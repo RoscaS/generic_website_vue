@@ -1,116 +1,220 @@
 <template>
   <div class="container">
     <div class="columns">
+
       <div class="column is-3">
-        <div class="has-background-primary">p</div>
+        <transition name="left-slide" appear>
+          <div class="_sides _left">
+            <a href="#" v-scroll-to="'#poule'">
+              <i class="fal fa-calendar fa-fw" :title="getTitle('horaire')"></i>
+            </a>
+            <span class="first-line">HORAIRE NON SPÉCIFIÉ</span>
+            <span class="second-line">CLIQUEZ SUR LE LIEN</span>
+          </div>
+        </transition>
       </div>
+
       <div class="column is-6">
-        <div class="debug">
-          <div class="top-title">MySite.</div>
-          <div class="top-ribbon">
+        <div class="_center">
+          <div class="_title">MySite.</div>
+          <div class="_ribbon">
             <div class="text">FORALL</div>
           </div>
+          <transition name="subtitle-fade-in" appear>
+            <div class="_subtitle">
+              LEMONDE / DEPUIS 2016
+            </div>
+          </transition>
         </div>
       </div>
+
+
       <div class="column is-3">
-        <div class="has-background-primary">p</div>
+        <transition name="right-slide" appear>
+          <div class="_sides _right">
+            <span class="first-line">AWESOME STREET</span>
+            <span class="second-line">
+              2000 LE MONDE, tel.:
+              <a href="tel:032-725-08-58">032 725 08 58</a>
+            </span>
+          </div>
+        </transition>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
+
+  const titles = [
+    {class: 'horaire', title: "Voir l'horaire complet."},
+  ];
+
+
   export default {
     name: 'Top',
     data() {
       return {
-        msg: ''
+        titles: titles,
       };
+    },
+
+    methods: {
+      getTitle(title) {
+        return this.titles.find(i => i.class == title).title;
+      }
     }
   };
 </script>
 
 <style scoped lang="scss">
-  @import 'sass/variables';
-  @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+  @import 'sass/global';
 
-  .debug {
-    border: 1px solid black;
+
+  .left-slide-enter-active, .left-slide-leave-active {
+    transition: opacity 1s, transform .5s;
+    transition-delay: .5s;
   }
 
-  .top-title {
-    font-family: 'Dancing Script', cursive, bold;
-    font-size: 130px;
-    text-align: center;
-    color: $top-title;
-    display: block;
+  .left-slide-enter, .left-slide-leave-active {
+    opacity: 0;
+    transform: translateX(-200px);
   }
 
-  .top-ribbon {
-    z-index: -1;
-    display: block;
-    letter-spacing: 0.1em;
-    padding: .26em 0 .26em 2em;
-    margin: -40px auto 0 auto;
+  .right-slide-enter-active, .right-slide-leave-active {
+    transition: opacity 1s, transform .5s;
+    transition-delay: .7s;
+  }
+
+  .right-slide-enter, .right-slide-leave-active {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+
+  .subtitle-fade-in-enter-active, .subtitle-fade-in-leave-active {
+    transition: opacity 3s ease;
+    transition-delay: 2s;
+  }
+
+  .subtitle-fade-in-enter, .subtitle-fade-in-leave-active {
+    opacity: 0;
+  }
+
+
+
+
+  ._sides {
+    color: $top-text;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 0 10px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     position: relative;
-    max-width: fit-content;
-    color: $ribbon-text;
-    background: $ribbon;
+    top: 150px;
+    max-height: 60px;
+    overflow: hidden;
 
-    &:before, &:after {
-      content: "";
-      width: .2em;
-      bottom: 0;
-      position: absolute;
+    .second-line {
       display: block;
-      border: 1.5em solid $ribbon;
-      z-index: -1;
     }
 
-    &:before {
-      top: 0;
-      left: -1.95em;
-      border-right-width: .75em;
-      border-left-color: transparent;
+    &._left {
+      text-align: right;
+      left: 60px;
     }
+    &._right {
+      right: 60px;
 
-    &:after {
-      top: 0;
-      right: -1.95em;
-      border-left-width: .75em;
-      border-right-color: transparent;
     }
+  }
 
-    // Text
-    & :first-child {
+  ._center {
+
+    ._title {
+      font-family: 'Dancing Script', cursive, bold;
+      font-size: 130px;
       text-align: center;
-      margin-left: -11px;
-      font-size: 28px;
-      letter-spacing: 20px;
-      font-weight: bold;
-      font-family: Arial, Helvetica, sans-serif;
+      color: $top-title;
+      display: block;
+    }
+
+    ._ribbon {
+      z-index: -1;
+      display: block;
+      letter-spacing: 0.1em;
+      padding: .26em 0 .26em 2em;
+      margin: -40px auto 0 auto;
+      position: relative;
+      max-width: fit-content;
+      color: $ribbon-text;
+      background: $ribbon;
 
       &:before, &:after {
         content: "";
-        bottom: -.5em;
+        width: .2em;
+        bottom: 0;
         position: absolute;
         display: block;
-        border-style: solid;
-        border-color: $ribbon transparent transparent transparent;
+        border: 1.5em solid $ribbon;
         z-index: -1;
       }
 
       &:before {
         top: 0;
-        left: 0;
-        border-width: .5em 0 0 .5em;
+        left: -1.95em;
+        border-right-width: .75em;
+        border-left-color: transparent;
       }
 
       &:after {
         top: 0;
-        right: 0;
-        border-width: .5em .5em 0 0;
+        right: -1.95em;
+        border-left-width: .75em;
+        border-right-color: transparent;
       }
+
+      // Text
+      & :first-child {
+        text-align: center;
+        margin-left: -11px;
+        font-size: 28px;
+        letter-spacing: 20px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+
+        &:before, &:after {
+          content: "";
+          bottom: -.5em;
+          position: absolute;
+          display: block;
+          border-style: solid;
+          border-color: $ribbon transparent transparent transparent;
+          z-index: -1;
+        }
+
+        &:before {
+          top: 0;
+          left: 0;
+          border-width: .5em 0 0 .5em;
+        }
+
+        &:after {
+          top: 0;
+          right: 0;
+          border-width: .5em .5em 0 0;
+        }
+      }
+    }
+
+    ._subtitle {
+      text-align: center;
+      margin-top: 5px;
+      font-size: 20px;
+      /*font-weight: bold;*/
+      font-family: Arial, Helvetica, sans-serif;
+      color: $top-title;
     }
   }
 

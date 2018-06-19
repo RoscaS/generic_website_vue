@@ -3,9 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 
+import VueScrollTo from 'vue-scrollto'
+
+
 import 'bulma/css/bulma.css'
 import '../static/fonts/font-awesome/css/fontawesome-all.css'
-// import '../static/fonts/DancingScript/DancingScript-Bold.ttf'
+
+Vue.use(VueScrollTo);
+
+
+
+
+
+
+
 
 Vue.config.productionTip = false;
 
@@ -14,3 +25,4 @@ new Vue({
   components: { App },
   template: '<App/>'
 });
+
