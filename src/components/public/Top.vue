@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div class="container _wrapper">
       <div class="columns">
 
         <div class="column is-3">
@@ -81,6 +81,10 @@
 
   .subtitle-fade-in-enter, .subtitle-fade-in-leave-active {
     opacity: 0;
+  }
+
+  ._wrapper {
+    margin-top: 50px;
   }
 
   ._sides {

@@ -1,9 +1,13 @@
 <template>
   <div class="collapse">
 
-    <div class="collapse-trigger" @click="toggle">
+    <div class="collapse-trigger"
+         @mouseenter="showPromo"
+         @mouseleave="hidePromo"
+         @click="lockPromo">
+
       <div class="corner-ribbon top-right"
-           title="Cliquez pour vérouiller."
+           :title="title"
            slot="trigger">
         Action spéciale !
       </div>
@@ -13,7 +17,7 @@
       <div class="container collapse-content _wrapper">
         <div class="columns">
           <div class="column is-4 is-offset-2 _left">
-            <img src="../../assets/action.jpg" width="400px">
+            <img src="../../assets/action.jpg">
           </div>
 
           <div class="column is-5 content _right">
@@ -30,8 +34,8 @@
         </div>
       </div>
     </VueSlideUpDown>
-
   </div>
+
 </template>
 
 
@@ -44,17 +48,44 @@
 
     data() {
       return {
-        isOpen: false
+        isOpen: false,
+        timeout: null,
+        isLocked: false,
+        title: "Cliquez pour vérouiller.",
       };
     },
-    watch: {
-      open(value) { this.isOpen = value; }
-    },
+
     methods: {
-      toggle() {
-        this.isOpen = !this.isOpen;
-        this.$emit('update:open', this.isOpen);
-        this.$emit(this.isOpen ? 'open' : 'close');
+      showPromo() {
+        if (!this.isLocked) {
+          this.timeout = setTimeout(() => {this.isOpen = true;}, 200);
+        }
+      },
+
+      hidePromo() {
+        clearTimeout(this.timeout);
+        if (!this.isLocked) {
+          this.isOpen = false;
+        }
+      },
+
+      lockPromo() {
+        if (this.isLocked) {
+          this.title = 'Cliquez pour vérouiller.';
+          this.isLocked = false;
+          this.$toast.open(
+            'Action spéciale dévérouillée &nbsp;' +
+            '<i class="fal fa-lock-open-alt"></i>'
+          );
+        }
+        else {
+          this.title = 'Cliquez pour dévérouiller.';
+          this.isLocked = true;
+          this.$toast.open(
+            'Action spéciale vérouillée &nbsp;' +
+            '<i class="fal fa-lock-alt"></i>'
+          );
+        }
       }
     }
   };
@@ -64,17 +95,17 @@
 <style scoped lang="scss">
   @import 'sass/global';
 
-
   ._wrapper {
-    margin-top: 80px;
-  }
+    height: 400px;
+    margin-top: 150px;
 
-  ._left {
+    img {
+      width: 400px;
+    }
 
-  }
-
-  ._right {
-    padding: 40px;
+    ._right {
+      padding: 40px;
+    }
   }
 
   .corner-ribbon {
