@@ -65,6 +65,12 @@
     },
 
     methods: {
+      checkScroll() {
+        if (window.pageYOffset > 100) {
+          this.lockPromo();
+        }
+      },
+
       showPromo() {
         if (!this.isLocked) {
           this.timeout = setTimeout(() => {this.isOpen = true;}, 200);
@@ -83,6 +89,8 @@
           this.title = 'Cliquez pour vérouiller.';
           this.isLocked = false;
           this.isOpen = false;
+          console.log('off');
+          window.removeEventListener('scroll', this.checkScroll);
           if (!this.isMobile) {
             this.$toast.open(
               'Action spéciale dévérouillée &nbsp;' +
@@ -94,6 +102,9 @@
           this.title = 'Cliquez pour dévérouiller.';
           this.isLocked = true;
           this.isOpen = true;
+          console.log('on');
+          window.addEventListener('scroll', this.checkScroll);
+
           if (!this.isMobile) {
             this.$toast.open(
               'Action spéciale vérouillée &nbsp;' +
@@ -114,7 +125,7 @@
     height: 400px;
     margin-top: 150px;
 
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: 400px) {
       height: 600px;
       margin-bottom: -500px;
     }
@@ -124,7 +135,7 @@
     }
 
     ._left {
-      @media screen and (max-width: 400px){
+      @media screen and (max-width: 400px) {
         margin-top: -60px;
         margin-bottom: -40px;
       }

@@ -2,6 +2,9 @@
   <div id="app">
     <PromoRibbon/>
     <Top/>
+    <Navbar/>
+    <div style="margin-bottom: 3000px;">
+    </div>
   </div>
 </template>
 
@@ -10,12 +13,14 @@
 <script>
 import PromoRibbon from './components/public/PromoRibbon'
 import Top from './components/public/Top'
+import Navbar from './components/public/Navbar'
 
 export default {
   name: 'App',
   components: {
     PromoRibbon,
     Top,
+    Navbar,
   }
 }
 </script>
