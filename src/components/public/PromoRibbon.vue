@@ -16,7 +16,8 @@
     <VueSlideUpDown :active="isOpen" :duration="1000">
       <div class="container collapse-content _wrapper">
         <div class="columns">
-          <div class="column is-4 is-offset-2 _left">
+
+          <div class="column is-4 is-offset-2-tablet _left">
             <img src="../../assets/action.jpg">
           </div>
 
@@ -31,6 +32,8 @@
               praesentium reiciendis reprehenderit, temporibus velit
               voluptatem.</p>
           </div>
+
+
         </div>
       </div>
     </VueSlideUpDown>
@@ -55,6 +58,12 @@
       };
     },
 
+    computed: {
+      isMobile() {
+        return window.innerWidth <= 1024;
+      }
+    },
+
     methods: {
       showPromo() {
         if (!this.isLocked) {
@@ -73,18 +82,24 @@
         if (this.isLocked) {
           this.title = 'Cliquez pour vérouiller.';
           this.isLocked = false;
-          this.$toast.open(
-            'Action spéciale dévérouillée &nbsp;' +
-            '<i class="fal fa-lock-open-alt"></i>'
-          );
+          this.isOpen = false;
+          if (!this.isMobile) {
+            this.$toast.open(
+              'Action spéciale dévérouillée &nbsp;' +
+              '<i class="fal fa-lock-open-alt"></i>'
+            );
+          }
         }
         else {
           this.title = 'Cliquez pour dévérouiller.';
           this.isLocked = true;
-          this.$toast.open(
-            'Action spéciale vérouillée &nbsp;' +
-            '<i class="fal fa-lock-alt"></i>'
-          );
+          this.isOpen = true;
+          if (!this.isMobile) {
+            this.$toast.open(
+              'Action spéciale vérouillée &nbsp;' +
+              '<i class="fal fa-lock-alt"></i>'
+            );
+          }
         }
       }
     }
@@ -99,8 +114,20 @@
     height: 400px;
     margin-top: 150px;
 
+    @media screen and (max-width: 400px){
+      height: 600px;
+      margin-bottom: -500px;
+    }
+
     img {
       width: 400px;
+    }
+
+    ._left {
+      @media screen and (max-width: 400px){
+        margin-top: -60px;
+        margin-bottom: -40px;
+      }
     }
 
     ._right {

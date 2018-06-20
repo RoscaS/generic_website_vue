@@ -8,21 +8,14 @@
 
 
 <script>
-import ToggleTest from './components/tests/ToggleTest'
-import BuefyTest from './components/tests/BuefyTest'
-
-
-// APP
 import PromoRibbon from './components/public/PromoRibbon'
 import Top from './components/public/Top'
 
 export default {
   name: 'App',
   components: {
-
     PromoRibbon,
     Top,
-
   }
 }
 </script>

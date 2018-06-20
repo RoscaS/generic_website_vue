@@ -3,7 +3,7 @@
     <div class="container _wrapper">
       <div class="columns">
 
-        <div class="column is-3">
+        <div class="column is-3 is-hidden-mobile">
           <transition name="bounceLeft" appear>
             <div class="_sides _left">
               <a href="#" v-scroll-to="'#poule'">
@@ -31,7 +31,7 @@
         </div>
 
 
-        <div class="column is-3">
+        <div class="column is-3 is-hidden-mobile">
           <transition name="bounceRight" appear>
             <div class="_sides _right">
               <span class="first-line">AWESOME STREET</span>
@@ -40,6 +40,29 @@
               <a href="tel:032-725-08-58">032 725 08 58</a>
             </span>
             </div>
+          </transition>
+        </div>
+
+        <!--MOBILE-->
+        <div class="column is-12 is-hidden-tablet _mobile">
+          <transition name="bounceLeft" appear>
+            <div class="_top">
+              <a href="#" v-scroll-to="'#poule'">
+                <i class="fal fa-calendar fa-fw"
+                   :title="getTitle('horaire')"></i>
+              </a>
+              <span class="first-line">HORAIRE NON SPÉCIFIÉ</span>
+            </div>
+          </transition>
+
+          <transition name="bounceRight" appear>
+          <div class="_bottom">
+            <span class="first-line">AWESOME STREET</span>
+            <span class="second-line">
+              2000 LE MONDE, tel.:
+              <a href="tel:032-725-08-58">032 725 08 58</a>
+            </span>
+          </div>
           </transition>
         </div>
 
@@ -74,6 +97,20 @@
 <style scoped lang="scss">
   @import 'sass/global';
 
+  ._mobile {
+    text-align: center;
+    color: $top-text;
+
+    ._top {
+      border-top: 1px solid black;
+      margin-bottom: 10px;
+    }
+
+    ._bottom {
+      border-bottom: 1px solid black;
+    }
+  }
+
   .subtitle-fade-in-enter-active, .subtitle-fade-in-leave-active {
     transition: opacity 3s ease;
     transition-delay: 1s;
@@ -90,7 +127,7 @@
   ._sides {
     color: $top-text;
     font-size: 13px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding: 10px 0 10px 0;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -98,10 +135,6 @@
     top: 150px;
     max-height: 60px;
     overflow: hidden;
-
-    .second-line {
-      display: block;
-    }
 
     &._left {
       text-align: right;
@@ -111,6 +144,10 @@
       right: 60px;
 
     }
+  }
+
+  .second-line {
+    display: block;
   }
 
   ._center {
