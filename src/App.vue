@@ -1,22 +1,60 @@
 <template>
   <div id="app">
-    <section class="section"><Top></Top></section>
-    <Toggle></Toggle>
+    <PromoRibbon/>
+    <Top/>
   </div>
 </template>
 
+
+
 <script>
+import ToggleTest from './components/tests/ToggleTest'
+import BuefyTest from './components/tests/BuefyTest'
+
+
+// APP
+import PromoRibbon from './components/public/PromoRibbon'
 import Top from './components/public/Top'
-import Toggle from './components/public/toggleTest'
 
 export default {
   name: 'App',
-  components: {Top, Toggle}
+  components: {
+
+    PromoRibbon,
+    Top,
+
+  }
 }
 </script>
 
-<style scoped lang="scss">
-.poule {
-  height: 4000px;
-}
+
+
+<style lang="scss">
+  // Import Bulma's core
+  @import "~bulma/sass/utilities/_all";
+  // Set your colors
+  $primary: #00D1B2;
+  $primary-invert: findColorInvert($primary);
+  $twitter: #4099ff;
+  $twitter-invert: findColorInvert($twitter);
+  // Setup $colors to use as bulma classes (e.g. 'is-twitter')
+  $colors: (
+      "white": ($white, $black),
+      "black": ($black, $white),
+      "light": ($light, $light-invert),
+      "dark": ($dark, $dark-invert),
+      "primary": ($primary, $primary-invert),
+      "info": ($info, $info-invert),
+      "success": ($success, $success-invert),
+      "warning": ($warning, $warning-invert),
+      "danger": ($danger, $danger-invert),
+      "twitter": ($twitter, $twitter-invert)
+  );
+  // Links
+  $link: $primary;
+  $link-invert: $primary-invert;
+  $link-focus-border: $primary;
+  // Import Bulma and Buefy styles
+  @import "~bulma";
+  @import "~buefy/src/scss/buefy";
 </style>

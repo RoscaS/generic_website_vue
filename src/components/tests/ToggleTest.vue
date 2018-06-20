@@ -44,22 +44,11 @@
 <script>
   import VueSlideUpDown from 'vue-slide-up-down';
 
-
   export default {
     name: "toggleTest",
-
-    components: {VueSlideUpDown},
-
-    directives: {
-      poule(el) {
-        console.log(el);
-      }
-    },
-
-
+    components: { VueSlideUpDown },
     data() {
       return {
-        // active: false
         count: 0,
         noms: [
           {active: false, nom: 'Joe'},
@@ -78,15 +67,16 @@
 
       isActive(idx) { return idx.active? '': 'transition-delay: .3s'; }
     }
-  }
-  ;
+  };
 </script>
 
+
+
 <style scoped lang="scss">
-  @import 'sass/global';
+  @import '../public/sass/global';
 
   h3 {
-    color: white;
+    color: white !important;
   }
 
 </style>

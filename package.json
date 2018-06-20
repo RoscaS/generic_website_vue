@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "buefy": "^0.6.6",
     "bulma": "^0.7.1",
     "e": "0.0.4",
     "vue": "^2.5.2",

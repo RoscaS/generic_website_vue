@@ -1,48 +1,51 @@
 <template>
-  <div class="container">
-    <div class="columns">
+  <section class="section">
+    <div class="container">
+      <div class="columns">
 
-      <div class="column is-3">
-        <transition name="left-slide" appear>
-          <div class="_sides _left">
-            <a href="#" v-scroll-to="'#poule'">
-              <i class="fal fa-calendar fa-fw" :title="getTitle('horaire')"></i>
-            </a>
-            <span class="first-line">HORAIRE NON SPÉCIFIÉ</span>
-            <span class="second-line">CLIQUEZ SUR LE LIEN</span>
-          </div>
-        </transition>
-      </div>
-
-      <div class="column is-6">
-        <div class="_center">
-          <div class="_title">MySite.</div>
-          <div class="_ribbon">
-            <div class="text">FORALL</div>
-          </div>
-          <transition name="subtitle-fade-in" appear>
-            <div class="_subtitle">
-              LEMONDE / DEPUIS 2016
+        <div class="column is-3">
+          <transition name="bounceLeft" appear>
+            <div class="_sides _left">
+              <a href="#" v-scroll-to="'#poule'">
+                <i class="fal fa-calendar fa-fw"
+                   :title="getTitle('horaire')"></i>
+              </a>
+              <span class="first-line">HORAIRE NON SPÉCIFIÉ</span>
+              <span class="second-line">CLIQUEZ SUR LE LIEN</span>
             </div>
           </transition>
         </div>
-      </div>
+
+        <div class="column is-6">
+          <div class="_center">
+            <div class="_title">MySite.</div>
+            <div class="_ribbon">
+              <div class="text">FORALL</div>
+            </div>
+            <transition name="subtitle-fade-in" appear>
+              <div class="_subtitle">
+                LEMONDE / DEPUIS 2016
+              </div>
+            </transition>
+          </div>
+        </div>
 
 
-      <div class="column is-3">
-        <transition name="right-slide" appear>
-          <div class="_sides _right">
-            <span class="first-line">AWESOME STREET</span>
-            <span class="second-line">
+        <div class="column is-3">
+          <transition name="bounceRight" appear>
+            <div class="_sides _right">
+              <span class="first-line">AWESOME STREET</span>
+              <span class="second-line">
               2000 LE MONDE, tel.:
               <a href="tel:032-725-08-58">032 725 08 58</a>
             </span>
-          </div>
-        </transition>
-      </div>
+            </div>
+          </transition>
+        </div>
 
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -71,38 +74,14 @@
 <style scoped lang="scss">
   @import 'sass/global';
 
-
-  .left-slide-enter-active, .left-slide-leave-active {
-    transition: opacity 1s, transform .5s;
-    transition-delay: .5s;
-  }
-
-  .left-slide-enter, .left-slide-leave-active {
-    opacity: 0;
-    transform: translateX(-200px);
-  }
-
-  .right-slide-enter-active, .right-slide-leave-active {
-    transition: opacity 1s, transform .5s;
-    transition-delay: .7s;
-  }
-
-  .right-slide-enter, .right-slide-leave-active {
-    opacity: 0;
-    transform: translateX(200px);
-  }
-
   .subtitle-fade-in-enter-active, .subtitle-fade-in-leave-active {
     transition: opacity 3s ease;
-    transition-delay: 2s;
+    transition-delay: 1s;
   }
 
   .subtitle-fade-in-enter, .subtitle-fade-in-leave-active {
     opacity: 0;
   }
-
-
-
 
   ._sides {
     color: $top-text;

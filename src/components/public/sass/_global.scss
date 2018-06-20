@@ -2,6 +2,11 @@
 @import 'variables';
 
 
+.debug {
+  border: 1px solid black;
+}
+
+
 a {
   transition: color .2s ease;
   color: $link;
