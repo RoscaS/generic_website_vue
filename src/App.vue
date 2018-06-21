@@ -3,8 +3,9 @@
     <PromoRibbon/>
     <Top/>
     <Navbar/>
-    <div style="margin-bottom: 3000px;">
-    </div>
+    <div style="margin-bottom: 200px;"></div>
+    <div class="has-background-primary" style="height: 500px;">a</div>
+    <div style="margin-bottom: 3000px;"></div>
   </div>
 </template>
 
