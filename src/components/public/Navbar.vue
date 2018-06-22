@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nav id="Navbar" class="container has-background-white"
+    <nav id="Navbar" class="has-background-white"
          :class="{'sticky': isSticky}">
-      <div class="level is-mobile">
+      <div class="level is-mobile container">
         <div id="Brand" class="level-left">
           <a class="" href="#">
             <h1 class="title">
@@ -27,27 +27,21 @@
           </div>
 
           <b-modal :active.sync="smallMenu" :width="640" scroll="keep">
-
-          <ul class="content">
-            <li v-for="link in links">
-              <h2 class="_small-links">
-                <a :href="'#' + link.name">
-                  <i class="far fa-fw" :class="link.icon"></i>
-                  {{link.name}}
-                </a>
-              </h2>
-            </li>
-          </ul>
+            <ul id="LinksList" class="content">
+              <li v-for="link in links">
+                <h2>
+                  <a :href="'#' + link.name">
+                    <i class="far fa-fw" :class="link.icon"></i>
+                    {{link.name}}
+                  </a>
+                </h2>
+              </li>
+            </ul>
 
           </b-modal>
         </div>
-
       </div>
     </nav>
-
-
-
-
   </div>
 </template>
 
@@ -80,8 +74,24 @@
 
     methods: {
 
+      showSmallLinks() {
+        setTimeout(() => {
+          let links = Array.from(document.getElementById('LinksList').children);
+          let time = 0;
+          links.forEach(link => {
+            setTimeout(() => {
+              link.style.opacity = 1;
+              link.classList.add('fadeInLeft');
+            }, time);
+            time += 225;
+          });
+        }, 10);
+
+      },
+
       toggleModal() {
         this.smallMenu = !this.smallMenu;
+        this.showSmallLinks();
       },
 
 
@@ -171,7 +181,7 @@
     }
 
     ._links {
-      margin-left: -140px;
+      margin-left: -110px;
 
       a {
         margin-left: 10px;
@@ -181,12 +191,19 @@
     }
   }
 
-  ._small-links {
+  #LinksList {
+    margin-left: 25%;
+    li {
+      list-style: none;
+      opacity: 0;
+    }
     a {
       color: white !important;
+      &:hover {
+        color: $link-hover!important;
+      }
     }
   }
-
 
   #BurgerIcon {
     width: 60px;
