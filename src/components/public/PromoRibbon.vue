@@ -59,14 +59,14 @@
     },
 
     computed: {
-      isMobile() {
+      isTouch() {
         return window.innerWidth <= 1024;
       }
     },
 
     methods: {
       checkScroll() {
-        if (window.pageYOffset > 100) {
+        if (window.pageYOffset > 0) {
           this.lockPromo();
         }
       },
@@ -91,7 +91,7 @@
           this.isOpen = false;
           console.log('off');
           window.removeEventListener('scroll', this.checkScroll);
-          if (!this.isMobile) {
+          if (!this.isTouch) {
             this.$toast.open(
               'Action spéciale dévérouillée &nbsp;' +
               '<i class="fal fa-lock-open-alt"></i>'
@@ -104,8 +104,7 @@
           this.isOpen = true;
           console.log('on');
           window.addEventListener('scroll', this.checkScroll);
-
-          if (!this.isMobile) {
+          if (!this.isTouch) {
             this.$toast.open(
               'Action spéciale vérouillée &nbsp;' +
               '<i class="fal fa-lock-alt"></i>'
