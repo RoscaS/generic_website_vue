@@ -4,13 +4,13 @@
          :class="{'sticky': isSticky}">
       <div class="level is-mobile container">
         <div id="Brand" class="level-left">
-          <a class="" href="#">
+          <a class="no-tr" href="#" v-scroll-to="'#Home'">
             <h1 class="title">
-              my<span class="_site">site</span>
+              my<span>site</span>
             </h1>
           </a>
         </div>
-        <div class="level-item _links is-hidden-mobile">
+        <div class="level-item links is-hidden-mobile">
           <a v-for="link in links" :href="'#' + link.name">
             <i class="fa fa-fw" :class="link.icon"></i>
             {{link.name}}
@@ -18,16 +18,19 @@
         </div>
 
         <div class="level-right is-hidden-tablet">
-          <div class="level-item" @click="toggleModal">
-            <div id="BurgerIcon" :class="{'open': smallMenu}">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+          <div class="level-item">
+
+            <transition name="bounce"
+                        enter-active-class="bounceInLeft"
+                        leave-active-class="bounceOutRight">
+              <a class="no-tr" @click="toggleModal" v-show="!smallMenu">
+                <i class="far fa-bars fa-2x"></i>
+              </a>
+            </transition>
           </div>
 
           <b-modal :active.sync="smallMenu" :width="640" scroll="keep">
-            <ul id="LinksList" class="content">
+            <ul id="SmallLinkList" class="content">
               <li v-for="link in links">
                 <h2>
                   <a :href="'#' + link.name">
@@ -76,7 +79,7 @@
 
       showSmallLinks() {
         setTimeout(() => {
-          let links = Array.from(document.getElementById('LinksList').children);
+          let links = Array.from(document.getElementById('SmallLinkList').children);
           let time = 0;
           links.forEach(link => {
             setTimeout(() => {
@@ -92,6 +95,7 @@
       toggleModal() {
         this.smallMenu = !this.smallMenu;
         this.showSmallLinks();
+
       },
 
 
@@ -157,9 +161,10 @@
 <style scoped lang="scss">
   @import 'sass/global';
 
+
   .sticky {
     position: fixed;
-    top: 0;
+    top: 0.01rem; // permet à tr de fonctionner
     width: 100%;
   }
 
@@ -169,29 +174,38 @@
 
     #Brand {
       opacity: 0;
+      z-index: 20;
+
+      a {
+        cursor: default;
+      }
     }
 
     .title {
       color: $ribbon;
 
-      ._site {
+      & :first-child {
         background-color: $ribbon;
         color: white;
       }
     }
 
-    ._links {
+    .links {
       margin-left: -110px;
 
       a {
+        color: $links-nav;
         margin-left: 10px;
         margin-right: 10px;
-        color: black !important;
+
+        &.tr:after {
+          background-color: $links-nav;
+        }
       }
     }
   }
 
-  #LinksList {
+  #SmallLinkList {
     margin-left: 25%;
     li {
       list-style: none;
@@ -200,90 +214,8 @@
     a {
       color: white !important;
       &:hover {
-        color: $link-hover!important;
+        color: $link-hover !important;
       }
     }
   }
-
-  #BurgerIcon {
-    width: 60px;
-    height: 45px;
-    position: relative;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg) scale(0.5);
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    transition: .5s ease-in-out;
-    cursor: pointer;
-  }
-
-  #BurgerIcon span {
-    display: block;
-    position: absolute;
-    height: 6px;
-    width: 100%;
-    background: $top-text;
-    border-radius: 9px;
-    opacity: 1;
-    left: 0;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
-  }
-
-  #BurgerIcon span:nth-child(1) {
-    top: 0;
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
-    transform-origin: left center;
-  }
-
-  #BurgerIcon span:nth-child(2) {
-    top: 18px;
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
-    transform-origin: left center;
-  }
-
-  #BurgerIcon span:nth-child(3) {
-    top: 36px;
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
-    transform-origin: left center;
-  }
-
-  #BurgerIcon.open span:nth-child(1) {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    top: -3px;
-    left: 8px;
-  }
-
-  #BurgerIcon.open span:nth-child(2) {
-    width: 0;
-    opacity: 0;
-  }
-
-  #BurgerIcon.open span:nth-child(3) {
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    top: 39px;
-    left: 8px;
-  }
-
 </style>

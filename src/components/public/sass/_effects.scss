@@ -1,0 +1,32 @@
+// Link underline
+.tr,
+.tr:visited,
+.tr:hover,
+.tr:active {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: relative;
+  transition: 0.5s color ease;
+  text-decoration: none;
+}
+
+.tr:after {
+  content: "";
+  transition: 0.5s all ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  height: 1px;
+  width: 0;
+  background: $link-hover;
+}
+
+.tr:after {
+  bottom: -0.25em;
+  left: 0;
+}
+
+.tr:hover:before,
+.tr:hover:after {
+  width: 100%;
+}

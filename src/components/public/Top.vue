@@ -1,12 +1,12 @@
 <template>
-  <section class="section">
+  <section id="Home" class="section">
     <div class="container _wrapper">
       <div class="columns">
 
         <div class="column is-3 is-hidden-mobile">
           <transition name="bounceLeft" appear>
             <div class="_sides _left">
-              <a href="#" v-scroll-to="'#poule'">
+              <a class="no-tr" href="#" v-scroll-to="'#poule'">
                 <i class="fal fa-calendar fa-fw"
                    :title="getTitle('horaire')"></i>
               </a>
@@ -37,7 +37,7 @@
               <span class="first-line">AWESOME STREET</span>
               <span class="second-line">
               2000 LE MONDE, tel.:
-              <a href="tel:032-725-08-58">032 725 08 58</a>
+              <a href="tel:032-725-08-58">032-725-08-58</a>
             </span>
             </div>
           </transition>
@@ -47,7 +47,7 @@
         <div class="column is-12 is-hidden-tablet _mobile">
           <transition name="bounceLeft" appear>
             <div class="_top">
-              <a href="#" v-scroll-to="'#poule'">
+              <a class="no-tr" href="#" v-scroll-to="'#poule'">
                 <i class="fal fa-calendar fa-fw"
                    :title="getTitle('horaire')"></i>
               </a>
@@ -60,7 +60,7 @@
             <span class="first-line">AWESOME STREET</span>
             <span class="second-line">
               2000 LE MONDE, tel.:
-              <a href="tel:032-725-08-58">032 725 08 58</a>
+              <a class="no-tr" href="tel:032-725-08-58">032 725 08 58</a>
             </span>
           </div>
           </transition>
@@ -134,7 +134,6 @@
     position: relative;
     top: 150px;
     max-height: 60px;
-    overflow: hidden;
 
     &._left {
       text-align: right;
@@ -142,6 +141,10 @@
     }
     &._right {
       right: 60px;
+      a {
+        padding-left: 6px;
+        position: absolute;
+      }
 
     }
   }
