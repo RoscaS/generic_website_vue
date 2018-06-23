@@ -2,53 +2,55 @@
   <div>
     <nav id="Navbar" class="has-background-white"
          :class="{'sticky': isSticky}">
-      <div class="level is-mobile container">
-        <div id="Brand" class="level-left">
-          <a class="no-tr" href="#" v-scroll-to="'#Home'">
-            <h1 class="title">
-              my<span>site</span>
-            </h1>
-          </a>
-        </div>
-        <div class="level-item links is-hidden-mobile">
-          <a v-for="link in links" :href="'#' + link.name">
-            <i class="fa fa-fw" :class="link.icon"></i>
-            {{link.name}}
-          </a>
-        </div>
-
-        <div class="level-right is-hidden-tablet">
-          <div class="level-item">
-
-            <transition name="bounce"
-                        enter-active-class="bounceInLeft"
-                        leave-active-class="bounceOutRight">
-              <a class="no-tr" @click="toggleModal" v-show="!smallMenu">
-                <i class="far fa-bars fa-2x"></i>
-              </a>
-            </transition>
+      <!--<transition name="zoomUp" appear>-->
+        <div class="level is-mobile container">
+          <div id="Brand" class="level-left">
+            <a class="no-tr" href="#" v-scroll-to="'#Home'">
+              <h1 class="title">
+                my<span>site</span>
+              </h1>
+            </a>
+          </div>
+          <div class="level-item links is-hidden-mobile">
+            <a v-for="link in links" :href="'#' + link.name">
+              <i class="fa fa-fw" :class="link.icon"></i>
+              {{link.name}}
+            </a>
           </div>
 
-          <b-modal :active.sync="smallMenu" :width="640" scroll="keep">
-            <ul id="SmallLinkList" class="content">
-              <li v-for="link in links">
-                <h2>
-                  <a :href="'#' + link.name">
-                    <i class="far fa-fw" :class="link.icon"></i>
-                    {{link.name}}
-                  </a>
-                </h2>
-              </li>
-            </ul>
+          <div class="level-right is-hidden-tablet">
+            <div class="level-item">
 
-          </b-modal>
+              <transition name="_bounceInLeft">S
+                <a class="no-tr" @click="toggleModal" v-show="!smallMenu">
+                  <i class="far fa-bars fa-2x"></i>
+                </a>
+              </transition>
+            </div>
+
+            <b-modal :active.sync="smallMenu" :width="640" scroll="keep">
+              <ul id="SmallLinkList" class="content">
+                <li v-for="link in links">
+                  <h2>
+                    <a :href="'#' + link.name">
+                      <i class="far fa-fw" :class="link.icon"></i>
+                      {{link.name}}
+                    </a>
+                  </h2>
+                </li>
+              </ul>
+
+            </b-modal>
+          </div>
         </div>
-      </div>
+      <!--</transition>-->
     </nav>
   </div>
 </template>
 
 <script>
+
+
 
   export default {
     name: "Navbar",
@@ -161,7 +163,6 @@
 <style scoped lang="scss">
   @import 'sass/global';
 
-
   .sticky {
     position: fixed;
     top: 0.01rem; // permet à tr de fonctionner
@@ -171,6 +172,7 @@
   #Navbar {
     width: 100%;
     padding: 10px 0 10px 0 !important;;
+    z-index: 19;
 
     #Brand {
       opacity: 0;

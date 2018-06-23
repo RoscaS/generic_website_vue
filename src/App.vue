@@ -3,6 +3,7 @@
     <PromoRibbon/>
     <Top/>
     <Navbar/>
+    <CarouselTop/>
     <div style="margin-bottom: 200px;"></div>
     <div class="has-background-primary" style="height: 500px;">a</div>
     <div style="margin-bottom: 3000px;"></div>
@@ -15,6 +16,7 @@
 import PromoRibbon from './components/public/PromoRibbon'
 import Top from './components/public/Top'
 import Navbar from './components/public/Navbar'
+import CarouselTop from './components/public/CarouselTop'
 
 export default {
   name: 'App',
@@ -22,6 +24,7 @@ export default {
     PromoRibbon,
     Top,
     Navbar,
+    CarouselTop,
   }
 }
 </script>
@@ -56,4 +59,12 @@ export default {
   // Import Bulma and Buefy styles
   @import "~bulma";
   @import "~buefy/src/scss/buefy";
+
+
+
+
+
+
+
+
 </style>

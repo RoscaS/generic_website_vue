@@ -1,5 +1,5 @@
 <template>
-  <section id="Home" class="section">
+  <section class="section">
     <div class="container _wrapper">
       <div class="columns">
 
@@ -122,6 +122,7 @@
 
   ._wrapper {
     margin-top: 50px;
+    margin-bottom: 12px;
   }
 
   ._sides {
