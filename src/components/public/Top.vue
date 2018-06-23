@@ -37,7 +37,7 @@
               <span class="first-line">AWESOME STREET</span>
               <span class="second-line">
               2000 LE MONDE, tel.:
-              <a href="tel:032-725-08-58">032-725-08-58</a>
+                <a href="tel:032-725-08-58">032-725-08-58</a>
             </span>
             </div>
           </transition>
@@ -56,13 +56,13 @@
           </transition>
 
           <transition name="bounceRight" appear>
-          <div class="_bottom">
-            <span class="first-line">AWESOME STREET</span>
-            <span class="second-line">
+            <div class="_bottom">
+              <span class="first-line">AWESOME STREET</span>
+              <span class="second-line">
               2000 LE MONDE, tel.:
               <a class="no-tr" href="tel:032-725-08-58">032 725 08 58</a>
             </span>
-          </div>
+            </div>
           </transition>
         </div>
 

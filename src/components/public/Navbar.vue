@@ -147,11 +147,14 @@
 
     mounted() {
       window.addEventListener('scroll', this.scrollWatch);
-      document.addEventListener("DOMContentLoaded", () => {
+
+      setTimeout(() => {
         this.navbar = document.getElementById("Navbar");
         this.brand = document.getElementById("Brand");
         this.navbarOffset = this.navbar.offsetTop;
-      });
+        console.log(this.navbarOffset)
+      }, 50);
+
     },
 
     destroyed() {
