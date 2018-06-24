@@ -1,35 +1,40 @@
 <template>
-  <transition name="carousel-fade-in" appear>
-  <carousel class="content">
-    <carousel-slide v-for="i in slides" :key="i" :index="i-1">
-      <h2><span></span></h2>
-      <img :src="'https://picsum.photos/1920/1080?image='+i+2">
-    </carousel-slide>
-  </carousel>
-  </transition>
+  <div>
+    <transition name="carousel-fade-in" appear>
+      <carousel class="content">
+        <carousel-slide v-for="i in slides" :key="i" :index="i-1">
+          <h2><span></span></h2>
+          <!--<img :src="'../../../src/assets/carousel/00'+i+'.jpg'">-->
+          <img :src="'https://picsum.photos/1920/1080?image='+i+2">
+
+        </carousel-slide>
+      </carousel>
+
+    </transition>
+  </div>
 </template>
 
 <script>
   import Carousel from '../Components/Carousel/Carousel';
   import CarouselSlide from '../Components/Carousel/CarouselSlide';
 
+  import axios from 'axios';
+
   export default {
     name: "CarouselTop",
     components: {Carousel, CarouselSlide},
     data() {
       return {
-        slides: 5,
+        slides: 8,
       };
     },
 
-    methods: {
-      addSlide() { this.slides++;},
-      removeSlide() {
-        if (this.slides > 0) {
-          this.slides--;
-        }
-      },
-    },
+    mounted() {
+      axios
+      .get('http://localhost:8000/images/')
+      .then(response => {console.log(response.data)});
+    }
+
   };
 </script>
 

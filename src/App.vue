@@ -4,6 +4,7 @@
     <Top/>
     <Navbar/>
     <CarouselTop/>
+    <!--<img src="../src/assets/carousel/001.jpg" alt="">-->
     <div style="margin-bottom: 200px;"></div>
     <div class="has-background-primary" style="height: 500px;">a</div>
     <div style="margin-bottom: 3000px;"></div>
