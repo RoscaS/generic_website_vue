@@ -36,8 +36,8 @@
             <div class="_sides _right">
               <span class="first-line">AWESOME STREET</span>
               <span class="second-line">
-              2000 LE MONDE, tel.:
-                <a href="tel:032-725-08-58">032-725-08-58</a>
+                2000 LE MONDE, tel.:
+                <a class="phone" href="tel:032-725-08-58">032-725-08-58</a>
             </span>
             </div>
           </transition>
@@ -98,6 +98,7 @@
   @import 'sass/global';
 
   ._mobile {
+    font-size: 13px;
     text-align: center;
     color: $top-text;
 
@@ -152,6 +153,9 @@
 
   .second-line {
     display: block;
+    .phone {
+      white-space: nowrap;
+    }
   }
 
   ._center {
