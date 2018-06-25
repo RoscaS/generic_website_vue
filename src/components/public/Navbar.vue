@@ -154,7 +154,7 @@
           return;
         }
         buffer = this.isShadow;
-        this.isShadow = window.pageYOffset >= this.navbarOffset + 100;
+        this.isShadow = window.pageYOffset >= this.navbarOffset + 50;
         if (this.isShadow !== buffer) {
           this.removeShadow();
         }

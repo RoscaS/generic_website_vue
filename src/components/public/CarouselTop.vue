@@ -30,7 +30,7 @@
 
     mounted() {
       axios
-      .get('http://localhost:8000/images/')
+      .get('http://localhost:8000/galleries/1/')
       .then(response => {console.log(response.data)});
     }
 
