@@ -9,7 +9,6 @@
 
         </carousel-slide>
       </carousel>
-
     </transition>
   </div>
 </template>
@@ -87,6 +86,12 @@
 
   .add-remove {
     margin-left: 20px;
+  }
+
+
+  .delete {
+    margin-left: 20px;
+    margin-right: 12px;
   }
 
 </style>

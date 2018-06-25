@@ -30,6 +30,4 @@ new Vue({
   template: '<App/>'
 });
 
-
-
 // Vue.component('vue-slide-up-down');
