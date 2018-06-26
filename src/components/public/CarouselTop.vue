@@ -4,9 +4,7 @@
       <carousel class="content">
         <carousel-slide v-for="i in slides" :key="i" :index="i-1">
           <h2><span></span></h2>
-          <!--<img :src="'../../../src/assets/carousel/00'+i+'.jpg'">-->
-          <img :src="'https://picsum.photos/1920/1080?image='+i+2">
-
+          <img :src="urls[i]">
         </carousel-slide>
       </carousel>
     </transition>
@@ -24,6 +22,7 @@
     components: {Carousel, CarouselSlide},
     data() {
       return {
+        urls: [],
         slides: 8,
       };
     },
@@ -31,9 +30,12 @@
     mounted() {
       axios
       .get('http://localhost:8000/galleries/1/')
-      .then(response => {console.log(response.data)});
+      .then(response => {
+        let images = response.data.images;
+        images.forEach(i => {this.urls.push(i.image);});
+        this.slides = this.urls.length - 1;
+      });
     }
-
   };
 </script>
 
