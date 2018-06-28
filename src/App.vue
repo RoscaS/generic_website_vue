@@ -3,8 +3,7 @@
     <PromoRibbon/>
     <Top/>
     <Navbar/>
-    <CarouselTop/>
-    <!--<img src="../src/assets/carousel/001.jpg" alt="">-->
+    <CarouselTop :url="'http://localhost:8000/galleries/1/'"/>
     <div style="margin-bottom: 200px;"></div>
     <div class="has-background-primary" style="height: 500px;">a</div>
     <div style="margin-bottom: 3000px;"></div>

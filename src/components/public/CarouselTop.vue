@@ -20,6 +20,9 @@
   export default {
     name: "CarouselTop",
     components: {Carousel, CarouselSlide},
+    props: {
+      url: {type: String}
+    },
     data() {
       return {
         urls: [],
@@ -28,11 +31,9 @@
     },
 
     mounted() {
-      axios
-      .get('http://localhost:8000/galleries/1/')
-      .then(response => {
+      axios.get(this.url).then(response => {
         let images = response.data.images;
-        images.forEach(i => {this.urls.push(i.image);});
+        images.forEach(i => { this.urls.push(i.image); });
         this.slides = this.urls.length - 1;
       });
     }
