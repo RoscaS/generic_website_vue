@@ -31,10 +31,14 @@
     },
 
     mounted() {
-      axios.get(this.url).then(response => {
+      axios.get(this.url)
+      .then(response => {
         let images = response.data.images;
         images.forEach(i => { this.urls.push(i.image); });
         this.slides = this.urls.length - 1;
+      })
+      .catch(error => {
+        console.log(error)
       });
     }
   };
@@ -52,7 +56,7 @@
   }
 
   .carousel {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     h2 {
       span {
         background-color: rgba(0, 0, 0, 0.51);

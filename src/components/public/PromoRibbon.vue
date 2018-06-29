@@ -32,13 +32,10 @@
               praesentium reiciendis reprehenderit, temporibus velit
               voluptatem.</p>
           </div>
-
-
         </div>
       </div>
     </VueSlideUpDown>
   </div>
-
 </template>
 
 
@@ -89,7 +86,6 @@
           this.title = 'Cliquez pour vérouiller.';
           this.isLocked = false;
           this.isOpen = false;
-          console.log('off');
           window.removeEventListener('scroll', this.checkScroll);
           if (!this.isTouch) {
             this.$toast.open(
@@ -102,7 +98,6 @@
           this.title = 'Cliquez pour dévérouiller.';
           this.isLocked = true;
           this.isOpen = true;
-          console.log('on');
           window.addEventListener('scroll', this.checkScroll);
           if (!this.isTouch) {
             this.$toast.open(

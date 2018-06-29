@@ -3,10 +3,8 @@
     <PromoRibbon/>
     <Top/>
     <Navbar/>
-    <CarouselTop :url="'http://localhost:8000/galleries/1/'"/>
-    <div style="margin-bottom: 200px;"></div>
-    <div class="has-background-primary" style="height: 500px;">a</div>
-    <div style="margin-bottom: 3000px;"></div>
+    <Carousel :url="'http://localhost:8000/galleries/carousel/'"/>
+
   </div>
 </template>
 
@@ -16,7 +14,9 @@
 import PromoRibbon from './components/public/PromoRibbon'
 import Top from './components/public/Top'
 import Navbar from './components/public/Navbar'
-import CarouselTop from './components/public/CarouselTop'
+import Carousel from './components/public/Carousel'
+import Presentation from './components/public/Presentation'
+
 
 export default {
   name: 'App',
@@ -24,7 +24,9 @@ export default {
     PromoRibbon,
     Top,
     Navbar,
-    CarouselTop,
+    Carousel,
+    Presentation,
+
   }
 }
 </script>

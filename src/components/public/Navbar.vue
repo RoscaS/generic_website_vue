@@ -66,18 +66,12 @@
     data() {
       return {
         smallMenu: false,
-
-
         isSticky: false,
         isShadow: false,
-
         navbar: null,
         navbarOffset: null,
         brand: null,
-
         canCancel: [true, false, true],
-
-
         links: [
           {name: 'Info', icon: 'fa-info'},
           {name: 'Articles', icon: 'fa-shopping-bag'},
@@ -159,7 +153,6 @@
           this.removeShadow();
         }
       },
-
     },
 
     mounted() {

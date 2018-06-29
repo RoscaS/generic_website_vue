@@ -104,7 +104,6 @@
 
     ._top {
       border-top: 1px solid black;
-      margin-bottom: 10px;
     }
 
     ._bottom {
@@ -122,14 +121,12 @@
   }
 
   ._wrapper {
-    margin-top: 50px;
     margin-bottom: 12px;
   }
 
   ._sides {
     color: $top-text;
     font-size: 13px;
-    /*font-weight: bold;*/
     padding: 10px 0 10px 0;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
