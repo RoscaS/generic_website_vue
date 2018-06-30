@@ -4,8 +4,13 @@
       <div class="columns">
 
         <div class="column is-3 is-hidden-mobile">
-          <transition name="bounceLeft" appear>
-            <div class="_sides _left">
+            <div class="_sides _left"
+                 v-scroll-reveal="{
+                 origin: 'left',
+                 distance: '400px',
+                 duration: 1000,
+                 delay: 1500
+                 }">
               <a class="no-tr" href="#" v-scroll-to="'#poule'">
                 <i class="fal fa-calendar fa-fw"
                    :title="getTitle('horaire')"></i>
@@ -13,14 +18,27 @@
               <span class="first-line">HORAIRE NON SPÉCIFIÉ</span>
               <span class="second-line">CLIQUEZ SUR LE LIEN</span>
             </div>
-          </transition>
         </div>
 
         <div class="column is-6">
           <div class="_center">
-            <div class="_title">MySite.</div>
-            <div class="_ribbon">
-              <div class="text">FORALL</div>
+            <div class="_title"
+                 v-scroll-reveal="{
+                 origin: 'top',
+                 duration: 1000,
+                 delay: 500
+                 }">
+              MySite.
+            </div>
+            <div class="_ribbon"
+                 v-scroll-reveal="{
+                 origin: 'bottom',
+                 duration: 2000,
+                 delay: 500
+                 }">
+              <div class="text">
+                FORALL
+              </div>
             </div>
             <transition name="subtitle-fade-in" appear>
               <div class="_subtitle">
@@ -32,15 +50,19 @@
 
 
         <div class="column is-3 is-hidden-mobile">
-          <transition name="bounceRight" appear>
-            <div class="_sides _right">
+            <div class="_sides _right"
+                 v-scroll-reveal="{
+                 origin: 'right',
+                 distance: '400px',
+                 duration: 1000,
+                 delay: 1500
+                 }">
               <span class="first-line">AWESOME STREET</span>
               <span class="second-line">
                 2000 LE MONDE, tel.:
                 <a class="phone" href="tel:032-725-08-58">032-725-08-58</a>
             </span>
             </div>
-          </transition>
         </div>
 
         <!--MOBILE-->
@@ -110,6 +132,7 @@
       border-bottom: 1px solid black;
     }
   }
+
 
   .subtitle-fade-in-enter-active, .subtitle-fade-in-leave-active {
     transition: opacity 3s ease;

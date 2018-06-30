@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="carousel-wrapper">
     <transition name="carousel-fade-in" appear>
       <carousel class="content">
         <carousel-slide v-for="i in slides" :key="i" :index="i-1">
@@ -7,11 +7,6 @@
           <img :src="urls[i]">
         </carousel-slide>
       </carousel>
-    </transition>
-    <transition>
-      <div class="down-arrow">
-        <i class="fal fa-chevron-double-down"></i>
-      </div>
     </transition>
   </div>
 </template>
@@ -37,26 +32,7 @@
     },
 
     methods: {
-      scrollWatch() {
-        console.log(pageYOffset)
-        console.log(this.downArrow)
-        if(window.pageYOffset >= 165){
-          this.downArrow.classList.remove('fadeInDown');
-          this.downArrow.classList.add('fadeOutDown');
-          window.removeEventListener('scroll', this.scrollWatch);
-        }
-      },
 
-      setDownArrow() {
-        setTimeout(() => {
-          this.downArrow = document.getElementsByClassName('down-arrow')[0];
-          Velocity(this.downArrow, {opacity: '1'});
-          this.downArrow.classList.add('fadeInDown');
-          setTimeout(() => {
-            this.downArrow.classList.add('soft-bounce');
-          }, 1000);
-        }, 1800);
-      }
     },
 
     mounted() {
@@ -69,8 +45,6 @@
         console.log(error);
       });
 
-      window.addEventListener('scroll', this.scrollWatch);
-      this.setDownArrow();
     }
   };
 </script>
@@ -86,37 +60,21 @@
     opacity: 0;
   }
 
-  .soft-bounce {
-    animation: softBounce .5s ease infinite;
-  }
-
-  @keyframes softBounce {
-    0% {
-      transform: translateY(0px);
+  .carousel-wrapper {
+    height: 600px;
+    @media screen and (max-width: 1024px) {
+      height: 305px;
     }
-    60% {
-      transform: translateY(3px);
+    @media screen and (max-width: 1280px) {
+      height: 340px;
     }
-    100% {
-      transform: translateY(0px);
+    @media screen and (max-width: 1366px) {
+      height: 320px;
     }
-  }
-
-  .down-arrow {
-    opacity: 0;
-    font-size: 50px;
-    color: white;
-    left: 49%;
-    bottom: 150px;
-    position: relative;
-
-    i {
-      cursor: pointer;
-    }
-
   }
 
   .carousel {
+    margin-bottom: -50px !important;
 
     h2 {
       span {
@@ -132,19 +90,19 @@
 
     img {
       width: 100%;
-      max-height: 600px;
+      height: 600px;
       overflow: hidden;
       -o-object-fit: cover;
       object-fit: cover;
 
       @media screen and (max-width: 1024px) {
-        max-height: 305px;
+        height: 305px;
       }
       @media screen and (max-width: 1280px) {
-        max-height: 340px;
+        height: 340px;
       }
       @media screen and (max-width: 1366px) {
-        max-height: 320px;
+        height: 320px;
       }
     }
   }

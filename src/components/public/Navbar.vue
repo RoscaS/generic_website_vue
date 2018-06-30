@@ -11,7 +11,14 @@
             </h1>
           </a>
         </div>
-        <div class="level-item links is-hidden-mobile">
+        <div class="level-item links is-hidden-mobile"
+             v-scroll-reveal="{
+              origin: 'right',
+              distance: '400px',
+              duration: 1500,
+              delay:2000,
+              easing: 'ease'
+              }">
           <a v-for="link in links" :href="'#' + link.name">
             <i class="fa fa-fw" :class="link.icon"></i>
             {{link.name}}
