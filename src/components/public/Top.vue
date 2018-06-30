@@ -95,7 +95,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import 'sass/global';
+  @import '../../../static/sass/global';
 
   ._mobile {
     font-size: 13px;

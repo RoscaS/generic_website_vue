@@ -8,6 +8,11 @@
         </carousel-slide>
       </carousel>
     </transition>
+    <transition>
+      <div class="down-arrow">
+        <i class="fal fa-chevron-double-down"></i>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -25,21 +30,47 @@
     },
     data() {
       return {
+        downArrow: null,
         urls: [],
         slides: 8,
       };
     },
 
+    methods: {
+      scrollWatch() {
+        console.log(pageYOffset)
+        console.log(this.downArrow)
+        if(window.pageYOffset >= 165){
+          this.downArrow.classList.remove('fadeInDown');
+          this.downArrow.classList.add('fadeOutDown');
+          window.removeEventListener('scroll', this.scrollWatch);
+        }
+      },
+
+      setDownArrow() {
+        setTimeout(() => {
+          this.downArrow = document.getElementsByClassName('down-arrow')[0];
+          Velocity(this.downArrow, {opacity: '1'});
+          this.downArrow.classList.add('fadeInDown');
+          setTimeout(() => {
+            this.downArrow.classList.add('soft-bounce');
+          }, 1000);
+        }, 1800);
+      }
+    },
+
     mounted() {
-      axios.get(this.url)
-      .then(response => {
+      axios.get(this.url).then(response => {
         let images = response.data.images;
         images.forEach(i => { this.urls.push(i.image); });
         this.slides = this.urls.length - 1;
-      })
-      .catch(error => {
-        console.log(error)
+      }).catch(error => {
+        console.log(this.url);
+        console.log(error);
       });
+
+      window.addEventListener('scroll', this.scrollWatch);
+      this.setDownArrow();
     }
   };
 </script>
@@ -55,12 +86,41 @@
     opacity: 0;
   }
 
+  .soft-bounce {
+    animation: softBounce .5s ease infinite;
+  }
+
+  @keyframes softBounce {
+    0% {
+      transform: translateY(0px);
+    }
+    60% {
+      transform: translateY(3px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  .down-arrow {
+    opacity: 0;
+    font-size: 50px;
+    color: white;
+    left: 49%;
+    bottom: 150px;
+    position: relative;
+
+    i {
+      cursor: pointer;
+    }
+
+  }
+
   .carousel {
-    /*margin-top: 10px;*/
+
     h2 {
       span {
         background-color: rgba(0, 0, 0, 0.51);
-
       }
       position: absolute;
       text-align: center;
@@ -72,7 +132,7 @@
 
     img {
       width: 100%;
-      max-height: 640px;
+      max-height: 600px;
       overflow: hidden;
       -o-object-fit: cover;
       object-fit: cover;
@@ -86,19 +146,7 @@
       @media screen and (max-width: 1366px) {
         max-height: 320px;
       }
-
     }
-
-  }
-
-  .add-remove {
-    margin-left: 20px;
-  }
-
-
-  .delete {
-    margin-left: 20px;
-    margin-right: 12px;
   }
 
 </style>

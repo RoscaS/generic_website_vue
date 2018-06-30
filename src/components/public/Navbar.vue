@@ -173,7 +173,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import 'sass/global';
+  @import '../../../static/sass/global';
 
   .sticky {
     position: fixed;

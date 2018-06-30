@@ -73,7 +73,7 @@
 
 
 <style scoped lang="scss">
-  @import '../public/sass/global';
+  @import '../../../static/sass/global';
 
   h3 {
     color: white !important;

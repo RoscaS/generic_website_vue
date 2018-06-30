@@ -3,7 +3,9 @@
     <PromoRibbon/>
     <Top/>
     <Navbar/>
-    <Carousel :url="'http://localhost:8000/galleries/carousel/'"/>
+    <Carousel :url="base + carousel"/>
+    <Presentation :url="base + presentation"/>
+    <div style="height: 1000px"></div>
 
   </div>
 </template>
@@ -26,7 +28,14 @@ export default {
     Navbar,
     Carousel,
     Presentation,
+  },
+  data() {
+    return {
+      base: 'http://localhost:8000/',
+      carousel: 'galleries/carousel/',
+      presentation: 'presentation/',
 
+    }
   }
 }
 </script>
@@ -34,7 +43,6 @@ export default {
 
 
 <style lang="scss">
-  // Import Bulma's core
   @import "~bulma/sass/utilities/_all";
   // Set your colors
   $primary: #00D1B2;

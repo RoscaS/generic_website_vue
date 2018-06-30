@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 @import 'variables';
 @import 'effects';
+
+.container {
+  //width: 948px;
+  max-width: 948px;
+}
 
 .debug {
   border: 1px solid black;
@@ -22,6 +28,7 @@ a {
 
 p {
   color: $paragraph;
+  font-family: 'Lato', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {

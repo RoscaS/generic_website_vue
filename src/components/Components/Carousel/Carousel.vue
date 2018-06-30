@@ -104,8 +104,8 @@
     }
 
     .carousel__pagination {
-      position: absolute;
-      bottom: 50px;
+      position: static;
+      bottom: 10px;
       left: 0;
       right: 0;
       text-align: center;
@@ -118,12 +118,13 @@
 
         &.active {
           transition: border .5s ease;
-          border-bottom: 8px solid white;
+          /*border-bottom: 8px solid white;*/
+          border-bottom: 8px solid lightgray;
         }
 
         &:hover {
           transition: border-color .5s ease;
-          border-bottom-color: white;
+          border-bottom-color: lightgray;
         }
       }
     }

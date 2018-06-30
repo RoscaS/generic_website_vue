@@ -113,7 +113,7 @@
 
 
 <style scoped lang="scss">
-  @import 'sass/global';
+  @import '../../../static/sass/global';
 
   ._wrapper {
     height: 400px;
