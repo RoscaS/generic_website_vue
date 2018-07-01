@@ -5,7 +5,7 @@
          v-scroll-to="{
                      el: '#Presentation',
                      duration: 2000,
-                     offset: -100
+                     offset: -80
                      }"></i>
     </transition>
     <section id="Presentation">
@@ -13,7 +13,7 @@
         <div slot="content">
           <p class="text1"
              v-scroll-reveal="{
-             origin: 'right',
+             origin: 'left',
              distance: '400px',
              duration: 1500,
              delay: 250,
@@ -25,16 +25,14 @@
             <div class="column">
               <img :src="image"
                    v-scroll-reveal="{
-                   origin: 'left',
-                   distance: '400px',
-                   duration: 1500,
+                   duration: 2500,
                    delay: 500,
                    easing: 'ease'
                    }">
             </div>
             <div class="column"
                  v-scroll-reveal="{
-                 origin: 'bottom',
+                 origin: 'right',
                  distance: '400px',
                  duration: 1500,
                  easing: 'ease'
@@ -111,6 +109,10 @@
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
+
+  #Presentation {
+    margin-top: -20px;
+  }
 
   .down-arrow {
     opacity: 0;

@@ -5,6 +5,7 @@
     <Navbar/>
     <Carousel :url="base + carousel"/>
     <Presentation :url="base + presentation"/>
+    <Hero :url="base + hero"/>
     <div style="height: 1000px"></div>
 
   </div>
@@ -18,6 +19,7 @@ import Top from './components/public/Top'
 import Navbar from './components/public/Navbar'
 import Carousel from './components/public/Carousel'
 import Presentation from './components/public/Presentation'
+import Hero from './components/public/Hero'
 
 
 export default {
@@ -28,13 +30,15 @@ export default {
     Navbar,
     Carousel,
     Presentation,
+    Hero,
+
   },
   data() {
     return {
       base: 'http://localhost:8000/',
       carousel: 'galleries/carousel/',
       presentation: 'presentation/',
-
+      hero: 'hero/'
     }
   }
 }
