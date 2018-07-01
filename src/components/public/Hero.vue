@@ -36,7 +36,6 @@
         </div>
       </div>
 
-
     </div>
   </section>
 </template>
@@ -66,7 +65,6 @@
 
     mounted() {
       axios.get(this.url).then(response => {
-        console.log(response.data);
         let data = response.data[0];
         this.icon1 = data.icon1;
         this.icon2 = data.icon2;

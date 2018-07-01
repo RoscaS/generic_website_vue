@@ -6,6 +6,7 @@
     <Carousel :url="base + carousel"/>
     <Presentation :url="base + presentation"/>
     <Hero :url="base + hero"/>
+    <Parallax :url="base + parallax1" :idx="0" :height="600"/>
     <div style="height: 1000px"></div>
 
   </div>
@@ -20,6 +21,7 @@ import Navbar from './components/public/Navbar'
 import Carousel from './components/public/Carousel'
 import Presentation from './components/public/Presentation'
 import Hero from './components/public/Hero'
+import Parallax from './components/Components/Parallax'
 
 
 export default {
@@ -31,6 +33,7 @@ export default {
     Carousel,
     Presentation,
     Hero,
+    Parallax,
 
   },
   data() {
@@ -38,9 +41,10 @@ export default {
       base: 'http://localhost:8000/',
       carousel: 'galleries/carousel/',
       presentation: 'presentation/',
-      hero: 'hero/'
+      hero: 'hero/',
+      parallax1: 'galleries/parallax/'
     }
-  }
+  },
 }
 </script>
 
