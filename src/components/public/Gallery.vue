@@ -12,22 +12,29 @@
                 delay: 200,
                 easing: 'ease',
                }">
-            <img :src="image"/>
+            <a class="no-tr"
+               :href="image"
+               v-lightbox
+               @click="disableScrolling">
+              <img :src="image"/>
+            </a>
           </div>
         </div>
       </div>
     </SectionContainer>
+    <Lightbox></Lightbox>
   </div>
 
 </template>
 
 <script>
   import SectionContainer from '../Components/SectionContainer';
+  import Lightbox from '../Components/Lightbox/Lightbox';
   import axios from 'axios';
 
   export default {
     name: "Gallery",
-    components: {SectionContainer},
+    components: {SectionContainer, Lightbox},
     props: {
       url: {type: String},
       urlData: {type: String},
@@ -40,6 +47,15 @@
         urls: [],
       };
     },
+
+    methods: {
+      disableScrolling() {
+        let x = window.scrollX;
+        let y = window.scrollY;
+        window.onscroll = function() {window.scrollTo(x, y);};
+      }
+    },
+
     mounted() {
       axios.get(this.url).then(response => {
         let images = response.data.images;

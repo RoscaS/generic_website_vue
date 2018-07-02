@@ -11,6 +11,36 @@
     <Parallax :url="base + parallax" :idx="1" :height="400"/>
     <Gallery :url="base + gallery" :urlData="base + galleryData"/>
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
+
+
+
+    <!--<div v-if="title === 'first'">-->
+      <!--<a v-lightbox v-for="n in 9"-->
+         <!--:href="'https://picsum.photos/800/600?image=2' + n">-->
+        <!--<img :src="'https://picsum.photos/150/150?image=2' + n">-->
+      <!--</a>-->
+    <!--</div>-->
+
+    <!--<section>-->
+      <!--<div v-if="title === 'second'">-->
+        <!--<a v-lightbox v-for="n in 9"-->
+           <!--:href="'https://picsum.photos/800/600?image=5' + n">-->
+          <!--<img :src="'https://picsum.photos/150/150?image=5' + n">-->
+        <!--</a>-->
+      <!--</div>-->
+    <!--</section>-->
+
+    <!--<div class="field is-grouped">-->
+      <!--<p class="control">-->
+        <!--<a class="button is-outlined is-primary"-->
+           <!--@click="title = 'first'">First</a>-->
+        <!--<a class="button is-outlined is-primary" @click="title = 'second'">Second</a>-->
+      <!--</p>-->
+    <!--</div>-->
+
+
+
+
     <div style="height: 1000px"></div>
 
   </div>
@@ -19,6 +49,7 @@
 
 <script>
   import Parallax from './components/Components/Parallax';
+
   import PromoRibbon from './components/public/PromoRibbon';
   import Top from './components/public/Top';
   import Navbar from './components/public/Navbar';
@@ -32,6 +63,8 @@
     name: 'App',
     components: {
       Parallax,
+      // Lightbox,
+
       PromoRibbon,
       Top,
       Navbar,
@@ -43,6 +76,9 @@
     },
     data() {
       return {
+        title: 'first',
+
+
         base: 'http://localhost:8000/',
         parallax: 'galleries/parallax/',
 
