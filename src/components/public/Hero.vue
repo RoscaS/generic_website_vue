@@ -87,7 +87,6 @@
   @import '../../../static/sass/global';
 
   .hero {
-    margin-top: 20px;
     text-align: center;
     background-color: $separator;
 

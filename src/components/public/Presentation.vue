@@ -52,7 +52,7 @@
 
   export default {
     name: "Presentation",
-    components: {SectionContainer},
+    components: { SectionContainer },
     props: {
       url: {type: String}
     },

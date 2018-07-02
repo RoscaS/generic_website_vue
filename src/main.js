@@ -6,11 +6,11 @@ import Buefy from 'buefy';
 
 import VueScrollTo from 'vue-scrollto';
 import VueScrollReveal from 'vue-scroll-reveal';
+// USE VODAL FOR ADMIN MODAL
 
 import '../static/js/velocity';
 import '../static/fonts/font-awesome/css/fontawesome-all.css';
 import 'vue2-animate/dist/vue2-animate.min.css';
-// import 'bulma/css/bulma.css'
 
 
 Vue.use(VueScrollTo);

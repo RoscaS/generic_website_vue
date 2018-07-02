@@ -13,13 +13,18 @@
         </div>
         <div class="level-item links is-hidden-mobile"
              v-scroll-reveal="{
-              origin: 'right',
-              distance: '400px',
-              duration: 1500,
-              delay:2000,
-              easing: 'ease'
+                origin: 'right',
+                distance: '400px',
+                duration: 1500,
+                delay:2000,
+                easing: 'ease'
               }">
-          <a v-for="link in links" :href="'#' + link.name">
+          <a v-for="link in links"
+             v-scroll-to="{
+               el: '#' + link.name,
+               duration: 2000,
+               offset: -80
+             }">
             <i class="fa fa-fw" :class="link.icon"></i>
             {{link.name}}
           </a>
@@ -80,7 +85,7 @@
         brand: null,
         canCancel: [true, false, true],
         links: [
-          {name: 'Info', icon: 'fa-info'},
+          {name: 'Presentation', icon: 'fa-info'},
           {name: 'Articles', icon: 'fa-shopping-bag'},
           {name: 'Galerie', icon: 'fa-th'},
           {name: 'Contact', icon: 'fa-envelope'},

@@ -1,13 +1,11 @@
 <template>
-  <section :id="id" class="hero is-large parallax has-text-centered">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          {{ title }}
-        </h1>
-      </div>
-    </div>
-  </section>
+  <div :id="title">
+    <section :id="id" class="parallax has-text-centered">
+      <h1 class="title">
+        {{ title }}
+      </h1>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -49,13 +47,11 @@
 <style scoped lang="scss">
   @import '../../../static/sass/global';
 
-  h1 {
-    color: white;
-    font-size: 50px;
-    font-weight: normal;
-  }
-
   .parallax {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     opacity: 0.75;
     position: relative;
 
@@ -63,5 +59,11 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    h1 {
+      color: white;
+      font-size: 50px;
+      font-weight: normal;
+    }
   }
 </style>

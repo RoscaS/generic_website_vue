@@ -25,6 +25,10 @@
 <style scoped lang="scss">
   @import '../../../static/sass/global';
 
+  .section {
+    margin-bottom: 60px;
+  }
+
   .header {
     font-weight: normal !important;
     text-align: center;
