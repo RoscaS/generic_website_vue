@@ -90,7 +90,7 @@
 
     mounted() {
       axios.get(this.url).then(response => {
-        let data = response.data[0];
+        let data = response.data;
         this.title = data.title;
         this.subTitle = data.sub_title;
         this.text1 = data.text1;

@@ -72,7 +72,7 @@
       });
 
       axios.get(this.urlSectionData).then(response => {
-        let data = response.data[0];
+        let data = response.data;
         this.title = data.title;
         this.subTitle = data.sub_title;
       }).catch(error => {

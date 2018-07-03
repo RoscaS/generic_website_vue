@@ -27,7 +27,7 @@
             </div>
             <p>{{ subTitle2 }}</p>
 
-            <ContactForm></ContactForm>
+            <ContactForm :url="urlPostMessage"></ContactForm>
           </div>
         </div>
       </div>
@@ -39,15 +39,16 @@
 <script>
   import SectionContainer from '../Components/SectionContainer';
   import Options from '../../options';
-  import ContactForm from '../Components/Forms/ContactForm'
+  import ContactForm from '../Components/Forms/ContactForm';
 
   import axios from 'axios';
 
   export default {
     name: "Contact",
-    components: { SectionContainer, ContactForm},
+    components: {SectionContainer, ContactForm},
     props: {
-      url: {type: String}
+      url: {type: String},
+      urlPostMessage: {type: String},
     },
     data() {
       return {
@@ -67,11 +68,14 @@
 
     mounted() {
       axios.get(this.url).then(response => {
-        let data = response.data[0];
+        let data = response.data;
         this.title = data.title;
         this.subTitle1 = data.sub_title;
         this.subTitle2 = data.sub_title2;
         this.subTitle3 = data.sub_title3;
+      }).catch(error => {
+        console.log(this.url);
+        console.log(error);
       });
     }
   };

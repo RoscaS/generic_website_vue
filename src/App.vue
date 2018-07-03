@@ -11,7 +11,7 @@
     <Parallax :url="base + parallax" :idx="1" :height="400"/>
     <Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
-    <Contact :url="base + contact"/>
+    <Contact :url="base + contact" :urlPostMessage="base + message"/>
 
     <div style="height: 1000px"></div>
 
@@ -52,13 +52,16 @@
         title: 'first',
 
         base: 'http://localhost:8000/',
+        message: 'message/',
+
+
         parallax: 'galleries/parallax/',
         carousel: 'galleries/carousel/',
-        presentation: 'presentation/',
-        hero: 'hero/',
+        presentation: 'presentation/1',
+        hero: 'hero/1',
         gallery: 'galleries/events/',
-        galleryData: 'gallery/',
-        contact: 'contact/',
+        galleryData: 'gallery/1',
+        contact: 'contact/1',
       };
     },
   };

@@ -65,7 +65,7 @@
 
     mounted() {
       axios.get(this.url).then(response => {
-        let data = response.data[0];
+        let data = response.data;
         this.icon1 = data.icon1;
         this.icon2 = data.icon2;
         this.icon3 = data.icon3;
