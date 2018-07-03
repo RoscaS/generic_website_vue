@@ -66,7 +66,7 @@
           wdth: width-200 + 'px',
           height: height-200 + 'px',
           top: ((window.innerHeight - height) * 0.5)+100 + 'px',
-          left: ((window.innerWidth - width) * 0.5)+200 + 'px',
+          left: ((window.innerWidth - width) * 0.5)+165 + 'px',
         };
       }
     },

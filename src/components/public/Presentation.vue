@@ -17,7 +17,7 @@
              distance: '400px',
              duration: 1500,
              delay: 250,
-             easing: 'ease'
+             easing: 'ease',
              }">
             {{ text1 }}
           </p>
@@ -120,9 +120,13 @@
     font-size: 50px;
     color: white;
     left: 49%;
-    bottom: 90px;
+    bottom: 120px;
     position: relative;
     cursor: pointer;
+
+    @media screen and (max-width: 1366px) {
+      display: none;
+    }
 
     &:hover {
       transition: color .5s ease;

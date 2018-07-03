@@ -27,6 +27,10 @@
 
   .section {
     margin-bottom: 60px;
+
+    @media screen and (max-width: 1366px) {
+      margin-top: 60px;
+    }
   }
 
   .header {

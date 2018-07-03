@@ -4,7 +4,7 @@
       <div slot="content">
         <div id="GalleryColumns" class="columns is-multiline">
           <div id="Verge" class="column is-3 gallery-col"
-               v-for="image in urls"
+               v-for="image in images"
                v-scroll-reveal="{
                 origin: 'left',
                 distance: '400px',
@@ -13,10 +13,11 @@
                 easing: 'ease',
                }">
             <a class="no-tr"
-               :href="image"
+               :href="image.url"
+               :description="image.description"
                v-lightbox
                @click="disableScrolling">
-              <img :src="image"/>
+              <img :src="image.url"/>
             </a>
           </div>
         </div>
@@ -37,14 +38,14 @@
     components: {SectionContainer, Lightbox},
     props: {
       url: {type: String},
-      urlData: {type: String},
+      urlSectionData: {type: String},
     },
 
     data() {
       return {
         title: '',
         subTitle: '',
-        urls: [],
+        images: []
       };
     },
 
@@ -59,13 +60,18 @@
     mounted() {
       axios.get(this.url).then(response => {
         let images = response.data.images;
-        images.forEach(i => { this.urls.push(i.image); });
+        images.forEach(i => {
+          this.images.push({
+            url: i.image,
+            description: i.description
+          });
+        });
       }).catch(error => {
         console.log(this.url);
         console.log(error);
       });
 
-      axios.get(this.urlData).then(response => {
+      axios.get(this.urlSectionData).then(response => {
         let data = response.data[0];
         this.title = data.title;
         this.subTitle = data.sub_title;

@@ -9,37 +9,9 @@
     <Parallax :url="base + parallax" :idx="0" :height="600"/>
     <Presentation :url="base + presentation"/>
     <Parallax :url="base + parallax" :idx="1" :height="400"/>
-    <Gallery :url="base + gallery" :urlData="base + galleryData"/>
+    <Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
-
-
-
-    <!--<div v-if="title === 'first'">-->
-      <!--<a v-lightbox v-for="n in 9"-->
-         <!--:href="'https://picsum.photos/800/600?image=2' + n">-->
-        <!--<img :src="'https://picsum.photos/150/150?image=2' + n">-->
-      <!--</a>-->
-    <!--</div>-->
-
-    <!--<section>-->
-      <!--<div v-if="title === 'second'">-->
-        <!--<a v-lightbox v-for="n in 9"-->
-           <!--:href="'https://picsum.photos/800/600?image=5' + n">-->
-          <!--<img :src="'https://picsum.photos/150/150?image=5' + n">-->
-        <!--</a>-->
-      <!--</div>-->
-    <!--</section>-->
-
-    <!--<div class="field is-grouped">-->
-      <!--<p class="control">-->
-        <!--<a class="button is-outlined is-primary"-->
-           <!--@click="title = 'first'">First</a>-->
-        <!--<a class="button is-outlined is-primary" @click="title = 'second'">Second</a>-->
-      <!--</p>-->
-    <!--</div>-->
-
-
-
+    <Contact :url="base + contact"/>
 
     <div style="height: 1000px"></div>
 
@@ -57,13 +29,13 @@
   import Presentation from './components/public/Presentation';
   import Hero from './components/public/Hero';
   import Gallery from './components/public/Gallery';
+  import Contact from './components/public/Contact';
 
 
   export default {
     name: 'App',
     components: {
       Parallax,
-      // Lightbox,
 
       PromoRibbon,
       Top,
@@ -72,21 +44,21 @@
       Presentation,
       Hero,
       Gallery,
+      Contact,
 
     },
     data() {
       return {
         title: 'first',
 
-
         base: 'http://localhost:8000/',
         parallax: 'galleries/parallax/',
-
         carousel: 'galleries/carousel/',
         presentation: 'presentation/',
         hero: 'hero/',
         gallery: 'galleries/events/',
         galleryData: 'gallery/',
+        contact: 'contact/',
       };
     },
   };

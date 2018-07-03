@@ -6,6 +6,7 @@ import Buefy from 'buefy';
 
 import VueScrollTo from 'vue-scrollto';
 import VueScrollReveal from 'vue-scroll-reveal';
+// import VueTyper from 'vue-typer';
 // USE VODAL FOR ADMIN MODAL
 
 import '../static/js/velocity';
@@ -15,6 +16,8 @@ import 'vue2-animate/dist/vue2-animate.min.css';
 
 Vue.use(VueScrollTo);
 Vue.use(VueScrollReveal);
+// Vue.use(VueTyper);
+
 
 Vue.use(Buefy, {
   defaultIconPack: 'fas',

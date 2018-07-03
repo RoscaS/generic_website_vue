@@ -3,11 +3,18 @@ class LightboxStore {
   constructor() {
     this.state = {
       images: [],
+      descriptions: [],
       index: false,
     }
   }
 
-  addImage(url) { return this.state.images.push(url) }
+  addImage(url) {
+    return this.state.images.push(url)
+  }
+
+  addDescription(description) {
+    this.state.descriptions.push(description)
+  }
 
   open(index) { this.state.index = index - 1; }
 

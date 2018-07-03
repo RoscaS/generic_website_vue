@@ -28,7 +28,7 @@
                  duration: 1000,
                  delay: 500
                  }">
-              MySite.
+              {{ options.name }}
             </div>
             <div class="_ribbon"
                  v-scroll-reveal="{
@@ -37,12 +37,12 @@
                  delay: 500
                  }">
               <div class="text">
-                FORALL
+                {{ options.nameAdd.toUpperCase() }}
               </div>
             </div>
             <transition name="subtitle-fade-in" appear>
               <div class="_subtitle">
-                LEMONDE / DEPUIS 2016
+                {{ options.city.toUpperCase() }} / DEPUIS {{ options.oppening}}
               </div>
             </transition>
           </div>
@@ -57,10 +57,10 @@
                  duration: 1000,
                  delay: 1500
                  }">
-              <span class="first-line">AWESOME STREET</span>
+              <span class="first-line">{{ options.adress.toUpperCase() }}</span>
               <span class="second-line">
-                2000 LE MONDE, tel.:
-                <a class="phone" href="tel:032-725-08-58">032-725-08-58</a>
+                {{ options.postCode }} {{ options.city.toUpperCase() }}, tel.:
+                <a class="phone" :href="phoneHref">{{options.phone}}</a>
             </span>
             </div>
         </div>
@@ -79,21 +79,21 @@
 
           <transition name="bounceRight" appear>
             <div class="_bottom">
-              <span class="first-line">AWESOME STREET</span>
+              <span class="first-line">{{ options.adress.toUpperCase() }}</span>
               <span class="second-line">
-              2000 LE MONDE, tel.:
-              <a class="no-tr" href="tel:032-725-08-58">032 725 08 58</a>
+                {{ options.postCode }} {{ options.city.toUpperCase() }}, tel.:
+              <a class="no-tr" :href="phoneHref">{{options.phone}}</a>
             </span>
             </div>
           </transition>
         </div>
-
       </div>
     </div>
   </section>
 </template>
 
 <script>
+  import options from '../../options'
 
   const titles = [
     {class: 'horaire', title: "Voir l'horaire complet."},
@@ -104,8 +104,13 @@
     name: 'Top',
     data() {
       return {
+        options: options,
         titles: titles,
       };
+    },
+
+    computed: {
+      phoneHref() { return `tel:${this.options.phone}` }
     },
 
     methods: {
@@ -144,7 +149,8 @@
   }
 
   ._wrapper {
-    margin-bottom: 12px;
+    margin-top: 30px;
+    margin-bottom: 20px;
   }
 
   ._sides {

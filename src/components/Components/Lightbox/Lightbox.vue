@@ -8,6 +8,9 @@
        @click.stop.prevent="next"></i>
     <i class="far fa-chevron-left fa-3x arrows prev"
        @click.stop.prevent="prev"></i>
+
+    <h2 class="description">{{ description }}</h2>
+    <p class="counter">{{ index }}/{{ total }}</p>
   </div>
 </template>
 
@@ -28,20 +31,17 @@
     },
 
     computed: {
-      image() {
-        if (this.index !== false) {
-          return this.state.images[this.state.index];
-        }
-      },
-      transition() {
-        return 'lightbox-' + this.direction;
-      }
+      image() { return this.state.images[this.state.index]; },
+      description() { return this.state.descriptions[this.state.index]; },
+      index() { return this.state.index + 1; },
+      total() { return this.state.images.length; },
+      transition() { return 'lightbox-' + this.direction; }
     },
 
     methods: {
 
-      enableScrolling(){
-          window.onscroll = function(){};
+      enableScrolling() {
+        window.onscroll = function() {};
       },
 
       close() {
@@ -61,6 +61,7 @@
 </script>
 
 <style scoped lang="scss">
+
   .lightbox {
     z-index: 20;
     position: fixed;
@@ -69,7 +70,23 @@
     width: 100%;
     height: 100%;
     background-color: #FFF;
-    background-color: rgba(#000, 0.8);
+    background-color: rgba(#000, 0.9);
+
+    .description {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: white;
+      top: 88%;
+    }
+
+    .counter {
+      position: fixed;
+      color: white;
+      top: 20px;
+      left: 20px;
+    }
 
     .arrows {
       transition: color .1s, transform .1s;
