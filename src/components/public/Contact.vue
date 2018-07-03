@@ -1,14 +1,18 @@
 <template>
-
   <section id="Contact">
     <SectionContainer :title="title" :sub-title="subTitle1">
       <div slot="content">
         <div class="columns">
           <div class="column left"></div>
           <div class="column right">
-            <div class="info">
-
-
+            <div class="info"
+                 v-scroll-reveal="{
+                 origin: 'right',
+                 distance: '400px',
+                 duration: 1500,
+                 delay: 50,
+                 easing: 'ease',
+                 }">
               <div class="line">
                 <i class="fas fa-map-marker-alt fa-fw"></i>
                 <a :href="options.google">{{ options.city }}</a>
@@ -25,7 +29,15 @@
               </div>
 
             </div>
-            <p>{{ subTitle2 }}</p>
+            <p class="subtitle2"
+               v-scroll-reveal="{
+               origin: 'right',
+               distance: '200px',
+               duration: 1500,
+               delay: 100,
+               easing: 'ease',
+               }">
+            {{ subTitle2 }}</p>
 
             <ContactForm :url="urlPostMessage"></ContactForm>
           </div>
@@ -81,6 +93,16 @@
   };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import '../../../static/sass/global';
+
+  .line {
+    margin-bottom: 10px;
+  }
+
+  .subtitle2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
 
 </style>

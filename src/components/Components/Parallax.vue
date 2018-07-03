@@ -1,11 +1,9 @@
 <template>
-  <div :id="title">
-    <section :id="id" class="parallax has-text-centered">
-      <h1 class="title">
-        {{ title }}
-      </h1>
-    </section>
-  </div>
+  <section :id="id" class="parallax has-text-centered">
+    <h1 class="title">
+      {{ title }}
+    </h1>
+  </section>
 </template>
 
 <script>

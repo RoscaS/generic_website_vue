@@ -2,28 +2,29 @@
   <div>
     <nav id="Navbar" class="has-background-white"
          :class="{'sticky': isSticky}">
-      <!--<transition name="zoomUp" appear>-->
       <div class="level is-mobile container">
         <div id="Brand" class="level-left">
-          <a class="no-tr" href="#" v-scroll-to="'#Home'">
+          <a class="no-tr" v-scroll-to="'#Home'">
             <h1 class="title">
               my<span>site</span>
             </h1>
           </a>
         </div>
-        <div class="level-item links is-hidden-mobile"
+        <div id="Links" class="level-item links is-hidden-mobile"
              v-scroll-reveal="{
-                origin: 'right',
-                distance: '400px',
-                duration: 1500,
-                delay:2000,
+                origin: 'left',
+                distance: '100px',
+                duration: 1000,
+                delay:1000,
                 easing: 'ease'
               }">
+
           <a v-for="link in links"
              v-scroll-to="{
                el: '#' + link.name,
                duration: 2000,
-               offset: -80
+               offset: -50
+
              }">
             <i class="fa fa-fw" :class="link.icon"></i>
             {{link.name}}
@@ -170,10 +171,17 @@
     mounted() {
       window.addEventListener('scroll', this.scrollWatch);
 
+
       setTimeout(() => {
         this.navbar = document.getElementById("Navbar");
         this.brand = document.getElementById("Brand");
-        this.navbarOffset = this.navbar.offsetTop;
+        // this.navbarOffset = this.navbar.offsetTop;
+        this.navbarOffset = 386;
+
+        if (window.pageYOffset !== 0) {
+          window.scrollTo(0, 0)
+        }
+
       }, 50);
 
     },
@@ -202,8 +210,8 @@
       opacity: 0;
       z-index: 20;
 
-      a {
-        cursor: default;
+      h1 {
+        cursor: pointer;
       }
     }
 

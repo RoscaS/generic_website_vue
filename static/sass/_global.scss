@@ -35,5 +35,23 @@ h1, h2, h3, h4, h5, h6 {
   color: $header;
 }
 
+._btn {
+  transition: 0.2s color ease-out, 0.3s background-color ease-out;
+  border-radius: 0;
+  border-color: $accent;
+  color: $accent;
+  background-color: transparent;
+
+  &:hover {
+    transition: 0.2s color ease-in, 0.3s background-color ease-out;
+    color: white;
+    background-color: $accent;
+  }
+}
+
+input {
+}
+
+
 
 

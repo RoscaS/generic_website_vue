@@ -92,6 +92,7 @@
   $link: $primary;
   $link-invert: $primary-invert;
   $link-focus-border: $primary;
+
   // Import Bulma and Buefy styles
   @import "~bulma";
   @import "~buefy/src/scss/buefy";

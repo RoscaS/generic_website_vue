@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <section id="Galerie">
     <SectionContainer :title="title" :sub-title="subTitle">
       <div slot="content">
         <div id="GalleryColumns" class="columns is-multiline">
@@ -24,7 +24,7 @@
       </div>
     </SectionContainer>
     <Lightbox></Lightbox>
-  </div>
+  </section>
 
 </template>
 
