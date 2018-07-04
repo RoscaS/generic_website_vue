@@ -7,8 +7,8 @@
                v-for="image in images"
                v-scroll-reveal="{
                 origin: 'left',
-                distance: '400px',
-                duration: 600,
+                distance: '100px',
+                duration: 1500,
                 delay: 200,
                 easing: 'ease',
                }">

@@ -1,4 +1,5 @@
 <template>
+
   <form @submit.prevent="preValidate" class="form">
     <section>
 
@@ -6,12 +7,12 @@
                :message="errors.first('name')"
                :type="errors.first('name')? 'is-danger': 'input'"
                v-scroll-reveal="{
-               origin: 'right',
-               distance: '100px',
-               duration: 1500,
-               delay: 150,
-               easing: 'ease',
-               }">
+                 origin: 'right',
+                 distance: '100px',
+                 duration: 1500,
+                 delay: 150,
+                 easing: 'ease',
+                 }">
         <b-input name="name"
                  v-validate="'required|min:3'"
                  icon="user"
@@ -26,12 +27,12 @@
                :message="errors.first('email')"
                :type="errors.first('email')? 'is-danger': 'input'"
                v-scroll-reveal="{
-               origin: 'right',
-               distance: '100px',
-               duration: 1500,
-               delay: 200,
-               easing: 'ease',
-               }">
+                 origin: 'right',
+                 distance: '100px',
+                 duration: 1500,
+                 delay: 200,
+                 easing: 'ease',
+                 }">
         <b-input name="email"
                  v-validate="'required|email'"
                  icon="envelope"
@@ -44,12 +45,12 @@
       <b-field :message="errors.first('textarea')"
                :type="errors.first('textarea')? 'is-danger': 'input'"
                v-scroll-reveal="{
-               origin: 'right',
-               distance: '100px',
-               duration: 1500,
-               delay: 250,
-               easing: 'ease',
-               }">
+                 origin: 'right',
+                 distance: '100px',
+                 duration: 1500,
+                 delay: 250,
+                 easing: 'ease',
+                 }">
         <b-input type="textarea"
                  name="textarea"
                  v-validate="'required|min:5'"
@@ -64,20 +65,24 @@
         <button class="button _btn"
                 type="submit"
                 v-scroll-reveal="{
-                origin: 'bottom',
-                distance: '100px',
-                duration: 1500,
-                delay: 300,
-                easing: 'ease',
-                }">
+                  origin: 'bottom',
+                  distance: '100px',
+                  duration: 1500,
+                  delay: 300,
+                  easing: 'ease',
+                  }">
           <i class="fas fa-fw fa-paper-plane"></i>
           &nbsp; Envoyer
         </button>
       </p>
     </section>
-    <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="false"></b-loading>
+    <b-loading :is-full-page="false" :active.sync="isLoading"
+               :can-cancel="false"></b-loading>
   </form>
+
 </template>
+
+
 
 <script>
   import axios from 'axios';
@@ -105,6 +110,7 @@
     },
     data() {
       return {
+        show: false,
         isLoading: false,
 
         name: null,

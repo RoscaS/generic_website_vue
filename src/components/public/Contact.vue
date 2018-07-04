@@ -3,7 +3,9 @@
     <SectionContainer :title="title" :sub-title="subTitle1">
       <div slot="content">
         <div class="columns">
-          <div class="column left"></div>
+          <div class="column left">
+            <GoogleMap name="map"></GoogleMap>
+          </div>
           <div class="column right">
             <div class="info"
                  v-scroll-reveal="{
@@ -52,12 +54,13 @@
   import SectionContainer from '../Components/SectionContainer';
   import Options from '../../options';
   import ContactForm from '../Components/Forms/ContactForm';
+  import GoogleMap from '../Components/Google/Maps'
 
   import axios from 'axios';
 
   export default {
     name: "Contact",
-    components: {SectionContainer, ContactForm},
+    components: {SectionContainer, ContactForm, GoogleMap},
     props: {
       url: {type: String},
       urlPostMessage: {type: String},

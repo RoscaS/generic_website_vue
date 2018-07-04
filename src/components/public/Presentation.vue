@@ -16,7 +16,7 @@
              origin: 'left',
              distance: '400px',
              duration: 1500,
-             delay: 250,
+             delay: 50,
              easing: 'ease',
              }">
             {{ text1 }}
@@ -26,7 +26,7 @@
               <img :src="image"
                    v-scroll-reveal="{
                    duration: 2500,
-                   delay: 500,
+                   delay: 100,
                    easing: 'ease'
                    }">
             </div>
@@ -34,6 +34,7 @@
                  v-scroll-reveal="{
                  origin: 'right',
                  distance: '400px',
+                 delay: 100,
                  duration: 1500,
                  easing: 'ease'
                  }">
