@@ -12,6 +12,8 @@
     <Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
     <Contact :url="base + contact" :urlPostMessage="base + message"/>
+    <Review :url="base + review"/>
+
 
     <div style="height: 1000px"></div>
 
@@ -30,6 +32,7 @@
   import Hero from './components/public/Hero';
   import Gallery from './components/public/Gallery';
   import Contact from './components/public/Contact';
+  import Review from './components/public/Review';
 
 
   export default {
@@ -45,6 +48,7 @@
       Hero,
       Gallery,
       Contact,
+      Review,
 
     },
     data() {
@@ -62,6 +66,7 @@
         gallery: 'galleries/events/',
         galleryData: 'gallery/1',
         contact: 'contact/1',
+        review: 'review/1',
       };
     },
   };

@@ -30,3 +30,14 @@
 .tr:hover:after {
   width: 100%;
 }
+
+
+
+.shadow {
+  transition: box-shadow .5s ease;
+  &:hover {
+    transition: box-shadow .5s ease;
+    box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
+  }
+}
+

@@ -2,8 +2,8 @@
   <section id="Galerie">
     <SectionContainer :title="title" :sub-title="subTitle">
       <div slot="content">
-        <div id="GalleryColumns" class="columns is-multiline">
-          <div id="Verge" class="column is-3 gallery-col"
+        <div class="columns is-multiline">
+          <div class="column is-3 gallery-col"
                v-for="image in images"
                v-scroll-reveal="{
                 origin: 'left',
@@ -95,7 +95,7 @@
     &:hover {
       transition: box-shadow .5s ease, transform .5s ease;
       box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   }
 

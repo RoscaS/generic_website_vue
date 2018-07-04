@@ -4,16 +4,24 @@
       <div slot="content">
         <div class="columns">
           <div class="column left">
-            <GoogleMap name="map"></GoogleMap>
+            <div v-scroll-reveal="{
+                   origin: 'left',
+                   distance: '100px',
+                   duration: 2500,
+                   delay: 100,
+                   easing: 'ease',
+                 }">
+              <GoogleMap name="map"></GoogleMap>
+            </div>
           </div>
           <div class="column right">
             <div class="info"
                  v-scroll-reveal="{
-                 origin: 'right',
-                 distance: '400px',
-                 duration: 1500,
-                 delay: 50,
-                 easing: 'ease',
+                   origin: 'right',
+                   distance: '400px',
+                   duration: 1500,
+                   delay: 50,
+                   easing: 'ease',
                  }">
               <div class="line">
                 <i class="fas fa-map-marker-alt fa-fw"></i>
@@ -33,13 +41,13 @@
             </div>
             <p class="subtitle2"
                v-scroll-reveal="{
-               origin: 'right',
-               distance: '200px',
-               duration: 1500,
-               delay: 100,
-               easing: 'ease',
+                 origin: 'right',
+                 distance: '200px',
+                 duration: 1500,
+                 delay: 100,
+                 easing: 'ease',
                }">
-            {{ subTitle2 }}</p>
+              {{ subTitle2 }}</p>
 
             <ContactForm :url="urlPostMessage"></ContactForm>
           </div>
@@ -54,7 +62,7 @@
   import SectionContainer from '../Components/SectionContainer';
   import Options from '../../options';
   import ContactForm from '../Components/Forms/ContactForm';
-  import GoogleMap from '../Components/Google/Maps'
+  import GoogleMap from '../Components/Maps';
 
   import axios from 'axios';
 

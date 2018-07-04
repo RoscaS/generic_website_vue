@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import Options from '../../../options';
+  import Options from '../../options';
 
 
   export default {
@@ -49,7 +49,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../static/sass/global';
 
   .google-map {
     width: 380px;
