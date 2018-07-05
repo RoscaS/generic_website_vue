@@ -4,6 +4,7 @@ class SiteOptions {
   constructor() {
     this.url = 'http://localhost:8000/options';
     this.data = '';
+    this.projectName = '';
     this.name = '';
     this.nameAdd = '';
     this.description = '';
@@ -27,6 +28,7 @@ class SiteOptions {
     axios.get(this.url).then(response => {
       this.data = response.data[0];
       this.url = 'http://localhost:8000/options';
+      this.projectName = this.data.project_name;
       this.name = this.data.name;
       this.nameAdd = this.data.name_add;
       this.description = this.data.description;

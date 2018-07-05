@@ -1,53 +1,75 @@
 <template>
   <SectionContainer :title="title" :sub-title="subTitle">
     <div slot="content">
-      <div class="level is-mobile overall">
-        <div class="level-left"
+
+      <div class="level">
+
+        <div class="level-item">
+          <div class="level is-mobile overall">
+            <div class="level-left"
+                 v-scroll-reveal="{
+                    origin: 'left',
+                    distance: '100px',
+                    duration: 1500,
+                    delay: 0,
+                    easing: 'ease',
+                   }">
+              {{ overall }}
+            </div>
+            <div class="level-right">
+              <div class="level-item"
+                   v-scroll-reveal="{
+                      origin: 'top',
+                      distance: '0px',
+                      duration: 1500,
+                      delay: 0,
+                      easing: 'ease',
+                     }">
+                  <span v-for="star in getStarsList(overall)">
+                    <i class="fas fa-star" v-if="star == 1"></i>
+                    <i class="fas fa-star-half" v-if="star == 2"></i>
+                  </span>
+              </div>
+              <div class="leve-item"
+                   v-scroll-reveal="{
+                      origin: 'right',
+                      distance: '100px',
+                      duration: 1500,
+                      delay: 0,
+                      easing: 'ease',
+                     }">
+                <a target="_blank" :href="reviewAll">80+ reviews</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="level-right"
              v-scroll-reveal="{
-              origin: 'left',
+                origin: 'left',
+                distance: '100px',
+                duration: 3500,
+                delay: 500,
+                easing: 'ease',
+               }">
+          <a target="_blank" :href="reviewNew" class="button _btn no-tr">
+            <i class="fas fa-pencil-alt"></i>
+            &nbsp; Ajouter une review
+          </a>
+        </div>
+      </div>
+
+
+      <div class="columns is-multiline">
+        <div class="column is-6"
+             v-for="review in reviews"
+             v-scroll-reveal="{
+              origin: 'bottom',
               distance: '100px',
               duration: 1500,
               delay: 0,
               easing: 'ease',
              }">
-          {{ overall }}
-        </div>
-        <div class="level-right">
-          <div class="level-item"
-               v-scroll-reveal="{
-                origin: 'top',
-                distance: '0px',
-                duration: 1500,
-                delay: 0,
-                easing: 'ease',
-               }">
-            <span v-for="star in getStarsList(overall)">
-              <i class="fas fa-star" v-if="star == 1"></i>
-              <i class="fas fa-star-half" v-if="star == 2"></i>
-            </span>
-          </div>
-          <div class="leve-item"
-               v-scroll-reveal="{
-                origin: 'right',
-                distance: '100px',
-                duration: 1500,
-                delay: 0,
-                easing: 'ease',
-               }">
-            <p>80+ reviews</p>
-          </div>
-        </div>
-      </div>
-      <div class="columns is-multiline">
-        <div class="column is-6" v-for="review in reviews">
-          <div class="card shadow"
-               v-scroll-reveal="{
-                origin: 'bottom',
-                distance: '100px',
-                duration: 1500,
-                delay: 0,
-                easing: 'ease',
-               }">
+          <div class="card shadow">
             <div class="card-content">
               <div class="media">
                 <div class="media-left">
@@ -99,7 +121,8 @@
       return {
         title: null,
         subTitle: null,
-
+        reviewAll: null,
+        reviewNew: null,
         overall: null,
         reviews: null,
       };
@@ -128,6 +151,9 @@
         let data = response.data;
         this.title = data.title;
         this.subTitle = data.sub_title;
+
+        this.reviewAll = data.g_review_all_url;
+        this.reviewNew = data.g_review_new_url;
         this.overall = data.reviews.overall;
         this.reviews = data.reviews.reviews;
       }).catch(error => {

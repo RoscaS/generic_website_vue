@@ -13,10 +13,7 @@
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
     <Contact :url="base + contact" :urlPostMessage="base + message"/>
     <Review :url="base + review"/>
-
-
-    <div style="height: 1000px"></div>
-
+    <Footer/>
   </div>
 </template>
 
@@ -33,6 +30,7 @@
   import Gallery from './components/public/Gallery';
   import Contact from './components/public/Contact';
   import Review from './components/public/Review';
+  import Footer from './components/public/Footer';
 
 
   export default {
@@ -49,6 +47,7 @@
       Gallery,
       Contact,
       Review,
+      Footer,
 
     },
     data() {

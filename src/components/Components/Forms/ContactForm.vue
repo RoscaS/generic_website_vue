@@ -61,16 +61,15 @@
         </b-input>
       </b-field>
 
-      <p class="control">
-        <button class="button _btn"
-                type="submit"
-                v-scroll-reveal="{
-                  origin: 'bottom',
-                  distance: '100px',
-                  duration: 1500,
-                  delay: 300,
-                  easing: 'ease',
-                  }">
+      <p class="control"
+         v-scroll-reveal="{
+           origin: 'bottom',
+           distance: '100px',
+           duration: 1500,
+           delay: 300,
+           easing: 'ease',
+           }">
+        <button class="button _btn" type="submit">
           <i class="fas fa-fw fa-paper-plane"></i>
           &nbsp; Envoyer
         </button>

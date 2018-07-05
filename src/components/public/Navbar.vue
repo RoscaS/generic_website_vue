@@ -24,7 +24,6 @@
                el: '#' + link.name,
                duration: 2000,
                offset: -50
-
              }">
             <i class="fa fa-fw" :class="link.icon"></i>
             {{link.name}}
@@ -71,8 +70,6 @@
 </template>
 
 <script>
-
-
   export default {
     name: "Navbar",
 
