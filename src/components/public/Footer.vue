@@ -1,22 +1,23 @@
 <template>
   <section class="section hero">
 
-    <button class="button _btn no-tr"
-            v-scroll-reveal="{
-              origin: 'top',
-              distance: '20px',
-              duration: 1500,
-              delay: 0,
-              easing: 'ease',
-             }"
-            v-scroll-to="{
+    <div v-scroll-reveal="{
+          origin: 'top',
+          distance: '20px',
+          duration: 1500,
+          delay: 0,
+          easing: 'ease',
+         }">
+      <button class="button _btn no-tr"
+              v-scroll-to="{
               el: '#Home',
               duration: 2000,
               offset: -50
             }">
-      <i class="fas fa-arrow-up"></i>
-      &nbsp; Haut de la page
-    </button>
+        <i class="fas fa-arrow-up"></i>
+        &nbsp; Haut de la page
+      </button>
+    </div>
 
     <div class="level is-mobile">
       <div class="level-item"
