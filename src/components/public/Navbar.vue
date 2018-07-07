@@ -176,7 +176,7 @@
         this.navbarOffset = 386;
 
         if (window.pageYOffset !== 0) {
-          window.scrollTo(0, 0)
+          window.scrollTo(0, 0);
         }
 
       }, 50);
