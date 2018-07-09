@@ -58,6 +58,10 @@
     background-repeat: no-repeat;
     background-size: cover;
 
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      will-change: transform;
+    }
+
     h1 {
       color: white;
       font-size: 50px;

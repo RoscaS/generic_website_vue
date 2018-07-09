@@ -28,6 +28,7 @@
             <i class="fa fa-fw" :class="link.icon"></i>
             {{link.name}}
           </a>
+
         </div>
 
         <div class="level-right is-hidden-tablet">
