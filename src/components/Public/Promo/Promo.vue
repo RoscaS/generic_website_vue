@@ -8,7 +8,8 @@
 
       <div class="column right is-5 content">
         <h3>
-          <input v-if="editTitle" v-model="title">
+          <input v-if="editTitle"
+                 v-model="title" @keyup.enter="pushData">
           <br>
           <strong>
             {{ promoTitle }}
@@ -34,7 +35,7 @@
     store: store,
     data() {
       return {
-        editTitle: false,
+        editTitle: true,
         editText: false,
       }
     },
@@ -60,6 +61,8 @@
     },
 
     methods: mapActions([
+      'fetchData',
+      'pushData',
       'setTitle',
       'setText',
       'setImage',
@@ -70,6 +73,9 @@
       text(value) { this.setText(value); }
     },
 
+    mounted() {
+      this.fetchData()
+    }
   };
 </script>
 
