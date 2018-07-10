@@ -120,7 +120,6 @@
 
     methods: {
 
-
       preValidate() {
         this.$validator.validateAll().then((result) => {
           if (result) {

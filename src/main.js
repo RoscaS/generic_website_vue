@@ -1,8 +1,9 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+
+
 import Vue from 'vue';
-import App from './App';
 import Buefy from 'buefy';
+import VueRouter from 'vue-router';
+
 
 import VueScrollTo from 'vue-scrollto';
 import VueScrollReveal from 'vue-scroll-reveal';
@@ -13,15 +14,31 @@ import '../static/js/velocity';
 import '../static/fonts/font-awesome/css/fontawesome-all.css';
 import 'vue2-animate/dist/vue2-animate.min.css';
 
-
+Vue.use(VueRouter);
 Vue.use(VueScrollTo);
 Vue.use(VueScrollReveal);
 Vue.use(VeeValidate);
-
-
 Vue.use(Buefy, {
   defaultIconPack: 'fas',
   defaultTooltipAnimated: true,
+});
+
+
+const router = new VueRouter({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      name: 'public',
+      component: require('./components/Public.vue').default,
+    },
+
+    {
+      path: '/login',
+      mane: 'login',
+      component: require('./components/Components/Login/Login').default,
+    },
+  ]
 });
 
 
@@ -29,8 +46,12 @@ Vue.config.productionTip = false;
 
 new Vue({
   el: '#app',
-  components: {App},
-  template: '<App/>'
+  router,
+  render: h => h(require('./App').default),
+
+
+
+  // components: { App },
+  // template: '<App/>'
 });
 
-// Vue.component('vue-slide-up-down');

@@ -7,83 +7,58 @@
          @click="lockPromo">
 
       <div class="corner-ribbon top-right"
-           :title="title"
+           :title="hoverTitle"
            slot="trigger">
         Action spéciale !
       </div>
     </div>
 
     <VueSlideUpDown :active="isOpen" :duration="1000">
-      <div class="container collapse-content _wrapper">
-        <div class="columns">
-
-          <div class="column is-4 is-offset-2-tablet _left">
-            <img src="../../assets/action.jpg">
-          </div>
-
-          <div class="column is-5 content _right">
-            <h3>
-              <strong>Le titre</strong>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Assumenda atque culpa dolorum ducimus earum et explicabo
-              facilis
-              illo incidunt iure nesciunt obcaecati officiis perspiciatis
-              praesentium reiciendis reprehenderit, temporibus velit
-              voluptatem.</p>
-          </div>
-        </div>
-      </div>
+      <Promo></Promo>
     </VueSlideUpDown>
+
   </div>
 </template>
 
-
 <script>
   import VueSlideUpDown from 'vue-slide-up-down';
+  import Promo from './Promo'
+
 
   export default {
-    name: "Promo_ribbon",
-    components: {VueSlideUpDown},
-
+    name: "PromoRibbon",
+    components: { Promo, VueSlideUpDown },
     data() {
       return {
         isOpen: false,
         timeout: null,
         isLocked: false,
-        title: "Cliquez pour vérouiller.",
+        hoverTitle: "Cliquez pour vérouiller.",
       };
     },
-
     computed: {
-      isTouch() {
-        return window.innerWidth <= 1024;
-      }
+      isTouch() { return window.innerWidth <= 1024; }
     },
-
     methods: {
       checkScroll() {
         if (window.pageYOffset > 0) {
           this.lockPromo();
         }
       },
-
       showPromo() {
         if (!this.isLocked) {
           this.timeout = setTimeout(() => {this.isOpen = true;}, 200);
         }
       },
-
       hidePromo() {
         clearTimeout(this.timeout);
         if (!this.isLocked) {
           this.isOpen = false;
         }
       },
-
       lockPromo() {
         if (this.isLocked) {
-          this.title = 'Cliquez pour vérouiller.';
+          this.hoverTitle = 'Cliquez pour vérouiller.';
           this.isLocked = false;
           this.isOpen = false;
           window.removeEventListener('scroll', this.checkScroll);
@@ -95,7 +70,7 @@
           }
         }
         else {
-          this.title = 'Cliquez pour dévérouiller.';
+          this.hoverTitle = 'Cliquez pour dévérouiller.';
           this.isLocked = true;
           this.isOpen = true;
           window.addEventListener('scroll', this.checkScroll);
@@ -107,38 +82,12 @@
           }
         }
       }
-    }
+    },
   };
 </script>
 
-
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
-
-  ._wrapper {
-    height: 400px;
-    margin-top: 150px;
-
-    @media screen and (max-width: 400px) {
-      height: 600px;
-      margin-bottom: -500px;
-    }
-
-    img {
-      width: 400px;
-    }
-
-    ._left {
-      @media screen and (max-width: 400px) {
-        margin-top: -60px;
-        margin-bottom: -40px;
-      }
-    }
-
-    ._right {
-      padding: 40px;
-    }
-  }
+  @import '../../../../static/sass/global';
 
   .corner-ribbon {
     cursor: default;

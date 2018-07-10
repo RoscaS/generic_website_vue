@@ -1,84 +1,24 @@
 <template>
   <div id="app">
-    <PromoRibbon/>
-    <Top/>
-    <Navbar/>
-    <Carousel :url="base + carousel"/>
-    <Presentation :url="base + presentation"/>
-    <Hero :url="base + hero"/>
-    <Parallax :url="base + parallax" :idx="0" :height="600"/>
-    <Presentation :url="base + presentation"/>
-    <Parallax :url="base + parallax" :idx="1" :height="400"/>
-    <Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>
-    <Parallax :url="base + parallax" :idx="2" :height="400"/>
-    <Contact :url="base + contact" :urlPostMessage="base + message"/>
-    <Review :url="base + review"/>
-    <Footer/>
+    <router-view></router-view>
   </div>
 </template>
 
 
 <script>
-  import Parallax from './components/Components/Parallax';
-
-  import PromoRibbon from './components/public/PromoRibbon';
-  import Top from './components/public/Top';
-  import Navbar from './components/public/Navbar';
-  import Carousel from './components/public/Carousel';
-  import Presentation from './components/public/Presentation';
-  import Hero from './components/public/Hero';
-  import Gallery from './components/public/Gallery';
-  import Contact from './components/public/Contact';
-  import Review from './components/public/Review';
-  import Footer from './components/public/Footer';
-
-
-  export default {
-    name: 'App',
-    components: {
-      Parallax,
-
-      PromoRibbon,
-      Top,
-      Navbar,
-      Carousel,
-      Presentation,
-      Hero,
-      Gallery,
-      Contact,
-      Review,
-      Footer,
-
-    },
-    data() {
-      return {
-        title: 'first',
-
-        base: 'http://localhost:8000/',
-        message: 'message/',
-
-
-        parallax: 'galleries/parallax/',
-        carousel: 'galleries/carousel/',
-        presentation: 'presentation/1',
-        hero: 'hero/1',
-        gallery: 'galleries/events/',
-        galleryData: 'gallery/1',
-        contact: 'contact/1',
-        review: 'review/1',
-      };
-    },
-  };
+  export default { };
 </script>
 
 
 <style lang="scss">
   @import "~bulma/sass/utilities/_all";
+
   // Set your colors
   $primary: #00D1B2;
   $primary-invert: findColorInvert($primary);
   $twitter: #4099ff;
   $twitter-invert: findColorInvert($twitter);
+
   // Setup $colors to use as bulma classes (e.g. 'is-twitter')
   $colors: (
     "white": ($white, $black),
@@ -92,6 +32,7 @@
     "danger": ($danger, $danger-invert),
     "twitter": ($twitter, $twitter-invert)
   );
+
   // Links
   $link: $primary;
   $link-invert: $primary-invert;

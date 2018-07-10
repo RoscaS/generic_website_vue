@@ -1,23 +1,21 @@
 <template>
   <div>
-    <transition>
-      <i class="down-arrow fal fa-chevron-double-down"
-         v-scroll-to="{
-                     el: '#Presentation',
-                     duration: 2000,
-                     offset: -80
-                     }"></i>
-    </transition>
+    <i class="down-arrow fal fa-chevron-double-down"
+       v-scroll-to="{
+         el: '#Presentation',
+         duration: 2000,
+         offset: -80
+       }"></i>
     <section id="Presentation">
       <SectionContainer :title="title" :sub-title="subTitle">
         <div slot="content">
           <p class="text1"
              v-scroll-reveal="{
-             origin: 'left',
-             distance: '400px',
-             duration: 1500,
-             delay: 50,
-             easing: 'ease',
+               origin: 'left',
+               distance: '400px',
+               duration: 1500,
+               delay: 50,
+               easing: 'ease',
              }">
             {{ text1 }}
           </p>
@@ -25,18 +23,18 @@
             <div class="column">
               <img :src="image"
                    v-scroll-reveal="{
-                   duration: 2500,
-                   delay: 100,
-                   easing: 'ease'
+                     duration: 2500,
+                     delay: 100,
+                     easing: 'ease'
                    }">
             </div>
             <div class="column"
                  v-scroll-reveal="{
-                 origin: 'right',
-                 distance: '400px',
-                 delay: 100,
-                 duration: 1500,
-                 easing: 'ease'
+                   origin: 'right',
+                   distance: '400px',
+                   delay: 100,
+                   duration: 1500,
+                   easing: 'ease'
                  }">
               <p>{{ text2 }}</p>
             </div>
@@ -53,7 +51,7 @@
 
   export default {
     name: "Presentation",
-    components: { SectionContainer },
+    components: {SectionContainer},
     props: {
       url: {type: String}
     },
