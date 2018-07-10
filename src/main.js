@@ -2,6 +2,7 @@
 
 import Vue from 'vue';
 import Buefy from 'buefy';
+import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 
 
@@ -14,6 +15,7 @@ import '../static/js/velocity';
 import '../static/fonts/font-awesome/css/fontawesome-all.css';
 import 'vue2-animate/dist/vue2-animate.min.css';
 
+Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(VueScrollTo);
 Vue.use(VueScrollReveal);
@@ -48,10 +50,5 @@ new Vue({
   el: '#app',
   router,
   render: h => h(require('./App').default),
-
-
-
-  // components: { App },
-  // template: '<App/>'
 });
 
