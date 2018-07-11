@@ -22,6 +22,7 @@ const state = {
   },
 
   isDirty: false,
+  isLoading: false,
 };
 
 const getters = {
@@ -30,6 +31,7 @@ const getters = {
   promoImage: state => state.image,
   promoBackupData: state => state.backup,
   promoDirtyFlag: state => state.isDirty,
+  promoLoadingFlag: state => state.isLoading,
 };
 
 const mutations = {
@@ -56,7 +58,10 @@ const mutations = {
   },
 
   SET_DIRTY: state => { state.isDirty = true; },
-  UNSET_DIRTY: state => { state.isDirty = false; }
+  UNSET_DIRTY: state => { state.isDirty = false; },
+
+  SET_LOADING: state => { state.isLoading = true; },
+  UNSET_LOADING: state => { state.isLoading = false; },
 };
 
 
@@ -70,18 +75,30 @@ const actions = {
   },
 
   pushData: (store) => {
+    store.commit('SET_LOADING');
     axios.put(url, {
       title: store.getters.promoTitle,
       text: store.getters.promoText,
       image: store.getters.promoImage,
     }).then(response => {
+
+      // setTimeout(()=> {
+      //   toast('Donnée mise à jour!', 1);
+      //   store.commit('CLEAR_BACKUP');
+      //   store.commit('UNSET_DIRTY');
+      //   store.commit('UNSET_LOADING');
+      //   console.log(url + '\n' + response);
+      // }, 5000);
+
       toast('Donnée mise à jour!', 1);
       store.commit('CLEAR_BACKUP');
       store.commit('UNSET_DIRTY');
+      store.commit('UNSET_LOADING');
       console.log(url + '\n' + response);
     }).catch(error => {
       console.log(url + '\n' + error);
       toast("Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur.", 0);
+      store.commit('UNSET_LOADING');
     });
   },
 
@@ -100,14 +117,12 @@ const actions = {
 
   setDirty: store => {
     if (!store.getters.promoDirtyFlag) {
-      console.log('ici')
       let backup = store.getters.promoBackupData;
       let fresh = store.getters;
       let titles = backup.title !== fresh.promoTitle && backup.title !== '';
       let texts = backup.text !== fresh.promoText && backup.text !== '';
       let images = backup.image !== fresh.promoImage && backup.image !== '';
       if (titles || texts || images) {
-        console.log('SET_DIRTY')
         store.commit('SET_DIRTY');
       }
     }

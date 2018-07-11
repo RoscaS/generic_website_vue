@@ -7,9 +7,10 @@
       <section class="section edit-slots">
         <div class="columns content">
           <slot></slot>
-          <Buttons @close-edit="editOff"></Buttons>
+          <Buttons @close-edit="closeEdit" @is-loading="loading=true"></Buttons>
         </div>
       </section>
+      <b-loading :is-full-page="false" :active.sync="loading" :can-cancel="false"></b-loading>
     </div>
   </transition>
 </template>
@@ -24,6 +25,11 @@
     name: "EditNav",
     components: {Buttons},
     store: store,
+    data() {
+      return {
+        loading: false,
+      }
+    },
     computed: {
       ...mapGetters([
         'editNav'
@@ -32,7 +38,12 @@
     methods: {
       ...mapActions([
         'editOff'
-      ])
+      ]),
+
+      closeEdit() {
+        this.editOff();
+        this.loading = false;
+      }
     }
   };
 </script>

@@ -1,12 +1,12 @@
 <template>
   <div class="field is-grouped">
     <p class="control">
-      <button class="button is-success is-inverted" @click="commitEdit">
+      <button class="button is-success is-inverted" @click="commitChanges">
         <i class="far fa-check"></i>
       </button>
       <button class="button is-danger is-inverted"
-              :disabled="disableCancel"
-              @click="cancelEdit">
+              :disabled="disabledCancelBtn"
+              @click="cancelChanges">
         <i class="far fa-times"></i>
       </button>
     </p>
@@ -22,13 +22,19 @@
     store: store,
     data() {
       return {
-        disableCancel: false,
-      }
+        disabledCancelBtn: false,
+        timeout: 5000,
+      };
     },
     computed: {
       ...mapGetters([
-        'promoDirtyFlag'
+        'promoDirtyFlag',
+        'promoLoadingFlag',
       ]),
+
+      loading: {
+        get() { return this.promoLoadingFlag; },
+      }
     },
     methods: {
       ...mapActions([
@@ -36,36 +42,45 @@
         'recoverData',
       ]),
 
-      commitEdit() {
+      commitChanges() {
         if (this.promoDirtyFlag) {
-          this.disableCancel = false;
+          this.disabledCancelBtn = false;
           this.pushData();
         }
-        this.$emit('close-edit');
+        this.toggleLoading();
       },
 
-      cancelEdit() {
+      cancelChanges() {
         if (this.promoDirtyFlag) {
-          this.disableCancel = true;
-          setTimeout(()=> {this.disableCancel = false}, 3000);
-
-          this.dirtyStore();
+          this.disabledCancelBtn = true;
+          setTimeout(() => {this.disabledCancelBtn = false;}, this.timeout);
+          this.storeIsDirty();
           return;
         }
         this.$emit('close-edit');
       },
 
-      dirtyStore() {
+      toggleLoading() {
+        this.$emit('is-loading');
+        this.checkLoading();
+      },
+
+      checkLoading() {
+        this.loading ? setTimeout(() => {this.checkLoading();}, 100)
+                     : this.$emit('close-edit');
+      },
+
+      storeIsDirty() {
         this.$snackbar.open({
           message: 'Les modifications seront perdues.',
           type: 'is-warning',
           position: 'is-top',
           actionText: 'Continuer?',
-          duration: 3000,
+          duration: this.timeout,
           indefinite: false,
           onAction: () => {
             this.recoverData();
-            this.disableCancel = false;
+            this.disabledCancelBtn = false;
             this.$emit('close-edit');
           }
         });

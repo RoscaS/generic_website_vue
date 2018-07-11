@@ -72,21 +72,21 @@
         get() { return this.promoTitle; },
         set(value) {
           this.setTitle(value);
-          this.setDirty()
+          this.setDirty();
         }
       },
       text: {
         get() { return this.promoText; },
         set(value) {
           this.setText(value);
-          this.setDirty()
+          this.setDirty();
         }
       },
       image: {
         get() { return this.promoImage; },
         set(value) {
           this.setImage(value);
-          this.setDirty()
+          this.setDirty();
         }
       },
 
@@ -107,7 +107,8 @@
     watch: {
       title(value) {this.setTitle(value);},
       text(value) {this.setText(value);},
-      image(value) {this.setImage(value);}},
+      image(value) {this.setImage(value);}
+    },
 
     mounted() {
       this.fetchData();
