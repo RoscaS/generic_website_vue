@@ -1,29 +1,47 @@
 <template>
-  <div class="container collapse-content">
+  <div>
+    <div class="container collapse-content">
 
-    <EditIcon marginLeft="120px" marginTop="0px">
-      <div class="columns">
+      <EditIcon marginTop="10px" @backup-original-data="backupData">
+        <div class="columns">
 
-        <div class="column left is-4 is-offset-2-tablet">
-          <img :src="promoImage">
+          <div class="column left is-4 is-offset-2-tablet">
+            <img :src="promoImage">
+          </div>
+
+          <div class="column right is-5 content">
+            <h3>{{ promoTitle }}</h3>
+            <p>
+              {{ promoText }}
+              <textarea v-if="editText" v-model="text"></textarea>
+            </p>
+          </div>
+
         </div>
-
-        <div class="column right is-5 content">
-          <h3>{{ promoTitle }}</h3>
-          <p>
-            {{ promoText }}
-            <!--Textarea utile pour retrouver comment double bind + maj-->
-            <textarea v-if="editText" v-model="text"></textarea>
-          </p>
-        </div>
-
-        <EditNav>
-          <!-- A FAIRE -->
-        </EditNav>
-
+      </EditIcon>
+    </div>
+    <EditNav>
+      <div class="column is-3 is-offset-one-quarter edit-area">
+        <b-field label="Titre" custom-class="has-text-white">
+          <b-input name="title"
+                   maxlength="200"
+                   v-model="title">
+          </b-input>
+        </b-field>
+        <b-field label="Text" custom-class="has-text-white">
+          <b-input name="text"
+                   type="textarea"
+                   maxlength="2000"
+                   v-model="text">
+          </b-input>
+        </b-field>
       </div>
-    </EditIcon>
-
+      <div class="column is-3 edit-area">
+        <b-field label="Image" custom-class="has-text-white">
+          <b-input maxlength="200"></b-input>
+        </b-field>
+      </div>
+    </EditNav>
   </div>
 </template>
 
@@ -52,15 +70,24 @@
 
       title: {
         get() { return this.promoTitle; },
-        set(value) { this.setTitle(value); }
+        set(value) {
+          this.setTitle(value);
+          this.setDirty()
+        }
       },
       text: {
         get() { return this.promoText; },
-        set(value) { this.setText(value); }
+        set(value) {
+          this.setText(value);
+          this.setDirty()
+        }
       },
       image: {
         get() { return this.promoImage; },
-        set(value) { this.setImage(value); }
+        set(value) {
+          this.setImage(value);
+          this.setDirty()
+        }
       },
 
     },
@@ -69,16 +96,18 @@
       ...mapActions([
         'fetchData',
         'pushData',
+        'backupData',
         'setTitle',
         'setText',
         'setImage',
+        'setDirty',
       ]),
     },
 
     watch: {
-      title(value) { this.setTitle(value); },
-      text(value) { this.setText(value); }
-    },
+      title(value) {this.setTitle(value);},
+      text(value) {this.setText(value);},
+      image(value) {this.setImage(value);}},
 
     mounted() {
       this.fetchData();
@@ -88,6 +117,12 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  .edit-area {
+    .label {
+      color: white;
+    }
+  }
 
   .container {
     height: 400px;

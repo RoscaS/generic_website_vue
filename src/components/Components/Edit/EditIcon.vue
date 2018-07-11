@@ -4,7 +4,7 @@
     <transition name="fade">
       <i class="fal fa-pencil-alt edit-icon fa-2x"
          v-show="editIcon"
-         @click="toggleEdit"
+         @click="startEdit"
          :style="margins">
       </i>
     </transition>
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-  // import store from '../../Public/Promo/PromoStore';
   import store from './EditStore';
   import {mapActions} from 'vuex';
 
@@ -31,13 +30,18 @@
     },
     computed: {
       margins() {
-        return `margin-left:${this.marginLeft};margin-top:${this.marginTop}`;
+        return `margin-top:${this.marginTop}`;
       }
     },
     methods: {
       ...mapActions([
-        'toggleEdit',
+        'editOn',
       ]),
+
+      startEdit() {
+        this.editOn();
+        this.$emit('backup-original-data');
+      }
     },
   };
 </script>
@@ -50,6 +54,7 @@
     position: absolute;
     color: $link;
     cursor: pointer;
+    right: 1px;
 
     &:hover {
       transition: color .5s ease;

@@ -9,11 +9,15 @@ const getters = {
 };
 
 const mutations = {
-  TOGGLE_EDIT: (state) => { state.edit = !state.edit },
+  EDIT_ON: state => { state.edit = true; },
+  EDIT_OFF: state => { state.edit = false; },
+  EDIT_TOGGLE: state => { state.edit = !state.edit; },
 };
 
 const actions = {
-  toggleEdit: (store) => { store.commit('TOGGLE_EDIT'); },
+  editToggle: store => { store.commit('EDIT_TOGGLE'); },
+  editOn: store => { store.commit('EDIT_ON'); },
+  editOff: store => { store.commit('EDIT_OFF'); },
 };
 
 export default new Vuex.Store({
