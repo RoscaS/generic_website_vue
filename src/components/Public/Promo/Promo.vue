@@ -25,6 +25,7 @@
         <b-field label="Titre" custom-class="has-text-white">
           <b-input name="title"
                    maxlength="200"
+                   :disabled="loading"
                    v-model="title">
           </b-input>
         </b-field>
@@ -32,6 +33,7 @@
           <b-input name="text"
                    type="textarea"
                    maxlength="2000"
+                   :disabled="loading"
                    v-model="text">
           </b-input>
         </b-field>
@@ -66,6 +68,7 @@
         'promoTitle',
         'promoText',
         'promoImage',
+        'promoLoadingFlag',
       ]),
 
       title: {
@@ -89,7 +92,9 @@
           this.setDirty();
         }
       },
-
+      loading: {
+        get() { return this.promoLoadingFlag; },
+      }
     },
 
     methods: {

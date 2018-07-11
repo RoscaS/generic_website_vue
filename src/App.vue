@@ -6,12 +6,15 @@
 
 
 <script>
-  export default { };
+  export default {};
 </script>
 
 
 <style lang="scss">
-  @import "~bulma/sass/utilities/_all";
+
+  /*@import "~bulma/sass/utilities/_all";*/
+  @import "~bulma/sass/utilities/initial-variables";
+  @import "~bulma/sass/utilities/functions";
 
   // Set your colors
   $primary: #00D1B2;
@@ -19,19 +22,10 @@
   $twitter: #4099ff;
   $twitter-invert: findColorInvert($twitter);
 
-  // Setup $colors to use as bulma classes (e.g. 'is-twitter')
-  $colors: (
-    "white": ($white, $black),
-    "black": ($black, $white),
-    "light": ($light, $light-invert),
-    "dark": ($dark, $dark-invert),
-    "primary": ($primary, $primary-invert),
-    "info": ($info, $info-invert),
-    "success": ($success, $success-invert),
-    "warning": ($warning, $warning-invert),
-    "danger": ($danger, $danger-invert),
-    "twitter": ($twitter, $twitter-invert)
-  );
+  $green: #41B883;
+
+
+
 
   // Links
   $link: $primary;

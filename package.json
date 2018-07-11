@@ -17,6 +17,7 @@
     "moment": "^2.22.2",
     "vee-validate": "^2.1.0-beta.5",
     "vue": "^2.5.2",
+    "vue-loading-spinner": "^1.0.11",
     "vue-router": "^3.0.1",
     "vue-scroll-reveal": "^1.0.8",
     "vue-scrollto": "^2.11.0",

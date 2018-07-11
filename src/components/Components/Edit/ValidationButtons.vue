@@ -1,11 +1,14 @@
 <template>
   <div class="field is-grouped">
     <p class="control">
-      <button class="button is-success is-inverted" @click="commitChanges">
+      <button class="button is-success"
+              :class="{'is-loading': loading}"
+              :disabled="loading"
+              @click="commitChanges">
         <i class="far fa-check"></i>
       </button>
-      <button class="button is-danger is-inverted"
-              :disabled="disabledCancelBtn"
+      <button class="button is-danger"
+              :disabled="disabledCancelBtn || loading"
               @click="cancelChanges">
         <i class="far fa-times"></i>
       </button>
@@ -14,12 +17,14 @@
 </template>
 
 <script>
+  import {SpinLine} from 'vue-loading-spinner';
   import store from '../../Public/Promo/PromoStore';
   import {mapGetters, mapActions} from 'vuex';
 
   export default {
     name: "ValidationButtons",
     store: store,
+    components: {SpinLine},
     data() {
       return {
         disabledCancelBtn: false,
