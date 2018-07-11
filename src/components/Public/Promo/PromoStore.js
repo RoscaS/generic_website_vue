@@ -1,12 +1,7 @@
 import Vuex from 'vuex';
 import axios from 'axios';
 
-
-const url = 'http://localhost:8000/promo/1/';
-const instance = axios.create({baseURL: url});
-
-// instance.defaults.headers.common['Authorisation'] = AUTH_TOKEN;
-
+const url = 'promo/1/';
 
 const state = {
   title: '',
@@ -28,9 +23,10 @@ const mutations = {
 
 
 const actions = {
+
   fetchData: (store) => {
-    instance
-    .get().then(response => {
+    axios
+    .get(url).then(response => {
       store.commit('SET_TITLE', response.data.title);
       store.commit('SET_TEXT', response.data.text);
       store.commit('SET_IMAGE', response.data.image.image)
@@ -39,13 +35,10 @@ const actions = {
 
   pushData: (store) => {
     axios.put(url, {
-      title: this.promoTitle,
-      text:  this.promoText,
-      image: this.promoImage,
+      title: store.getters.promoTitle,
+      text:  store.getters.promoText,
+      image: store.getters.promoImage,
     }).then(response => {
-      console.log(this.promoTitle);
-      console.log(this.promoText);
-      console.log(this.promoImage);
       console.log(url+'\n'+response);
     }).catch(error => {console.log(url+'\n'+error);})
   },
@@ -53,6 +46,7 @@ const actions = {
   setTitle: (store, title) => { store.commit('SET_TITLE', title); },
   setText: (store, text) => { store.commit('SET_TEXT', text); },
   setImage: (store, image) => { store.commit('SET_IMAGE', image); },
+
 };
 
 export default new Vuex.Store({

@@ -1,6 +1,7 @@
 
 
 import Vue from 'vue';
+import axios from 'axios';
 import Buefy from 'buefy';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
@@ -42,6 +43,9 @@ const router = new VueRouter({
     },
   ]
 });
+
+axios.defaults.baseURL = 'http://localhost:8000/';
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 
 Vue.config.productionTip = false;
