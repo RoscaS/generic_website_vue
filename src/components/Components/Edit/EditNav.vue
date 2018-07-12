@@ -6,7 +6,7 @@
       <div class="navbar edit-area"
            v-show="editNav">
         <section class="section edit-slots">
-          <div class="columns content">
+          <div class="columns is-8 is-variable ">
             <slot></slot>
             <ValidationBtns @close-edit="closeEdit"
                             @is-loading="loading=true">
@@ -57,8 +57,6 @@
 </script>
 
 <style scoped lang="scss">
-
-
   @import '../../../../static/sass/global';
 
   .loading-icon {

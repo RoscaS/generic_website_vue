@@ -21,11 +21,7 @@
   $primary-invert: findColorInvert($primary);
   $twitter: #4099ff;
   $twitter-invert: findColorInvert($twitter);
-
   $green: #41B883;
-
-
-
 
   // Links
   $link: $primary;

@@ -22,6 +22,9 @@
     </div>
     <EditNav>
       <div class="column is-3 is-offset-one-quarter edit-area">
+        <FileUpload></FileUpload>
+      </div>
+      <div class="column is-3 edit-area">
         <b-field label="Titre" custom-class="has-text-white">
           <b-input name="title"
                    maxlength="200"
@@ -38,11 +41,6 @@
           </b-input>
         </b-field>
       </div>
-      <div class="column is-3 edit-area">
-        <b-field label="Image" custom-class="has-text-white">
-          <b-input maxlength="200"></b-input>
-        </b-field>
-      </div>
     </EditNav>
   </div>
 </template>
@@ -52,10 +50,11 @@
   import {mapGetters, mapActions} from 'vuex';
   import EditIcon from '../../Components/Edit/EditIcon';
   import EditNav from '../../Components/Edit/EditNav';
+  import FileUpload from '../../Components/Edit/FileUpload'
 
   export default {
     name: 'Promo',
-    components: {EditIcon, EditNav},
+    components: {EditIcon, EditNav, FileUpload},
     store: store,
     data() {
       return {

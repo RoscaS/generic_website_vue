@@ -1,13 +1,13 @@
 <template>
   <div class="field is-grouped">
     <p class="control">
-      <button class="button is-success"
+      <button class="button is-success is-inverted"
               :class="{'is-loading': loading}"
               :disabled="loading"
               @click="commitChanges">
         <i class="far fa-check"></i>
       </button>
-      <button class="button is-danger"
+      <button class="button is-danger is-inverted"
               :disabled="disabledCancelBtn || loading"
               @click="cancelChanges">
         <i class="far fa-times"></i>
