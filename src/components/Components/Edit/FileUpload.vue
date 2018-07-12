@@ -7,7 +7,7 @@
         <input type="file" multiple :name="uploadFieldName" :disabled="isSaving"
                @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
                accept="image/*" class="input-file">
-        <p class="TEXT" v-if="isInitial">
+        <p v-if="isInitial">
           Glissez une image ici<br> ou cliquez pour naviguer votre disque.
         </p>
         <p class="TEXT" v-if="isSaving">
