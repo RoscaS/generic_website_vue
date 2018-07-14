@@ -23,7 +23,6 @@
 
 <script>
   import {SpinLine} from 'vue-loading-spinner'
-
   import store from './EditStore';
   import ValidationBtns from './ValidationButtons';
   import {mapGetters, mapActions} from 'vuex';
