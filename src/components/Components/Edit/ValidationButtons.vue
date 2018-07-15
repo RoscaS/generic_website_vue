@@ -1,13 +1,13 @@
 <template>
   <div class="field is-grouped">
     <p class="control">
-      <button class="button is-success is-inverted"
+      <button class="button is-success"
               :class="{'is-loading': loading}"
               :disabled="loading"
               @click="commitChanges">
         <i class="far fa-check"></i>
       </button>
-      <button class="button is-danger is-inverted"
+      <button class="button is-danger"
               :disabled="disabledCancelBtn || loading"
               @click="cancelChanges">
         <i class="far fa-times"></i>
@@ -18,12 +18,9 @@
 
 <script>
   import {SpinLine} from 'vue-loading-spinner';
-  import store from '../../Public/Promo/PromoStore';
-  import {mapGetters, mapActions} from 'vuex';
 
   export default {
     name: "ValidationButtons",
-    store: store,
     components: {SpinLine},
     data() {
       return {
@@ -32,20 +29,18 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'promoDirtyFlag',
-        'promoLoadingFlag',
-      ]),
-
-      loading: {
-        get() { return this.promoLoadingFlag; },
-      }
+      root() { return this.$parent.$parent },
+      promoDirtyFlag() { return this.root.promoDirtyFlag; },
+      loading() { return this.root.promoLoadingFlag; },
     },
     methods: {
-      ...mapActions([
-        'pushData',
-        'recoverData',
-      ]),
+      pushData() {
+        this.root.pushData();
+      },
+
+      recoverData() {
+        this.root.recoverData();
+      },
 
       commitChanges() {
         if (this.promoDirtyFlag) {

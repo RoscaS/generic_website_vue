@@ -7,8 +7,8 @@ function toast(message, type) {
   Toast.open({message: message, type: success[type]});
 }
 
-
 const url = 'promo/1/';
+
 
 const state = {
   title: '',
@@ -57,11 +57,8 @@ const mutations = {
     state.backup.image = '';
   },
 
-  SET_DIRTY: state => { state.isDirty = true; },
-  UNSET_DIRTY: state => { state.isDirty = false; },
-
-  SET_LOADING: state => { state.isLoading = true; },
-  UNSET_LOADING: state => { state.isLoading = false; },
+  TOGGLE_DIRTY: state => { state.isDirty = !state.isDirty; },
+  TOGGLE_LOADING: state => { state.isLoading = !state.isLoading; },
 };
 
 
@@ -75,60 +72,60 @@ const actions = {
   },
 
   pushData: (store) => {
-    store.commit('SET_LOADING');
+    store.commit('TOGGLE_LOADING');
     axios.put(url, {
       title: store.getters.promoTitle,
       text: store.getters.promoText,
       image: store.getters.promoImage,
     }).then(response => {
 
-      // setTimeout(()=> {
-      //   toast('Donnée mise à jour!', 1);
-      //   store.commit('CLEAR_BACKUP');
-      //   store.commit('UNSET_DIRTY');
-      //   store.commit('UNSET_LOADING');
-      //   console.log(url + '\n' + response);
-      // }, 5000);
+      setTimeout(()=> {
+        toast('Donnée mise à jour!', 1);
+        store.commit('CLEAR_BACKUP');
+        store.commit('TOGGLE_DIRTY');
+        store.commit('TOGGLE_LOADING');
+      }, 5000);
 
-      toast('Donnée mise à jour!', 1);
-      store.commit('CLEAR_BACKUP');
-      store.commit('UNSET_DIRTY');
-      store.commit('UNSET_LOADING');
-      console.log(url + '\n' + response);
+      // toast('Donnée mise à jour!', 1);
+      // store.commit('CLEAR_BACKUP');
+      // store.commit('TOGGLE_DIRTY');
+      // store.commit('TOGGLE_LOADING');
     }).catch(error => {
       console.log(url + '\n' + error);
       toast("Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur.", 0);
-      store.commit('UNSET_LOADING');
+      store.commit('SET_RECOVER');
+      store.commit('CLEAR_BACKUP');
+      store.commit('TOGGLE_DIRTY');
+      store.commit('TOGGLE_LOADING');
     });
   },
 
   setTitle: (store, title) => { store.commit('SET_TITLE', title); },
   setText: (store, text) => { store.commit('SET_TEXT', text); },
-  setImage: (store, image) => { store.commit('SET_IMAGE', image); },
+  setImage: (store, image) => { store.commit('SET_IMAGE', image)},
 
   backupData: store => { store.commit('SET_BACKUP');},
   recoverData: store => {
     store.commit('SET_RECOVER');
     store.commit('CLEAR_BACKUP');
-    store.commit('UNSET_DIRTY');
+    store.commit('TOGGLE_DIRTY');
     toast('Modifications annulées', 2);
   },
 
 
-  setDirty: store => {
+  toggleDirty: store => {
     if (!store.getters.promoDirtyFlag) {
       let backup = store.getters.promoBackupData;
       let fresh = store.getters;
       let titles = backup.title !== fresh.promoTitle && backup.title !== '';
       let texts = backup.text !== fresh.promoText && backup.text !== '';
       let images = backup.image !== fresh.promoImage && backup.image !== '';
+
       if (titles || texts || images) {
-        store.commit('SET_DIRTY');
+        store.commit('TOGGLE_DIRTY');
       }
     }
   },
-
-  unsetDirty: store => { store.commit('UNSET_DIRTY');},
 };
 
 export default new Vuex.Store({

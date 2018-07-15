@@ -1,23 +1,25 @@
 <template>
   <div>
     <div class="container collapse-content">
+      <EditIcon Right="200px"
+                Top="0px"
+                @backup-original-data="backupData">
 
-      <EditIcon marginTop="10px" @backup-original-data="backupData">
-        <div class="columns">
+        <div class="columns content">
 
-          <div class="column left is-4 is-offset-2-tablet">
+          <div class="column left is-offset-2 is-4">
             <img :src="promoImage">
           </div>
 
-          <div class="column right is-5 content">
-            <h3>{{ promoTitle }}</h3>
-            <p>
-              {{ promoText }}
-              <textarea v-if="editText" v-model="text"></textarea>
-            </p>
+          <div class="column right is-5">
+            <div>
+              <h3>{{ promoTitle }}</h3>
+              <p>{{ promoText }}</p>
+            </div>
           </div>
 
         </div>
+
       </EditIcon>
     </div>
     <EditNav>
@@ -50,7 +52,7 @@
   import {mapGetters, mapActions} from 'vuex';
   import EditIcon from '../../Components/Edit/EditIcon';
   import EditNav from '../../Components/Edit/EditNav';
-  import FileUpload from '../../Components/Edit/FileUpload'
+  import FileUpload from '../../Components/Edit/FileUpload';
 
   export default {
     name: 'Promo',
@@ -67,6 +69,7 @@
         'promoTitle',
         'promoText',
         'promoImage',
+        'promoDirtyFlag', // used in Validation Btns
         'promoLoadingFlag',
       ]),
 
@@ -74,21 +77,21 @@
         get() { return this.promoTitle; },
         set(value) {
           this.setTitle(value);
-          this.setDirty();
+          this.toggleDirty();
         }
       },
       text: {
         get() { return this.promoText; },
         set(value) {
           this.setText(value);
-          this.setDirty();
+          this.toggleDirty();
         }
       },
       image: {
         get() { return this.promoImage; },
         set(value) {
           this.setImage(value);
-          this.setDirty();
+          this.toggleDirty();
         }
       },
       loading: {
@@ -101,11 +104,13 @@
         'fetchData',
         'pushData',
         'backupData',
+        'recoverData',
         'setTitle',
         'setText',
         'setImage',
-        'setDirty',
+        'toggleDirty',
       ]),
+
     },
 
     watch: {
@@ -133,24 +138,34 @@
     height: 400px;
     margin-top: 150px;
 
-    @media screen and (max-width: 400px) {
-      height: 600px;
-      margin-bottom: -500px;
+    @media screen and (max-width: 768px) {
+      height: 800px;
+
+      .column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h2 {
+          display: block;
+        }
+
+        p {
+          display: block;
+        }
+      }
     }
 
     img {
       width: 400px;
-    }
-
-    .left {
-      @media screen and (max-width: 400px) {
-        margin-top: -60px;
-        margin-bottom: -40px;
-      }
+      margin-top: 30px;
     }
 
     .right {
       padding: 40px;
+      @media screen and (max-width: 768px) {
+        padding: 80px;
+      }
     }
   }
 </style>

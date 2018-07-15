@@ -172,7 +172,7 @@
 
   .input-file {
     opacity: 0; /* invisible but it's there! */
-    width: 50%;
+    width: 100%;
     height: 200px;
     position: absolute;
     cursor: pointer;

@@ -20,8 +20,8 @@
     name: "EditIcon",
     store: store,
     props: {
-      marginLeft: {type: String},
-      marginTop: {type: String}
+      Right: {type: String},
+      Top: {type: String}
     },
     data() {
       return {
@@ -30,7 +30,7 @@
     },
     computed: {
       margins() {
-        return `margin-top:${this.marginTop}`;
+        return `top:${this.Top};right:${this.Right};`;
       }
     },
     methods: {
@@ -54,7 +54,6 @@
     position: absolute;
     color: $link;
     cursor: pointer;
-    right: 1px;
 
     &:hover {
       transition: color .5s ease;
