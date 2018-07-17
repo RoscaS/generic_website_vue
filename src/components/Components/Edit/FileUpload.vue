@@ -1,8 +1,14 @@
 <template>
   <div>
     <div class="label">Image</div>
-    <div class="dropbox">
-      <input type="file" id="file" ref="file" @change="fileUpload" class="input-file">
+    <div class="dropbox"
+         :class="{'disabled-dropbox': loading}">
+      <input class="input-file"
+             type="file"
+             id="file"
+             ref="file"
+             :disabled="loading"
+             @change="fileUpload">
       <p>
         <i class="fal fa-cloud-upload fa-2x"></i><br>
         Glissez une image ici<br>
@@ -23,7 +29,13 @@
     },
 
     computed: {
-      root() { return this.$parent.$parent; },
+      root() {
+        return this.$parent.$parent;
+      },
+
+      loading() {
+        return this.root.promoLoadingFlag;
+      },
     },
 
     methods: {
@@ -77,11 +89,24 @@
     p {
       font-size: 1.2em;
       text-align: center;
-      padding: 50px 0;
+      padding: 37px;
     }
 
     &:hover {
       background: lightblue;
+    }
+  }
+
+  .disabled-dropbox {
+    background: lightgray;
+
+    &:hover {
+      background: lightgray;
+      cursor: not-allowed;
+    }
+
+    input {
+      cursor: not-allowed;
     }
   }
 

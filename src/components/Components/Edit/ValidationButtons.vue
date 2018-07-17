@@ -28,11 +28,21 @@
         timeout: 5000,
       };
     },
+
     computed: {
-      root() { return this.$parent.$parent },
-      promoDirtyFlag() { return this.root.promoDirtyFlag; },
-      loading() { return this.root.promoLoadingFlag; },
+      root() {
+        return this.$parent.$parent;
+      },
+
+      promoDirtyFlag() {
+        return this.root.promoDirtyFlag;
+      },
+
+      loading() {
+        return this.root.promoLoadingFlag;
+      },
     },
+
     methods: {
       pushData() {
         this.root.pushData();
