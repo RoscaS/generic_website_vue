@@ -2,7 +2,7 @@
   <div @mouseover="editIcon=true"
        @mouseleave="editIcon=false">
     <transition name="fade">
-      <i class="fal fa-pencil-alt edit-icon fa-2x"
+      <i class="fal fa-pencil-alt edit-icon"
          v-show="editIcon"
          @click="startEdit"
          :style="margins">
@@ -26,6 +26,7 @@
     data() {
       return {
         editIcon: false,
+        // editIcon: true,
       }
     },
     computed: {
@@ -50,6 +51,7 @@
   @import '../../../../static/sass/global';
 
   .edit-icon {
+    font-size: 25px;
     transition: color .5s ease;
     position: absolute;
     color: $link;

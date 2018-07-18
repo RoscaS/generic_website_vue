@@ -79,7 +79,6 @@
     background: lightcyan;
     color: dimgray;
     padding: 10px 10px;
-    /*min-height: 200px; !* minimum height *!*/
     position: relative;
     cursor: pointer;
     height: auto;

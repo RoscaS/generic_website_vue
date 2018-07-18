@@ -7,17 +7,20 @@ function toast(message, type) {
   Toast.open({message: message, type: success[type]});
 }
 
-const url = 'promo/1/';
-
+const url = 'presentation/1/';
 
 const state = {
   title: '',
-  text: '',
+  subTitle: '',
+  text1: '',
+  text2: '',
   image: '',
 
   backup: {
     title: '',
-    text: '',
+    subTitle: '',
+    text1: '',
+    text2: '',
     image: '',
   },
 
@@ -26,48 +29,57 @@ const state = {
 };
 
 const getters = {
-  promoTitle: state => state.title,
-  promoText: state => state.text,
-  promoImage: state => state.image,
-  promoBackupData: state => state.backup,
-  promoDirtyFlag: state => state.isDirty,
-  promoLoadingFlag: state => state.isLoading,
+  presTitle: state => state.title,
+  presSubTitle: state => state.subTitle,
+  presText1: state => state.text1,
+  presText2: state => state.text2,
+  presImage: state => state.image,
+  presDirtyFlag: state => state.isDirty,
+  presLoadingFlag: state => state.isLoading,
 };
 
 const mutations = {
   SET_TITLE: (state, title) => { state.title = title; },
-  SET_TEXT: (state, text) => { state.text = text; },
+  SET_SUBTITLE: (state, subTitle) => { state.subTitle = subTitle; },
+  SET_TEXT1: (state, text1) => { state.text1 = text1; },
+  SET_TEXT2: (state, text2) => { state.text2 = text2; },
   SET_IMAGE: (state, image) => { state.image = image; },
 
   SET_BACKUP: state => {
     state.backup.title = state.title;
-    state.backup.text = state.text;
+    state.backup.subTitle = state.subTitle;
+    state.backup.text1 = state.text1;
+    state.backup.text2 = state.text2;
     state.backup.image = state.image;
   },
 
   SET_RECOVER: state => {
     state.title = state.backup.title;
-    state.text = state.backup.text;
+    state.subTitle = state.backup.subTitle;
+    state.text1 = state.backup.text1;
+    state.text2 = state.backup.text2;
     state.image = state.backup.image;
   },
 
   CLEAR_BACKUP: state => {
     state.backup.title = '';
-    state.backup.text = '';
+    state.backup.subTitle = '';
+    state.backup.text1 = '';
+    state.backup.text2 = '';
     state.backup.image = '';
   },
 
   TOGGLE_DIRTY: state => { state.isDirty = !state.isDirty; },
-
   TOGGLE_LOADING: state => { state.isLoading = !state.isLoading; },
 };
-
 
 const actions = {
   fetchData: store => {
     axios.get(url).then(response => {
       store.commit('SET_TITLE', response.data.title);
-      store.commit('SET_TEXT', response.data.text);
+      store.commit('SET_SUBTITLE', response.data.sub_title);
+      store.commit('SET_TEXT1', response.data.text1);
+      store.commit('SET_TEXT2', response.data.text2);
       store.commit('SET_IMAGE', response.data.image.image);
     }).catch(error => { console.log(`${url}\n${error}`) })
   },
@@ -75,12 +87,14 @@ const actions = {
   pushData: store => {
     store.commit('TOGGLE_LOADING');
     axios.put(url, {
-      title: store.getters.promoTitle,
-      text: store.getters.promoText,
-      image: store.getters.promoImage,
+      title: store.getters.title,
+      sub_title: store.getters.subTitle,
+      text1: store.getters.text1,
+      text2: store.getters.text2,
+      image: store.getters.image,
     }).then(response => {
 
-      setTimeout(()=> {
+      setTimeout(() => {
         toast('Donnée mise à jour!', 1);
         store.commit('CLEAR_BACKUP');
         store.commit('TOGGLE_DIRTY');
@@ -91,6 +105,7 @@ const actions = {
       // store.commit('CLEAR_BACKUP');
       // store.commit('TOGGLE_DIRTY');
       // store.commit('TOGGLE_LOADING');
+
     }).catch(error => {
       console.log(`${url}\n${error}`);
       toast("Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur.", 0);
@@ -98,12 +113,14 @@ const actions = {
       store.commit('CLEAR_BACKUP');
       store.commit('TOGGLE_DIRTY');
       store.commit('TOGGLE_LOADING');
-    });
+    })
   },
 
-  setTitle: (store, title) => { store.commit('SET_TITLE', title); },
-  setText: (store, text) => { store.commit('SET_TEXT', text); },
-  setImage: (store, image) => { store.commit('SET_IMAGE', image)},
+  settitle: (store, title) => { store.commit('SET_TITLE', title); },
+  setsubTitle: (store, subTitle) => { store.commit('SET_SUBTITLE', subTitle); },
+  settext1: (store, text) => { store.commit('SET_TEXT1', text); },
+  settext2: (store, text) => { store.commit('SET_TEXT2', text); },
+  setimage: (store, image) => { store.commit('SET_IMAGE', image); },
 
   backupData: store => { store.commit('SET_BACKUP');},
   recoverData: store => {
@@ -113,20 +130,24 @@ const actions = {
     toast('Modifications annulées', 2);
   },
 
-
   toggleDirty: store => {
     if (!store.getters.promoDirtyFlag) {
       let backup = store.getters.promoBackupData;
       let fresh = store.getters;
-      let titles = backup.title !== fresh.promoTitle && backup.title !== '';
-      let texts = backup.text !== fresh.promoText && backup.text !== '';
-      let images = backup.image !== fresh.promoImage && backup.image !== '';
 
-      if (titles || texts || images) {
+      let titles = backup.title !== fresh.prestitle && backup.title !== '';
+      let subTitles = backup.subTitle !== fresh.pressubTitle && backup.subTitle !== '';
+      let texts1 = backup.text1 !== fresh.prestext1 && backup.text1 !== '';
+      let texts2 = backup.text2 !== fresh.prestext2 && backup.text2 !== '';
+      let images = backup.image !== fresh.presimage && backup.image !== '';
+
+
+      if (titles || subTitles || texts1 || texts2 || images) {
         store.commit('TOGGLE_DIRTY');
       }
     }
   },
+
 };
 
 export default new Vuex.Store({

@@ -5,15 +5,18 @@
                 leave-active-class="slideOutDown">
       <div class="navbar edit-area"
            v-show="editNav">
-        <section class="section edit-slots">
+        <section class="section">
           <div class="columns is-8 is-variable ">
             <slot></slot>
+            <!--<div class="main">-->
+              <!--<slot name="content"></slot>-->
+            <!--</div>-->
             <ValidationBtns @close-edit="closeEdit"
                             @is-loading="loading=true">
             </ValidationBtns>
           </div>
         </section>
-        <div class="loading-icon">
+        <div class="loading-animation">
           <SpinLine v-show="loading"/>
         </div>
       </div>
@@ -58,7 +61,7 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  .loading-icon {
+  .loading-animation {
     position: absolute;
     top: -66%;
     left: 50%;

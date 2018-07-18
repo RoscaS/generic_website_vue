@@ -7,7 +7,7 @@
     <Presentation :url="base + presentation"/>
     <Hero :url="base + hero"/>
     <Parallax :url="base + parallax" :idx="0" :height="600"/>
-    <Presentation :url="base + presentation"/>
+    <!--<Presentation :url="base + presentation"/>-->
     <Parallax :url="base + parallax" :idx="1" :height="400"/>
     <Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
@@ -26,7 +26,7 @@
   import Top from './Public/Top';
   import Navbar from './Public/Navbar';
   import Carousel from './Public/Carousel';
-  import Presentation from './Public/Presentation';
+  import Presentation from './Public/Presentation/Presentation';
   import Hero from './Public/Hero';
   import Gallery from './Public/Gallery';
   import Contact from './Public/Contact';

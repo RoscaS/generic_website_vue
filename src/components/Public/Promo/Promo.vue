@@ -2,7 +2,7 @@
   <div>
     <div class="container collapse-content">
       <EditIcon Right="200px"
-                Top="0px"
+                Top="36px"
                 @backup-original-data="backupData">
 
         <div class="columns content">
@@ -23,26 +23,28 @@
       </EditIcon>
     </div>
     <EditNav>
-      <div class="column is-3 is-offset-one-quarter edit-area">
-        <FileUpload></FileUpload>
-      </div>
-      <div class="column is-3 edit-area">
-        <b-field label="Titre" custom-class="has-text-white">
-          <b-input name="title"
-                   maxlength="200"
-                   :disabled="loading"
-                   v-model="title">
-          </b-input>
-        </b-field>
-        <b-field label="Text" custom-class="has-text-white">
-          <b-input name="text"
-                   type="textarea"
-                   maxlength="2000"
-                   :disabled="loading"
-                   v-model="text">
-          </b-input>
-        </b-field>
-      </div>
+      <!--<div slot="content">-->
+        <div class="column is-3 is-offset-one-quarter edit-area">
+          <FileUpload></FileUpload>
+        </div>
+        <div class="column is-3 edit-area">
+          <b-field label="Titre" custom-class="has-text-white">
+            <b-input name="title"
+                     maxlength="200"
+                     :disabled="loading"
+                     v-model="title">
+            </b-input>
+          </b-field>
+          <b-field label="Text" custom-class="has-text-white">
+            <b-input name="text"
+                     type="textarea"
+                     maxlength="2000"
+                     :disabled="loading"
+                     v-model="text">
+            </b-input>
+          </b-field>
+        </div>
+      <!--</div>-->
     </EditNav>
   </div>
 </template>
@@ -99,6 +101,12 @@
       }
     },
 
+    watch: {
+      title(value) {this.setTitle(value);},
+      text(value) {this.setText(value);},
+      image(value) {this.setImage(value);}
+    },
+
     methods: {
       ...mapActions([
         'fetchData',
@@ -111,12 +119,6 @@
         'toggleDirty',
       ]),
 
-    },
-
-    watch: {
-      title(value) {this.setTitle(value);},
-      text(value) {this.setText(value);},
-      image(value) {this.setImage(value);}
     },
 
     mounted() {
