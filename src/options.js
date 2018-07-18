@@ -1,30 +1,30 @@
+import Vue from 'vue';
 import axios from 'axios';
 
-class SiteOptions {
-  constructor() {
-    this.url = 'http://localhost:8000/options';
-    this.data = '';
-    this.projectName = '';
-    this.name = '';
-    this.nameAdd = '';
-    this.description = '';
-    this.oppening = '';
-    this.adress = '';
-    this.city = '';
-    this.postCode = '';
-    this.phone = '';
-    this.mail = '';
-    this.facebook = '';
-    this.tripadvisor = '';
-    this.google = '';
-    this.twitter = '';
-    this.instagram = '';
-    this.linkedin = '';
-    this.snapchat = '';
-    this.fetchOptions();
-  }
 
-  fetchOptions() {
+const SiteOptions = new Vue({
+  data: {
+      url: 'http://localhost:8000/options',
+      data: '',
+      projectName: '',
+      name: '',
+      nameAdd: '',
+      description: '',
+      oppening: '',
+      adress: '',
+      city: '',
+      postCode: '',
+      phone: '',
+      mail: '',
+      facebook: '',
+      tripadvisor: '',
+      google: '',
+      twitter: '',
+      instagram: '',
+      linkedin: '',
+      snapchat: '',
+  },
+  created() {
     axios.get(this.url).then(response => {
       this.data = response.data[0];
       this.url = 'http://localhost:8000/options';
@@ -50,6 +50,6 @@ class SiteOptions {
       console.log(error);
     });
   }
-}
+});
 
-export default new SiteOptions();
+export default SiteOptions;

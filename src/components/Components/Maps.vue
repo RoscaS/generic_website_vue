@@ -3,7 +3,6 @@
 </template>
 
 <script>
-  import Options from '../../options';
 
 
   export default {

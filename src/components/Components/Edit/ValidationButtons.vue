@@ -45,6 +45,7 @@
 
     methods: {
       pushData() {
+        console.log('ici')
         this.root.pushData();
       },
 

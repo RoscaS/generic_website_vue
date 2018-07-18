@@ -3,6 +3,7 @@
     <div class="container collapse-content">
       <EditIcon Right="200px"
                 Top="36px"
+                :Component="$options.name"
                 @backup-original-data="backupData">
 
         <div class="columns content">
@@ -22,15 +23,14 @@
 
       </EditIcon>
     </div>
-    <EditNav>
-      <!--<div slot="content">-->
+    <EditNav v-if="$Global.EditPannel.check($options.name)">
         <div class="column is-3 is-offset-one-quarter edit-area">
           <FileUpload></FileUpload>
         </div>
         <div class="column is-3 edit-area">
           <b-field label="Titre" custom-class="has-text-white">
             <b-input name="title"
-                     maxlength="200"
+                     maxlength="35"
                      :disabled="loading"
                      v-model="title">
             </b-input>
@@ -38,13 +38,12 @@
           <b-field label="Text" custom-class="has-text-white">
             <b-input name="text"
                      type="textarea"
-                     maxlength="2000"
+                     maxlength="500"
                      :disabled="loading"
                      v-model="text">
             </b-input>
           </b-field>
         </div>
-      <!--</div>-->
     </EditNav>
   </div>
 </template>
@@ -61,10 +60,7 @@
     components: {EditIcon, EditNav, FileUpload},
     store: store,
     data() {
-      return {
-        isEdit: false,
-        editText: false,
-      };
+      return {};
     },
     computed: {
       ...mapGetters([
@@ -118,7 +114,6 @@
         'setImage',
         'toggleDirty',
       ]),
-
     },
 
     mounted() {

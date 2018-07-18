@@ -7,8 +7,11 @@
          offset: -80
        }"></i>
     <section id="Presentation">
-      <EditIcon Right="400px" Top="" @backup-original-data="backupData">
-        <SectionContainer :title="presTitle" :sub-title="presSubTitle">
+      <EditIcon Right="400px"
+                Top=""
+                :Component="$options.name"
+                @backup-original-data="backupData">
+        <SectionContainer :title="title" :sub-title="presSubTitle">
           <div slot="content">
             <p class="text1"
                v-scroll-reveal="{
@@ -43,27 +46,49 @@
           </div>
         </SectionContainer>
       </EditIcon>
-      <!--<EditNav>-->
-        <!--<div slot="content">-->
-          <!--<div class="column is-3 edit-area">-->
-            <!--<b-field label="Titre" custom-class="has-text-white">-->
-              <!--<b-input name="title"-->
-                       <!--maxlength="200"-->
-                       <!--:disabled="loading"-->
-                       <!--v-model="title">-->
-              <!--</b-input>-->
-            <!--</b-field>-->
-            <!--<b-field label="Text" custom-class="has-text-white">-->
-              <!--<b-input name="text"-->
-                       <!--type="textarea"-->
-                       <!--maxlength="2000"-->
-                       <!--:disabled="loading"-->
-                       <!--v-model="text">-->
-              <!--</b-input>-->
-            <!--</b-field>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</EditNav>-->
+      <EditNav v-if="$Global.EditPannel.check($options.name)">
+        <div class="column is-3 is-offset-1 edit-area">
+          <FileUpload></FileUpload>
+        </div>
+        <div class="column is-3 edit-area">
+          <b-field label="Titre" custom-class="has-text-white">
+            <b-input name="title"
+                     maxlength="35"
+                     :disabled="loading"
+                     v-model="title">
+            </b-input>
+          </b-field>
+          <b-field label="Sous titre" custom-class="has-text-white">
+            <b-input name="subTitle"
+                     type="textarea"
+                     maxlength="200"
+                     rows="2"
+                     :disabled="loading"
+                     v-model="subTitle">
+            </b-input>
+          </b-field>
+        </div>
+        <div class="column is-3 edit-area">
+          <b-field label="Premier texte" custom-class="has-text-white">
+            <b-input name="text1"
+                     type="textarea"
+                     maxlength="800"
+                     rows="2"
+                     :disabled="loading"
+                     v-model="text1">
+            </b-input>
+          </b-field>
+          <b-field label="Second texte" custom-class="has-text-white">
+            <b-input name="text2"
+                     type="textarea"
+                     maxlength="800"
+                     rows="2"
+                     :disabled="loading"
+                     v-model="text2">
+            </b-input>
+          </b-field>
+        </div>
+      </EditNav>
     </section>
   </div>
 </template>
@@ -85,7 +110,6 @@
     },
     data() {
       return {
-        base: {},
         downArrow: null,
       };
     },
@@ -139,14 +163,18 @@
           this.toggleDirty();
         }
       },
+
+      loading: {
+        get() { return this.presLoadingFlag; },
+      }
     },
 
     watch: {
-      title(value) { this.settitle(value); },
-      subTitle(value) { this.setsubTitle(value); },
-      text1(value) { this.settext1(value); },
-      text2(value) { this.settext2(value); },
-      image(value) { this.setimage(value); },
+      title(value) { this.setTitle(value); },
+      subTitle(value) { this.setSubTitle(value); },
+      text1(value) { this.setText1(value); },
+      text2(value) { this.setText2(value); },
+      image(value) { this.setImage(value); },
     },
 
     methods: {
@@ -155,11 +183,11 @@
         'pushData',
         'backupData',
         'recoverData',
-        'settitle',
-        'setsubTitle',
-        'settext1',
-        'settext2',
-        'setimage',
+        'setTitle',
+        'setSubTitle',
+        'setText1',
+        'setText2',
+        'setImage',
         'toggleDirty',
       ]),
 

@@ -59,7 +59,6 @@
 </template>
 
 <script>
-  import options from '../../options';
   import moment from 'moment';
 
 
@@ -67,26 +66,27 @@
     name: "Footer",
     data() {
       return {
-        icons: [
-          {icon: 'fa-facebook', url: options.facebook,},
-          {icon: 'fa-tripadvisor', url: options.tripadvisor,},
-          {icon: 'fa-google', url: options.google,},
-          {icon: 'fa-twitter', url: options.twitter,},
-          {icon: 'fa-instagram', url: options.instagram,},
-          {icon: 'fa-linkedin', url: options.linkedin,},
-          {icon: 'fa-snapchat', url: options.snapchat,},
-        ]
+        options: this.$Global.Options,
       };
     },
     computed: {
-      getCopyright() {
-        return moment().format('Y') + ' ' + options.projectName;
-      },
-
-      withLove() {
-        return 'With \uf004 by Jrosk';
+      icons() {
+        return [
+          {icon: 'fa-facebook', url: this.options.facebook,},
+          {icon: 'fa-tripadvisor', url: this.options.tripadvisor,},
+          {icon: 'fa-google', url: this.options.google,},
+          {icon: 'fa-twitter', url: this.options.twitter,},
+          {icon: 'fa-instagram', url: this.options.instagram,},
+          {icon: 'fa-linkedin', url: this.options.linkedin,},
+          {icon: 'fa-snapchat', url: this.options.snapchat,},
+        ];
       }
     },
+    methods: {
+      getCopyright() {
+        return moment().format('Y') + ' ' + this.options.projectName;
+      },
+    }
   };
 </script>
 

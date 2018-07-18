@@ -34,6 +34,7 @@ const getters = {
   presText1: state => state.text1,
   presText2: state => state.text2,
   presImage: state => state.image,
+  presBackupData: state => state.backup,
   presDirtyFlag: state => state.isDirty,
   presLoadingFlag: state => state.isLoading,
 };
@@ -70,6 +71,7 @@ const mutations = {
   },
 
   TOGGLE_DIRTY: state => { state.isDirty = !state.isDirty; },
+
   TOGGLE_LOADING: state => { state.isLoading = !state.isLoading; },
 };
 
@@ -116,11 +118,11 @@ const actions = {
     })
   },
 
-  settitle: (store, title) => { store.commit('SET_TITLE', title); },
-  setsubTitle: (store, subTitle) => { store.commit('SET_SUBTITLE', subTitle); },
-  settext1: (store, text) => { store.commit('SET_TEXT1', text); },
-  settext2: (store, text) => { store.commit('SET_TEXT2', text); },
-  setimage: (store, image) => { store.commit('SET_IMAGE', image); },
+  setTitle: (store, title) => { store.commit('SET_TITLE', title); },
+  setSubTitle: (store, subTitle) => { store.commit('SET_SUBTITLE', subTitle); },
+  setText1: (store, text) => { store.commit('SET_TEXT1', text); },
+  setText2: (store, text) => { store.commit('SET_TEXT2', text); },
+  setImage: (store, image) => { store.commit('SET_IMAGE', image); },
 
   backupData: store => { store.commit('SET_BACKUP');},
   recoverData: store => {
@@ -132,14 +134,14 @@ const actions = {
 
   toggleDirty: store => {
     if (!store.getters.promoDirtyFlag) {
-      let backup = store.getters.promoBackupData;
+      let backup = store.getters.presBackupData;
       let fresh = store.getters;
 
-      let titles = backup.title !== fresh.prestitle && backup.title !== '';
-      let subTitles = backup.subTitle !== fresh.pressubTitle && backup.subTitle !== '';
-      let texts1 = backup.text1 !== fresh.prestext1 && backup.text1 !== '';
-      let texts2 = backup.text2 !== fresh.prestext2 && backup.text2 !== '';
-      let images = backup.image !== fresh.presimage && backup.image !== '';
+      let titles = backup.title !== fresh.presTitle && backup.title !== '';
+      let subTitles = backup.subTitle !== fresh.presSubTitle && backup.subTitle !== '';
+      let texts1 = backup.text1 !== fresh.presText1 && backup.text1 !== '';
+      let texts2 = backup.text2 !== fresh.presText2 && backup.text2 !== '';
+      let images = backup.image !== fresh.presImage && backup.image !== '';
 
 
       if (titles || subTitles || texts1 || texts2 || images) {

@@ -60,7 +60,7 @@
 
 <script>
   import SectionContainer from '../Components/SectionContainer';
-  import Options from '../../options';
+  // import Options from '../../options';
   import ContactForm from '../Components/Forms/ContactForm';
   import GoogleMap from '../Components/Maps';
 
@@ -75,7 +75,7 @@
     },
     data() {
       return {
-        options: Options,
+        options: this.$Global.Options,
         title: '',
         subTitle1: '',
         subTitle2: '',

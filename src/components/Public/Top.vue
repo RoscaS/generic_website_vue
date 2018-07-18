@@ -93,8 +93,6 @@
 </template>
 
 <script>
-  import options from '../../options'
-
   const titles = [
     {class: 'horaire', title: "Voir l'horaire complet."},
   ];
@@ -104,7 +102,7 @@
     name: 'Top',
     data() {
       return {
-        options: options,
+        options: this.$Global.Options,
         titles: titles,
       };
     },

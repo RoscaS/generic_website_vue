@@ -3,7 +3,7 @@
        @mouseleave="editIcon=false">
     <transition name="fade">
       <i class="fal fa-pencil-alt edit-icon"
-         v-show="editIcon"
+         v-show="editIcon && !$Global.EditPannel.edit"
          @click="startEdit"
          :style="margins">
       </i>
@@ -13,15 +13,12 @@
 </template>
 
 <script>
-  import store from './EditStore';
-  import {mapActions} from 'vuex';
-
   export default {
     name: "EditIcon",
-    store: store,
     props: {
       Right: {type: String},
-      Top: {type: String}
+      Top: {type: String},
+      Component: {type: String},
     },
     data() {
       return {
@@ -35,12 +32,9 @@
       }
     },
     methods: {
-      ...mapActions([
-        'editOn',
-      ]),
-
       startEdit() {
-        this.editOn();
+        console.log(this.Component)
+        this.$Global.EditPannel.startEdit(this.Component);
         this.$emit('backup-original-data');
       }
     },

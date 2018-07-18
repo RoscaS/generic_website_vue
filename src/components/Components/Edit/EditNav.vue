@@ -1,5 +1,4 @@
 <template>
-  <div>
     <transition name="slide"
                 enter-active-class="slideInUp"
                 leave-active-class="slideOutDown">
@@ -7,10 +6,9 @@
            v-show="editNav">
         <section class="section">
           <div class="columns is-8 is-variable ">
+
             <slot></slot>
-            <!--<div class="main">-->
-              <!--<slot name="content"></slot>-->
-            <!--</div>-->
+
             <ValidationBtns @close-edit="closeEdit"
                             @is-loading="loading=true">
             </ValidationBtns>
@@ -21,37 +19,26 @@
         </div>
       </div>
     </transition>
-  </div>
 </template>
 
 <script>
-  import {SpinLine} from 'vue-loading-spinner'
-  import store from './EditStore';
+  import {SpinLine} from 'vue-loading-spinner';
   import ValidationBtns from './ValidationButtons';
-  import {mapGetters, mapActions} from 'vuex';
-
 
   export default {
     name: "EditNav",
     components: {ValidationBtns, SpinLine},
-    store: store,
     data() {
       return {
         loading: false,
       };
     },
     computed: {
-      ...mapGetters([
-        'editNav'
-      ]),
+      editNav() { return this.$Global.EditPannel.edit; }
     },
     methods: {
-      ...mapActions([
-        'editOff'
-      ]),
-
       closeEdit() {
-        this.editOff();
+        this.$Global.EditPannel.endEdit();
         this.loading = false;
       }
     }

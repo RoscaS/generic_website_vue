@@ -14,6 +14,26 @@ import '../static/js/velocity';
 import '../static/fonts/font-awesome/css/fontawesome-all.css';
 import 'vue2-animate/dist/vue2-animate.min.css';
 
+
+
+import EditPannel from './editPannel'
+import Options from './options'
+
+
+const Global = {
+  EditPannel: EditPannel,
+  Options: Options,
+};
+
+
+Global.install = function() {
+  Object.defineProperty(Vue.prototype, '$Global', {
+    get() { return Global; }
+  });
+};
+
+Vue.use(Global);
+
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(VueScrollTo);
@@ -41,6 +61,7 @@ const router = new VueRouter({
     },
   ]
 });
+
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
