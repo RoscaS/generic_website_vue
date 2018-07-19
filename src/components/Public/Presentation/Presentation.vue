@@ -47,47 +47,70 @@
         </SectionContainer>
       </EditIcon>
       <EditNav v-if="$Global.EditPannel.check($options.name)">
-        <div class="column is-3 is-offset-1 edit-area">
-          <FileUpload></FileUpload>
+
+
+        <div class="column is-2 is-offset-3 edit-area">
+          <ul class="editLink">
+            <li v-for="i in menu">
+              <a class="no-tr" @click="editMenu(i)">{{ i.name }}</a>
+            </li>
+          </ul>
         </div>
+
         <div class="column is-3 edit-area">
-          <b-field label="Titre" custom-class="has-text-white">
+
+
+
+            <FileUpload v-show="menu.find(i => i.name == 'Image').display"
+                        class="TEST">
+            </FileUpload>
+
+
+
             <b-input name="title"
+                     class="TEST"
+                     v-show="menu.find(i => i.name == 'Titre').display"
                      maxlength="35"
                      :disabled="loading"
                      v-model="title">
             </b-input>
-          </b-field>
-          <b-field label="Sous titre" custom-class="has-text-white">
+
+
             <b-input name="subTitle"
+                     class="TEST"
+                     v-show="menu.find(i => i.name == 'Sous titre').display"
                      type="textarea"
                      maxlength="200"
                      rows="2"
                      :disabled="loading"
                      v-model="subTitle">
             </b-input>
-          </b-field>
-        </div>
-        <div class="column is-3 edit-area">
-          <b-field label="Premier texte" custom-class="has-text-white">
+
+
             <b-input name="text1"
+                     class="TEST"
+                     v-show="menu.find(i => i.name == 'Texte 1').display"
                      type="textarea"
                      maxlength="800"
-                     rows="2"
+                     rows="7"
                      :disabled="loading"
                      v-model="text1">
             </b-input>
-          </b-field>
-          <b-field label="Second texte" custom-class="has-text-white">
+
+
             <b-input name="text2"
+                     class="TEST"
+                     v-show="menu.find(i => i.name == 'Texte 2').display"
                      type="textarea"
                      maxlength="800"
-                     rows="2"
+                     rows="7"
                      :disabled="loading"
                      v-model="text2">
             </b-input>
-          </b-field>
+
+
         </div>
+
       </EditNav>
     </section>
   </div>
@@ -111,6 +134,13 @@
     data() {
       return {
         downArrow: null,
+        menu: [
+          {display: false, name: 'Image',},
+          {display: false, name: 'Titre',},
+          {display: false, name: 'Sous titre',},
+          {display: false, name: 'Texte 1',},
+          {display: false, name: 'Texte 2',},
+        ]
       };
     },
     computed: {
@@ -191,6 +221,16 @@
         'toggleDirty',
       ]),
 
+      editMenu(menu) {
+        this.menu.forEach(i => {i.display = false;});
+        menu.display = true;
+      },
+
+      // getMenu(menu) {
+      //   return menu.find(i => i.name == menu).display
+      //
+      // },
+
       scrollWatch() {
         if (window.pageYOffset >= 165) {
           this.downArrow.classList.remove('fadeInDown');
@@ -224,6 +264,11 @@
 
   #Presentation {
     margin-top: -20px;
+  }
+
+  .TEST {
+    position: absolute;
+    width: 30%;
   }
 
   .down-arrow {

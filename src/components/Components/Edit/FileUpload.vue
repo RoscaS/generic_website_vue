@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="label">Image</div>
+    <!--<div class="label">Image</div>-->
     <div class="dropbox"
          :class="{'disabled-dropbox': loading}">
       <input class="input-file"
