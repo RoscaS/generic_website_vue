@@ -92,33 +92,33 @@
         <div class="column is-3 edit-area">
           <FileUpload v-show="findElement('Image').display"></FileUpload>
           <b-input name="title"
-                   v-show="findElement('Titre').display"
                    maxlength="35"
                    :disabled="loading"
+                   v-show="findElement('Titre').display"
                    v-model="title">
           </b-input>
           <b-input name="subTitle"
-                   v-show="findElement('Sous titre').display"
                    type="textarea"
                    maxlength="200"
                    rows="2"
                    :disabled="loading"
+                   v-show="findElement('Sous titre').display"
                    v-model="subTitle">
           </b-input>
           <b-input name="text1"
-                   v-show="findElement('Texte 1').display"
                    type="textarea"
                    maxlength="800"
                    rows="7"
                    :disabled="loading"
+                   v-show="findElement('Texte 1').display"
                    v-model="text1">
           </b-input>
           <b-input name="text2"
-                   v-show="findElement('Texte 2').display"
                    type="textarea"
                    maxlength="800"
                    rows="7"
                    :disabled="loading"
+                   v-show="findElement('Texte 2').display"
                    v-model="text2">
           </b-input>
         </div>
@@ -285,21 +285,7 @@
     }
   }
 
-  .header {
-    font-weight: normal !important;
-    text-align: center;
-    width: 400px;
-    margin: 0 auto 0 auto;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $accent;
-  }
 
-  .sub-title {
-    margin: 15px auto 15px auto;
-    font-size: 14px;
-    text-align: center;
-    font-style: italic;
-  }
 
   .main {
     margin-top: 50px !important;

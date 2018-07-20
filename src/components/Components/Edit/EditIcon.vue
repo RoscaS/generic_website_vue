@@ -5,7 +5,7 @@
       <i class="fal fa-pencil-alt edit-icon"
          v-show="editIcon && !$Global.EditPannel.edit"
          @click="startEdit"
-         :style="margins">
+         :style="customStyle">
       </i>
     </transition>
     <slot></slot>
@@ -22,12 +22,12 @@
     },
     data() {
       return {
-        editIcon: false,
-        // editIcon: true,
+        // editIcon: false,
+        editIcon: true,
       }
     },
     computed: {
-      margins() {
+      customStyle() {
         return `margin-top:${this.Top};right:${this.Right};`;
       }
     },
@@ -47,13 +47,13 @@
     font-size: 25px;
     transition: color .5s ease;
     position: absolute;
-    color: $link;
+    color: $is-success;
     cursor: pointer;
     z-index: 1;
 
     &:hover {
       transition: color .5s ease;
-      color: $link-hover;
+      color: $link-hover !important;
     }
 
   }

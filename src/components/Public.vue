@@ -7,7 +7,7 @@
     <Presentation :url="base + presentation"/>
     <Hero :url="base + hero"/>
     <Parallax :url="base + parallax" :idx="0" :height="600"/>
-    <!--<Presentation :url="base + presentation"/>-->
+    <Articles :url="base + presentation"/>
     <Parallax :url="base + parallax" :idx="1" :height="400"/>
     <Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
@@ -27,7 +27,8 @@
   import Navbar from './Public/Navbar';
   import Carousel from './Public/Carousel';
   import Presentation from './Public/Presentation/Presentation';
-  import Hero from './Public/Hero';
+  import Articles from './Public/Articles';
+  import Hero from './Public/Hero/Hero';
   import Gallery from './Public/Gallery';
   import Contact from './Public/Contact';
   import Review from './Public/Review';
@@ -38,7 +39,7 @@
     name: "Public",
     components: {
       Login, Parallax, PromoRibbon, Top, Navbar, Carousel, Presentation,
-      Hero, Gallery, Contact, Review, Footer,
+      Hero, Gallery, Articles, Contact, Review, Footer,
     },
     data() {
       return {
