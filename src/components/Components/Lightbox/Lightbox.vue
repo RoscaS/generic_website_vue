@@ -61,9 +61,10 @@
 </script>
 
 <style scoped lang="scss">
+  @import '../../../../static/sass/global';
 
   .lightbox {
-    z-index: 20;
+    z-index: 4;
     position: fixed;
     top: 0;
     left: 0;
@@ -115,27 +116,15 @@
     }
 
     @keyframes next-arrow {
-      0% {
-        transform: translate(0px);
-      }
-      60% {
-        transform: translate(3px);
-      }
-      100% {
-        transform: translate(0px);
-      }
+      0% {transform: translate(0px);}
+      60% {transform: translate(3px);}
+      100% {transform: translate(0px);}
     }
 
     @keyframes prev-arrow {
-      0% {
-        transform: translate(0px);
-      }
-      60% {
-        transform: translate(-3px);
-      }
-      100% {
-        transform: translate(0px);
-      }
+      0% {transform: translate(0px);}
+      60% {transform: translate(-3px);}
+      100% {transform: translate(0px);}
     }
 
     .close {

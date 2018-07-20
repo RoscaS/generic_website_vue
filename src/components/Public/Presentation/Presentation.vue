@@ -1,14 +1,16 @@
 <template>
   <div>
-    <i class="down-arrow fal fa-chevron-double-down"
-       v-scroll-to="{
-         el: '#Presentation',
-         duration: 2000,
-         offset: -80
-       }"></i>
+    <div class="down-arrow-wrapper">
+      <i class="down-arrow fal fa-chevron-double-down"
+         v-scroll-to="{
+             el: '#Presentation',
+             duration: 2000,
+             offset: -80
+           }"></i>
+    </div>
     <section id="Presentation">
-      <EditIcon Right="400px"
-                Top=""
+      <EditIcon Right="500px"
+                Top="50px"
                 :Component="$options.name"
                 @backup-original-data="backupData">
 
@@ -159,8 +161,8 @@
         'presText1',
         'presText2',
         'presImage',
-        'presDirtyFlag',
-        'presLoadingFlag',
+        'DirtyFlag',
+        'LoadingFlag',
       ]),
 
       title: {
@@ -204,7 +206,7 @@
       },
 
       loading: {
-        get() { return this.presLoadingFlag; },
+        get() { return this.LoadingFlag; },
       }
     },
 
@@ -276,6 +278,7 @@
 
   .section {
     margin-bottom: 60px;
+    margin-top: -100px;
 
     @media screen and (max-width: 1366px) {
       margin-top: 60px;
@@ -306,13 +309,25 @@
     margin-top: -20px;
   }
 
+
+  .down-arrow-wrapper {
+    animation: down-arrow .6s ease infinite;
+
+    @keyframes down-arrow {
+      0% {transform: translateY(0px);}
+      60% {transform: translateY(-5px);}
+      100% {transform: translateY(0px);}
+    }
+  }
+
   .down-arrow {
     opacity: 0;
     transition: color .5s ease;
     font-size: 50px;
+    font-weight: normal;
     color: white;
     left: 49%;
-    bottom: 120px;
+    bottom: 140px;
     position: relative;
     cursor: pointer;
 
@@ -329,5 +344,4 @@
   .text1 {
     margin-bottom: 40px !important;
   }
-
 </style>

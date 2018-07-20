@@ -4,7 +4,11 @@ import {Toast} from 'buefy';
 
 function toast(message, type) {
   let success = ['is-danger', 'is-success', 'is-warning'];
-  Toast.open({message: message, type: success[type]});
+  Toast.open({
+    message: message,
+    type: success[type],
+    position: 'is-bottom'
+  });
 }
 
 const url = 'presentation/1/';
@@ -35,8 +39,8 @@ const getters = {
   presText2: state => state.text2,
   presImage: state => state.image,
   presBackupData: state => state.backup,
-  presDirtyFlag: state => state.isDirty,
-  presLoadingFlag: state => state.isLoading,
+  DirtyFlag: state => state.isDirty,
+  LoadingFlag: state => state.isLoading,
 };
 
 const mutations = {
@@ -133,7 +137,7 @@ const actions = {
   },
 
   toggleDirty: store => {
-    if (!store.getters.promoDirtyFlag) {
+    if (!store.getters.DirtyFlag) {
       let backup = store.getters.presBackupData;
       let fresh = store.getters;
 

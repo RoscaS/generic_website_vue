@@ -42,7 +42,7 @@
         delay: 0,
         easing: 'ease',
        }">
-      Copyright &copy; {{ getCopyright }}
+      Copyright &copy; {{ getCopyright() }}
     </p>
     <p v-scroll-reveal="{
         origin: 'right',

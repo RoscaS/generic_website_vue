@@ -34,7 +34,7 @@
       },
 
       loading() {
-        return this.root.promoLoadingFlag;
+        return this.root.LoadingFlag;
       },
     },
 

@@ -90,7 +90,7 @@
 
     img {
       width: 100%;
-      height: 600px;
+      height: 525px;
       overflow: hidden;
       -o-object-fit: cover;
       object-fit: cover;

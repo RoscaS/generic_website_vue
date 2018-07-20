@@ -34,18 +34,17 @@
         return this.$parent.$parent;
       },
 
-      promoDirtyFlag() {
-        return this.root.promoDirtyFlag;
+      DirtyFlag() {
+        return this.root.DirtyFlag;
       },
 
       loading() {
-        return this.root.promoLoadingFlag;
+        return this.root.LoadingFlag;
       },
     },
 
     methods: {
       pushData() {
-        console.log('ici')
         this.root.pushData();
       },
 
@@ -54,7 +53,7 @@
       },
 
       commitChanges() {
-        if (this.promoDirtyFlag) {
+        if (this.DirtyFlag) {
           this.disabledCancelBtn = false;
           this.pushData();
         }
@@ -62,7 +61,7 @@
       },
 
       cancelChanges() {
-        if (this.promoDirtyFlag) {
+        if (this.DirtyFlag) {
           this.disabledCancelBtn = true;
           setTimeout(() => {this.disabledCancelBtn = false;}, this.timeout);
           this.storeIsDirty();

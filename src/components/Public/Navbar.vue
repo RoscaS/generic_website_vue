@@ -202,11 +202,11 @@
   #Navbar {
     width: 100%;
     padding: 10px 0 10px 0 !important;;
-    z-index: 19;
+    z-index: 2;
 
     #Brand {
       opacity: 0;
-      z-index: 20;
+      z-index: 3;
 
       h1 {
         cursor: pointer;

@@ -1,15 +1,18 @@
 <template>
   <div class="carousel">
     <slot></slot>
-    <a class="carousel__nav carousel__prev" @click.prevent="prev">
+    <a class="carousel__nav carousel__prev no-tr"
+       @click.prevent="prev">
       <i class="fal fa-3x fa-chevron-left"></i>
     </a>
-    <a class="carousel__nav carousel__next" @click.prevent="next">
+    <a class="carousel__nav carousel__next no-tr"
+       @click.prevent="next">
       <i class="fal fa-3x fa-chevron-right"></i>
     </a>
     <div class="carousel__pagination">
       <a v-for="i in slidesCount"
          @click.prevent="goto(i-1)"
+         class="no-tr"
          :class="{active: i-1 === index}">
       </a>
     </div>
@@ -70,13 +73,14 @@
 
 
 <style scoped lang="scss">
+  @import '../../../../static/sass/global';
 
   a {
     transition: color .5s ease;
     color: #fff;
+
     &:hover {
-      transition: color .5s ease;
-      color: #8b8b8b;
+      color: #fff;
     }
   }
 
@@ -95,12 +99,42 @@
       left: 10px;
 
       &.carousel__prev {
+        &:hover {
+          animation: prev-arrow .6s ease infinite;
+        }
       }
       &.carousel__next {
         right: 10px;
         left: auto;
+
+        &:hover {
+          animation: next-arrow .6s ease infinite;
+        }
       }
 
+      @keyframes next-arrow {
+        0% {
+          transform: translate(0px);
+        }
+        60% {
+          transform: translate(3px);
+        }
+        100% {
+          transform: translate(0px);
+        }
+      }
+
+      @keyframes prev-arrow {
+        0% {
+          transform: translate(0px);
+        }
+        60% {
+          transform: translate(-3px);
+        }
+        100% {
+          transform: translate(0px);
+        }
+      }
     }
 
     .carousel__pagination {
@@ -124,7 +158,7 @@
 
         &:hover {
           transition: border-color .5s ease;
-          border-bottom-color: lightgray;
+          border-bottom-color: $link-hover;
         }
       }
     }

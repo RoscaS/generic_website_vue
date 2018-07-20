@@ -28,12 +28,11 @@
     },
     computed: {
       margins() {
-        return `top:${this.Top};right:${this.Right};`;
+        return `margin-top:${this.Top};right:${this.Right};`;
       }
     },
     methods: {
       startEdit() {
-        console.log(this.Component)
         this.$Global.EditPannel.startEdit(this.Component);
         this.$emit('backup-original-data');
       }
@@ -50,6 +49,7 @@
     position: absolute;
     color: $link;
     cursor: pointer;
+    z-index: 1;
 
     &:hover {
       transition: color .5s ease;

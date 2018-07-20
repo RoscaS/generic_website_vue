@@ -90,8 +90,8 @@
         'promoTitle',
         'promoText',
         'promoImage',
-        'promoDirtyFlag', // used in Validation Btns
-        'promoLoadingFlag',
+        'DirtyFlag', // used in Validation Btns
+        'LoadingFlag',
       ]),
 
       title: {
@@ -116,7 +116,7 @@
         }
       },
       loading: {
-        get() { return this.promoLoadingFlag; },
+        get() { return this.LoadingFlag; },
       }
     },
 

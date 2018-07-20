@@ -53,12 +53,12 @@
   }
 
   .selected {
-    color: $is-primary;
+    color: $is-info;
     }
 }
 
 .highlighted {
   transition: background-color .5s ease;
-  background-color: $is-primary;
+  background-color: $is-info;
 }
 
