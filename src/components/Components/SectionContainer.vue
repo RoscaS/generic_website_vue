@@ -2,8 +2,12 @@
   <div class="container">
     <div class="content">
       <section class="section">
-        <h1 class="title header">{{ title }}</h1>
-        <p class="sub-title">{{ subTitle }}</p>
+        <h1 class="title header">
+              {{ title }}
+        </h1>
+        <p class="sub-title">
+            {{ subTitle }}
+        </p>
         <div class="main">
           <slot name="content"></slot>
         </div>
@@ -18,7 +22,7 @@
     props: {
       title: {type: String},
       subTitle: {type: String},
-    }
+    },
   };
 </script>
 

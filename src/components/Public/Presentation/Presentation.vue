@@ -11,40 +11,66 @@
                 Top=""
                 :Component="$options.name"
                 @backup-original-data="backupData">
-        <SectionContainer :title="title" :sub-title="presSubTitle">
-          <div slot="content">
-            <p class="text1"
-               v-scroll-reveal="{
-                 origin: 'left',
-                 distance: '400px',
-                 duration: 1500,
-                 delay: 50,
-                 easing: 'ease',
-               }">
-              {{ presText1 }}
-            </p>
-            <div class="columns is-variable is-8">
-              <div class="column">
-                <img :src="presImage"
+
+        <div class="container">
+          <div class="content">
+            <section class="section">
+              <div :class="{'highlighted': highlight('Titre')}">
+                <h1 class="title header">
+                  {{ title }}
+                </h1>
+              </div>
+
+
+              <div :class="{'highlighted': highlight('Sous titre')}">
+                <p class="sub-title">
+                  {{ subTitle }}
+                </p>
+              </div>
+              <div class="main">
+
+
+                <div :class="{'highlighted': highlight('Texte 1')}">
+                  <p class="text1"
                      v-scroll-reveal="{
-                       duration: 2500,
-                       delay: 100,
-                       easing: 'ease'
-                     }">
-              </div>
-              <div class="column"
-                   v-scroll-reveal="{
-                     origin: 'right',
+                     origin: 'left',
                      distance: '400px',
-                     delay: 100,
                      duration: 1500,
-                     easing: 'ease'
+                     delay: 50,
+                     easing: 'ease',
                    }">
-                <p>{{ presText2 }}</p>
+                    {{ presText1 }}
+                  </p>
+                </div>
+                <div class="columns is-variable is-8">
+                  <div class="column">
+                    <div :class="{'highlighted': highlight('Image')}">
+                      <img :src="presImage"
+                           v-scroll-reveal="{
+                               duration: 2500,
+                               delay: 100,
+                               easing: 'ease'
+                             }">
+                    </div>
+                  </div>
+                  <div class="column"
+                       v-scroll-reveal="{
+                           origin: 'right',
+                           distance: '400px',
+                           delay: 100,
+                           duration: 1500,
+                           easing: 'ease'
+                         }">
+                    <div :class="{'highlighted': highlight('Texte 2')}">
+                      <p>{{ presText2 }}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </section>
           </div>
-        </SectionContainer>
+        </div>
+
       </EditIcon>
       <EditNav v-if="$Global.EditPannel.check($options.name)">
 
@@ -52,65 +78,48 @@
         <div class="column is-2 is-offset-3 edit-area">
           <ul class="editLink">
             <li v-for="i in menu">
-              <a class="no-tr" @click="editMenu(i)">{{ i.name }}</a>
+              <a class="no-tr"
+                 :class="{'selected': findElement(i.name).display}"
+                 @click="editMenu(i)">
+                {{ i.name }}
+              </a>
             </li>
           </ul>
         </div>
 
         <div class="column is-3 edit-area">
-
-
-
-            <FileUpload v-show="menu.find(i => i.name == 'Image').display"
-                        class="TEST">
-            </FileUpload>
-
-
-
-            <b-input name="title"
-                     class="TEST"
-                     v-show="menu.find(i => i.name == 'Titre').display"
-                     maxlength="35"
-                     :disabled="loading"
-                     v-model="title">
-            </b-input>
-
-
-            <b-input name="subTitle"
-                     class="TEST"
-                     v-show="menu.find(i => i.name == 'Sous titre').display"
-                     type="textarea"
-                     maxlength="200"
-                     rows="2"
-                     :disabled="loading"
-                     v-model="subTitle">
-            </b-input>
-
-
-            <b-input name="text1"
-                     class="TEST"
-                     v-show="menu.find(i => i.name == 'Texte 1').display"
-                     type="textarea"
-                     maxlength="800"
-                     rows="7"
-                     :disabled="loading"
-                     v-model="text1">
-            </b-input>
-
-
-            <b-input name="text2"
-                     class="TEST"
-                     v-show="menu.find(i => i.name == 'Texte 2').display"
-                     type="textarea"
-                     maxlength="800"
-                     rows="7"
-                     :disabled="loading"
-                     v-model="text2">
-            </b-input>
-
-
+          <FileUpload v-show="findElement('Image').display"></FileUpload>
+          <b-input name="title"
+                   v-show="findElement('Titre').display"
+                   maxlength="35"
+                   :disabled="loading"
+                   v-model="title">
+          </b-input>
+          <b-input name="subTitle"
+                   v-show="findElement('Sous titre').display"
+                   type="textarea"
+                   maxlength="200"
+                   rows="2"
+                   :disabled="loading"
+                   v-model="subTitle">
+          </b-input>
+          <b-input name="text1"
+                   v-show="findElement('Texte 1').display"
+                   type="textarea"
+                   maxlength="800"
+                   rows="7"
+                   :disabled="loading"
+                   v-model="text1">
+          </b-input>
+          <b-input name="text2"
+                   v-show="findElement('Texte 2').display"
+                   type="textarea"
+                   maxlength="800"
+                   rows="7"
+                   :disabled="loading"
+                   v-model="text2">
+          </b-input>
         </div>
-
       </EditNav>
     </section>
   </div>
@@ -135,7 +144,7 @@
       return {
         downArrow: null,
         menu: [
-          {display: false, name: 'Image',},
+          {display: true, name: 'Image',},
           {display: false, name: 'Titre',},
           {display: false, name: 'Sous titre',},
           {display: false, name: 'Texte 1',},
@@ -226,10 +235,13 @@
         menu.display = true;
       },
 
-      // getMenu(menu) {
-      //   return menu.find(i => i.name == menu).display
-      //
-      // },
+      findElement(element) {
+        return this.menu.find(i => i.name == element);
+      },
+
+      highlight(element) {
+        return (this.findElement(element).display && this.$Global.EditPannel.edit);
+      },
 
       scrollWatch() {
         if (window.pageYOffset >= 165) {
@@ -262,13 +274,36 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  #Presentation {
-    margin-top: -20px;
+  .section {
+    margin-bottom: 60px;
+
+    @media screen and (max-width: 1366px) {
+      margin-top: 60px;
+    }
   }
 
-  .TEST {
-    position: absolute;
-    width: 30%;
+  .header {
+    font-weight: normal !important;
+    text-align: center;
+    width: 400px;
+    margin: 0 auto 0 auto;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $accent;
+  }
+
+  .sub-title {
+    margin: 15px auto 15px auto;
+    font-size: 14px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .main {
+    margin-top: 50px !important;
+  }
+
+  #Presentation {
+    margin-top: -20px;
   }
 
   .down-arrow {

@@ -51,4 +51,14 @@
     font-size: 22px;
     color: white;
   }
+
+  .selected {
+    color: $is-primary;
+    }
 }
+
+.highlighted {
+  transition: background-color .5s ease;
+  background-color: $is-primary;
+}
+

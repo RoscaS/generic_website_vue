@@ -9,13 +9,19 @@
         <div class="columns content">
 
           <div class="column left is-offset-2 is-4">
-            <img :src="promoImage">
+            <div :class="{'highlighted': highlight('Image')}">
+              <img :src="promoImage">
+            </div>
           </div>
 
           <div class="column right is-5">
             <div>
-              <h3>{{ promoTitle }}</h3>
-              <p>{{ promoText }}</p>
+              <div :class="{'highlighted': highlight('Titre')}">
+                <h3>{{ promoTitle }}</h3>
+              </div>
+              <div :class="{'highlighted': highlight('Texte')}">
+                <p>{{ promoText }}</p>
+              </div>
             </div>
           </div>
 
@@ -24,26 +30,37 @@
       </EditIcon>
     </div>
     <EditNav v-if="$Global.EditPannel.check($options.name)">
-        <div class="column is-3 is-offset-one-quarter edit-area">
-          <FileUpload></FileUpload>
-        </div>
-        <div class="column is-3 edit-area">
-          <b-field label="Titre" custom-class="has-text-white">
-            <b-input name="title"
-                     maxlength="35"
-                     :disabled="loading"
-                     v-model="title">
-            </b-input>
-          </b-field>
-          <b-field label="Text" custom-class="has-text-white">
-            <b-input name="text"
-                     type="textarea"
-                     maxlength="500"
-                     :disabled="loading"
-                     v-model="text">
-            </b-input>
-          </b-field>
-        </div>
+
+      <div class="column is-2 is-offset-3 edit-area">
+        <ul class="editLink">
+          <li v-for="i in menu">
+            <a class="no-tr"
+               :class="{'selected': findElement(i.name).display}"
+               @click="editMenu(i)">
+              {{ i.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="column is-3 edit-area">
+        <FileUpload v-show="findElement('Image').display"></FileUpload>
+        <b-input name="title"
+                 v-show="findElement('Titre').display"
+                 maxlength="35"
+                 :disabled="loading"
+                 v-model="title">
+        </b-input>
+        <b-input name="text"
+                 v-show="findElement('Texte').display"
+                 type="textarea"
+                 maxlength="500"
+                 rows="7"
+                 :disabled="loading"
+                 v-model="text">
+        </b-input>
+      </div>
     </EditNav>
   </div>
 </template>
@@ -60,7 +77,13 @@
     components: {EditIcon, EditNav, FileUpload},
     store: store,
     data() {
-      return {};
+      return {
+        menu: [
+          {display: true, name: 'Image',},
+          {display: false, name: 'Titre',},
+          {display: false, name: 'Texte',},
+        ]
+      };
     },
     computed: {
       ...mapGetters([
@@ -114,6 +137,19 @@
         'setImage',
         'toggleDirty',
       ]),
+
+      editMenu(menu) {
+        this.menu.forEach(i => {i.display = false;});
+        menu.display = true;
+      },
+
+      findElement(element) {
+        return this.menu.find(i => i.name == element);
+      },
+
+      highlight(element) {
+        return (this.findElement(element).display && this.$Global.EditPannel.edit);
+      },
     },
 
     mounted() {
