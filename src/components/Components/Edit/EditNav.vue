@@ -56,12 +56,13 @@
   }
 
   .edit-area {
+    /*overflow: auto;*/
     color: white;
     width: 100%;
     display: block;
     position: fixed;
     bottom: 0;
-    height: 311px;
+    /*height: 311px;*/
     background-color: $top-title;
     -webkit-box-shadow: -1px -3px 24px -2px rgba(0, 0, 0, 0.59);
     -moz-box-shadow: -1px -3px 24px -2px rgba(0, 0, 0, 0.59);

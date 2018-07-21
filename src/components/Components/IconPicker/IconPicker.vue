@@ -16,11 +16,24 @@
            :class="`item ${selected === icon.name ? 'selected' : ''}`"
            v-for="icon in icons"
            :key="icon.value">
-          <i :class="'fal fa-'+icon.name"></i>
+          <i :class="`${weight} fa-${icon.name}`"></i>
         </a>
       </scrolly-viewport>
       <scrolly-bar axis="y"></scrolly-bar>
     </scrolly>
+    <div class="block">
+      <div class="level is-mobile">
+        <div class="level-item">
+          <b-radio v-model="weight" native-value="fal">Fin</b-radio>
+        </div>
+        <div class="level-item">
+          <b-radio v-model="weight" native-value="far">Normal</b-radio>
+        </div>
+        <div class="level-item">
+          <b-radio v-model="weight" native-value="fas">Épais</b-radio>
+        </div>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -36,8 +49,9 @@
     data() {
       return {
         selected: '',
-        icons,
         search: '',
+        weight: 'fal',
+        icons,
       };
     },
     watch: {
@@ -97,7 +111,7 @@
 
   .body {
     position: relative;
-    max-height: 140px;
+    max-height: 120px;
     /*padding: 0 0 20px 5px;*/
     overflow: auto;
     margin-top: 20px;
@@ -115,6 +129,10 @@
         color: $link-hover;
       }
     }
+  }
+
+  .block {
+    margin-top: 15px;
   }
 
 </style>

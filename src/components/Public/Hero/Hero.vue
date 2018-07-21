@@ -46,7 +46,7 @@
     </section>
     <EditNav v-if="$Global.EditPannel.check($options.name)">
 
-      <div class="column is-1 is-offset-3 edit-area">
+      <div class="column is-2 is-offset-2 edit-area">
         <ul class="editLink">
           <li v-for="i in menu">
             <a class="no-tr"
@@ -114,7 +114,7 @@
       </div>
 
 
-      <div class="column is-2 edit-area"
+      <div class="column is-3 edit-area"
            v-show="findElement('Droite').display">
         <label>Titre:</label>
         <b-input name="R_title"
@@ -131,10 +131,12 @@
                  v-model="R_text">
         </b-input>
       </div>
-      <div class="column is-2 edit-area"
+
+
+      <div class="column is-3 edit-area"
            v-show="findElement('Droite').display">
         <label>Icone:</label>
-          <IconPicker v-on:selectIcon="TEST"></IconPicker>
+          <IconPicker v-on:selectIcon="returnIcon"></IconPicker>
       </div>
 
 
@@ -273,7 +275,7 @@
         'toggleDirty',
       ]),
 
-      TEST(selectedIcon) {
+      returnIcon(selectedIcon) {
         console.log('selected', selectedIcon)
       },
 
