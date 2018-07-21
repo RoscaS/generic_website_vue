@@ -22,8 +22,8 @@
     },
     data() {
       return {
-        // editIcon: false,
-        editIcon: true,
+        editIcon: false,
+        // editIcon: true,
       }
     },
     computed: {

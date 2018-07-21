@@ -114,7 +114,7 @@
       </div>
 
 
-      <div class="column is-3 edit-area"
+      <div class="column is-2 edit-area"
            v-show="findElement('Droite').display">
         <label>Titre:</label>
         <b-input name="R_title"
@@ -134,11 +134,7 @@
       <div class="column is-2 edit-area"
            v-show="findElement('Droite').display">
         <label>Icone:</label>
-        <b-input name="R_icon"
-                 maxlength="100"
-                 :disabled="loading"
-                 v-model="R_icon">
-        </b-input>
+          <IconPicker v-on:selectIcon="TEST"></IconPicker>
       </div>
 
 
@@ -147,6 +143,8 @@
 </template>
 
 <script>
+  import IconPicker from '../../Components/IconPicker/IconPicker';
+
   import store from './HeroStore';
   import {mapGetters, mapActions} from 'vuex';
   import EditIcon from '../../Components/Edit/EditIcon';
@@ -155,13 +153,14 @@
 
   export default {
     name: "Hero",
-    components: {EditIcon, EditNav, FileUpload},
+    components: {EditIcon, EditNav, FileUpload, IconPicker},
     store: store,
     props: {
       url: {type: String}
     },
     data() {
       return {
+        iconPicker: false,
         menu: [
           {display: true, name: 'Gauche'},
           {display: false, name: 'Centre'},
@@ -273,6 +272,10 @@
         'setRightText',
         'toggleDirty',
       ]),
+
+      TEST(selectedIcon) {
+        console.log('selected', selectedIcon)
+      },
 
       editMenu(menu) {
         this.menu.forEach(i => {i.display = false;});
