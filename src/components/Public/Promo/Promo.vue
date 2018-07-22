@@ -9,17 +9,20 @@
         <div class="columns content">
 
           <div class="column left is-offset-2 is-4">
-            <div :class="{'highlighted': highlight('Image')}">
+            <div :class="{'highlighted': editPannel.highlight(
+                  'Image', menu, $options.name)}">
               <img :src="promoImage">
             </div>
           </div>
 
           <div class="column right is-5">
             <div>
-              <div :class="{'highlighted': highlight('Titre')}">
+              <div :class="{'highlighted': editPannel.highlight(
+                    'Titre', menu, $options.name)}">
                 <h3>{{ promoTitle }}</h3>
               </div>
-              <div :class="{'highlighted': highlight('Texte')}">
+              <div :class="{'highlighted': editPannel.highlight(
+                    'Texte', menu, $options.name)}">
                 <p>{{ promoText }}</p>
               </div>
             </div>
@@ -29,14 +32,14 @@
 
       </EditIcon>
     </div>
-    <EditNav v-if="$Global.EditPannel.check($options.name)">
+    <EditNav v-if="editPannel.check($options.name)">
 
       <div class="column is-2 is-offset-3 edit-area">
         <ul class="editLink">
           <li v-for="i in menu">
             <a class="no-tr"
-               :class="{'selected': findElement(i.name).display}"
-               @click="editMenu(i)">
+               :class="{'selected': editPannel.getSelected(i.name, menu).display}"
+               @click="editPannel.editMenu(i, menu)">
               {{ i.name }}
             </a>
           </li>
@@ -45,15 +48,15 @@
 
 
       <div class="column is-3 edit-area">
-        <FileUpload v-show="findElement('Image').display"></FileUpload>
+        <FileUpload v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
         <b-input name="title"
-                 v-show="findElement('Titre').display"
+                 v-show="editPannel.getSelected('Titre', menu).display"
                  maxlength="35"
                  :disabled="loading"
                  v-model="title">
         </b-input>
         <b-input name="text"
-                 v-show="findElement('Texte').display"
+                 v-show="editPannel.getSelected('Texte', menu).display"
                  type="textarea"
                  maxlength="500"
                  rows="7"
@@ -78,6 +81,7 @@
     store: store,
     data() {
       return {
+        editPannel: this.$Global.EditPannel,
         menu: [
           {display: true, name: 'Image',},
           {display: false, name: 'Titre',},
@@ -138,18 +142,20 @@
         'toggleDirty',
       ]),
 
-      editMenu(menu) {
-        this.menu.forEach(i => {i.display = false;});
-        menu.display = true;
-      },
-
-      findElement(element) {
-        return this.menu.find(i => i.name == element);
-      },
-
-      highlight(element) {
-        return (this.findElement(element).display && this.$Global.EditPannel.edit);
-      },
+    //   editMenu(menu) {
+    //     this.menu.forEach(i => {i.display = false;});
+    //     menu.display = true;
+    //   },
+    //
+    //   getSelected(element) {
+    //     return this.menu.find(i => i.name == element);
+    //   },
+    //
+    //   highlight(element) {
+    //     return (this.getSelected(element).display &&
+    //       this.$Global.EditPannel.component == this.$options.name) &&
+    //       this.$Global.EditPannel.edit;
+    //   },
     },
 
     mounted() {

@@ -4,6 +4,7 @@ import Vue from 'vue';
 const EditPannel = new Vue({
   data: {
     component: null,
+    loading: false,
     edit: false,
   },
 
@@ -15,23 +16,34 @@ const EditPannel = new Vue({
 
     endEdit() {
       this.edit = false;
-      setTimeout(() => {
-        this.component = null;
-      }, 1000);
+      this.loading = false;
+      setTimeout(() => { this.component = null; }, 1000);
     },
 
     check(component) {
-      if (this.edit) {
-        // console.log(`
-        // Check called from: ${component}
-        // Current component: ${this.component}
-        // => ${component == this.component}
-        // `);
-      }
       return component == this.component;
-    }
+    },
+
+
+
+    editMenu(selected, menu) {
+      menu.forEach(i => {i.display = false;});
+      selected.display = true;
+    },
+
+    getSelected(selected, menu) {
+      return menu.find(i => i.name == selected);
+    },
+
+    highlight(element, menu, name) {
+      return (this.getSelected(element, menu).display &&
+        this.component == name) && this.edit;
+    },
+
+
   }
 
 });
 
 export default EditPannel;
+

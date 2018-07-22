@@ -17,14 +17,16 @@
         <div class="container">
           <div class="content">
             <section class="section">
-              <div :class="{'highlighted': highlight('Titre')}">
+              <div :class="{'highlighted': editPannel.highlight(
+                    'Titre', menu, $options.name)}">
                 <h1 class="title header">
                   {{ title }}
                 </h1>
               </div>
 
 
-              <div :class="{'highlighted': highlight('Sous titre')}">
+              <div :class="{'highlighted': editPannel.highlight(
+                    'Sous titre', menu, $options.name)}">
                 <p class="sub-title">
                   {{ subTitle }}
                 </p>
@@ -32,7 +34,8 @@
               <div class="main">
 
 
-                <div :class="{'highlighted': highlight('Texte 1')}">
+                <div :class="{'highlighted': editPannel.highlight(
+                      'Texte 1', menu, $options.name)}">
                   <p class="text1"
                      v-scroll-reveal="{
                      origin: 'left',
@@ -46,7 +49,8 @@
                 </div>
                 <div class="columns is-variable is-8">
                   <div class="column">
-                    <div :class="{'highlighted': highlight('Image')}">
+                    <div :class="{'highlighted': editPannel.highlight(
+                          'Image', menu, $options.name)}">
                       <img :src="presImage"
                            v-scroll-reveal="{
                                duration: 2500,
@@ -63,7 +67,8 @@
                            duration: 1500,
                            easing: 'ease'
                          }">
-                    <div :class="{'highlighted': highlight('Texte 2')}">
+                    <div :class="{'highlighted': editPannel.highlight(
+                          'Texte 2', menu, $options.name)}">
                       <p>{{ presText2 }}</p>
                     </div>
                   </div>
@@ -74,15 +79,15 @@
         </div>
 
       </EditIcon>
-      <EditNav v-if="$Global.EditPannel.check($options.name)">
+      <EditNav v-if="editPannel.check($options.name)">
 
 
         <div class="column is-2 is-offset-3 edit-area">
           <ul class="editLink">
             <li v-for="i in menu">
               <a class="no-tr"
-                 :class="{'selected': findElement(i.name).display}"
-                 @click="editMenu(i)">
+                 :class="{'selected': editPannel.getSelected(i.name, menu).display}"
+                 @click="editPannel.editMenu(i, menu)">
                 {{ i.name }}
               </a>
             </li>
@@ -90,11 +95,12 @@
         </div>
 
         <div class="column is-3 edit-area">
-          <FileUpload v-show="findElement('Image').display"></FileUpload>
+          <FileUpload
+            v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
           <b-input name="title"
                    maxlength="35"
                    :disabled="loading"
-                   v-show="findElement('Titre').display"
+                   v-show="editPannel.getSelected('Titre', menu).display"
                    v-model="title">
           </b-input>
           <b-input name="subTitle"
@@ -102,7 +108,7 @@
                    maxlength="200"
                    rows="2"
                    :disabled="loading"
-                   v-show="findElement('Sous titre').display"
+                   v-show="editPannel.getSelected('Sous titre', menu).display"
                    v-model="subTitle">
           </b-input>
           <b-input name="text1"
@@ -110,7 +116,7 @@
                    maxlength="800"
                    rows="7"
                    :disabled="loading"
-                   v-show="findElement('Texte 1').display"
+                   v-show="editPannel.getSelected('Texte 1', menu).display"
                    v-model="text1">
           </b-input>
           <b-input name="text2"
@@ -118,7 +124,7 @@
                    maxlength="800"
                    rows="7"
                    :disabled="loading"
-                   v-show="findElement('Texte 2').display"
+                   v-show="editPannel.getSelected('Texte 2', menu).display"
                    v-model="text2">
           </b-input>
         </div>
@@ -144,6 +150,7 @@
     },
     data() {
       return {
+        editPannel: this.$Global.EditPannel,
         downArrow: null,
         menu: [
           {display: true, name: 'Image',},
@@ -232,18 +239,20 @@
         'toggleDirty',
       ]),
 
-      editMenu(menu) {
-        this.menu.forEach(i => {i.display = false;});
-        menu.display = true;
-      },
+      // editMenu(menu) {
+      //   this.menu.forEach(i => {i.display = false;});
+      //   menu.display = true;
+      // },
 
-      findElement(element) {
-        return this.menu.find(i => i.name == element);
-      },
+      // getSelected(element) {
+      //   return this.menu.find(i => i.name == element);
+      // },
 
-      highlight(element) {
-        return (this.findElement(element).display && this.$Global.EditPannel.edit);
-      },
+      // highlight(element) {
+      //   return (this.editPannel.getSelected(element, this.menu).display &&
+      //     this.editPannel.component == this.$options.name) &&
+      //     this.editPannel.edit;
+      // },
 
       scrollWatch() {
         if (window.pageYOffset >= 165) {
@@ -285,8 +294,6 @@
     }
   }
 
-
-
   .main {
     margin-top: 50px !important;
   }
@@ -295,14 +302,19 @@
     margin-top: -20px;
   }
 
-
   .down-arrow-wrapper {
     animation: down-arrow .6s ease infinite;
 
     @keyframes down-arrow {
-      0% {transform: translateY(0px);}
-      60% {transform: translateY(-5px);}
-      100% {transform: translateY(0px);}
+      0% {
+        transform: translateY(0px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
     }
   }
 

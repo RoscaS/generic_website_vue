@@ -46,6 +46,9 @@
   export default {
     name: 'fontAwesomePicker',
     components: {Scrolly, ScrollyViewport, ScrollyBar},
+    props: {
+      position: { type: String },
+    },
     data() {
       return {
         selected: '',
@@ -60,21 +63,14 @@
     methods: {
       getIcon(icon, key) {
         this.selected = key;
-        // NEED TO FIX CONVERT METHOD
-        // this.convert(icon);
         this.selectIcon(icon.toUpperCase());
       },
-      convert(value) {
-        const newValue = value.charCodeAt(1).toString(10).replace(/\D/g, '');
-        let hexValue = Number(newValue).toString(16);
-        while (hexValue.length < 4) {
-          hexValue = `0${hexValue}`;
-        }
-      },
+
       selectIcon(value) {
         const result = {
+          weight: this.weight,
           className: this.selected,
-          cssValue: value,
+          position: this.position,
         };
         this.$emit('selectIcon', result);
       },

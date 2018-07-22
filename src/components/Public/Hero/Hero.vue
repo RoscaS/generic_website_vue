@@ -8,50 +8,59 @@
         <div class="container">
 
           <div class="columns is-variable is-8">
-            <div class="column"
-                 v-scroll-reveal="{
+            <div :class="{'highlighted': editPannel.highlight(
+                  'Gauche', menu, $options.name)}">
+              <div class="column"
+                   v-scroll-reveal="{
                    origin: 'left',
                    distance: '400px',
                    duration: 1500,
                    easing: 'ease'
                    }">
-              <i :class="L_icon"></i>
-              <h2 class="subtitle">{{ L_title }}</h2>
-              <p>{{ L_text }}</p>
+                <i :class="L_icon"></i>
+                <h2 class="subtitle">{{ L_title }}</h2>
+                <p>{{ L_text }}</p>
+              </div>
             </div>
-            <div class="column"
-                 v-scroll-reveal="{
+            <div :class="{'highlighted': editPannel.highlight(
+                  'Centre', menu, $options.name)}">
+              <div class="column"
+                   v-scroll-reveal="{
                    duration: 1500,
                    easing: 'ease'
                    }">
-              <i :class="M_icon"></i>
-              <h2 class="subtitle">{{ M_title }}</h2>
-              <p>{{ M_text }}</p>
+                <i :class="M_icon"></i>
+                <h2 class="subtitle">{{ M_title }}</h2>
+                <p>{{ M_text }}</p>
+              </div>
             </div>
-            <div class="column"
-                 v-scroll-reveal="{
+            <div :class="{'highlighted': editPannel.highlight(
+                  'Droite', menu, $options.name)}">
+              <div class="column"
+                   v-scroll-reveal="{
                    origin: 'right',
                    distance: '400px',
                    duration: 1500,
                    easing: 'ease'
                    }">
-              <i :class="R_icon"></i>
-              <h2 class="subtitle">{{ R_title }}</h2>
-              <p>{{ R_text }}</p>
+                <i :class="R_icon"></i>
+                <h2 class="subtitle">{{ R_title }}</h2>
+                <p>{{ R_text }}</p>
+              </div>
             </div>
           </div>
 
         </div>
       </EditIcon>
     </section>
-    <EditNav v-if="$Global.EditPannel.check($options.name)">
+    <EditNav v-if="editPannel.check($options.name)">
 
       <div class="column is-2 is-offset-2 edit-area">
         <ul class="editLink">
           <li v-for="i in menu">
             <a class="no-tr"
-               :class="{'selected': findElement(i.name).display}"
-               @click="editMenu(i)">
+               :class="{'selected': editPannel.getSelected(i.name, menu).display}"
+               @click="editPannel.editMenu(i, menu)">
               {{ i.name }}
             </a>
           </li>
@@ -59,7 +68,7 @@
       </div>
 
       <div class="column is-3 edit-area"
-           v-show="findElement('Gauche').display">
+           v-show="editPannel.getSelected('Gauche',menu).display">
         <label>Titre:</label>
         <b-input name="L_title"
                  maxlength="35"
@@ -75,19 +84,15 @@
                  v-model="L_text">
         </b-input>
       </div>
-      <div class="column is-2 edit-area"
-           v-show="findElement('Gauche').display">
+      <div class="column is-3 edit-area"
+           v-show="editPannel.getSelected('Gauche',menu).display">
         <label>Icone:</label>
-        <b-input name="L_icon"
-                 maxlength="100"
-                 :disabled="loading"
-                 v-model="L_icon">
-        </b-input>
+        <IconPicker @selectIcon="returnIcon" position="L"></IconPicker>
       </div>
 
 
       <div class="column is-3 edit-area"
-           v-show="findElement('Centre').display">
+           v-show="editPannel.getSelected('Centre',menu).display">
         <label>Titre:</label>
         <b-input name="M_title"
                  maxlength="35"
@@ -103,19 +108,15 @@
                  v-model="M_text">
         </b-input>
       </div>
-      <div class="column is-2 edit-area"
-           v-show="findElement('Centre').display">
+      <div class="column is-3 edit-area"
+           v-show="editPannel.getSelected('Centre',menu).display">
         <label>Icone:</label>
-        <b-input name="M_icon"
-                 maxlength="100"
-                 :disabled="loading"
-                 v-model="M_icon">
-        </b-input>
+        <IconPicker @selectIcon="returnIcon" position="M"></IconPicker>
       </div>
 
 
       <div class="column is-3 edit-area"
-           v-show="findElement('Droite').display">
+           v-show="editPannel.getSelected('Droite',menu).display">
         <label>Titre:</label>
         <b-input name="R_title"
                  maxlength="35"
@@ -134,9 +135,9 @@
 
 
       <div class="column is-3 edit-area"
-           v-show="findElement('Droite').display">
+           v-show="editPannel.getSelected('Droite',menu).display">
         <label>Icone:</label>
-          <IconPicker v-on:selectIcon="returnIcon"></IconPicker>
+        <IconPicker @selectIcon="returnIcon" position="R"></IconPicker>
       </div>
 
 
@@ -162,6 +163,7 @@
     },
     data() {
       return {
+        editPannel: this.$Global.EditPannel,
         iconPicker: false,
         menu: [
           {display: true, name: 'Gauche'},
@@ -275,19 +277,19 @@
         'toggleDirty',
       ]),
 
-      returnIcon(selectedIcon) {
-        console.log('selected', selectedIcon)
+      returnIcon(icon) {
+        switch (icon.position) {
+          case 'L':
+            this.L_icon = `${icon.weight} fa-${icon.className}`;
+            break;
+          case 'M':
+            this.M_icon = `${icon.weight} fa-${icon.className}`;
+            break;
+          case 'R':
+            this.R_icon = `${icon.weight} fa-${icon.className}`;
+            break;
+        }
       },
-
-      editMenu(menu) {
-        this.menu.forEach(i => {i.display = false;});
-        menu.display = true;
-      },
-
-      findElement(element) {
-        return this.menu.find(i => i.name == element);
-      },
-
     },
     mounted() {
       this.fetchData();

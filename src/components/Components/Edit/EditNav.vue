@@ -3,15 +3,13 @@
                 enter-active-class="slideInUp"
                 leave-active-class="slideOutDown">
       <div class="navbar edit-area"
-           v-show="editNav">
+           v-show="editPannel.edit">
         <section class="section">
           <div class="columns is-8 is-variable ">
 
             <slot></slot>
 
-            <ValidationBtns @close-edit="closeEdit"
-                            @is-loading="loading=true">
-            </ValidationBtns>
+            <ValidationBtns></ValidationBtns>
           </div>
         </section>
         <div class="loading-animation">
@@ -28,19 +26,12 @@
   export default {
     name: "EditNav",
     components: {ValidationBtns, SpinLine},
-    data() {
-      return {
-        loading: false,
-      };
-    },
+    data() { return { editPannel: this.$Global.EditPannel }},
     computed: {
-      editNav() { return this.$Global.EditPannel.edit; }
-    },
-    methods: {
-      closeEdit() {
-        this.$Global.EditPannel.endEdit();
-        this.loading = false;
-      }
+      loading: {
+        get() { return this.editPannel.loading; },
+        set(value) { this.editPannel.loading = value;}
+      },
     }
   };
 </script>
@@ -56,13 +47,12 @@
   }
 
   .edit-area {
-    /*overflow: auto;*/
     color: white;
     width: 100%;
     display: block;
     position: fixed;
     bottom: 0;
-    /*height: 311px;*/
+    min-height: 331px;
     background-color: $top-title;
     -webkit-box-shadow: -1px -3px 24px -2px rgba(0, 0, 0, 0.59);
     -moz-box-shadow: -1px -3px 24px -2px rgba(0, 0, 0, 0.59);

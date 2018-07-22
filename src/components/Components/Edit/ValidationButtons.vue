@@ -24,33 +24,24 @@
     components: {SpinLine},
     data() {
       return {
+        editPannel: this.$Global.EditPannel,
         disabledCancelBtn: false,
         timeout: 5000,
       };
     },
 
     computed: {
-      root() {
-        return this.$parent.$parent;
-      },
+      root() { return this.$parent.$parent; },
 
-      DirtyFlag() {
-        return this.root.DirtyFlag;
-      },
+      DirtyFlag() { return this.root.DirtyFlag; },
 
-      loading() {
-        return this.root.LoadingFlag;
-      },
+      loading() { return this.root.LoadingFlag; },
     },
 
     methods: {
-      pushData() {
-        this.root.pushData();
-      },
+      pushData() { this.root.pushData(); },
 
-      recoverData() {
-        this.root.recoverData();
-      },
+      recoverData() { this.root.recoverData(); },
 
       commitChanges() {
         if (this.DirtyFlag) {
@@ -67,17 +58,17 @@
           this.storeIsDirty();
           return;
         }
-        this.$emit('close-edit');
+        this.editPannel.endEdit();
       },
 
       toggleLoading() {
-        this.$emit('is-loading');
+        this.editPannel.loading = !this.editPannel.loading;
         this.checkLoading();
       },
 
       checkLoading() {
         this.loading ? setTimeout(() => {this.checkLoading();}, 100)
-                     : this.$emit('close-edit');
+                     : this.editPannel.endEdit();
       },
 
       storeIsDirty() {
@@ -91,7 +82,7 @@
           onAction: () => {
             this.recoverData();
             this.disabledCancelBtn = false;
-            this.$emit('close-edit');
+            this.editPannel.endEdit();
           }
         });
       },

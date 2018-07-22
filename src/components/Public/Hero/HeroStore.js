@@ -12,9 +12,7 @@ function toast(message, type) {
 }
 
 function checkEmpty(backup, fresh) {
-  console.log('in checkEmpty')
   for (let i in backup) {
-    console.log(`${i}\nbackup: ${backup[i]}\nfresh: ${fresh[i]}`);
     if (backup[i] !== fresh[i] && backup[i] !== '') {
       return false
     }
