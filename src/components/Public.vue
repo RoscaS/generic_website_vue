@@ -4,10 +4,10 @@
     <Top/>
     <Navbar/>
     <Carousel :url="base + carousel"/>
-    <Presentation :url="base + presentation"/>
-    <Hero :url="base + hero"/>
+    <Presentation/>
+    <Hero/>
     <Parallax :url="base + parallax" :idx="0" :height="600"/>
-    <Articles :url="base + presentation"/>
+    <Articles/>
     <Parallax :url="base + parallax" :idx="1" :height="400"/>
     <Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
@@ -51,9 +51,6 @@
 
         parallax: 'galleries/parallax/',
         carousel: 'galleries/carousel/',
-        promo: 'promo/1',
-        presentation: 'presentation/1',
-        hero: 'hero/1',
         gallery: 'galleries/events/',
         galleryData: 'gallery/1',
         contact: 'contact/1',

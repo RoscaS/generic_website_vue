@@ -2,7 +2,7 @@
   <div>
     <div class="container collapse-content">
       <EditIcon Right="200px"
-                Top="36px"
+                Top="0"
                 :Component="$options.name"
                 @backup-original-data="backupData">
 
@@ -49,14 +49,12 @@
 
       <div class="column is-3 edit-area">
         <FileUpload v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
-        <b-input name="title"
-                 v-show="editPannel.getSelected('Titre', menu).display"
+        <b-input v-show="editPannel.getSelected('Titre', menu).display"
                  maxlength="35"
                  :disabled="loading"
                  v-model="title">
         </b-input>
-        <b-input name="text"
-                 v-show="editPannel.getSelected('Texte', menu).display"
+        <b-input v-show="editPannel.getSelected('Texte', menu).display"
                  type="textarea"
                  maxlength="500"
                  rows="7"
@@ -141,21 +139,6 @@
         'setImage',
         'toggleDirty',
       ]),
-
-    //   editMenu(menu) {
-    //     this.menu.forEach(i => {i.display = false;});
-    //     menu.display = true;
-    //   },
-    //
-    //   getSelected(element) {
-    //     return this.menu.find(i => i.name == element);
-    //   },
-    //
-    //   highlight(element) {
-    //     return (this.getSelected(element).display &&
-    //       this.$Global.EditPannel.component == this.$options.name) &&
-    //       this.$Global.EditPannel.edit;
-    //   },
     },
 
     mounted() {

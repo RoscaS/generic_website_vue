@@ -63,10 +63,6 @@
     methods: {
       getIcon(icon, key) {
         this.selected = key;
-        this.selectIcon(icon.toUpperCase());
-      },
-
-      selectIcon(value) {
         const result = {
           weight: this.weight,
           className: this.selected,
@@ -74,15 +70,16 @@
         };
         this.$emit('selectIcon', result);
       },
+
       filterIcons(search) {
         let filter = [];
-
         if (search.length > 1) {
           filter = icons.filter((item) => {
             const regex = new RegExp(search, 'gi');
             return item.name.match(regex);
           });
-        } else if (search.length === 0) {
+        }
+        else if (search.length === 0) {
           this.icons = icons;
         }
 

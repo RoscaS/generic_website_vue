@@ -70,14 +70,12 @@
       <div class="column is-3 edit-area"
            v-show="editPannel.getSelected('Gauche',menu).display">
         <label>Titre:</label>
-        <b-input name="L_title"
-                 maxlength="35"
+        <b-input maxlength="20"
                  :disabled="loading"
                  v-model="L_title">
         </b-input>
         <label>Texte:</label>
-        <b-input name="L_text"
-                 type="textarea"
+        <b-input type="textarea"
                  rows="3"
                  maxlength="200"
                  :disabled="loading"
@@ -94,14 +92,12 @@
       <div class="column is-3 edit-area"
            v-show="editPannel.getSelected('Centre',menu).display">
         <label>Titre:</label>
-        <b-input name="M_title"
-                 maxlength="35"
+        <b-input maxlength="20"
                  :disabled="loading"
                  v-model="M_title">
         </b-input>
         <label>Texte:</label>
-        <b-input name="M_text"
-                 type="textarea"
+        <b-input type="textarea"
                  rows="3"
                  maxlength="200"
                  :disabled="loading"
@@ -118,14 +114,12 @@
       <div class="column is-3 edit-area"
            v-show="editPannel.getSelected('Droite',menu).display">
         <label>Titre:</label>
-        <b-input name="R_title"
-                 maxlength="35"
+        <b-input maxlength="20"
                  :disabled="loading"
                  v-model="R_title">
         </b-input>
         <label>Texte:</label>
-        <b-input name="R_text"
-                 type="textarea"
+        <b-input type="textarea"
                  rows="3"
                  maxlength="200"
                  :disabled="loading"
@@ -158,9 +152,6 @@
     name: "Hero",
     components: {EditIcon, EditNav, FileUpload, IconPicker},
     store: store,
-    props: {
-      url: {type: String}
-    },
     data() {
       return {
         editPannel: this.$Global.EditPannel,

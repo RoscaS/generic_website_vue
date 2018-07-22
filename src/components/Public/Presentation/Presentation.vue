@@ -9,8 +9,7 @@
            }"></i>
     </div>
     <section id="Presentation">
-      <EditIcon Right="500px"
-                Top="50px"
+      <EditIcon Top="60px"
                 :Component="$options.name"
                 @backup-original-data="backupData">
 
@@ -97,30 +96,26 @@
         <div class="column is-3 edit-area">
           <FileUpload
             v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
-          <b-input name="title"
-                   maxlength="35"
+          <b-input maxlength="35"
                    :disabled="loading"
                    v-show="editPannel.getSelected('Titre', menu).display"
                    v-model="title">
           </b-input>
-          <b-input name="subTitle"
-                   type="textarea"
+          <b-input type="textarea"
                    maxlength="200"
                    rows="2"
                    :disabled="loading"
                    v-show="editPannel.getSelected('Sous titre', menu).display"
                    v-model="subTitle">
           </b-input>
-          <b-input name="text1"
-                   type="textarea"
+          <b-input type="textarea"
                    maxlength="800"
                    rows="7"
                    :disabled="loading"
                    v-show="editPannel.getSelected('Texte 1', menu).display"
                    v-model="text1">
           </b-input>
-          <b-input name="text2"
-                   type="textarea"
+          <b-input type="textarea"
                    maxlength="800"
                    rows="7"
                    :disabled="loading"
@@ -145,9 +140,6 @@
     name: "Presentation",
     components: {SectionContainer, EditIcon, EditNav, FileUpload},
     store: store,
-    props: {
-      url: {type: String}
-    },
     data() {
       return {
         editPannel: this.$Global.EditPannel,

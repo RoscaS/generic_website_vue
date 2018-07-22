@@ -1,13 +1,12 @@
 <template>
-  <div @mouseover="editIcon=true"
-       @mouseleave="editIcon=false">
-    <transition name="fade">
-      <i class="fal fa-pencil-alt edit-icon"
-         v-show="editIcon && !$Global.EditPannel.edit"
-         @click="startEdit"
-         :style="customStyle">
+  <div>
+    <button class="button is-danger"
+            :style="setStyle"
+            :disabled="$Global.EditPannel.edit"
+            @click="startEdit">
+      <i class="fal fa-pencil-alt">
       </i>
-    </transition>
+    </button>
     <slot></slot>
   </div>
 </template>
@@ -21,16 +20,12 @@
       Component: {type: String},
     },
     data() {
-      return {
-        editIcon: false,
-        // editIcon: true,
-      }
+      return {};
     },
     computed: {
-      customStyle() {
-        return `margin-top:${this.Top};right:${this.Right};`;
-      }
+      setStyle() { return `margin-top:${this.Top};`; },
     },
+
     methods: {
       startEdit() {
         this.$Global.EditPannel.startEdit(this.Component);
@@ -43,18 +38,16 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  .edit-icon {
+  .button {
+    transition: .5s background-color ease;
     font-size: 25px;
-    transition: color .5s ease;
+    left: 50px;
     position: absolute;
-    color: $is-success;
-    cursor: pointer;
     z-index: 1;
 
     &:hover {
-      transition: color .5s ease;
-      color: $link-hover !important;
+      transition: .5s background-color ease;
+      background-color: #d03656;
     }
-
   }
 </style>
