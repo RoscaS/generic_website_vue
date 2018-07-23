@@ -1,7 +1,9 @@
 <template>
-  <section id="Galerie">
-    <SectionContainer :title="title" :sub-title="subTitle">
-      <div slot="content">
+  <section id="Galerie" class="section section-container">
+    <div class="container">
+      <div class="content">
+        <Title>{{ title }}</Title>
+        <p class="sub-title">{{ subTitle }}</p>
         <div class="columns is-multiline">
           <div class="column is-3 gallery-col"
                v-for="image in images"
@@ -21,21 +23,22 @@
             </a>
           </div>
         </div>
+        <Lightbox></Lightbox>
       </div>
-    </SectionContainer>
-    <Lightbox></Lightbox>
+    </div>
   </section>
-
 </template>
 
 <script>
-  import SectionContainer from '../Components/SectionContainer';
+
   import Lightbox from '../Components/Lightbox/Lightbox';
+  import Title from '../Components/Title';
+
   import axios from 'axios';
 
   export default {
     name: "Gallery",
-    components: {SectionContainer, Lightbox},
+    components: {Lightbox, Title},
     props: {
       url: {type: String},
       urlSectionData: {type: String},

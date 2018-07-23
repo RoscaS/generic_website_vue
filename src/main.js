@@ -1,38 +1,17 @@
+// Vendor
 import Vue from 'vue';
 import axios from 'axios';
 import Buefy from 'buefy';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 
-
 import VueScrollTo from 'vue-scrollto';
 import VueScrollReveal from 'vue-scroll-reveal';
 import VeeValidate from 'vee-validate';
 
-
 import '../static/js/velocity';
 import '../static/fonts/font-awesome/css/fontawesome-all.css';
 import 'vue2-animate/dist/vue2-animate.min.css';
-
-
-
-import EditPannel from './editPannel'
-import Options from './options'
-
-
-const Global = {
-  EditPannel: EditPannel,
-  Options: Options,
-};
-
-
-Global.install = function() {
-  Object.defineProperty(Vue.prototype, '$Global', {
-    get() { return Global; }
-  });
-};
-
-Vue.use(Global);
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -45,6 +24,22 @@ Vue.use(Buefy, {
 });
 
 
+// Perso
+import EditPannel from './editPannel'
+import Options from './options'
+
+const Global = {EditPannel: EditPannel, Options: Options,};
+
+Global.install = function() {
+  Object.defineProperty(Vue.prototype, '$Global', {
+    get() { return Global; }
+  });
+};
+
+Vue.use(Global);
+
+
+// Router
 const router = new VueRouter({
   mode: 'history',
   routes: [

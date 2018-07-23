@@ -10,7 +10,8 @@ $paragraph: #4D5763;
 $header: #4D5763;
 $emphasis: #4D5763;
 $accent: #4D5763;
-$link: #CB132D;
+//$link: #CB132D;
+$link: hsl(348, 73%, 55%);;
 $link-hover: #6293bf;
 $background: #FFFFFF;
 $separator: #193F6E;
@@ -37,4 +38,6 @@ $is-info: hsla(204, 86%, 53%, 0.45);
 $is-success: #45a875;
 $is-warning: hsl(48, 100%, 67%);
 $is-danger: hsl(348, 73%, 55%);
+
+
 

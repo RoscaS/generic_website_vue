@@ -8,19 +8,16 @@
              offset: -80
            }"></i>
     </div>
-    <section id="Presentation">
+    <section id="Presentation" class="section section-container">
       <EditIcon Top="60px"
                 :Component="$options.name"
                 @backup-original-data="backupData">
 
         <div class="container">
           <div class="content">
-            <section class="section">
               <div :class="{'highlighted': editPannel.highlight(
                     'Titre', menu, $options.name)}">
-                <h1 class="title header">
-                  {{ title }}
-                </h1>
+                <Title>{{ title }}</Title>
               </div>
 
 
@@ -30,50 +27,46 @@
                   {{ subTitle }}
                 </p>
               </div>
-              <div class="main">
 
-
-                <div :class="{'highlighted': editPannel.highlight(
+              <div :class="{'highlighted': editPannel.highlight(
                       'Texte 1', menu, $options.name)}">
-                  <p class="text1"
-                     v-scroll-reveal="{
+                <p class="text1"
+                   v-scroll-reveal="{
                      origin: 'left',
                      distance: '400px',
                      duration: 1500,
                      delay: 50,
                      easing: 'ease',
                    }">
-                    {{ presText1 }}
-                  </p>
-                </div>
-                <div class="columns is-variable is-8">
-                  <div class="column">
-                    <div :class="{'highlighted': editPannel.highlight(
+                  {{ presText1 }}
+                </p>
+              </div>
+              <div class="columns is-variable is-8">
+                <div class="column">
+                  <div :class="{'highlighted': editPannel.highlight(
                           'Image', menu, $options.name)}">
-                      <img :src="presImage"
-                           v-scroll-reveal="{
+                    <img :src="presImage"
+                         v-scroll-reveal="{
                                duration: 2500,
                                delay: 100,
                                easing: 'ease'
                              }">
-                    </div>
                   </div>
-                  <div class="column"
-                       v-scroll-reveal="{
+                </div>
+                <div class="column"
+                     v-scroll-reveal="{
                            origin: 'right',
                            distance: '400px',
                            delay: 100,
                            duration: 1500,
                            easing: 'ease'
                          }">
-                    <div :class="{'highlighted': editPannel.highlight(
+                  <div :class="{'highlighted': editPannel.highlight(
                           'Texte 2', menu, $options.name)}">
-                      <p>{{ presText2 }}</p>
-                    </div>
+                    <p>{{ presText2 }}</p>
                   </div>
                 </div>
               </div>
-            </section>
           </div>
         </div>
 
@@ -130,15 +123,15 @@
 
 <script>
   import store from './PresentationStore';
-  import SectionContainer from '../../Components/SectionContainer';
   import {mapGetters, mapActions} from 'vuex';
   import EditIcon from '../../Components/Edit/EditIcon';
   import EditNav from '../../Components/Edit/EditNav';
   import FileUpload from '../../Components/Edit/FileUpload';
+  import Title from '../../Components/Title';
 
   export default {
     name: "Presentation",
-    components: {SectionContainer, EditIcon, EditNav, FileUpload},
+    components: {EditIcon, EditNav, FileUpload, Title},
     store: store,
     data() {
       return {
@@ -231,21 +224,6 @@
         'toggleDirty',
       ]),
 
-      // editMenu(menu) {
-      //   this.menu.forEach(i => {i.display = false;});
-      //   menu.display = true;
-      // },
-
-      // getSelected(element) {
-      //   return this.menu.find(i => i.name == element);
-      // },
-
-      // highlight(element) {
-      //   return (this.editPannel.getSelected(element, this.menu).display &&
-      //     this.editPannel.component == this.$options.name) &&
-      //     this.editPannel.edit;
-      // },
-
       scrollWatch() {
         if (window.pageYOffset >= 165) {
           this.downArrow.classList.remove('fadeInDown');
@@ -278,20 +256,7 @@
   @import '../../../../static/sass/global';
 
   .section {
-    margin-bottom: 60px;
-    margin-top: -100px;
-
-    @media screen and (max-width: 1366px) {
-      margin-top: 60px;
-    }
-  }
-
-  .main {
-    margin-top: 50px !important;
-  }
-
-  #Presentation {
-    margin-top: -20px;
+    margin-top: -70px !important;
   }
 
   .down-arrow-wrapper {

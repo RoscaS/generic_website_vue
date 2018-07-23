@@ -64,3 +64,7 @@ npm run build --report
 
 * [Get place id](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)
 
+## TODO
+* Titre affichés dans les parallax animés:
+  * IN: à l'arrivée du viewport
+  * OUT: à l'entrée dans le viewport du titre de la section

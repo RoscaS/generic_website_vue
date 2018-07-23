@@ -54,17 +54,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.header {
-  font-weight: normal !important;
-  text-align: center;
-  width: 400px;
-  margin: 0 auto 0 auto;
-  padding-bottom: 10px;
-  border-bottom: 1px solid $accent;
+
+.section-container {
+  margin: 30px auto 50px auto;
+
+  @media screen and (max-width: 1366px) {
+    margin-top: 60px;
+  }
 }
 
 .sub-title {
-  margin: 15px auto 15px auto;
+  margin: 15px auto 80px auto !important;
   font-size: 14px;
   text-align: center;
   font-style: italic;

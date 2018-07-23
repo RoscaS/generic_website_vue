@@ -1,66 +1,69 @@
 <template>
-  <section id="Contact">
-    <SectionContainer :title="title" :sub-title="subTitle1">
-      <div slot="content">
-        <div class="columns">
-          <div class="column left">
-            <div v-scroll-reveal="{
+  <section id="Contact" class="section section-container">
+    <div slot="content">
+      <div class="container">
+        <div class="content">
+          <Title>{{ title }}</Title>
+          <p class="sub-title">{{ subTitle1 }}</p>
+          <div class="columns">
+            <div class="column left">
+              <div v-scroll-reveal="{
                    origin: 'left',
                    distance: '100px',
                    duration: 2500,
                    delay: 100,
                    easing: 'ease',
                  }">
-              <GoogleMap name="map"></GoogleMap>
+                <GoogleMap name="map"></GoogleMap>
+              </div>
             </div>
-          </div>
-          <div class="column right">
-            <div class="info"
-                 v-scroll-reveal="{
+            <div class="column right">
+              <div class="info"
+                   v-scroll-reveal="{
                    origin: 'right',
                    distance: '400px',
                    duration: 1500,
                    delay: 50,
                    easing: 'ease',
                  }">
-              <div class="line">
-                <i class="fas fa-map-marker-alt fa-fw"></i>
-                <a :href="options.google">{{ options.city }}</a>
-              </div>
+                <div class="line">
+                  <i class="fas fa-map-marker-alt fa-fw"></i>
+                  <a :href="options.google">{{ options.city }}</a>
+                </div>
 
-              <div class="line">
-                <i class="fas fa-phone fa-fw"></i>
-                <a :href="phoneHref">{{ options.phone }}</a>
-              </div>
+                <div class="line">
+                  <i class="fas fa-phone fa-fw"></i>
+                  <a :href="phoneHref">{{ options.phone }}</a>
+                </div>
 
-              <div class="line">
-                <i class="fas fa-envelope fa-fw"></i>
-                <a :href="mailHref">{{ options.mail }}</a>
-              </div>
+                <div class="line">
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <a :href="mailHref">{{ options.mail }}</a>
+                </div>
 
-            </div>
-            <p class="subtitle2"
-               v-scroll-reveal="{
+              </div>
+              <p class="subtitle2"
+                 v-scroll-reveal="{
                  origin: 'right',
                  distance: '200px',
                  duration: 1500,
                  delay: 100,
                  easing: 'ease',
                }">
-              {{ subTitle2 }}</p>
+                {{ subTitle2 }}</p>
 
-            <ContactForm :url="urlPostMessage"></ContactForm>
+              <ContactForm :url="urlPostMessage"></ContactForm>
+            </div>
           </div>
         </div>
       </div>
-    </SectionContainer>
+    </div>
   </section>
 
 </template>
 
 <script>
-  import SectionContainer from '../Components/SectionContainer';
-  // import Options from '../../options';
+  import Title from '../Components/Title';
   import ContactForm from '../Components/Forms/ContactForm';
   import GoogleMap from '../Components/Maps';
 
@@ -68,7 +71,7 @@
 
   export default {
     name: "Contact",
-    components: {SectionContainer, ContactForm, GoogleMap},
+    components: {ContactForm, GoogleMap, Title},
     props: {
       url: {type: String},
       urlPostMessage: {type: String},

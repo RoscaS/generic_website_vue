@@ -1,5 +1,5 @@
 <template>
-  <section id="Articles">
+  <section id="Articles" class="section section-container">
     <EditIcon Right="500px"
               Top="50px"
               :Component="$options.name"
@@ -7,17 +7,12 @@
 
       <div class="container">
         <div class="content">
-          <section class="section">
             <div>
-              <h1 class="title header">
-                Articles
-              </h1>
+              <Title>Nos Articles</Title>
               <p class="sub-title">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, delectus doloremque ex excepturi odit quaerat quos voluptate. A animi, architecto dicta exercitationem labore laudantium quidem. Molestiae nostrum sed tempora voluptas.
               </p>
             </div>
-            <br>
-            <br>
             <img src="http://via.placeholder.com/1250x400" alt="">
             <br>
             <br>
@@ -25,7 +20,6 @@
             <br>
             <img src="http://via.placeholder.com/1250x600" alt="">
 
-          </section>
         </div>
       </div>
     </EditIcon>
@@ -34,10 +28,11 @@
 
 <script>
   import EditIcon from '../Components/Edit/EditIcon'
+  import Title from '../Components/Title';
 
   export default {
     name: "Articles",
-    components: {EditIcon},
+    components: {EditIcon, Title},
   };
 </script>
 
