@@ -18,12 +18,13 @@
                :href="image.url"
                :description="image.description"
                v-lightbox
-               @click="disableScrolling">
-              <img :src="image.url"/>
+               @click="clickImage(image)">
+              <img :src="image.url"
+                   :class="[imgClass, {'img-selected': image.selected}]"/>
             </a>
           </div>
         </div>
-        <Lightbox></Lightbox>
+        <Lightbox v-if="!isAdmin"></Lightbox>
       </div>
     </div>
   </section>
@@ -46,14 +47,28 @@
 
     data() {
       return {
+        isAdmin: true,
         title: '',
         subTitle: '',
         images: []
       };
     },
 
+    computed: {
+      imgClass() { return this.isAdmin ? 'img-admin' : 'img-user'; }
+    },
+
     methods: {
-      disableScrolling() {
+      clickImage(image) {
+        if (!this.isAdmin) {
+          this.lockScroll();
+        }
+        else {
+          image.selected = !image.selected;
+        }
+      },
+
+      lockScroll() {
         let x = window.scrollX;
         let y = window.scrollY;
         window.onscroll = function() {window.scrollTo(x, y);};
@@ -66,7 +81,8 @@
         images.forEach(i => {
           this.images.push({
             url: i.image,
-            description: i.description
+            description: i.description,
+            selected: false,
           });
         });
       }).catch(error => {
@@ -91,15 +107,39 @@
 
   img {
     cursor: pointer;
-    transition: box-shadow .5s ease, transform .5s ease;
+    transition: box-shadow .5s ease, transform .5s ease-out;
     box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
     transform: scale(1);
+  }
 
+  .img-user {
     &:hover {
-      transition: box-shadow .5s ease, transform .5s ease;
+      transition: box-shadow .5s ease, transform .5s ease-out;
+      -webkit-box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
       box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
+  }
+
+  .img-admin {
+    &:hover {
+      /*transition: box-shadow .5s ease-out;*/
+      /*-webkit-box-shadow: 0 0 28px 5px rgba(0,0,0,.41);*/
+      /*-moz-box-shadow: 0 0 28px 5px rgba(0,0,0,.41);*/
+      /*box-shadow: 0 0 28px 5px rgba(0,0,0,.41);*/
+    }
+  }
+
+  .img-selected {
+    /*&:hover {*/
+    transition: box-shadow .5s ease, transform .5s ease-out;
+    -webkit-box-shadow: 0 0 28px 5px rgba(114, 165, 211, 1);
+    -moz-box-shadow: 0 0 28px 5px rgba(114, 165, 211, 1);
+    box-shadow: 0 0 28px 5px rgba(114, 165, 211, 1);
+    /*}*/
   }
 
 </style>

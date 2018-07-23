@@ -9,7 +9,7 @@
            }"></i>
     </div>
     <section id="Presentation" class="section section-container">
-      <EditIcon Top="60px"
+      <EditIcon Top="20px"
                 :Component="$options.name"
                 @backup-original-data="backupData">
 

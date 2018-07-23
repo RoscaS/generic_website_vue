@@ -40,7 +40,7 @@
 
   .button {
     transition: .5s background-color ease;
-    font-size: 25px;
+    font-size: 20px;
     left: 50px;
     position: absolute;
     z-index: 1;

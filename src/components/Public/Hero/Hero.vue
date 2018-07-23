@@ -8,41 +8,41 @@
         <div class="container">
 
           <div class="columns is-variable is-8">
-            <div :class="{'highlighted': editPannel.highlight(
-                  'Gauche', menu, $options.name)}">
-              <div class="column"
+              <div class="column is-one-third"
                    v-scroll-reveal="{
                    origin: 'left',
                    distance: '400px',
                    duration: 1500,
                    easing: 'ease'
                    }">
+            <div :class="{'highlighted': editPannel.highlight(
+                  'Gauche', menu, $options.name)}">
                 <i :class="L_icon"></i>
                 <h2 class="subtitle">{{ L_title }}</h2>
                 <p>{{ L_text }}</p>
               </div>
             </div>
-            <div :class="{'highlighted': editPannel.highlight(
-                  'Centre', menu, $options.name)}">
-              <div class="column"
+              <div class="column is-one-third"
                    v-scroll-reveal="{
                    duration: 1500,
                    easing: 'ease'
                    }">
+            <div :class="{'highlighted': editPannel.highlight(
+                  'Centre', menu, $options.name)}">
                 <i :class="M_icon"></i>
                 <h2 class="subtitle">{{ M_title }}</h2>
                 <p>{{ M_text }}</p>
               </div>
             </div>
-            <div :class="{'highlighted': editPannel.highlight(
-                  'Droite', menu, $options.name)}">
-              <div class="column"
-                   v-scroll-reveal="{
+            <div class="column is-one-third"
+                 v-scroll-reveal="{
                    origin: 'right',
                    distance: '400px',
                    duration: 1500,
                    easing: 'ease'
                    }">
+            <div :class="{'highlighted': editPannel.highlight(
+                  'Droite', menu, $options.name)}">
                 <i :class="R_icon"></i>
                 <h2 class="subtitle">{{ R_title }}</h2>
                 <p>{{ R_text }}</p>

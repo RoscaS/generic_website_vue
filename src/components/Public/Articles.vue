@@ -1,7 +1,7 @@
 <template>
   <section id="Articles" class="section section-container">
     <EditIcon Right="500px"
-              Top="50px"
+              Top="20px"
               :Component="$options.name"
               @backup-original-data="">
 
