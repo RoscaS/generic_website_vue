@@ -31,6 +31,7 @@
 </template>
 
 <script>
+  import draggable from 'vuedraggable'
 
   import Lightbox from '../Components/Lightbox/Lightbox';
   import Title from '../Components/Title';
@@ -39,7 +40,7 @@
 
   export default {
     name: "Gallery",
-    components: {Lightbox, Title},
+    components: {draggable, Lightbox, Title},
     props: {
       url: {type: String},
       urlSectionData: {type: String},
@@ -77,14 +78,15 @@
 
     mounted() {
       axios.get(this.url).then(response => {
-        let images = response.data.images;
-        images.forEach(i => {
+        response.data.images.forEach(image => {
           this.images.push({
-            url: i.image,
-            description: i.description,
+            url: image.image,
+            description: image.description,
+            position: image.position,
             selected: false,
           });
         });
+        this.images.sort((a, b) => a.position - b.position)
       }).catch(error => {
         console.log(this.url);
         console.log(error);
@@ -134,12 +136,10 @@
   }
 
   .img-selected {
-    /*&:hover {*/
-    transition: box-shadow .5s ease, transform .5s ease-out;
-    -webkit-box-shadow: 0 0 28px 5px rgba(114, 165, 211, 1);
-    -moz-box-shadow: 0 0 28px 5px rgba(114, 165, 211, 1);
-    box-shadow: 0 0 28px 5px rgba(114, 165, 211, 1);
-    /*}*/
+    transition: box-shadow .1s ease, transform .5s ease-out;
+    -webkit-box-shadow: 0 0 8px 5px rgba(114, 165, 211, 1);
+    -moz-box-shadow: 0 0 8px 5px rgba(114, 165, 211, 1);
+    box-shadow: 0 0 8px 5px rgba(114, 165, 211, 1);
   }
 
 </style>

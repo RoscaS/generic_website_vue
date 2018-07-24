@@ -15,109 +15,110 @@
 
         <div class="container">
           <div class="content">
-              <div :class="{'highlighted': editPannel.highlight(
+            <div :class="{'highlighted': editPannel.highlight(
                     'Titre', menu, $options.name)}">
-                <Title>{{ title }}</Title>
-              </div>
+              <Title>{{ title }}</Title>
+            </div>
 
 
-              <div :class="{'highlighted': editPannel.highlight(
+            <div :class="{'highlighted': editPannel.highlight(
                     'Sous titre', menu, $options.name)}">
-                <p class="sub-title">
-                  {{ subTitle }}
-                </p>
-              </div>
+              <p class="sub-title">
+                {{ subTitle }}
+              </p>
+            </div>
 
-              <div :class="{'highlighted': editPannel.highlight(
+            <div :class="{'highlighted': editPannel.highlight(
                       'Texte 1', menu, $options.name)}">
-                <p class="text1"
-                   v-scroll-reveal="{
+              <p class="text1"
+                 v-scroll-reveal="{
                      origin: 'left',
                      distance: '400px',
                      duration: 1500,
                      delay: 50,
                      easing: 'ease',
                    }">
-                  {{ presText1 }}
-                </p>
-              </div>
-              <div class="columns is-variable is-8">
-                <div class="column">
-                  <div :class="{'highlighted': editPannel.highlight(
+                {{ presText1 }}
+              </p>
+            </div>
+            <div class="columns is-variable is-8">
+              <div class="column">
+                <div :class="{'highlighted': editPannel.highlight(
                           'Image', menu, $options.name)}">
-                    <img :src="presImage"
-                         v-scroll-reveal="{
+                  <img :src="presImage"
+                       v-scroll-reveal="{
                                duration: 2500,
                                delay: 100,
                                easing: 'ease'
                              }">
-                  </div>
                 </div>
-                <div class="column"
-                     v-scroll-reveal="{
+              </div>
+              <div class="column"
+                   v-scroll-reveal="{
                            origin: 'right',
                            distance: '400px',
                            delay: 100,
                            duration: 1500,
                            easing: 'ease'
                          }">
-                  <div :class="{'highlighted': editPannel.highlight(
+                <div :class="{'highlighted': editPannel.highlight(
                           'Texte 2', menu, $options.name)}">
-                    <p>{{ presText2 }}</p>
-                  </div>
+                  <p>{{ presText2 }}</p>
                 </div>
               </div>
+            </div>
           </div>
         </div>
 
       </EditIcon>
-      <EditNav v-if="editPannel.check($options.name)">
-
-
-        <div class="column is-2 is-offset-3 edit-area">
-          <ul class="editLink">
-            <li v-for="i in menu">
-              <a class="no-tr"
-                 :class="{'selected': editPannel.getSelected(i.name, menu).display}"
-                 @click="editPannel.editMenu(i, menu)">
-                {{ i.name }}
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="column is-3 edit-area">
-          <FileUpload
-            v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
-          <b-input maxlength="35"
-                   :disabled="loading"
-                   v-show="editPannel.getSelected('Titre', menu).display"
-                   v-model="title">
-          </b-input>
-          <b-input type="textarea"
-                   maxlength="200"
-                   rows="2"
-                   :disabled="loading"
-                   v-show="editPannel.getSelected('Sous titre', menu).display"
-                   v-model="subTitle">
-          </b-input>
-          <b-input type="textarea"
-                   maxlength="800"
-                   rows="7"
-                   :disabled="loading"
-                   v-show="editPannel.getSelected('Texte 1', menu).display"
-                   v-model="text1">
-          </b-input>
-          <b-input type="textarea"
-                   maxlength="800"
-                   rows="7"
-                   :disabled="loading"
-                   v-show="editPannel.getSelected('Texte 2', menu).display"
-                   v-model="text2">
-          </b-input>
-        </div>
-      </EditNav>
     </section>
+
+    <EditNav v-if="editPannel.check($options.name)">
+
+
+      <div class="column is-2 is-offset-3 edit-area">
+        <ul class="editLink">
+          <li v-for="i in menu">
+            <a class="no-tr"
+               :class="{'selected': editPannel.getSelected(i.name, menu).display}"
+               @click="editPannel.editMenu(i, menu)">
+              {{ i.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="column is-3 edit-area">
+        <FileUpload
+          v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
+        <b-input maxlength="35"
+                 :disabled="loading"
+                 v-show="editPannel.getSelected('Titre', menu).display"
+                 v-model="title">
+        </b-input>
+        <b-input type="textarea"
+                 maxlength="200"
+                 rows="2"
+                 :disabled="loading"
+                 v-show="editPannel.getSelected('Sous titre', menu).display"
+                 v-model="subTitle">
+        </b-input>
+        <b-input type="textarea"
+                 maxlength="800"
+                 rows="7"
+                 :disabled="loading"
+                 v-show="editPannel.getSelected('Texte 1', menu).display"
+                 v-model="text1">
+        </b-input>
+        <b-input type="textarea"
+                 maxlength="800"
+                 rows="7"
+                 :disabled="loading"
+                 v-show="editPannel.getSelected('Texte 2', menu).display"
+                 v-model="text2">
+        </b-input>
+      </div>
+    </EditNav>
   </div>
 </template>
 
