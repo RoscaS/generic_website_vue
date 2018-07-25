@@ -1,6 +1,8 @@
 <template>
   <section id="Galerie" class="section section-container">
     <div class="container">
+
+
       <div class="content">
         <Title>{{ title }}</Title>
         <p class="sub-title">{{ subTitle }}</p>
@@ -23,9 +25,15 @@
                    :class="[imgClass, {'img-selected': image.selected}]"/>
             </a>
           </div>
+
         </div>
+
+
+
         <Lightbox v-if="!isAdmin"></Lightbox>
       </div>
+
+
     </div>
   </section>
 </template>
@@ -33,8 +41,8 @@
 <script>
   import draggable from 'vuedraggable'
 
-  import Lightbox from '../Components/Lightbox/Lightbox';
-  import Title from '../Components/Title';
+  import Lightbox from '../../Components/Lightbox/Lightbox';
+  import Title from '../../Components/Title';
 
   import axios from 'axios';
 
@@ -105,7 +113,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../../../static/sass/global';
 
   img {
     cursor: pointer;
