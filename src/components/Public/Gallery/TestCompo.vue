@@ -1,147 +1,137 @@
 <template>
-  <section class="section section-container">
-    <div class="container">
-      <div class="content">
-        <h1 class="header title">Test draggable</h1> <br>
 
-        <div class="level">
-          <div class="level-left">
-            <button class="button is-info level-item"
-                    @click="orderList">Reset
-            </button>
-            <button class="button is-info level-item"
-                    @click="orderList">Debug
-            </button>
-            <b-checkbox class="level-item" type="is-info"
-                        v-model="editable">Activer drag and drop
-            </b-checkbox>
+  <div>
+    <section class="section section-container">
+      <div class="container">
+        <div class="content">
+          <h1 class="header title">Test draggable</h1> <br>
+
+          <div class="level">
+            <div class="level-left">
+              <button class="button is-info level-item"
+                      @click="orderList">Reset
+              </button>
+              <b-checkbox class="level-item" type="is-info"
+                          v-model="debug">Debug
+              </b-checkbox>
+              <b-checkbox class="level-item" type="is-info"
+                          v-model="editable">Drag and drop
+              </b-checkbox>
+              <b-checkbox class="level-item" type="is-info"
+                          v-model="hiddenGallery">Stock
+              </b-checkbox>
+            </div>
           </div>
-        </div>  <br>
+          <br>
 
-        <div>
-          <draggable v-model="list"
-                     :options="dragOptions"
-                     :move="onMove"
-                     @start="isDragging=true"
-                     @end="isDragging=false">
-            <transition-group type="transition"
-                              class="columns is-multiline box top-section"
-                              tag="div"
-                              :name="reOrder? 'flip-list': ''">
-              <div class="column is-one-quarter"
-                   v-for="element in list"
-                   :key="element.position">
-                <div class="">
-                  <img :src="element.url" alt="">
+          <div>
+            <draggable v-model="images"
+                       :options="dragOptions"
+                       :move="onMove"
+                       @start="isDragging=true"
+                       @end="isDragging=false">
+              <transition-group type="transition"
+                                class="columns is-multiline box main-section"
+                                tag="div"
+                                :name="reOrder? 'flip-list': ''">
+                <div class="column is-one-quarter"
+                     v-for="image in images"
+                     :key="image.position">
+                  <div class="">
+                    <img :src="image.url" alt="">
+                  </div>
+
                 </div>
+              </transition-group>
+            </draggable>
+          </div>
 
-              </div>
-            </transition-group>
-          </draggable>
-        </div>
+          <br><br>
 
-        <br><br>
 
-        <div>
-          <draggable v-model="list2"
-                     :options="dragOptions"
-                     :move="onMove">
-            <transition-group type="transition"
-                              class="columns is-multiline box bottom-section"
-                              tag="div">
-              <!--:name="'flip-list'">-->
-              <div class="column is-one-quarter"
-                   v-for="element in list2"
-                   :key="element.position">
-
-                <img :src="element.url" alt="">
-              </div>
-            </transition-group>
-          </draggable>
         </div>
       </div>
+    </section>
+
+    <transition name="fade"
+                enter-active-class="fadeInRight"
+                leave-active-class="fadeOutRight">
+      <div class="card hidden-section" v-show="hiddenGallery">
+        <header class="card-header">
+          <p class="card-header-title">Stock</p>
+        </header>
+
+        <div class="card-content">
+          <scrolly class="body"
+                   :parentScroll="false"
+                   :style="{ width: '', height: '104%'}">
+            <scrolly-viewport>
+
+              <draggable v-model="hiddenImages"
+                         :options="dragOptions"
+                         :move="onMove"
+                         @start="isDragging=true"
+                         @end="isDragging=false">
+                <transition-group type="transition"
+                                  class="place-holder"
+                                  tag="div">
+                  <!--:name="'flip-list'">-->
+
+                  <div class="place-holder"
+                       v-for="image in hiddenImages"
+                       :key="image.position">
+                    <img style="max-height: 117px" :src="image.url" alt="">
+                  </div>
 
 
-    </div>
-
-    <div class="debug-sortable">
-
-      <ul class="box">
-        <li>
-          <div class="level">
-            <div class="level-left">reOrder:</div>
-            <div class="level-right"><code :style="codeColor(reOrder)">
-              {{ reOrder }}
-            </code></div>
-          </div>
-        </li>
-        <li>
-          <div class="level">
-            <div class="level-left">isDragging:</div>
-            <div class="level-right"><code :style="codeColor(isDragging)">
-              {{ isDragging }}
-            </code></div>
-          </div>
-        </li>
-        <li>
-          <div class="level">
-            <div class="level-left">delayedDragging:</div>
-            <div class="level-right"><code :style="codeColor(delayedDragging)">
-              {{ delayedDragging }}
-            </code></div>
-          </div>
-        </li>
-        <li>
-          <div class="level">
-            <div class="level-left">editable:</div>
-            <div class="level-right"><code :style="codeColor(editable)">
-              {{ editable }}
-            </code></div>
-          </div>
-        </li>
-      </ul>
-
-      <ol class="box">
-        <li v-for="i in listString">
-          <div class="level tables">
-            <div class="level-item">{{ i.name }}</div>
-            <div class="level-item">{{ i.position }}</div>
-            <div class="level-item">{{ i.selected }}</div>
-          </div>
-        </li>
-      </ol>
-
-      <ol class="box">
-        <li v-for="i in list2String">
-          <div class="level tables">
-            <div class="level-item">{{ i.name }}</div>
-            <div class="level-item">{{ i.position }}</div>
-            <div class="level-item">{{ i.selected }}</div>
-          </div>
-        </li>
-      </ol>
-
-    </div>
+                </transition-group>
+              </draggable>
+            </scrolly-viewport>
+            <scrolly-bar axis="y"></scrolly-bar>
+          </scrolly>
+        </div>
 
 
-  </section>
+        <div class="is-empty content" v-if="hiddenImages == 0">
+          <h3>Vide</h3>
+          <h5>Glissez une image ici.</h5>
+        </div>
+      </div>
+    </transition>
+
+
+    <transition name="fade"
+                enter-active-class="fadeInLeft"
+                leave-active-class="fadeOutLeft">
+      <GalleryDebug v-show="debug"></GalleryDebug>
+    </transition>
+
+
+  </div>
+
 </template>
 
 <script>
   import axios from 'axios';
   import draggable from 'vuedraggable';
+  import GalleryDebug from './GalleryDebug';
+  import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
+
 
   export default {
-    name: 'hello',
-    components: {
-      draggable,
-    },
+    name: 'TestCompo',
+    components: {draggable, GalleryDebug, Scrolly, ScrollyViewport, ScrollyBar},
     data() {
       return {
-        reOrder: false,
         url: 'galleries/events/',
-        list: [],
-        list2: [],
+        related: null,
+        dragged: null,
+
+        images: [],
+        hiddenImages: [],
+        hiddenGallery: true,
+        debug: true,
+        reOrder: false,
         editable: true,
         isDragging: false,
         delayedDragging: false
@@ -150,16 +140,34 @@
     methods: {
       orderList() {
         this.reOrder = true;
-        this.list = this.list.sort((one, two) => {return one.position - two.position; });
+        this.images = this.images.sort((one, two) => {return one.position - two.position; });
         setTimeout(() => { this.reOrder = false; }, 500);
 
       },
       onMove({relatedContext, draggedContext}) {
-        const relatedElement = relatedContext.element;
-        const draggedElement = draggedContext.element;
-        return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed;
+        // this.related = relatedContext;
+        // this.dragged = draggedContext;
       },
-      codeColor(prop) {return prop? 'color: #45a875': '';}
+
+      // setVisibility() {
+      //   let image = this.related.list[this.dragged.index];
+      //   if (!this.images.find(i => i == image)) {
+      //     this.dragged.element.visible = false;
+      //   }
+      //   else {
+      //     this.dragged.element.visible = true;
+      //   }
+      // },
+
+      // setNewPos() {
+      // for (let tab of [this.images, this.hiddenImages]) {
+      //   if (tab) {
+      //     for (let i = 0; i < tab.length; i++) {
+      //       tab[i].newPosition = i + 1;
+      //     }
+      //   }
+      // }
+      // },
     },
     computed: {
       dragOptions() {
@@ -171,12 +179,13 @@
           // ghostClass: 'ghost'
         };
       },
-      listString() {
-        return this.list;
+      getList() {
+        return this.images;
       },
-      list2String() {
-        return this.list2;
-      }
+      getListHidden() {
+        return this.hiddenImages;
+      },
+
     },
     watch: {
       isDragging(newValue) {
@@ -185,20 +194,25 @@
           return;
         }
         this.$nextTick(() => {
+          // this.setVisibility();
           this.delayedDragging = false;
         });
-      }
+      },
+
     },
     mounted() {
       axios.get(this.url).then(response => {
         response.data.images.forEach(image => {
-          this.list.push({
+          this.images.push({
             url: image.image,
+            id: image.id,
             name: image.name,
             description: image.description,
             position: image.position,
-            fixed: false,
+            newPosition: -1,
+            visible: image.visible,
             selected: false,
+            fixed: false,
           });
         });
         this.images.sort((a, b) => a.position - b.position);
@@ -213,42 +227,35 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  i {
-    margin-right: 20px;
-    padding: 20px;
-  }
-
-  .box {
-    text-align: center;
-  }
-
-  .top-section {
+  .main-section {
     min-height: 380px;
   }
 
-  .bottom-section {
-    min-height: 190px;
-  }
-
-  .debug-sortable {
-    left: 2%;
-    top: 25%;
+  .hidden-section {
     position: absolute;
+    right: 2%;
+    top: 25%;
+    height: 55%;
     width: 250px;
 
-    li {
+    .card-content {
+      /*height: 100%;*/
+      /*overflow: auto;*/
+      height: 88%;
+    }
+
+    .place-holder {
+      height: 117px;
+      width: 209px;
+      margin-bottom: 15px;
 
     }
 
-    .level {
-      color: #777;
-      padding: 0;
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
-
-    .tables {
-      border: 1px solid black;
+    .is-empty {
+      text-align: center;
+      position: absolute;
+      top: 20%;
+      left: 13%;
     }
   }
 
