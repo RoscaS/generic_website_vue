@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TestCompo/>
+    <!--<GalleryManager/>-->
     <PromoRibbon/>
     <Top/>
     <Navbar/>
@@ -35,14 +35,14 @@
   import Review from './Public/Review';
   import Footer from './Public/Footer';
 
-  import TestCompo from './Public/Gallery/TestCompo';
+  import GalleryManager from './Public/GalleryManager/GalleryManager';
 
 
   export default {
     name: "Public",
     components: {
       Login, Parallax, PromoRibbon, Top, Navbar, Carousel, Presentation,
-      Hero, Gallery, Articles, Contact, Review, Footer, TestCompo
+      Hero, Gallery, Articles, Contact, Review, Footer, GalleryManager
     },
     data() {
       return {

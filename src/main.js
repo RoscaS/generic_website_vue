@@ -25,6 +25,7 @@ Vue.use(Buefy, {
 
 
 // Perso
+  //  Global variable
 import EditPannel from './editPannel'
 import Options from './options'
 
@@ -37,6 +38,18 @@ Global.install = function() {
 };
 
 Vue.use(Global);
+
+
+  //  Global components
+import Highlighted from './components/Components/Edit/Highlighted';
+import Title from './components/Components/Title';
+import InOut from './components/Components/InOut';
+
+Vue.component('Highlighted', Highlighted);
+Vue.component('Title', Title);
+Vue.component('InOut', InOut);
+
+
 
 
 // Router

@@ -15,21 +15,17 @@
 
         <div class="container">
           <div class="content">
-            <div :class="{'highlighted': editPannel.highlight(
-                    'Titre', menu, $options.name)}">
+
+            <Highlighted sub="Titre" :menu="menu" :name="name">
               <Title>{{ title }}</Title>
-            </div>
+            </Highlighted>
 
 
-            <div :class="{'highlighted': editPannel.highlight(
-                    'Sous titre', menu, $options.name)}">
-              <p class="sub-title">
-                {{ subTitle }}
-              </p>
-            </div>
+            <Highlighted sub="Sous titre" :menu="menu" :name="name">
+              <p class="sub-title">{{ subTitle }}</p>
+            </Highlighted>
 
-            <div :class="{'highlighted': editPannel.highlight(
-                      'Texte 1', menu, $options.name)}">
+            <Highlighted sub="Texte 1" :menu="menu" :name="name">
               <p class="text1"
                  v-scroll-reveal="{
                      origin: 'left',
@@ -40,19 +36,22 @@
                    }">
                 {{ presText1 }}
               </p>
-            </div>
+            </Highlighted>
+
             <div class="columns is-variable is-8">
               <div class="column">
-                <div :class="{'highlighted': editPannel.highlight(
-                          'Image', menu, $options.name)}">
+
+                <Highlighted sub="Image" :menu="menu" :name="name">
                   <img :src="presImage"
                        v-scroll-reveal="{
                                duration: 2500,
                                delay: 100,
                                easing: 'ease'
                              }">
-                </div>
+                </Highlighted>
+
               </div>
+
               <div class="column"
                    v-scroll-reveal="{
                            origin: 'right',
@@ -61,11 +60,12 @@
                            duration: 1500,
                            easing: 'ease'
                          }">
-                <div :class="{'highlighted': editPannel.highlight(
-                          'Texte 2', menu, $options.name)}">
+                <Highlighted sub="Texte 2" :menu="menu" :name="name">
                   <p>{{ presText2 }}</p>
-                </div>
+                </Highlighted>
+
               </div>
+
             </div>
           </div>
         </div>
@@ -73,8 +73,7 @@
       </EditIcon>
     </section>
 
-    <EditNav v-if="editPannel.check($options.name)">
-
+    <EditNav v-if="editPannel.check(name)">
 
       <div class="column is-2 is-offset-3 edit-area">
         <ul class="editLink">
@@ -91,6 +90,8 @@
       <div class="column is-3 edit-area">
         <FileUpload
           v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
+
+
         <b-input maxlength="35"
                  :disabled="loading"
                  v-show="editPannel.getSelected('Titre', menu).display"
@@ -128,22 +129,23 @@
   import EditIcon from '../../Components/Edit/EditIcon';
   import EditNav from '../../Components/Edit/EditNav';
   import FileUpload from '../../Components/Edit/FileUpload';
-  import Title from '../../Components/Title';
+
 
   export default {
     name: "Presentation",
-    components: {EditIcon, EditNav, FileUpload, Title},
+    components: {EditIcon, EditNav, FileUpload},
     store: store,
     data() {
       return {
-        editPannel: this.$Global.EditPannel,
+        name: this.$options.name,
         downArrow: null,
+        editPannel: this.$Global.EditPannel,
         menu: [
-          {display: true, name: 'Image',},
-          {display: false, name: 'Titre',},
-          {display: false, name: 'Sous titre',},
-          {display: false, name: 'Texte 1',},
-          {display: false, name: 'Texte 2',},
+          {display: true, name: 'Image'},
+          {display: false, name: 'Titre'},
+          {display: false, name: 'Sous titre'},
+          {display: false, name: 'Texte 1'},
+          {display: false, name: 'Texte 2'},
         ]
       };
     },
@@ -157,6 +159,10 @@
         'DirtyFlag',
         'LoadingFlag',
       ]),
+
+      loading: {
+        get() { return this.LoadingFlag; },
+      },
 
       title: {
         get() { return this.presTitle; },
@@ -196,10 +202,6 @@
           this.setImage(value);
           this.toggleDirty();
         }
-      },
-
-      loading: {
-        get() { return this.LoadingFlag; },
       }
     },
 

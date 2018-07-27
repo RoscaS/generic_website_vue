@@ -1,153 +1,155 @@
 <template>
-  <section id="Galerie" class="section section-container">
-    <div class="container">
+  <div>
+    <section id="Galerie" class="section section-container">
 
+      <EditIcon Top="20px"
+                :Component="$options.name"
+                @backup-original-data="backupData">
 
-      <div class="content">
-        <Title>{{ title }}</Title>
-        <p class="sub-title">{{ subTitle }}</p>
-        <div class="columns is-multiline">
-          <div class="column is-3 gallery-col"
-               v-for="image in images"
-               v-scroll-reveal="{
-                origin: 'left',
-                distance: '100px',
-                duration: 1500,
-                delay: 200,
-                easing: 'ease',
-               }">
-            <a class="no-tr"
-               :href="image.url"
-               :description="image.description"
-               v-lightbox
-               @click="clickImage(image)">
-              <img :src="image.url"
-                   :class="[imgClass, {'img-selected': image.selected}]"/>
-            </a>
+        <div class="container">
+          <div class="content">
+            <Highlighted sub="Titre" :menu="menu" :name="name">
+              <Title>{{ title }}</Title>
+
+              <button class="button is-warning" @click="isAdmin= !isAdmin">
+                Admin
+              </button>
+
+            </Highlighted>
+            <Highlighted sub="Sous titre" :menu="menu" :name="name">
+              <p class="sub-title">{{ subTitle }}</p>
+            </Highlighted>
           </div>
-
         </div>
 
 
+        <transition name="fade" mode="out-in">
+          <GalleryManager v-if="isAdmin"></GalleryManager>
+          <!--</InOut>-->
 
-        <Lightbox v-if="!isAdmin"></Lightbox>
-      </div>
+          <!--<InOut type="fade" enter="Right" leave="Right">-->
+          <GalleryUser v-else></GalleryUser>
+          <!--</InOut>-->
+        </transition>
 
 
-    </div>
+        <!--</div>-->
+  <!--</div>-->
+
+  </EditIcon>
   </section>
+
+  <EditNav v-if="editPannel.check($options.name)">
+
+    <div class="column is-2 is-offset-3 edit-area">
+      <ul class="editLink">
+        <li v-for="i in menu">
+          <a class="no-tr"
+             :class="{'selected': editPannel.getSelected(i.name, menu).display}"
+             @click="editPannel.editMenu(i, menu)">
+            {{ i.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="column is-3 edit-area">
+      <b-input v-show="editPannel.getSelected('Titre', menu).display"
+               maxlength="35"
+               :disabled="loading"
+               v-model="title">
+      </b-input>
+      <b-input v-show="editPannel.getSelected('Sous titre', menu).display"
+               type="textarea"
+               maxlength="500"
+               rows="7"
+               :disabled="loading"
+               v-model="subTitle">
+      </b-input>
+    </div>
+  </EditNav>
+  </div>
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
+  import store from './GalleryStore';
+  import {mapGetters, mapActions} from 'vuex';
 
-  import Lightbox from '../../Components/Lightbox/Lightbox';
-  import Title from '../../Components/Title';
+  import GalleryUser from './GalleryUser';
+  import GalleryManager from '../GalleryManager/GalleryManager';
 
-  import axios from 'axios';
+  import EditIcon from '../../Components/Edit/EditIcon';
+  import EditNav from '../../Components/Edit/EditNav';
 
   export default {
     name: "Gallery",
-    components: {draggable, Lightbox, Title},
-    props: {
-      url: {type: String},
-      urlSectionData: {type: String},
-    },
+    components: {GalleryUser, GalleryManager, EditIcon, EditNav},
+    store: store,
 
     data() {
       return {
+        name: this.$options.name,
         isAdmin: true,
-        title: '',
-        subTitle: '',
-        images: []
+
+        editPannel: this.$Global.EditPannel,
+        menu: [
+          {display: false, name: 'Titre',},
+          {display: false, name: 'Sous titre',},
+        ],
       };
     },
-
     computed: {
-      imgClass() { return this.isAdmin ? 'img-admin' : 'img-user'; }
-    },
+      ...mapGetters([
+        'galTitle',
+        'galSubTitle',
+      ]),
 
-    methods: {
-      clickImage(image) {
-        if (!this.isAdmin) {
-          this.lockScroll();
-        }
-        else {
-          image.selected = !image.selected;
+      loading: {
+        get() { return this.LoadingFlag; },
+      },
+
+      title: {
+        get() { return this.galTitle; },
+        set(value) {
+          this.setTitle(value);
+          this.toggleDirty();
         }
       },
 
-      lockScroll() {
-        let x = window.scrollX;
-        let y = window.scrollY;
-        window.onscroll = function() {window.scrollTo(x, y);};
-      }
+      subTitle: {
+        get() { return this.galSubTitle; },
+        set(value) {
+          this.setSubTitle(value);
+          this.toggleDirty();
+        }
+      },
+    },
+
+    watch: {
+      title(value) { this.setTitle(value); },
+      subTitle(value) { this.setSubTitle(value); },
+    },
+
+    methods: {
+      ...mapActions([
+        'fetchData',
+        'pushData',
+        'backupData',
+        'recoverData',
+        'setTitle',
+        'setSubTitle',
+        'toggleDirty',
+      ]),
     },
 
     mounted() {
-      axios.get(this.url).then(response => {
-        response.data.images.forEach(image => {
-          this.images.push({
-            url: image.image,
-            description: image.description,
-            position: image.position,
-            selected: false,
-          });
-        });
-        this.images.sort((a, b) => a.position - b.position)
-      }).catch(error => {
-        console.log(this.url);
-        console.log(error);
-      });
-
-      axios.get(this.urlSectionData).then(response => {
-        let data = response.data;
-        this.title = data.title;
-        this.subTitle = data.sub_title;
-      }).catch(error => {
-        console.log(this.url);
-        console.log(error);
-      });
+      this.fetchData();
     }
   };
 </script>
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
-
-  img {
-    cursor: pointer;
-    transition: box-shadow .5s ease, transform .5s ease-out;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    transform: scale(1);
-  }
-
-  .img-user {
-    &:hover {
-      transition: box-shadow .5s ease, transform .5s ease-out;
-      -webkit-box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
-      box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
-      transform: scale(1.1);
-    }
-  }
-
-  .img-admin {
-    &:hover {
-      /*transition: box-shadow .5s ease-out;*/
-      /*-webkit-box-shadow: 0 0 28px 5px rgba(0,0,0,.41);*/
-      /*-moz-box-shadow: 0 0 28px 5px rgba(0,0,0,.41);*/
-      /*box-shadow: 0 0 28px 5px rgba(0,0,0,.41);*/
-    }
-  }
-
-  .img-selected {
-    transition: box-shadow .1s ease, transform .5s ease-out;
-    -webkit-box-shadow: 0 0 8px 5px rgba(114, 165, 211, 1);
-    -moz-box-shadow: 0 0 8px 5px rgba(114, 165, 211, 1);
-    box-shadow: 0 0 8px 5px rgba(114, 165, 211, 1);
-  }
 
 </style>

@@ -11,18 +11,15 @@ function toast(message, type) {
   });
 }
 
-const url = 'promo/1/';
-
+const url = 'gallery/1';
 
 const state = {
   title: '',
-  text: '',
-  image: '',
+  subTitle: '',
 
   backup: {
     title: '',
-    text: '',
-    image: '',
+    subTitle: '',
   },
 
   isDirty: false,
@@ -30,35 +27,30 @@ const state = {
 };
 
 const getters = {
-  promoTitle: state => state.title,
-  promoText: state => state.text,
-  promoImage: state => state.image,
-  promoBackupData: state => state.backup,
+  galTitle: state => state.title,
+  galSubTitle: state => state.subTitle,
+  galBackupData: state => state.backup,
   DirtyFlag: state => state.isDirty,
   LoadingFlag: state => state.isLoading,
 };
 
 const mutations = {
   SET_TITLE: (state, title) => { state.title = title; },
-  SET_TEXT: (state, text) => { state.text = text; },
-  SET_IMAGE: (state, image) => { state.image = image; },
+  SET_SUBTITLE: (state, subTitle) => { state.subTitle = subTitle; },
 
   SET_BACKUP: state => {
     state.backup.title = state.title;
-    state.backup.text = state.text;
-    state.backup.image = state.image;
+    state.backup.subTitle = state.subTitle;
   },
 
   SET_RECOVER: state => {
     state.title = state.backup.title;
-    state.text = state.backup.text;
-    state.image = state.backup.image;
+    state.subTitle = state.backup.subTitle;
   },
 
   CLEAR_BACKUP: state => {
     state.backup.title = '';
-    state.backup.text = '';
-    state.backup.image = '';
+    state.backup.subTitle = '';
   },
 
   TOGGLE_DIRTY: state => { state.isDirty = !state.isDirty; },
@@ -66,25 +58,22 @@ const mutations = {
   TOGGLE_LOADING: state => { state.isLoading = !state.isLoading; },
 };
 
-
 const actions = {
   fetchData: store => {
     axios.get(url).then(response => {
       store.commit('SET_TITLE', response.data.title);
-      store.commit('SET_TEXT', response.data.text);
-      store.commit('SET_IMAGE', response.data.image.image);
+      store.commit('SET_SUBTITLE', response.data.sub_title);
     }).catch(error => { console.log(`${url}\n${error}`) })
   },
 
   pushData: store => {
     store.commit('TOGGLE_LOADING');
     axios.put(url, {
-      title: store.getters.promoTitle,
-      text: store.getters.promoText,
-      image: store.getters.promoImage,
+      title: store.getters.title,
+      sub_title: store.getters.subTitle,
     }).then(response => {
 
-      setTimeout(()=> {
+      setTimeout(() => {
         toast('Donnée mise à jour!', 1);
         store.commit('CLEAR_BACKUP');
         store.commit('TOGGLE_DIRTY');
@@ -95,6 +84,7 @@ const actions = {
       // store.commit('CLEAR_BACKUP');
       // store.commit('TOGGLE_DIRTY');
       // store.commit('TOGGLE_LOADING');
+
     }).catch(error => {
       console.log(`${url}\n${error}`);
       toast("Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur.", 0);
@@ -102,12 +92,11 @@ const actions = {
       store.commit('CLEAR_BACKUP');
       store.commit('TOGGLE_DIRTY');
       store.commit('TOGGLE_LOADING');
-    });
+    })
   },
 
   setTitle: (store, title) => { store.commit('SET_TITLE', title); },
-  setText: (store, text) => { store.commit('SET_TEXT', text); },
-  setImage: (store, image) => { store.commit('SET_IMAGE', image)},
+  setSubTitle: (store, subTitle) => { store.commit('SET_SUBTITLE', subTitle); },
 
   backupData: store => { store.commit('SET_BACKUP');},
   recoverData: store => {
@@ -117,20 +106,20 @@ const actions = {
     toast('Modifications annulées', 2);
   },
 
-
   toggleDirty: store => {
     if (!store.getters.DirtyFlag) {
-      let backup = store.getters.promoBackupData;
+      let backup = store.getters.galBackupData;
       let fresh = store.getters;
-      let titles = backup.title !== fresh.promoTitle && backup.title !== '';
-      let texts = backup.text !== fresh.promoText && backup.text !== '';
-      let images = backup.image !== fresh.promoImage && backup.image !== '';
 
-      if (titles || texts || images) {
+      let titles = backup.title !== fresh.galTitle && backup.title !== '';
+      let subTitles = backup.subTitle !== fresh.galSubTitle && backup.subTitle !== '';
+
+      if (titles || subTitles) {
         store.commit('TOGGLE_DIRTY');
       }
     }
   },
+
 };
 
 export default new Vuex.Store({

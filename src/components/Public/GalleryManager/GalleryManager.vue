@@ -1,61 +1,54 @@
 <template>
 
   <div>
-    <section class="section section-container">
-      <div class="container">
-        <div class="content">
-          <h1 class="header title">Test draggable</h1> <br>
 
-          <div class="level">
-            <div class="level-left">
-              <button class="button is-info level-item"
-                      @click="orderList">Reset
-              </button>
-              <b-checkbox class="level-item" type="is-info"
-                          v-model="debug">Debug
-              </b-checkbox>
-              <b-checkbox class="level-item" type="is-info"
-                          v-model="editable">Drag and drop
-              </b-checkbox>
-              <b-checkbox class="level-item" type="is-info"
-                          v-model="hiddenGallery">Stock
-              </b-checkbox>
-            </div>
+    <div class="container">
+      <div class="content">
+
+
+        <div class="level">
+          <div class="level-left">
+            <button class="button is-info level-item"
+                    @click="orderList">Reset
+            </button>
+            <b-checkbox class="level-item" type="is-info"
+                        v-model="debug">Debug
+            </b-checkbox>
+            <b-checkbox class="level-item" type="is-info"
+                        v-model="editable">Drag and drop
+            </b-checkbox>
+            <b-checkbox class="level-item" type="is-info"
+                        v-model="hiddenGallery">Stock
+            </b-checkbox>
           </div>
-          <br>
-
-          <div>
-            <draggable v-model="images"
-                       :options="dragOptions"
-                       :move="onMove"
-                       @start="isDragging=true"
-                       @end="isDragging=false">
-              <transition-group type="transition"
-                                class="columns is-multiline box main-section"
-                                tag="div"
-                                :name="reOrder? 'flip-list': ''">
-                <div class="column is-one-quarter"
-                     v-for="image in images"
-                     :key="image.position">
-                  <div class="">
-                    <img :src="image.url" alt="">
-                  </div>
-
-                </div>
-              </transition-group>
-            </draggable>
-          </div>
-
-          <br><br>
-
-
         </div>
-      </div>
-    </section>
 
-    <transition name="fade"
-                enter-active-class="fadeInRight"
-                leave-active-class="fadeOutRight">
+
+        <draggable v-model="images"
+                   :options="dragOptions"
+                   :move="onMove"
+                   @start="isDragging=true"
+                   @end="isDragging=false">
+          <transition-group type="transition"
+                            class="columns is-multiline box main-section"
+                            tag="div"
+                            :name="reOrder? 'flip-list': ''">
+            <div class="column is-one-quarter"
+                 v-for="image in images"
+                 :key="image.position">
+              <div class="">
+                <img :src="image.url" alt="">
+              </div>
+
+            </div>
+          </transition-group>
+        </draggable>
+      </div>
+    </div>
+
+
+    <!--<div class="content">-->
+    <InOut type="fade" enter="Right" leave="Right">
       <div class="card hidden-section" v-show="hiddenGallery">
         <header class="card-header">
           <p class="card-header-title">Stock</p>
@@ -97,15 +90,12 @@
           <h5>Glissez une image ici.</h5>
         </div>
       </div>
-    </transition>
+    </InOut>
 
 
-    <transition name="fade"
-                enter-active-class="fadeInLeft"
-                leave-active-class="fadeOutLeft">
+    <InOut type="fade" enter="Left" leave="Left">
       <GalleryDebug v-show="debug"></GalleryDebug>
-    </transition>
-
+    </InOut>
 
   </div>
 
@@ -119,7 +109,7 @@
 
 
   export default {
-    name: 'TestCompo',
+    name: 'GalleryManager',
     components: {draggable, GalleryDebug, Scrolly, ScrollyViewport, ScrollyBar},
     data() {
       return {
@@ -129,8 +119,8 @@
 
         images: [],
         hiddenImages: [],
-        hiddenGallery: true,
-        debug: true,
+        hiddenGallery: false,
+        debug: false,
         reOrder: false,
         editable: true,
         isDragging: false,
@@ -234,13 +224,12 @@
   .hidden-section {
     position: absolute;
     right: 2%;
-    top: 25%;
+    margin-top: -650px;
     height: 55%;
     width: 250px;
+    z-index: 1;
 
     .card-content {
-      /*height: 100%;*/
-      /*overflow: auto;*/
       height: 88%;
     }
 

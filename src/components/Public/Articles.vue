@@ -28,11 +28,10 @@
 
 <script>
   import EditIcon from '../Components/Edit/EditIcon'
-  import Title from '../Components/Title';
 
   export default {
     name: "Articles",
-    components: {EditIcon, Title},
+    components: {EditIcon},
   };
 </script>
 

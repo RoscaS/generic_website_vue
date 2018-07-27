@@ -9,22 +9,21 @@
         <div class="columns content">
 
           <div class="column left is-offset-2 is-4">
-            <div :class="{'highlighted': editPannel.highlight(
-                  'Image', menu, $options.name)}">
+            <Highlighted sub="Image" :menu="menu" :name="name">
               <img :src="promoImage">
-            </div>
+            </Highlighted>
           </div>
 
           <div class="column right is-5">
             <div>
-              <div :class="{'highlighted': editPannel.highlight(
-                    'Titre', menu, $options.name)}">
+
+              <Highlighted sub="Titre" :menu="menu" :name="name">
                 <h3>{{ promoTitle }}</h3>
-              </div>
-              <div :class="{'highlighted': editPannel.highlight(
-                    'Texte', menu, $options.name)}">
+              </Highlighted>
+
+              <Highlighted sub="Texte" :menu="menu" :name="name">
                 <p>{{ promoText }}</p>
-              </div>
+              </Highlighted>
             </div>
           </div>
 
@@ -48,7 +47,8 @@
 
 
       <div class="column is-3 edit-area">
-        <FileUpload v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
+        <FileUpload
+          v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
         <b-input v-show="editPannel.getSelected('Titre', menu).display"
                  maxlength="35"
                  :disabled="loading"
@@ -79,6 +79,7 @@
     store: store,
     data() {
       return {
+        name: this.$options.name,
         editPannel: this.$Global.EditPannel,
         menu: [
           {display: true, name: 'Image',},
@@ -96,6 +97,10 @@
         'LoadingFlag',
       ]),
 
+      loading: {
+        get() { return this.LoadingFlag; },
+      },
+
       title: {
         get() { return this.promoTitle; },
         set(value) {
@@ -103,6 +108,7 @@
           this.toggleDirty();
         }
       },
+
       text: {
         get() { return this.promoText; },
         set(value) {
@@ -110,15 +116,13 @@
           this.toggleDirty();
         }
       },
+
       image: {
         get() { return this.promoImage; },
         set(value) {
           this.setImage(value);
           this.toggleDirty();
         }
-      },
-      loading: {
-        get() { return this.LoadingFlag; },
       }
     },
 

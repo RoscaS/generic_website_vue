@@ -63,7 +63,6 @@
 </template>
 
 <script>
-  import Title from '../Components/Title';
   import ContactForm from '../Components/Forms/ContactForm';
   import GoogleMap from '../Components/Maps';
 
@@ -71,7 +70,7 @@
 
   export default {
     name: "Contact",
-    components: {ContactForm, GoogleMap, Title},
+    components: {ContactForm, GoogleMap},
     props: {
       url: {type: String},
       urlPostMessage: {type: String},

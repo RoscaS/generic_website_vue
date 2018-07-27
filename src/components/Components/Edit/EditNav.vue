@@ -1,22 +1,24 @@
 <template>
-    <transition name="slide"
-                enter-active-class="slideInUp"
-                leave-active-class="slideOutDown">
-      <div class="navbar edit-area"
-           v-show="editPannel.edit">
-        <section class="section">
-          <div class="columns is-8 is-variable ">
+  <!--<transition name="slide"-->
+              <!--enter-active-class="slideInUp"-->
+              <!--leave-active-class="slideOutDown">-->
 
-            <slot></slot>
+    <InOut type="slide" enter="Up" leave="Down">
+    <div class="navbar edit-area"
+         v-show="editPannel.edit">
+      <section class="section">
+        <div class="columns is-8 is-variable ">
 
-            <ValidationBtns></ValidationBtns>
-          </div>
-        </section>
-        <div class="loading-animation">
-          <SpinLine v-show="loading"/>
+          <slot></slot>
+
+          <ValidationBtns></ValidationBtns>
         </div>
+      </section>
+      <div class="loading-animation">
+        <SpinLine v-show="loading"/>
       </div>
-    </transition>
+    </div>
+    </InOut>
 </template>
 
 <script>
@@ -26,7 +28,7 @@
   export default {
     name: "EditNav",
     components: {ValidationBtns, SpinLine},
-    data() { return { editPannel: this.$Global.EditPannel }},
+    data() { return {editPannel: this.$Global.EditPannel};},
     computed: {
       loading: {
         get() { return this.editPannel.loading; },

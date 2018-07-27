@@ -35,8 +35,8 @@ const EditPannel = new Vue({
       return menu.find(i => i.name == selected);
     },
 
-    highlight(element, menu, name) {
-      return (this.getSelected(element, menu).display &&
+    highlight(sub, menu, name) {
+      return (this.getSelected(sub, menu).display &&
         this.component == name) && this.edit;
     },
 

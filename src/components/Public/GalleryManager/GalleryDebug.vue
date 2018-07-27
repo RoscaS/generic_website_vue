@@ -6,7 +6,7 @@
 
 
     <div class="card-content">
-      <div class="content">
+      <!--<div class="content">-->
 
 
         <div class="level">
@@ -75,7 +75,7 @@
       </ol>
 
     </div>
-  </div>
+  <!--</div>-->
 </template>
 
 <script>
@@ -96,10 +96,12 @@
   @import '../../../../static/sass/global';
 
   .debug-sortable {
-    left: 2%;
-    top: 25%;
     position: absolute;
     width: 250px;
+    left: 2%;
+    margin-top: -650px;
+    z-index: 1;
+
 
     .level {
       color: #777;

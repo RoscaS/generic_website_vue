@@ -8,31 +8,29 @@
         <div class="container">
 
           <div class="columns is-variable is-8">
-              <div class="column is-one-third"
-                   v-scroll-reveal="{
+            <div class="column is-one-third"
+                 v-scroll-reveal="{
                    origin: 'left',
                    distance: '400px',
                    duration: 1500,
                    easing: 'ease'
                    }">
-            <div :class="{'highlighted': editPannel.highlight(
-                  'Gauche', menu, $options.name)}">
+              <Highlighted sub="Gauche" :menu="menu" :name="name">
                 <i :class="L_icon"></i>
                 <h2 class="subtitle">{{ L_title }}</h2>
                 <p>{{ L_text }}</p>
-              </div>
+              </Highlighted>
             </div>
-              <div class="column is-one-third"
-                   v-scroll-reveal="{
+            <div class="column is-one-third"
+                 v-scroll-reveal="{
                    duration: 1500,
                    easing: 'ease'
                    }">
-            <div :class="{'highlighted': editPannel.highlight(
-                  'Centre', menu, $options.name)}">
+              <Highlighted sub="Centre" :menu="menu" :name="name">
                 <i :class="M_icon"></i>
                 <h2 class="subtitle">{{ M_title }}</h2>
                 <p>{{ M_text }}</p>
-              </div>
+              </Highlighted>
             </div>
             <div class="column is-one-third"
                  v-scroll-reveal="{
@@ -41,12 +39,11 @@
                    duration: 1500,
                    easing: 'ease'
                    }">
-            <div :class="{'highlighted': editPannel.highlight(
-                  'Droite', menu, $options.name)}">
+              <Highlighted sub="Droite" :menu="menu" :name="name">
                 <i :class="R_icon"></i>
                 <h2 class="subtitle">{{ R_title }}</h2>
                 <p>{{ R_text }}</p>
-              </div>
+              </Highlighted>
             </div>
           </div>
 
@@ -154,6 +151,7 @@
     store: store,
     data() {
       return {
+        name: this.$options.name,
         editPannel: this.$Global.EditPannel,
         iconPicker: false,
         menu: [
@@ -171,6 +169,10 @@
         'DirtyFlag',
         'LoadingFlag',
       ]),
+
+      loading: {
+        get() { return this.LoadingFlag; },
+      },
 
       L_title: {
         get() { return this.heroLeft.title; },
@@ -234,9 +236,6 @@
           this.setRightText(value);
           this.toggleDirty();
         }
-      },
-      loading: {
-        get() { return this.LoadingFlag; },
       }
     },
     watch: {

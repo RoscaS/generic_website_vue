@@ -108,14 +108,13 @@
 </template>
 
 <script>
-  import Title from '../Components/Title';
   import axios from 'axios';
   import moment from 'moment';
 
 
   export default {
     name: "Review",
-    components: {Title},
+    components: { },
     props: {
       url: {type: String},
     },
