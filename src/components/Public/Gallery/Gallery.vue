@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gallery-wrapper">
     <section id="Galerie" class="section section-container">
 
       <EditIcon Top="20px"
@@ -11,10 +11,6 @@
             <Highlighted sub="Titre" :menu="menu" :name="name">
               <Title>{{ title }}</Title>
 
-              <button class="button is-warning" @click="isAdmin= !isAdmin">
-                Admin
-              </button>
-
             </Highlighted>
             <Highlighted sub="Sous titre" :menu="menu" :name="name">
               <p class="sub-title">{{ subTitle }}</p>
@@ -24,51 +20,35 @@
 
 
         <transition name="fade" mode="out-in">
-          <GalleryManager v-if="isAdmin"></GalleryManager>
-          <!--</InOut>-->
-
-          <!--<InOut type="fade" enter="Right" leave="Right">-->
+          <GalleryManager v-if="editGalery">
+          </GalleryManager>
           <GalleryUser v-else></GalleryUser>
-          <!--</InOut>-->
         </transition>
 
 
-        <!--</div>-->
-  <!--</div>-->
+      </EditIcon>
+    </section>
 
-  </EditIcon>
-  </section>
+    <EditNav id="GalleryEditNav" v-if="editPannel.check($options.name)">
 
-  <EditNav v-if="editPannel.check($options.name)">
+      <div class="column is-3 edit-area">
+        <b-input v-show="menu.find(i=>i.name=='Titre').display"
+                 maxlength="35"
+                 :disabled="loading"
+                 v-model="title">
+        </b-input>
+        <b-input v-show="menu.find(i=>i.name=='Sous titre').display"
+                 type="textarea"
+                 maxlength="500"
+                 rows="3"
+                 :disabled="loading"
+                 v-model="subTitle">
+        </b-input>
 
-    <div class="column is-2 is-offset-3 edit-area">
-      <ul class="editLink">
-        <li v-for="i in menu">
-          <a class="no-tr"
-             :class="{'selected': editPannel.getSelected(i.name, menu).display}"
-             @click="editPannel.editMenu(i, menu)">
-            {{ i.name }}
-          </a>
-        </li>
-      </ul>
-    </div>
+        <h1 class="header title" v-show=""> POULETTE </h1>
 
-
-    <div class="column is-3 edit-area">
-      <b-input v-show="editPannel.getSelected('Titre', menu).display"
-               maxlength="35"
-               :disabled="loading"
-               v-model="title">
-      </b-input>
-      <b-input v-show="editPannel.getSelected('Sous titre', menu).display"
-               type="textarea"
-               maxlength="500"
-               rows="7"
-               :disabled="loading"
-               v-model="subTitle">
-      </b-input>
-    </div>
-  </EditNav>
+      </div>
+    </EditNav>
   </div>
 </template>
 
@@ -90,12 +70,13 @@
     data() {
       return {
         name: this.$options.name,
-        isAdmin: true,
+        baseHeight: null,
 
         editPannel: this.$Global.EditPannel,
         menu: [
-          {display: false, name: 'Titre',},
+          {display: true, name: 'Titre',},
           {display: false, name: 'Sous titre',},
+          {display: false, name: 'Galerie',},
         ],
       };
     },
@@ -104,6 +85,21 @@
         'galTitle',
         'galSubTitle',
       ]),
+
+      editGalery() {
+        let el = document.getElementById('GalleryEditNav');
+        let test = this.menu.find(i => i.name == 'Galerie').display &&
+          this.$Global.EditPannel.component == 'Gallery';
+
+        if (test) {
+          setTimeout(() => {Velocity(el, {minHeight: 'auto'}, 1500);}, 250);
+        }
+        else {
+          setTimeout(() => {Velocity(el, {minHeight: '331px'}, 1500);}, 10);
+          this.menu.find(i => i.name == 'Galerie').display = false;
+        }
+        return test;
+      },
 
       loading: {
         get() { return this.LoadingFlag; },
@@ -151,5 +147,9 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  .gallery-wrapper {
+    min-height: 597px;
+  }
 
 </style>

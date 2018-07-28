@@ -1,13 +1,24 @@
 <template>
-  <!--<transition name="slide"-->
-              <!--enter-active-class="slideInUp"-->
-              <!--leave-active-class="slideOutDown">-->
+  <transition name="slide"
+              enter-active-class="slideInUp"
+              leave-active-class="slideOutDown">
 
-    <InOut type="slide" enter="Up" leave="Down">
     <div class="navbar edit-area"
          v-show="editPannel.edit">
       <section class="section">
         <div class="columns is-8 is-variable ">
+
+          <div class="column is-2 is-offset-3">
+            <ul class="editLink">
+              <li v-for="sub in $parent.menu">
+                <a class="no-tr"
+                   :class="{'selected': $parent.menu.find(i=>sub.name==i.name).display}"
+                   @click="editPannel.editMenu(sub, $parent.menu)">
+                  {{ sub.name }}
+                </a>
+              </li>
+            </ul>
+          </div>
 
           <slot></slot>
 
@@ -18,7 +29,7 @@
         <SpinLine v-show="loading"/>
       </div>
     </div>
-    </InOut>
+  </transition>
 </template>
 
 <script>
@@ -28,7 +39,11 @@
   export default {
     name: "EditNav",
     components: {ValidationBtns, SpinLine},
-    data() { return {editPannel: this.$Global.EditPannel};},
+    data() {
+      return {
+        editPannel: this.$Global.EditPannel
+      };
+    },
     computed: {
       loading: {
         get() { return this.editPannel.loading; },

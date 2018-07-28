@@ -6,22 +6,19 @@
       <div class="content">
 
 
-        <div class="level">
-          <div class="level-left">
-            <button class="button is-info level-item"
-                    @click="orderList">Reset
-            </button>
-            <b-checkbox class="level-item" type="is-info"
-                        v-model="debug">Debug
-            </b-checkbox>
-            <b-checkbox class="level-item" type="is-info"
-                        v-model="editable">Drag and drop
-            </b-checkbox>
-            <b-checkbox class="level-item" type="is-info"
-                        v-model="hiddenGallery">Stock
-            </b-checkbox>
-          </div>
-        </div>
+        <!--<div class="level">-->
+          <!--<div class="level-left">-->
+            <!--<button class="button is-info level-item"-->
+                    <!--@click="orderList">Reset-->
+            <!--</button>-->
+            <!--<b-checkbox class="level-item" type="is-info"-->
+                        <!--v-model="editable">Drag and drop-->
+            <!--</b-checkbox>-->
+            <!--<b-checkbox class="level-item" type="is-info"-->
+                        <!--v-model="hiddenGallery">Stock-->
+            <!--</b-checkbox>-->
+          <!--</div>-->
+        <!--</div>-->
 
 
         <draggable v-model="images"
@@ -30,7 +27,7 @@
                    @start="isDragging=true"
                    @end="isDragging=false">
           <transition-group type="transition"
-                            class="columns is-multiline box main-section"
+                            class="columns is-multiline main-section"
                             tag="div"
                             :name="reOrder? 'flip-list': ''">
             <div class="column is-one-quarter"
@@ -47,7 +44,6 @@
     </div>
 
 
-    <!--<div class="content">-->
     <InOut type="fade" enter="Right" leave="Right">
       <div class="card hidden-section" v-show="hiddenGallery">
         <header class="card-header">
@@ -93,10 +89,6 @@
     </InOut>
 
 
-    <InOut type="fade" enter="Left" leave="Left">
-      <GalleryDebug v-show="debug"></GalleryDebug>
-    </InOut>
-
   </div>
 
 </template>
@@ -104,13 +96,12 @@
 <script>
   import axios from 'axios';
   import draggable from 'vuedraggable';
-  import GalleryDebug from './GalleryDebug';
   import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
 
 
   export default {
     name: 'GalleryManager',
-    components: {draggable, GalleryDebug, Scrolly, ScrollyViewport, ScrollyBar},
+    components: {draggable, Scrolly, ScrollyViewport, ScrollyBar},
     data() {
       return {
         url: 'galleries/events/',
@@ -119,8 +110,7 @@
 
         images: [],
         hiddenImages: [],
-        hiddenGallery: false,
-        debug: false,
+        hiddenGallery: true,
         reOrder: false,
         editable: true,
         isDragging: false,
@@ -217,14 +207,12 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  .main-section {
-    min-height: 380px;
-  }
+
 
   .hidden-section {
     position: absolute;
     right: 2%;
-    margin-top: -650px;
+    margin-top: -520px;
     height: 55%;
     width: 250px;
     z-index: 1;

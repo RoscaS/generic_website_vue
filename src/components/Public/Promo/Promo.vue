@@ -32,29 +32,15 @@
       </EditIcon>
     </div>
     <EditNav v-if="editPannel.check($options.name)">
-
-      <div class="column is-2 is-offset-3 edit-area">
-        <ul class="editLink">
-          <li v-for="i in menu">
-            <a class="no-tr"
-               :class="{'selected': editPannel.getSelected(i.name, menu).display}"
-               @click="editPannel.editMenu(i, menu)">
-              {{ i.name }}
-            </a>
-          </li>
-        </ul>
-      </div>
-
-
       <div class="column is-3 edit-area">
         <FileUpload
           v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
-        <b-input v-show="editPannel.getSelected('Titre', menu).display"
+        <b-input v-show="menu.find(i=>i.name=='Titre').display"
                  maxlength="35"
                  :disabled="loading"
                  v-model="title">
         </b-input>
-        <b-input v-show="editPannel.getSelected('Texte', menu).display"
+        <b-input v-show="menu.find(i=>i.name=='Texte').display"
                  type="textarea"
                  maxlength="500"
                  rows="7"

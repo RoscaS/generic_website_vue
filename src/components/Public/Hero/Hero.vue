@@ -52,20 +52,8 @@
     </section>
     <EditNav v-if="editPannel.check($options.name)">
 
-      <div class="column is-2 is-offset-2 edit-area">
-        <ul class="editLink">
-          <li v-for="i in menu">
-            <a class="no-tr"
-               :class="{'selected': editPannel.getSelected(i.name, menu).display}"
-               @click="editPannel.editMenu(i, menu)">
-              {{ i.name }}
-            </a>
-          </li>
-        </ul>
-      </div>
-
       <div class="column is-3 edit-area"
-           v-show="editPannel.getSelected('Gauche',menu).display">
+           v-show="menu.find(i=>i.name=='Gauche').display">
         <label>Titre:</label>
         <b-input maxlength="20"
                  :disabled="loading"
@@ -80,14 +68,14 @@
         </b-input>
       </div>
       <div class="column is-3 edit-area"
-           v-show="editPannel.getSelected('Gauche',menu).display">
+           v-show="menu.find(i=>i.name=='Gauche').display">
         <label>Icone:</label>
         <IconPicker @selectIcon="returnIcon" position="L"></IconPicker>
       </div>
 
 
       <div class="column is-3 edit-area"
-           v-show="editPannel.getSelected('Centre',menu).display">
+           v-show="menu.find(i=>i.name=='Centre').display">
         <label>Titre:</label>
         <b-input maxlength="20"
                  :disabled="loading"
@@ -102,14 +90,14 @@
         </b-input>
       </div>
       <div class="column is-3 edit-area"
-           v-show="editPannel.getSelected('Centre',menu).display">
+           v-show="menu.find(i=>i.name=='Centre').display">
         <label>Icone:</label>
         <IconPicker @selectIcon="returnIcon" position="M"></IconPicker>
       </div>
 
 
       <div class="column is-3 edit-area"
-           v-show="editPannel.getSelected('Droite',menu).display">
+           v-show="menu.find(i=>i.name=='Droite').display">
         <label>Titre:</label>
         <b-input maxlength="20"
                  :disabled="loading"
@@ -126,7 +114,7 @@
 
 
       <div class="column is-3 edit-area"
-           v-show="editPannel.getSelected('Droite',menu).display">
+           v-show="menu.find(i=>i.name=='Droite').display">
         <label>Icone:</label>
         <IconPicker @selectIcon="returnIcon" position="R"></IconPicker>
       </div>

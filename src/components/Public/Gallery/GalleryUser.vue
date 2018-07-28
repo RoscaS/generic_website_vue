@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!--<div class="container">-->
-      <!--<div class="content">-->
+    <div class="container">
+      <div class="content">
         <div class="columns is-multiline">
           <div class="column is-3 gallery-col"
                v-for="image in images"
@@ -22,8 +22,8 @@
             </a>
           </div>
         </div>
-      <!--</div>-->
-    <!--</div>-->
+      </div>
+    </div>
 
     <Lightbox v-if="!isAdmin"></Lightbox>
   </div>

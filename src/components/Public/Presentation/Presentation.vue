@@ -75,47 +75,35 @@
 
     <EditNav v-if="editPannel.check(name)">
 
-      <div class="column is-2 is-offset-3 edit-area">
-        <ul class="editLink">
-          <li v-for="i in menu">
-            <a class="no-tr"
-               :class="{'selected': editPannel.getSelected(i.name, menu).display}"
-               @click="editPannel.editMenu(i, menu)">
-              {{ i.name }}
-            </a>
-          </li>
-        </ul>
-      </div>
-
       <div class="column is-3 edit-area">
         <FileUpload
-          v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
+          v-show="menu.find(i=>i.name=='Image').display"></FileUpload>
 
 
         <b-input maxlength="35"
                  :disabled="loading"
-                 v-show="editPannel.getSelected('Titre', menu).display"
+                 v-show="menu.find(i=>i.name=='Titre').display"
                  v-model="title">
         </b-input>
         <b-input type="textarea"
                  maxlength="200"
                  rows="2"
                  :disabled="loading"
-                 v-show="editPannel.getSelected('Sous titre', menu).display"
+                 v-show="menu.find(i=>i.name=='Sous titre').display"
                  v-model="subTitle">
         </b-input>
         <b-input type="textarea"
                  maxlength="800"
                  rows="7"
                  :disabled="loading"
-                 v-show="editPannel.getSelected('Texte 1', menu).display"
+                 v-show="menu.find(i=>i.name=='Texte 1').display"
                  v-model="text1">
         </b-input>
         <b-input type="textarea"
                  maxlength="800"
                  rows="7"
                  :disabled="loading"
-                 v-show="editPannel.getSelected('Texte 2', menu).display"
+                 v-show="menu.find(i=>i.name=='Texte 2').display"
                  v-model="text2">
         </b-input>
       </div>
