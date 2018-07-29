@@ -120,6 +120,11 @@
         font-size: 22px;
       }
     }
+
+    @media screen and (max-width: 768px) {
+      top: auto;
+      bottom: 20px;
+    }
   }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dropbox"
+    <div class="dropbox is-hidden-touch"
          :class="{'disabled-dropbox': loading}">
       <input class="input-file"
              type="file"
@@ -13,6 +13,16 @@
         Glissez une image ici<br>
         <small>ou cliquez pour naviguer votre disque.</small>
       </p>
+    </div>
+
+    <div class="dropbox is-hidden-desktop mobile"
+         :class="{'disabled-dropbox': loading}">
+      <input class="input-file"
+             type="file"
+             ref="file"
+             :disabled="loading"
+             @change="fileUpload">
+      <p>Ajouter une image</p>
     </div>
   </div>
 </template>
@@ -78,16 +88,21 @@
     background: lightcyan;
     color: dimgray;
     padding: 10px 10px;
-    position: relative;
     cursor: pointer;
     height: auto;
-    width: auto;
+    width: 80%;
+    margin: 0 auto 0 auto;
     border-radius: 2%;
+
+    &.mobile {
+      margin-top: 20px;
+    }
 
     p {
       font-size: 1.2em;
       text-align: center;
-      padding: 37px;
+      padding-top: 20px;
+      padding-bottom: 20px;
     }
 
     &:hover {
@@ -111,7 +126,7 @@
   .input-file {
     opacity: 0; /* invisible but it's there! */
     width: 90%;
-    height: 90%;
+    height: 138px;
     position: absolute;
     cursor: pointer;
   }

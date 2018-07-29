@@ -1,0 +1,92 @@
+@import '../../static/sass/variables';
+@import '~buefy/src/scss/utils/variables';
+@import '~buefy/src/scss/components/tabs';
+
+.custom-tabs-wrapper {
+
+
+
+  input {
+    display: block;
+    margin: 0 auto 0 auto;
+    width: 40%;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+
+  .b-tabs {
+
+    height: 200px;
+    width: 50%;
+    margin: 0 auto 0 auto;
+
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      margin-top: -10px;
+
+      @media screen and (max-width: 768px) {
+        margin-bottom: -20px;
+      }
+
+
+      ul {
+        width: auto;
+        border-bottom-color: $top-title;
+        margin-bottom: 15px;
+      }
+
+      a {
+        padding-top: 0;
+
+        @media screen and (max-width: 768px) {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+      }
+
+      .is-active {
+        a {
+          color: $link-hover;
+          border-bottom-color: $link-hover;
+        }
+      }
+
+      li {
+        //height: 30px;
+        border-radius: 5px;
+        margin-right: 10px;
+        background-color: $top-title;
+
+        @media screen and (max-width: 768px) {
+          margin-right: 0;
+        }
+
+
+        a {
+          color: white;
+          &:hover {
+            border-bottom-color: $link-hover;
+          }
+          border-bottom-color: $top-title;
+          //border-bottom-color: white;
+        }
+
+      }
+    }
+  }
+
+  .tab-item {
+    padding-top: 0px;
+    padding-bottom: 2000px;
+  }
+}
+
+

@@ -75,39 +75,48 @@
 
     <EditNav v-if="editPannel.check(name)">
 
-      <div class="column is-3 edit-area">
-        <FileUpload
-          v-show="menu.find(i=>i.name=='Image').display"></FileUpload>
 
+        <b-tabs v-model="activeTab" position="is-centered">
 
-        <b-input maxlength="35"
-                 :disabled="loading"
-                 v-show="menu.find(i=>i.name=='Titre').display"
-                 v-model="title">
-        </b-input>
-        <b-input type="textarea"
-                 maxlength="200"
-                 rows="2"
-                 :disabled="loading"
-                 v-show="menu.find(i=>i.name=='Sous titre').display"
-                 v-model="subTitle">
-        </b-input>
-        <b-input type="textarea"
-                 maxlength="800"
-                 rows="7"
-                 :disabled="loading"
-                 v-show="menu.find(i=>i.name=='Texte 1').display"
-                 v-model="text1">
-        </b-input>
-        <b-input type="textarea"
-                 maxlength="800"
-                 rows="7"
-                 :disabled="loading"
-                 v-show="menu.find(i=>i.name=='Texte 2').display"
-                 v-model="text2">
-        </b-input>
-      </div>
+          <b-tab-item label="Image">
+            <FileUpload></FileUpload>
+          </b-tab-item>
+
+          <b-tab-item class="_tab-content" label="Titre">
+            <b-input maxlength="35"
+                     :disabled="loading"
+                     v-model="title">
+            </b-input>
+          </b-tab-item>
+          <b-tab-item class="_tab-content" label="Sous titre">
+            <b-input type="textarea"
+                     maxlength="200"
+                     rows="2"
+                     :disabled="loading"
+                     v-model="subTitle">
+            </b-input>
+          </b-tab-item>
+          <b-tab-item class="_tab-content" label="Texte 1">
+            <b-input type="textarea"
+                     maxlength="800"
+                     rows="4"
+                     :disabled="loading"
+                     v-model="text1">
+            </b-input>
+          </b-tab-item>
+          <b-tab-item class="_tab-content" label="texte 2">
+            <b-input type="textarea"
+                     maxlength="800"
+                     rows="4"
+                     :disabled="loading"
+                     v-model="text2">
+            </b-input>
+          </b-tab-item>
+
+        </b-tabs>
+
     </EditNav>
+
   </div>
 </template>
 
@@ -125,18 +134,23 @@
     store: store,
     data() {
       return {
+        activeTab: 0,
+
+
         name: this.$options.name,
         downArrow: null,
         editPannel: this.$Global.EditPannel,
         menu: [
           {display: true, name: 'Image'},
-          {display: false, name: 'Titre'},
-          {display: false, name: 'Sous titre'},
-          {display: false, name: 'Texte 1'},
-          {display: false, name: 'Texte 2'},
+          {modelll: this.title, display: false, name: 'Titre'},
+          {modelll: this.subTitle, display: false, name: 'Sous titre'},
+          {modelll: this.text1, display: false, name: 'Texte 1'},
+          {modelll: this.text2, display: false, name: 'Texte 2'},
         ]
       };
     },
+
+
     computed: {
       ...mapGetters([
         'presTitle',
@@ -197,8 +211,10 @@
       title(value) { this.setTitle(value); },
       subTitle(value) { this.setSubTitle(value); },
       text1(value) { this.setText1(value); },
-      text2(value) { this.setText2(value); },
+      // text2(value) { this.setText2(value); },
       image(value) { this.setImage(value); },
+
+
     },
 
     methods: {
@@ -235,10 +251,12 @@
     },
 
     mounted() {
+
       this.fetchData();
 
       window.addEventListener('scroll', this.scrollWatch);
       this.setDownArrow();
+
     },
   };
 </script>
@@ -247,11 +265,18 @@
   @import '../../../../static/sass/global';
 
   .section {
-    margin-top: -70px !important;
+    margin-top: -50px !important;
+    @media screen and (max-width: 1366px) {
+      margin-top: 25px !important;
+
+    }
   }
 
   .down-arrow-wrapper {
+    position: absolute;
+    left: 49%;
     animation: down-arrow .6s ease infinite;
+
 
     @keyframes down-arrow {
       0% {
@@ -272,14 +297,10 @@
     font-size: 50px;
     font-weight: normal;
     color: white;
-    left: 49%;
     bottom: 140px;
     position: relative;
     cursor: pointer;
 
-    @media screen and (max-width: 1366px) {
-      display: none;
-    }
 
     &:hover {
       transition: color .5s ease;
