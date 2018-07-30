@@ -8,12 +8,12 @@
 
         <div class="container">
           <div class="content">
-            <Title :class="{'highlighted': menu[activeTab].name=='Titre'}">
+            <Title :class="{'highlighted': activeTab==0&&edit.component==name}">
               {{ title }}
             </Title>
 
             <p class="sub-title"
-               :class="{'highlighted': menu[activeTab].name=='Sous titre'}">
+               :class="{'highlighted': activeTab==1&&edit.component==name}">
               {{ subTitle }}
             </p>
           </div>
@@ -21,38 +21,48 @@
 
 
         <transition name="fade" mode="out-in">
-          <GalleryManager v-if="editGalery">
-          </GalleryManager>
-          <GalleryUser v-else></GalleryUser>
+          <GalleryManager v-if="editGalery"/>
+          <GalleryUser v-else/>
         </transition>
 
 
       </EditIcon>
     </section>
 
-    <EditNav id="GalleryEditNav" v-if="editPannel.check($options.name)">
+    <EditNav id="GalleryEditNav" v-if="edit.check($options.name)" height="150">
 
       <b-tabs v-model="activeTab" position="is-centered">
 
-        <b-tab-item class="_tab-content" label="Titre">
-          <b-input v-show="menu.find(i=>i.name=='Titre').display"
-                   maxlength="35"
+        <b-tab-item label="Titre">
+          <b-input maxlength="35"
                    :disabled="loading"
                    v-model="title">
           </b-input>
         </b-tab-item>
 
-        <b-tab-item class="_tab-content" label="Sous titre">
-          <b-input v-show="menu.find(i=>i.name=='Sous titre').display"
-                   type="textarea"
-                   maxlength="500"
+        <b-tab-item label="Sous titre">
+          <b-input maxlength="200"
                    rows="3"
                    :disabled="loading"
                    v-model="subTitle">
           </b-input>
         </b-tab-item>
 
-        <h1 class="header title" v-show=""> POULETTE </h1>
+        <b-tab-item label="Galerie">
+          <div class="level">
+            <div class="level-left">
+              <button class="button is-info level-item"
+                      @click="reOrder=true">Reset
+              </button>
+              <!--<b-checkbox class="level-item" type="is-info"-->
+                          <!--v-model="editable">Drag and drop-->
+              <!--</b-checkbox>-->
+              <!--<b-checkbox class="level-item" type="is-info"-->
+                          <!--v-model="hiddenGallery">Stock-->
+              <!--</b-checkbox>-->
+            </div>
+          </div>
+        </b-tab-item>
 
       </b-tabs>
     </EditNav>
@@ -79,8 +89,8 @@
         activeTab: 0,
         name: this.$options.name,
         baseHeight: null,
-
-        editPannel: this.$Global.EditPannel,
+        edit: this.$Global.EditPannel,
+        // reOrder: this.$Global.EditPannel.reOrder,
         menu: [
           {display: true, name: 'Titre',},
           {display: false, name: 'Sous titre',},
@@ -94,19 +104,13 @@
         'galSubTitle',
       ]),
 
-      editGalery() {
-        let el = document.getElementById('GalleryEditNav');
-        let test = this.menu.find(i => i.name == 'Galerie').display &&
-          this.$Global.EditPannel.component == 'Gallery';
+      reOrder: {
+        get() { return this.$Global.EditPannel.reOrder; },
+        set(value) { this.$Global.EditPannel.reOrder = value}
+      },
 
-        if (test) {
-          setTimeout(() => {Velocity(el, {minHeight: 'auto'}, 1500);}, 250);
-        }
-        else {
-          setTimeout(() => {Velocity(el, {minHeight: '331px'}, 1500);}, 10);
-          this.menu.find(i => i.name == 'Galerie').display = false;
-        }
-        return test;
+      editGalery() {
+        return this.activeTab == 2 && this.edit.component == this.name;
       },
 
       loading: {

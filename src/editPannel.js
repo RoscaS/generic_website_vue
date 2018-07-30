@@ -6,6 +6,9 @@ const EditPannel = new Vue({
     component: null,
     loading: false,
     edit: false,
+
+    //
+    reOrder: false
   },
 
   methods: {

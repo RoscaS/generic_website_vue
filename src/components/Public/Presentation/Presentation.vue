@@ -80,13 +80,13 @@
           <FileUpload></FileUpload>
         </b-tab-item>
 
-        <b-tab-item class="_tab-content" label="Titre">
+        <b-tab-item label="Titre">
           <b-input maxlength="35"
                    :disabled="loading"
                    v-model="title">
           </b-input>
         </b-tab-item>
-        <b-tab-item class="_tab-content" label="Sous titre">
+        <b-tab-item label="Sous titre">
           <b-input type="textarea"
                    maxlength="200"
                    rows="2"
@@ -94,7 +94,7 @@
                    v-model="subTitle">
           </b-input>
         </b-tab-item>
-        <b-tab-item class="_tab-content" label="Texte 1">
+        <b-tab-item label="Texte 1">
           <b-input type="textarea"
                    maxlength="800"
                    rows="4"
@@ -102,7 +102,7 @@
                    v-model="text1">
           </b-input>
         </b-tab-item>
-        <b-tab-item class="_tab-content" label="texte 2">
+        <b-tab-item label="texte 2">
           <b-input type="textarea"
                    maxlength="800"
                    rows="4"

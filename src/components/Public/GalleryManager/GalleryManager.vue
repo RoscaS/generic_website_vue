@@ -2,23 +2,28 @@
 
   <div>
 
-    <div class="container">
-      <div class="content">
+    <!--<div class="container">-->
+    <!--<div class="content">-->
+
+                <!--@click="orderList">Reset-->
+
+    <!--<div class="level">-->
+      <!--<div class="level-left">-->
+        <!--<button class="button is-info level-item"-->
+                <!--@click="reOrder=true">Reset-->
+        <!--</button>-->
+        <!--<b-checkbox class="level-item" type="is-info"-->
+                    <!--v-model="editable">Drag and drop-->
+        <!--</b-checkbox>-->
+        <!--<b-checkbox class="level-item" type="is-info"-->
+                    <!--v-model="hiddenGallery">Stock-->
+        <!--</b-checkbox>-->
+      <!--</div>-->
+    <!--</div>-->
 
 
-        <!--<div class="level">-->
-          <!--<div class="level-left">-->
-            <!--<button class="button is-info level-item"-->
-                    <!--@click="orderList">Reset-->
-            <!--</button>-->
-            <!--<b-checkbox class="level-item" type="is-info"-->
-                        <!--v-model="editable">Drag and drop-->
-            <!--</b-checkbox>-->
-            <!--<b-checkbox class="level-item" type="is-info"-->
-                        <!--v-model="hiddenGallery">Stock-->
-            <!--</b-checkbox>-->
-          <!--</div>-->
-        <!--</div>-->
+    <div class="columns">
+      <div class="column is-6 is-offset-3-desktop">
 
 
         <draggable v-model="images"
@@ -41,54 +46,59 @@
           </transition-group>
         </draggable>
       </div>
-    </div>
+
+      <!--</div>-->
+
+      <div class="column is-1"></div>
+
+      <div class="column is-2">
+
+        <InOut type="fade" enter="Right" leave="Right">
+          <div class="card hidden-section" v-show="hiddenGallery">
+            <header class="card-header">
+              <p class="card-header-title">Stock</p>
+            </header>
+
+            <div class="card-content">
+              <scrolly class="body"
+                       :parentScroll="false"
+                       :style="{ width: '', height: '104%'}">
+                <scrolly-viewport>
+
+                  <draggable v-model="hiddenImages"
+                             :options="dragOptions"
+                             :move="onMove"
+                             @start="isDragging=true"
+                             @end="isDragging=false">
+                    <transition-group type="transition"
+                                      class="place-holder"
+                                      tag="div">
+                      <!--:name="'flip-list'">-->
+
+                      <div class="place-holder"
+                           v-for="image in hiddenImages"
+                           :key="image.position">
+                        <img style="max-height: 117px" :src="image.url" alt="">
+                      </div>
 
 
-    <InOut type="fade" enter="Right" leave="Right">
-      <div class="card hidden-section" v-show="hiddenGallery">
-        <header class="card-header">
-          <p class="card-header-title">Stock</p>
-        </header>
-
-        <div class="card-content">
-          <scrolly class="body"
-                   :parentScroll="false"
-                   :style="{ width: '', height: '104%'}">
-            <scrolly-viewport>
-
-              <draggable v-model="hiddenImages"
-                         :options="dragOptions"
-                         :move="onMove"
-                         @start="isDragging=true"
-                         @end="isDragging=false">
-                <transition-group type="transition"
-                                  class="place-holder"
-                                  tag="div">
-                  <!--:name="'flip-list'">-->
-
-                  <div class="place-holder"
-                       v-for="image in hiddenImages"
-                       :key="image.position">
-                    <img style="max-height: 117px" :src="image.url" alt="">
-                  </div>
+                    </transition-group>
+                  </draggable>
+                </scrolly-viewport>
+                <scrolly-bar axis="y"></scrolly-bar>
+              </scrolly>
+            </div>
 
 
-                </transition-group>
-              </draggable>
-            </scrolly-viewport>
-            <scrolly-bar axis="y"></scrolly-bar>
-          </scrolly>
-        </div>
+            <div class="is-empty content" v-if="hiddenImages == 0">
+              <h3>Vide</h3>
+              <h5>Glissez une image ici.</h5>
+            </div>
+          </div>
+        </InOut>
 
-
-        <div class="is-empty content" v-if="hiddenImages == 0">
-          <h3>Vide</h3>
-          <h5>Glissez une image ici.</h5>
-        </div>
       </div>
-    </InOut>
-
-
+    </div>
   </div>
 
 </template>
@@ -111,19 +121,12 @@
         images: [],
         hiddenImages: [],
         hiddenGallery: true,
-        reOrder: false,
         editable: true,
         isDragging: false,
         delayedDragging: false
       };
     },
     methods: {
-      orderList() {
-        this.reOrder = true;
-        this.images = this.images.sort((one, two) => {return one.position - two.position; });
-        setTimeout(() => { this.reOrder = false; }, 500);
-
-      },
       onMove({relatedContext, draggedContext}) {
         // this.related = relatedContext;
         // this.dragged = draggedContext;
@@ -150,6 +153,11 @@
       // },
     },
     computed: {
+      reOrder: {
+        get() { return this.$Global.EditPannel.reOrder; },
+        set(value) { this.$Global.EditPannel.reOrder = value}
+      },
+
       dragOptions() {
         return {
           animation: 250,
@@ -178,7 +186,10 @@
           this.delayedDragging = false;
         });
       },
-
+      reOrder() {
+        this.images = this.images.sort((one, two) => {return one.position - two.position; });
+        setTimeout(() => { this.reOrder = false; }, 500);
+      }
     },
     mounted() {
       axios.get(this.url).then(response => {
@@ -207,13 +218,11 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-
-
   .hidden-section {
-    position: absolute;
-    right: 2%;
-    margin-top: -520px;
-    height: 55%;
+    /*position: absolute;*/
+    /*right: 2%;*/
+     margin-top: -175px;
+    height: 490px;
     width: 250px;
     z-index: 1;
 
