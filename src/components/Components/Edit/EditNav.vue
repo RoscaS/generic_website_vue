@@ -3,7 +3,7 @@
               enter-active-class="slideInUp"
               leave-active-class="slideOutDown">
 
-    <div class="navbar custom-tabs-wrapper" v-show="editPannel.edit">
+    <div class="navbar custom-tabs-wrapper" v-show="edit.edit">
 
       <div class="columns">
         <div class="column is-5-desktop is-offset-4-desktop">
@@ -17,7 +17,7 @@
 
       <ValidationBtns></ValidationBtns>
       <div class="loading-animation">
-        <SpinLine v-show="loading"/>
+        <SpinLine v-show="edit.loading"/>
       </div>
     </div>
   </transition>
@@ -38,18 +38,9 @@
     data() {
       return {
         activeTab: 0,
-        menu: this.$parent.menu,
-        editPannel: this.$Global.EditPannel
+        edit: this.$Global.EditPannel
       };
     },
-
-    computed: {
-      loading: {
-        get() { return this.editPannel.loading; },
-        set(value) { this.editPannel.loading = value;}
-      },
-
-    }
   };
 </script>
 

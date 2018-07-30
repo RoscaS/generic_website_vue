@@ -2,8 +2,8 @@
   <div>
     <button class="button is-danger"
             :style="setStyle"
-            :disabled="$Global.EditPannel.edit"
-            @click="startEdit">
+            :disabled="edit.edit"
+            @click="edit.startEdit(component)">
       <i class="fal fa-pencil-alt">
       </i>
     </button>
@@ -17,20 +17,15 @@
     props: {
       Right: {type: String},
       Top: {type: String},
-      Component: {type: String},
+      component: {type: String},
     },
     data() {
-      return {};
+      return {
+        edit: this.$Global.EditPannel,
+      };
     },
     computed: {
       setStyle() { return `margin-top:${this.Top};`; },
-    },
-
-    methods: {
-      startEdit() {
-        this.$Global.EditPannel.startEdit(this.Component);
-        this.$emit('backup-original-data');
-      }
     },
   };
 </script>

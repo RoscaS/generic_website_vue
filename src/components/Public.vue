@@ -1,18 +1,18 @@
 <template>
   <div>
-    <PromoRibbon/>
+    <!--<PromoRibbon/>-->
     <Top/>
-    <Navbar/>
-    <Carousel :url="base + carousel"/>
+    <!--<Navbar/>-->
+    <!--<Carousel :url="base + carousel"/>-->
     <Presentation/>
-    <Hero/>
-    <Parallax :url="base + parallax" :idx="0" :height="600"/>
-    <Articles/>
-    <Parallax :url="base + parallax" :idx="1" :height="400"/>
-    <Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>
-    <Parallax :url="base + parallax" :idx="2" :height="400"/>
-    <Contact :url="base + contact" :urlPostMessage="base + message"/>
-    <Review :url="base + review"/>
+    <!--<Hero/>-->
+    <!--<Parallax :url="base + parallax" :idx="0" :height="600"/>-->
+    <!--<Articles/>-->
+    <!--<Parallax :url="base + parallax" :idx="1" :height="400"/>-->
+    <!--<Gallery :url="base + gallery" :urlSectionData="base + galleryData"/>-->
+    <!--<Parallax :url="base + parallax" :idx="2" :height="400"/>-->
+    <!--<Contact :url="base + contact" :urlPostMessage="base + message"/>-->
+    <!--<Review :url="base + review"/>-->
     <Footer/>
   </div>
 </template>

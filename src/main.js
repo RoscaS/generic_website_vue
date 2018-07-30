@@ -28,10 +28,15 @@ Vue.use(Buefy, {
 
 // Perso
   //  Global variable
-import EditPannel from './editPannel'
-import Options from './options'
+import EditPannel from './editPannel';
+import Tools from './tools';
+import Options from './options';
 
-const Global = {EditPannel: EditPannel, Options: Options,};
+const Global = {
+  EditPannel: EditPannel,
+  Options: Options,
+  Tools: Tools
+};
 
 Global.install = function() {
   Object.defineProperty(Vue.prototype, '$Global', {

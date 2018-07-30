@@ -4,12 +4,12 @@
       <button class="button is-success"
               :class="{'is-loading': loading}"
               :disabled="loading"
-              @click="commitChanges">
+              @click="validateBtn">
         <i class="far fa-check"></i>
       </button>
       <button class="button is-danger"
-              :disabled="disabledCancelBtn || loading"
-              @click="cancelChanges">
+              :disabled="disable || loading"
+              @click="cancelBtn">
         <i class="far fa-times"></i>
       </button>
     </p>
@@ -17,58 +17,54 @@
 </template>
 
 <script>
-  import {SpinLine} from 'vue-loading-spinner';
 
   export default {
     name: "ValidationButtons",
-    components: {SpinLine},
     data() {
       return {
-        editPannel: this.$Global.EditPannel,
-        disabledCancelBtn: false,
+        edit: this.$Global.EditPannel,
+
+        disable: false,
         timeout: 5000,
       };
     },
 
     computed: {
-      root() { return this.$parent.$parent; },
-
-      DirtyFlag() { return this.root.DirtyFlag; },
-
-      loading() { return this.root.LoadingFlag; },
+      root() { console.log('ici'); return this.$parent.$parent; },
+      dirty: {
+        get() { return this.edit.dirty; },
+        set(value) { this.edit.dirty = value; }
+      },
+      loading: {
+        get() { return this.edit.loading; },
+        set(value) { this.edit.loading = value; }
+      }
     },
 
     methods: {
-      pushData() { this.root.pushData(); },
-
-      recoverData() { this.root.recoverData(); },
-
-      commitChanges() {
-        if (this.DirtyFlag) {
-          this.disabledCancelBtn = false;
-          this.pushData();
+      validateBtn() {
+        if (this.dirty) {
+          this.disable = false;
+          this.root.pushData();
         }
-        this.toggleLoading();
-      },
-
-      cancelChanges() {
-        if (this.DirtyFlag) {
-          this.disabledCancelBtn = true;
-          setTimeout(() => {this.disabledCancelBtn = false;}, this.timeout);
-          this.storeIsDirty();
-          return;
-        }
-        this.editPannel.endEdit();
-      },
-
-      toggleLoading() {
-        this.editPannel.loading = !this.editPannel.loading;
+        // this.loading = !this.loading;
+        this.loading = true;
         this.checkLoading();
       },
 
+      cancelBtn() {
+        if (this.dirty) {
+          this.disable = true;
+          setTimeout(() => {this.disable = false;}, this.timeout);
+          this.storeIsDirty();
+          return;
+        }
+        this.edit.endEdit();
+      },
+
       checkLoading() {
-        this.loading ? setTimeout(() => {this.checkLoading();}, 100)
-                     : this.editPannel.endEdit();
+        this.loading ? setTimeout(() => { this.checkLoading(); }, 100)
+                     : this.edit.endEdit();
       },
 
       storeIsDirty() {
@@ -80,16 +76,16 @@
           duration: this.timeout,
           indefinite: false,
           onAction: () => {
-            this.recoverData();
-            this.disabledCancelBtn = false;
-            this.editPannel.endEdit();
+            this.root.recoverData();
+            this.disable = false;
+            this.edit.endEdit();
           }
         });
       },
     },
     destroyed() {
-      this.root.menu.forEach(i => i.display = false);
-      this.root.activeTab = 0;
+      // this.root.menu.forEach(i => i.display = false);
+      // this.root.activeTab = 0;
     }
   };
 </script>

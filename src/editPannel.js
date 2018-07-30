@@ -7,6 +7,8 @@ const EditPannel = new Vue({
     loading: false,
     edit: false,
 
+    dirty: false,
+
     //
     reOrder: false
   },
@@ -23,9 +25,9 @@ const EditPannel = new Vue({
       setTimeout(() => { this.component = null; }, 1000);
     },
 
-    check(component) {
-      return component == this.component;
-    },
+    // check(component) {
+    //   return component == this.component;
+    // },
   }
 });
 

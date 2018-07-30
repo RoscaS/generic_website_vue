@@ -8,12 +8,10 @@
              offset: -80
            }"></i>
     </div>
-
-
     <section id="Presentation" class="section section-container">
       <EditIcon Top="20px"
-                :component="name">
-                <!--@backup-original-data="backupData">-->
+                :Component="$options.name"
+                @backup-original-data="backupData">
 
         <div class="container">
           <div class="content">
@@ -21,6 +19,7 @@
             <Title :class="{'highlighted': activeTab==1&&edit.component==name}">
               {{ title }}
             </Title>
+
 
             <p class="sub-title"
                :class="{'highlighted': activeTab==2&&edit.component==name}">
@@ -36,13 +35,13 @@
                      delay: 50,
                      easing: 'ease',
                    }">
-              {{ text1 }}
+              {{ presText1 }}
             </p>
 
             <div class="columns is-variable is-8">
               <div class="column">
 
-                <img :src="image"
+                <img :src="presImage"
                      :class="{'highlighted': activeTab==0&&edit.component==name}"
                      v-scroll-reveal="{
                                duration: 2500,
@@ -60,10 +59,11 @@
                            easing: 'ease'
                          }">
                 <p :class="{'highlighted': activeTab==4&&edit.component==name}">
-                  {{ text2 }}
+                  {{ presText2 }}
                 </p>
 
               </div>
+
             </div>
           </div>
         </div>
@@ -71,7 +71,9 @@
       </EditIcon>
     </section>
 
-    <EditNav v-if="edit.component==name" height="225">
+    <EditNav v-if="edit.check(name)" height="225">
+
+
       <b-tabs v-model="activeTab" position="is-centered">
 
         <b-tab-item label="Image">
@@ -110,13 +112,15 @@
         </b-tab-item>
 
       </b-tabs>
+
     </EditNav>
+
   </div>
 </template>
 
 <script>
-  import PresentationStore from './PresentationStore';
-
+  import store from './PresentationStore';
+  import {mapGetters, mapActions} from 'vuex';
   import EditIcon from '../../Components/Edit/EditIcon';
   import EditNav from '../../Components/Edit/EditNav';
   import FileUpload from '../../Components/Edit/FileUpload';
@@ -125,49 +129,103 @@
   export default {
     name: "Presentation",
     components: {EditIcon, EditNav, FileUpload},
+    store: store,
     data() {
       return {
-        name: this.$options.name,
-        edit: this.$Global.EditPannel,
-        loading: this.$Global.EditPannel.loading,
-
-        store: PresentationStore,
-        state: PresentationStore.state,
-
         activeTab: 0,
+        name: this.$options.name,
         downArrow: null,
+        edit: this.$Global.EditPannel,
+        menu: [
+          {display: false, name: 'Image'},
+          {display: false, name: 'Titre'},
+          {display: false, name: 'Sous titre'},
+          {display: false, name: 'Texte 1'},
+          {display: false, name: 'Texte 2'},
+        ]
       };
     },
 
+
     computed: {
+      ...mapGetters([
+        'presTitle',
+        'presSubTitle',
+        'presText1',
+        'presText2',
+        'presImage',
+        'DirtyFlag',
+        'LoadingFlag',
+      ]),
+
+      loading: {
+        get() { return this.LoadingFlag; },
+      },
+
       title: {
-        get() { return this.state.title;},
-        set(value) { this.state.title = value; }
+        get() { return this.presTitle; },
+        set(value) {
+          this.setTitle(value);
+          this.toggleDirty();
+        }
       },
+
       subTitle: {
-        get() { return this.state.subTitle;},
-        set(value) { this.state.subTitle = value; }
+        get() { return this.presSubTitle; },
+        set(value) {
+          this.setSubTitle(value);
+          this.toggleDirty();
+        }
       },
+
       text1: {
-        get() { return this.state.text1;},
-        set(value) { this.state.text1 = value; }
+        get() { return this.presText1; },
+        set(value) {
+          this.setText1(value);
+          this.toggleDirty();
+        }
       },
+
       text2: {
-        get() { return this.state.text2;},
-        set(value) { this.state.text2 = value; }
+        get() { return this.presText2; },
+        set(value) {
+          this.setText2(value);
+          this.toggleDirty();
+        }
       },
+
       image: {
-        get() { return this.state.image;},
-        set(value) { this.state.image = value; }
-      },
+        get() { return this.presImage; },
+        set(value) {
+          this.setImage(value);
+          this.toggleDirty();
+        }
+      }
+    },
+
+    watch: {
+      title(value) { this.setTitle(value); },
+      subTitle(value) { this.setSubTitle(value); },
+      text1(value) { this.setText1(value); },
+      text2(value) { this.setText2(value); },
+      image(value) { this.setImage(value); },
+
+
     },
 
     methods: {
-      pushData() { PresentationStore.pushData(); },
-      recoverData() { PresentationStore.setRecoverData(); },
-
-      DirtyFlag() { return this.state.isDirty; },
-      LoadingFlag() { console.log('delete-me, LoadingFlag'); },
+      ...mapActions([
+        'fetchData',
+        'pushData',
+        'backupData',
+        'recoverData',
+        'setTitle',
+        'setSubTitle',
+        'setText1',
+        'setText2',
+        'setImage',
+        'toggleDirty',
+      ]),
 
       scrollWatch() {
         if (window.pageYOffset >= 165) {
@@ -189,7 +247,9 @@
     },
 
     mounted() {
-      PresentationStore.fetchData()
+
+      this.fetchData();
+
       window.addEventListener('scroll', this.scrollWatch);
       this.setDownArrow();
 
