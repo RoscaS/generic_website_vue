@@ -5,9 +5,17 @@
 
     <div class="navbar custom-tabs-wrapper" v-show="editPannel.edit">
 
-              <slot></slot>
+      <div class="columns">
+        <div class="column is-5-desktop is-offset-4-desktop">
 
-        <ValidationBtns></ValidationBtns>
+          <div class="custom-tabs" :style="{height: height+'px'}">
+            <slot></slot>
+          </div>
+
+        </div>
+      </div>
+
+      <ValidationBtns></ValidationBtns>
       <div class="loading-animation">
         <SpinLine v-show="loading"/>
       </div>
@@ -24,6 +32,9 @@
   export default {
     name: "EditNav",
     components: {ValidationBtns, FileUpload, SpinLine},
+    props: {
+      height: {type: String}
+    },
     data() {
       return {
         activeTab: 0,
@@ -37,6 +48,7 @@
         get() { return this.editPannel.loading; },
         set(value) { this.editPannel.loading = value;}
       },
+
     }
   };
 </script>
@@ -44,14 +56,19 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
+  .custom-tabs {
+    height: 200px;
+    /*width: 50%;*/
+    margin: 0 auto 0 auto;
+
+  }
+
   .loading-animation {
     position: absolute;
     top: -66%;
     left: 50%;
     transform: scale(3.5);
   }
-
-
 
   .custom-tabs-wrapper {
     color: white;

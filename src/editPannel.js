@@ -23,26 +23,7 @@ const EditPannel = new Vue({
     check(component) {
       return component == this.component;
     },
-
-
-
-    editMenu(selected, menu) {
-      menu.forEach(i => {i.display = false;});
-      selected.display = true;
-    },
-
-    getSelected(selected, menu) {
-      return menu.find(i => i.name == selected);
-    },
-
-    highlight(sub, menu, name) {
-      return (this.getSelected(sub, menu).display &&
-        this.component == name) && this.edit;
-    },
-
-
   }
-
 });
 
 export default EditPannel;

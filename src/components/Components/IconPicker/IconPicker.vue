@@ -24,13 +24,13 @@
     <div class="block">
       <div class="level is-mobile">
         <div class="level-item">
-          <b-radio v-model="weight" native-value="fal">Fin</b-radio>
+          <b-radio :size="smallRadio" v-model="weight" native-value="fal">Fin</b-radio>
         </div>
         <div class="level-item">
-          <b-radio v-model="weight" native-value="far">Normal</b-radio>
+          <b-radio :size="smallRadio" v-model="weight" native-value="far">Normal</b-radio>
         </div>
         <div class="level-item">
-          <b-radio v-model="weight" native-value="fas">Épais</b-radio>
+          <b-radio :size="smallRadio" v-model="weight" native-value="fas">Épais</b-radio>
         </div>
       </div>
     </div>
@@ -56,6 +56,11 @@
         weight: 'fal',
         icons,
       };
+    },
+    computed: {
+      smallRadio() {
+        return window.innerWidth < 600? 'is-small': '';
+      }
     },
     watch: {
       search(value) { this.filterIcons(value.trim()); }
@@ -87,6 +92,8 @@
           this.icons = filter;
         }
       },
+
+
     },
   };
 </script>
@@ -126,6 +133,11 @@
 
   .block {
     margin-top: 15px;
+
+    @media screen and (max-width: 600px) {
+      margin-top: 10px;
+      margin-left: -15px;
+    }
   }
 
 </style>

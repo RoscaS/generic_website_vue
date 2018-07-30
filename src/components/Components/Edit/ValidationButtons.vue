@@ -86,6 +86,10 @@
           }
         });
       },
+    },
+    destroyed() {
+      this.root.menu.forEach(i => i.display = false);
+      this.root.activeTab = 0;
     }
   };
 </script>
@@ -121,7 +125,7 @@
       }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1089px) {
       top: auto;
       bottom: 20px;
     }

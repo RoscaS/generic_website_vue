@@ -8,13 +8,14 @@
 
         <div class="container">
           <div class="content">
-            <Highlighted sub="Titre" :menu="menu" :name="name">
-              <Title>{{ title }}</Title>
+            <Title :class="{'highlighted': menu[activeTab].name=='Titre'}">
+              {{ title }}
+            </Title>
 
-            </Highlighted>
-            <Highlighted sub="Sous titre" :menu="menu" :name="name">
-              <p class="sub-title">{{ subTitle }}</p>
-            </Highlighted>
+            <p class="sub-title"
+               :class="{'highlighted': menu[activeTab].name=='Sous titre'}">
+              {{ subTitle }}
+            </p>
           </div>
         </div>
 
@@ -31,23 +32,29 @@
 
     <EditNav id="GalleryEditNav" v-if="editPannel.check($options.name)">
 
-      <div class="column is-3 edit-area">
-        <b-input v-show="menu.find(i=>i.name=='Titre').display"
-                 maxlength="35"
-                 :disabled="loading"
-                 v-model="title">
-        </b-input>
-        <b-input v-show="menu.find(i=>i.name=='Sous titre').display"
-                 type="textarea"
-                 maxlength="500"
-                 rows="3"
-                 :disabled="loading"
-                 v-model="subTitle">
-        </b-input>
+      <b-tabs v-model="activeTab" position="is-centered">
+
+        <b-tab-item class="_tab-content" label="Titre">
+          <b-input v-show="menu.find(i=>i.name=='Titre').display"
+                   maxlength="35"
+                   :disabled="loading"
+                   v-model="title">
+          </b-input>
+        </b-tab-item>
+
+        <b-tab-item class="_tab-content" label="Sous titre">
+          <b-input v-show="menu.find(i=>i.name=='Sous titre').display"
+                   type="textarea"
+                   maxlength="500"
+                   rows="3"
+                   :disabled="loading"
+                   v-model="subTitle">
+          </b-input>
+        </b-tab-item>
 
         <h1 class="header title" v-show=""> POULETTE </h1>
 
-      </div>
+      </b-tabs>
     </EditNav>
   </div>
 </template>
@@ -69,6 +76,7 @@
 
     data() {
       return {
+        activeTab: 0,
         name: this.$options.name,
         baseHeight: null,
 

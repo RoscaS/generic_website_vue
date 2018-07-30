@@ -16,40 +16,38 @@
         <div class="container">
           <div class="content">
 
-            <Highlighted sub="Titre" :menu="menu" :name="name">
-              <Title>{{ title }}</Title>
-            </Highlighted>
+            <Title :class="{'highlighted': activeTab==1&&edit.component==name}">
+              {{ title }}
+            </Title>
 
 
-            <Highlighted sub="Sous titre" :menu="menu" :name="name">
-              <p class="sub-title">{{ subTitle }}</p>
-            </Highlighted>
+            <p class="sub-title"
+               :class="{'highlighted': activeTab==2&&edit.component==name}">
+              {{ subTitle }}
+            </p>
 
-            <Highlighted sub="Texte 1" :menu="menu" :name="name">
-              <p class="text1"
-                 v-scroll-reveal="{
+            <p class="text1"
+               :class="{'highlighted': activeTab==3&&edit.component==name}"
+               v-scroll-reveal="{
                      origin: 'left',
                      distance: '400px',
                      duration: 1500,
                      delay: 50,
                      easing: 'ease',
                    }">
-                {{ presText1 }}
-              </p>
-            </Highlighted>
+              {{ presText1 }}
+            </p>
 
             <div class="columns is-variable is-8">
               <div class="column">
 
-                <Highlighted sub="Image" :menu="menu" :name="name">
-                  <img :src="presImage"
-                       v-scroll-reveal="{
+                <img :src="presImage"
+                     :class="{'highlighted': activeTab==0&&edit.component==name}"
+                     v-scroll-reveal="{
                                duration: 2500,
                                delay: 100,
                                easing: 'ease'
                              }">
-                </Highlighted>
-
               </div>
 
               <div class="column"
@@ -60,9 +58,9 @@
                            duration: 1500,
                            easing: 'ease'
                          }">
-                <Highlighted sub="Texte 2" :menu="menu" :name="name">
-                  <p>{{ presText2 }}</p>
-                </Highlighted>
+                <p :class="{'highlighted': activeTab==4&&edit.component==name}">
+                  {{ presText2 }}
+                </p>
 
               </div>
 
@@ -73,47 +71,47 @@
       </EditIcon>
     </section>
 
-    <EditNav v-if="editPannel.check(name)">
+    <EditNav v-if="edit.check(name)" height="225">
 
 
-        <b-tabs v-model="activeTab" position="is-centered">
+      <b-tabs v-model="activeTab" position="is-centered">
 
-          <b-tab-item label="Image">
-            <FileUpload></FileUpload>
-          </b-tab-item>
+        <b-tab-item label="Image">
+          <FileUpload></FileUpload>
+        </b-tab-item>
 
-          <b-tab-item class="_tab-content" label="Titre">
-            <b-input maxlength="35"
-                     :disabled="loading"
-                     v-model="title">
-            </b-input>
-          </b-tab-item>
-          <b-tab-item class="_tab-content" label="Sous titre">
-            <b-input type="textarea"
-                     maxlength="200"
-                     rows="2"
-                     :disabled="loading"
-                     v-model="subTitle">
-            </b-input>
-          </b-tab-item>
-          <b-tab-item class="_tab-content" label="Texte 1">
-            <b-input type="textarea"
-                     maxlength="800"
-                     rows="4"
-                     :disabled="loading"
-                     v-model="text1">
-            </b-input>
-          </b-tab-item>
-          <b-tab-item class="_tab-content" label="texte 2">
-            <b-input type="textarea"
-                     maxlength="800"
-                     rows="4"
-                     :disabled="loading"
-                     v-model="text2">
-            </b-input>
-          </b-tab-item>
+        <b-tab-item class="_tab-content" label="Titre">
+          <b-input maxlength="35"
+                   :disabled="loading"
+                   v-model="title">
+          </b-input>
+        </b-tab-item>
+        <b-tab-item class="_tab-content" label="Sous titre">
+          <b-input type="textarea"
+                   maxlength="200"
+                   rows="2"
+                   :disabled="loading"
+                   v-model="subTitle">
+          </b-input>
+        </b-tab-item>
+        <b-tab-item class="_tab-content" label="Texte 1">
+          <b-input type="textarea"
+                   maxlength="800"
+                   rows="4"
+                   :disabled="loading"
+                   v-model="text1">
+          </b-input>
+        </b-tab-item>
+        <b-tab-item class="_tab-content" label="texte 2">
+          <b-input type="textarea"
+                   maxlength="800"
+                   rows="4"
+                   :disabled="loading"
+                   v-model="text2">
+          </b-input>
+        </b-tab-item>
 
-        </b-tabs>
+      </b-tabs>
 
     </EditNav>
 
@@ -135,17 +133,15 @@
     data() {
       return {
         activeTab: 0,
-
-
         name: this.$options.name,
         downArrow: null,
-        editPannel: this.$Global.EditPannel,
+        edit: this.$Global.EditPannel,
         menu: [
-          {display: true, name: 'Image'},
-          {modelll: this.title, display: false, name: 'Titre'},
-          {modelll: this.subTitle, display: false, name: 'Sous titre'},
-          {modelll: this.text1, display: false, name: 'Texte 1'},
-          {modelll: this.text2, display: false, name: 'Texte 2'},
+          {display: false, name: 'Image'},
+          {display: false, name: 'Titre'},
+          {display: false, name: 'Sous titre'},
+          {display: false, name: 'Texte 1'},
+          {display: false, name: 'Texte 2'},
         ]
       };
     },
@@ -277,7 +273,6 @@
     left: 49%;
     animation: down-arrow .6s ease infinite;
 
-
     @keyframes down-arrow {
       0% {
         transform: translateY(0px);
@@ -300,7 +295,6 @@
     bottom: 140px;
     position: relative;
     cursor: pointer;
-
 
     &:hover {
       transition: color .5s ease;

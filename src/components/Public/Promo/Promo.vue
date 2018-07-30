@@ -9,21 +9,20 @@
         <div class="columns content">
 
           <div class="column left is-offset-2 is-4">
-            <Highlighted sub="Image" :menu="menu" :name="name">
-              <img :src="promoImage">
-            </Highlighted>
+              <img :class="{'highlighted': activeTab==0&&edit.component==name}"
+                   :src="promoImage">
           </div>
 
           <div class="column right is-5">
             <div>
 
-              <Highlighted sub="Titre" :menu="menu" :name="name">
-                <h3>{{ promoTitle }}</h3>
-              </Highlighted>
+                <h3 :class="{'highlighted': activeTab==1&&edit.component==name}">
+                  {{ promoTitle }}
+                </h3>
 
-              <Highlighted sub="Texte" :menu="menu" :name="name">
-                <p>{{ promoText }}</p>
-              </Highlighted>
+                <p :class="{'highlighted': activeTab==2&&edit.component==name}">
+                  {{ promoText }}
+                </p>
             </div>
           </div>
 
@@ -31,23 +30,32 @@
 
       </EditIcon>
     </div>
-    <EditNav v-if="editPannel.check($options.name)">
-      <div class="column is-3 edit-area">
-        <FileUpload
-          v-show="editPannel.getSelected('Image', menu).display"></FileUpload>
-        <b-input v-show="menu.find(i=>i.name=='Titre').display"
-                 maxlength="35"
-                 :disabled="loading"
-                 v-model="title">
-        </b-input>
-        <b-input v-show="menu.find(i=>i.name=='Texte').display"
-                 type="textarea"
-                 maxlength="500"
-                 rows="7"
-                 :disabled="loading"
-                 v-model="text">
-        </b-input>
-      </div>
+    <EditNav v-if="edit.check(name)">
+
+      <b-tabs v-model="activeTab" position="is-centered">
+
+        <b-tab-item label="Image">
+          <FileUpload></FileUpload>
+        </b-tab-item>
+
+        <b-tab-item label="Titre">
+
+          <b-input maxlength="35"
+                   :disabled="loading"
+                   v-model="title">
+          </b-input>
+        </b-tab-item>
+
+        <b-tab-item label="Texte">
+
+          <b-input type="textarea"
+                   maxlength="500"
+                   rows="4"
+                   :disabled="loading"
+                   v-model="text">
+          </b-input>
+        </b-tab-item>
+      </b-tabs>
     </EditNav>
   </div>
 </template>
@@ -65,10 +73,11 @@
     store: store,
     data() {
       return {
+        activeTab: null,
         name: this.$options.name,
-        editPannel: this.$Global.EditPannel,
+        edit: this.$Global.EditPannel,
         menu: [
-          {display: true, name: 'Image',},
+          {display: false, name: 'Image',},
           {display: false, name: 'Titre',},
           {display: false, name: 'Texte',},
         ]

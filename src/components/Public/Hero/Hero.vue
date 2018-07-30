@@ -15,22 +15,22 @@
                    duration: 1500,
                    easing: 'ease'
                    }">
-              <Highlighted sub="Gauche" :menu="menu" :name="name">
+              <div :class="{'highlighted': activeTab==0&&edit.component==name}">
                 <i :class="L_icon"></i>
                 <h2 class="subtitle">{{ L_title }}</h2>
                 <p>{{ L_text }}</p>
-              </Highlighted>
+              </div>
             </div>
             <div class="column is-one-third"
                  v-scroll-reveal="{
                    duration: 1500,
                    easing: 'ease'
                    }">
-              <Highlighted sub="Centre" :menu="menu" :name="name">
+              <div :class="{'highlighted': activeTab==1&&edit.component==name}">
                 <i :class="M_icon"></i>
                 <h2 class="subtitle">{{ M_title }}</h2>
                 <p>{{ M_text }}</p>
-              </Highlighted>
+              </div>
             </div>
             <div class="column is-one-third"
                  v-scroll-reveal="{
@@ -39,85 +39,94 @@
                    duration: 1500,
                    easing: 'ease'
                    }">
-              <Highlighted sub="Droite" :menu="menu" :name="name">
+              <div :class="{'highlighted': activeTab==2&&edit.component==name}">
                 <i :class="R_icon"></i>
                 <h2 class="subtitle">{{ R_title }}</h2>
                 <p>{{ R_text }}</p>
-              </Highlighted>
+              </div>
             </div>
           </div>
 
         </div>
       </EditIcon>
     </section>
-    <EditNav v-if="editPannel.check($options.name)">
-
-      <div class="column is-3 edit-area"
-           v-show="menu.find(i=>i.name=='Gauche').display">
-        <label>Titre:</label>
-        <b-input maxlength="20"
-                 :disabled="loading"
-                 v-model="L_title">
-        </b-input>
-        <label>Texte:</label>
-        <b-input type="textarea"
-                 rows="3"
-                 maxlength="200"
-                 :disabled="loading"
-                 v-model="L_text">
-        </b-input>
-      </div>
-      <div class="column is-3 edit-area"
-           v-show="menu.find(i=>i.name=='Gauche').display">
-        <label>Icone:</label>
-        <IconPicker @selectIcon="returnIcon" position="L"></IconPicker>
-      </div>
+    <EditNav v-if="edit.check(name)" height="300">
 
 
-      <div class="column is-3 edit-area"
-           v-show="menu.find(i=>i.name=='Centre').display">
-        <label>Titre:</label>
-        <b-input maxlength="20"
-                 :disabled="loading"
-                 v-model="M_title">
-        </b-input>
-        <label>Texte:</label>
-        <b-input type="textarea"
-                 rows="3"
-                 maxlength="200"
-                 :disabled="loading"
-                 v-model="M_text">
-        </b-input>
-      </div>
-      <div class="column is-3 edit-area"
-           v-show="menu.find(i=>i.name=='Centre').display">
-        <label>Icone:</label>
-        <IconPicker @selectIcon="returnIcon" position="M"></IconPicker>
-      </div>
+      <b-tabs v-model="activeTab" position="is-centered">
+
+        <b-tab-item label="Gauche">
+        <div class="columns is-mobile is-variable is-8-desktop">
+          <div class="column is-6">
+            <label>Titre:</label>
+            <b-input maxlength="20"
+                     :disabled="loading"
+                     v-model="L_title">
+            </b-input>
+            <label>Texte:</label>
+            <b-input type="textarea"
+                     rows="3"
+                     maxlength="200"
+                     :disabled="loading"
+                     v-model="L_text">
+            </b-input>
+          </div>
+          <div class="column is-6">
+            <label>Icone:</label>
+            <IconPicker @selectIcon="returnIcon" position="L"></IconPicker>
+          </div>
+        </div>
+        </b-tab-item>
 
 
-      <div class="column is-3 edit-area"
-           v-show="menu.find(i=>i.name=='Droite').display">
-        <label>Titre:</label>
-        <b-input maxlength="20"
-                 :disabled="loading"
-                 v-model="R_title">
-        </b-input>
-        <label>Texte:</label>
-        <b-input type="textarea"
-                 rows="3"
-                 maxlength="200"
-                 :disabled="loading"
-                 v-model="R_text">
-        </b-input>
-      </div>
+        <b-tab-item label="Centre">
+        <div class="columns is-mobile is-variable is-8-desktop">
+          <div class="column is-6">
+            <label>Titre:</label>
+            <b-input maxlength="20"
+                     :disabled="loading"
+                     v-model="M_title">
+            </b-input>
+            <label>Texte:</label>
+            <b-input type="textarea"
+                     rows="3"
+                     maxlength="200"
+                     :disabled="loading"
+                     v-model="M_text">
+            </b-input>
+          </div>
+          <div class="column is-6">
+            <label>Icone:</label>
+            <IconPicker @selectIcon="returnIcon" position="M"></IconPicker>
+          </div>
+        </div>
+        </b-tab-item>
 
 
-      <div class="column is-3 edit-area"
-           v-show="menu.find(i=>i.name=='Droite').display">
-        <label>Icone:</label>
-        <IconPicker @selectIcon="returnIcon" position="R"></IconPicker>
-      </div>
+        <b-tab-item label="Droite">
+        <div class="columns is-mobile is-variable is-8-desktop">
+          <div class="column is-6">
+            <label>Titre:</label>
+            <b-input maxlength="20"
+                     :disabled="loading"
+                     v-model="R_title">
+            </b-input>
+            <label>Texte:</label>
+            <b-input type="textarea"
+                     rows="3"
+                     maxlength="200"
+                     :disabled="loading"
+                     v-model="R_text">
+            </b-input>
+          </div>
+          <div class="column is-6">
+            <label>Icone:</label>
+            <IconPicker @selectIcon="returnIcon" position="R"></IconPicker>
+          </div>
+        </div>
+        </b-tab-item>
+
+      </b-tabs>
 
 
     </EditNav>
@@ -139,11 +148,13 @@
     store: store,
     data() {
       return {
+        activeTab: 0,
         name: this.$options.name,
-        editPannel: this.$Global.EditPannel,
+
+        edit: this.$Global.EditPannel,
         iconPicker: false,
         menu: [
-          {display: true, name: 'Gauche'},
+          {display: false, name: 'Gauche'},
           {display: false, name: 'Centre'},
           {display: false, name: 'Droite'},
         ]
