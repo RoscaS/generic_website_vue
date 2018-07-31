@@ -1,20 +1,22 @@
 import Vue from 'vue';
 import {Toast} from 'buefy';
 
-const toastType = ['is-danger', 'is-success', 'is-warning'];
+const data = [
+  { color: 'is-danger', message: "Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur." },
+  { color: 'is-success', message: "Donnée mise à jour!" },
+  { color: 'is-warning', message: "Modifications annulées." },
+];
 
 const Tools = new Vue({
   methods: {
-    message(message, type) { this.toast(message, type); },
+    message(type) { this.toast(type); },
+    errorMessage(url, error) { this.toast(0, url, error); },
 
-    errorMessage(message, url, error) { this.toast(message, 0, url, error); },
-
-    toast(message, type, url='', error=null) {
-      console.log(message)
+    toast(type, url='', error=null) {
       if (error) {console.log(`Error @ ${url} call:\n${error}`);}
       Toast.open({
-        message: message,
-        type: toastType[type],
+        message: data[type].message,
+        type: data[type].color,
         position: 'is-bottom'
       });
     },

@@ -30,7 +30,6 @@
     },
 
     computed: {
-      root() { console.log('ici'); return this.$parent.$parent; },
       dirty: {
         get() { return this.edit.dirty; },
         set(value) { this.edit.dirty = value; }
@@ -45,11 +44,12 @@
       validateBtn() {
         if (this.dirty) {
           this.disable = false;
-          this.root.pushData();
+          this.edit.pushSignal = true;
+          this.loading = true;
+          this.checkLoading();
+        } else {
+          this.edit.endEdit();
         }
-        // this.loading = !this.loading;
-        this.loading = true;
-        this.checkLoading();
       },
 
       cancelBtn() {
@@ -57,9 +57,9 @@
           this.disable = true;
           setTimeout(() => {this.disable = false;}, this.timeout);
           this.storeIsDirty();
-          return;
+        } else {
+          this.edit.endEdit();
         }
-        this.edit.endEdit();
       },
 
       checkLoading() {
@@ -76,7 +76,7 @@
           duration: this.timeout,
           indefinite: false,
           onAction: () => {
-            this.root.recoverData();
+            this.edit.recoverSignal = true;
             this.disable = false;
             this.edit.endEdit();
           }

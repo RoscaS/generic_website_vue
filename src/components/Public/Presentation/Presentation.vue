@@ -9,26 +9,22 @@
            }"></i>
     </div>
 
-
     <section id="Presentation" class="section section-container">
-      <EditIcon Top="20px"
-                :component="name">
-                <!--@backup-original-data="backupData">-->
-
+      <EditIcon Top="20px" :component="name">
         <div class="container">
           <div class="content">
 
-            <Title :class="{'highlighted': activeTab==1&&edit.component==name}">
+            <Title :class="{'highlighted': highlighted(1)}">
               {{ title }}
             </Title>
 
             <p class="sub-title"
-               :class="{'highlighted': activeTab==2&&edit.component==name}">
-              {{ subTitle }}
+               :class="{'highlighted': highlighted(2)}">
+              {{ subTi }}
             </p>
 
             <p class="text1"
-               :class="{'highlighted': activeTab==3&&edit.component==name}"
+               :class="{'highlighted': highlighted(3)}"
                v-scroll-reveal="{
                      origin: 'left',
                      distance: '400px',
@@ -43,7 +39,7 @@
               <div class="column">
 
                 <img :src="image"
-                     :class="{'highlighted': activeTab==0&&edit.component==name}"
+                     :class="{'highlighted': highlighted(0)}"
                      v-scroll-reveal="{
                                duration: 2500,
                                delay: 100,
@@ -59,7 +55,7 @@
                            duration: 1500,
                            easing: 'ease'
                          }">
-                <p :class="{'highlighted': activeTab==4&&edit.component==name}">
+                <p :class="{'highlighted': highlighted(4)}">
                   {{ text2 }}
                 </p>
 
@@ -67,15 +63,17 @@
             </div>
           </div>
         </div>
-
       </EditIcon>
     </section>
 
-    <EditNav v-if="edit.component==name" height="225">
+    <EditNav v-if="edit.component==name"
+             height="225"
+             @push-data="pushData"
+             @recover-data="recoverData">
       <b-tabs v-model="activeTab" position="is-centered">
 
         <b-tab-item label="Image">
-          <FileUpload></FileUpload>
+          <FileUpload @image-preview="image=$event"></FileUpload>
         </b-tab-item>
 
         <b-tab-item label="Titre">
@@ -89,7 +87,7 @@
                    maxlength="200"
                    rows="2"
                    :disabled="loading"
-                   v-model="subTitle">
+                   v-model="subTi">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Texte 1">
@@ -116,11 +114,9 @@
 
 <script>
   import PresentationStore from './PresentationStore';
-
   import EditIcon from '../../Components/Edit/EditIcon';
   import EditNav from '../../Components/Edit/EditNav';
   import FileUpload from '../../Components/Edit/FileUpload';
-
 
   export default {
     name: "Presentation",
@@ -129,45 +125,52 @@
       return {
         name: this.$options.name,
         edit: this.$Global.EditPannel,
-        loading: this.$Global.EditPannel.loading,
-
         store: PresentationStore,
         state: PresentationStore.state,
-
         activeTab: 0,
         downArrow: null,
       };
     },
 
     computed: {
+      loading() { return this.edit.loading; },
+      pushSignal() { return this.edit.pushSignal; },
+      recoverSignal() { return this.edit.recoverSignal; },
+
       title: {
-        get() { return this.state.title;},
+        get() { return this.state.title ; },
         set(value) { this.state.title = value; }
       },
-      subTitle: {
-        get() { return this.state.subTitle;},
-        set(value) { this.state.subTitle = value; }
+      subTi: {
+        get() { return this.state.subTi; },
+        set(value) { this.state.subTi = value; }
       },
       text1: {
-        get() { return this.state.text1;},
+        get() { return this.state.text1 ; },
         set(value) { this.state.text1 = value; }
       },
       text2: {
-        get() { return this.state.text2;},
+        get() { return this.state.text2 ; },
         set(value) { this.state.text2 = value; }
       },
       image: {
-        get() { return this.state.image;},
-        set(value) { this.state.image = value; }
+        get() { return this.state.image ; },
+        set(value) {this.state.image = value; }
       },
+    },
+
+    watch: {
+      recoverSignal() { this.edit.recoverSignal? this.recoverData(): '' },
+      pushSignal() { this.edit.pushSignal? this.pushData(): '' },
     },
 
     methods: {
       pushData() { PresentationStore.pushData(); },
-      recoverData() { PresentationStore.setRecoverData(); },
-
+      recoverData() { PresentationStore.recoverData(); },
       DirtyFlag() { return this.state.isDirty; },
-      LoadingFlag() { console.log('delete-me, LoadingFlag'); },
+      highlighted(idx) {
+        return (this.activeTab == idx) && (this.edit.component == this.name);
+      },
 
       scrollWatch() {
         if (window.pageYOffset >= 165) {

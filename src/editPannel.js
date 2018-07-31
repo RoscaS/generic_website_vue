@@ -6,12 +6,21 @@ const EditPannel = new Vue({
     component: null,
     loading: false,
     edit: false,
-
     dirty: false,
 
-    //
+    pushSignal: false,
+    recoverSignal: false,
+
+    image: '',
+
     reOrder: false
   },
+
+  watch: {
+    pushSignal() { setTimeout(() => { this.pushSignal = false; }, 10); },
+    recoverSignal() { setTimeout(() => { this.recoverSignal = false; }, 10); },
+  },
+
 
   methods: {
     startEdit(component) {
@@ -22,12 +31,10 @@ const EditPannel = new Vue({
     endEdit() {
       this.edit = false;
       this.loading = false;
-      setTimeout(() => { this.component = null; }, 1000);
+      setTimeout(() => {
+        this.component = null;
+      }, 1000);
     },
-
-    // check(component) {
-    //   return component == this.component;
-    // },
   }
 });
 

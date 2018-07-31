@@ -2,16 +2,12 @@ import Vue from 'vue';
 import axios from 'axios';
 
 const url = 'presentation/1/';
-const successMessage = "Donnée mise à jour!";
-const errorMessage = "Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur.";
-const cancelMessage = "Modifications annulées."
 
 const PresentationStore = new Vue({
   data: {
-    state: { title: '', subTitle: '', text1: '', text2: '', image: '', },
-    backup: { title: '', subTitle: '', text1: '', text2: '', image: '', },
+    state: { title: '', subTi: '', text1: '', text2: '', image: '', },
+    backup: { title: '', subTi: '', text1: '', text2: '', image: '', },
   },
-
   computed: {
     edit() { return this.$Global.EditPannel; },
     tools() { return this.$Global.Tools; },
@@ -36,20 +32,20 @@ const PresentationStore = new Vue({
   },
   methods: {
     _copyData(from, to) { for (let i in from) {to[i] = from[i];} },
-    setBackupData() { this._copyData(this.state, this.backup); },
-    setRecoverData() {
+    backupData() { this._copyData(this.state, this.backup); },
+    recoverData() {
       this._copyData(this.backup, this.state);
-      this.tools.message(cancelMessage, 2);
+      this.tools.message(2);
       },
 
     fetchData() {
       axios.get(url).then(response => {
         this.state.title = response.data.title;
-        this.state.subTitle = response.data.sub_title;
+        this.state.subTi = response.data.sub_title;
         this.state.text1 = response.data.text1;
         this.state.text2 = response.data.text2;
         this.state.image = response.data.image.image;
-        this.setBackupData();
+        this.backupData();
       }).catch(error => { console.log(`${url}\n${error}`);});
     },
     commit() {
@@ -62,11 +58,11 @@ const PresentationStore = new Vue({
       this.isDirty = false;
       this.loading = false;
       if (error) {
-        this.tools.errorMessage(errorMessage, url, error);
-        this.setRecoverData();
+        this.tools.errorMessage(url, error);
+        this.recoverData();
       } else {
-        this.tools.message(successMessage, 1);
-        this.setBackupData();
+        this.tools.message(1);
+        this.backupData();
       }
     },
     checkDirty() {
@@ -80,7 +76,7 @@ const PresentationStore = new Vue({
     pushData() {
       axios.put(url, {
         title: this.state.title,
-        sub_title: this.state.subTitle,
+        sub_title: this.state.subTi,
         text1: this.state.text1,
         text2: this.state.text2,
         image: this.state.image,

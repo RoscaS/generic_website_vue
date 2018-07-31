@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dropbox is-hidden-touch"
+    <div class="dropbox"
          :class="{'disabled-dropbox': loading}">
       <input class="input-file"
              type="file"
@@ -14,37 +14,24 @@
         <small>ou cliquez pour naviguer votre disque.</small>
       </p>
     </div>
-
-    <div class="dropbox is-hidden-desktop mobile"
-         :class="{'disabled-dropbox': loading}">
-      <input class="input-file"
-             type="file"
-             ref="file"
-             :disabled="loading"
-             @change="fileUpload">
-      <p>Ajouter une image</p>
-    </div>
   </div>
 </template>
 
 <script>
   import axios from 'axios';
 
+  const url = 'images/';
 
   export default {
     name: "FileUpload",
     data() {
-      return {};
+      return {
+        edit: this.$Global.EditPannel,
+      };
     },
 
     computed: {
-      root() {
-        return this.$parent.$parent;
-      },
-
-      loading() {
-        return this.root.LoadingFlag;
-      },
+      loading() { return this.edit.loading; },
     },
 
     methods: {
@@ -53,14 +40,12 @@
         let formData = new FormData();
         formData.append('image', file);
         formData.append('gallery', '_temp');
-        axios.post('http://localhost:8000/images/',
-          formData,
-          {
+        axios.post(url, formData, {
             headers: {'content-type': 'multipart/form-data'},
           }
         ).then(response => {
-          console.log(response);
-          this.root.image = response.data.image;
+          this.$emit('image-preview', response.data.image);
+          this.edit.dirty = true;
         }).catch(error => {
           this.$toast.open({
             duration: 4000,
