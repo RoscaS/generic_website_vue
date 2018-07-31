@@ -10,7 +10,7 @@
     </div>
 
     <section id="Presentation" class="section section-container">
-      <EditIcon Top="20px" :component="name">
+      <EditIcon top="20px" :component="name">
         <div class="container">
           <div class="content">
 
@@ -66,10 +66,7 @@
       </EditIcon>
     </section>
 
-    <EditNav v-if="edit.component==name"
-             height="225"
-             @push-data="pushData"
-             @recover-data="recoverData">
+    <EditNav v-if="edit.component==name" height="225">
       <b-tabs v-model="activeTab" position="is-centered">
 
         <b-tab-item label="Image">
@@ -138,7 +135,7 @@
       recoverSignal() { return this.edit.recoverSignal; },
 
       title: {
-        get() { return this.state.title ; },
+        get() { return this.state.title; },
         set(value) { this.state.title = value; }
       },
       subTi: {
@@ -146,31 +143,34 @@
         set(value) { this.state.subTi = value; }
       },
       text1: {
-        get() { return this.state.text1 ; },
+        get() { return this.state.text1; },
         set(value) { this.state.text1 = value; }
       },
       text2: {
-        get() { return this.state.text2 ; },
+        get() { return this.state.text2; },
         set(value) { this.state.text2 = value; }
       },
       image: {
-        get() { return this.state.image ; },
+        get() { return this.state.image; },
         set(value) {this.state.image = value; }
       },
     },
 
     watch: {
-      recoverSignal() { this.edit.recoverSignal? this.recoverData(): '' },
-      pushSignal() { this.edit.pushSignal? this.pushData(): '' },
+      recoverSignal() {
+        if (this.checkSignal(this.edit.recoverSignal)) this.recoverData();
+      },
+      pushSignal() {
+        if (this.checkSignal(this.edit.pushSignal)) this.pushData();
+      },
     },
 
     methods: {
       pushData() { PresentationStore.pushData(); },
       recoverData() { PresentationStore.recoverData(); },
-      DirtyFlag() { return this.state.isDirty; },
-      highlighted(idx) {
-        return (this.activeTab == idx) && (this.edit.component == this.name);
-      },
+      checkName() { return this.edit.component === this.name;},
+      highlighted(idx) { return (this.activeTab == idx) && this.checkName(); },
+      checkSignal(sig) { return sig && this.checkName(); },
 
       scrollWatch() {
         if (window.pageYOffset >= 165) {
@@ -192,10 +192,9 @@
     },
 
     mounted() {
-      PresentationStore.fetchData()
+      PresentationStore.fetchData();
       window.addEventListener('scroll', this.scrollWatch);
       this.setDownArrow();
-
     },
   };
 </script>

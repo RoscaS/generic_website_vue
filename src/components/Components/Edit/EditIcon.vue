@@ -15,8 +15,8 @@
   export default {
     name: "EditIcon",
     props: {
-      Right: {type: String},
-      Top: {type: String},
+      right: {type: String},
+      top: {type: String},
       component: {type: String},
     },
     data() {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--<PromoRibbon/>-->
+    <PromoRibbon/>
     <Top/>
     <!--<Navbar/>-->
     <!--<Carousel :url="base + carousel"/>-->

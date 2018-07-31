@@ -1,53 +1,40 @@
 <template>
   <div>
     <div class="container collapse-content">
-      <EditIcon Right="200px"
-                Top="0"
-                :Component="$options.name"
-                @backup-original-data="backupData">
 
+      <EditIcon :component="name">
         <div class="columns content">
-
           <div class="column left is-offset-2 is-4">
-              <img :class="{'highlighted': activeTab==0&&edit.component==name}"
-                   :src="promoImage">
+            <img :class="{'highlighted': highlighted(2)}"
+                 :src="image">
           </div>
-
           <div class="column right is-5">
             <div>
-
-                <h3 :class="{'highlighted': activeTab==1&&edit.component==name}">
-                  {{ promoTitle }}
-                </h3>
-
-                <p :class="{'highlighted': activeTab==2&&edit.component==name}">
-                  {{ promoText }}
-                </p>
+              <h3 :class="{'highlighted': highlighted(0)}">
+                {{ title }}
+              </h3>
+              <p :class="{'highlighted': highlighted(1)}">
+                {{ text }}
+              </p>
             </div>
           </div>
-
         </div>
-
       </EditIcon>
     </div>
-    <EditNav v-if="edit.check(name)">
-
+    <EditNav v-if="edit.component==name">
       <b-tabs v-model="activeTab" position="is-centered">
 
         <b-tab-item label="Image">
-          <FileUpload></FileUpload>
+          <FileUpload @image-preview="image=$event"></FileUpload>
         </b-tab-item>
 
         <b-tab-item label="Titre">
-
           <b-input maxlength="35"
                    :disabled="loading"
                    v-model="title">
           </b-input>
         </b-tab-item>
-
         <b-tab-item label="Texte">
-
           <b-input type="textarea"
                    maxlength="500"
                    rows="4"
@@ -61,8 +48,7 @@
 </template>
 
 <script>
-  import store from './PromoStore';
-  import {mapGetters, mapActions} from 'vuex';
+  import PromoStore from './PromoStore';
   import EditIcon from '../../Components/Edit/EditIcon';
   import EditNav from '../../Components/Edit/EditNav';
   import FileUpload from '../../Components/Edit/FileUpload';
@@ -70,79 +56,56 @@
   export default {
     name: 'Promo',
     components: {EditIcon, EditNav, FileUpload},
-    store: store,
     data() {
       return {
-        activeTab: null,
         name: this.$options.name,
         edit: this.$Global.EditPannel,
-        menu: [
-          {display: false, name: 'Image',},
-          {display: false, name: 'Titre',},
-          {display: false, name: 'Texte',},
-        ]
+        store: PromoStore,
+        state: PromoStore.state,
+        activeTab: 0,
       };
     },
-    computed: {
-      ...mapGetters([
-        'promoTitle',
-        'promoText',
-        'promoImage',
-        'DirtyFlag', // used in Validation Btns
-        'LoadingFlag',
-      ]),
 
-      loading: {
-        get() { return this.LoadingFlag; },
-      },
+    computed: {
+      loading() { return this.edit.loading; },
+      pushSignal() { return this.edit.pushSignal; },
+      recoverSignal() { return this.edit.recoverSignal; },
 
       title: {
-        get() { return this.promoTitle; },
-        set(value) {
-          this.setTitle(value);
-          this.toggleDirty();
-        }
+        get() { return this.state.title; },
+        set(value) { this.state.title = value; }
       },
 
       text: {
-        get() { return this.promoText; },
-        set(value) {
-          this.setText(value);
-          this.toggleDirty();
-        }
+        get() { return this.state.text; },
+        set(value) { this.state.text2 = value; }
       },
-
       image: {
-        get() { return this.promoImage; },
-        set(value) {
-          this.setImage(value);
-          this.toggleDirty();
-        }
-      }
+        get() { return this.state.image; },
+        set(value) {this.state.image = value; }
+      },
     },
 
     watch: {
-      title(value) {this.setTitle(value);},
-      text(value) {this.setText(value);},
-      image(value) {this.setImage(value);}
+      recoverSignal() {
+        if (this.checkSignal(this.edit.recoverSignal)) this.recoverData();
+      },
+      pushSignal() {
+        if (this.checkSignal(this.edit.pushSignal)) this.pushData();
+      },
     },
 
     methods: {
-      ...mapActions([
-        'fetchData',
-        'pushData',
-        'backupData',
-        'recoverData',
-        'setTitle',
-        'setText',
-        'setImage',
-        'toggleDirty',
-      ]),
+      pushData() { PromoStore.pushData(); },
+      recoverData() { PromoStore.recoverData(); },
+      checkName() { return this.edit.component === this.name;},
+      highlighted(idx) { return (this.activeTab == idx) && this.checkName(); },
+      checkSignal(sig) { return sig && this.checkName(); },
     },
 
     mounted() {
-      this.fetchData();
-    }
+      PromoStore.fetchData();
+    },
   };
 </script>
 
