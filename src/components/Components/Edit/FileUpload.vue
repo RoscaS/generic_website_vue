@@ -19,14 +19,14 @@
 
 <script>
   import axios from 'axios';
-
+  import EditStore from '../../Components/Edit/EditStore'
   const url = 'images/';
 
   export default {
     name: "FileUpload",
     data() {
       return {
-        edit: this.$Global.EditPannel,
+        edit: EditStore
       };
     },
 

@@ -17,13 +17,13 @@
 </template>
 
 <script>
+  import EditStore from '../../../components/Components/Edit/EditStore'
 
   export default {
     name: "ValidationButtons",
     data() {
       return {
-        edit: this.$Global.EditPannel,
-
+        edit: EditStore,
         disable: false,
         timeout: 5000,
       };
@@ -31,33 +31,39 @@
     computed: {
       loading: {
         get() { return this.edit.loading; },
-        set(value) { this.edit.loading = value; }
+        set(value) { this.edit.setLoading(value); }
       }
     },
     methods: {
+
       validateBtn() {
         if (this.edit.dirty) {
+          this.edit.sendPushSignal();
           this.disable = false;
-          this.edit.pushSignal = true;
-          this.loading = true;
           this.checkLoading();
         } else {
           this.edit.end();
         }
       },
+
       cancelBtn() {
         if (this.edit.dirty) {
           this.disable = true;
-          setTimeout(() => {this.disable = false;}, this.timeout);
           this.snackBar();
+          setTimeout(() => {this.disable = false;}, this.timeout);
         } else {
           this.edit.end();
         }
       },
+
       checkLoading() {
-        this.loading ? setTimeout(() => { this.checkLoading(); }, 100)
-                     : this.edit.end();
+        if (this.loading) {
+          setTimeout(() => { this.checkLoading(); }, 100)
+        } else {
+          this.edit.end()
+        }
       },
+
       snackBar() {
         this.$snackbar.open({
           message: 'Les modifications seront perdues.',
@@ -67,7 +73,7 @@
           duration: this.timeout,
           indefinite: false,
           onAction: () => {
-            this.edit.recoverSignal = true;
+            this.edit.sendRecoverSignal();
             this.disable = false;
             this.edit.end();
           }

@@ -1,64 +1,48 @@
+import EditStore from '../components/Components/Edit/EditStore'
+
 export default {
   data: {
-    component: '',
+    component: null,
+    edit: EditStore,
   },
   computed: {
-    edit() { return this.$Global.EditPannel; },
     tools() { return this.$Global.Tools; },
     pushSignal() { return this.edit.pushSignal; },
     recoverSignal() { return this.edit.recoverSignal; },
-    loading: {
-      get() { return this.edit.loading; },
-      set(value) { this.edit.loading = value; }
-    },
-    isDirty: {
-      get() { return this.edit.dirty; },
-      set(value) { this.edit.dirty = value; }
-    }
+    backupSignal() { return this.edit.backupSignal; },
   },
   watch: {
-    recoverSignal() {
-      if (this.edit.recoverSignal && this.checkComponent()) {
-        console.log('dedans')
-        this.recoverData();
-      }
-    },
     pushSignal() {
-      if (this.edit.pushSignal && this.checkComponent()) {
-        this.pushData();
-      }
+      if (this.checkSignal(this.pushSignal)) { this.commitData(); }
+    },
+    recoverSignal() {
+      if (this.checkSignal(this.recoverSignal)) { this.recoverData(); }
+    },
+    backupSignal() {
+      if (this.checkSignal(this.backupSignal)) { this.backupData(); }
     },
     state: {
       handler() {
-        if (!this.isDirty) {
-          this.checkDirty() ? this.isDirty = true : this.isDirty = false;
+        if (this.component == this.edit.component && !this.edit.dirty) {
+          this.dirtyCheck()
         }
       },
       deep: true
     },
   },
   methods: {
-    _copyData(from, to) {
-      for (let i in from) {
-        to[i] = from[i];
-      }
+    setComponent(value) {
+      this.component = value
     },
-    backupData() {
-      this._copyData(this.state, this.backup);
+    copyData(from, to) {
+      for (let i in from) {to[i] = from[i]; }
     },
-    recoverData() {
-      this._copyData(this.backup, this.state);
-      this.tools.message(2);
-    },
-    commit() {
-      if (this.checkDirty()) {
-        this.loading = true;
-        this.pushData();
-      }
+    commitData() {
+      this.pushData();
     },
     postCommit(error = null) {
-      this.isDirty = false;
-      this.loading = false;
+      this.edit.setDirty(false);
+      this.edit.setLoading(false);
       if (error) {
         this.tools.errorMessage(this.$options.url, error);
         this.recoverData();
@@ -67,16 +51,23 @@ export default {
         this.backupData();
       }
     },
-    checkDirty() {
+    recoverData() {
+      this.copyData(this.backup, this.state);
+      this.tools.message(2);
+    },
+    backupData() {
+      this.copyData(this.state, this.backup);
+    },
+    dirtyCheck() {
       for (let i in this.backup) {
         if (this.backup[i] !== this.state[i]) {
-          return true;
+          this.edit.setDirty(true);
+          return
         }
       }
-      return false;
     },
-    checkComponent() {
-      return this.component == this.edit.component
+    checkSignal(signal) {
+      return signal && this.component == this.edit.component
     }
   }
 };

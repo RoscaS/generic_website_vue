@@ -3,7 +3,7 @@
               enter-active-class="slideInUp"
               leave-active-class="slideOutDown">
 
-    <div class="navbar custom-tabs-wrapper" v-show="edit.edit">
+    <div class="navbar custom-tabs-wrapper" v-show="edit.active">
 
       <div class="columns">
         <div class="column is-5-desktop is-offset-4-desktop">
@@ -27,7 +27,7 @@
   import {SpinLine} from 'vue-loading-spinner';
   import FileUpload from '../../Components/Edit/FileUpload';
   import ValidationBtns from './ValidationButtons';
-
+  import EditStore from '../../../components/Components/Edit/EditStore'
 
   export default {
     name: "EditNav",
@@ -38,7 +38,7 @@
     data() {
       return {
         activeTab: 0,
-        edit: this.$Global.EditPannel
+        edit: EditStore
       };
     },
   };

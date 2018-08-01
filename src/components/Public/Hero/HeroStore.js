@@ -31,7 +31,6 @@ const HeroStore = new Vue({
         this.state.L_text = response.data.text1;
         this.state.C_text = response.data.text2;
         this.state.R_text = response.data.text3;
-        this.backupData();
       }).catch(error => { (`${this.$options.url}\n${error}`); });
     },
     pushData() {

@@ -2,7 +2,7 @@
   <div>
     <button class="button is-danger"
             :style="setStyle"
-            :disabled="edit.edit"
+            :disabled="edit.active"
             @click="edit.start(component)">
       <i class="fal fa-pencil-alt">
       </i>
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+  import EditStore from '../../../components/Components/Edit/EditStore'
+
   export default {
     name: "EditIcon",
     props: {
@@ -21,8 +23,8 @@
     },
     data() {
       return {
-        edit: this.$Global.EditPannel,
-      };
+        edit: EditStore
+      }
     },
     computed: {
       setStyle() { return `margin-top:${this.Top};`; },

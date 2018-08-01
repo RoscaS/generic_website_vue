@@ -1,18 +1,18 @@
 import EditIcon from '../components/Components/Edit/EditIcon';
 import EditNav from '../components/Components/Edit/EditNav';
 import FileUpload from '../components/Components/Edit/FileUpload';
+import EditStore from '../components/Components/Edit/EditStore'
 
 export default {
   components: {EditIcon, EditNav, FileUpload},
   data() {
     return {
-      store: this.store,
+      edit: EditStore,
       name: this.$options.name,
       activeTab: 0,
     };
   },
   computed: {
-    edit() { return this.$Global.EditPannel; },
     loading() { return this.edit.loading; },
   },
   methods: {
@@ -25,7 +25,7 @@ export default {
   },
 
   mounted() {
-    this.store.component = this.name;
+    this.store.setComponent(this.name);
     this.store.fetchData();
   }
 };

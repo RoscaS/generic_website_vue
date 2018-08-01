@@ -14,7 +14,6 @@ const GalleryDataStore = new Vue ({
       axios.get(this.$options.url).then(response => {
         this.state.title = response.data.title;
         this.state.subTi = response.data.sub_title;
-        this.backupData();
       }).catch(error => { console.log(`${this.$options.url}\n${error}`);});
     },
     pushData() {

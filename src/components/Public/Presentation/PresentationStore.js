@@ -18,7 +18,6 @@ const PresentationStore = new Vue({
         this.state.text1 = response.data.text1;
         this.state.text2 = response.data.text2;
         this.state.image = response.data.image.image;
-        this.backupData();
       }).catch(error => { console.log(`${this.$options.url}\n${error}`);});
     },
     pushData() {

@@ -15,7 +15,6 @@ const PromoStore = new Vue({
         this.state.title = response.data.title;
         this.state.text = response.data.text;
         this.state.image = response.data.image.image;
-        this.backupData();
       }).catch(error => { console.log(`${this.$options.url}\n${error}`);});
     },
     pushData() {

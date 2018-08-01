@@ -28,12 +28,10 @@ Vue.use(Buefy, {
 
 // Perso
   //  Global variable
-import EditPannel from './editPannel';
 import Tools from './tools';
 import Options from './options';
 
 const Global = {
-  EditPannel: EditPannel,
   Options: Options,
   Tools: Tools
 };
