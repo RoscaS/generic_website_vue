@@ -11,8 +11,8 @@
     <Parallax :url="base + parallax" :idx="1" :height="400"/>
     <Gallery/>
     <Parallax :url="base + parallax" :idx="2" :height="400"/>
-    <Contact :url="base + contact" :urlPostMessage="base + message"/>
-    <Review :url="base + review"/>
+    <Contact/>
+    <Review/>
     <Footer/>
   </div>
 </template>
@@ -31,7 +31,7 @@
   import Hero from './Public/Hero/Hero';
   import Gallery from './Public/Gallery/Gallery';
   import Contact from './Public/Contact/Contact';
-  import Review from './Public/Review';
+  import Review from './Public/Review/Review';
   import Footer from './Public/Footer';
 
   import GalleryManager from './Public/GalleryManager/GalleryManager';
@@ -47,15 +47,9 @@
         title: 'first',
 
         base: 'http://localhost:8000/',
-        message: 'message/',
 
         parallax: 'galleries/parallax/',
         carousel: 'galleries/carousel/',
-        gallery: 'galleries/events/',
-        galleryData: 'gallery/1',
-        contact: 'contact/1',
-        review: 'review/1',
-
       };
     }
   };

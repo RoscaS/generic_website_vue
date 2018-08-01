@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content">
         <Title>{{ title }}</Title>
-        <p class="sub-title">{{ subTitle }}</p>
+        <p class="sub-title">{{ subTi }}</p>
         <div class="level">
 
           <div class="level-item">
@@ -65,11 +65,11 @@
           <div class="column is-6"
                v-for="review in reviews"
                v-scroll-reveal="{
-              origin: 'bottom',
-              distance: '100px',
-              duration: 1500,
-              delay: 0,
-              easing: 'ease',
+                origin: 'bottom',
+                distance: '100px',
+                duration: 1500,
+                delay: 0,
+                easing: 'ease',
              }">
             <div class="card shadow">
               <div class="card-content">
@@ -108,33 +108,47 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import ReviewStore from './ReviewStore';
   import moment from 'moment';
+  import mixin from '../../../mixins/PublicMixin';
 
 
   export default {
     name: "Review",
-    components: { },
-    props: {
-      url: {type: String},
-    },
+    mixins: [mixin],
 
     data() {
       return {
-        title: null,
-        subTitle: null,
-        reviewAll: null,
-        reviewNew: null,
-        overall: null,
-        reviews: null,
+        store: ReviewStore,
+        state: ReviewStore.state,
       };
     },
-
+    computed: {
+      title: {
+        get() { return this.state.title; },
+        set(value) { this.state.title = value; }
+      },
+      subTi: {
+        get() { return this.state.subTi; },
+        set(value) { this.state.subTi = value; }
+      },
+      reviewAll: {
+        get() { return this.store.reviewAll; },
+      },
+      reviewNew: {
+        get() { return this.store.reviewNew; },
+      },
+      overall: {
+        get() { return this.store.overall; },
+      },
+      reviews: {
+        get() {return this.store.reviews; },
+      },
+    },
     methods: {
       getDateTime(epoch) {
         return moment(epoch * 1000).format('D/M/Y');
       },
-
       getStarsList(rating) {
         let lst = [];
         let value = parseInt(rating);
@@ -147,32 +161,16 @@
         return lst;
       }
     },
-
-    mounted() {
-      axios.get(this.url).then(response => {
-        let data = response.data;
-        this.title = data.title;
-        this.subTitle = data.sub_title;
-
-        this.reviewAll = data.g_review_all_url;
-        this.reviewNew = data.g_review_new_url;
-        this.overall = data.reviews.overall;
-        this.reviews = data.reviews.reviews;
-      }).catch(error => {
-        console.log(this.url);
-        console.log(error);
-      });
-    }
   };
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../../../static/sass/global';
 
   .overall {
     width: 350px;
     max-width: 350px;
-    margin: 40px auto 40px auto;
+    margin: 0 auto 40px auto;
     .level-left {
       font-family: arial, sans-serif;
       font-size: 32px;
