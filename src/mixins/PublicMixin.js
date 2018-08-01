@@ -23,7 +23,6 @@ export default {
       return (this.activeTab == idx) && this.checkName();
     },
   },
-
   mounted() {
     this.store.setComponent(this.name);
     this.store.fetchData();

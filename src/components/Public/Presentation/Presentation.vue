@@ -83,7 +83,7 @@
         <b-tab-item label="Texte 1">
           <b-input type="textarea"
                    maxlength="800"
-                   rows="4"
+                   rows="5"
                    :disabled="loading"
                    v-model="text1">
           </b-input>
@@ -91,7 +91,7 @@
         <b-tab-item label="texte 2">
           <b-input type="textarea"
                    maxlength="800"
-                   rows="4"
+                   rows="5"
                    :disabled="loading"
                    v-model="text2">
           </b-input>

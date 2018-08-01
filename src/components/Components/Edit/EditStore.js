@@ -41,7 +41,6 @@ const EditStore = new Vue({
       this.active = true;
     },
     end() {
-      this.loading = false;
       this.active = false;
       setTimeout(() => { this.component = null; }, 1000);
     },

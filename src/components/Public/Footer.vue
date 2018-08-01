@@ -66,25 +66,25 @@
     name: "Footer",
     data() {
       return {
-        options: this.$Global.Options,
+        siteSettings: this.$Global.SiteSettings,
       };
     },
     computed: {
       icons() {
         return [
-          {icon: 'fa-facebook', url: this.options.facebook,},
-          {icon: 'fa-tripadvisor', url: this.options.tripadvisor,},
-          {icon: 'fa-google', url: this.options.google,},
-          {icon: 'fa-twitter', url: this.options.twitter,},
-          {icon: 'fa-instagram', url: this.options.instagram,},
-          {icon: 'fa-linkedin', url: this.options.linkedin,},
-          {icon: 'fa-snapchat', url: this.options.snapchat,},
+          {icon: 'fa-facebook', url: this.siteSettings.facebook,},
+          {icon: 'fa-tripadvisor', url: this.siteSettings.tripadvisor,},
+          {icon: 'fa-google', url: this.siteSettings.google,},
+          {icon: 'fa-twitter', url: this.siteSettings.twitter,},
+          {icon: 'fa-instagram', url: this.siteSettings.instagram,},
+          {icon: 'fa-linkedin', url: this.siteSettings.linkedin,},
+          {icon: 'fa-snapchat', url: this.siteSettings.snapchat,},
         ];
       }
     },
     methods: {
       getCopyright() {
-        return moment().format('Y') + ' ' + this.options.projectName;
+        return moment().format('Y') + ' ' + this.siteSettings.projectName;
       },
     }
   };

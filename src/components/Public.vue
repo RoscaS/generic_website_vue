@@ -30,12 +30,11 @@
   import Articles from './Public/Articles';
   import Hero from './Public/Hero/Hero';
   import Gallery from './Public/Gallery/Gallery';
-  import Contact from './Public/Contact';
+  import Contact from './Public/Contact/Contact';
   import Review from './Public/Review';
   import Footer from './Public/Footer';
 
   import GalleryManager from './Public/GalleryManager/GalleryManager';
-
 
   export default {
     name: "Public",

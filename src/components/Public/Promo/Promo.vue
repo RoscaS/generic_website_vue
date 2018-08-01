@@ -37,7 +37,7 @@
         <b-tab-item label="Texte">
           <b-input type="textarea"
                    maxlength="500"
-                   rows="4"
+                   rows="5"
                    :disabled="loading"
                    v-model="text">
           </b-input>

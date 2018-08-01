@@ -13,7 +13,7 @@ export default {
   },
   watch: {
     pushSignal() {
-      if (this.checkSignal(this.pushSignal)) { this.commitData(); }
+      if (this.checkSignal(this.pushSignal)) { this.pushData(); }
     },
     recoverSignal() {
       if (this.checkSignal(this.recoverSignal)) { this.recoverData(); }
@@ -37,18 +37,14 @@ export default {
     copyData(from, to) {
       for (let i in from) {to[i] = from[i]; }
     },
-    commitData() {
-      this.pushData();
-    },
     postCommit(error = null) {
-      this.edit.setDirty(false);
       this.edit.setLoading(false);
+      this.edit.setDirty(false);
       if (error) {
         this.tools.errorMessage(this.$options.url, error);
         this.recoverData();
       } else {
         this.tools.message(1);
-        this.backupData();
       }
     },
     recoverData() {

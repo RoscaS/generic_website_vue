@@ -100,8 +100,6 @@
       type: 'is-danger'
     }
   };
-
-
   export default {
     name: "ContactForm",
     props: {
@@ -117,9 +115,7 @@
         message: null,
       };
     },
-
     methods: {
-
       preValidate() {
         this.$validator.validateAll().then((result) => {
           if (result) {
@@ -131,7 +127,6 @@
           }
         });
       },
-
       commit() {
         axios.post(this.url, {
           name: this.name,
@@ -148,7 +143,6 @@
           console.log(error);
         });
       },
-
       toast(errors, type) {
         this.$toast.open({
           duration: 5000,
@@ -157,7 +151,6 @@
           type: type
         });
       },
-
       clearForm() {
         this.name = null;
         this.email = null;

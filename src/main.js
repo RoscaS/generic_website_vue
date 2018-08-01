@@ -29,10 +29,10 @@ Vue.use(Buefy, {
 // Perso
   //  Global variable
 import Tools from './tools';
-import Options from './options';
+import SiteSettings from './siteSettings';
 
 const Global = {
-  Options: Options,
+  SiteSettings: SiteSettings,
   Tools: Tools
 };
 

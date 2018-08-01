@@ -28,7 +28,7 @@
                  duration: 1000,
                  delay: 500
                  }">
-              {{ options.name }}
+              {{ siteSettings.name }}
             </div>
             <div class="_ribbon"
                  v-scroll-reveal="{
@@ -37,12 +37,12 @@
                  delay: 500
                  }">
               <div class="text">
-                {{ options.nameAdd.toUpperCase() }}
+                {{ siteSettings.nameAdd.toUpperCase() }}
               </div>
             </div>
             <transition name="subtitle-fade-in" appear>
               <div class="_subtitle">
-                {{ options.city.toUpperCase() }} / DEPUIS {{ options.oppening}}
+                {{ siteSettings.city.toUpperCase() }} / DEPUIS {{ siteSettings.oppening}}
               </div>
             </transition>
           </div>
@@ -57,10 +57,10 @@
                  duration: 1000,
                  delay: 1500
                  }">
-              <span class="first-line">{{ options.adress.toUpperCase() }}</span>
+              <span class="first-line">{{ siteSettings.adress.toUpperCase() }}</span>
               <span class="second-line">
-                {{ options.postCode }} {{ options.city.toUpperCase() }}, tel.:
-                <a class="phone" :href="phoneHref">{{options.phone}}</a>
+                {{ siteSettings.postCode }} {{ siteSettings.city.toUpperCase() }}, tel.:
+                <a class="phone" :href="phoneHref">{{siteSettings.phone}}</a>
             </span>
             </div>
         </div>
@@ -79,10 +79,10 @@
 
           <transition name="bounceRight" appear>
             <div class="_bottom">
-              <span class="first-line">{{ options.adress.toUpperCase() }}</span>
+              <span class="first-line">{{ siteSettings.adress.toUpperCase() }}</span>
               <span class="second-line">
-                {{ options.postCode }} {{ options.city.toUpperCase() }}, tel.:
-              <a class="no-tr" :href="phoneHref">{{options.phone}}</a>
+                {{ siteSettings.postCode }} {{ siteSettings.city.toUpperCase() }}, tel.:
+              <a class="no-tr" :href="phoneHref">{{siteSettings.phone}}</a>
             </span>
             </div>
           </transition>
@@ -102,13 +102,13 @@
     name: 'Top',
     data() {
       return {
-        options: this.$Global.Options,
+        siteSettings: this.$Global.SiteSettings,
         titles: titles,
       };
     },
 
     computed: {
-      phoneHref() { return `tel:${this.options.phone}` }
+      phoneHref() { return `tel:${this.siteSettings.phone}` }
     },
 
     methods: {
