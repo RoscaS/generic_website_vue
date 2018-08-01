@@ -187,7 +187,9 @@
         });
       },
       reOrder() {
-        this.images = this.images.sort((one, two) => {return one.position - two.position; });
+        this.images = this.images.sort((one, two) => {
+          return one.position - two.position;
+        });
         setTimeout(() => { this.reOrder = false; }, 500);
       }
     },

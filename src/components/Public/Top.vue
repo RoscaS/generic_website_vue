@@ -11,7 +11,7 @@
                  duration: 1000,
                  delay: 1500
                  }">
-              <a class="no-tr" href="#" v-scroll-to="'#poule'">
+              <a class="no-tr" href="#" v-scroll-to="'#'">
                 <i class="fal fa-calendar fa-fw"
                    :title="getTitle('horaire')"></i>
               </a>
@@ -69,7 +69,7 @@
         <div class="column is-12 is-hidden-tablet _mobile">
           <transition name="bounceLeft" appear>
             <div class="_top">
-              <a class="no-tr" href="#" v-scroll-to="'#poule'">
+              <a class="no-tr" href="#" v-scroll-to="'#'">
                 <i class="fal fa-calendar fa-fw"
                    :title="getTitle('horaire')"></i>
               </a>

@@ -6,23 +6,20 @@
              el: '#Presentation',
              duration: 2000,
              offset: -80
-           }"></i>
+           }">
+      </i>
     </div>
-
     <section id="Presentation" class="section section-container">
       <EditIcon top="20px" :component="name">
         <div class="container">
           <div class="content">
-
             <Title :class="{'highlighted': highlighted(1)}">
               {{ title }}
             </Title>
-
             <p class="sub-title"
                :class="{'highlighted': highlighted(2)}">
               {{ subTi }}
             </p>
-
             <p class="text1"
                :class="{'highlighted': highlighted(3)}"
                v-scroll-reveal="{
@@ -37,7 +34,6 @@
 
             <div class="columns is-variable is-8">
               <div class="column">
-
                 <img :src="image"
                      :class="{'highlighted': highlighted(0)}"
                      v-scroll-reveal="{
@@ -46,7 +42,6 @@
                                easing: 'ease'
                              }">
               </div>
-
               <div class="column"
                    v-scroll-reveal="{
                            origin: 'right',
@@ -58,7 +53,6 @@
                 <p :class="{'highlighted': highlighted(4)}">
                   {{ text2 }}
                 </p>
-
               </div>
             </div>
           </div>
@@ -66,11 +60,10 @@
       </EditIcon>
     </section>
 
-    <EditNav v-if="edit.component==name" height="225">
+    <EditNav v-if="checkName()" height="225">
       <b-tabs v-model="activeTab" position="is-centered">
-
         <b-tab-item label="Image">
-          <FileUpload @image-preview="image=$event"></FileUpload>
+          <FileUpload @image-preview="image=$event"/>
         </b-tab-item>
 
         <b-tab-item label="Titre">
@@ -103,7 +96,6 @@
                    v-model="text2">
           </b-input>
         </b-tab-item>
-
       </b-tabs>
     </EditNav>
   </div>
@@ -111,29 +103,19 @@
 
 <script>
   import PresentationStore from './PresentationStore';
-  import EditIcon from '../../Components/Edit/EditIcon';
-  import EditNav from '../../Components/Edit/EditNav';
-  import FileUpload from '../../Components/Edit/FileUpload';
+  import mixin from '../../../mixins/PublicMixin'
 
   export default {
     name: "Presentation",
-    components: {EditIcon, EditNav, FileUpload},
+    mixins: [mixin],
     data() {
       return {
-        name: this.$options.name,
-        edit: this.$Global.EditPannel,
         store: PresentationStore,
         state: PresentationStore.state,
-        activeTab: 0,
         downArrow: null,
       };
     },
-
     computed: {
-      loading() { return this.edit.loading; },
-      pushSignal() { return this.edit.pushSignal; },
-      recoverSignal() { return this.edit.recoverSignal; },
-
       title: {
         get() { return this.state.title; },
         set(value) { this.state.title = value; }
@@ -155,23 +137,7 @@
         set(value) {this.state.image = value; }
       },
     },
-
-    watch: {
-      recoverSignal() {
-        if (this.checkSignal(this.edit.recoverSignal)) this.recoverData();
-      },
-      pushSignal() {
-        if (this.checkSignal(this.edit.pushSignal)) this.pushData();
-      },
-    },
-
     methods: {
-      pushData() { PresentationStore.pushData(); },
-      recoverData() { PresentationStore.recoverData(); },
-      checkName() { return this.edit.component === this.name;},
-      highlighted(idx) { return (this.activeTab == idx) && this.checkName(); },
-      checkSignal(sig) { return sig && this.checkName(); },
-
       scrollWatch() {
         if (window.pageYOffset >= 165) {
           this.downArrow.classList.remove('fadeInDown');
@@ -179,7 +145,6 @@
           window.removeEventListener('scroll', this.scrollWatch);
         }
       },
-
       setDownArrow() {
         setTimeout(() => {
           this.downArrow = document.getElementsByClassName('down-arrow')[0];
@@ -190,9 +155,7 @@
         }, 1800);
       }
     },
-
     mounted() {
-      PresentationStore.fetchData();
       window.addEventListener('scroll', this.scrollWatch);
       this.setDownArrow();
     },

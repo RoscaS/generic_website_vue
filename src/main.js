@@ -82,6 +82,9 @@ axios.defaults.baseURL = 'http://localhost:8000/';
 
 Vue.config.productionTip = false;
 
+import MyMixin from './mixins/PublicMixin'
+
+
 new Vue({
   el: '#app',
   router,

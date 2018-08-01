@@ -1,50 +1,41 @@
 <template>
   <div class="gallery-wrapper">
     <section id="Galerie" class="section section-container">
-
-      <EditIcon Top="20px"
-                :Component="$options.name"
-                @backup-original-data="backupData">
-
+      <EditIcon top="20px" :component="$options.name">
         <div class="container">
           <div class="content">
-            <Title :class="{'highlighted': activeTab==0&&edit.component==name}">
+            <Title :class="{'highlighted': highlighted(0)}">
               {{ title }}
             </Title>
 
             <p class="sub-title"
-               :class="{'highlighted': activeTab==1&&edit.component==name}">
-              {{ subTitle }}
+               :class="{'highlighted': highlighted(1)}">
+              {{ subTi }}
             </p>
           </div>
         </div>
 
-
         <transition name="fade" mode="out-in">
-          <GalleryManager v-if="editGalery"/>
+          <GalleryManager v-if="activeTab==2 && edit.component==name"/>
           <GalleryUser v-else/>
         </transition>
-
 
       </EditIcon>
     </section>
 
-    <EditNav id="GalleryEditNav" v-if="edit.check($options.name)" height="150">
-
+    <EditNav id="GalleryEditNav" v-if="checkName()" height="150">
       <b-tabs v-model="activeTab" position="is-centered">
-
         <b-tab-item label="Titre">
           <b-input maxlength="35"
                    :disabled="loading"
                    v-model="title">
           </b-input>
         </b-tab-item>
-
         <b-tab-item label="Sous titre">
           <b-input maxlength="200"
                    rows="3"
                    :disabled="loading"
-                   v-model="subTitle">
+                   v-model="subTi">
           </b-input>
         </b-tab-item>
 
@@ -63,97 +54,45 @@
             </div>
           </div>
         </b-tab-item>
-
       </b-tabs>
     </EditNav>
   </div>
 </template>
 
 <script>
-  import store from './GalleryStore';
-  import {mapGetters, mapActions} from 'vuex';
-
+  import GalleryDataStore from './GalleryDataStore';
+  import mixin from '../../../mixins/PublicMixin'
   import GalleryUser from './GalleryUser';
   import GalleryManager from '../GalleryManager/GalleryManager';
 
-  import EditIcon from '../../Components/Edit/EditIcon';
-  import EditNav from '../../Components/Edit/EditNav';
+
 
   export default {
     name: "Gallery",
-    components: {GalleryUser, GalleryManager, EditIcon, EditNav},
-    store: store,
-
+    mixins: [mixin],
+    components: {GalleryUser, GalleryManager},
     data() {
       return {
-        activeTab: 0,
-        name: this.$options.name,
+        store: GalleryDataStore,
+        state: GalleryDataStore.state,
         baseHeight: null,
-        edit: this.$Global.EditPannel,
         // reOrder: this.$Global.EditPannel.reOrder,
-        menu: [
-          {display: true, name: 'Titre',},
-          {display: false, name: 'Sous titre',},
-          {display: false, name: 'Galerie',},
-        ],
       };
     },
     computed: {
-      ...mapGetters([
-        'galTitle',
-        'galSubTitle',
-      ]),
-
       reOrder: {
-        get() { return this.$Global.EditPannel.reOrder; },
-        set(value) { this.$Global.EditPannel.reOrder = value}
+        get() { return this.edit.reOrder; },
+        set(value) { this.edit.reOrder = value}
       },
-
-      editGalery() {
-        return this.activeTab == 2 && this.edit.component == this.name;
-      },
-
-      loading: {
-        get() { return this.LoadingFlag; },
-      },
-
       title: {
-        get() { return this.galTitle; },
-        set(value) {
-          this.setTitle(value);
-          this.toggleDirty();
-        }
+        get() { return this.state.title; },
+        set(value) { this.state.title = value; }
       },
-
-      subTitle: {
-        get() { return this.galSubTitle; },
-        set(value) {
-          this.setSubTitle(value);
-          this.toggleDirty();
-        }
+      subTi: {
+        get() { return this.state.subTi; },
+        set(value) { this.state.subTi = value; }
       },
     },
-
-    watch: {
-      title(value) { this.setTitle(value); },
-      subTitle(value) { this.setSubTitle(value); },
-    },
-
-    methods: {
-      ...mapActions([
-        'fetchData',
-        'pushData',
-        'backupData',
-        'recoverData',
-        'setTitle',
-        'setSubTitle',
-        'toggleDirty',
-      ]),
-    },
-
-    mounted() {
-      this.fetchData();
-    }
   };
 </script>
 

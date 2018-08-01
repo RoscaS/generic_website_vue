@@ -28,46 +28,37 @@
         timeout: 5000,
       };
     },
-
     computed: {
-      dirty: {
-        get() { return this.edit.dirty; },
-        set(value) { this.edit.dirty = value; }
-      },
       loading: {
         get() { return this.edit.loading; },
         set(value) { this.edit.loading = value; }
       }
     },
-
     methods: {
       validateBtn() {
-        if (this.dirty) {
+        if (this.edit.dirty) {
           this.disable = false;
           this.edit.pushSignal = true;
           this.loading = true;
           this.checkLoading();
         } else {
-          this.edit.endEdit();
+          this.edit.end();
         }
       },
-
       cancelBtn() {
-        if (this.dirty) {
+        if (this.edit.dirty) {
           this.disable = true;
           setTimeout(() => {this.disable = false;}, this.timeout);
-          this.storeIsDirty();
+          this.snackBar();
         } else {
-          this.edit.endEdit();
+          this.edit.end();
         }
       },
-
       checkLoading() {
         this.loading ? setTimeout(() => { this.checkLoading(); }, 100)
-                     : this.edit.endEdit();
+                     : this.edit.end();
       },
-
-      storeIsDirty() {
+      snackBar() {
         this.$snackbar.open({
           message: 'Les modifications seront perdues.',
           type: 'is-warning',
@@ -78,15 +69,11 @@
           onAction: () => {
             this.edit.recoverSignal = true;
             this.disable = false;
-            this.edit.endEdit();
+            this.edit.end();
           }
         });
       },
     },
-    destroyed() {
-      // this.root.menu.forEach(i => i.display = false);
-      // this.root.activeTab = 0;
-    }
   };
 </script>
 

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 
-
 const EditPannel = new Vue({
   data: {
     component: null,
@@ -20,15 +19,12 @@ const EditPannel = new Vue({
     pushSignal() { setTimeout(() => { this.pushSignal = false; }, 10); },
     recoverSignal() { setTimeout(() => { this.recoverSignal = false; }, 10); },
   },
-
-
   methods: {
-    startEdit(component) {
+    start(component) {
       this.component = component;
       this.edit = true;
     },
-
-    endEdit() {
+    end() {
       this.edit = false;
       this.loading = false;
       setTimeout(() => {

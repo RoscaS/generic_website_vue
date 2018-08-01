@@ -21,7 +21,7 @@
         </div>
       </EditIcon>
     </div>
-    <EditNav v-if="edit.component==name">
+    <EditNav v-if="checkName()">
       <b-tabs v-model="activeTab" position="is-centered">
 
         <b-tab-item label="Image">
@@ -49,33 +49,22 @@
 
 <script>
   import PromoStore from './PromoStore';
-  import EditIcon from '../../Components/Edit/EditIcon';
-  import EditNav from '../../Components/Edit/EditNav';
-  import FileUpload from '../../Components/Edit/FileUpload';
+  import mixin from '../../../mixins/PublicMixin'
 
   export default {
     name: 'Promo',
-    components: {EditIcon, EditNav, FileUpload},
+    mixins: [mixin],
     data() {
       return {
-        name: this.$options.name,
-        edit: this.$Global.EditPannel,
         store: PromoStore,
         state: PromoStore.state,
-        activeTab: 0,
       };
     },
-
     computed: {
-      loading() { return this.edit.loading; },
-      pushSignal() { return this.edit.pushSignal; },
-      recoverSignal() { return this.edit.recoverSignal; },
-
       title: {
         get() { return this.state.title; },
         set(value) { this.state.title = value; }
       },
-
       text: {
         get() { return this.state.text; },
         set(value) { this.state.text2 = value; }
@@ -84,27 +73,6 @@
         get() { return this.state.image; },
         set(value) {this.state.image = value; }
       },
-    },
-
-    watch: {
-      recoverSignal() {
-        if (this.checkSignal(this.edit.recoverSignal)) this.recoverData();
-      },
-      pushSignal() {
-        if (this.checkSignal(this.edit.pushSignal)) this.pushData();
-      },
-    },
-
-    methods: {
-      pushData() { PromoStore.pushData(); },
-      recoverData() { PromoStore.recoverData(); },
-      checkName() { return this.edit.component === this.name;},
-      highlighted(idx) { return (this.activeTab == idx) && this.checkName(); },
-      checkSignal(sig) { return sig && this.checkName(); },
-    },
-
-    mounted() {
-      PromoStore.fetchData();
     },
   };
 </script>

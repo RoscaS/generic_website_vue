@@ -3,7 +3,7 @@
     <button class="button is-danger"
             :style="setStyle"
             :disabled="edit.edit"
-            @click="edit.startEdit(component)">
+            @click="edit.start(component)">
       <i class="fal fa-pencil-alt">
       </i>
     </button>
