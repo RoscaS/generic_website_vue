@@ -60,12 +60,10 @@
 </template>
 
 <script>
-  import GalleryDataStore from './GalleryDataStore';
+  import GalleryMainStore from './GalleryMainStore';
   import mixin from '../../../mixins/PublicMixin'
-  import GalleryUser from './GalleryUser';
-  import GalleryManager from '../GalleryManager/GalleryManager';
-
-
+  import GalleryUser from './GalleryUser/GalleryUser';
+  import GalleryManager from './GalleryEdit/GalleryEdit';
 
   export default {
     name: "Gallery",
@@ -73,10 +71,10 @@
     components: {GalleryUser, GalleryManager},
     data() {
       return {
-        store: GalleryDataStore,
-        state: GalleryDataStore.state,
+        store: GalleryMainStore,
+        state: GalleryMainStore.state,
         baseHeight: null,
-        // reOrder: this.$Global.EditPannel.reOrder,
+
       };
     },
     computed: {

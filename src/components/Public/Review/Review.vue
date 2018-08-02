@@ -4,11 +4,11 @@
       <EditIcon top="20px" :component="name">
         <div class="container">
           <div class="content">
-            <Title :class="{'highlighted': highlighted(1)}">
+            <Title :class="{'highlighted': highlighted(0)}">
               {{ title }}
             </Title>
             <p class="sub-title"
-               :class="{'highlighted': highlighted(2)}">
+               :class="{'highlighted': highlighted(1)}">
               {{ subTi }}
             </p>
           </div>
@@ -119,7 +119,7 @@
       </div>
     </section>
 
-    <EditNav v-if="checkName()" height="225">
+    <EditNav v-if="checkName()" height="150">
       <b-tabs v-model="activeTab" position="is-centered">
         <b-tab-item label="Titre">
           <b-input maxlength="35"

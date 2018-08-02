@@ -6,7 +6,7 @@
     <div class="navbar custom-tabs-wrapper" v-show="edit.active">
 
       <div class="columns">
-        <div class="column is-5-desktop is-offset-4-desktop">
+        <div class="column is-5-desktop is-offset-3-desktop">
 
           <div class="custom-tabs" :style="{height: height+'px'}">
             <slot></slot>
@@ -46,6 +46,13 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  .columns {
+    margin-left: 7%;
+    @media screen and (max-width: 1089px) {
+      margin-left: auto;
+    }
+  }
 
   .custom-tabs {
     height: 200px;

@@ -104,7 +104,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import GalleryImagesStore from '../GalleryUser/GalleryImagesStore';
   import draggable from 'vuedraggable';
   import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
 
@@ -114,17 +114,39 @@
     components: {draggable, Scrolly, ScrollyViewport, ScrollyBar},
     data() {
       return {
-        url: 'galleries/events/',
+        store: GalleryImagesStore,
+        state: GalleryImagesStore.state,
+
         related: null,
         dragged: null,
 
-        images: [],
         hiddenImages: [],
         hiddenGallery: true,
         editable: true,
         isDragging: false,
-        delayedDragging: false
+        delayedDragging: false,
+
+        reOrder: false,
       };
+    },
+    computed: {
+      images() { return this.state.images },
+
+      dragOptions() {
+        return {
+          animation: 250,
+          group: 'description',
+          disabled: !this.editable,
+          ghostClass: 'none'
+          // ghostClass: 'ghost'
+        };
+      },
+      getList() {
+        return this.images;
+      },
+      getListHidden() {
+        return this.hiddenImages;
+      },
     },
     methods: {
       onMove({relatedContext, draggedContext}) {
@@ -152,29 +174,7 @@
       // }
       // },
     },
-    computed: {
-      reOrder: {
-        get() { return this.$Global.EditPannel.reOrder; },
-        set(value) { this.$Global.EditPannel.reOrder = value}
-      },
 
-      dragOptions() {
-        return {
-          animation: 250,
-          group: 'description',
-          disabled: !this.editable,
-          ghostClass: 'none'
-          // ghostClass: 'ghost'
-        };
-      },
-      getList() {
-        return this.images;
-      },
-      getListHidden() {
-        return this.hiddenImages;
-      },
-
-    },
     watch: {
       isDragging(newValue) {
         if (newValue) {
@@ -193,36 +193,13 @@
         setTimeout(() => { this.reOrder = false; }, 500);
       }
     },
-    mounted() {
-      axios.get(this.url).then(response => {
-        response.data.images.forEach(image => {
-          this.images.push({
-            url: image.image,
-            id: image.id,
-            name: image.name,
-            description: image.description,
-            position: image.position,
-            newPosition: -1,
-            visible: image.visible,
-            selected: false,
-            fixed: false,
-          });
-        });
-        this.images.sort((a, b) => a.position - b.position);
-      }).catch(error => {
-        console.log(this.url);
-        console.log(error);
-      });
-    }
   };
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../../../static/sass/global';
 
   .hidden-section {
-    /*position: absolute;*/
-    /*right: 2%;*/
      margin-top: -175px;
     height: 490px;
     width: 250px;

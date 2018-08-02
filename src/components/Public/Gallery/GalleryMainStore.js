@@ -2,7 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import mixin from '../../../mixins/PublicStoreMixin'
 
-const GalleryDataStore = new Vue ({
+const GalleryMainStore = new Vue ({
   mixins: [mixin],
   url: 'gallery/1/',
   data: {
@@ -28,5 +28,5 @@ const GalleryDataStore = new Vue ({
   }
 });
 
-export default GalleryDataStore;
+export default GalleryMainStore;
 

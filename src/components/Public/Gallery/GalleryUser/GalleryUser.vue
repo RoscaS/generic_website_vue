@@ -17,8 +17,8 @@
                :description="image.description"
                v-lightbox
                @click="clickImage(image)">
-              <img :src="image.url"
-                   :class="[imgClass, {'img-selected': image.selected}]"/>
+              <img :src="image.url">
+                   <!--:class="[imgClass, {'img-selected': image.selected}]"/>-->
             </a>
           </div>
         </div>
@@ -30,28 +30,23 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable';
-
-  import Lightbox from '../../Components/Lightbox/Lightbox';
-
-  import axios from 'axios';
+  import GalleryImagesStore from './GalleryImagesStore';
+  import Lightbox from '../../../Components/Lightbox/Lightbox';
 
   export default {
     name: "GalleryUser",
-    components: {draggable, Lightbox},
-
+    components: {Lightbox},
     data() {
       return {
-        url: 'galleries/events/',
-
+        store: GalleryImagesStore,
+        state: GalleryImagesStore.state,
         isAdmin: false,
-
-        images: []
       };
     },
 
     computed: {
-      imgClass() { return this.isAdmin ? 'img-admin' : 'img-user'; }
+      images() { return this.state.images; },
+      // imgClass() { return this.isAdmin ? 'img-admin' : 'img-user'; }
     },
 
     methods: {
@@ -59,41 +54,21 @@
         if (!this.isAdmin) {
           this.lockScroll();
         }
-        else {
-          image.selected = !image.selected;
-        }
+        // else {
+        //   image.selected = !image.selected;
+        // }
       },
-
       lockScroll() {
         let x = window.scrollX;
         let y = window.scrollY;
         window.onscroll = function() {window.scrollTo(x, y);};
       }
     },
-
-    mounted() {
-      axios.get(this.url).then(response => {
-        response.data.images.forEach(image => {
-          this.images.push({
-            url: image.image,
-            description: image.description,
-            position: image.position,
-            selected: false,
-          });
-        });
-        this.images.sort((a, b) => a.position - b.position);
-      }).catch(error => {
-        console.log(this.url);
-        console.log(error);
-      });
-
-
-    }
   };
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../../../static/sass/global';
 
   img {
     cursor: pointer;

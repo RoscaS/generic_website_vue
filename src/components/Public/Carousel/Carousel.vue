@@ -4,7 +4,7 @@
       <carousel class="content">
         <carousel-slide v-for="i in slides" :key="i" :index="i-1">
           <h2><span></span></h2>
-          <img :src="urls[i]">
+          <img :src="urls[i-1]">
         </carousel-slide>
       </carousel>
     </transition>
@@ -12,40 +12,31 @@
 </template>
 
 <script>
-  import Carousel from '../Components/Carousel/Carousel';
-  import CarouselSlide from '../Components/Carousel/CarouselSlide';
-
-  import axios from 'axios';
+  import CarouselStore from './CarouselStore';
+  import Carousel from '../../Components/Carousel/Carousel';
+  import CarouselSlide from '../../Components/Carousel/CarouselSlide';
 
   export default {
     name: "CarouselTop",
     components: {Carousel, CarouselSlide},
-    props: {
-      url: {type: String}
-    },
     data() {
       return {
-        downArrow: null,
-        urls: [],
+        store: CarouselStore,
+        state: CarouselStore.state,
         slides: 8,
       };
     },
 
-    methods: {
-
+    computed: {
+      images() { return this.state.images; },
+      urls() {
+        let urls = []
+        this.images.forEach(i => {
+          urls.push(i.url)
+        });
+        return urls;
+      }
     },
-
-    mounted() {
-      axios.get(this.url).then(response => {
-        let images = response.data.images;
-        images.forEach(i => { this.urls.push(i.image); });
-        this.slides = this.urls.length - 1;
-      }).catch(error => {
-        console.log(this.url);
-        console.log(error);
-      });
-
-    }
   };
 </script>
 
