@@ -60,7 +60,7 @@
 </template>
 
 <script>
-  import GalleryMainStore from './GalleryMainStore';
+  import GalleryStore from './GalleryStore';
   import mixin from '../../../mixins/PublicMixin'
   import GalleryUser from './GalleryUser/GalleryUser';
   import GalleryManager from './GalleryEdit/GalleryEdit';
@@ -71,8 +71,8 @@
     components: {GalleryUser, GalleryManager},
     data() {
       return {
-        store: GalleryMainStore,
-        state: GalleryMainStore.state,
+        store: GalleryStore,
+        state: GalleryStore.state,
         baseHeight: null,
 
       };

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import CarouselStore from './CarouselStore';
+  import ImageStore from '../../Components/GalleryManager/ImageStore';
   import Carousel from '../../Components/Carousel/Carousel';
   import CarouselSlide from '../../Components/Carousel/CarouselSlide';
 
@@ -21,8 +21,8 @@
     components: {Carousel, CarouselSlide},
     data() {
       return {
-        store: CarouselStore,
-        state: CarouselStore.state,
+        store: ImageStore,
+        state: ImageStore.galeries.carousel.state,
         slides: 8,
       };
     },
@@ -31,9 +31,7 @@
       images() { return this.state.images; },
       urls() {
         let urls = []
-        this.images.forEach(i => {
-          urls.push(i.url)
-        });
+        this.images.forEach(i => { urls.push(i.url) });
         return urls;
       }
     },
@@ -41,7 +39,6 @@
 </script>
 
 <style scoped lang="scss">
-
   .carousel-fade-in-enter-active, .carousel-fade-in-leave-active {
     transition: opacity 3s ease;
     transition-delay: 1s;

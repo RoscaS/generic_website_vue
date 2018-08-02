@@ -105,6 +105,8 @@
   import PresentationStore from './PresentationStore';
   import mixin from '../../../mixins/PublicMixin'
 
+
+
   export default {
     name: "Presentation",
     mixins: [mixin],

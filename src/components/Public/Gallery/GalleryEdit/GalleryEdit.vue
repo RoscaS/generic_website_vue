@@ -104,9 +104,12 @@
 </template>
 
 <script>
-  import GalleryImagesStore from '../GalleryUser/GalleryImagesStore';
   import draggable from 'vuedraggable';
   import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
+  import ImageStore from '../../../Components/GalleryManager/ImageStore';
+
+
+
 
 
   export default {
@@ -114,8 +117,8 @@
     components: {draggable, Scrolly, ScrollyViewport, ScrollyBar},
     data() {
       return {
-        store: GalleryImagesStore,
-        state: GalleryImagesStore.state,
+        store: ImageStore,
+        state: ImageStore.galeries.gallery.state,
 
         related: null,
         dragged: null,
@@ -191,7 +194,7 @@
           return one.position - two.position;
         });
         setTimeout(() => { this.reOrder = false; }, 500);
-      }
+      },
     },
   };
 </script>

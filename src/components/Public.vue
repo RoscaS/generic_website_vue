@@ -34,9 +34,7 @@
   import Review from './Public/Review/Review';
   import Footer from './Public/Footer';
 
-
-  import CarouselStore from './Public/Carousel/CarouselStore';
-  import GalleryImageStore from './Public/Gallery/GalleryUser/GalleryImagesStore';
+  import ImageStore from './Components/GalleryManager/ImageStore';
 
 
   export default {
@@ -56,8 +54,7 @@
       };
     },
     created() {
-      CarouselStore.fetchData();
-      GalleryImageStore.fetchData();
+      ImageStore.init()
     }
   };
 </script>

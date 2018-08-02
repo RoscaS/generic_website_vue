@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import GalleryImagesStore from './GalleryImagesStore';
+  import ImageStore from '../../../Components/GalleryManager/ImageStore';
   import Lightbox from '../../../Components/Lightbox/Lightbox';
 
   export default {
@@ -38,8 +38,8 @@
     components: {Lightbox},
     data() {
       return {
-        store: GalleryImagesStore,
-        state: GalleryImagesStore.state,
+        store: ImageStore,
+        state: ImageStore.galeries.gallery.state,
         isAdmin: false,
       };
     },
