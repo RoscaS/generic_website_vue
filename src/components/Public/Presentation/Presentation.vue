@@ -6,39 +6,32 @@
       </i>
     </div>
 
-    <BaseLayout :id="name" :title="state.title.data" :subTi="state.subTi.data">
-      <template slot="content">
-        <p class="text1"
-           :class="{'highlighted': highlighted(2)}"
-           v-scroll-reveal="sReveal('left', 250, 400)">
-          {{ state.text1.data }}
-        </p>
-        <div class="columns is-variable is-8">
-          <div class="column">
-            <img :src="state.image.data"
-                 :class="{'highlighted': highlighted(4)}"
-                 v-scroll-reveal="sReveal('bottom', 300, 10)">
-          </div>
-          <div class="column"
-               v-scroll-reveal="sReveal('right', 350, 400)">
-            <p :class="{'highlighted': highlighted(3)}">
-
-              {{ state.text2.data }}
-            </p>
-          </div>
+    <BaseLayout :id="name"
+                :title="state.title.data"
+                :subTi="state.subTi.data"
+                :state="state"
+                :activeTab="activeTab"
+                :loading="loading"
+                @changeTab="activeTab=$event">
+      <p class="text1"
+         :class="{'highlighted': highlighted(2)}"
+         v-scroll-reveal="sReveal('left', 250, 400)">
+        {{ state.text1.data }}
+      </p>
+      <div class="columns is-variable is-8">
+        <div class="column">
+          <img :src="state.image.data"
+               :class="{'highlighted': highlighted(4)}"
+               v-scroll-reveal="sReveal('bottom', 300, 10)">
         </div>
-      </template>
+        <div class="column"
+             v-scroll-reveal="sReveal('right', 350, 400)">
+          <p :class="{'highlighted': highlighted(3)}">
 
-      <b-tabs v-model="activeTab" position="is-centered" slot="edit-nav">
-        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
-          <b-field type="is-light" v-if="i.label !=='Image'">
-            <b-input :type="i.type" :maxlength="i.len" :rows="i.rows"
-                     :disabled="loading" v-model="i.data">
-            </b-input>
-          </b-field>
-          <FileUpload v-else @image-preview="state.image.data=$event"/>
-        </b-tab-item>
-      </b-tabs>
+            {{ state.text2.data }}
+          </p>
+        </div>
+      </div>
     </BaseLayout>
   </div>
 </template>

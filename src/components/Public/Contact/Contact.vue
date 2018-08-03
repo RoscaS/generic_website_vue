@@ -1,57 +1,48 @@
 <template>
-  <BaseLayout :id="name" :title="state.title.data"
-              :subTi="state.subTi.data" edit-nav-height="150">
-    <template slot="content">
-      <div class="columns">
-        <div class="column left">
-          <div v-scroll-reveal="sReveal('left', 100, 100, 2500)">
-            <GoogleMap name="map"></GoogleMap>
-          </div>
-        </div>
-        <div class="column right">
-          <div class="info"
-               v-scroll-reveal="sReveal('right', 50, 400, 1500)">
-            <div class="line">
-              <i class="fas fa-map-marker-alt fa-fw"></i>
-              <a :href="siteSettings.google">{{ siteSettings.city }}</a>
-            </div>
-
-            <div class="line">
-              <i class="fas fa-phone fa-fw"></i>
-              <a :href="phoneHref">{{ siteSettings.phone }}</a>
-            </div>
-
-            <div class="line">
-              <i class="fas fa-envelope fa-fw"></i>
-              <a :href="mailHref">{{ siteSettings.mail }}</a>
-            </div>
-          </div>
-          <p class="subT1"
-             :class="{'highlighted': highlighted(2)}"
-             v-scroll-reveal="sReveal('right', 100, 200, 1500)">
-            {{ state.subT2.data }}</p>
-          <ContactForm url="message/"></ContactForm>
+  <BaseLayout :id="name"
+              :title="state.title.data"
+              :subTi="state.subTi.data"
+              :state="state"
+              :activeTab="activeTab"
+              :loading="loading"
+              @changeTab="activeTab=$event">
+    <div class="columns">
+      <div class="column left">
+        <div v-scroll-reveal="sReveal('left', 100, 100, 2500)">
+          <GoogleMap name="map"></GoogleMap>
         </div>
       </div>
-      <div class="has-text-centered subT3">
-        <p :class="{'highlighted': highlighted(3)}"
-           v-scroll-reveal="sReveal('left', 600, 200, 1500)">
-          {{ state.subT3.data }}
-        </p>
+      <div class="column right">
+        <div class="info"
+             v-scroll-reveal="sReveal('right', 50, 400, 1500)">
+          <div class="line">
+            <i class="fas fa-map-marker-alt fa-fw"></i>
+            <a :href="siteSettings.google">{{ siteSettings.city }}</a>
+          </div>
+
+          <div class="line">
+            <i class="fas fa-phone fa-fw"></i>
+            <a :href="phoneHref">{{ siteSettings.phone }}</a>
+          </div>
+
+          <div class="line">
+            <i class="fas fa-envelope fa-fw"></i>
+            <a :href="mailHref">{{ siteSettings.mail }}</a>
+          </div>
+        </div>
+        <p class="subT1"
+           :class="{'highlighted': highlighted(2)}"
+           v-scroll-reveal="sReveal('right', 100, 200, 1500)">
+          {{ state.subT2.data }}</p>
+        <ContactForm url="message/"></ContactForm>
       </div>
-    </template>
-      <b-tabs v-model="activeTab" position="is-centered" slot="edit-nav">
-        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
-          <b-field type="is-light">
-            <b-input :type="i.type"
-                     :maxlength="i.len"
-                     :rows="i.rows"
-                     :disabled="loading"
-                     v-model="i.data">
-            </b-input>
-          </b-field>
-        </b-tab-item>
-      </b-tabs>
+    </div>
+    <div class="has-text-centered subT3">
+      <p :class="{'highlighted': highlighted(3)}"
+         v-scroll-reveal="sReveal('left', 600, 200, 1500)">
+        {{ state.subT3.data }}
+      </p>
+    </div>
   </BaseLayout>
 </template>
 

@@ -1,11 +1,10 @@
 import EditIcon from '../../components/Components/Edit/EditIcon';
 import EditNav from '../../components/Components/Edit/EditNav';
-import FileUpload from '../../components/Components/Edit/FileUpload';
 import EditStore from '../../components/Components/Edit/EditStore';
-import BaseLayout from '../../components/Components/BaseLayout'
+import BaseLayout from '../../components/Public/BaseLayout';
 
 export default {
-  components: {EditIcon, EditNav, FileUpload, BaseLayout},
+  components: {EditIcon, EditNav, BaseLayout},
   data() {
     return {
 

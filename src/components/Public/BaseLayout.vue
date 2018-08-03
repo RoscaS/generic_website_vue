@@ -18,24 +18,29 @@
         </div>
       </EditIcon>
 
-      <div class="container">
+      <slot v-if="$parent.name=='Gallery'"></slot>
+
+      <div class="container" v-else>
         <div class="content">
-          <slot name="content"></slot>
+          <slot></slot>
         </div>
       </div>
 
-      <slot name="gallery-content" v-if="$parent.name=='Gallery'"></slot>
-
     </section>
-    <EditNav v-if="checkName()" :height="editNavHeight" >
-      <slot name="edit-nav"></slot>
+    <EditNav v-if="checkName()" :height="editNavHeight">
+      <FieldsLayout :state="state" :activeTab="activeTab" :loading="loading"
+                      @changeTab="$emit('changeTab', $event)">
+        <slot name="moreFields"></slot>
+      </FieldsLayout>
     </EditNav>
   </div>
 </template>
 
 <script>
-  import EditIcon from '../../components/Components/Edit/EditIcon';
-  import EditNav from '../../components/Components/Edit/EditNav';
+  import EditIcon from '../Components/Edit/EditIcon';
+  import EditNav from '../Components/Edit/EditNav';
+  import FieldsLayout from './FieldsLayout.vue'
+
 
   export default {
     name: "BaseLayout",
@@ -43,9 +48,12 @@
       id: {Type: String},
       title: {Type: String},
       subTi: {Type: String},
+      state: {type: Object},
+      activeTab: {type: Number},
+      loading: {type: Boolean},
       editNavHeight: {type: String, default: '225'}
     },
-    components: {EditIcon, EditNav},
+    components: {EditIcon, EditNav, FieldsLayout},
     methods: {
       sReveal(side, delay, distance, duration) {
         return this.$parent.sReveal(side, delay, distance, duration)

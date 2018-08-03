@@ -1,42 +1,34 @@
 <template>
   <div class="gallery-wrapper">
-    <BaseLayout id="Galerie" :title="state.title.data"
-                :subTi="state.subTi.data" edit-nav-height="150">
-      <template slot="gallery-content">
-        <transition name="fade" mode="out-in">
-          <GalleryManager v-if="activeTab==2 && edit.component==name"/>
-          <GalleryUser v-else/>
-        </transition>
-      </template>
+    <BaseLayout :id="name"
+                :title="state.title.data"
+                :subTi="state.subTi.data"
+                :state="state" :activeTab="activeTab"
+                :loading="loading"
+                @changeTab="activeTab=$event">
+      <transition name="fade" mode="out-in">
+        <GalleryManager v-if="activeTab==2 && edit.component==name"/>
+        <GalleryUser v-else/>
+      </transition>
 
-      <b-tabs v-model="activeTab" position="is-centered" slot="edit-nav">
-        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
-          <b-field type="is-light">
-            <b-input :type="i.type"
-                     :maxlength="i.len"
-                     :rows="i.rows"
-                     :disabled="loading"
-                     v-model="i.data">
-            </b-input>
-          </b-field>
-        </b-tab-item>
 
+      <template slot="moreFields">
         <b-tab-item label="Galerie">
           <div class="level">
             <div class="level-left">
-              <button class="button is-info level-item"
-                      @click="reOrder=true">Reset
+              <button class="button is-info level-item" @click="reOrder=true">
+                Reset
               </button>
               <!--<b-checkbox class="level-item" type="is-info"-->
-                          <!--v-model="editable">Drag and drop-->
+              <!--v-model="editable">Drag and drop-->
               <!--</b-checkbox>-->
               <!--<b-checkbox class="level-item" type="is-info"-->
-                          <!--v-model="hiddenGallery">Stock-->
+              <!--v-model="hiddenGallery">Stock-->
               <!--</b-checkbox>-->
             </div>
           </div>
         </b-tab-item>
-      </b-tabs>
+      </template>
 
     </BaseLayout>
   </div>

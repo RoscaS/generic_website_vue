@@ -21,27 +21,22 @@
       </EditIcon>
     </div>
     <EditNav v-if="checkName()">
-      <b-tabs v-model="activeTab" position="is-centered">
-        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
-          <b-field type="is-light" v-if="i.label !=='Image'">
-            <b-input :type="i.type" :maxlength="i.len" :rows="i.rows"
-                     :disabled="loading" v-model="i.data">
-            </b-input>
-          </b-field>
-          <FileUpload v-else @image-preview="state.image.data=$event"/>
-        </b-tab-item>
-      </b-tabs>
+      <FieldsLayout :state="state" :activeTab="activeTab" :loading="loading"
+                     @changeTab="$emit('changeTab', $event)">
+      </FieldsLayout>
     </EditNav>
   </div>
 </template>
 
 <script>
   import PromoStore from './PromoStore';
+  import FieldsLayout from '../FieldsLayout.vue'
   import mixin from '../../../mixins/Public/PublicMixin'
 
   export default {
     name: 'Promo',
     mixins: [mixin],
+    components: { FieldsLayout },
     data() {
       return {
         store: PromoStore,
