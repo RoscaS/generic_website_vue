@@ -6,11 +6,11 @@
         <div class="container">
           <div class="content">
             <Title :class="{'highlighted': highlighted(0)}">
-              {{ state.title }}
+              {{ state.title.data }}
             </Title>
             <p class="sub-title"
                :class="{'highlighted': highlighted(1)}">
-              {{ state.subT1 }}
+              {{ state.subT1.data }}
             </p>
             <div class="columns">
               <div class="column left">
@@ -58,7 +58,7 @@
                    delay: 100,
                    easing: 'ease',
                  }">
-                  {{ state.subT2 }}</p>
+                  {{ state.subT2.data }}</p>
                 <ContactForm url="message/"></ContactForm>
               </div>
             </div>
@@ -71,7 +71,7 @@
                     delay: 600,
                     easing: 'ease',
                   }">
-                {{ state.subT3 }}
+                {{ state.subT3.data }}
               </p>
             </div>
           </div>
@@ -80,29 +80,15 @@
     </section>
     <EditNav v-if="checkName()" height="150">
       <b-tabs v-model="activeTab" position="is-centered">
-        <b-tab-item label="Titre">
-          <b-input maxlength="35"
-                   :disabled="loading"
-                   v-model="state.title">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="Sous titre 1">
-          <b-input maxlength="200"
-                   :disabled="loading"
-                   v-model="state.subT1">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="Sous titre 2">
-          <b-input maxlength="200"
-                   :disabled="loading"
-                   v-model="state.subT2">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="Sous titre 3">
-          <b-input maxlength="200"
-                   :disabled="loading"
-                   v-model="state.subT3">
-          </b-input>
+        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
+          <b-field type="is-light">
+            <b-input :type="i.type"
+                     :maxlength="i.len"
+                     :rows="i.rows"
+                     :disabled="loading"
+                     v-model="i.data">
+            </b-input>
+          </b-field>
         </b-tab-item>
       </b-tabs>
     </EditNav>
@@ -113,7 +99,7 @@
   import ContactStore from './ContactStore';
   import ContactForm from '../../Components/Forms/ContactForm';
   import GoogleMap from '../../Components/Maps';
-  import mixin from '../../../mixins/PublicMixin';
+  import mixin from '../../../mixins/Public/PublicMixin';
 
   export default {
     name: "Contact",
@@ -123,7 +109,12 @@
       return {
         siteSettings: this.$Global.SiteSettings,
         store: ContactStore,
-        state: { title: '', subT1: '', subT2: '', subT3: '', },
+        state: {
+          title: {data: '', len: '35', label: 'Titre',},
+          subT1: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre 1',},
+          subT2: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre 2',},
+          subT3: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre 3',},
+        },
       };
     },
     computed: {

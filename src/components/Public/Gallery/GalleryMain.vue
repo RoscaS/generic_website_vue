@@ -5,12 +5,12 @@
         <div class="container">
           <div class="content">
             <Title :class="{'highlighted': highlighted(0)}">
-              {{ state.title }}
+              {{ state.title.data }}
             </Title>
 
             <p class="sub-title"
                :class="{'highlighted': highlighted(1)}">
-              {{ state.subTi }}
+              {{ state.subTi.data }}
             </p>
           </div>
         </div>
@@ -25,18 +25,16 @@
 
     <EditNav id="GalleryEditNav" v-if="checkName()" height="150">
       <b-tabs v-model="activeTab" position="is-centered">
-        <b-tab-item label="Titre">
-          <b-input maxlength="35"
-                   :disabled="loading"
-                   v-model="state.title">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="Sous titre">
-          <b-input maxlength="200"
-                   rows="3"
-                   :disabled="loading"
-                   v-model="state.subTi">
-          </b-input>
+
+        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
+          <b-field type="is-light">
+            <b-input :type="i.type"
+                     :maxlength="i.len"
+                     :rows="i.rows"
+                     :disabled="loading"
+                     v-model="i.data">
+            </b-input>
+          </b-field>
         </b-tab-item>
 
         <b-tab-item label="Galerie">
@@ -61,7 +59,7 @@
 
 <script>
   import GalleryStore from './GalleryStore';
-  import mixin from '../../../mixins/PublicMixin'
+  import mixin from '../../../mixins/Public/PublicMixin'
   import GalleryUser from './GalleryUser/GalleryUser';
   import GalleryManager from './GalleryEdit/GalleryEdit';
 
@@ -72,7 +70,10 @@
     data() {
       return {
         store: GalleryStore,
-        state: { title: '', subTi: '', },
+        state: {
+          title: {data: '', len: '35', label: 'Titre',},
+          subTi: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre',},
+        },
         baseHeight: null,
 
       };

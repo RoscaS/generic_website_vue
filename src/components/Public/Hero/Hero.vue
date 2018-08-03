@@ -5,40 +5,27 @@
         <div class="container">
           <div class="columns is-variable is-8">
             <div class="column is-one-third"
-                 v-scroll-reveal="{
-                   origin: 'left',
-                   distance: '400px',
-                   duration: 1500,
-                   easing: 'ease'
-                   }">
+                 v-scroll-reveal="sReveal('left', 150, 400, 1500)">
               <div :class="{'highlighted': highlighted(0)}">
-                <i :class="state.L_icon"></i>
-                <h2 class="subtitle">{{ state.L_title }}</h2>
-                <p>{{ state.L_text }}</p>
+                <i :class="state.L_icon.data"></i>
+                <h2 class="subtitle">{{ state.L_title.data }}</h2>
+                <p>{{ state.L_text.data }}</p>
               </div>
             </div>
             <div class="column is-one-third"
-                 v-scroll-reveal="{
-                   duration: 1500,
-                   easing: 'ease'
-                   }">
+                 v-scroll-reveal="sReveal('top', 150, 0, 1500)">
               <div :class="{'highlighted': highlighted(1)}">
-                <i :class="state.C_icon"></i>
-                <h2 class="subtitle">{{ state.C_title }}</h2>
-                <p>{{ state.C_text }}</p>
+                <i :class="state.C_icon.data"></i>
+                <h2 class="subtitle">{{ state.C_title.data }}</h2>
+                <p>{{ state.C_text.data }}</p>
               </div>
             </div>
             <div class="column is-one-third"
-                 v-scroll-reveal="{
-                   origin: 'right',
-                   distance: '400px',
-                   duration: 1500,
-                   easing: 'ease'
-                   }">
+                 v-scroll-reveal="sReveal('right', 150, 400, 1500)">
               <div :class="{'highlighted': highlighted(2)}">
-                <i :class="state.R_icon"></i>
-                <h2 class="subtitle">{{ state.R_title }}</h2>
-                <p>{{ state.R_text }}</p>
+                <i :class="state.R_icon.data"></i>
+                <h2 class="subtitle">{{ state.R_title.data }}</h2>
+                <p>{{ state.R_text.data }}</p>
               </div>
             </div>
           </div>
@@ -49,111 +36,89 @@
     <EditNav v-if="checkName()" height="300">
       <b-tabs v-model="activeTab" position="is-centered">
 
-        <b-tab-item label="Gauche">
+        <b-tab-item v-for="(i, idx) in labels" :key="idx" :label="i.label">
           <div class="columns is-mobile is-variable is-8-desktop">
             <div class="column is-6">
-              <label>Titre:</label>
-              <b-input maxlength="20"
+              <label>{{ i.subs[0].label }}:</label>
+              <b-input :len="i.subs[0].len"
                        :disabled="loading"
-                       v-model="state.L_title">
+                       v-model="i.subs[0].data">
               </b-input>
-              <label>Texte:</label>
-              <b-input type="textarea"
-                       rows="3"
-                       maxlength="200"
+              <label>{{ i.subs[1].label }}:</label>
+              <b-input :type="i.subs[1].type"
+                       :rows="i.subs[1].rows"
+                       :maxlength="i.subs[1].len"
                        :disabled="loading"
-                       v-model="state.L_text">
+                       v-model="i.subs[1].data">
               </b-input>
             </div>
             <div class="column is-6">
-              <label>Icone:</label>
-              <IconPicker @selectIcon="returnIcon" position="L"/>
+              <label>{{ i.subs[2].label }}:</label>
+              <IconPicker @selectIcon="returnIcon" :position="i.label"/>
             </div>
           </div>
         </b-tab-item>
 
-        <b-tab-item label="Centre">
-          <div class="columns is-mobile is-variable is-8-desktop">
-            <div class="column is-6">
-              <label>Titre:</label>
-              <b-input maxlength="20"
-                       :disabled="loading"
-                       v-model="state.C_title">
-              </b-input>
-              <label>Texte:</label>
-              <b-input type="textarea"
-                       rows="3"
-                       maxlength="200"
-                       :disabled="loading"
-                       v-model="state.C_text">
-              </b-input>
-            </div>
-            <div class="column is-6">
-              <label>Icone:</label>
-              <IconPicker @selectIcon="returnIcon" position="M"/>
-            </div>
-          </div>
-        </b-tab-item>
-
-        <b-tab-item label="Droite">
-          <div class="columns is-mobile is-variable is-8-desktop">
-            <div class="column is-6">
-              <label>Titre:</label>
-              <b-input maxlength="20"
-                       :disabled="loading"
-                       v-model="state.R_title">
-              </b-input>
-              <label>Texte:</label>
-              <b-input type="textarea"
-                       rows="3"
-                       maxlength="200"
-                       :disabled="loading"
-                       v-model="state.R_text">
-              </b-input>
-            </div>
-            <div class="column is-6">
-              <label>Icone:</label>
-              <IconPicker @selectIcon="returnIcon" position="R"/>
-            </div>
-          </div>
-        </b-tab-item>
       </b-tabs>
-
     </EditNav>
   </div>
 </template>
 
 <script>
   import HeroStore from './HeroStore';
-  import mixin from '../../../mixins/PublicMixin'
+  import mixin from '../../../mixins/Public/PublicMixin';
   import IconPicker from '../../Components/IconPicker/IconPicker';
 
   export default {
     name: "Hero",
     mixins: [mixin],
-    components: { IconPicker },
+    components: {IconPicker},
     data() {
       return {
         state: {
-          L_title: '', L_icon: '', L_text: '',
-          C_title: '', C_icon: '', C_text: '',
-          R_title: '', R_icon: '', R_text: '',
+          L_title: {data: '', len: '20', label: 'Titre'},
+          L_text: {data: '', len: '200', rows: '3', type: 'textarea', label: 'Texte'},
+          L_icon: {data: '', label: 'Icone'},
+          C_title: {data: '', len: '20', label: 'Titre'},
+          C_text: {data: '', len: '20', rows: '3', type: 'textarea', label: 'Texte'},
+          C_icon: {data: '', label: 'Icone'},
+          R_title: {data: '', len: '20', label: 'Titre'},
+          R_text: {data: '', len: '200', rows: '3', type: 'textarea', label: 'Texte'},
+          R_icon: {data: '', label: 'Icone'},
         },
         store: HeroStore,
         iconPicker: false,
       };
     },
+    computed: {
+      labels() {
+        return [
+          {
+            label: 'Gauche',
+            subs: [this.state.L_title, this.state.L_text, this.state.L_icon]
+          },
+          {
+            label: 'Centre',
+            subs: [this.state.C_title, this.state.C_text, this.state.C_icon]
+          },
+          {
+            label: 'Droite',
+            subs: [this.state.R_title, this.state.R_text, this.state.R_icon]
+          },
+        ];
+      }
+    },
     methods: {
       returnIcon(icon) {
         switch (icon.position) {
-          case 'L':
-            this.state.L_icon = `${icon.weight} fa-${icon.className}`;
+          case 'Gauche':
+            this.state.L_icon.data = `${icon.weight} fa-${icon.className}`;
             break;
-          case 'M':
-            this.state.C_icon = `${icon.weight} fa-${icon.className}`;
+          case 'Centre':
+            this.state.C_icon.data = `${icon.weight} fa-${icon.className}`;
             break;
-          case 'R':
-            this.state.R_icon = `${icon.weight} fa-${icon.className}`;
+          case 'Droite':
+            this.state.R_icon.data = `${icon.weight} fa-${icon.className}`;
             break;
         }
       },

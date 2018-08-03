@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
-import mixin from '../../../mixins/PublicStoreMixin'
+import mixin from '../../../mixins/Public/PublicStoreMixin'
 
 const PromoStore = new Vue({
   mixins: [mixin],

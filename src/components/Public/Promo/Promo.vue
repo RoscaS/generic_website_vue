@@ -6,15 +6,15 @@
         <div class="columns content">
           <div class="column left is-offset-2 is-4">
             <img :class="{'highlighted': highlighted(2)}"
-                 :src="state.image">
+                 :src="state.image.data">
           </div>
           <div class="column right is-5">
             <div>
               <h3 :class="{'highlighted': highlighted(0)}">
-                {{ state.title }}
+                {{ state.title.data}}
               </h3>
               <p :class="{'highlighted': highlighted(1)}">
-                {{ state.text }}
+                {{ state.text.data}}
               </p>
             </div>
           </div>
@@ -27,20 +27,15 @@
         <b-tab-item label="Image">
           <FileUpload @image-preview="image=$event"></FileUpload>
         </b-tab-item>
-
-        <b-tab-item label="Titre">
-          <b-input maxlength="35"
-                   :disabled="loading"
-                   v-model="state.title">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="Texte">
-          <b-input type="textarea"
-                   maxlength="500"
-                   rows="5"
-                   :disabled="loading"
-                   v-model="state.text">
-          </b-input>
+        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
+          <b-field type="is-light">
+            <b-input :type="i.type"
+                     :maxlength="i.len"
+                     :rows="i.rows"
+                     :disabled="loading"
+                     v-model="i.data">
+            </b-input>
+          </b-field>
         </b-tab-item>
       </b-tabs>
     </EditNav>
@@ -49,7 +44,7 @@
 
 <script>
   import PromoStore from './PromoStore';
-  import mixin from '../../../mixins/PublicMixin'
+  import mixin from '../../../mixins/Public/PublicMixin'
 
   export default {
     name: 'Promo',
@@ -57,7 +52,11 @@
     data() {
       return {
         store: PromoStore,
-        state: {title: '', text: '', image: '',},
+        state: {
+          title: {data: '', len: '35', label: 'Titre',},
+          text: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte',},
+          image: {data: '',},
+        }
       };
     },
   };

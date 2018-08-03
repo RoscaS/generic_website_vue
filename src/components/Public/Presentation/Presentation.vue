@@ -2,56 +2,39 @@
   <div>
     <div class="down-arrow-wrapper">
       <i class="down-arrow fal fa-chevron-double-down"
-         v-scroll-to="{
-             el: '#Presentation',
-             duration: 2000,
-             offset: -80
-           }">
+         v-scroll-to="{ el: '#Presentation', duration: 2000, offset: -80 }">
       </i>
     </div>
     <section id="Presentation" class="section section-container">
       <EditIcon top="20px" :component="name">
         <div class="container">
           <div class="content">
-            <Title :class="{'highlighted': highlighted(1)}">
-              {{ state.title }}
+            <Title :class="{'highlighted': highlighted(1)}"
+                   v-scroll-reveal="sReveal('top', 150, 30)">
+              {{ state.title.data }}
             </Title>
             <p class="sub-title"
-               :class="{'highlighted': highlighted(2)}">
-              {{ state.subTi }}
+               :class="{'highlighted': highlighted(2)}"
+               v-scroll-reveal="sReveal('bottom', 200, 10, duration=3000)">
+              {{ state.subTi.data }}
             </p>
             <p class="text1"
                :class="{'highlighted': highlighted(3)}"
-               v-scroll-reveal="{
-                     origin: 'left',
-                     distance: '400px',
-                     duration: 1500,
-                     delay: 50,
-                     easing: 'ease',
-                   }">
-              {{ state.text1 }}
+               v-scroll-reveal="sReveal('left', 250, 400)">
+              {{ state.text1.data }}
             </p>
 
             <div class="columns is-variable is-8">
               <div class="column">
-                <img :src="state.image"
+                <img :src="state.image.data"
                      :class="{'highlighted': highlighted(0)}"
-                     v-scroll-reveal="{
-                               duration: 2500,
-                               delay: 100,
-                               easing: 'ease'
-                             }">
+                     v-scroll-reveal="sReveal('bottom', 300, 10)">
               </div>
               <div class="column"
-                   v-scroll-reveal="{
-                           origin: 'right',
-                           distance: '400px',
-                           delay: 100,
-                           duration: 1500,
-                           easing: 'ease'
-                         }">
+                   v-scroll-reveal="sReveal('right', 350, 400)">
                 <p :class="{'highlighted': highlighted(4)}">
-                  {{ state.text2 }}
+
+                  {{ state.text2.data }}
                 </p>
               </div>
             </div>
@@ -63,38 +46,18 @@
     <EditNav v-if="checkName()" height="225">
       <b-tabs v-model="activeTab" position="is-centered">
         <b-tab-item label="Image">
-          <FileUpload @image-preview="state.image=$event"/>
+          <FileUpload @image-preview="state.image.data=$event"/>
         </b-tab-item>
 
-        <b-tab-item label="Titre">
-          <b-input maxlength="35"
-                   :disabled="loading"
-                   v-model="state.title">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="Sous titre">
-          <b-input type="textarea"
-                   maxlength="200"
-                   rows="2"
-                   :disabled="loading"
-                   v-model="state.subTi">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="Texte 1">
-          <b-input type="textarea"
-                   maxlength="800"
-                   rows="5"
-                   :disabled="loading"
-                   v-model="state.text1">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="texte 2">
-          <b-input type="textarea"
-                   maxlength="800"
-                   rows="5"
-                   :disabled="loading"
-                   v-model="state.text2">
-          </b-input>
+        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
+          <b-field type="is-light">
+            <b-input :type="i.type"
+                     :maxlength="i.len"
+                     :rows="i.rows"
+                     :disabled="loading"
+                     v-model="i.data">
+            </b-input>
+          </b-field>
         </b-tab-item>
       </b-tabs>
     </EditNav>
@@ -103,8 +66,7 @@
 
 <script>
   import PresentationStore from './PresentationStore';
-  import mixin from '../../../mixins/PublicMixin';
-
+  import mixin from '../../../mixins/Public/PublicMixin';
 
   export default {
     name: "Presentation",
@@ -112,7 +74,13 @@
     data() {
       return {
         store: PresentationStore,
-        state: { title: '', subTi: '', text1: '', text2: '', image: '', },
+        state: {
+          title: {data: '', len: '35', label: 'Titre',},
+          subTi: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre',},
+          text1: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte 1',},
+          text2: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte 2',},
+          image: {data: '',},
+        },
         downArrow: null,
       };
     },

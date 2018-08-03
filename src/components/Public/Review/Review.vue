@@ -5,11 +5,11 @@
         <div class="container">
           <div class="content">
             <Title :class="{'highlighted': highlighted(0)}">
-              {{ state.title }}
+              {{ state.title.data }}
             </Title>
             <p class="sub-title"
                :class="{'highlighted': highlighted(1)}">
-              {{ state.subTi }}
+              {{ state.subTi.data }}
             </p>
           </div>
         </div>
@@ -22,49 +22,25 @@
             <div class="level-item">
               <div class="level is-mobile overall">
                 <div class="level-left"
-                     v-scroll-reveal="{
-                    origin: 'left',
-                    distance: '100px',
-                    duration: 1500,
-                    delay: 0,
-                    easing: 'ease',
-                   }">
+                     v-scroll-reveal="sReveal('left', 0, 100, duration=1500)">
                   {{ overall }}
                 </div>
                 <div class="level-right">
                   <div class="level-item"
-                       v-scroll-reveal="{
-                      origin: 'top',
-                      distance: '0px',
-                      duration: 1500,
-                      delay: 0,
-                      easing: 'ease',
-                     }">
+                       v-scroll-reveal="sReveal('top', 0, 0, duration=1500)">
                   <span v-for="star in getStarsList(overall)">
                     <i class="fas fa-star" v-if="star == 1"></i>
                     <i class="fas fa-star-half" v-if="star == 2"></i>
                   </span>
                   </div>
                   <div class="leve-item"
-                       v-scroll-reveal="{
-                      origin: 'right',
-                      distance: '100px',
-                      duration: 1500,
-                      delay: 0,
-                      easing: 'ease',
-                     }">
+                       v-scroll-reveal="sReveal('right', 0, 100, duration=1500)">
                     <a target="_blank" :href="reviewAll">80+ reviews</a>
                   </div>
                 </div>
               </div>
               <div class="level-right"
-                   v-scroll-reveal="{
-                origin: 'left',
-                distance: '100px',
-                duration: 3500,
-                delay: 500,
-                easing: 'ease',
-               }">
+                   v-scroll-reveal="sReveal('left', 50010010, duration=3500)">
                 <a target="_blank" :href="reviewNew"
                    class="button _btn no-tr">
                   <i class="fas fa-pencil-alt"></i>
@@ -74,17 +50,10 @@
             </div>
           </div>
 
-
           <div class="columns is-multiline">
             <div class="column is-6"
                  v-for="review in reviews"
-                 v-scroll-reveal="{
-                origin: 'bottom',
-                distance: '100px',
-                duration: 1500,
-                delay: 0,
-                easing: 'ease',
-             }">
+                 v-scroll-reveal="sReveal('bottom', 0, 100, duration=1500)">
               <div class="card shadow">
                 <div class="card-content">
                   <div class="media">
@@ -121,17 +90,15 @@
 
     <EditNav v-if="checkName()" height="150">
       <b-tabs v-model="activeTab" position="is-centered">
-        <b-tab-item label="Titre">
-          <b-input maxlength="35"
-                   :disabled="loading"
-                   v-model="state.title">
-          </b-input>
-        </b-tab-item>
-        <b-tab-item label="Sous titre">
-          <b-input maxlength="200"
-                   :disabled="loading"
-                   v-model="state.subTi">
-          </b-input>
+        <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
+          <b-field type="is-light">
+            <b-input :type="i.type"
+                     :maxlength="i.len"
+                     rows="i.rows"
+                     :disabled="loading"
+                     v-model="i.data">
+            </b-input>
+          </b-field>
         </b-tab-item>
       </b-tabs>
     </EditNav>
@@ -141,7 +108,7 @@
 <script>
   import ReviewStore from './ReviewStore';
   import moment from 'moment';
-  import mixin from '../../../mixins/PublicMixin';
+  import mixin from '../../../mixins/Public/PublicMixin';
 
 
   export default {
@@ -151,7 +118,10 @@
     data() {
       return {
         store: ReviewStore,
-        state: {title: '', subTi: '',},
+        state: {
+          title: {data: '', len: '35', label: 'Titre',},
+          subTi: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre',},
+        },
       };
     },
     computed: {

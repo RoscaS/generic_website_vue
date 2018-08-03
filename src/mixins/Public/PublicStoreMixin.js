@@ -1,4 +1,4 @@
-import EditStore from '../components/Components/Edit/EditStore'
+import EditStore from '../../components/Components/Edit/EditStore'
 
 export default {
   data: {

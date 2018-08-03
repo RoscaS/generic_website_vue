@@ -7,13 +7,8 @@ const EditStore = new Vue({
     active: false,
     dirty: false,
 
-    timeout: 5000,
-
     pushSignal: false,
-    recoverSignal: false,
     cancelSignal: false,
-
-    image: '',
 
     reOrder: false
   },
@@ -37,6 +32,7 @@ const EditStore = new Vue({
       this.active = true;
     },
     end() {
+      this.loading = false;
       this.active = false;
       setTimeout(() => { this.component = null; }, 1000);
     },

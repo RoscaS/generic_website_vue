@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Vue from "vue";
 
-
 const ImageStore = new Vue({
   data: {
     galeries: {

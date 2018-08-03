@@ -1,15 +1,17 @@
-import EditIcon from '../components/Components/Edit/EditIcon';
-import EditNav from '../components/Components/Edit/EditNav';
-import FileUpload from '../components/Components/Edit/FileUpload';
-import EditStore from '../components/Components/Edit/EditStore';
+import EditIcon from '../../components/Components/Edit/EditIcon';
+import EditNav from '../../components/Components/Edit/EditNav';
+import FileUpload from '../../components/Components/Edit/FileUpload';
+import EditStore from '../../components/Components/Edit/EditStore';
 
 export default {
   components: {EditIcon, EditNav, FileUpload},
   data() {
     return {
+
       edit: EditStore,
       name: this.$options.name,
       activeTab: 0,
+      timeout: 5000,
     };
   },
   computed: {
@@ -22,7 +24,9 @@ export default {
       if (this.checkSignal(this.pushSignal)) {
         this.edit.setLoading(true);
         if (this.isDirty()) {
-          this.copyData(this.state, this.store.state);
+          for (let i in this.store.state) {
+            this.store.state[i] = this.state[i].data;
+          }
           this.store.pushData();
         } else {
           this.edit.end();
@@ -38,9 +42,6 @@ export default {
         }
       }
     },
-    recoverSignal() {
-      if (this.checkSignal(this.recoverSignal)) { this.recoverData(); }
-    },
   },
   methods: {
     checkName() {
@@ -54,26 +55,24 @@ export default {
     checkSignal(signal) {
       return signal && this.name == this.edit.component;
     },
-    copyData(from, to) {
-      for (let i in from) { to[i] = from[i]; }
-    },
     setData() {
       if (this.store.fetchFlag) {
-        this.copyData(this.store.state, this.state);
+        for (let i in this.store.state) {
+          this.state[i].data = this.store.state[i];
+        }
       } else {
         setTimeout(() => { this.setData(); }, 2);
       }
     },
     isDirty() {
       for (let i in this.state) {
-        if (this.state[i] !== this.store.state[i]) {
+        if (this.state[i].data !== this.store.state[i]) {
           this.edit.setDirty(true);
           return true;
         }
       }
       return false;
     },
-
     snackBar() {
       this.$snackbar.open({
         message: 'Les modifications seront perdues (Pressez le bouton vert pour sauver).',
@@ -83,11 +82,22 @@ export default {
         duration: this.edit.timeout,
         indefinite: false,
         onAction: () => {
-          this.copyData(this.store.state, this.state);
+          for (let i in this.store.state) {
+            this.state[i].data = this.store.state[i];
+          }
           this.edit.end();
         }
       });
     },
+    sReveal(side, delay, distance = 100, duration = 1500) {
+      return {
+        origin: side,
+        distance: `${distance}px`,
+        duration: duration,
+        delay: delay,
+        easing: 'ease',
+      };
+    }
   },
   created() {
     this.store.setComponent(this.name);
