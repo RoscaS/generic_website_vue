@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="container collapse-content">
-
       <EditIcon :component="name">
         <div class="columns content">
           <div class="column left is-offset-2 is-4">
@@ -23,19 +22,13 @@
     </div>
     <EditNav v-if="checkName()">
       <b-tabs v-model="activeTab" position="is-centered">
-
-        <b-tab-item label="Image">
-          <FileUpload @image-preview="image=$event"></FileUpload>
-        </b-tab-item>
         <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
-          <b-field type="is-light">
-            <b-input :type="i.type"
-                     :maxlength="i.len"
-                     :rows="i.rows"
-                     :disabled="loading"
-                     v-model="i.data">
+          <b-field type="is-light" v-if="i.label !=='Image'">
+            <b-input :type="i.type" :maxlength="i.len" :rows="i.rows"
+                     :disabled="loading" v-model="i.data">
             </b-input>
           </b-field>
+          <FileUpload v-else @image-preview="state.image.data=$event"/>
         </b-tab-item>
       </b-tabs>
     </EditNav>
@@ -55,7 +48,7 @@
         state: {
           title: {data: '', len: '35', label: 'Titre',},
           text: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte',},
-          image: {data: '',},
+          image: {data: '', label: 'Image',},
         }
       };
     },

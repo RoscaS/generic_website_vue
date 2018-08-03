@@ -5,62 +5,41 @@
          v-scroll-to="{ el: '#Presentation', duration: 2000, offset: -80 }">
       </i>
     </div>
-    <section id="Presentation" class="section section-container">
-      <EditIcon top="20px" :component="name">
-        <div class="container">
-          <div class="content">
-            <Title :class="{'highlighted': highlighted(1)}"
-                   v-scroll-reveal="sReveal('top', 150, 30)">
-              {{ state.title.data }}
-            </Title>
-            <p class="sub-title"
-               :class="{'highlighted': highlighted(2)}"
-               v-scroll-reveal="sReveal('bottom', 200, 10, duration=3000)">
-              {{ state.subTi.data }}
-            </p>
-            <p class="text1"
-               :class="{'highlighted': highlighted(3)}"
-               v-scroll-reveal="sReveal('left', 250, 400)">
-              {{ state.text1.data }}
-            </p>
 
-            <div class="columns is-variable is-8">
-              <div class="column">
-                <img :src="state.image.data"
-                     :class="{'highlighted': highlighted(0)}"
-                     v-scroll-reveal="sReveal('bottom', 300, 10)">
-              </div>
-              <div class="column"
-                   v-scroll-reveal="sReveal('right', 350, 400)">
-                <p :class="{'highlighted': highlighted(4)}">
+    <BaseLayout :id="name" :title="state.title.data" :subTi="state.subTi.data">
+      <template slot="content">
+        <p class="text1"
+           :class="{'highlighted': highlighted(2)}"
+           v-scroll-reveal="sReveal('left', 250, 400)">
+          {{ state.text1.data }}
+        </p>
+        <div class="columns is-variable is-8">
+          <div class="column">
+            <img :src="state.image.data"
+                 :class="{'highlighted': highlighted(4)}"
+                 v-scroll-reveal="sReveal('bottom', 300, 10)">
+          </div>
+          <div class="column"
+               v-scroll-reveal="sReveal('right', 350, 400)">
+            <p :class="{'highlighted': highlighted(3)}">
 
-                  {{ state.text2.data }}
-                </p>
-              </div>
-            </div>
+              {{ state.text2.data }}
+            </p>
           </div>
         </div>
-      </EditIcon>
-    </section>
+      </template>
 
-    <EditNav v-if="checkName()" height="225">
-      <b-tabs v-model="activeTab" position="is-centered">
-        <b-tab-item label="Image">
-          <FileUpload @image-preview="state.image.data=$event"/>
-        </b-tab-item>
-
+      <b-tabs v-model="activeTab" position="is-centered" slot="edit-nav">
         <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
-          <b-field type="is-light">
-            <b-input :type="i.type"
-                     :maxlength="i.len"
-                     :rows="i.rows"
-                     :disabled="loading"
-                     v-model="i.data">
+          <b-field type="is-light" v-if="i.label !=='Image'">
+            <b-input :type="i.type" :maxlength="i.len" :rows="i.rows"
+                     :disabled="loading" v-model="i.data">
             </b-input>
           </b-field>
+          <FileUpload v-else @image-preview="state.image.data=$event"/>
         </b-tab-item>
       </b-tabs>
-    </EditNav>
+    </BaseLayout>
   </div>
 </template>
 
@@ -79,7 +58,7 @@
           subTi: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre',},
           text1: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte 1',},
           text2: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte 2',},
-          image: {data: '',},
+          image: {data: '', label: 'Image',},
         },
         downArrow: null,
       };

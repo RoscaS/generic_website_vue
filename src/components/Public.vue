@@ -29,7 +29,7 @@
   import Presentation from './Public/Presentation/Presentation';
   import Articles from './Public/Articles';
   import Hero from './Public/Hero/Hero';
-  import Gallery from './Public/Gallery/GalleryMain';
+  import Gallery from './Public/Gallery/Gallery';
   import Contact from './Public/Contact/Contact';
   import Review from './Public/Review/Review';
   import Footer from './Public/Footer';

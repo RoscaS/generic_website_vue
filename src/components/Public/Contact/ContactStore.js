@@ -8,13 +8,13 @@ const PresentationStore = new Vue({
   url: 'contact/1/' ,
   fetchFlag: false,
   data: {
-    state: { title: '', subT1: '', subT2: '', subT3: '', },
+    state: { title: '', subTi: '', subT2: '', subT3: '', },
   },
   methods: {
     fetchData() {
       axios.get(this.$options.url).then(response => {
         this.state.title = response.data.title;
-        this.state.subT1 = response.data.sub_title;
+        this.state.subTi = response.data.sub_title;
         this.state.subT2 = response.data.sub_title2;
         this.state.subT3 = response.data.sub_title3;
         this.fetchFlag = true;

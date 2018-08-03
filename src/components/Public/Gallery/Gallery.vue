@@ -1,31 +1,15 @@
 <template>
   <div class="gallery-wrapper">
-    <section id="Galerie" class="section section-container">
-      <EditIcon top="20px" :component="$options.name">
-        <div class="container">
-          <div class="content">
-            <Title :class="{'highlighted': highlighted(0)}">
-              {{ state.title.data }}
-            </Title>
-
-            <p class="sub-title"
-               :class="{'highlighted': highlighted(1)}">
-              {{ state.subTi.data }}
-            </p>
-          </div>
-        </div>
-
+    <BaseLayout id="Galerie" :title="state.title.data"
+                :subTi="state.subTi.data" edit-nav-height="150">
+      <template slot="gallery-content">
         <transition name="fade" mode="out-in">
           <GalleryManager v-if="activeTab==2 && edit.component==name"/>
           <GalleryUser v-else/>
         </transition>
+      </template>
 
-      </EditIcon>
-    </section>
-
-    <EditNav id="GalleryEditNav" v-if="checkName()" height="150">
-      <b-tabs v-model="activeTab" position="is-centered">
-
+      <b-tabs v-model="activeTab" position="is-centered" slot="edit-nav">
         <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
           <b-field type="is-light">
             <b-input :type="i.type"
@@ -53,7 +37,8 @@
           </div>
         </b-tab-item>
       </b-tabs>
-    </EditNav>
+
+    </BaseLayout>
   </div>
 </template>
 
