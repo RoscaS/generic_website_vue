@@ -108,10 +108,6 @@
   import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
   import ImageStore from '../../../Components/GalleryManager/ImageStore';
 
-
-
-
-
   export default {
     name: 'GalleryManager',
     components: {draggable, Scrolly, ScrollyViewport, ScrollyBar},

@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div class="down-arrow-wrapper">
-      <i class="down-arrow fal fa-chevron-double-down"
-         v-scroll-to="{ el: '#Presentation', duration: 2000, offset: -80 }">
-      </i>
-    </div>
-
+    <DownArrow></DownArrow>
     <BaseLayout :id="name"
                 :title="state.title.data"
                 :subTi="state.subTi.data"
@@ -27,7 +22,6 @@
         <div class="column"
              v-scroll-reveal="sReveal('right', 350, 400)">
           <p :class="{'highlighted': highlighted(3)}">
-
             {{ state.text2.data }}
           </p>
         </div>
@@ -37,12 +31,14 @@
 </template>
 
 <script>
+  import DownArrow from '../../../components/Components/Carousel/DownArrow.vue'
   import PresentationStore from './PresentationStore';
   import mixin from '../../../mixins/Public/PublicMixin';
 
   export default {
     name: "Presentation",
     mixins: [mixin],
+    components: {DownArrow},
     data() {
       return {
         store: PresentationStore,
@@ -84,46 +80,10 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
-
   .section {
     margin-top: -50px !important;
     @media screen and (max-width: 1366px) {
       margin-top: 25px !important;
-
-    }
-  }
-
-  .down-arrow-wrapper {
-    position: absolute;
-    left: 49%;
-    animation: down-arrow .6s ease infinite;
-
-    @keyframes down-arrow {
-      0% {
-        transform: translateY(0px);
-      }
-      60% {
-        transform: translateY(-5px);
-      }
-      100% {
-        transform: translateY(0px);
-      }
-    }
-  }
-
-  .down-arrow {
-    opacity: 0;
-    transition: color .5s ease;
-    font-size: 50px;
-    font-weight: normal;
-    color: white;
-    bottom: 140px;
-    position: relative;
-    cursor: pointer;
-
-    &:hover {
-      transition: color .5s ease;
-      color: #d1d1d1;
     }
   }
 

@@ -20,7 +20,7 @@
         </div>
       </EditIcon>
     </div>
-    <EditNav v-if="checkName()">
+    <EditNav v-if="checkName()" height="225">
       <FieldsLayout :state="state" :activeTab="activeTab" :loading="loading"
                      @changeTab="$emit('changeTab', $event)">
       </FieldsLayout>
@@ -52,7 +52,6 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
-
   .edit-area {
     .label {
       color: white;
@@ -70,11 +69,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
         h2 {
           display: block;
         }
-
         p {
           display: block;
         }
