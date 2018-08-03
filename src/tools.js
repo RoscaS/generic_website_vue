@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {Toast} from 'buefy';
+import {Toast, Snackbar} from 'buefy';
 
 const data = [
   { color: 'is-danger', message: "Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur." },
@@ -8,6 +8,13 @@ const data = [
 ];
 
 const Tools = new Vue({
+  data() {
+    return {
+      snackBarData: {
+
+      }
+    }
+  },
   methods: {
     message(type) { this.toast(type); },
     errorMessage(url, error) { this.toast(0, url, error); },

@@ -12,9 +12,9 @@
                    easing: 'ease'
                    }">
               <div :class="{'highlighted': highlighted(0)}">
-                <i :class="L_icon"></i>
-                <h2 class="subtitle">{{ L_title }}</h2>
-                <p>{{ L_text }}</p>
+                <i :class="state.L_icon"></i>
+                <h2 class="subtitle">{{ state.L_title }}</h2>
+                <p>{{ state.L_text }}</p>
               </div>
             </div>
             <div class="column is-one-third"
@@ -23,9 +23,9 @@
                    easing: 'ease'
                    }">
               <div :class="{'highlighted': highlighted(1)}">
-                <i :class="C_icon"></i>
-                <h2 class="subtitle">{{ C_title }}</h2>
-                <p>{{ C_text }}</p>
+                <i :class="state.C_icon"></i>
+                <h2 class="subtitle">{{ state.C_title }}</h2>
+                <p>{{ state.C_text }}</p>
               </div>
             </div>
             <div class="column is-one-third"
@@ -36,9 +36,9 @@
                    easing: 'ease'
                    }">
               <div :class="{'highlighted': highlighted(2)}">
-                <i :class="R_icon"></i>
-                <h2 class="subtitle">{{ R_title }}</h2>
-                <p>{{ R_text }}</p>
+                <i :class="state.R_icon"></i>
+                <h2 class="subtitle">{{ state.R_title }}</h2>
+                <p>{{ state.R_text }}</p>
               </div>
             </div>
           </div>
@@ -55,14 +55,14 @@
               <label>Titre:</label>
               <b-input maxlength="20"
                        :disabled="loading"
-                       v-model="L_title">
+                       v-model="state.L_title">
               </b-input>
               <label>Texte:</label>
               <b-input type="textarea"
                        rows="3"
                        maxlength="200"
                        :disabled="loading"
-                       v-model="L_text">
+                       v-model="state.L_text">
               </b-input>
             </div>
             <div class="column is-6">
@@ -78,14 +78,14 @@
               <label>Titre:</label>
               <b-input maxlength="20"
                        :disabled="loading"
-                       v-model="C_title">
+                       v-model="state.C_title">
               </b-input>
               <label>Texte:</label>
               <b-input type="textarea"
                        rows="3"
                        maxlength="200"
                        :disabled="loading"
-                       v-model="C_text">
+                       v-model="state.C_text">
               </b-input>
             </div>
             <div class="column is-6">
@@ -101,14 +101,14 @@
               <label>Titre:</label>
               <b-input maxlength="20"
                        :disabled="loading"
-                       v-model="R_title">
+                       v-model="state.R_title">
               </b-input>
               <label>Texte:</label>
               <b-input type="textarea"
                        rows="3"
                        maxlength="200"
                        :disabled="loading"
-                       v-model="R_text">
+                       v-model="state.R_text">
               </b-input>
             </div>
             <div class="column is-6">
@@ -134,60 +134,26 @@
     components: { IconPicker },
     data() {
       return {
+        state: {
+          L_title: '', L_icon: '', L_text: '',
+          C_title: '', C_icon: '', C_text: '',
+          R_title: '', R_icon: '', R_text: '',
+        },
         store: HeroStore,
-        state: HeroStore.state,
         iconPicker: false,
       };
-    },
-    computed: {
-      L_title: {
-        get() { return this.state.L_title; },
-        set(value) { this.state.L_title = value; }
-      },
-      C_title: {
-        get() { return this.state.C_title; },
-        set(value) { this.state.C_title = value; }
-      },
-      R_title: {
-        get() { return this.state.R_title; },
-        set(value) { this.state.R_title = value; }
-      },
-      L_icon: {
-        get() { return this.state.L_icon; },
-        set(value) { this.state.L_icon = value; }
-      },
-      C_icon: {
-        get() { return this.state.C_icon; },
-        set(value) { this.state.C_icon = value; }
-      },
-      R_icon: {
-        get() { return this.state.R_icon; },
-        set(value) { this.state.R_icon = value; }
-      },
-      L_text: {
-        get() { return this.state.L_text; },
-        set(value) { this.state.L_text = value; }
-      },
-      C_text: {
-        get() { return this.state.C_text; },
-        set(value) { this.state.C_text = value; }
-      },
-      R_text: {
-        get() { return this.state.R_text; },
-        set(value) { this.state.R_text = value; }
-      }
     },
     methods: {
       returnIcon(icon) {
         switch (icon.position) {
           case 'L':
-            this.L_icon = `${icon.weight} fa-${icon.className}`;
+            this.state.L_icon = `${icon.weight} fa-${icon.className}`;
             break;
           case 'M':
-            this.C_icon = `${icon.weight} fa-${icon.className}`;
+            this.state.C_icon = `${icon.weight} fa-${icon.className}`;
             break;
           case 'R':
-            this.R_icon = `${icon.weight} fa-${icon.className}`;
+            this.state.R_icon = `${icon.weight} fa-${icon.className}`;
             break;
         }
       },

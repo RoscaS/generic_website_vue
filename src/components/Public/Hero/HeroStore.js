@@ -3,15 +3,11 @@ import axios from 'axios';
 import mixin from '../../../mixins/PublicStoreMixin';
 
 const HeroStore = new Vue({
-  mixins: [mixin],
   url: 'hero/1/',
+  mixins: [mixin],
+  fetchFlag: false,
   data: {
     state: {
-      L_title: '', L_icon: '', L_text: '',
-      C_title: '', C_icon: '', C_text: '',
-      R_title: '', R_icon: '', R_text: '',
-    },
-    backup: {
       L_title: '', L_icon: '', L_text: '',
       C_title: '', C_icon: '', C_text: '',
       R_title: '', R_icon: '', R_text: '',
@@ -31,6 +27,7 @@ const HeroStore = new Vue({
         this.state.L_text = response.data.text1;
         this.state.C_text = response.data.text2;
         this.state.R_text = response.data.text3;
+        this.fetchFlag = true;
       }).catch(error => { (`${this.$options.url}\n${error}`); });
     },
     pushData() {

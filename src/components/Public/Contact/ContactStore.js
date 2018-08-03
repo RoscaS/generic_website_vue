@@ -6,9 +6,9 @@ import mixin from '../../../mixins/PublicStoreMixin'
 const PresentationStore = new Vue({
   mixins: [mixin],
   url: 'contact/1/' ,
+  fetchFlag: false,
   data: {
     state: { title: '', subT1: '', subT2: '', subT3: '', },
-    backup: { title: '', subT1: '', subT2: '', subT3: '', },
   },
   methods: {
     fetchData() {
@@ -17,6 +17,7 @@ const PresentationStore = new Vue({
         this.state.subT1 = response.data.sub_title;
         this.state.subT2 = response.data.sub_title2;
         this.state.subT3 = response.data.sub_title3;
+        this.fetchFlag = true;
       }).catch(error => { console.log(`${this.$options.url}\n${error}`);});
     },
     pushData() {

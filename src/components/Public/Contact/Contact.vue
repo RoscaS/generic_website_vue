@@ -6,11 +6,11 @@
         <div class="container">
           <div class="content">
             <Title :class="{'highlighted': highlighted(0)}">
-              {{ title }}
+              {{ state.title }}
             </Title>
             <p class="sub-title"
                :class="{'highlighted': highlighted(1)}">
-              {{ subT1 }}
+              {{ state.subT1 }}
             </p>
             <div class="columns">
               <div class="column left">
@@ -58,7 +58,7 @@
                    delay: 100,
                    easing: 'ease',
                  }">
-                  {{ subT2 }}</p>
+                  {{ state.subT2 }}</p>
                 <ContactForm url="message/"></ContactForm>
               </div>
             </div>
@@ -71,7 +71,7 @@
                     delay: 600,
                     easing: 'ease',
                   }">
-                {{ subT3 }}
+                {{ state.subT3 }}
               </p>
             </div>
           </div>
@@ -83,25 +83,25 @@
         <b-tab-item label="Titre">
           <b-input maxlength="35"
                    :disabled="loading"
-                   v-model="title">
+                   v-model="state.title">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Sous titre 1">
           <b-input maxlength="200"
                    :disabled="loading"
-                   v-model="subT1">
+                   v-model="state.subT1">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Sous titre 2">
           <b-input maxlength="200"
                    :disabled="loading"
-                   v-model="subT2">
+                   v-model="state.subT2">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Sous titre 3">
           <b-input maxlength="200"
                    :disabled="loading"
-                   v-model="subT3">
+                   v-model="state.subT3">
           </b-input>
         </b-tab-item>
       </b-tabs>
@@ -123,29 +123,12 @@
       return {
         siteSettings: this.$Global.SiteSettings,
         store: ContactStore,
-        state: ContactStore.state,
+        state: { title: '', subT1: '', subT2: '', subT3: '', },
       };
     },
     computed: {
       phoneHref() { return `tel:${this.siteSettings.phone}`; },
       mailHref() { return `mailto:${this.siteSettings.mail}`; },
-
-      title: {
-        get() { return this.state.title; },
-        set(value) { this.state.title = value; }
-      },
-      subT1: {
-        get() { return this.state.subT1; },
-        set(value) { this.state.subT1 = value; }
-      },
-      subT2: {
-        get() { return this.state.subT2; },
-        set(value) { this.state.subT2 = value; }
-      },
-      subT3: {
-        get() { return this.state.subT3; },
-        set(value) { this.state.subT3 = value; }
-      },
     },
   };
 </script>

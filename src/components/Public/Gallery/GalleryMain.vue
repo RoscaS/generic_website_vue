@@ -5,12 +5,12 @@
         <div class="container">
           <div class="content">
             <Title :class="{'highlighted': highlighted(0)}">
-              {{ title }}
+              {{ state.title }}
             </Title>
 
             <p class="sub-title"
                :class="{'highlighted': highlighted(1)}">
-              {{ subTi }}
+              {{ state.subTi }}
             </p>
           </div>
         </div>
@@ -28,14 +28,14 @@
         <b-tab-item label="Titre">
           <b-input maxlength="35"
                    :disabled="loading"
-                   v-model="title">
+                   v-model="state.title">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Sous titre">
           <b-input maxlength="200"
                    rows="3"
                    :disabled="loading"
-                   v-model="subTi">
+                   v-model="state.subTi">
           </b-input>
         </b-tab-item>
 
@@ -72,24 +72,10 @@
     data() {
       return {
         store: GalleryStore,
-        state: GalleryStore.state,
+        state: { title: '', subTi: '', },
         baseHeight: null,
 
       };
-    },
-    computed: {
-      reOrder: {
-        get() { return this.edit.reOrder; },
-        set(value) { this.edit.reOrder = value}
-      },
-      title: {
-        get() { return this.state.title; },
-        set(value) { this.state.title = value; }
-      },
-      subTi: {
-        get() { return this.state.subTi; },
-        set(value) { this.state.subTi = value; }
-      },
     },
   };
 </script>

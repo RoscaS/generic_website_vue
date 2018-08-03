@@ -5,9 +5,9 @@ import mixin from '../../../mixins/PublicStoreMixin'
 const PromoStore = new Vue({
   mixins: [mixin],
   url: 'promo/1/',
+  fetchFlag: false,
   data: {
     state: {title: '', text: '', image: '',},
-    backup: {title: '', text: '', image: '',},
   },
   methods: {
     fetchData() {
@@ -15,6 +15,7 @@ const PromoStore = new Vue({
         this.state.title = response.data.title;
         this.state.text = response.data.text;
         this.state.image = response.data.image.image;
+        this.fetchFlag = true;
       }).catch(error => { console.log(`${this.$options.url}\n${error}`);});
     },
     pushData() {

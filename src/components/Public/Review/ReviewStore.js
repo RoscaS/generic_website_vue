@@ -6,14 +6,13 @@ import mixin from '../../../mixins/PublicStoreMixin';
 const ReviewStore = new Vue({
   mixins: [mixin],
   url: 'review/1/',
+  fetchFlag: false,
   data: {
     reviewAll: null,
     reviewNew: null,
     overall: null,
     reviews: null,
-
     state: {title: '', subTi: '',},
-    backup: {title: '', subTi: '',},
   },
   methods: {
     fetchData() {
@@ -24,6 +23,7 @@ const ReviewStore = new Vue({
         this.reviewNew = response.data.g_review_new_url;
         this.overall = response.data.reviews.overall;
         this.reviews = response.data.reviews.reviews;
+        this.fetchFlag = true;
       }).catch(error => { console.log(`${this.$options.url}\n${error}`);});
     },
     pushData() {

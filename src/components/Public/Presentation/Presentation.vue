@@ -14,11 +14,11 @@
         <div class="container">
           <div class="content">
             <Title :class="{'highlighted': highlighted(1)}">
-              {{ title }}
+              {{ state.title }}
             </Title>
             <p class="sub-title"
                :class="{'highlighted': highlighted(2)}">
-              {{ subTi }}
+              {{ state.subTi }}
             </p>
             <p class="text1"
                :class="{'highlighted': highlighted(3)}"
@@ -29,12 +29,12 @@
                      delay: 50,
                      easing: 'ease',
                    }">
-              {{ text1 }}
+              {{ state.text1 }}
             </p>
 
             <div class="columns is-variable is-8">
               <div class="column">
-                <img :src="image"
+                <img :src="state.image"
                      :class="{'highlighted': highlighted(0)}"
                      v-scroll-reveal="{
                                duration: 2500,
@@ -51,7 +51,7 @@
                            easing: 'ease'
                          }">
                 <p :class="{'highlighted': highlighted(4)}">
-                  {{ text2 }}
+                  {{ state.text2 }}
                 </p>
               </div>
             </div>
@@ -63,13 +63,13 @@
     <EditNav v-if="checkName()" height="225">
       <b-tabs v-model="activeTab" position="is-centered">
         <b-tab-item label="Image">
-          <FileUpload @image-preview="image=$event"/>
+          <FileUpload @image-preview="state.image=$event"/>
         </b-tab-item>
 
         <b-tab-item label="Titre">
           <b-input maxlength="35"
                    :disabled="loading"
-                   v-model="title">
+                   v-model="state.title">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Sous titre">
@@ -77,7 +77,7 @@
                    maxlength="200"
                    rows="2"
                    :disabled="loading"
-                   v-model="subTi">
+                   v-model="state.subTi">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Texte 1">
@@ -85,7 +85,7 @@
                    maxlength="800"
                    rows="5"
                    :disabled="loading"
-                   v-model="text1">
+                   v-model="state.text1">
           </b-input>
         </b-tab-item>
         <b-tab-item label="texte 2">
@@ -93,7 +93,7 @@
                    maxlength="800"
                    rows="5"
                    :disabled="loading"
-                   v-model="text2">
+                   v-model="state.text2">
           </b-input>
         </b-tab-item>
       </b-tabs>
@@ -103,8 +103,7 @@
 
 <script>
   import PresentationStore from './PresentationStore';
-  import mixin from '../../../mixins/PublicMixin'
-
+  import mixin from '../../../mixins/PublicMixin';
 
 
   export default {
@@ -113,32 +112,11 @@
     data() {
       return {
         store: PresentationStore,
-        state: PresentationStore.state,
+        state: { title: '', subTi: '', text1: '', text2: '', image: '', },
         downArrow: null,
       };
     },
-    computed: {
-      title: {
-        get() { return this.state.title; },
-        set(value) { this.state.title = value; }
-      },
-      subTi: {
-        get() { return this.state.subTi; },
-        set(value) { this.state.subTi = value; }
-      },
-      text1: {
-        get() { return this.state.text1; },
-        set(value) { this.state.text1 = value; }
-      },
-      text2: {
-        get() { return this.state.text2; },
-        set(value) { this.state.text2 = value; }
-      },
-      image: {
-        get() { return this.state.image; },
-        set(value) {this.state.image = value; }
-      },
-    },
+
     methods: {
       scrollWatch() {
         if (window.pageYOffset >= 165) {
@@ -160,7 +138,7 @@
     mounted() {
       window.addEventListener('scroll', this.scrollWatch);
       this.setDownArrow();
-    },
+    }
   };
 </script>
 

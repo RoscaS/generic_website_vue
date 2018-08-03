@@ -7,9 +7,11 @@ const EditStore = new Vue({
     active: false,
     dirty: false,
 
+    timeout: 5000,
+
     pushSignal: false,
-    backupSignal: false,
     recoverSignal: false,
+    cancelSignal: false,
 
     image: '',
 
@@ -26,18 +28,12 @@ const EditStore = new Vue({
       this.pushSignal = true;
       setTimeout(() => { this.pushSignal = false }, 10);
     },
-    sendBackupSignal() {
-      this.backupSignal = true;
-      setTimeout(() => { this.backupSignal = false }, 10);
+    sendCancelSignal() {
+      this.cancelSignal = true;
+      setTimeout(() => { this.cancelSignal = false }, 10);
     },
-    sendRecoverSignal() {
-      this.recoverSignal = true;
-      setTimeout(() => { this.recoverSignal = false }, 10);
-    },
-
     start(component) {
       this.component = component;
-      this.sendBackupSignal();
       this.active = true;
     },
     end() {

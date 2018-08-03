@@ -6,15 +6,15 @@
         <div class="columns content">
           <div class="column left is-offset-2 is-4">
             <img :class="{'highlighted': highlighted(2)}"
-                 :src="image">
+                 :src="state.image">
           </div>
           <div class="column right is-5">
             <div>
               <h3 :class="{'highlighted': highlighted(0)}">
-                {{ title }}
+                {{ state.title }}
               </h3>
               <p :class="{'highlighted': highlighted(1)}">
-                {{ text }}
+                {{ state.text }}
               </p>
             </div>
           </div>
@@ -31,7 +31,7 @@
         <b-tab-item label="Titre">
           <b-input maxlength="35"
                    :disabled="loading"
-                   v-model="title">
+                   v-model="state.title">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Texte">
@@ -39,7 +39,7 @@
                    maxlength="500"
                    rows="5"
                    :disabled="loading"
-                   v-model="text">
+                   v-model="state.text">
           </b-input>
         </b-tab-item>
       </b-tabs>
@@ -57,22 +57,8 @@
     data() {
       return {
         store: PromoStore,
-        state: PromoStore.state,
+        state: {title: '', text: '', image: '',},
       };
-    },
-    computed: {
-      title: {
-        get() { return this.state.title; },
-        set(value) { this.state.title = value; }
-      },
-      text: {
-        get() { return this.state.text; },
-        set(value) { this.state.text2 = value; }
-      },
-      image: {
-        get() { return this.state.image; },
-        set(value) {this.state.image = value; }
-      },
     },
   };
 </script>

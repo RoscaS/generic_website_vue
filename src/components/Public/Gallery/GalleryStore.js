@@ -5,15 +5,16 @@ import mixin from '../../../mixins/PublicStoreMixin'
 const GalleryStore = new Vue ({
   mixins: [mixin],
   url: 'gallery/1/',
+  fetchFlag: false,
   data: {
     state: { title: '', subTi: '', },
-    backup: { title: '', subTi: '', },
   },
   methods: {
     fetchData() {
       axios.get(this.$options.url).then(response => {
         this.state.title = response.data.title;
         this.state.subTi = response.data.sub_title;
+        this.fetchFlag = true;
       }).catch(error => { console.log(`${this.$options.url}\n${error}`);});
     },
     pushData() {

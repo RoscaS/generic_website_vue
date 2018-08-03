@@ -25,7 +25,6 @@
       return {
         edit: EditStore,
         disable: false,
-        timeout: 5000,
       };
     },
     computed: {
@@ -35,49 +34,22 @@
       }
     },
     methods: {
-
       validateBtn() {
-        if (this.edit.dirty) {
           this.edit.sendPushSignal();
           this.disable = false;
           this.checkLoading();
-        } else {
-          this.edit.end();
-        }
       },
-
       cancelBtn() {
-        if (this.edit.dirty) {
+          this.edit.sendCancelSignal();
           this.disable = true;
-          this.snackBar();
-          setTimeout(() => {this.disable = false;}, this.timeout);
-        } else {
-          this.edit.end();
-        }
+          setTimeout(() => { this.disable = false; }, this.edit.timeout);
       },
-
       checkLoading() {
         if (this.loading) {
           setTimeout(() => { this.checkLoading(); }, 100)
         } else {
           this.edit.end()
         }
-      },
-
-      snackBar() {
-        this.$snackbar.open({
-          message: 'Les modifications seront perdues.',
-          type: 'is-warning',
-          position: 'is-top',
-          actionText: 'Continuer?',
-          duration: this.timeout,
-          indefinite: false,
-          onAction: () => {
-            this.edit.sendRecoverSignal();
-            this.disable = false;
-            this.edit.end();
-          }
-        });
       },
     },
   };

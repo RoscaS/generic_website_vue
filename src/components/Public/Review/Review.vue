@@ -5,11 +5,11 @@
         <div class="container">
           <div class="content">
             <Title :class="{'highlighted': highlighted(0)}">
-              {{ title }}
+              {{ state.title }}
             </Title>
             <p class="sub-title"
                :class="{'highlighted': highlighted(1)}">
-              {{ subTi }}
+              {{ state.subTi }}
             </p>
           </div>
         </div>
@@ -124,13 +124,13 @@
         <b-tab-item label="Titre">
           <b-input maxlength="35"
                    :disabled="loading"
-                   v-model="title">
+                   v-model="state.title">
           </b-input>
         </b-tab-item>
         <b-tab-item label="Sous titre">
           <b-input maxlength="200"
                    :disabled="loading"
-                   v-model="subTi">
+                   v-model="state.subTi">
           </b-input>
         </b-tab-item>
       </b-tabs>
@@ -151,30 +151,14 @@
     data() {
       return {
         store: ReviewStore,
-        state: ReviewStore.state,
+        state: {title: '', subTi: '',},
       };
     },
     computed: {
-      title: {
-        get() { return this.state.title; },
-        set(value) { this.state.title = value; }
-      },
-      subTi: {
-        get() { return this.state.subTi; },
-        set(value) { this.state.subTi = value; }
-      },
-      reviewAll: {
-        get() { return this.store.reviewAll; },
-      },
-      reviewNew: {
-        get() { return this.store.reviewNew; },
-      },
-      overall: {
-        get() { return this.store.overall; },
-      },
-      reviews: {
-        get() {return this.store.reviews; },
-      },
+      reviewAll() { return this.store.reviewAll; },
+      reviewNew() { return this.store.reviewNew; },
+      overall() { return this.store.overall; },
+      reviews() {return this.store.reviews; },
     },
     methods: {
       getDateTime(epoch) {
