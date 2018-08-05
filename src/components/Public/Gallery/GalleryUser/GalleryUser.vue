@@ -33,7 +33,6 @@
   import ImageStore from '../../../Components/GalleryManager/ImageStore';
   import Lightbox from '../../../Components/Lightbox/Lightbox';
 
-
   export default {
     name: "GalleryUser",
     components: {Lightbox},

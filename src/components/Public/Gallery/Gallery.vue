@@ -48,8 +48,8 @@
       return {
         store: GalleryStore,
         state: {
-          title: {data: '', len: '35', label: 'Titre',},
-          subTi: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre',},
+          title: new this.Title(),
+          subTi: new this.SubTitle(),
         },
         baseHeight: null,
 

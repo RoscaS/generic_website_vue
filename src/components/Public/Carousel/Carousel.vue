@@ -30,7 +30,7 @@
     computed: {
       images() { return this.state.images; },
       urls() {
-        let urls = []
+        let urls = [];
         this.images.forEach(i => { urls.push(i.url) });
         return urls;
       }

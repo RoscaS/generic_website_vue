@@ -2,18 +2,21 @@ import EditIcon from '../../components/Components/Edit/EditIcon';
 import EditNav from '../../components/Components/Edit/EditNav';
 import EditStore from '../../components/Components/Edit/EditStore';
 import BaseLayout from '../../components/Public/BaseLayout';
+import mixin from './BuildStateMixin'
 
 export default {
+  name: "PublicMixin",
+  mixins: [mixin],
   components: {EditIcon, EditNav, BaseLayout},
   data() {
     return {
-
       edit: EditStore,
       name: this.$options.name,
+      tools: this.$Global.Tools,
       activeTab: 0,
-      timeout: 5000,
     };
   },
+
   computed: {
     loading() { return this.edit.loading; },
     pushSignal() { return this.edit.pushSignal; },
@@ -73,36 +76,44 @@ export default {
       }
       return false;
     },
+
     snackBar() {
-      this.$snackbar.open({
-        message: 'Les modifications seront perdues (Pressez le bouton vert pour sauver).',
-        type: 'is-warning',
-        position: 'is-top',
-        actionText: 'Continuer?',
-        duration: this.edit.timeout,
-        indefinite: false,
-        onAction: () => {
-          for (let i in this.store.state) {
-            this.state[i].data = this.store.state[i];
-          }
-          this.edit.end();
-        }
-      });
+      let options = new this.tools.SnackBarOptions();
+      options.onAction = this.snackBarCallback;
+      this.$snackbar.open(options);
     },
+
+    snackBarCallback() {
+      for (let i in this.store.state) {
+        this.state[i].data = this.store.state[i];
+      }
+      this.edit.end();
+    },
+
     sReveal(side, delay, distance = 100, duration = 1500) {
-      return {
-        origin: side,
-        distance: `${distance}px`,
-        duration: duration,
-        delay: delay,
-        easing: 'ease',
-      };
-    }
+      return new this.tools.ScrollRevealOptions(
+        side, delay, distance, duration
+      )
+    },
+
+    // buildState() {
+    //   console.log(this.name)
+    //   for (let i in this.state) {
+    //     if (i.includes('title')) {
+    //       this.state[i] = new this.tools.title()
+    //     }
+    //   }
+    //   console.log('\n')
+    // }
   },
+
+
   created() {
     this.store.setComponent(this.name);
     this.store.fetchData();
   },
+
+
   mounted() {
     this.setData();
   },

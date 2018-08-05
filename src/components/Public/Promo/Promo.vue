@@ -41,9 +41,9 @@
       return {
         store: PromoStore,
         state: {
-          title: {data: '', len: '35', label: 'Titre',},
-          text: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte',},
-          image: {data: '', label: 'Image',},
+          title: new this.Title(),
+          text: new this.Text(),
+          image: new this.Image()
         }
       };
     },

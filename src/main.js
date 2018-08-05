@@ -15,7 +15,7 @@ import '../static/fonts/font-awesome/css/fontawesome-all.css';
 import 'vue2-animate/dist/vue2-animate.min.css';
 
 Vue.use(Vuex);
-Vue.use(Sticky)
+Vue.use(Sticky);
 Vue.use(VueRouter);
 Vue.use(VueScrollTo);
 Vue.use(VueScrollReveal);

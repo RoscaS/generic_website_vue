@@ -43,14 +43,17 @@
       return {
         store: PresentationStore,
         state: {
-          title: {data: '', len: '35', label: 'Titre',},
-          subTi: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre',},
-          text1: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte 1',},
-          text2: {data: '', type: 'textarea', len: '400', rows: '5', label: 'Texte 2',},
-          image: {data: '', label: 'Image',},
+          title: new this.Title(),
+          subTi: new this.SubTitle(),
+          text1: new this.Text('Texte 1'),
+          text2: new this.Text('Texte 2'),
+          image: new this.Image()
         },
         downArrow: null,
       };
+    },
+    computed: {
+
     },
 
     methods: {

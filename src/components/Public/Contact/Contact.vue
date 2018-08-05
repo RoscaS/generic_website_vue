@@ -61,10 +61,10 @@
         siteSettings: this.$Global.SiteSettings,
         store: ContactStore,
         state: {
-          title: {data: '', len: '35', label: 'Titre',},
-          subTi: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre 1',},
-          subT2: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre 2',},
-          subT3: {data: '', type: 'textarea', len: '200', rows: '2', label: 'Sous titre 3',},
+          title: new this.Title(),
+          subTi: new this.SubTitle('Sous titre 1'),
+          subT2: new this.SubTitle('Sous titre 2'),
+          subT3: new this.SubTitle('Sous titre 3'),
         },
       };
     },

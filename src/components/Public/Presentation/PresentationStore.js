@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
-import mixin from '../../../mixins/Public/PublicStoreMixin'
+import mixin from '../../../mixins/Public/PublicStoreMixin';
 
 
 const PresentationStore = new Vue({
@@ -8,7 +8,7 @@ const PresentationStore = new Vue({
   mixins: [mixin],
   fetchFlag: false,
   data: {
-    state: { title: '', subTi: '', text1: '', text2: '', image: '', },
+    state: {title: '', subTi: '', text1: '', text2: '', image: '',},
   },
   methods: {
     fetchData() {
