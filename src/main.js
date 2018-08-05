@@ -28,8 +28,8 @@ Vue.use(Buefy, {
 
 // Perso
   //  Global variable
-import Tools from './tools';
-import SiteSettings from './siteSettings';
+import Tools from './utiles/tools';
+import SiteSettings from './utiles/siteSettings';
 
 const Global = {
   SiteSettings: SiteSettings,
@@ -46,8 +46,8 @@ Vue.use(Global);
 
 
   //  Global components
-import Title from './components/Components/Title';
-import InOut from './components/Components/InOut';
+import Title from './components/Title';
+import InOut from './components/InOut';
 
 Vue.component('Title', Title);
 Vue.component('InOut', InOut);
@@ -62,13 +62,13 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'public',
-      component: require('./components/Public.vue').default,
+      component: require('./routes/Public.vue').default,
     },
 
     {
       path: '/login',
       mane: 'login',
-      component: require('./components/Components/Login/Login').default,
+      component: require('./components/Login/Login').default,
     },
   ]
 });

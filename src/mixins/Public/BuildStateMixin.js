@@ -19,7 +19,7 @@ export default {
       this.data = '';
       this.type = 'textarea';
       this.len = '400';
-      this.rows = 'rows';
+      this.rows = rows;
       this.label = label;
     },
 

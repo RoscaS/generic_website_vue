@@ -1,7 +1,7 @@
-import EditIcon from '../../components/Components/Edit/EditIcon';
-import EditNav from '../../components/Components/Edit/EditNav';
-import EditStore from '../../components/Components/Edit/EditStore';
-import BaseLayout from '../../components/Public/BaseLayout';
+import EditIcon from '../../components/Edit/EditIcon';
+import EditNav from '../../components/Edit/EditNav';
+import EditStore from '../../components/Edit/EditStore';
+import BaseLayout from '../../views/BaseLayout';
 import mixin from './BuildStateMixin'
 
 export default {
@@ -95,19 +95,7 @@ export default {
         side, delay, distance, duration
       )
     },
-
-    // buildState() {
-    //   console.log(this.name)
-    //   for (let i in this.state) {
-    //     if (i.includes('title')) {
-    //       this.state[i] = new this.tools.title()
-    //     }
-    //   }
-    //   console.log('\n')
-    // }
   },
-
-
   created() {
     this.store.setComponent(this.name);
     this.store.fetchData();

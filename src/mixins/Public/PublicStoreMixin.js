@@ -1,7 +1,8 @@
-import EditStore from '../../components/Components/Edit/EditStore'
+import EditStore from '../../components/Edit/EditStore'
 
 export default {
   data: {
+    fetchFlag: false,
     component: null,
     edit: EditStore,
   },
@@ -30,6 +31,5 @@ export default {
       this.copyData(this.backup, this.state);
       this.tools.message(2);
     },
-
   }
 };
