@@ -5,20 +5,31 @@
             @click="startEdit()">
       <i class="fal fa-pencil-alt"></i>
     </button>
-    <GalleriesEditModal :component="component"
-                        :showModal="showModal"
-                        v-if="showModal">
-    </GalleriesEditModal>
+
+    <b-modal :active.sync="showModal"
+             :width="1024" scroll="keep" has-modal-card>
+      <CarouselEditModal v-if="edit.component == 'Carousel'"></CarouselEditModal>
+      <GalleryEditModal v-if="edit.component == 'Gallery'"></GalleryEditModal>
+      <ParallaxEditModal v-if="edit.component == 'Parallax0'"></ParallaxEditModal>
+    </b-modal>
+
   </div>
 </template>
 
 <script>
   import GalleriesEditStore from './GalleriesEditStore'
-  import GalleriesEditModal from './GalleriesEditModal'
+
+  import CarouselEditModal from './modals/carouselEditModal'
+  import GalleryEditModal from './modals/galleryEditModal'
+  import ParallaxEditModal from './modals/parallaxEditModal'
 
   export default {
     name: "GalleryEditIcon",
-    components: {GalleriesEditModal},
+    components: {
+      CarouselEditModal,
+      GalleryEditModal,
+      ParallaxEditModal
+    },
     props: {
       right: {type: String},
       top: {type: String},

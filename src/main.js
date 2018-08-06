@@ -9,14 +9,12 @@ import VueScrollTo from 'vue-scrollto';
 import VueScrollReveal from 'vue-scroll-reveal';
 import VeeValidate from 'vee-validate';
 // import Sticky from 'vue-sticky-directive'
-import VModal from 'vue-js-modal'
 
 import '../static/js/velocity';
 import '../static/fonts/font-awesome/css/fontawesome-all.css';
 import 'vue2-animate/dist/vue2-animate.min.css';
 
 Vue.use(Vuex);
-Vue.use(VModal);
 // Vue.use(Sticky);
 Vue.use(VueRouter);
 Vue.use(VueScrollTo);

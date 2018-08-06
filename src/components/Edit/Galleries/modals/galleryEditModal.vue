@@ -14,20 +14,25 @@
 </template>
 
 <script>
+  import GalleriesEditStore from '../GalleriesEditStore';
+
   export default {
     name: "galleryEditModal",
+    props: {component: {type: String}},
     data() {
-      return {};
+      return {
+        edit: GalleriesEditStore,
+      };
     },
     computed: {},
     methods: {},
-    mounted() {
-      console.log('ici')
-    }
   };
 </script>
 
 <style scoped lang="scss">
   @import '../../../../../static/sass/global';
 
+  .card {
+    width: 1024px;
+  }
 </style>
