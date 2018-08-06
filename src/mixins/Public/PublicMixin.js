@@ -1,6 +1,6 @@
-import EditIcon from '../../components/Edit/EditIcon';
-import EditNav from '../../components/Edit/EditNav';
-import EditStore from '../../components/Edit/EditStore';
+import EditIcon from '../../components/Edit/Texts/EditIcon';
+import EditNav from '../../components/Edit/Texts/EditNav';
+import TextsEditStore from '../../components/Edit/Texts/TextsEditStore';
 import BaseLayout from '../../views/BaseLayout';
 import mixin from './BuildStateMixin'
 
@@ -10,8 +10,7 @@ export default {
   components: {EditIcon, EditNav, BaseLayout},
   data() {
     return {
-      edit: EditStore,
-      name: this.$options.name,
+      edit: TextsEditStore,
       tools: this.$Global.Tools,
       activeTab: 0,
     };
@@ -47,16 +46,16 @@ export default {
     },
   },
   methods: {
-    checkName() {
-      return this.edit.component === this.name;
+    checkComponent() {
+      return this.edit.component === this.$options.name;
     },
     highlighted(idx) {
-      return (this.activeTab == idx) && this.checkName();
+      return (this.activeTab == idx) && this.checkComponent();
     },
 
 
     checkSignal(signal) {
-      return signal && this.name == this.edit.component;
+      return signal && this.checkComponent();
     },
     setData() {
       if (this.store.fetchFlag) {
@@ -97,7 +96,7 @@ export default {
     },
   },
   created() {
-    this.store.setComponent(this.name);
+    this.store.setComponent(this.$options.name);
     this.store.fetchData();
   },
 

@@ -1,10 +1,10 @@
-import EditStore from '../../components/Edit/EditStore'
+import TextsEditStore from '../../components/Edit/Texts/TextsEditStore'
 
 export default {
   data: {
     fetchFlag: false,
     component: null,
-    edit: EditStore,
+    edit: TextsEditStore,
   },
   computed: {
     tools() { return this.$Global.Tools; },

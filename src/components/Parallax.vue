@@ -1,16 +1,23 @@
 <template>
+<div>
+  <GalleriesEditIcon :component="id"></GalleriesEditIcon>
   <section :id="id" class="parallax has-text-centered">
     <h1 class="title">
       {{ title }}
     </h1>
   </section>
+</div>
 </template>
 
 <script>
   import axios from 'axios';
+  import GalleriesEditIcon from './Edit/Galleries/GalleriesEditIcon';
+
+
 
   export default {
-    name: "Parallax",
+    name: `Parallax`,
+    components: { GalleriesEditIcon },
     props: {
       url: {type: String},
       idx: {type: Number},
@@ -23,7 +30,7 @@
       };
     },
     computed: {
-      id() {return 'parallax' + this.idx;}
+      id() {return `Parallax${this.idx}` ;}
     },
     mounted() {
       axios.get(this.url).then(response => {

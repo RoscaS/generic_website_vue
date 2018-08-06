@@ -1,9 +1,5 @@
 
 export default {
-  computed: {
-
-  },
-
   methods: {
     setData() {
       if (this.store.fetchFlag) {
@@ -11,8 +7,12 @@ export default {
       } else {
         setTimeout(() => { this.setData(); }, 2);
       }
-    }
+    },
+    checkComponent() {
+      return this.edit.component === this.$options.name;
+    },
   },
+
   created() {
     this.store.fetchData();
   },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <PromoRibbon/>
-    <Top/>
+    <Header/>
     <Navbar/>
     <Carousel/>
     <Presentation/>
@@ -22,25 +22,23 @@
 
   import Parallax from '../components/Parallax';
 
-  import PromoRibbon from '../views/Public/Promo/PromoRibbon';
-  import Top from '../views/Public/Top';
-  import Navbar from '../views/Public/Navbar';
-  import Carousel from '../views/Public/Carousel/Carousel';
-  import Presentation from '../views/Public/Presentation/Presentation';
-  import Articles from '../views/Public/Articles';
-  import Hero from '../views/Public/Hero/Hero';
-  import Gallery from '../views/Public/Gallery/Gallery';
-  import Contact from '../views/Public/Contact/Contact';
-  import Review from '../views/Public/Review/Review';
-  import Footer from '../views/Public/Footer';
-
-  import ImageStore from '../components/GalleryManager/ImageStore';
+  import PromoRibbon from '../views/Promo/PromoRibbon';
+  import Header from '../views/Header/Header';
+  import Navbar from '../views/Navbar/Navbar';
+  import Carousel from '../views/Carousel/Carousel';
+  import Presentation from '../views/Presentation/Presentation';
+  import Articles from '../views/Articles/Articles';
+  import Hero from '../views/Hero/Hero';
+  import Gallery from '../views/Gallery/Gallery';
+  import Contact from '../views/Contact/Contact';
+  import Review from '../views/Review/Review';
+  import Footer from '../views/Footer/Footer';
 
 
   export default {
     name: "Public",
     components: {
-      Login, Parallax, PromoRibbon, Top, Navbar, Carousel, Presentation,
+      Login, Parallax, PromoRibbon, Header, Navbar, Carousel, Presentation,
       Hero, Gallery, Articles, Contact, Review, Footer
     },
     data() {
@@ -53,9 +51,6 @@
         carousel: 'galleries/carousel/',
       };
     },
-    created() {
-      ImageStore.init()
-    }
   };
 </script>
 
