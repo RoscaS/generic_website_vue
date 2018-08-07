@@ -3,10 +3,15 @@
               enter-active-class="slideInUp"
               leave-active-class="slideOutDown">
 
-    <div class="navbar custom-tabs-wrapper" v-show="edit.active">
+    <div class="navbar custom-tabs-wrapper textEdit" v-show="edit.active">
 
       <div class="columns">
-        <div class="column is-5-desktop is-offset-3-desktop">
+        <div class="column
+                    is-6-desktop
+                    is-9-tablet
+                    is-12-mobile
+                    is-offset-2-desktop
+                    is-offset-1-tablet">
 
           <div class="custom-tabs" :style="{height: height+'px'}">
             <slot></slot>
@@ -47,8 +52,8 @@
   @import '../../../../static/sass/global';
 
   .columns {
-    margin-left: 7%;
-    @media screen and (max-width: 1089px) {
+    margin-left: 14.5%;
+    @media screen and (max-width: 768px) {
       margin-left: auto;
     }
   }

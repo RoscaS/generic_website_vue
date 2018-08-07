@@ -100,12 +100,11 @@
         console.log(e);
         let d = '';
         console.log(`PRIMARY: ${this.$parent.gallery.name}`)
-        this.$parent.gallery.images.forEach(i => {d += `, ${i.id}`});
+        this.$parent.gallery.images.forEach(i => {
+          d += `[id:${i.id}, pos:${i.position}]`
+        });
         console.log(d);
         console.log('\n\n')
-
-
-
       }
     },
     mounted() {

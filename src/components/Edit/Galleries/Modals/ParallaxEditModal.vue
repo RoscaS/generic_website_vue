@@ -1,8 +1,8 @@
 <template>
   <ModalLayout component="parallax"
                :parallaxIdx="id"
-               :classes="classes">
-  </ModalLayout>
+               :classes="classes"
+               top="650px"/>
 </template>
 
 <script>

@@ -12,7 +12,7 @@
     <Gallery/>
     <Parallax :idx="2" height="400px"/>
     <Contact/>
-    <Review/>
+    <!--<Review/>-->
     <Footer/>
   </div>
 </template>

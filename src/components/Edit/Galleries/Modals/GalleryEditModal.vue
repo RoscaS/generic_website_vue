@@ -1,5 +1,7 @@
 <template>
-  <ModalLayout component="gallery" :classes="classes"/>
+  <ModalLayout component="gallery"
+               :classes="classes"
+               top="790px"/>
 </template>
 
 <script>

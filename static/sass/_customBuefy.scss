@@ -2,29 +2,28 @@
 @import '~buefy/src/scss/utils/variables';
 @import '~buefy/src/scss/components/tabs';
 
-.custom-tabs-wrapper {
+.custom-tabs-wrapper.textEdit {
   input {
     @media screen and (max-width: 768px) {
       width: 100%;
     }
   }
 
-
   .b-tabs {
     margin: 0 auto 0 auto;
 
-    @media screen and (max-width: 768px) {
-      width: 100%;
-      margin-bottom: 20px;
-    }
+    //@media screen and (max-width: 768px) {
+    //  width: 100%;
+    //  margin-bottom: 20px;
+    //}
 
     .tabs {
       margin-top: -10px;
+      margin-bottom: 10px;
 
       @media screen and (max-width: 1089px) {
-        margin-bottom: -20px;
+        margin-left: -10px;
       }
-
 
       ul {
         width: auto;
@@ -58,7 +57,6 @@
           margin-right: 0;
         }
 
-
         a {
           transition: border-bottom-color .5s ease;
           color: white;
@@ -76,6 +74,38 @@
   .tab-item {
     padding-top: 0px;
     padding-bottom: 2000px;
+  }
+}
+
+.imagesEdit {
+  .b-tabs {
+    margin: 0 auto 0 auto;
+
+    @media screen and (max-width: 768px) {
+
+    }
+
+    .tabs {
+      margin-top: -88px;
+      margin-bottom: 10px;
+      //height: 40px;
+
+      @media screen and (max-width: 1089px) {
+        //margin-bottom: -20px;
+      }
+
+      ul {
+        li {
+          margin: 0;
+        }
+        li.is-active {
+          a {
+            background-color: #167DF0;
+            border-color: #167DF0;
+          }
+        }
+      }
+    }
   }
 }
 

@@ -74,7 +74,7 @@
     color: dimgray;
     padding: 10px 10px;
     cursor: pointer;
-    height: auto;
+    /*height: auto;*/
     width: 80%;
     margin: 0 auto 0 auto;
     border-radius: 2%;
@@ -86,8 +86,8 @@
     p {
       font-size: 1.2em;
       text-align: center;
-      padding-top: 20px;
-      padding-bottom: 20px;
+      /*padding-top: 20px;*/
+      /*padding-bottom: 20px;*/
     }
 
     &:hover {
@@ -111,7 +111,7 @@
   .input-file {
     opacity: 0; /* invisible but it's there! */
     width: 90%;
-    height: 138px;
+    /*height: 138px;*/
     position: absolute;
     cursor: pointer;
   }

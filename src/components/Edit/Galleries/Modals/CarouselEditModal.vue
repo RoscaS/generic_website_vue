@@ -1,5 +1,7 @@
 <template>
-  <ModalLayout component="carousel" :classes="classes"/>
+  <ModalLayout component="carousel"
+               :classes="classes"
+               top="680px"/>
 </template>
 
 <script>

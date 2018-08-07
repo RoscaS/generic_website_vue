@@ -7,6 +7,7 @@
                 :state="state"
                 :activeTab="activeTab"
                 :loading="loading"
+                editNavHeight="200"
                 @changeTab="activeTab=$event">
       <p class="text1"
          :class="{'highlighted': highlighted(2)}"

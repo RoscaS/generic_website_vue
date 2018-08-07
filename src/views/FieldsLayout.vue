@@ -1,7 +1,7 @@
 <template>
   <b-tabs v-model="currentTab" position="is-centered" slot="edit-nav">
     <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
-      <b-field type="is-light" v-if="i.label !=='Image'">
+      <b-field v-if="i.label !=='Image'" type="is-light">
         <b-input :type="i.type" :maxlength="i.len" :rows="i.rows"
                  :disabled="loading" v-model="i.data">
         </b-input>
