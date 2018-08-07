@@ -2,7 +2,7 @@ import TextsEditStore from '../../components/Edit/Texts/TextsEditStore'
 
 export default {
   data: {
-    fetchFlag: false,
+    // fetchFlag: false,
     component: null,
     edit: TextsEditStore,
   },

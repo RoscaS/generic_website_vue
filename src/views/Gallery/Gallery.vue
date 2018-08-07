@@ -8,7 +8,7 @@
               @changeTab="activeTab=$event">
     <!--<transition name="fade" mode="out-in">-->
       <!--<GalleryManager v-if="activeTab==2 && edit.component==name"/>-->
-    <GalleriesEditIcon :component="$options.name"></GalleriesEditIcon>
+    <GalleriesEditIcon :component="$options.name"/>
       <GalleryImages></GalleryImages>
     <!--</transition>-->
 

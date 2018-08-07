@@ -1,6 +1,6 @@
 <template>
   <div class="field is-grouped">
-    <p class="control">
+    <p class="control" :style="style">
       <button class="button is-success"
               :class="{'is-loading': loading}"
               :disabled="loading"
@@ -17,10 +17,16 @@
 </template>
 
 <script>
-  import TextsEditStore from './TextsEditStore'
+  import TextsEditStore from './Texts/TextsEditStore';
+  import GalleriesEditStore from './Galleries/GalleriesEditStore';
 
   export default {
     name: "ValidationButtons",
+    props: {
+      editStore: {type: String, default: 'Texts'},
+      right: {type: String, default: '30px'},
+      top: {type: String, default: '20px'},
+    },
     data() {
       return {
         edit: TextsEditStore,
@@ -29,26 +35,35 @@
     },
     computed: {
       loading: {
+        edit() {
+          return this.editStore == 'Texts' ? TextsEditStore : GalleriesEditStore;
+        },
         get() { return this.edit.loading; },
         set(value) { this.edit.setLoading(value); }
-      }
+      },
+      style() {
+        return {
+          right: this.right,
+          top: this.top,
+        };
+      },
     },
     methods: {
       validateBtn() {
-          this.edit.sendPushSignal();
-          this.disable = false;
-          this.checkLoading();
+        this.edit.sendPushSignal();
+        this.disable = false;
+        this.checkLoading();
       },
       cancelBtn() {
-          this.edit.sendCancelSignal();
-          this.disable = true;
-          setTimeout(() => { this.disable = false; }, this.edit.timeout);
+        this.edit.sendCancelSignal();
+        this.disable = true;
+        setTimeout(() => { this.disable = false; }, this.edit.timeout);
       },
       checkLoading() {
         if (this.loading) {
-          setTimeout(() => { this.checkLoading(); }, 100)
+          setTimeout(() => { this.checkLoading(); }, 100);
         } else {
-          this.edit.end()
+          this.edit.end();
         }
       },
     },
@@ -56,12 +71,11 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../static/sass/global';
 
   .control {
+    z-index: 100;
     position: absolute;
-    right: 30px;
-    top: 20px;
     button {
       &:first-child {
         transition: background-color .2s, color .2s;

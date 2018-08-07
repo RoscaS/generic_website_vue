@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import FileUpload from '../components/Edit/Texts/FileUpload';
+  import FileUpload from '../components/Edit/FileUpload';
 
   export default {
     name: "FieldsLayout",

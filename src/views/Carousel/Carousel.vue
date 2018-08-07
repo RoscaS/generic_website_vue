@@ -33,14 +33,23 @@
         slides: 8,
       };
     },
-
     computed: {
-      images() { return this.state.images; },
+      images() { return this.store.state.images; },
       urls() {
         let urls = [];
         this.state.images.forEach(i => { urls.push(i.url); });
         return urls;
       }
+    },
+    watch: {
+      images: {
+        handler: function() {
+          // console.log('ici');
+          this.setData();
+          this.slides = this.images.length;
+        },
+        deep: true
+      },
     },
   };
 </script>

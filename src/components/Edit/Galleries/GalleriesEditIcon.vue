@@ -7,10 +7,13 @@
     </button>
 
     <b-modal :active.sync="showModal"
-             :width="1024" scroll="keep" has-modal-card>
-      <CarouselEditModal v-if="edit.component == 'Carousel'"></CarouselEditModal>
-      <GalleryEditModal v-if="edit.component == 'Gallery'"></GalleryEditModal>
-      <ParallaxEditModal v-if="edit.component == 'Parallax0'"></ParallaxEditModal>
+             scroll="clip"
+             :width="850"
+             :canCancel="['outside']"
+             has-modal-card>
+      <CarouselModal v-if="is('Carousel')"/>
+      <GalleryModal v-if="is('Gallery')"/>
+      <ParallaxModal v-if="is('Parallax')" :id="id"/>
     </b-modal>
 
   </div>
@@ -19,20 +22,21 @@
 <script>
   import GalleriesEditStore from './GalleriesEditStore'
 
-  import CarouselEditModal from './modals/carouselEditModal'
-  import GalleryEditModal from './modals/galleryEditModal'
-  import ParallaxEditModal from './modals/parallaxEditModal'
+  import CarouselModal from './Modals/CarouselEditModal'
+  import GalleryModal from './Modals/GalleryEditModal'
+  import ParallaxModal from './Modals/ParallaxEditModal'
 
   export default {
     name: "GalleryEditIcon",
     components: {
-      CarouselEditModal,
-      GalleryEditModal,
-      ParallaxEditModal
+      CarouselModal,
+      GalleryModal,
+      ParallaxModal
     },
     props: {
       right: {type: String},
       top: {type: String},
+      id: {type: Number},
       component: {type: String},
     },
     data() {
@@ -45,6 +49,9 @@
       setStyle() { return `margin-top:${this.Top};`; },
     },
     methods: {
+      is(component) {
+        return this.edit.component == component;
+      },
       startEdit() {
         this.edit.start(this.component);
         this.showModal = true;

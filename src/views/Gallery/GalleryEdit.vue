@@ -1,6 +1,8 @@
 <template>
 
-  <div>
+  <section class="section section-container">
+  <div class="container">
+    <div class="content">
 
     <!--<div class="container">-->
     <!--<div class="content">-->
@@ -101,6 +103,9 @@
     </div>
   </div>
 
+  </div>
+  </section>
+
 </template>
 
 <script>
@@ -114,7 +119,7 @@
     data() {
       return {
         store: GalleriesEditStore,
-        state: GalleriesEditStore.galeries.gallery.state,
+        state: GalleriesEditStore.state.gallery,
 
         related: null,
         dragged: null,
@@ -199,7 +204,7 @@
   @import '../../../static/sass/global';
 
   .hidden-section {
-     margin-top: -175px;
+     //margin-top: -175px;
     height: 490px;
     width: 250px;
     z-index: 1;

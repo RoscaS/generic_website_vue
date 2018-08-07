@@ -3,6 +3,8 @@ import axios from "axios";
 export default {
   data: {
     component: null,
+    fetchFlag: false,
+    dataSet: false,
   },
   computed: {
     tools() { return this.$Global.Tools; },
@@ -17,9 +19,12 @@ export default {
             name: image.name,
             description: image.description,
             position: image.position,
+            id: image.id,
+            gallery: image.gallery,
           });
-          this.fetchFlag = true;
         });
+        this.fetchFlag = true;
+        // console.log(`Fetch done: ${this.state.images[0].gallery}\tflag: ${this.fetchFlag}`)
       }).catch(error => {
         console.log(`${this.url}\n${error}`);
       });

@@ -1,7 +1,18 @@
 import Vue from 'vue';
+import GalleryImagesStore from '../../../views/Gallery/GalleryImagesStore';
+import CarouselImagesStore from '../../../views/Carousel/CarouselImagesStore';
+import ParallaxImagesStore from '../../Parallax/ParallaxImagesStore'
+import StockImagesStore from './Stock/StockImagesStore';
 
-const GalleryEditStore = new Vue({
+const GalleriesEditStore = new Vue({
   data: {
+    state: {
+      stock: {name: 'Stock', images: StockImagesStore.state.images, store: StockImagesStore},
+      carousel: {name: 'Carousel', images: CarouselImagesStore.state.images, store: CarouselImagesStore},
+      gallery: {name: 'Galerie', images: GalleryImagesStore.state.images, store: GalleryImagesStore},
+      parallax: {name: 'Parallax', images: ParallaxImagesStore.state.images, store: ParallaxImagesStore},
+    },
+
     component: null,
     loading: false,
     active: false,
@@ -21,11 +32,11 @@ const GalleryEditStore = new Vue({
     sendPushSignal() {
       this.loading = true;
       this.pushSignal = true;
-      setTimeout(() => { this.pushSignal = false }, 10);
+      setTimeout(() => { this.pushSignal = false; }, 10);
     },
     sendCancelSignal() {
       this.cancelSignal = true;
-      setTimeout(() => { this.cancelSignal = false }, 10);
+      setTimeout(() => { this.cancelSignal = false; }, 10);
     },
     start(component) {
       this.component = component;
@@ -39,5 +50,5 @@ const GalleryEditStore = new Vue({
   },
 });
 
-export default GalleryEditStore;
+export default GalleriesEditStore;
 

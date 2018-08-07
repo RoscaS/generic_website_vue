@@ -6,7 +6,7 @@ const GalleryImagesStore = new Vue({
   url: 'galleries/events/',
   mixins: [mixin],
   data: {
-    fetchFlag: false,
+    // fetchFlag: false,
     state: { images: [] },
   },
 });

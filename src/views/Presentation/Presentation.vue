@@ -35,10 +35,12 @@
   import PresentationStore from './PresentationStore';
   import mixin from '../../mixins/Public/PublicMixin';
 
+  import CarouselEditModal from '../../components/Edit/Galleries/Modals/CarouselEditModal'
+
   export default {
     name: "Presentation",
     mixins: [mixin],
-    components: {DownArrow},
+    components: {DownArrow, CarouselEditModal},
     data() {
       return {
         store: PresentationStore,

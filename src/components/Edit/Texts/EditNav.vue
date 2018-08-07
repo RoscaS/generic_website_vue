@@ -25,13 +25,12 @@
 
 <script>
   import {SpinLine} from 'vue-loading-spinner';
-  import FileUpload from './FileUpload';
-  import ValidationBtns from './ValidationButtons';
+  import ValidationBtns from '../ValidationButtons';
   import TextsEditStore from './TextsEditStore'
 
   export default {
     name: "EditNav",
-    components: {ValidationBtns, FileUpload, SpinLine},
+    components: {ValidationBtns, SpinLine},
     props: {
       height: {type: String}
     },

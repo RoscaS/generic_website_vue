@@ -19,7 +19,7 @@
 
 <script>
   import axios from 'axios';
-  import TextsEditStore from './TextsEditStore'
+  import TextsEditStore from './Texts/TextsEditStore'
   const url = 'images/';
 
   export default {
@@ -60,7 +60,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../static/sass/global';
 
   .label {
     color: white;

@@ -6,11 +6,11 @@
     <Carousel/>
     <Presentation/>
     <Hero/>
-    <Parallax :url="base + parallax" :idx="0" :height="600"/>
+    <Parallax :idx="0" height="600px"/>
     <Articles/>
-    <Parallax :url="base + parallax" :idx="1" :height="400"/>
+    <Parallax :idx="1" height="400px"/>
     <Gallery/>
-    <Parallax :url="base + parallax" :idx="2" :height="400"/>
+    <Parallax :idx="2" height="400px"/>
     <Contact/>
     <Review/>
     <Footer/>
@@ -20,7 +20,7 @@
 <script>
   import Login from '../components/Login/Login';
 
-  import Parallax from '../components/Parallax';
+  import Parallax from '../components/Parallax/Parallax';
 
   import PromoRibbon from '../views/Promo/PromoRibbon';
   import Header from '../views/Header/Header';
@@ -34,23 +34,25 @@
   import Review from '../views/Review/Review';
   import Footer from '../views/Footer/Footer';
 
+  import GalleryImagesStore from '../views/Gallery/GalleryImagesStore';
+  import CarouselImagesStore from '../views/Carousel/CarouselImagesStore';
+  import StockImagesStore from '../components/Edit/Galleries/Stock/StockImagesStore';
+  import ParallaxImagesStore from '../components/Parallax/ParallaxImagesStore';
+
 
   export default {
     name: "Public",
     components: {
       Login, Parallax, PromoRibbon, Header, Navbar, Carousel, Presentation,
-      Hero, Gallery, Articles, Contact, Review, Footer
+      Hero, Gallery, Articles, Contact, Review, Footer, GalleryImagesStore,
+      CarouselImagesStore, StockImagesStore, ParallaxImagesStore
     },
-    data() {
-      return {
-        title: 'first',
-
-        base: 'http://localhost:8000/',
-
-        parallax: 'galleries/parallax/',
-        carousel: 'galleries/carousel/',
-      };
-    },
+    mounted() {
+      CarouselImagesStore.fetchData();
+      ParallaxImagesStore.fetchData();
+      GalleryImagesStore.fetchData();
+      StockImagesStore.fetchData();
+    }
   };
 </script>
 
