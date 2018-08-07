@@ -27,6 +27,7 @@
     components: {CarouselApp, CarouselSlide, GalleriesEditIcon},
     data() {
       return {
+        component: 'Carousel',
         store: CarouselImageStore,
         state: {images: []},
 

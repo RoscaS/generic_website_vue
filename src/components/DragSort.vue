@@ -29,6 +29,7 @@
   import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
 
   import CarouselImagesStore from '../views/Carousel/CarouselImagesStore';
+  import GalleryImagesStore from '../views/Gallery/GalleryImagesStore';
   import GalleriesEditStore from '../components/Edit/Galleries/GalleriesEditStore';
 
 
@@ -67,7 +68,9 @@
         }
         this.$nextTick(() => {
           // this.setVisibility();
+          GalleriesEditStore.sendUpdateSignal();
           this._debug();
+
           this.delayedDragging = false;
         });
       }
@@ -80,35 +83,40 @@
       },
 
       _debug() {
-        // console.log('\nCURRENT:')
+        // let root = this.$parent.$parent.$parent;
+        // console.log('\n\nCURRENT:')
         // let a = '';
         // this.list.images.forEach(i => {a += `, ${i.id}`});
         // console.log(a);
-        // console.log('\nPARENT:')
+        // console.log('PARENT:')
         // let b = '';
-        // this.$parent.primaryList['carousel'].images.forEach(i => {b += `, ${i.id}`});
+        // root.gallery.images.forEach(i => {b += `, ${i.id}`});
         // console.log(b);
-        // console.log('\nORIGINAL:')
+        // console.log('CENTRAL:')
+        // let f = '';
+        // GalleriesEditStore.state.gallery.images.forEach(i => {f += `, ${i.id}`});
+        // console.log(f);
+        // console.log('ORIGINAL:')
         // let c = '';
-        // CarouselImagesStore.state.images.forEach(i => {c += `, ${i.id}`});
+        // GalleryImagesStore.state.images.forEach(i => {c += `, ${i.id}`});
         // console.log(c);
-        let e = '';
-        console.log(`SECONDARY: ${this.$parent.secondaryList.name}`)
-        this.$parent.secondaryList.images.forEach(i => {
-          e += `[id:${i.id}, pos:${i.position}]`
-        });
-        console.log(e);
-        let d = '';
-        console.log(`PRIMARY: ${this.$parent.gallery.name}`)
-        this.$parent.gallery.images.forEach(i => {
-          d += `[id:${i.id}, pos:${i.position}]`
-        });
-        console.log(d);
-        console.log('\n\n')
+        // let e = '';
+        // console.log(`SECONDARY: ${root.secondaryList.name}`)
+        // root.secondaryList.images.forEach(i => {
+        //   e += `[id:${i.id}, pos:${i.position}]`
+        // });
+        // console.log(e);
+        // let d = '';
+        // console.log(`PRIMARY: ${root.gallery.name}`)
+        // root.gallery.images.forEach(i => {
+        //   d += `[id:${i.id}, pos:${i.position}]`
+        // });
+        // console.log(d);
+        // console.log('\n\n')
       }
     },
     mounted() {
-      this._debug();
+      // this._debug();
     }
   };
 </script>

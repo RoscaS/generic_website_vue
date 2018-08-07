@@ -1,6 +1,7 @@
 <template>
   <ModalLayout component="gallery"
                :classes="classes"
+               primaryHeight="500px"
                top="790px"/>
 </template>
 

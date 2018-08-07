@@ -26,6 +26,7 @@
     },
     data() {
       return {
+        component: 'Parallax',
         store: ParallaxImagesStore,
         state: {images: []},
 

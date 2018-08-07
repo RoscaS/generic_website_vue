@@ -40,6 +40,7 @@
     components: {Lightbox},
     data() {
       return {
+        component: 'Gallery',
         store: GalleryImagesStore,
         state: { images: [] },
 

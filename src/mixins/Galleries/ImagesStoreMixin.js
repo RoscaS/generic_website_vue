@@ -13,6 +13,7 @@ export default {
   methods: {
     fetchData() {
       axios.get(this.$options.url).then(response => {
+        this.state.images.length = 0;
         response.data.images.forEach(image => {
           this.state.images.push({
             url: image.image,

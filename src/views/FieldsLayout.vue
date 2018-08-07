@@ -6,7 +6,9 @@
                  :disabled="loading" v-model="i.data">
         </b-input>
       </b-field>
-      <FileUpload v-else @image-preview="state.image.data=$event"></FileUpload>
+      <FileUpload v-else @image-preview="state.image.data=$event.image"
+                  :edit="edit">
+      </FileUpload>
     </b-tab-item>
     <slot></slot>
   </b-tabs>
@@ -14,6 +16,7 @@
 
 <script>
   import FileUpload from '../components/Edit/FileUpload';
+  import TextsEditStore from '../components/Edit/Texts/TextsEditStore';
 
   export default {
     name: "FieldsLayout",
@@ -23,6 +26,7 @@
       activeTab: {type: Number},
       loading: {type: Boolean}
     },
+    data() { return {edit: TextsEditStore};},
     computed: {
       currentTab: {
         get() { return this.activeTab; },

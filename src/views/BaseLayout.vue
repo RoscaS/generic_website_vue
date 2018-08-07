@@ -41,7 +41,6 @@
   import EditNav from '../components/Edit/Texts/EditNav';
   import FieldsLayout from './FieldsLayout.vue'
 
-
   export default {
     name: "BaseLayout",
     props: {

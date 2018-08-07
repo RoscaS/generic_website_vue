@@ -27,26 +27,28 @@
           </div>
         </div>
 
-        <div class="card primary">
-          <header class="card-header">
-            <h2 class="card-header-title">{{ gallery.name }}</h2>
-          </header>
-          <div class="card-content imagesEdit">
+        <div class="primary">
+          <div class="card">
+            <header class="card-header">
+              <h2 class="card-header-title">{{ gallery.name }}</h2>
+            </header>
+            <div class="card-content imagesEdit">
               <b-tabs type="is-toggle" v-model="activeTab" position="is-right">
-
                 <b-tab-item icon="images">
                   <DragSort :list="gallery" :classes="classes"/>
                 </b-tab-item>
                 <b-tab-item icon="upload">
-                  <FileUpload></FileUpload>
+                  <FileUpload @image-preview="poule($event)"
+                              :gallery="component"
+                              :edit="edit"/>
                 </b-tab-item>
               </b-tabs>
+            </div>
           </div>
+          <!--<div class="loading-animation">-->
+          <!--<SpinLine v-show="edit.loading"/>-->
+          <!--</div>-->
         </div>
-        <!--<div class="loading-animation">-->
-        <!--<SpinLine v-show="edit.loading"/>-->
-        <!--</div>-->
-
       </div>
     </div>
   </div>
@@ -71,6 +73,7 @@
     },
     data() {
       return {
+        edit: GalleriesEditStore,
         primaryList: GalleriesEditStore.state,
         secondaryList: GalleriesEditStore.state.stock,
         secondaryClasses: [
@@ -85,6 +88,11 @@
     },
     methods: {
       selectSecondary(secondary) { this.secondaryList = secondary; },
+
+      poule(e) {
+        console.log(`New image:\ngallery: ${e.gallery}\npos: ${e.position}\nimage: ${e.image}`)
+        this.gallery.images.push(e)
+      }
     },
   };
 </script>
@@ -108,16 +116,16 @@
     }
   }
 
+  .primary {
+    height: 450px;
+  }
+
   .card {
     /*border-radius: 10px;*/
     margin-bottom: 60px;
     max-width: 850px;
 
-    &.primary {
-      min-height: 250px;
-    }
-
-    .card-header-title{
+    .card-header-title {
       margin-bottom: 0;
     }
   }

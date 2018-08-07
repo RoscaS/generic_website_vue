@@ -19,14 +19,17 @@
 
 <script>
   import axios from 'axios';
-  import TextsEditStore from './Texts/TextsEditStore'
   const url = 'images/';
 
   export default {
     name: "FileUpload",
+    props: {
+      gallery: {type: String, default: '_temp'},
+      edit: {type: Object},
+    },
     data() {
       return {
-        edit: TextsEditStore
+        // edit: this.edit
       };
     },
 
@@ -38,14 +41,25 @@
       fileUpload() {
         let file = this.$refs.file.files[0];
         let formData = new FormData();
+
+
+        let gallery = this.gallery;
+        if (gallery == 'gallery') gallery = 'events';
+        console.log(gallery);
+
+
         formData.append('image', file);
-        formData.append('gallery', '_temp');
+        formData.append('gallery', gallery);
+
+
+
         axios.post(url, formData, {
             headers: {'content-type': 'multipart/form-data'},
           }
         ).then(response => {
-          this.$emit('image-preview', response.data.image);
+          this.$emit('image-preview', response.data);
           this.edit.dirty = true;
+          this.edit.sendUpdateSignal()
         }).catch(error => {
           this.$toast.open({
             duration: 4000,
@@ -74,7 +88,7 @@
     color: dimgray;
     padding: 10px 10px;
     cursor: pointer;
-    /*height: auto;*/
+    height: auto;
     width: 80%;
     margin: 0 auto 0 auto;
     border-radius: 2%;
@@ -110,7 +124,8 @@
 
   .input-file {
     opacity: 0; /* invisible but it's there! */
-    width: 90%;
+    width: 75%;
+    height: 65%;
     /*height: 138px;*/
     position: absolute;
     cursor: pointer;

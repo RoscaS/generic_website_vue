@@ -21,7 +21,12 @@ const GalleriesEditStore = new Vue({
     pushSignal: false,
     cancelSignal: false,
 
+    updateSignal: false,
+
     reOrder: false
+  },
+  wacth: {
+  //  watch here for change in galleries and force compo to reload
   },
 
   methods: {
@@ -37,6 +42,10 @@ const GalleriesEditStore = new Vue({
     sendCancelSignal() {
       this.cancelSignal = true;
       setTimeout(() => { this.cancelSignal = false; }, 10);
+    },
+    sendUpdateSignal() {
+      this.updateSignal = true;
+      setTimeout(() => { this.updateSignal = false; }, 10);
     },
     start(component) {
       this.component = component;
