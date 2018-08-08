@@ -1,5 +1,5 @@
-import EditIcon from '../../components/Edit/Texts/EditIcon';
-import EditNav from '../../components/Edit/Texts/EditNav';
+import EditIcon from '../../components/Edit/EditIcon';
+import EditNav from '../../components/Edit/Texts/TextsEditMenu';
 import TextsEditStore from '../../components/Edit/Texts/TextsEditStore';
 import BaseLayout from '../../views/BaseLayout';
 import mixin from './BuildStateMixin'

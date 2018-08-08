@@ -2,6 +2,7 @@ import GalleriesEditStore
   from '../../components/Edit/Galleries/GalleriesEditStore';
 
 export default {
+  name: 'ImagesComponentMixin',
   data() {
     return {
       edit: GalleriesEditStore,

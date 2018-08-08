@@ -8,7 +8,7 @@
               @changeTab="activeTab=$event">
     <!--<transition name="fade" mode="out-in">-->
       <!--<GalleryManager v-if="activeTab==2 && edit.component==name"/>-->
-    <GalleriesEditIcon :component="$options.name"/>
+    <EditIcon :component="$options.name" editMenu="image"/>
       <GalleryImages></GalleryImages>
     <!--</transition>-->
 
@@ -42,14 +42,15 @@
   import GalleryImages from './GalleryImages';
   import GalleryManager from './GalleryEdit';
 
-  import GalleriesEditIcon from '../../components/Edit/Galleries/GalleriesEditIcon';
+  import EditIcon from '../../components/Edit/EditIcon';
+
 
 
 
   export default {
     name: "Gallery",
     mixins: [mixin],
-    components: {GalleryImages, GalleryManager, GalleriesEditIcon},
+    components: {GalleryImages, GalleryManager, EditIcon},
     data() {
       return {
         store: GalleryTextsStore,

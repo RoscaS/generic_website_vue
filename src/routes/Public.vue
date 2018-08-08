@@ -36,7 +36,7 @@
 
   import GalleryImagesStore from '../views/Gallery/GalleryImagesStore';
   import CarouselImagesStore from '../views/Carousel/CarouselImagesStore';
-  import StockImagesStore from '../components/Edit/Galleries/Stock/StockImagesStore';
+  import StockImagesStore from '../components/Edit/Stock/StockImagesStore';
   import ParallaxImagesStore from '../components/Parallax/ParallaxImagesStore';
 
 

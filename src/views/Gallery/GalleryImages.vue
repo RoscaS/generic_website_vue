@@ -32,11 +32,11 @@
 <script>
   import GalleryImagesStore from './GalleryImagesStore';
   import Lightbox from '../../components/Lightbox/Lightbox';
-  import mixin from '../../mixins/Galleries/ImagesMixin';
+  import ImagesComponentMixin from '../../mixins/Galleries/ImagesComponentMixin';
 
   export default {
     name: "GalleryUser",
-    mixins: [mixin],
+    mixins: [ImagesComponentMixin],
     components: {Lightbox},
     data() {
       return {

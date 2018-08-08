@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-wrapper">
-    <GalleriesEditIcon :component="$options.name"></GalleriesEditIcon>
+    <EditIcon :component="$options.name" editMenu="image" top="10px"/>
     <transition name="carousel-fade-in" appear>
       <carouselApp class="content">
         <carousel-slide v-for="i in slides" :key="i" :index="i-1">
@@ -14,17 +14,16 @@
 
 <script>
   import CarouselImageStore from './CarouselImagesStore';
+  import ImagesComponentMixin from '../../mixins/Galleries/ImagesComponentMixin';
+
+  import EditIcon from '../../components/Edit/EditIcon';
   import CarouselApp from '../../components/Carousel/CarouselApp';
   import CarouselSlide from '../../components/Carousel/CarouselSlide';
-  import mixin from '../../mixins/Galleries/ImagesMixin';
-
-  import GalleriesEditIcon from '../../components/Edit/Galleries/GalleriesEditIcon';
-
 
   export default {
     name: "Carousel",
-    mixins: [mixin],
-    components: {CarouselApp, CarouselSlide, GalleriesEditIcon},
+    mixins: [ImagesComponentMixin],
+    components: {CarouselApp, CarouselSlide, EditIcon},
     data() {
       return {
         component: 'Carousel',
@@ -45,7 +44,6 @@
     watch: {
       images: {
         handler: function() {
-          // console.log('ici');
           this.setData();
           this.slides = this.images.length;
         },

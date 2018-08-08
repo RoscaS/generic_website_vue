@@ -3,7 +3,7 @@ import Vue from 'vue';
 import GalleryImagesStore from '../../../views/Gallery/GalleryImagesStore';
 import CarouselImagesStore from '../../../views/Carousel/CarouselImagesStore';
 import ParallaxImagesStore from '../../Parallax/ParallaxImagesStore'
-import StockImagesStore from './Stock/StockImagesStore';
+import StockImagesStore from '../Stock/StockImagesStore';
 
 const GalleriesEditStore = new Vue({
   name: 'GalleriesEditStore',
@@ -78,9 +78,6 @@ const GalleriesEditStore = new Vue({
         }
       }
     },
-
-
-
 
     start(component) {
       this.component = component;

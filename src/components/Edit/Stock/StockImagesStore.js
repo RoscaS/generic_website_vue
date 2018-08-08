@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import mixin from '../../../../mixins/Galleries/ImagesStoreMixin';
+import mixin from '../../../mixins/Galleries/ImagesStoreMixin';
 
 
 const StockImagesStore = new Vue({

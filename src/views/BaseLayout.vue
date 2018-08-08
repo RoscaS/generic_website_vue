@@ -1,22 +1,20 @@
 <template>
   <div>
     <section :id="id" class="section section-container">
-      <EditIcon :component="$parent.$options.name">
-
-        <div class="container">
-          <div class="content">
-            <Title :class="{'highlighted': $parent.highlighted(0)}"
-                   v-scroll-reveal="$parent.sReveal('top', 150, 30)">
-              {{ title }}
-            </Title>
-            <p class="sub-title"
-               :class="{'highlighted': $parent.highlighted(1)}"
-               v-scroll-reveal="$parent.sReveal('bottom', 200, 10, 3000)">
-              {{ subTi }}
-            </p>
-          </div>
+      <EditIcon :component="$parent.$options.name"/>
+      <div class="container">
+        <div class="content">
+          <Title :class="{'highlighted': $parent.highlighted(0)}"
+                 v-scroll-reveal="$parent.sReveal('top', 150, 30)">
+            {{ title }}
+          </Title>
+          <p class="sub-title"
+             :class="{'highlighted': $parent.highlighted(1)}"
+             v-scroll-reveal="$parent.sReveal('bottom', 200, 10, 3000)">
+            {{ subTi }}
+          </p>
         </div>
-      </EditIcon>
+      </div>
 
       <slot v-if="$parent.$options.name=='Gallery'"></slot>
 
@@ -29,7 +27,7 @@
     </section>
     <EditNav v-if="$parent.checkComponent()" :height="editNavHeight">
       <FieldsLayout :state="state" :activeTab="activeTab" :loading="loading"
-                      @changeTab="$emit('changeTab', $event)">
+                    @changeTab="$emit('changeTab', $event)">
         <slot name="moreFields"></slot>
       </FieldsLayout>
     </EditNav>
@@ -37,9 +35,9 @@
 </template>
 
 <script>
-  import EditIcon from '../components/Edit/Texts/EditIcon';
-  import EditNav from '../components/Edit/Texts/EditNav';
-  import FieldsLayout from './FieldsLayout.vue'
+  import EditIcon from '../components/Edit/EditIcon';
+  import EditNav from '../components/Edit/Texts/TextsEditMenu';
+  import FieldsLayout from './FieldsLayout.vue';
 
   export default {
     name: "BaseLayout",

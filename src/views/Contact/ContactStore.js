@@ -3,7 +3,7 @@ import axios from 'axios';
 import mixin from '../../mixins/Public/PublicStoreMixin'
 
 
-const PresentationStore = new Vue({
+const ContactStore = new Vue({
   mixins: [mixin],
   url: 'contact/1/' ,
   data: {
@@ -32,4 +32,4 @@ const PresentationStore = new Vue({
   },
 });
 
-export default PresentationStore;
+export default ContactStore;

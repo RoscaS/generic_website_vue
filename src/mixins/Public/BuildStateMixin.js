@@ -15,7 +15,7 @@ export default {
       this.label = label;
     },
 
-    Text(label = 'Texte', rows = 5) {
+    Text(label = 'Texte', rows = 4) {
       this.data = '';
       this.type = 'textarea';
       this.len = '400';

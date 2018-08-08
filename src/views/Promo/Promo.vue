@@ -1,28 +1,27 @@
 <template>
   <div>
     <div class="container collapse-content">
-      <EditIcon :component="this.$options.name">
-        <div class="columns content">
-          <div class="column left is-offset-2 is-4">
-            <img :class="{'highlighted': highlighted(2)}"
-                 :src="state.image.data">
-          </div>
-          <div class="column right is-5">
-            <div>
-              <h3 :class="{'highlighted': highlighted(0)}">
-                {{ state.title.data}}
-              </h3>
-              <p :class="{'highlighted': highlighted(1)}">
-                {{ state.text.data}}
-              </p>
-            </div>
+      <EditIcon :component="$options.name"/>
+      <div class="columns content">
+        <div class="column left is-offset-2 is-4">
+          <img :class="{'highlighted': highlighted(2)}"
+               :src="state.image.data">
+        </div>
+        <div class="column right is-5">
+          <div>
+            <h3 :class="{'highlighted': highlighted(0)}">
+              {{ state.title.data}}
+            </h3>
+            <p :class="{'highlighted': highlighted(1)}">
+              {{ state.text.data}}
+            </p>
           </div>
         </div>
-      </EditIcon>
+      </div>
     </div>
     <EditNav v-if="checkComponent()" height="225">
       <FieldsLayout :state="state" :activeTab="activeTab" :loading="loading"
-                     @changeTab="$emit('changeTab', $event)">
+                    @changeTab="$emit('changeTab', $event)">
       </FieldsLayout>
     </EditNav>
   </div>
@@ -30,13 +29,13 @@
 
 <script>
   import PromoStore from './PromoStore';
-  import FieldsLayout from '../FieldsLayout'
-  import mixin from '../../mixins/Public/PublicMixin'
+  import FieldsLayout from '../FieldsLayout';
+  import mixin from '../../mixins/Public/PublicMixin';
 
   export default {
     name: 'Promo',
     mixins: [mixin],
-    components: { FieldsLayout },
+    components: {FieldsLayout},
     data() {
       return {
         store: PromoStore,
@@ -52,6 +51,7 @@
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
+
   .edit-area {
     .label {
       color: white;

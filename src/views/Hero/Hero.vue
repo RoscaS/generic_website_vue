@@ -1,36 +1,35 @@
 <template>
   <div>
     <section class="section hero">
-      <EditIcon :component="$options.name">
-        <div class="container">
-          <div class="columns is-variable is-8">
-            <div class="column is-one-third"
-                 v-scroll-reveal="sReveal('left', 150, 400, 1500)">
-              <div :class="{'highlighted': highlighted(0)}">
-                <i :class="state.L_icon.data"></i>
-                <h2 class="subtitle">{{ state.L_title.data }}</h2>
-                <p>{{ state.L_text.data }}</p>
-              </div>
+      <EditIcon :component="$options.name" top="-35px"/>
+      <div class="container">
+        <div class="columns is-variable is-8">
+          <div class="column is-one-third"
+               v-scroll-reveal="sReveal('left', 150, 400, 1500)">
+            <div :class="{'highlighted': highlighted(0)}">
+              <i :class="state.L_icon.data"></i>
+              <h2 class="subtitle">{{ state.L_title.data }}</h2>
+              <p>{{ state.L_text.data }}</p>
             </div>
-            <div class="column is-one-third"
-                 v-scroll-reveal="sReveal('top', 150, 0, 1500)">
-              <div :class="{'highlighted': highlighted(1)}">
-                <i :class="state.C_icon.data"></i>
-                <h2 class="subtitle">{{ state.C_title.data }}</h2>
-                <p>{{ state.C_text.data }}</p>
-              </div>
+          </div>
+          <div class="column is-one-third"
+               v-scroll-reveal="sReveal('top', 150, 0, 1500)">
+            <div :class="{'highlighted': highlighted(1)}">
+              <i :class="state.C_icon.data"></i>
+              <h2 class="subtitle">{{ state.C_title.data }}</h2>
+              <p>{{ state.C_text.data }}</p>
             </div>
-            <div class="column is-one-third"
-                 v-scroll-reveal="sReveal('right', 150, 400, 1500)">
-              <div :class="{'highlighted': highlighted(2)}">
-                <i :class="state.R_icon.data"></i>
-                <h2 class="subtitle">{{ state.R_title.data }}</h2>
-                <p>{{ state.R_text.data }}</p>
-              </div>
+          </div>
+          <div class="column is-one-third"
+               v-scroll-reveal="sReveal('right', 150, 400, 1500)">
+            <div :class="{'highlighted': highlighted(2)}">
+              <i :class="state.R_icon.data"></i>
+              <h2 class="subtitle">{{ state.R_title.data }}</h2>
+              <p>{{ state.R_text.data }}</p>
             </div>
           </div>
         </div>
-      </EditIcon>
+      </div>
     </section>
 
     <EditNav v-if="checkComponent()" height="300">
@@ -77,14 +76,14 @@
       return {
         state: {
           L_title: new this.Title(),
-          L_text:  new this.Text(),
-          L_icon:  new this.Icon(),
+          L_text: new this.Text(),
+          L_icon: new this.Icon(),
           C_title: new this.Title(),
-          C_text:  new this.Text(),
-          C_icon:  new this.Icon(),
+          C_text: new this.Text(),
+          C_icon: new this.Icon(),
           R_title: new this.Title(),
-          R_text:  new this.Text(),
-          R_icon:  new this.Icon(),
+          R_text: new this.Text(),
+          R_icon: new this.Icon(),
         },
         store: HeroStore,
         iconPicker: false,

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import ModalLayout from './ModalLayout';
+  import ModalLayout from '../ImagesEditMenu';
 
   export default {
     name: "CarouselEditModal",

@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <ValidationBtns :edit="edit"/>
+      <ValidationBtns editMenu="text"/>
       <div class="loading-animation">
         <SpinLine v-show="edit.loading"/>
       </div>

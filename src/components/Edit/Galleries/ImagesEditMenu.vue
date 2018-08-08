@@ -5,7 +5,8 @@
     </div>
     <div class="container">
       <div class="content">
-        <ValidationBtns :edit="edit" :top="top" :right="right"/>
+
+        <ValidationBtns editMenu="image" :top="top" :right="right"/>
 
         <h1>Edition: {{ gallery.name }}</h1>
 
@@ -57,14 +58,14 @@
 </template>
 
 <script>
-  import DragSort from '../../../DragSort';
+  import DragSort from '../../DragSort';
   import {SpinLine} from 'vue-loading-spinner';
-  import FileUpload from '../../FileUpload';
-  import ValidationBtns from '../../ValidationButtons';
-  import GalleriesEditStore from '../GalleriesEditStore';
+  import FileUpload from '../FileUpload';
+  import ValidationBtns from '../ValidationButtons';
+  import GalleriesEditStore from './GalleriesEditStore';
 
   export default {
-    name: "ModalLayout",
+    name: "ImagesEditMenu",
     components: {DragSort, ValidationBtns, FileUpload, SpinLine},
     props: {
       component: {type: String},
@@ -110,7 +111,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../../static/sass/global';
+  @import '../../../../static/sass/global';
 
   h1 {
     z-index: 1000;
