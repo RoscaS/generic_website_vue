@@ -1,7 +1,7 @@
 <template>
   <div :class="classes[0]">
     <div :class="classes[1]">
-      <draggable v-model="list.images"
+      <draggable v-model="store.images"
                  :options="dragOptions"
                  :move="onMove"
                  @start="isDragging=true"
@@ -9,10 +9,10 @@
         <transition-group type="transition"
                           :class="classes[2]"
                           tag="div"
-                          :name="reOrder? 'flip-list': ''">
+                          :name="reOrder? 'flip-store': ''">
           <div :class="classes[3]"
                class="image-slot"
-               v-for="image in list.images"
+               v-for="image in store.images"
                :key="image.id">
             <div class="">
               <img :src="image.url">
@@ -26,18 +26,18 @@
 
 <script>
   import draggable from 'vuedraggable';
-  import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
-
-  import CarouselImagesStore from '../views/Carousel/CarouselImagesStore';
-  import GalleryImagesStore from '../views/Gallery/GalleryImagesStore';
-  import GalleriesEditStore from '../components/Edit/Galleries/GalleriesEditStore';
+  // import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
+  // import CarouselImagesStore from '../views/Carousel/CarouselImagesStore';
+  // import GalleryImagesStore from '../views/Gallery/GalleryImagesStore';
+  import GalleriesEditStore
+    from '../components/Edit/Galleries/GalleriesEditStore';
 
 
   export default {
     name: "DragSort",
     components: {draggable},
     props: {
-      list: {type: Object},
+      component: {type: String},
       classes: {type: Array}
     },
     data() {
@@ -52,6 +52,9 @@
       };
     },
     computed: {
+      store() {
+        return GalleriesEditStore.state[this.component.toLowerCase()].store.state;
+      },
       dragOptions() {
         return {
           animation: 250,
@@ -68,9 +71,9 @@
         }
         this.$nextTick(() => {
           // this.setVisibility();
-          GalleriesEditStore.sendUpdateSignal();
+          // GalleriesEditStore.sendPushSignal();
+          this.setPosition();
           this._debug();
-
           this.delayedDragging = false;
         });
       }
@@ -78,15 +81,26 @@
     methods: {
       selectSecondary(secondary) { this.secondaryList = secondary; },
       onMove({relatedContext, draggedContext}) {
+        console.log(relatedContext)
         // this.related = relatedContext;
         // this.dragged = draggedContext;
+      },
+
+      setPosition() {
+        if (this.store.images.length) {
+          for (let i = 0; i < this.store.images.length; i++) {
+            this.store.images[i].position = i + 1;
+          }
+        }
+        // this.store.store.putData();
+        // GalleriesEditStore.sendUpdateSignal();
       },
 
       _debug() {
         // let root = this.$parent.$parent.$parent;
         // console.log('\n\nCURRENT:')
         // let a = '';
-        // this.list.images.forEach(i => {a += `, ${i.id}`});
+        // this.store.images.forEach(i => {a += `, ${i.id}`});
         // console.log(a);
         // console.log('PARENT:')
         // let b = '';
@@ -98,26 +112,26 @@
         // console.log(f);
         // console.log('ORIGINAL:')
         // let c = '';
-        // GalleryImagesStore.state.images.forEach(i => {c += `, ${i.id}`});
+        // GalleryImagesStore.state.images.forEach(i => {c += `, ${i.id}`;});
         // console.log(c);
         // let e = '';
-        // console.log(`SECONDARY: ${root.secondaryList.name}`)
+        // console.log(`SECONDARY: ${root.secondaryList.name}`);
         // root.secondaryList.images.forEach(i => {
-        //   e += `[id:${i.id}, pos:${i.position}]`
+        //   e += `([${i.position}]id:${i.id}), `;
         // });
         // console.log(e);
         // let d = '';
-        // console.log(`PRIMARY: ${root.gallery.name}`)
+        // console.log(`PRIMARY: ${root.gallery.name}`);
         // root.gallery.images.forEach(i => {
-        //   d += `[id:${i.id}, pos:${i.position}]`
+        //   d += `([${i.position}]id:${i.id}), `;
         // });
         // console.log(d);
-        // console.log('\n\n')
+        // console.log('\n\n');
       }
     },
-    mounted() {
-      // this._debug();
-    }
+    created() {
+      // this.store = GalleriesEditStore.state[this.component.toLowerCase()].store.state;
+    },
   };
 </script>
 

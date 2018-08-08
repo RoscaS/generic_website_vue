@@ -5,6 +5,7 @@ import ParallaxImagesStore from '../../Parallax/ParallaxImagesStore'
 import StockImagesStore from './Stock/StockImagesStore';
 
 const GalleriesEditStore = new Vue({
+  name: 'GalleriesEditStore',
   data: {
     state: {
       stock: {name: 'Stock', images: StockImagesStore.state.images, store: StockImagesStore},
@@ -18,15 +19,16 @@ const GalleriesEditStore = new Vue({
     active: false,
     dirty: false,
 
+    activeTab: 0,
+
     pushSignal: false,
     cancelSignal: false,
-
     updateSignal: false,
 
     reOrder: false
   },
-  wacth: {
-  //  watch here for change in galleries and force compo to reload
+  computed: {
+
   },
 
   methods: {
@@ -34,18 +36,21 @@ const GalleriesEditStore = new Vue({
     setLoading(value) { this.loading = value; },
     setDirty(value) { this.dirty = value; },
 
+    setActiveTab(value) { this.activeTab = value; },
+
     sendPushSignal() {
       this.loading = true;
       this.pushSignal = true;
       setTimeout(() => { this.pushSignal = false; }, 10);
     },
+    sendUpdateSignal() {
+      this.loading = true;
+      this.updateSignal = true;
+      setTimeout(() => { this.updateSignal = false }, 10);
+    },
     sendCancelSignal() {
       this.cancelSignal = true;
       setTimeout(() => { this.cancelSignal = false; }, 10);
-    },
-    sendUpdateSignal() {
-      this.updateSignal = true;
-      setTimeout(() => { this.updateSignal = false; }, 10);
     },
     start(component) {
       this.component = component;

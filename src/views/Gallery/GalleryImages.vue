@@ -4,7 +4,7 @@
       <div class="content">
         <div class="columns is-multiline">
           <div class="column is-3 gallery-col"
-               v-for="image in images"
+               v-for="image in state.images"
                v-scroll-reveal="{
                 origin: 'left',
                 distance: '100px',
@@ -17,8 +17,8 @@
                :description="image.description"
                v-lightbox
                @click="clickImage(image)">
-              <img :src="image.url">
-                   <!--:class="[imgClass, {'img-selected': image.selected}]"/>-->
+              <img :src="image.url"
+                   :class="[imgClass, {'img-selected': image.selected}]"/>
             </a>
           </div>
         </div>
@@ -49,8 +49,7 @@
     },
 
     computed: {
-      images() { return this.state.images; },
-      // imgClass() { return this.isAdmin ? 'img-admin' : 'img-user'; }
+      imgClass() { return this.isAdmin ? 'img-admin' : 'img-user'; }
     },
 
     methods: {

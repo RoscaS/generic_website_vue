@@ -1,8 +1,11 @@
 <template>
   <div>
+    <div class="loading-animation">
+      <SpinLine v-show="edit.loading"/>
+    </div>
     <div class="container">
       <div class="content">
-        <ValidationBtns editStore="Galleries" :top="top" :right="right"/>
+        <ValidationBtns :edit="edit" :top="top" :right="right"/>
 
         <h1>Edition: {{ gallery.name }}</h1>
 
@@ -23,7 +26,8 @@
             </div>
           </header>
           <div class="card-content">
-            <DragSort :list="secondaryList" :classes="secondaryClasses"/>
+            <DragSort :component="secondaryList.store.$options.related"
+                      :classes="secondaryClasses"/>
           </div>
         </div>
 
@@ -34,10 +38,11 @@
             </header>
             <div class="card-content imagesEdit">
               <b-tabs type="is-toggle" v-model="activeTab" position="is-right">
-                <b-tab-item icon="images">
-                  <DragSort :list="gallery" :classes="classes"/>
+                <b-tab-item icon="images" :disabled="edit.loading">
+                  <DragSort :component="gallery.store.$options.related"
+                            :classes="classes"/>
                 </b-tab-item>
-                <b-tab-item icon="upload">
+                <b-tab-item icon="upload" :disabled="edit.loading">
                   <FileUpload @image-preview="poule($event)"
                               :gallery="component"
                               :edit="edit"/>
@@ -45,9 +50,6 @@
               </b-tabs>
             </div>
           </div>
-          <!--<div class="loading-animation">-->
-          <!--<SpinLine v-show="edit.loading"/>-->
-          <!--</div>-->
         </div>
       </div>
     </div>
@@ -80,18 +82,28 @@
           'level is-mobile', 'level-left',
           'level-item', 'level-item image-slot'
         ],
-        activeTab: 0,
       };
     },
     computed: {
       gallery() { return this.primaryList[this.component]; },
+      activeTab: {
+        get() { return this.edit.activeTab; },
+        set(value) { this.edit.setActiveTab(value);}
+      }
     },
     methods: {
-      selectSecondary(secondary) { this.secondaryList = secondary; },
+      selectSecondary(secondary) {
+        console.log(secondary.name);
+        console.log(this.secondaryList.name);
+        this.secondaryList = secondary;
+        this.updateComponent =
+          console.log('UPDATE');
+        console.log(this.secondaryList.name);
+      },
 
       poule(e) {
-        console.log(`New image:\ngallery: ${e.gallery}\npos: ${e.position}\nimage: ${e.image}`)
-        this.gallery.images.push(e)
+        console.log(`New image:\ngallery: ${e.gallery}\npos: ${e.position}\nimage: ${e.image}`);
+        this.gallery.images.push(e);
       }
     },
   };
@@ -128,6 +140,14 @@
     .card-header-title {
       margin-bottom: 0;
     }
+  }
+
+  .loading-animation {
+    z-index: 20;
+    position: absolute;
+    top: 80%;
+    left: 49%;
+    transform: scale(3.5);
   }
 
 </style>

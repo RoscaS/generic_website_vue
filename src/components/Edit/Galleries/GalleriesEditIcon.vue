@@ -6,10 +6,13 @@
       <i class="fal fa-pencil-alt"></i>
     </button>
 
+    <!--:canCancel="edit.loading? []: ['outside', 'x']"-->
+
+
     <b-modal :active.sync="showModal"
              scroll="clip"
              :width="850"
-             :canCancel="['outside']"
+             :canCancel="edit.loading? []: ['outside', 'x', 'escape']"
              has-modal-card>
       <CarouselModal v-if="is('Carousel')"/>
       <GalleryModal v-if="is('Gallery')"/>
@@ -20,11 +23,11 @@
 </template>
 
 <script>
-  import GalleriesEditStore from './GalleriesEditStore'
+  import GalleriesEditStore from './GalleriesEditStore';
 
-  import CarouselModal from './Modals/CarouselEditModal'
-  import GalleryModal from './Modals/GalleryEditModal'
-  import ParallaxModal from './Modals/ParallaxEditModal'
+  import CarouselModal from './Modals/CarouselEditModal';
+  import GalleryModal from './Modals/GalleryEditModal';
+  import ParallaxModal from './Modals/ParallaxEditModal';
 
   export default {
     name: "GalleryEditIcon",
@@ -43,7 +46,7 @@
       return {
         edit: GalleriesEditStore,
         showModal: false,
-      }
+      };
     },
     computed: {
       setStyle() { return `margin-top:${this.Top};`; },

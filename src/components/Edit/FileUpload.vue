@@ -19,6 +19,7 @@
 
 <script>
   import axios from 'axios';
+
   const url = 'images/';
 
   export default {
@@ -28,9 +29,7 @@
       edit: {type: Object},
     },
     data() {
-      return {
-        // edit: this.edit
-      };
+      return {};
     },
 
     computed: {
@@ -45,21 +44,32 @@
 
         let gallery = this.gallery;
         if (gallery == 'gallery') gallery = 'events';
-        console.log(gallery);
-
 
         formData.append('image', file);
         formData.append('gallery', gallery);
 
-
-
         axios.post(url, formData, {
-            headers: {'content-type': 'multipart/form-data'},
+          headers: {'content-type': 'multipart/form-data'},
+        }).then(response => {
+
+          if (this.edit.$options.name == 'GalleriesEditStore') {
+            // Bug: necessite 2 sendPushSignal pour maj les 2 menu.
+            this.edit.sendPushSignal();
+            setTimeout(() => {
+              this.edit.sendPushSignal();
+              this.edit.setLoading(false);
+              this.$Global.Tools.message(3);
+              setTimeout(() => {
+                this.edit.setActiveTab(0);
+              }, 500);
+            }, 2000);
+
+          } else {
+
+            this.$emit('image-preview', response.data);
+            this.edit.setDirty(true);
           }
-        ).then(response => {
-          this.$emit('image-preview', response.data);
-          this.edit.dirty = true;
-          this.edit.sendUpdateSignal()
+
         }).catch(error => {
           this.$toast.open({
             duration: 4000,

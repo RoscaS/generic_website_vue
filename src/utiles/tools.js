@@ -4,8 +4,9 @@ import {Toast} from 'buefy';
 
 const types = [
   {color: 'is-danger', message: "Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur." },
-  {color: 'is-success', message: "Donnée mise à jour!"},
+  {color: 'is-success', message: "Donnée(s) mise(s) à jour!"},
   {color: 'is-warning', message: "Modifications annulées."},
+  {color: 'is-success', message: "Image chargée sur le serveur."},
 ];
 
 

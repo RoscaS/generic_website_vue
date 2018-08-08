@@ -3,6 +3,8 @@ import mixin from '../../mixins/Galleries/ImagesStoreMixin';
 
 
 const ParallaxImagesStore = new Vue({
+  name: 'ParallaxImagesStore',
+  related: 'Parallax',
   url: 'galleries/parallax/',
   mixins: [mixin],
   data: {

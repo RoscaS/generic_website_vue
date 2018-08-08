@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 const TextsEditStore = new Vue({
+  name: 'TextEditStore',
   data: {
     component: null,
     loading: false,
