@@ -15,8 +15,6 @@
   import EditIcon from '../Edit/EditIcon';
   import ImagesComponentMixin from '../../mixins/Galleries/ImagesComponentMixin';
 
-
-
   export default {
     name: 'Parallax',
     mixins: [ImagesComponentMixin],

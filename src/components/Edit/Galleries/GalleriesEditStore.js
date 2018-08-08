@@ -1,6 +1,6 @@
 import axios from "axios";
 import Vue from 'vue';
-import GalleryImagesStore from '../../../views/Gallery/GalleryImagesStore';
+import EventsImagesStore from '../../../views/Events/EventsImagesStore';
 import CarouselImagesStore from '../../../views/Carousel/CarouselImagesStore';
 import ParallaxImagesStore from '../../Parallax/ParallaxImagesStore'
 import StockImagesStore from '../Stock/StockImagesStore';
@@ -9,10 +9,10 @@ const GalleriesEditStore = new Vue({
   name: 'GalleriesEditStore',
   data: {
     state: {
-      stock: {name: 'Stock', images: StockImagesStore.state.images, store: StockImagesStore},
-      carousel: {name: 'Carousel', images: CarouselImagesStore.state.images, store: CarouselImagesStore},
-      gallery: {name: 'Galerie', images: GalleryImagesStore.state.images, store: GalleryImagesStore},
-      parallax: {name: 'Parallax', images: ParallaxImagesStore.state.images, store: ParallaxImagesStore},
+      stock: {name: 'Stock', store: StockImagesStore},
+      carousel: {name: 'Carousel', store: CarouselImagesStore},
+      events: {name: 'Galerie', store: EventsImagesStore},
+      parallax: {name: 'Parallax', store: ParallaxImagesStore},
     },
 
     component: null,
@@ -57,9 +57,6 @@ const GalleriesEditStore = new Vue({
     updateAll() {
       for (let i in this.state) {
         let images = this.state[i].store.state.images;
-        let gallery = this.state[i].store.$options.related.toLowerCase();
-        gallery == 'gallery'? gallery = 'events' : null;
-        console.log(gallery)
         for (let j in images) {
           let url = `images/${images[j].id}/`;
           let formData = new FormData();

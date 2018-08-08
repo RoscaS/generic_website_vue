@@ -1,8 +1,8 @@
+import mixin from '../../mixins/Public/PublicStoreMixin'
 import Vue from 'vue';
 import axios from 'axios';
-import mixin from '../../mixins/Public/PublicStoreMixin'
 
-const GalleryTextsStore = new Vue ({
+const EventsTextsStore = new Vue ({
   mixins: [mixin],
   url: 'gallery/1/',
   data: {
@@ -28,5 +28,5 @@ const GalleryTextsStore = new Vue ({
   }
 });
 
-export default GalleryTextsStore;
+export default EventsTextsStore;
 

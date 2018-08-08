@@ -6,9 +6,7 @@
                  :disabled="loading" v-model="i.data">
         </b-input>
       </b-field>
-      <FileUpload v-else @image-preview="state.image.data=$event.image"
-                  :edit="edit">
-      </FileUpload>
+      <FileUpload v-else @image-preview="state.image.data=$event.image" :edit="edit"/>
     </b-tab-item>
     <slot></slot>
   </b-tabs>

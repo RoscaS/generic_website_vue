@@ -1,16 +1,14 @@
 <template>
-  <ModalLayout component="gallery"
-               :classes="classes"
-               primaryHeight="500px"
-               top="790px"/>
+  <ImagesEditMenu component="events" :classes="classes"
+                  primaryHeight="500px" top="790px"/>
 </template>
 
 <script>
-  import ModalLayout from '../ImagesEditMenu';
+  import ImagesEditMenu from '../ImagesEditMenu';
 
   export default {
-    name: "GalleryEditModal",
-    components: {ModalLayout},
+    name: "EventsEditModal",
+    components: {ImagesEditMenu},
     data() {
       return {
         classes: [

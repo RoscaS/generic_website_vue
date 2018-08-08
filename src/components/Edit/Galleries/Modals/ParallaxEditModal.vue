@@ -1,17 +1,15 @@
 <template>
-  <ModalLayout component="parallax"
-               :parallaxIdx="id"
-               :classes="classes"
-               top="650px"/>
+  <ImagesEditMenu component="parallax" :parallaxIdx="id"
+                  :classes="classes" top="650px"/>
 </template>
 
 <script>
-  import ModalLayout from '../ImagesEditMenu'
+  import ImagesEditMenu from '../ImagesEditMenu';
 
   export default {
     name: "ParallaxEditModal",
-    components: { ModalLayout },
-    props: { id: {type: Number} },
+    components: {ImagesEditMenu},
+    props: {id: {type: Number}},
     data() {
       return {
         classes: [

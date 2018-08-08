@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import mixin from '../../mixins/Galleries/ImagesStoreMixin';
 
-
-const GalleryImagesStore = new Vue({
-  name: 'GalleryImagesStore',
-  related: 'Gallery',
+const EventsImagesStore = new Vue({
+  name: 'EventsImagesStore',
+  related: 'Events',
   url: 'galleries/events/',
   mixins: [mixin],
   data: {
@@ -13,4 +12,4 @@ const GalleryImagesStore = new Vue({
   },
 });
 
-export default GalleryImagesStore;
+export default EventsImagesStore;

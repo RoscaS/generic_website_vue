@@ -20,7 +20,7 @@
                 </button>
                 <b-dropdown-item v-for="i in primaryList"
                                  :key="i.name"
-                                 @click="selectSecondary(i)"
+                                 @click="setSecondaryGallery(i)"
                                  class="no-tr">{{ i.name }}
                 </b-dropdown-item>
               </b-dropdown>
@@ -44,8 +44,7 @@
                             :classes="classes"/>
                 </b-tab-item>
                 <b-tab-item icon="upload" :disabled="edit.loading">
-                  <FileUpload @image-preview="poule($event)"
-                              :gallery="component"
+                  <FileUpload :gallery="component"
                               :edit="edit"/>
                 </b-tab-item>
               </b-tabs>
@@ -86,26 +85,24 @@
       };
     },
     computed: {
-      gallery() { return this.primaryList[this.component]; },
+      gallery() {
+        return this.primaryList[this.component];
+      },
+      dropDownMenu() {
+        for (let i in primaryList) {
+
+        }
+
+      },
       activeTab: {
         get() { return this.edit.activeTab; },
         set(value) { this.edit.setActiveTab(value);}
       }
     },
     methods: {
-      selectSecondary(secondary) {
-        console.log(secondary.name);
-        console.log(this.secondaryList.name);
+      setSecondaryGallery(secondary) {
         this.secondaryList = secondary;
-        this.updateComponent =
-          console.log('UPDATE');
-        console.log(this.secondaryList.name);
       },
-
-      poule(e) {
-        console.log(`New image:\ngallery: ${e.gallery}\npos: ${e.position}\nimage: ${e.image}`);
-        this.gallery.images.push(e);
-      }
     },
   };
 </script>

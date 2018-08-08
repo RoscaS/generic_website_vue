@@ -16,7 +16,7 @@
              :onCancel="endEdit"
              has-modal-card>
       <CarouselModal v-if="is('Carousel')"/>
-      <GalleryModal v-if="is('Gallery')"/>
+      <EventsModal v-if="is('Events')"/>
       <ParallaxModal v-if="is('Parallax')" :id="id"/>
     </b-modal>
   </div>
@@ -27,14 +27,14 @@
   import TextsEditStore from './Texts/TextsEditStore';
 
   import CarouselModal from './Galleries/Modals/CarouselEditModal';
-  import GalleryModal from './Galleries/Modals/GalleryEditModal';
+  import EventsModal from './Galleries/Modals/EventsEditModal';
   import ParallaxModal from './Galleries/Modals/ParallaxEditModal';
 
   export default {
     name: "EditIcon",
     components: {
       CarouselModal,
-      GalleryModal,
+      EventsModal,
       ParallaxModal
     },
     props: {

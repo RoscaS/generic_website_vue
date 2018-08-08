@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <slot v-if="$parent.$options.name=='Gallery'"></slot>
+      <slot v-if="$parent.$options.name=='Events'"></slot>
 
       <div class="container" v-else>
         <div class="content">

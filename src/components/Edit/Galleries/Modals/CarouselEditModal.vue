@@ -1,15 +1,13 @@
 <template>
-  <ModalLayout component="carousel"
-               :classes="classes"
-               top="680px"/>
+  <ImagesEditMenu component="carousel" :classes="classes" top="680px"/>
 </template>
 
 <script>
-  import ModalLayout from '../ImagesEditMenu';
+  import ImagesEditMenu from '../ImagesEditMenu';
 
   export default {
     name: "CarouselEditModal",
-    components: {ModalLayout},
+    components: {ImagesEditMenu},
     data() {
       return {
         classes: [

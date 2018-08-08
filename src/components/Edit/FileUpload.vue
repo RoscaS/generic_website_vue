@@ -42,11 +42,11 @@
         let formData = new FormData();
 
 
-        let gallery = this.gallery;
-        if (gallery == 'gallery') gallery = 'events';
+        // let gallery = this.gallery;
+        // if (gallery == 'gallery') gallery = 'events';
 
         formData.append('image', file);
-        formData.append('gallery', gallery);
+        formData.append('gallery', this.gallery);
 
         axios.post(url, formData, {
           headers: {'content-type': 'multipart/form-data'},

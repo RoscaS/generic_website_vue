@@ -30,18 +30,18 @@
 </template>
 
 <script>
-  import GalleryImagesStore from './GalleryImagesStore';
-  import Lightbox from '../../components/Lightbox/Lightbox';
   import ImagesComponentMixin from '../../mixins/Galleries/ImagesComponentMixin';
+  import EventsImagesStore from './EventsImagesStore';
+  import Lightbox from '../../components/Lightbox/Lightbox';
 
   export default {
-    name: "GalleryUser",
+    name: "EventsImages",
     mixins: [ImagesComponentMixin],
     components: {Lightbox},
     data() {
       return {
-        component: 'Gallery',
-        store: GalleryImagesStore,
+        component: 'Events',
+        store: EventsImagesStore,
         state: { images: [] },
 
         isAdmin: false,

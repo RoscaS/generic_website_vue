@@ -82,7 +82,7 @@
         links: [
           {id: 'Presentation',name: 'Presentation', icon: 'fa-info'},
           {id: 'Articles',name: 'Articles', icon: 'fa-shopping-bag'},
-          {id: 'Gallery',name: 'Galerie', icon: 'fa-th'},
+          {id: 'Events',name: 'Galerie', icon: 'fa-th'},
           {id: 'Contact',name: 'Contact', icon: 'fa-envelope'},
         ]
       };
