@@ -1,3 +1,4 @@
+import axios from "axios";
 import Vue from 'vue';
 import GalleryImagesStore from '../../../views/Gallery/GalleryImagesStore';
 import CarouselImagesStore from '../../../views/Carousel/CarouselImagesStore';
@@ -52,6 +53,35 @@ const GalleriesEditStore = new Vue({
       this.cancelSignal = true;
       setTimeout(() => { this.cancelSignal = false; }, 10);
     },
+
+    updateAll() {
+      for (let i in this.state) {
+        let images = this.state[i].store.state.images;
+        let gallery = this.state[i].store.$options.related.toLowerCase();
+        gallery == 'gallery'? gallery = 'events' : null;
+        console.log(gallery)
+        for (let j in images) {
+          let url = `images/${images[j].id}/`;
+          let formData = new FormData();
+          formData.append('id', images[j].id);
+          formData.append('position', images[j].position);
+          formData.append('gallery', images[j].gallery.toLowerCase());
+
+          axios.patch(url, formData, {
+            headers: {'content-type': 'multipart/form-data'}
+          }).then((response) => {
+            console.log('putData: ok');
+          }).catch(error => {
+            console.log(url);
+            console.log(error);
+          })
+        }
+      }
+    },
+
+
+
+
     start(component) {
       this.component = component;
       this.active = true;

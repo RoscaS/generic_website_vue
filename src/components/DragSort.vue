@@ -26,9 +26,6 @@
 
 <script>
   import draggable from 'vuedraggable';
-  // import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
-  // import CarouselImagesStore from '../views/Carousel/CarouselImagesStore';
-  // import GalleryImagesStore from '../views/Gallery/GalleryImagesStore';
   import GalleriesEditStore
     from '../components/Edit/Galleries/GalleriesEditStore';
 
@@ -42,9 +39,6 @@
     },
     data() {
       return {
-        related: null,
-        dragged: null,
-
         isDragging: false,
         delayedDragging: false,
 
@@ -73,17 +67,18 @@
           // this.setVisibility();
           // GalleriesEditStore.sendPushSignal();
           this.setPosition();
-          this._debug();
           this.delayedDragging = false;
         });
       }
     },
     methods: {
       selectSecondary(secondary) { this.secondaryList = secondary; },
+
       onMove({relatedContext, draggedContext}) {
-        console.log(relatedContext)
-        // this.related = relatedContext;
-        // this.dragged = draggedContext;
+        console.log('\n');
+        setTimeout(() => {
+          draggedContext.element.gallery = relatedContext.list[0].gallery
+        },100);
       },
 
       setPosition() {
@@ -92,45 +87,7 @@
             this.store.images[i].position = i + 1;
           }
         }
-        // this.store.store.putData();
-        // GalleriesEditStore.sendUpdateSignal();
       },
-
-      _debug() {
-        // let root = this.$parent.$parent.$parent;
-        // console.log('\n\nCURRENT:')
-        // let a = '';
-        // this.store.images.forEach(i => {a += `, ${i.id}`});
-        // console.log(a);
-        // console.log('PARENT:')
-        // let b = '';
-        // root.gallery.images.forEach(i => {b += `, ${i.id}`});
-        // console.log(b);
-        // console.log('CENTRAL:')
-        // let f = '';
-        // GalleriesEditStore.state.gallery.images.forEach(i => {f += `, ${i.id}`});
-        // console.log(f);
-        // console.log('ORIGINAL:')
-        // let c = '';
-        // GalleryImagesStore.state.images.forEach(i => {c += `, ${i.id}`;});
-        // console.log(c);
-        // let e = '';
-        // console.log(`SECONDARY: ${root.secondaryList.name}`);
-        // root.secondaryList.images.forEach(i => {
-        //   e += `([${i.position}]id:${i.id}), `;
-        // });
-        // console.log(e);
-        // let d = '';
-        // console.log(`PRIMARY: ${root.gallery.name}`);
-        // root.gallery.images.forEach(i => {
-        //   d += `([${i.position}]id:${i.id}), `;
-        // });
-        // console.log(d);
-        // console.log('\n\n');
-      }
-    },
-    created() {
-      // this.store = GalleriesEditStore.state[this.component.toLowerCase()].store.state;
     },
   };
 </script>

@@ -13,10 +13,10 @@ export default {
     cancelSignal() { return this.edit.cancelSignal; },
   },
   watch: {
-    // pushSignal() { if (this.checkSignal(this.pushSignal)) this.pushData(); },
-    pushSignal() { if (this.pushSignal) this.pushData(); },
-    // updateSignal() { if (this.checkSignal(this.updateSignal)) this.updateData(); },
-    updateSignal() { if (this.updateSignal) this.updateData(); },
+    pushSignal() { if (this.checkSignal(this.pushSignal)) this.pushData(); },
+    // pushSignal() { if (this.pushSignal) this.pushData(); },
+    updateSignal() { if (this.checkSignal(this.updateSignal)) this.updateData(); },
+    // updateSignal() { if (this.updateSignal) this.updateData(); },
     cancelSignal() { if (this.checkSignal(this.cancelSignal)) this.snackBar(); }
   },
   methods: {
@@ -39,13 +39,16 @@ export default {
     },
     updateData() {
       console.log(`UPDATE_DATA: ${this.$options.name}`)
-      this.store.putData();
-      this.edit.sendPushSignal();
+      this.edit.updateAll();
       setTimeout(() => {
+        this.store.putData();
         this.edit.sendPushSignal();
-        this.edit.setLoading(false);
-        this.$Global.Tools.message(1)
-      }, 2000)
+        setTimeout(() => {
+          this.edit.sendPushSignal();
+          this.edit.setLoading(false);
+          this.$Global.Tools.message(1)
+        }, 2000)
+      }, 500);
     },
 
     recoverData() {
