@@ -15,9 +15,7 @@
              :canCancel="cancelModalOptions"
              :onCancel="endEdit"
              has-modal-card>
-      <CarouselModal v-if="is('Carousel')"/>
-      <EventsModal v-if="is('Events')"/>
-      <ParallaxModal v-if="is('Parallax')" :id="id"/>
+      <ImagesEditMenu :component="component"/>
     </b-modal>
   </div>
 </template>
@@ -25,22 +23,14 @@
 <script>
   import GalleriesEditStore from './Galleries/GalleriesEditStore';
   import TextsEditStore from './Texts/TextsEditStore';
-
-  import CarouselModal from './Galleries/Modals/CarouselEditModal';
-  import EventsModal from './Galleries/Modals/EventsEditModal';
-  import ParallaxModal from './Galleries/Modals/ParallaxEditModal';
+  import ImagesEditMenu from './Galleries/ImagesEditMenu';
 
   export default {
     name: "EditIcon",
-    components: {
-      CarouselModal,
-      EventsModal,
-      ParallaxModal
-    },
+    components: {ImagesEditMenu,},
     props: {
       right: {type: String},
       top: {type: String},
-      id: {type: Number}, // used for parallax identification
       component: {type: String},
       editMenu: {type: String, default: 'text'},
     },
@@ -54,13 +44,13 @@
         return this.editMenu == 'text' ? TextsEditStore : GalleriesEditStore;
       },
       isActive() {
-        return this.edit.active
+        return this.edit.active;
       },
       style() {
         return {marginTop: this.top, left: this.right};
       },
       cancelModalOptions() {
-        return this.edit.loading ? [] : ['outside', 'x', 'escape']
+        return this.edit.loading ? [] : ['outside', 'x', 'escape'];
       }
     },
     methods: {

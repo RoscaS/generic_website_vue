@@ -41,10 +41,6 @@
         let file = this.$refs.file.files[0];
         let formData = new FormData();
 
-
-        // let gallery = this.gallery;
-        // if (gallery == 'gallery') gallery = 'events';
-
         formData.append('image', file);
         formData.append('gallery', this.gallery);
 

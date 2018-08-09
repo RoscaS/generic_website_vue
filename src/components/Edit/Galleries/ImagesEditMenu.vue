@@ -6,9 +6,9 @@
     <div class="container">
       <div class="content">
 
-        <ValidationBtns editMenu="image" :top="top" :right="right"/>
+        <ValidationBtns editMenu="image" :top="layout.top" :right="layout.right"/>
 
-        <h1>Edition: {{ gallery.name }}</h1>
+        <h1>Edition: {{ primaryList.name }}</h1>
 
         <div class="card secondary">
           <header class="card-header">
@@ -18,7 +18,7 @@
                   <p>{{ secondaryList.name }}</p>
                   <i class="fa fa-fw fa-sort-down"></i>
                 </button>
-                <b-dropdown-item v-for="i in primaryList"
+                <b-dropdown-item v-for="i in dropDownList"
                                  :key="i.name"
                                  @click="setSecondaryGallery(i)"
                                  class="no-tr">{{ i.name }}
@@ -28,24 +28,23 @@
           </header>
           <div class="card-content">
             <DragSort :component="secondaryList.store.$options.related"
-                      :classes="secondaryClasses"/>
+                      :classes="levelClasses"/>
           </div>
         </div>
 
         <div class="primary">
           <div class="card">
             <header class="card-header">
-              <h2 class="card-header-title">{{ gallery.name }}</h2>
+              <h2 class="card-header-title">{{ primaryList.name }}</h2>
             </header>
             <div class="card-content imagesEdit">
               <b-tabs type="is-toggle" v-model="activeTab" position="is-right">
                 <b-tab-item icon="images" :disabled="edit.loading">
-                  <DragSort :component="gallery.store.$options.related"
-                            :classes="classes"/>
+                  <DragSort :component="gallery"
+                            :classes="layout.classes"/>
                 </b-tab-item>
                 <b-tab-item icon="upload" :disabled="edit.loading">
-                  <FileUpload :gallery="component"
-                              :edit="edit"/>
+                  <FileUpload :edit="edit" :gallery="gallery"/>
                 </b-tab-item>
               </b-tabs>
             </div>
@@ -69,30 +68,44 @@
     props: {
       component: {type: String},
       classes: {type: Array},
-      parallaxIdx: {type: Number},
       top: {type: String},
       right: {type: String, default: '88px'},
     },
     data() {
       return {
         edit: GalleriesEditStore,
-        primaryList: GalleriesEditStore.state,
+        // primaryList: GalleriesEditStore.state,
         secondaryList: GalleriesEditStore.state.stock,
-        secondaryClasses: [
+        levelClasses: [
           'level is-mobile', 'level-left',
-          'level-item', 'level-item image-slot'
+          'level-item', 'level-item'
+        ],
+        columnsClasses: [
+          '', '', 'columns is-multiline is-mobile',
+          'column is-one-quarter'
         ],
       };
+
     },
     computed: {
       gallery() {
-        return this.primaryList[this.component];
+        return this.component.toLowerCase();
       },
-      dropDownMenu() {
-        for (let i in primaryList) {
-
+      primaryList() {
+        return GalleriesEditStore.state[this.gallery];
+      },
+      dropDownList() {
+        return GalleriesEditStore.state
+      },
+      layoutData() {
+        return {
+          events: {height: '500px', top: '790px', classes: this.columnsClasses},
+          carousel: {height: '', top: '680px', classes: this.levelClasses},
+          parallax: {height: '', top: '650px', classes: this.levelClasses},
         }
-
+      },
+      layout() {
+        return this.layoutData[this.gallery]
       },
       activeTab: {
         get() { return this.edit.activeTab; },
@@ -101,6 +114,7 @@
     },
     methods: {
       setSecondaryGallery(secondary) {
+        console.log(this['eventsData']);
         this.secondaryList = secondary;
       },
     },
