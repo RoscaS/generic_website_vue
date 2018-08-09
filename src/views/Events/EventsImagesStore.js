@@ -3,12 +3,12 @@ import mixin from '../../mixins/Galleries/ImagesStoreMixin';
 
 const EventsImagesStore = new Vue({
   name: 'EventsImagesStore',
-  related: 'Events',
-  url: 'galleries/events/',
   mixins: [mixin],
   data: {
-    // fetchFlag: false,
-    state: { images: [] },
+    title: 'Galerie',
+    related: 'Events',
+    url: 'galleries/events/',
+    state: {images: []},
   },
 });
 

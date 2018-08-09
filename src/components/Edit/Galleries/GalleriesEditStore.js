@@ -2,17 +2,17 @@ import axios from "axios";
 import Vue from 'vue';
 import EventsImagesStore from '../../../views/Events/EventsImagesStore';
 import CarouselImagesStore from '../../../views/Carousel/CarouselImagesStore';
-import ParallaxImagesStore from '../../Parallax/ParallaxImagesStore'
+import ParallaxImagesStore from '../../Parallax/ParallaxImagesStore';
 import StockImagesStore from '../Stock/StockImagesStore';
 
 const GalleriesEditStore = new Vue({
   name: 'GalleriesEditStore',
   data: {
     state: {
-      stock: {name: 'Stock', store: StockImagesStore},
-      carousel: {name: 'Carousel', store: CarouselImagesStore},
-      events: {name: 'Galerie', store: EventsImagesStore},
-      parallax: {name: 'Parallax', store: ParallaxImagesStore},
+      stock: StockImagesStore,
+      carousel: CarouselImagesStore,
+      events: EventsImagesStore,
+      parallax: ParallaxImagesStore
     },
 
     component: null,
@@ -28,9 +28,7 @@ const GalleriesEditStore = new Vue({
 
     reOrder: false
   },
-  computed: {
-
-  },
+  computed: {},
 
   methods: {
     setComponent(value) { this.component = value; },
@@ -47,11 +45,24 @@ const GalleriesEditStore = new Vue({
     sendUpdateSignal() {
       this.loading = true;
       this.updateSignal = true;
-      setTimeout(() => { this.updateSignal = false }, 10);
+      setTimeout(() => { this.updateSignal = false; }, 10);
     },
     sendCancelSignal() {
       this.cancelSignal = true;
       setTimeout(() => { this.cancelSignal = false; }, 10);
+    },
+
+    fetchAll() {
+      for (let i in this.state) {
+        console.log('ici');
+        let gallery = this.stock[i];
+        axios.get(gallery.url).then(response => {
+          this.buildStore(gallery, response);
+          // gallery.fetchFlag = true;
+        }).catch(error => {
+          console.log(`${this.url}\n${error}`);
+        });
+      }
     },
 
     updateAll() {
@@ -71,11 +82,29 @@ const GalleriesEditStore = new Vue({
           }).catch(error => {
             console.log(url);
             console.log(error);
-          })
+          });
         }
       }
     },
-
+    buildStore(gallery, response) {
+      gallery.store.length = 0;
+      response.data.images.forEach(image => {
+        gallery.store.push({
+          url: image.image,
+          name: image.name,
+          description: image.description,
+          position: image.position,
+          id: image.id,
+          gallery: image.gallery,
+        });
+      });
+      this.sortByPosition(gallery.store);
+    },
+    sortByPosition(gallery) {
+      gallery = gallery.sort((a, b) => {
+        return a.position - b.position;
+      });
+    },
     start(component) {
       this.component = component;
       this.active = true;

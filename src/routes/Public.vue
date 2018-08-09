@@ -39,13 +39,16 @@
   import StockImagesStore from '../components/Edit/Stock/StockImagesStore';
   import ParallaxImagesStore from '../components/Parallax/ParallaxImagesStore';
 
+  import GalleriesEditStore
+    from '../components/Edit/Galleries/GalleriesEditStore';
 
   export default {
-    name: "Public",
+    name: "PublicCCC",
     components: {
       Login, Parallax, PromoRibbon, Header, Navbar, Carousel, Presentation,
-      Hero, Events, Articles, Contact, Review, Footer, EventsImagesStore: EventsImagesStore,
-      CarouselImagesStore, StockImagesStore, ParallaxImagesStore
+      Hero, Events, Articles, Contact, Review, Footer, CarouselImagesStore,
+      GalleriesEditStore,
+      EventsImagesStore, StockImagesStore, ParallaxImagesStore,
     },
     mounted() {
       CarouselImagesStore.fetchData();

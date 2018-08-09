@@ -15,7 +15,7 @@
              :canCancel="cancelModalOptions"
              :onCancel="endEdit"
              has-modal-card>
-      <ImagesEditMenu :component="component"/>
+      <ImagesEditMenu :store="store"/>
     </b-modal>
   </div>
 </template>
@@ -33,6 +33,7 @@
       top: {type: String},
       component: {type: String},
       editMenu: {type: String, default: 'text'},
+      store: {type: Object},
     },
     data() {
       return {
@@ -64,7 +65,14 @@
       endEdit() {
         return this.edit.end();
       }
-    }
+    },
+    // mounted() {
+    //   if (this.store) {
+    //     console.log('\nEDITICON:');
+    //     console.log(this.store.$options.related);
+    //     console.log(this.store);
+    //   }
+    // }
   };
 </script>
 

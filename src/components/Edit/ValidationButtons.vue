@@ -90,7 +90,6 @@
       }
       &:last-child {
         transition: background-color .2s, color .2s;
-        margin-right: 10px;
         &:hover {
           transition: background-color .2s, color .2s;
           background-color: $is-danger;

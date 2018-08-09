@@ -6,7 +6,7 @@
                 :state="state" :activeTab="activeTab"
                 :loading="loading"
                 @changeTab="activeTab=$event">
-      <EditIcon :component="$options.name" editMenu="image"/>
+      <EditIcon :store="imagesStore" editMenu="image"/>
       <EventsImages/>
     </BaseLayout>
   </div>
@@ -17,6 +17,7 @@
   import mixin from '../../mixins/Public/PublicMixin';
   import EventsTextsStore from './EventsTextsStore';
   import EventsImages from './EventsImages';
+  import EventsImagesStore from './EventsImagesStore';
   import EditIcon from '../../components/Edit/EditIcon';
 
   export default {
@@ -25,13 +26,13 @@
     components: {EventsImages, EditIcon},
     data() {
       return {
+        imagesStore: EventsImagesStore,
         store: EventsTextsStore,
         state: {
           title: new this.Title(),
           subTi: new this.SubTitle(),
         },
         baseHeight: null,
-
       };
     },
   };

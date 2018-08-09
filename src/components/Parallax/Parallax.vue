@@ -1,6 +1,6 @@
 <template>
   <div>
-    <EditIcon :component="$options.name" :id="idx" editMenu="image" top="10px"/>
+    <EditIcon :store="store" editMenu="image" top="10px"/>
     <section :id="id" class="parallax has-text-centered" :style="style">
       <h1 class="title">
         {{ title }}
@@ -27,7 +27,7 @@
       return {
         component: 'Parallax',
         store: ParallaxImagesStore,
-        state: {images: []},
+        state: ParallaxImagesStore.state,
 
         image: null,
         title: null,
@@ -36,14 +36,14 @@
     computed: {
       id() {return `Parallax${this.idx}`;},
       style() {
-        if (this.store.dataSet) {
-          this.title = this.store.state.images[this.idx].description;
+        if (this.state.images.length) {
+          this.title = this.state.images[this.idx].description;
           return {
-            backgroundImage: `url(${this.store.state.images[this.idx].url})`,
+            backgroundImage: `url(${this.state.images[this.idx].url})`,
             minHeight: this.height
           };
         } else {
-          setTimeout(() => { return this.style;}, 2);
+          setTimeout(() => { return this.style; }, 2);
         }
       },
     },

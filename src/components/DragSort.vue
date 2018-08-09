@@ -1,7 +1,8 @@
 <template>
   <div :class="classes[0]">
     <div :class="classes[1]">
-      <draggable v-model="store.images"
+      <!--<draggable v-model="store.images"-->
+      <draggable v-model="store.state.images"
                  :options="dragOptions"
                  :move="onMove"
                  @start="isDragging=true"
@@ -10,9 +11,10 @@
                           :class="classes[2]"
                           tag="div"
                           :name="reOrder? 'flip-store': ''">
-          <div :class="classes[3]"
+          <!--<div v-for="image in store.images"-->
+          <div v-for="image in store.state.images"
+               :class="classes[3]"
                class="image-slot"
-               v-for="image in store.images"
                :key="image.id">
             <div class="">
               <img :src="image.url">
@@ -35,7 +37,8 @@
     components: {draggable},
     props: {
       component: {type: String},
-      classes: {type: Array}
+      classes: {type: Array},
+      store: {type: Object},
     },
     data() {
       return {
@@ -46,9 +49,6 @@
       };
     },
     computed: {
-      store() {
-        return GalleriesEditStore.state[this.component.toLowerCase()].store.state;
-      },
       dragOptions() {
         return {
           animation: 250,
@@ -72,19 +72,19 @@
       }
     },
     methods: {
-      selectSecondary(secondary) { this.secondaryList = secondary; },
+      // selectSecondary(secondary) { this.secondaryList = secondary; },
 
       onMove({relatedContext, draggedContext}) {
         console.log('\n');
         setTimeout(() => {
-          draggedContext.element.gallery = relatedContext.list[0].gallery
-        },100);
+          draggedContext.element.gallery = relatedContext.list[0].gallery;
+        }, 100);
       },
 
       setPosition() {
-        if (this.store.images.length) {
-          for (let i = 0; i < this.store.images.length; i++) {
-            this.store.images[i].position = i + 1;
+        if (this.store.state.images.length) {
+          for (let i = 0; i < this.store.state.images.length; i++) {
+            this.store.state.images[i].position = i + 1;
           }
         }
       },

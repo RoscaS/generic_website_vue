@@ -14,16 +14,23 @@ export default {
     cancelSignal() { return this.edit.cancelSignal; },
   },
   watch: {
-    pushSignal() { if (this.checkSignal(this.pushSignal)) this.pushData(); },
-    updateSignal() { if (this.checkSignal(this.updateSignal)) this.updateData(); },
-    cancelSignal() { if (this.checkSignal(this.cancelSignal)) this.snackBar(); }
+    pushSignal() {
+      if (this.checkSignal(this.pushSignal)) this.pushData();
+    },
+    updateSignal() {
+      if (this.checkSignal(this.updateSignal)) this.updateData();
+    },
+    cancelSignal() {
+      if (this.checkSignal(this.cancelSignal)) this.snackBar();
+    }
   },
   methods: {
     checkComponent() {
-      return this.edit.component === this.component; },
-
-    checkSignal(signal) { return signal && this.checkComponent(); },
-
+      return this.edit.component === this.component;
+    },
+    checkSignal(signal) {
+      return signal && this.checkComponent();
+    },
     setData() {
       if (this.store.fetchFlag) {
         this.state.images = this.store.state.images.slice();
@@ -51,22 +58,19 @@ export default {
         }, 2000);
       }, 500);
     },
-
     recoverData() {
       this.fetchFlag = false;
       this.store.fetchData();
       this.setData();
       setTimeout(() => {this.setData();}, 100);
     },
-
     snackBar() {
       let options = new this.$Global.Tools.SnackBarOptions();
       options.onAction = this.recoverData;
       this.$snackbar.open(options);
     },
   },
-
   mounted() {
-    this.setData();
+    // this.setData();
   }
 };

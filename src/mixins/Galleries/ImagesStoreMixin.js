@@ -12,7 +12,7 @@ export default {
 
   methods: {
     fetchData() {
-      axios.get(this.$options.url).then(response => {
+      axios.get(this.url).then(response => {
         this.state.images.length = 0;
         this.buildImageList(response);
         this.sortByPosition();
@@ -63,3 +63,4 @@ export default {
     }
   },
 };
+

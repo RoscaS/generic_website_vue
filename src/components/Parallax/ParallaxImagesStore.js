@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import mixin from '../../mixins/Galleries/ImagesStoreMixin';
 
-
 const ParallaxImagesStore = new Vue({
   name: 'ParallaxImagesStore',
-  related: 'Parallax',
-  url: 'galleries/parallax/',
   mixins: [mixin],
   data: {
-    state: { images: [] },
+    title: 'Parallax',
+    related: 'Parallax',
+    url: 'galleries/parallax/',
+    state: {images: []},
   },
 });
 

@@ -30,7 +30,8 @@
 </template>
 
 <script>
-  import ImagesComponentMixin from '../../mixins/Galleries/ImagesComponentMixin';
+  import ImagesComponentMixin
+    from '../../mixins/Galleries/ImagesComponentMixin';
   import EventsImagesStore from './EventsImagesStore';
   import Lightbox from '../../components/Lightbox/Lightbox';
 
@@ -42,7 +43,9 @@
       return {
         component: 'Events',
         store: EventsImagesStore,
-        state: { images: [] },
+
+        state: EventsImagesStore.state,
+        // state: { images: [] },
 
         isAdmin: false,
       };
@@ -67,6 +70,10 @@
         window.onscroll = function() {window.scrollTo(x, y);};
       }
     },
+    // mounted() {
+    //   console.log('\nEvents:');
+    //   console.log(this.state.images)
+    // }
   };
 </script>
 
