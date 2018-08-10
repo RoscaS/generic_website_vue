@@ -66,13 +66,6 @@
         return this.edit.end();
       }
     },
-    // mounted() {
-    //   if (this.store) {
-    //     console.log('\nEDITICON:');
-    //     console.log(this.store.$options.related);
-    //     console.log(this.store);
-    //   }
-    // }
   };
 </script>
 
@@ -83,7 +76,6 @@
     transition: .5s background-color ease;
     font-size: 20px;
     left: 50px;
-    /*margin-top: 50px;*/
     position: absolute;
     z-index: 1;
 

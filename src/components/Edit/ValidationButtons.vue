@@ -46,14 +46,11 @@
     },
     methods: {
       validateBtn() {
-        console.log('validateBtn');
         if (this.editMenu == 'text') {
-          console.log('\tif');
           this.edit.sendPushSignal();
           this.checkLoading();
         } else {
-          console.log('\telse');
-          this.edit.sendUpdateSignal();
+          this.edit.update();
         }
       },
       cancelBtn() {

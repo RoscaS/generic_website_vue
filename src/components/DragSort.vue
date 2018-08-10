@@ -1,7 +1,6 @@
 <template>
   <div :class="classes[0]">
     <div :class="classes[1]">
-      <!--<draggable v-model="store.images"-->
       <draggable v-model="store.state.images"
                  :options="dragOptions"
                  :move="onMove"
@@ -11,7 +10,6 @@
                           :class="classes[2]"
                           tag="div"
                           :name="reOrder? 'flip-store': ''">
-          <!--<div v-for="image in store.images"-->
           <div v-for="image in store.state.images"
                :class="classes[3]"
                class="image-slot"
@@ -24,6 +22,7 @@
       </draggable>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -42,52 +41,44 @@
     },
     data() {
       return {
+        edit: GalleriesEditStore,
+        dirtyFlag: false,
+
         isDragging: false,
         delayedDragging: false,
-
         reOrder: false,
       };
     },
     computed: {
       dragOptions() {
-        return {
-          animation: 250,
-          group: 'description',
-          ghostClass: 'none'
-        };
+        return {animation: 250, group: 'description', ghostClass: 'none'};
       },
     },
     watch: {
+      store() {
+        if (!this.edit.dirtyStores.includes(this.store.string)) {
+          this.dirtyFlag = false;
+
+        }
+      },
       isDragging(newValue) {
         if (newValue) {
           this.delayedDragging = true;
           return;
         }
         this.$nextTick(() => {
-          // this.setVisibility();
-          // GalleriesEditStore.sendPushSignal();
-          this.setPosition();
-          this.delayedDragging = false;
+          this.checkDirtyStores();
         });
       }
     },
     methods: {
-      // selectSecondary(secondary) { this.secondaryList = secondary; },
-
-      onMove({relatedContext, draggedContext}) {
-        console.log('\n');
-        setTimeout(() => {
-          draggedContext.element.gallery = relatedContext.list[0].gallery;
-        }, 100);
-      },
-
-      setPosition() {
-        if (this.store.state.images.length) {
-          for (let i = 0; i < this.store.state.images.length; i++) {
-            this.store.state.images[i].position = i + 1;
-          }
+      checkDirtyStores() {
+        if (!this.dirtyFlag) {
+          this.dirtyFlag = true;
+          this.edit.dirtyStores = this.store;
         }
       },
+      onMove({relatedContext, draggedContext}) {},
     },
   };
 </script>

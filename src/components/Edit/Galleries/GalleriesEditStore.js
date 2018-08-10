@@ -15,12 +15,17 @@ const GalleriesEditStore = new Vue({
       parallax: ParallaxImagesStore
     },
 
-    component: null,
-    loading: false,
-    active: false,
-    dirty: false,
+    sortingStores: {
+      primary: null,
+      secondary: StockImagesStore
+    },
 
-    activeTab: 0,
+    DirtyStores: [],
+    ActiveTab: 0,
+    Loading: false,
+
+    component: '',
+    active: false,
 
     pushSignal: false,
     cancelSignal: false,
@@ -28,83 +33,86 @@ const GalleriesEditStore = new Vue({
 
     reOrder: false
   },
-  computed: {},
+
+  computed: {
+    primaryStore: {
+      get() { return this.sortingStores.primary; },
+      set(store) { this.sortingStores.primary = store; }
+    },
+    secondaryStore: {
+      get() { return this.sortingStores.secondary; },
+      set(store) { this.sortingStores.secondary = store; }
+    },
+    dirtyStores: {
+      get() { return this.getDirtyList(); },
+      set(value) { this.DirtyStores.push(value); }
+    },
+    activeTab: {
+      get() { return this.ActiveTab; },
+      set(value) { this.ActiveTab = value; }
+    },
+    loading: {
+      get() { return this.Loading; },
+      set(value) { this.Loading = value; }
+    },
+  },
 
   methods: {
     setComponent(value) { this.component = value; },
     setLoading(value) { this.loading = value; },
     setDirty(value) { this.dirty = value; },
 
-    setActiveTab(value) { this.activeTab = value; },
-
-    sendPushSignal() {
-      this.loading = true;
-      this.pushSignal = true;
-      setTimeout(() => { this.pushSignal = false; }, 10);
+    getDirtyList() {
+      let list = [];
+      this.DirtyStores.forEach(i => list.push(i.string));
+      return list;
     },
-    sendUpdateSignal() {
-      this.loading = true;
-      this.updateSignal = true;
-      setTimeout(() => { this.updateSignal = false; }, 10);
-    },
-    sendCancelSignal() {
-      this.cancelSignal = true;
-      setTimeout(() => { this.cancelSignal = false; }, 10);
-    },
-
-    fetchAll() {
-      for (let i in this.state) {
-        console.log('ici');
-        let gallery = this.stock[i];
-        axios.get(gallery.url).then(response => {
-          this.buildStore(gallery, response);
-          // gallery.fetchFlag = true;
-        }).catch(error => {
-          console.log(`${this.url}\n${error}`);
-        });
+    update() {
+      for (let i in this.DirtyStores) {
+        this.loading = true;
+        this.updatePosition(this.DirtyStores[i]);
+        this.updateGallery(this.DirtyStores[i]);
+        this.patchData(this.DirtyStores[i]);
       }
+      setTimeout(() => {
+        this.$Global.Tools.message(1);
+        this.loading = false;
+      }, 2000);
     },
-
-    updateAll() {
-      for (let i in this.state) {
-        let images = this.state[i].store.state.images;
-        for (let j in images) {
-          let url = `images/${images[j].id}/`;
-          let formData = new FormData();
-          formData.append('id', images[j].id);
-          formData.append('position', images[j].position);
-          formData.append('gallery', images[j].gallery.toLowerCase());
-
-          axios.patch(url, formData, {
-            headers: {'content-type': 'multipart/form-data'}
-          }).then((response) => {
-            console.log('putData: ok');
-          }).catch(error => {
-            console.log(url);
-            console.log(error);
-          });
+    updateGallery(store) {
+      store.state.images.forEach(i => {
+        i.gallery = store.string;
+      });
+    },
+    updatePosition(store) {
+      if (store.state.images.length) {
+        for (let i = 0; i < store.state.images.length; i++) {
+          store.state.images[i].position = i + 1;
         }
       }
     },
-    buildStore(gallery, response) {
-      gallery.store.length = 0;
-      response.data.images.forEach(image => {
-        gallery.store.push({
-          url: image.image,
-          name: image.name,
-          description: image.description,
-          position: image.position,
-          id: image.id,
-          gallery: image.gallery,
+    patchData(store) {
+      let images = store.state.images;
+      images.forEach(i => {
+        let url = `images/${i.id}/`;
+        axios.patch(url, this.getForm(i, store), {
+          headers: {'content-type': 'multipart/form-data'}
+        }).then((response) => {
+          console.log('OK')
+        }).catch(error => {
+          console.log(url);
+          console.log(error);
         });
       });
-      this.sortByPosition(gallery.store);
     },
-    sortByPosition(gallery) {
-      gallery = gallery.sort((a, b) => {
-        return a.position - b.position;
-      });
+    getForm(images, store) {
+      let formData = new FormData();
+      formData.append('id', images.id);
+      formData.append('position', images.position);
+      formData.append('gallery', store.string);
+      return formData;
     },
+
     start(component) {
       this.component = component;
       this.active = true;

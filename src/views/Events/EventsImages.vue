@@ -45,8 +45,6 @@
         store: EventsImagesStore,
 
         state: EventsImagesStore.state,
-        // state: { images: [] },
-
         isAdmin: false,
       };
     },
@@ -70,10 +68,6 @@
         window.onscroll = function() {window.scrollTo(x, y);};
       }
     },
-    // mounted() {
-    //   console.log('\nEvents:');
-    //   console.log(this.state.images)
-    // }
   };
 </script>
 

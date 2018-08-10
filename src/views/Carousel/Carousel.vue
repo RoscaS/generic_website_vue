@@ -3,10 +3,8 @@
     <EditIcon :store="store" editMenu="image" top="10px"/>
     <transition name="carousel-fade-in" appear>
       <carouselApp class="content">
-        <!--<carousel-slide v-for="i in slides" :key="i" :index="i-1">-->
         <carousel-slide v-for="i in state.images" :key="i.id" :index="index(i)">
           <h2><span></span></h2>
-          <!--<img :src="i.url">-->
           <img :src="imageMinusOne(i)">
         </carousel-slide>
       </carouselApp>
@@ -41,11 +39,9 @@
           this.state.images.forEach(i => { urls.push(i.url); });
           return urls;
         } else {
-
           setTimeout(() => {
             return this.urls; }, 2);
         }
-
       }
     },
     methods: {
@@ -60,15 +56,6 @@
         }
       }
     }
-    // watch: {
-    //   images: {
-    //     handler: function() {
-    //       this.setData();
-    //       this.slides = this.images.length;
-    //     },
-    //     deep: true
-    //   },
-    // },
   };
 </script>
 

@@ -26,10 +26,13 @@
     name: "FileUpload",
     props: {
       gallery: {type: String, default: '_temp'},
+      store: {type: Object},
       edit: {type: Object},
     },
     data() {
-      return {};
+      return {
+        c: 0,
+      };
     },
 
     computed: {
@@ -38,33 +41,18 @@
 
     methods: {
       fileUpload() {
-        let file = this.$refs.file.files[0];
-        let formData = new FormData();
-
-        formData.append('image', file);
-        formData.append('gallery', this.gallery);
-
-        axios.post(url, formData, {
+        this.edit.loading = true;
+        axios.post(url, this.buildForm(), {
           headers: {'content-type': 'multipart/form-data'},
         }).then(response => {
-
-          if (this.edit.$options.name == 'GalleriesEditStore') {
-            // Bug: necessite 2 sendPushSignal pour maj les 2 menu.
-            this.edit.sendPushSignal();
-            setTimeout(() => {
-              this.edit.sendPushSignal();
-              this.edit.setLoading(false);
-              this.$Global.Tools.message(3);
-              setTimeout(() => {
-                this.edit.setActiveTab(0);
-              }, 500);
-            }, 2000);
-
-          } else {
-
-            this.$emit('image-preview', response.data);
-            this.edit.setDirty(true);
-          }
+          // ajouter response en argument de commitG() et uniquement
+          // push dans le store ce qui est ajouté à la place de regen
+          // la liste complète.
+          setTimeout(() => {
+            if (this.gallery !== '_temp') this.commitGallery();
+            else this.commitText(response);
+            this.edit.loading = false;
+          }, 2000);
 
         }).catch(error => {
           this.$toast.open({
@@ -75,6 +63,28 @@
           console.log(error);
         });
       },
+
+      buildForm() {
+        let file = this.$refs.file.files[0];
+        let formData = new FormData();
+        formData.append('image', file);
+        formData.append('gallery', this.gallery);
+        return formData;
+      },
+
+      commitGallery() {
+        this.store.fetchData();
+        this.$Global.Tools.message(3);
+        setTimeout(() => {
+          this.edit.activeTab = 0;
+        }, 500);
+      },
+
+      commitText(response) {
+        this.$emit('image-preview', response.data);
+        this.edit.setDirty(true);
+      },
+
     },
   };
 </script>
@@ -88,7 +98,7 @@
   }
 
   .dropbox {
-    outline: 2px dashed grey; /* the dash box */
+    outline: 2px dashed grey; // the dash box
     outline-offset: -10px;
     background: lightcyan;
     color: dimgray;
@@ -129,7 +139,7 @@
   }
 
   .input-file {
-    opacity: 0; /* invisible but it's there! */
+    opacity: 0; // invisible but it's there!
     width: 75%;
     height: 65%;
     /*height: 138px;*/

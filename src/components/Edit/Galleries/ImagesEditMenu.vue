@@ -13,19 +13,7 @@
         <div class="card secondary">
           <header class="card-header">
             <div class="card-header-title">
-              <b-dropdown mobile-modal>
-                <button class="button is-info" slot="trigger">
-                  <p>{{ secondaryStore.title }}</p>
-                  <i class="fa fa-fw fa-sort-down"></i>
-                </button>
-                <b-dropdown-item v-for="i in dropDownList"
-                                 :key="i.name"
-                                 class="no-tr"
-                                 @click="setSecondaryGallery(i)"
-                                 :disabled="disabled(i)">
-                  {{ i.title }}
-                </b-dropdown-item>
-              </b-dropdown>
+              <GalleriesDropDown :store="store"/>
             </div>
           </header>
           <div class="card-content">
@@ -50,8 +38,9 @@
                 </b-tab-item>
                 <b-tab-item icon="upload"
                             :disabled="loading">
-                  <!--<FileUpload :edit="edit"-->
-                  <!--:gallery="primaryGallery"/>-->
+                  <FileUpload :edit="edit"
+                              :store="store"
+                              :gallery="store.string"/>
                 </b-tab-item>
               </b-tabs>
             </div>
@@ -63,15 +52,22 @@
 </template>
 
 <script>
-  import DragSort from '../../DragSort';
   import {SpinLine} from 'vue-loading-spinner';
+  import DragSort from '../../DragSort';
   import FileUpload from '../FileUpload';
   import ValidationBtns from '../ValidationButtons';
   import GalleriesEditStore from './GalleriesEditStore';
+  import GalleriesDropDown from './GalleriesDropDown';
 
   export default {
     name: "ImagesEditMenu",
-    components: {DragSort, ValidationBtns, FileUpload, SpinLine},
+    components: {
+      DragSort,
+      GalleriesDropDown,
+      ValidationBtns,
+      FileUpload,
+      SpinLine
+    },
     props: {
       component: {type: String},
       classes: {type: Array},
@@ -82,8 +78,6 @@
     data() {
       return {
         edit: GalleriesEditStore,
-        loading: GalleriesEditStore.edit,
-        secondaryStore: GalleriesEditStore.state.stock,
         levelClasses: [
           'level is-mobile',
           'level-left',
@@ -98,38 +92,44 @@
       };
     },
     computed: {
-      dropDownList() {
-        let list = [];
-        let galleries = this.edit.state;
-        for (let i in galleries) {
-          galleries[i] !== this.store ? list.push(galleries[i]) : null;
-        }
-        return list;
+      primaryStore: {
+        get() { return this.edit.primaryStore; },
+        set(store) { this.edit.primaryStore = store;},
       },
-      layoutData() {
-        return {
-          events: {height: '500px', top: '790px', classes: this.columnsClasses},
-          carousel: {height: '', top: '680px', classes: this.levelClasses},
-          parallax: {height: '', top: '650px', classes: this.levelClasses},
-        };
-      },
-      layout() {
-        return this.layoutData[this.store.related.toLowerCase()];
+      secondaryStore: {
+        get() { return this.edit.secondaryStore; },
+        set(store) { this.edit.secondaryStore = store;},
       },
       activeTab: {
         get() { return this.edit.activeTab; },
-        set(value) { this.edit.setActiveTab(value);}
-      }
-    },
-    methods: {
-      setSecondaryGallery(secondary) {
-        console.log(this['eventsData']);
-        this.secondaryStore = secondary;
+        set(value) { this.edit.activeTab = value; }
       },
-      disabled(secondary) {
-        return this.secondaryStore == secondary
+      loading() {
+        return this.edit.loading;
+      },
+      layout() {
+        return this.layoutData[this.store.string];
+      },
+      layoutData() {
+        return {
+          events: {
+            height: '500px', top: '790px', classes: this.columnsClasses
+          },
+          carousel: {
+            height: '', top: '680px', classes: this.levelClasses
+          },
+          parallax: {
+            height: '', top: '650px', classes: this.levelClasses
+          },
+        };
       },
     },
+    mounted() {
+      this.primaryStore = this.store;
+      console.log('\nIMAGESEDIT');
+      console.log(this.edit.primaryStore.string);
+      console.log(this.edit.secondaryStore.string);
+    }
   };
 </script>
 
@@ -139,17 +139,6 @@
   h1 {
     z-index: 1000;
     color: white;
-  }
-
-  button {
-    p {
-      font-weight: bold;
-      color: white;
-    }
-    i {
-      margin-top: -22px;
-      margin-left: 5px;
-    }
   }
 
   .container {
