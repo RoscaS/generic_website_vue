@@ -41,9 +41,6 @@
         return this.secondaryStore == gallery;
       },
     },
-    mounted() {
-      console.log(this.secondaryStore.title)
-    }
   };
 </script>
 

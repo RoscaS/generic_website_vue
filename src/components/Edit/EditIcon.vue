@@ -13,7 +13,6 @@
              scroll="clip"
              :width="850"
              :canCancel="cancelModalOptions"
-             :onCancel="endEdit"
              has-modal-card>
       <ImagesEditMenu :store="store"/>
     </b-modal>
@@ -55,16 +54,10 @@
       }
     },
     methods: {
-      is(component) {
-        return this.edit.component == component;
-      },
       startEdit() {
-        this.edit.start(this.component);
         if (this.editMenu == 'image') this.showModal = true;
+        else this.edit.start(this.component);
       },
-      endEdit() {
-        return this.edit.end();
-      }
     },
   };
 </script>

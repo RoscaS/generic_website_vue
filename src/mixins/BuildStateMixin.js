@@ -1,5 +1,5 @@
 export default {
-  name: "Presentation",
+  // name: "Presentation",
   methods: {
     Title() {
       this.data = '';

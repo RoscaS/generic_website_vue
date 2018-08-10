@@ -33,6 +33,7 @@
   import Contact from '../views/Contact/Contact';
   import Review from '../views/Review/Review';
   import Footer from '../views/Footer/Footer';
+  
 
   import GalleriesEditStore
     from '../components/Edit/Galleries/GalleriesEditStore';

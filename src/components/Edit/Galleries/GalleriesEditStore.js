@@ -1,66 +1,20 @@
+import BuildGalleriesStores from './GalleriesStores'
 import axios from "axios";
 import Vue from 'vue';
 
 const GalleriesEditStore = new Vue({
   name: 'GalleriesEditStore',
   data: {
-    state: [
-      {
-        state: {images: []},
-        related: 'Stock',
-        string: 'stock',
-        title: 'Stock',
-        url: 'galleries/stock/',
-      },
-      {
-        state: {images: []},
-        related: 'Carousel',
-        string: 'carousel',
-        title: 'Carousel',
-        url: 'galleries/carousel/',
-      },
-      {
-        state: {images: []},
-        related: 'Events',
-        string: 'events',
-        title: 'Galerie',
-        url: 'galleries/events/',
-      },
-      {
-        state: {images: []},
-        related: 'Parallax',
-        string: 'parallax',
-        title: 'Parallax',
-        url: 'galleries/parallax/',
-      }
-    ],
-
-    sortingStores: {
-      primary: null,
-      secondary: null
-    },
-
+    state: new BuildGalleriesStores,
+    SecondaryStore: null,
     ActiveTab: 0,
     Loading: false,
-
-    component: '',
-    active: false,
-
-    pushSignal: false,
-    cancelSignal: false,
-    updateSignal: false,
-
-    reOrder: false
   },
 
   computed: {
-    primaryStore: {
-      get() { return this.sortingStores.primary; },
-      set(store) { this.sortingStores.primary = store; }
-    },
     secondaryStore: {
-      get() { return this.sortingStores.secondary; },
-      set(store) { this.sortingStores.secondary = store; }
+      get() { return this.SecondaryStore; },
+      set(store) { this.SecondaryStore = store; }
     },
     activeTab: {
       get() { return this.ActiveTab; },
@@ -73,21 +27,16 @@ const GalleriesEditStore = new Vue({
   },
 
   methods: {
-    toggleLoading() { this.loading = !this.loading; },
-    setComponent(value) { this.component = value; },
-
-
     getStore(name) {
       return this.state.filter(i => i.related == name)[0];
     },
-
-
     fetchData(store = null) {
       let stores = store? [store] : this.state;
       stores.forEach(i => {
         axios.get(i.url).then(response => {
           i.state.images.length = 0;
           this.pushImage(i, response.data.images);
+          console.log(response.data.images)
         }).catch(error => {
           console.log(`${this.url}\n${error}`);
         });
@@ -115,7 +64,6 @@ const GalleriesEditStore = new Vue({
         return a.position - b.position;
       });
     },
-
     update() {
       this.loading = true;
       this.state.forEach(i => {
@@ -161,15 +109,6 @@ const GalleriesEditStore = new Vue({
       formData.append('position', images.position);
       formData.append('gallery', store.string);
       return formData;
-    },
-
-    start(component) {
-      this.component = component;
-      this.active = true;
-    },
-    end() {
-      this.active = false;
-      this.component = null;
     },
   },
 });

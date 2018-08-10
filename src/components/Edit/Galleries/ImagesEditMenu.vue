@@ -92,10 +92,6 @@
       };
     },
     computed: {
-      primaryStore: {
-        get() { return this.edit.primaryStore; },
-        set(store) { this.edit.primaryStore = store;},
-      },
       secondaryStore: {
         get() { return this.edit.secondaryStore; },
         set(store) { this.edit.secondaryStore = store;},
@@ -125,7 +121,6 @@
       },
     },
     created() {
-      this.primaryStore = this.store;
       this.secondaryStore = this.edit.getStore('Stock');
     }
   };
