@@ -33,23 +33,17 @@
         set(store) { this.edit.secondaryStore = store;} ,
       },
       dropDown() {
-        return this.getDropDownList(this.store);
+        return this.edit.state.filter(i => i != this.store)
       },
     },
     methods: {
       disabled(gallery) {
         return this.secondaryStore == gallery;
       },
-      getDropDownList() {
-        let list = [];
-        let galleries = this.edit.state;
-        for (let i in galleries) {
-          if (galleries[i] !== this.store)
-            list.push(galleries[i]);
-        }
-        return list;
-      },
     },
+    mounted() {
+      console.log(this.secondaryStore.title)
+    }
   };
 </script>
 

@@ -31,8 +31,7 @@
 
 <script>
   import ImagesComponentMixin
-    from '../../mixins/Galleries/ImagesComponentMixin';
-  import EventsImagesStore from './EventsImagesStore';
+    from '../../mixins/ImagesComponentMixin';
   import Lightbox from '../../components/Lightbox/Lightbox';
 
   export default {
@@ -42,9 +41,6 @@
     data() {
       return {
         component: 'Events',
-        store: EventsImagesStore,
-
-        state: EventsImagesStore.state,
         isAdmin: false,
       };
     },

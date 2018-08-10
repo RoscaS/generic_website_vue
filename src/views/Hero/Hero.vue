@@ -65,7 +65,7 @@
 
 <script>
   import HeroStore from './HeroStore';
-  import mixin from '../../mixins/Public/PublicMixin';
+  import mixin from '../../mixins/PublicMixin';
   import IconPicker from '../../components/IconPicker/IconPicker';
 
   export default {

@@ -1,4 +1,4 @@
-import mixin from '../../mixins/Public/PublicStoreMixin'
+import mixin from '../../mixins/PublicStoreMixin'
 import Vue from 'vue';
 import axios from 'axios';
 

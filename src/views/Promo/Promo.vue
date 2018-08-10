@@ -30,7 +30,7 @@
 <script>
   import PromoStore from './PromoStore';
   import FieldsLayout from '../FieldsLayout';
-  import mixin from '../../mixins/Public/PublicMixin';
+  import mixin from '../../mixins/PublicMixin';
 
   export default {
     name: 'Promo',

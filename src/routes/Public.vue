@@ -34,27 +34,17 @@
   import Review from '../views/Review/Review';
   import Footer from '../views/Footer/Footer';
 
-  import EventsImagesStore from '../views/Events/EventsImagesStore';
-  import CarouselImagesStore from '../views/Carousel/CarouselImagesStore';
-  import StockImagesStore from '../components/Edit/Stock/StockImagesStore';
-  import ParallaxImagesStore from '../components/Parallax/ParallaxImagesStore';
-
   import GalleriesEditStore
     from '../components/Edit/Galleries/GalleriesEditStore';
 
   export default {
-    name: "PublicCCC",
+    name: "Public",
     components: {
       Login, Parallax, PromoRibbon, Header, Navbar, Carousel, Presentation,
-      Hero, Events, Articles, Contact, Review, Footer, CarouselImagesStore,
-      GalleriesEditStore,
-      EventsImagesStore, StockImagesStore, ParallaxImagesStore,
+      Hero, Events, Articles, Contact, Review, Footer, GalleriesEditStore,
     },
     mounted() {
-      CarouselImagesStore.fetchData();
-      ParallaxImagesStore.fetchData();
-      EventsImagesStore.fetchData();
-      StockImagesStore.fetchData();
+      GalleriesEditStore.fetchData();
     }
   };
 </script>

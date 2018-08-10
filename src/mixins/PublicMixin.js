@@ -1,7 +1,7 @@
-import EditIcon from '../../components/Edit/EditIcon';
-import EditNav from '../../components/Edit/Texts/TextsEditMenu';
-import TextsEditStore from '../../components/Edit/Texts/TextsEditStore';
-import BaseLayout from '../../views/BaseLayout';
+import EditIcon from '../components/Edit/EditIcon';
+import EditNav from '../components/Edit/Texts/TextsEditMenu';
+import TextsEditStore from '../components/Edit/Texts/TextsEditStore';
+import BaseLayout from '../views/BaseLayout';
 import mixin from './BuildStateMixin'
 
 export default {

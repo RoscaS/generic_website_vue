@@ -79,7 +79,7 @@
 <script>
   import ReviewStore from './ReviewStore';
   import moment from 'moment';
-  import mixin from '../../mixins/Public/PublicMixin';
+  import mixin from '../../mixins/PublicMixin';
 
 
   export default {

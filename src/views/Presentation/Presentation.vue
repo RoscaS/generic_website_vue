@@ -34,7 +34,7 @@
 <script>
   import DownArrow from '../../components/Carousel/DownArrow.vue'
   import PresentationStore from './PresentationStore';
-  import mixin from '../../mixins/Public/PublicMixin';
+  import mixin from '../../mixins/PublicMixin';
 
 
   export default {

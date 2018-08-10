@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
-import mixin from '../../mixins/Public/PublicStoreMixin';
+import mixin from '../../mixins/PublicStoreMixin';
 
 
 const ReviewStore = new Vue({

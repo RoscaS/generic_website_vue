@@ -11,9 +11,8 @@
 </template>
 
 <script>
-  import ParallaxImagesStore from '../Parallax/ParallaxImagesStore';
   import EditIcon from '../Edit/EditIcon';
-  import ImagesComponentMixin from '../../mixins/Galleries/ImagesComponentMixin';
+  import ImagesComponentMixin from '../../mixins/ImagesComponentMixin';
 
   export default {
     name: 'Parallax',
@@ -26,9 +25,6 @@
     data() {
       return {
         component: 'Parallax',
-        store: ParallaxImagesStore,
-        state: ParallaxImagesStore.state,
-
         image: null,
         title: null,
       };

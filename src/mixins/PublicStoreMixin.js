@@ -1,4 +1,4 @@
-import TextsEditStore from '../../components/Edit/Texts/TextsEditStore'
+import TextsEditStore from '../components/Edit/Texts/TextsEditStore'
 
 export default {
   data: {

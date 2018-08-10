@@ -124,11 +124,9 @@
         };
       },
     },
-    mounted() {
+    created() {
       this.primaryStore = this.store;
-      console.log('\nIMAGESEDIT');
-      console.log(this.edit.primaryStore.string);
-      console.log(this.edit.secondaryStore.string);
+      this.secondaryStore = this.edit.getStore('Stock');
     }
   };
 </script>

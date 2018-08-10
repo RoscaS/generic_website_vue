@@ -14,11 +14,12 @@
 </template>
 
 <script>
-  import mixin from '../../mixins/Public/PublicMixin';
+  import mixin from '../../mixins/PublicMixin';
   import EventsTextsStore from './EventsTextsStore';
   import EventsImages from './EventsImages';
-  import EventsImagesStore from './EventsImagesStore';
   import EditIcon from '../../components/Edit/EditIcon';
+  import GalleriesEditStore
+    from '../../components/Edit/Galleries/GalleriesEditStore';
 
   export default {
     name: "Events",
@@ -26,8 +27,10 @@
     components: {EventsImages, EditIcon},
     data() {
       return {
-        imagesStore: EventsImagesStore,
+
+        imagesStore: GalleriesEditStore.getStore('Events'),
         store: EventsTextsStore,
+
         state: {
           title: new this.Title(),
           subTi: new this.SubTitle(),

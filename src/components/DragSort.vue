@@ -42,7 +42,6 @@
     data() {
       return {
         edit: GalleriesEditStore,
-        dirtyFlag: false,
 
         isDragging: false,
         delayedDragging: false,
@@ -55,29 +54,16 @@
       },
     },
     watch: {
-      store() {
-        if (!this.edit.dirtyStores.includes(this.store.string)) {
-          this.dirtyFlag = false;
-
-        }
-      },
       isDragging(newValue) {
         if (newValue) {
           this.delayedDragging = true;
           return;
         }
         this.$nextTick(() => {
-          this.checkDirtyStores();
         });
       }
     },
     methods: {
-      checkDirtyStores() {
-        if (!this.dirtyFlag) {
-          this.dirtyFlag = true;
-          this.edit.dirtyStores = this.store;
-        }
-      },
       onMove({relatedContext, draggedContext}) {},
     },
   };

@@ -13,9 +13,7 @@
 </template>
 
 <script>
-  import CarouselImageStore from './CarouselImagesStore';
-  import ImagesComponentMixin from '../../mixins/Galleries/ImagesComponentMixin';
-
+  import ImagesComponentMixin from '../../mixins/ImagesComponentMixin';
   import EditIcon from '../../components/Edit/EditIcon';
   import CarouselApp from '../../components/Carousel/CarouselApp';
   import CarouselSlide from '../../components/Carousel/CarouselSlide';
@@ -27,8 +25,6 @@
     data() {
       return {
         component: 'Carousel',
-        store: CarouselImageStore,
-        state: CarouselImageStore.state,
         slides: 8,
       };
     },

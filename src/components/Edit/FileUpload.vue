@@ -29,11 +29,6 @@
       store: {type: Object},
       edit: {type: Object},
     },
-    data() {
-      return {
-        c: 0,
-      };
-    },
 
     computed: {
       loading() { return this.edit.loading; },
@@ -45,12 +40,12 @@
         axios.post(url, this.buildForm(), {
           headers: {'content-type': 'multipart/form-data'},
         }).then(response => {
-          // ajouter response en argument de commitG() et uniquement
-          // push dans le store ce qui est ajouté à la place de regen
-          // la liste complète.
           setTimeout(() => {
-            if (this.gallery !== '_temp') this.commitGallery();
-            else this.commitText(response);
+            if (this.gallery !== '_temp') {
+              this.commitGallery(response);
+            } else {
+              this.commitText(response);
+            }
             this.edit.loading = false;
           }, 2000);
 
@@ -72,8 +67,8 @@
         return formData;
       },
 
-      commitGallery() {
-        this.store.fetchData();
+      commitGallery(response) {
+        this.edit.pushImage(this.store, [response.data]);
         this.$Global.Tools.message(3);
         setTimeout(() => {
           this.edit.activeTab = 0;

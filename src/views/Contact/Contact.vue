@@ -50,7 +50,7 @@
   import ContactStore from './ContactStore';
   import ContactForm from '../../components/Forms/ContactForm';
   import GoogleMap from '../../components/Maps';
-  import mixin from '../../mixins/Public/PublicMixin';
+  import mixin from '../../mixins/PublicMixin';
 
   export default {
     name: "Contact",
