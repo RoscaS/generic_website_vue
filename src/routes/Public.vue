@@ -1,17 +1,17 @@
 <template>
   <div>
-    <PromoRibbon/>
+    <!--<PromoRibbon/>-->
     <Header/>
     <Navbar/>
     <Carousel/>
     <Presentation/>
-    <Hero/>
+    <!--<Hero/>-->
     <Parallax :idx="0" height="600px"/>
-    <Articles/>
+    <!--<Articles/>-->
     <Parallax :idx="1" height="400px"/>
-    <Events/>
+    <!--<Events/>-->
     <Parallax :idx="2" height="400px"/>
-    <Contact/>
+    <!--<Contact/>-->
     <!--<Review/>-->
     <Footer/>
   </div>
@@ -33,18 +33,23 @@
   import Contact from '../views/Contact/Contact';
   import Review from '../views/Review/Review';
   import Footer from '../views/Footer/Footer';
-  
+
 
   import GalleriesEditStore
     from '../components/Edit/Galleries/GalleriesEditStore';
+
+  import TTextsEditStore
+    from '../components/Edit/Texts/TTextsEditStore';
 
   export default {
     name: "Public",
     components: {
       Login, Parallax, PromoRibbon, Header, Navbar, Carousel, Presentation,
-      Hero, Events, Articles, Contact, Review, Footer, GalleriesEditStore,
+      Hero, Events, Articles, Contact, Review, Footer,
+      GalleriesEditStore, TTextsEditStore,
     },
     mounted() {
+      TTextsEditStore.fetchData();
       GalleriesEditStore.fetchData();
     }
   };

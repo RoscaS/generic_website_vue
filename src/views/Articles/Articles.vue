@@ -1,6 +1,6 @@
 <template>
   <section id="Articles" class="section section-container">
-    <EditIcon :component="$options.name"/>
+    <EditIcon  :component="$options.name"/>
     <div class="container">
       <div class="content">
         <div>

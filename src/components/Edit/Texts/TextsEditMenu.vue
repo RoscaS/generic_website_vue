@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <ValidationBtns editMenu="text"/>
+      <ValidationBtns :edit="edit"/>
       <div class="loading-animation">
         <SpinLine v-show="edit.loading"/>
       </div>
@@ -31,10 +31,10 @@
 <script>
   import {SpinLine} from 'vue-loading-spinner';
   import ValidationBtns from '../ValidationButtons';
-  import TextsEditStore from './TextsEditStore'
+  import TextsEditStore from '../../../components/Edit/Texts/TTextsEditStore';
 
   export default {
-    name: "EditNav",
+    name: "TextsEditMenu",
     components: {ValidationBtns, SpinLine},
     props: {
       height: {type: String}

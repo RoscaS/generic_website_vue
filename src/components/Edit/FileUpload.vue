@@ -77,7 +77,7 @@
 
       commitText(response) {
         this.$emit('image-preview', response.data);
-        this.edit.setDirty(true);
+        // this.edit.setDirty(true);
       },
 
     },

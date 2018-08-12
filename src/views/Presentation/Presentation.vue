@@ -1,22 +1,16 @@
 <template>
   <div>
     <DownArrow></DownArrow>
-    <BaseLayout :id="$options.name"
-                :title="state.title.data"
-                :subTi="state.subTi.data"
-                :state="state"
-                :activeTab="activeTab"
-                :loading="loading"
-                editNavHeight="200"
-                @changeTab="activeTab=$event">
-      <p class="text1"
-         :class="{'highlighted': highlighted(2)}"
-         v-scroll-reveal="sReveal('left', 250, 400)">
-        {{ state.text1.data }}
-      </p>
+    <BaseLayout :store="store" editNavHeight="200">
+      <div class="text1"
+           v-scroll-reveal="sReveal('left', 250, 400)">
+        <p :class="{'highlighted': highlighted(2)}">
+          {{ state.text1.data }}
+        </p>
+      </div>
       <div class="columns is-variable is-8">
         <div class="column">
-          <img :src="state.image.data"
+          <img :src="state.image.data.image"
                :class="{'highlighted': highlighted(4)}"
                v-scroll-reveal="sReveal('bottom', 300, 10)">
         </div>
@@ -33,31 +27,21 @@
 
 <script>
   import DownArrow from '../../components/Carousel/DownArrow.vue'
-  import PresentationStore from './PresentationStore';
-  import mixin from '../../mixins/PublicMixin';
+  import ViewsMixin from '../../mixins/ViewsMixin';
+
 
 
   export default {
     name: "Presentation",
-    mixins: [mixin],
+    mixins: [ViewsMixin],
     components: {DownArrow},
     data() {
       return {
-        store: PresentationStore,
-        state: {
-          title: new this.Title(),
-          subTi: new this.SubTitle(),
-          text1: new this.Text('Texte 1'),
-          text2: new this.Text('Texte 2'),
-          image: new this.Image()
-        },
+        component: "Presentation",
+        type: 'text',
         downArrow: null,
       };
     },
-    computed: {
-
-    },
-
     methods: {
       scrollWatch() {
         if (window.pageYOffset >= 165) {

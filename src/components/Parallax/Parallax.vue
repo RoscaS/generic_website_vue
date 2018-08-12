@@ -1,6 +1,6 @@
 <template>
   <div>
-    <EditIcon :store="store" editMenu="image" top="10px"/>
+    <EditIcon :store="store" :edit="edit" top="10px"/>
     <section :id="id" class="parallax has-text-centered" :style="style">
       <h1 class="title">
         {{ title }}
@@ -12,11 +12,11 @@
 
 <script>
   import EditIcon from '../Edit/EditIcon';
-  import ImagesComponentMixin from '../../mixins/ImagesComponentMixin';
+  import ViewsMixin from '../../mixins/ViewsMixin';
 
   export default {
     name: 'Parallax',
-    mixins: [ImagesComponentMixin],
+    mixins: [ViewsMixin],
     components: {EditIcon},
     props: {
       idx: {type: Number},
@@ -25,6 +25,8 @@
     data() {
       return {
         component: 'Parallax',
+        type: 'image',
+
         image: null,
         title: null,
       };

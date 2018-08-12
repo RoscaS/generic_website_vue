@@ -8,7 +8,7 @@
       </i>
     </button>
 
-    <b-modal v-if="editMenu == 'image'"
+    <b-modal v-if="edit.type == 'image'"
              :active.sync="showModal"
              scroll="clip"
              :width="850"
@@ -20,8 +20,6 @@
 </template>
 
 <script>
-  import GalleriesEditStore from './Galleries/GalleriesEditStore';
-  import TextsEditStore from './Texts/TextsEditStore';
   import ImagesEditMenu from './Galleries/ImagesEditMenu';
 
   export default {
@@ -30,8 +28,7 @@
     props: {
       right: {type: String},
       top: {type: String},
-      component: {type: String},
-      editMenu: {type: String, default: 'text'},
+      edit: {type: Object},
       store: {type: Object},
     },
     data() {
@@ -40,9 +37,6 @@
       };
     },
     computed: {
-      edit() {
-        return this.editMenu == 'text' ? TextsEditStore : GalleriesEditStore;
-      },
       isActive() {
         return this.edit.active;
       },
@@ -55,8 +49,8 @@
     },
     methods: {
       startEdit() {
-        if (this.editMenu == 'image') this.showModal = true;
-        else this.edit.start(this.component);
+        if (this.edit.type == 'image') this.showModal = true;
+        else this.edit.start(this.store.related);
       },
     },
   };

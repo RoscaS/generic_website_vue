@@ -1,21 +1,18 @@
-import BuildGalleriesStores from './GalleriesStores'
+import BuildGalleriesStores from './GalleriesStores';
 import axios from "axios";
 import Vue from 'vue';
 
 const GalleriesEditStore = new Vue({
   name: 'GalleriesEditStore',
   data: {
+    type: 'image',
     state: new BuildGalleriesStores,
-    SecondaryStore: null,
     ActiveTab: 0,
     Loading: false,
+    SecondaryStore: null,
   },
 
   computed: {
-    secondaryStore: {
-      get() { return this.SecondaryStore; },
-      set(store) { this.SecondaryStore = store; }
-    },
     activeTab: {
       get() { return this.ActiveTab; },
       set(value) { this.ActiveTab = value; }
@@ -24,28 +21,37 @@ const GalleriesEditStore = new Vue({
       get() { return this.Loading; },
       set(value) { this.Loading = value; }
     },
+    secondaryStore: {
+      get() { return this.SecondaryStore; },
+      set(store) { this.SecondaryStore = store; }
+    },
   },
 
   methods: {
+    setLoading() { this.Loading = true; },
+    unsetLoading() { this.Loading = false; },
+
     getStore(name) {
       return this.state.filter(i => i.related == name)[0];
     },
+
     fetchData(store = null) {
-      let stores = store? [store] : this.state;
+      let stores = store ? [store] : this.state;
       stores.forEach(i => {
         axios.get(i.url).then(response => {
           i.state.images.length = 0;
           this.pushImage(i, response.data.images);
-          console.log(response.data.images)
         }).catch(error => {
-          console.log(`${this.url}\n${error}`);
+          console.log(`${i.url}\n${error}`);
         });
       });
     },
+
     pushImage(store, images) {
       this.buildImagesList(store, images);
       this.sortByPosition(store);
     },
+
     buildImagesList(store, images) {
       images.forEach(i => {
         store.state.images.push({
@@ -58,6 +64,7 @@ const GalleriesEditStore = new Vue({
         });
       });
     },
+
     sortByPosition(store) {
       let images = store.state.images;
       images = images.sort((a, b) => {
@@ -67,7 +74,7 @@ const GalleriesEditStore = new Vue({
     update() {
       this.loading = true;
       this.state.forEach(i => {
-        console.log(`update: ${i.related}`)
+        console.log(`update: ${i.related}`);
         this.updatePosition(i);
         this.updateGallery(i);
         this.patchData(i);

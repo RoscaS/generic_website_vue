@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-wrapper">
-    <EditIcon :store="store" editMenu="image" top="10px"/>
+    <EditIcon :store="store" :edit="edit" top="10px"/>
     <transition name="carousel-fade-in" appear>
       <carouselApp class="content">
         <carousel-slide v-for="i in state.images" :key="i.id" :index="index(i)">
@@ -13,18 +13,20 @@
 </template>
 
 <script>
-  import ImagesComponentMixin from '../../mixins/ImagesComponentMixin';
+  import ViewsMixin from '../../mixins/ViewsMixin';
   import EditIcon from '../../components/Edit/EditIcon';
   import CarouselApp from '../../components/Carousel/CarouselApp';
   import CarouselSlide from '../../components/Carousel/CarouselSlide';
 
   export default {
     name: "Carousel",
-    mixins: [ImagesComponentMixin],
+    mixins: [ViewsMixin],
     components: {CarouselApp, CarouselSlide, EditIcon},
     data() {
       return {
         component: 'Carousel',
+        type: 'image',
+
         slides: 8,
       };
     },

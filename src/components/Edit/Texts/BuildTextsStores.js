@@ -32,21 +32,25 @@ function Icon() {
 
 
 function Promo() {
-  this.component = 'Promo';
+  this.related = 'Promo';
   this.url = 'promo/1/';
+  this.isDirty = false;
+  this.backup = {};
   this.state = {
     title: new Title(),
-    text1: new Text(),
+    text: new Text(),
     image: new Image()
   };
 }
 
 function Presentation() {
-  this.component = 'Presentation';
+  this.related = 'Presentation';
   this.url = 'presentation/1/';
+  this.isDirty = false;
+  this.backup = {};
   this.state = {
     title: new Title(),
-    subTi: new SubTitle(),
+    sub_title: new SubTitle(),
     text1: new Text('Texte 1'),
     text2: new Text('Texte 2'),
     image: new Image()
@@ -54,40 +58,50 @@ function Presentation() {
 }
 
 function Events() {
-  this.component = 'Events';
+  this.related = 'Events';
   this.url = 'gallery/1/';
+  this.isDirty = false;
+  this.backup = {};
   this.state = {
     title: new Title(),
-    subTi: new SubTitle(),
+    sub_title: new SubTitle(),
   };
 }
 
 function Hero() {
-  this.component = 'Hero';
+  this.related = 'Hero';
   this.url = 'hero/1/';
+  this.isDirty = false;
+  this.backup = {};
   this.state = {
-    L_title: new Title(),
-    C_title: new Title(),
-    R_title: new Title(),
-    L_text: new Text(),
-    C_text: new Text(),
-    R_text: new Text(),
-    L_icon: new Icon(),
-    C_icon: new Icon(),
-    R_icon: new Icon(),
+    icon1: new Icon(),
+    icon2: new Icon(),
+    icon3: new Icon(),
+    title1: new Title(),
+    title2: new Title(),
+    title3: new Title(),
+    text1: new Text(),
+    text2: new Text(),
+    text3: new Text(),
   };
 }
 
 function Review() {
-  this.component = 'Review';
+  this.related = 'Review';
   this.url = 'review/1/';
+  this.isDirty = false;
+  this.backup = {};
   this.state = {
     title: new Title(),
-    subTi: new SubTitle(),
+    sub_title: new SubTitle(),
+    g_api: {data: ''},
+    g_place_id: {data: ''},
+    g_review_all_url: {data: ''},
+    g_review_new_url: {data: ''},
   };
 }
 
-function TextsStores() {
+function BuildTextsStores() {
   return [
     new Promo(),
     new Presentation(),
@@ -97,4 +111,4 @@ function TextsStores() {
   ]
 }
 
-export default TextsStores
+export default BuildTextsStores

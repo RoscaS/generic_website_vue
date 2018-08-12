@@ -30,17 +30,18 @@
 </template>
 
 <script>
-  import ImagesComponentMixin
-    from '../../mixins/ImagesComponentMixin';
+  import ViewsMixin from '../../mixins/ViewsMixin';
   import Lightbox from '../../components/Lightbox/Lightbox';
 
   export default {
     name: "EventsImages",
-    mixins: [ImagesComponentMixin],
+    mixins: [ViewsMixin],
     components: {Lightbox},
     data() {
       return {
         component: 'Events',
+        type: 'image',
+
         isAdmin: false,
       };
     },

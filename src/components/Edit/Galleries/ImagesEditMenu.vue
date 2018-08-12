@@ -5,7 +5,7 @@
     </div>
     <div class="container">
       <div class="content">
-        <ValidationBtns editMenu="image"
+        <ValidationBtns :edit="edit"
                         :top="layout.top"
                         right="0px"/>
         <h1>Edition: {{ store.title }}</h1>

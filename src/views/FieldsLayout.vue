@@ -1,12 +1,18 @@
 <template>
-  <b-tabs v-model="currentTab" position="is-centered" slot="edit-nav">
-    <b-tab-item v-for="(i, idx) in state" :key="idx" :label="i.label">
-      <b-field v-if="i.label !=='Image'" type="is-light">
-        <b-input :type="i.type" :maxlength="i.len" :rows="i.rows"
-                 :disabled="loading" v-model="i.data">
+  <b-tabs v-model="edit.activeTab" position="is-centered" slot="edit-nav">
+    <b-tab-item v-for="(i, idx) in store.state" :key="idx" :label="i.label">
+      <b-field v-if="i.label !=='Image'"
+               type="is-light">
+        <b-input :type="i.type"
+                 :maxlength="i.len"
+                 :rows="i.rows"
+                 :disabled="edit.loading"
+                 v-model="i.data">
         </b-input>
       </b-field>
-      <FileUpload v-else @image-preview="state.image.data=$event.image" :edit="edit"/>
+      <FileUpload v-else
+                  @image-preview="i.data.image=$event.image"
+                  :edit="edit"/>
     </b-tab-item>
     <slot></slot>
   </b-tabs>
@@ -14,28 +20,23 @@
 
 <script>
   import FileUpload from '../components/Edit/FileUpload';
-  import TextsEditStore from '../components/Edit/Texts/TextsEditStore';
+  import TextsEditStore from '../components/Edit/Texts/TTextsEditStore';
 
   export default {
     name: "FieldsLayout",
     components: {FileUpload},
     props: {
-      state: {type: Object},
-      activeTab: {type: Number},
-      loading: {type: Boolean}
+      store: {type: Object},
     },
-    data() { return {edit: TextsEditStore};},
     computed: {
+      edit() { return TextsEditStore; },
       currentTab: {
-        get() { return this.activeTab; },
+        get() { return this.edit.activeTab; },
         set(value) {
           this.$emit('changeTab', value);
         }
       }
     },
-    mounted() {
-      this.currentTab = this.activeTab;
-    }
   };
 </script>
 

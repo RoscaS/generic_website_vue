@@ -1,22 +1,27 @@
 <template>
   <div>
-    <section :id="id" class="section section-container">
-      <EditIcon :component="$parent.$options.name"/>
+    <section :id="store.related" class="section section-container">
+      <EditIcon :store="store" :edit="edit"/>
       <div class="container">
         <div class="content">
-          <Title :class="{'highlighted': $parent.highlighted(0)}"
-                 v-scroll-reveal="$parent.sReveal('top', 150, 30)">
-            {{ title }}
-          </Title>
-          <p class="sub-title"
-             :class="{'highlighted': $parent.highlighted(1)}"
-             v-scroll-reveal="$parent.sReveal('bottom', 200, 10, 3000)">
-            {{ subTi }}
-          </p>
+          <div v-scroll-reveal="$parent.sReveal('top', 150, 30)">
+            <Title :class="{'highlighted': $parent.highlighted(0)}">
+              {{ store.state.title.data }}
+            </Title>
+          </div>
+          <div>
+
+          </div>
+          <div v-scroll-reveal="$parent.sReveal('bottom', 200, 10, 3000)">
+            <p class="sub-title"
+               :class="{'highlighted': $parent.highlighted(1)}">
+              {{ store.state.sub_title.data }}
+            </p>
+          </div>
         </div>
       </div>
 
-      <slot v-if="$parent.$options.name=='Events'"></slot>
+      <slot v-if="store.related =='Events'"></slot>
 
       <div class="container" v-else>
         <div class="content">
@@ -25,32 +30,30 @@
       </div>
 
     </section>
-    <EditNav v-if="$parent.checkComponent()" :height="editNavHeight">
-      <FieldsLayout :state="state" :activeTab="activeTab" :loading="loading"
-                    @changeTab="$emit('changeTab', $event)">
+    <TextsEditMenu v-if="$parent.checkComponent()" :height="editNavHeight">
+      <FieldsLayout :store="store">
         <slot name="moreFields"></slot>
       </FieldsLayout>
-    </EditNav>
+    </TextsEditMenu>
   </div>
 </template>
 
 <script>
   import EditIcon from '../components/Edit/EditIcon';
-  import EditNav from '../components/Edit/Texts/TextsEditMenu';
+  import TextsEditMenu from '../components/Edit/Texts/TextsEditMenu';
   import FieldsLayout from './FieldsLayout.vue';
+  import TextsEditStore from '../components/Edit/Texts/TTextsEditStore';
 
   export default {
     name: "BaseLayout",
     props: {
-      id: {Type: String},
-      title: {Type: String},
-      subTi: {Type: String},
-      state: {type: Object},
-      activeTab: {type: Number},
-      loading: {type: Boolean},
+      store: {type: Object},
       editNavHeight: {type: String, default: '225'}
     },
-    components: {EditIcon, EditNav, FieldsLayout},
+    components: {EditIcon, TextsEditMenu, FieldsLayout},
+    computed: {
+      edit() { return TextsEditStore; },
+    }
   };
 </script>
 

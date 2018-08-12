@@ -6,7 +6,7 @@
                 :state="state" :activeTab="activeTab"
                 :loading="loading"
                 @changeTab="activeTab=$event">
-      <EditIcon :store="imagesStore" editMenu="image"/>
+      <EditIcon :store="imagesStore" :edit="edit"/>
       <EventsImages/>
     </BaseLayout>
   </div>
@@ -38,6 +38,9 @@
         baseHeight: null,
       };
     },
+    computed: {
+      // edit() { return this.GalleriesEditStore },
+    }
   };
 </script>
 

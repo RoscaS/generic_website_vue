@@ -17,13 +17,10 @@
 </template>
 
 <script>
-  import GalleriesEditStore from './Galleries/GalleriesEditStore';
-  import TextsEditStore from './Texts/TextsEditStore';
-
   export default {
     name: "ValidationButtons",
     props: {
-      editMenu: {type: String},
+      edit: {type: Object},
       right: {type: String, default: '30px'},
       top: {type: String, default: '20px'},
     },
@@ -33,9 +30,6 @@
       };
     },
     computed: {
-      edit() {
-        return this.editMenu == 'text' ? TextsEditStore : GalleriesEditStore;
-      },
       style() {
         return {right: this.right, top: this.top};
       },
@@ -46,17 +40,21 @@
     },
     methods: {
       validateBtn() {
-        if (this.editMenu == 'text') {
-          this.edit.sendPushSignal();
-          this.checkLoading();
-        } else {
-          this.edit.update();
-        }
+        this.edit.update();
+        this.checkLoading();
+
+
+          // if (this.editMenu == 'text') {
+          //   this.edit.sendPushSignal();
+          //   this.checkLoading();
+          // } else {
+          //   this.edit.update();
+          // }
       },
       cancelBtn() {
-        this.edit.sendCancelSignal();
-        this.disable = true;
-        setTimeout(() => { this.disable = false; }, this.edit.timeout);
+        this.edit.end();
+        this.disable = false;
+        // setTimeout(() => { this.disable = false; }, this.edit.timeout);
       },
       checkLoading() {
         if (this.loading) {
