@@ -28,10 +28,5 @@ export default {
         side, delay, distance, duration
       )
     },
-    snackBar() {
-      let options = new this.$Global.Tools.SnackBarOptions();
-      options.onAction = this.recoverData;
-      this.$snackbar.open(options);
-    },
   },
 };

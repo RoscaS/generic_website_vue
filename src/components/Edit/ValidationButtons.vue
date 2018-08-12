@@ -33,35 +33,17 @@
       style() {
         return {right: this.right, top: this.top};
       },
-      loading: {
-        get() { return this.edit.loading; },
-        set(value) { this.edit.setLoading(value); }
+      loading() {
+        return this.edit.loading;
       },
     },
     methods: {
       validateBtn() {
         this.edit.update();
-        this.checkLoading();
-
-
-          // if (this.editMenu == 'text') {
-          //   this.edit.sendPushSignal();
-          //   this.checkLoading();
-          // } else {
-          //   this.edit.update();
-          // }
       },
       cancelBtn() {
         this.edit.end();
         this.disable = false;
-        // setTimeout(() => { this.disable = false; }, this.edit.timeout);
-      },
-      checkLoading() {
-        if (this.loading) {
-          setTimeout(() => { this.checkLoading(); }, 100);
-        } else {
-          this.edit.end();
-        }
       },
     },
   };

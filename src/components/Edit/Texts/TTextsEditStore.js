@@ -14,7 +14,7 @@ const TextsEditStoreBis = new Vue({
 
     Component: null,
 
-    timeOut: 5000,
+    // timeOut: 5000,
   },
 
   computed: {
@@ -54,28 +54,52 @@ const TextsEditStoreBis = new Vue({
       for (let i in store.state) {
         store.state[i].data = response[i];
         store.backup[i] = response[i]
-
       }
     },
 
     update() {
       this.setLoading();
-      this.putData();
-    },
-
-    putData() {
       let store = this.getStore(this.component);
       let data = {};
       for (let i in store.state) {
         data[i] = store.state[i].data
       }
       axios.put(store.url, data).then(() => {
-        console.log('ici')
-        this.finish();
+        setTimeout(() => {
+          this.$Global.Tools.message(1);
+          this.unsetLoading();
+          this.active = false;
+          setTimeout(() => { this.component = null; }, 1000);
+        }, 2000);
       }).catch(error => {
         console.log(store.url);
         console.log(error);
       });
+    },
+
+    storeIsDirty() {
+      let store = this.getStore(this.component);
+      for (let i in store.state) {
+        if (store.state[i].data !== store.backup[i]) {
+          return true
+        }
+      }
+      return false
+    },
+
+    recoverData() {
+      let store = this.getStore(this.component);
+      for (let i in store.state) {
+        store.state[i].data = store.backup[i]
+      }
+      this.$Global.Tools.message(2);
+      this.end();
+    },
+
+    snackBar() {
+      let options = new this.$Global.Tools.SnackBarOptions();
+      options.onAction = this.recoverData;
+      this.$snackbar.open(options);
     },
 
     start(component) {
@@ -84,31 +108,15 @@ const TextsEditStoreBis = new Vue({
     },
 
     end() {
-      this.loading = false;
-      this.active = false;
-      setTimeout(() => { this.component = null; }, 1000);
-    },
-
-    finish(status = 1) {
-      setTimeout(() => {
-        this.$Global.Tools.message(status);
+      if (this.storeIsDirty()) {
+        this.snackBar();
+      } else {
         this.unsetLoading();
-      }, 2000);
-
-    },
-
-    debug(store, data) {
-      console.log(`\n\n\n${store.related}`);
-      console.log(`STORE:`);
-      for (let i in store.backup) {
-        if (i == 'image') {
-          console.log(`${i}:\t${store.state[i].image}`);
-          console.log(`${i} gallery:\t${store.state[i].gallery}`);
-        } else {
-          console.log(`${i}:\t${store.state[i]}`);
-        }
+        this.active = false;
+        setTimeout(() => { this.component = null; }, 1000);
       }
     },
+
   }
 });
 
