@@ -1,11 +1,5 @@
 <template>
-  <BaseLayout :id="$options.name"
-              :title="state.title.data"
-              :subTi="state.subTi.data"
-              :state="state"
-              :activeTab="activeTab"
-              :loading="loading"
-              @changeTab="activeTab=$event">
+  <BaseLayout :store="store">
     <div class="level">
       <div class="level-item">
         <div class="level is-mobile overall">
@@ -77,26 +71,24 @@
 </template>
 
 <script>
-  import ReviewStore from './ReviewStore';
   import moment from 'moment';
-  import mixin from '../../mixins/PublicMixin';
-
+  import ViewsMixin from '../../mixins/ViewsMixin';
 
   export default {
     name: "Review",
-    mixins: [mixin],
+    mixins: [ViewsMixin],
 
     data() {
       return {
-        store: ReviewStore,
-        state: { title: new this.Title(), subTi: new this.SubTitle(),},
+        component: "Review",
+        type: 'text',
       };
     },
     computed: {
-      reviewAll() { return this.store.reviewAll; },
-      reviewNew() { return this.store.reviewNew; },
-      overall() { return this.store.overall; },
-      reviews() {return this.store.reviews; },
+      reviewAll() { return this.store.state.g_review_all_url.data; },
+      reviewNew() { return this.store.state.g_review_new_url.data; },
+      overall() { return this.store.state.reviews.data.overall; },
+      reviews() {return this.store.state.reviews.data.reviews; },
     },
     methods: {
       getDateTime(epoch) {

@@ -1,12 +1,7 @@
 <template>
   <div>
-    <BaseLayout :id="$options.name"
-                :title="state.title.data"
-                :subTi="state.subTi.data"
-                :state="state" :activeTab="activeTab"
-                :loading="loading"
-                @changeTab="activeTab=$event">
-      <EditIcon :store="imagesStore" :edit="edit"/>
+    <BaseLayout :store="store">
+      <EditIcon :store="imagesStore" :edit="imagesEdit"/>
       <EventsImages/>
     </BaseLayout>
   </div>
@@ -14,39 +9,27 @@
 </template>
 
 <script>
-  import mixin from '../../mixins/PublicMixin';
-  import EventsTextsStore from './EventsTextsStore';
+  import ViewsMixin from '../../mixins/ViewsMixin';
   import EventsImages from './EventsImages';
+  import GalleriesEditStore from '../../components/Edit/Galleries/GalleriesEditStore';
   import EditIcon from '../../components/Edit/EditIcon';
-  import GalleriesEditStore
-    from '../../components/Edit/Galleries/GalleriesEditStore';
+
 
   export default {
     name: "Events",
-    mixins: [mixin],
+    mixins: [ViewsMixin],
     components: {EventsImages, EditIcon},
     data() {
       return {
-
+        component: 'Events',
+        type: 'text',
+        imagesEdit: GalleriesEditStore,
         imagesStore: GalleriesEditStore.getStore('Events'),
-        store: EventsTextsStore,
-
-        state: {
-          title: new this.Title(),
-          subTi: new this.SubTitle(),
-        },
-        baseHeight: null,
       };
     },
-    computed: {
-      // edit() { return this.GalleriesEditStore },
-    }
   };
 </script>
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
-
-
 </style>
-data traveling

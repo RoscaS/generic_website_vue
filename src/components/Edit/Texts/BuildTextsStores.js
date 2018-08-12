@@ -91,6 +91,19 @@ function Hero() {
   ];
 }
 
+function Contact() {
+  this.related = 'Contact';
+  this.url = 'contact/1/';
+  this.isDirty = false;
+  this.backup = {};
+  this.state = {
+    title: new Title(),
+    sub_title: new SubTitle('Sous titre 1'),
+    sub_title2: new SubTitle('Sous titre 2'),
+    sub_title3: new SubTitle('Sous titre 3'),
+  };
+}
+
 function Review() {
   this.related = 'Review';
   this.url = 'review/1/';
@@ -103,6 +116,7 @@ function Review() {
     g_place_id: {data: ''},
     g_review_all_url: {data: ''},
     g_review_new_url: {data: ''},
+    reviews: {data: ''},
   };
 }
 
@@ -112,6 +126,7 @@ function BuildTextsStores() {
     new Presentation(),
     new Events(),
     new Hero(),
+    new Contact(),
     new Review(),
   ];
 }

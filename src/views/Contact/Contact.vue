@@ -1,11 +1,5 @@
 <template>
-  <BaseLayout :id="$options.name"
-              :title="state.title.data"
-              :subTi="state.subTi.data"
-              :state="state"
-              :activeTab="activeTab"
-              :loading="loading"
-              @changeTab="activeTab=$event">
+  <BaseLayout :store="store">
     <div class="columns">
       <div class="column left">
         <div v-scroll-reveal="sReveal('left', 100, 100, 2500)">
@@ -33,39 +27,33 @@
         <p class="subT1"
            :class="{'highlighted': highlighted(2)}"
            v-scroll-reveal="sReveal('right', 100, 200, 1500)">
-          {{ state.subT2.data }}</p>
+          {{ state.sub_title2.data }}</p>
         <ContactForm url="message/"></ContactForm>
       </div>
     </div>
     <div class="has-text-centered subT3">
       <p :class="{'highlighted': highlighted(3)}"
          v-scroll-reveal="sReveal('left', 600, 200, 1500)">
-        {{ state.subT3.data }}
+        {{ state.sub_title3.data }}
       </p>
     </div>
   </BaseLayout>
 </template>
 
 <script>
-  import ContactStore from './ContactStore';
+  import ViewsMixin from '../../mixins/ViewsMixin';
   import ContactForm from '../../components/Forms/ContactForm';
   import GoogleMap from '../../components/Maps';
-  import mixin from '../../mixins/PublicMixin';
 
   export default {
     name: "Contact",
-    mixins: [mixin],
+    mixins: [ViewsMixin],
     components: {ContactForm, GoogleMap},
     data() {
       return {
         siteSettings: this.$Global.SiteSettings,
-        store: ContactStore,
-        state: {
-          title: new this.Title(),
-          subTi: new this.SubTitle('Sous titre 1'),
-          subT2: new this.SubTitle('Sous titre 2'),
-          subT3: new this.SubTitle('Sous titre 3'),
-        },
+        component: "Contact",
+        type: 'text',
       };
     },
     computed: {

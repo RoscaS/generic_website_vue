@@ -7,12 +7,12 @@
     <Presentation/>
     <Hero/>
     <Parallax :idx="0" height="600px"/>
-    <!--<Articles/>-->
+    <Articles/>
     <Parallax :idx="1" height="400px"/>
-    <!--<Events/>-->
+    <Events/>
     <Parallax :idx="2" height="400px"/>
-    <!--<Contact/>-->
-    <!--<Review/>-->
+    <Contact/>
+    <Review/>
     <Footer/>
   </div>
 </template>
