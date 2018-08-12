@@ -1,11 +1,11 @@
 <template>
   <div>
-    <!--<PromoRibbon/>-->
+    <PromoRibbon/>
     <Header/>
     <Navbar/>
     <Carousel/>
     <Presentation/>
-    <!--<Hero/>-->
+    <Hero/>
     <Parallax :idx="0" height="600px"/>
     <!--<Articles/>-->
     <Parallax :idx="1" height="400px"/>

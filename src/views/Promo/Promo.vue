@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="container collapse-content">
-      <EditIcon :component="$options.name"/>
+      <EditIcon :store="store" :edit="edit"/>
       <div class="columns content">
         <div class="column left is-offset-2 is-4">
           <img :class="{'highlighted': highlighted(2)}"
-               :src="state.image.data">
+               :src="state.image.data.image">
         </div>
         <div class="column right is-5">
           <div>
@@ -19,31 +19,26 @@
         </div>
       </div>
     </div>
-    <EditNav v-if="checkComponent()" height="225">
-      <FieldsLayout :state="state" :activeTab="activeTab" :loading="loading"
-                    @changeTab="$emit('changeTab', $event)">
-      </FieldsLayout>
-    </EditNav>
+    <TextsEditMenu v-if="checkComponent()" height="225">
+      <FieldsLayout :store="store"/>
+    </TextsEditMenu>
   </div>
 </template>
 
 <script>
-  import PromoStore from './PromoStore';
+  import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
+  import EditIcon from '../../components/Edit/EditIcon';
   import FieldsLayout from '../FieldsLayout';
-  import mixin from '../../mixins/PublicMixin';
+  import ViewsMixin from '../../mixins/ViewsMixin';
 
   export default {
     name: 'Promo',
-    mixins: [mixin],
-    components: {FieldsLayout},
+    mixins: [ViewsMixin],
+    components: {TextsEditMenu, EditIcon, FieldsLayout},
     data() {
       return {
-        store: PromoStore,
-        state: {
-          title: new this.Title(),
-          text: new this.Text(),
-          image: new this.Image()
-        }
+        component: "Promo",
+        type: 'text',
       };
     },
   };

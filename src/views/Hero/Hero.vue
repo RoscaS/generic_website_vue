@@ -1,123 +1,97 @@
 <template>
   <div>
     <section class="section hero">
-      <EditIcon :component="$options.name" top="-35px"/>
+      <EditIcon :store="store" :edit="edit" top="-35px"/>
       <div class="container">
         <div class="columns is-variable is-8">
           <div class="column is-one-third"
                v-scroll-reveal="sReveal('left', 150, 400, 1500)">
             <div :class="{'highlighted': highlighted(0)}">
-              <i :class="state.L_icon.data"></i>
-              <h2 class="subtitle">{{ state.L_title.data }}</h2>
-              <p>{{ state.L_text.data }}</p>
+              <i :class="state.icon1.data"></i>
+              <h2 class="subtitle">{{ state.title1.data }}</h2>
+              <p>{{ state.text1.data }}</p>
             </div>
           </div>
           <div class="column is-one-third"
                v-scroll-reveal="sReveal('top', 150, 0, 1500)">
             <div :class="{'highlighted': highlighted(1)}">
-              <i :class="state.C_icon.data"></i>
-              <h2 class="subtitle">{{ state.C_title.data }}</h2>
-              <p>{{ state.C_text.data }}</p>
+              <i :class="state.icon2.data"></i>
+              <h2 class="subtitle">{{ state.title2.data }}</h2>
+              <p>{{ state.text2.data }}</p>
             </div>
           </div>
           <div class="column is-one-third"
                v-scroll-reveal="sReveal('right', 150, 400, 1500)">
             <div :class="{'highlighted': highlighted(2)}">
-              <i :class="state.R_icon.data"></i>
-              <h2 class="subtitle">{{ state.R_title.data }}</h2>
-              <p>{{ state.R_text.data }}</p>
+              <i :class="state.icon3.data"></i>
+              <h2 class="subtitle">{{ state.title3.data }}</h2>
+              <p>{{ state.text3.data }}</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <EditNav v-if="checkComponent()" height="300">
-      <b-tabs v-model="activeTab" position="is-centered">
+    <TextsEditMenu v-if="checkComponent()" height="300">
+      <b-tabs v-model="edit.activeTab" position="is-centered">
 
-        <b-tab-item v-for="(i, idx) in labels" :key="idx" :label="i.label">
+        <b-tab-item v-for="(i, idx) in store.subs" :key="idx" :label="i.label">
           <div class="columns is-mobile is-variable is-8-desktop">
             <div class="column is-6">
-              <label>{{ i.subs[0].label }}:</label>
-              <b-input :len="i.subs[0].len"
-                       :disabled="loading"
-                       v-model="i.subs[0].data">
+              <label>{{ i.data[0].label }}:</label>
+              <b-input :len="i.data[0].len"
+                       :disabled="edit.loading"
+                       v-model="i.data[0].data">
               </b-input>
-              <label>{{ i.subs[1].label }}:</label>
-              <b-input :type="i.subs[1].type"
-                       :rows="i.subs[1].rows"
-                       :maxlength="i.subs[1].len"
-                       :disabled="loading"
-                       v-model="i.subs[1].data">
+              <label>{{ i.data[1].label }}:</label>
+              <b-input :type="i.data[1].type"
+                       :rows="i.data[1].rows"
+                       maxlength="200"
+                       :disabled="edit.loading"
+                       v-model="i.data[1].data">
               </b-input>
             </div>
             <div class="column is-6">
-              <label>{{ i.subs[2].label }}:</label>
+              <label>{{ i.data[2].label }}:</label>
               <IconPicker @selectIcon="returnIcon" :position="i.label"/>
             </div>
           </div>
         </b-tab-item>
 
       </b-tabs>
-    </EditNav>
+    </TextsEditMenu>
   </div>
 </template>
 
 <script>
-  import HeroStore from './HeroStore';
-  import mixin from '../../mixins/PublicMixin';
   import IconPicker from '../../components/IconPicker/IconPicker';
+  import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
+  import EditIcon from '../../components/Edit/EditIcon';
+  import FieldsLayout from '../FieldsLayout';
+  import ViewsMixin from '../../mixins/ViewsMixin';
 
   export default {
     name: "Hero",
-    mixins: [mixin],
-    components: {IconPicker},
+    mixins: [ViewsMixin],
+    components: {TextsEditMenu, EditIcon, FieldsLayout, IconPicker},
+
     data() {
       return {
-        state: {
-          L_title: new this.Title(),
-          L_text: new this.Text(),
-          L_icon: new this.Icon(),
-          C_title: new this.Title(),
-          C_text: new this.Text(),
-          C_icon: new this.Icon(),
-          R_title: new this.Title(),
-          R_text: new this.Text(),
-          R_icon: new this.Icon(),
-        },
-        store: HeroStore,
-        iconPicker: false,
+        component: "Hero",
+        type: 'text',
       };
-    },
-    computed: {
-      labels() {
-        return [
-          {
-            label: 'Gauche',
-            subs: [this.state.L_title, this.state.L_text, this.state.L_icon]
-          },
-          {
-            label: 'Centre',
-            subs: [this.state.C_title, this.state.C_text, this.state.C_icon]
-          },
-          {
-            label: 'Droite',
-            subs: [this.state.R_title, this.state.R_text, this.state.R_icon]
-          },
-        ];
-      }
     },
     methods: {
       returnIcon(icon) {
         switch (icon.position) {
           case 'Gauche':
-            this.state.L_icon.data = `${icon.weight} fa-${icon.className}`;
+            this.state.icon1.data = `${icon.weight} fa-${icon.className}`;
             break;
           case 'Centre':
-            this.state.C_icon.data = `${icon.weight} fa-${icon.className}`;
+            this.state.icon2.data = `${icon.weight} fa-${icon.className}`;
             break;
           case 'Droite':
-            this.state.R_icon.data = `${icon.weight} fa-${icon.className}`;
+            this.state.icon3.data = `${icon.weight} fa-${icon.className}`;
             break;
         }
       },

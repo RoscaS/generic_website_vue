@@ -29,8 +29,6 @@
   import DownArrow from '../../components/Carousel/DownArrow.vue'
   import ViewsMixin from '../../mixins/ViewsMixin';
 
-
-
   export default {
     name: "Presentation",
     mixins: [ViewsMixin],

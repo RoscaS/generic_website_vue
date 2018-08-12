@@ -84,6 +84,11 @@ function Hero() {
     text2: new Text(),
     text3: new Text(),
   };
+  this.subs = [
+    {label: 'Gauche', data: [this.state.title1, this.state.text1,  this.state.icon1]},
+    {label: 'Centre', data: [this.state.title2, this.state.text2,  this.state.icon2]},
+    {label: 'Droite', data: [this.state.title3, this.state.text3,  this.state.icon3]},
+  ];
 }
 
 function Review() {
@@ -108,7 +113,7 @@ function BuildTextsStores() {
     new Events(),
     new Hero(),
     new Review(),
-  ]
+  ];
 }
 
-export default BuildTextsStores
+export default BuildTextsStores;
