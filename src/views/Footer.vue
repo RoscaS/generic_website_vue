@@ -8,7 +8,7 @@
           delay: 0,
           easing: 'ease',
          }">
-      <button class="button _btn no-tr"
+      <a class="button _btn no-tr"
               v-scroll-to="{
               el: '#Home',
               duration: 2000,
@@ -16,7 +16,7 @@
             }">
         <i class="fas fa-arrow-up"></i>
         &nbsp; Haut de la page
-      </button>
+      </a>
     </div>
 
     <div class="level is-mobile">
@@ -135,6 +135,7 @@
 
   p {
     color: white;
+    font-size: 16px;
   }
 
   .jrosk {

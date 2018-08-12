@@ -20,14 +20,18 @@
               <a target="_blank" :href="reviewAll">80+ reviews</a>
             </div>
           </div>
-        </div>
-        <div class="level-right"
-             v-scroll-reveal="sReveal('left', 50010010, duration=3500)">
-          <a target="_blank" :href="reviewNew"
-             class="button _btn no-tr">
-            <i class="fas fa-pencil-alt"></i>
-            &nbsp; Ajouter une review
-          </a>
+          <div class="level-right add-review-btn">
+            <div class="level-item"
+                 v-scroll-reveal="sReveal('right', 500, 100, duration=3500)">
+
+
+            <a target="_blank" :href="reviewNew"
+               class="button _btn no-tr">
+              <i class="fas fa-pencil-alt"></i>
+              &nbsp; Ajouter une review
+            </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -112,10 +116,15 @@
 <style scoped lang="scss">
   @import '../../static/sass/global';
 
+  .add-review-btn {
+    margin-left: 102px;
+  }
+
   .overall {
     width: 350px;
     max-width: 350px;
     margin: 0 auto 40px auto;
+
     .level-left {
       font-family: arial, sans-serif;
       font-size: 32px;
@@ -127,6 +136,7 @@
         color: $star-full;
         margin-left: 5px;
       }
+
     }
   }
 

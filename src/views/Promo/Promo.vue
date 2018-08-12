@@ -9,9 +9,9 @@
         </div>
         <div class="column right is-5">
           <div>
-            <h3 :class="{'highlighted': highlighted(0)}">
+            <h2 class="title" :class="{'highlighted': highlighted(0)}">
               {{ state.title.data}}
-            </h3>
+            </h2>
             <p :class="{'highlighted': highlighted(1)}">
               {{ state.text.data}}
             </p>
@@ -56,6 +56,17 @@
   .container {
     height: 400px;
     margin-top: 150px;
+
+    .column {
+      h2 {
+        display: block;
+      }
+      p {
+        display: block;
+        font-size: 18px;
+        line-height: 28px;
+      }
+    }
 
     @media screen and (max-width: 768px) {
       height: 800px;

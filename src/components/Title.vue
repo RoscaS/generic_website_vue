@@ -15,12 +15,7 @@
 <style scoped lang="scss">
   @import '../../static/sass/global';
 
-  .header {
-    text-align: center;
-    width: 400px;
-    margin: 0 auto 0 auto;
-    padding-bottom: 10px;
-  }
+
 
   .underline {
     opacity: .65;

@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
-@import url('https://fonts.googleapis.com/css?family=Lato');
+//@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import 'variables';
 @import 'effects';
 @import 'scrollBar';
+
+
+
 
 
 .container {
@@ -15,8 +20,10 @@
 }
 
 a {
+  font-family: 'Open Sans', sans-serif;
   transition: color .2s ease;
   color: $link;
+  font-size: 18px;
 
   &:not(.no-tr) {
     @extend .tr;
@@ -30,14 +37,35 @@ a {
 
 p {
   color: $paragraph;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 21px;
+  line-height: 34px;
+  text-decoration: none solid rgb(51, 51, 51);
+  word-spacing: 0;
+  //font-family: 'Lato', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
   color: $header;
 }
 
+.header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 39.6px;
+  text-decoration: none solid rgb(255, 255, 255);
+  word-spacing: 0;
+  text-align: center;
+  width: 400px;
+  margin: 0 auto 0 auto;
+  padding-bottom: 10px;
+}
+
 ._btn {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
   transition: 0.2s color ease-out, 0.3s background-color ease-out;
   border-radius: 0;
   border-color: $accent;
@@ -65,8 +93,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sub-title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  line-height: 25px;
+  text-decoration: none solid rgb(255, 255, 255);
+  word-spacing: 0;
+
   margin: 15px auto 80px auto !important;
-  font-size: 14px;
+  //font-size: 14px;
   text-align: center;
   font-style: italic;
 }

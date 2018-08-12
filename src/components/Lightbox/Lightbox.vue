@@ -74,12 +74,19 @@
     background-color: rgba(#000, 0.9);
 
     .description {
+      font-family: 'Open Sans', sans-serif;
+
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 39.6px;
+
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       color: white;
-      top: 88%;
+      top: 90%;
+      width: 100%;
     }
 
     .counter {

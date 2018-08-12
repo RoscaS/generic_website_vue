@@ -24,15 +24,15 @@
             <a :href="mailHref">{{ siteSettings.mail }}</a>
           </div>
         </div>
-        <p class="subT1"
+        <p class="subtitle"
            :class="{'highlighted': highlighted(2)}"
            v-scroll-reveal="sReveal('right', 100, 200, 1500)">
           {{ state.sub_title2.data }}</p>
         <ContactForm url="message/"></ContactForm>
       </div>
     </div>
-    <div class="has-text-centered subT3">
-      <p :class="{'highlighted': highlighted(3)}"
+    <div class="has-text-centered">
+      <p :class="{'highlighted': highlighted(3)}" class="subtitle"
          v-scroll-reveal="sReveal('left', 600, 200, 1500)">
         {{ state.sub_title3.data }}
       </p>
@@ -70,13 +70,16 @@
     margin-bottom: 10px;
   }
 
-  .subT2 {
+  .subtitle {
     margin-top: 30px;
     margin-bottom: 10px;
-  }
-  .subT3 {
-    margin-top: 30px;
-    margin-bottom: 10px;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    line-height: 25px;
+    text-decoration: none solid rgb(255, 255, 255);
+    word-spacing: 0;
+    font-style: italic;
   }
 
 </style>

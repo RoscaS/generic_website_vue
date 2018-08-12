@@ -122,6 +122,10 @@
 <style scoped lang="scss">
   @import '../../static/sass/global';
 
+  a {
+    font-size: 13px;
+  }
+
   ._mobile {
     font-size: 13px;
     text-align: center;
@@ -160,6 +164,7 @@
     position: relative;
     top: 150px;
     max-height: 60px;
+
 
     &._left {
       text-align: right;

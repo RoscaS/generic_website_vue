@@ -8,7 +8,7 @@
                v-scroll-reveal="sReveal('left', 150, 400, 1500)">
             <div :class="{'highlighted': highlighted(0)}">
               <i :class="state.icon1.data"></i>
-              <h2 class="subtitle">{{ state.title1.data }}</h2>
+              <h2>{{ state.title1.data }}</h2>
               <p>{{ state.text1.data }}</p>
             </div>
           </div>
@@ -16,7 +16,7 @@
                v-scroll-reveal="sReveal('top', 150, 0, 1500)">
             <div :class="{'highlighted': highlighted(1)}">
               <i :class="state.icon2.data"></i>
-              <h2 class="subtitle">{{ state.title2.data }}</h2>
+              <h2>{{ state.title2.data }}</h2>
               <p>{{ state.text2.data }}</p>
             </div>
           </div>
@@ -24,7 +24,7 @@
                v-scroll-reveal="sReveal('right', 150, 400, 1500)">
             <div :class="{'highlighted': highlighted(2)}">
               <i :class="state.icon3.data"></i>
-              <h2 class="subtitle">{{ state.title3.data }}</h2>
+              <h2>{{ state.title3.data }}</h2>
               <p>{{ state.text3.data }}</p>
             </div>
           </div>
@@ -111,12 +111,22 @@
     }
 
     h2 {
-      font-weight: bold;
+      font-size: 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      word-spacing: 0;
+      line-height: 39.6px;
+      text-decoration: none solid rgb(255, 255, 255);
+
     }
 
     p {
-      font-size: 15px;
+      font-size: 18px;
+      line-height: 25px;
+      text-decoration: none solid rgb(255, 255, 255);
+      word-spacing: 0px;
       font-weight: 400;
+
     }
 
     i {
