@@ -14,6 +14,10 @@ function BuildGalleriesStores() {
       string: 'carousel',
       title: 'Carousel',
       url: 'galleries/carousel/',
+      options: {
+        autoScroll: false,
+        scrollTimer: 10
+      }
     },
     {
       state: {images: []},

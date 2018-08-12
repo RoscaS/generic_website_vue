@@ -2,10 +2,12 @@
   <div class="carousel-wrapper">
     <EditIcon :store="store" :edit="edit" top="10px"/>
     <transition name="carousel-fade-in" appear>
-      <carouselApp class="content">
-        <carousel-slide v-for="i in state.images" :key="i.id" :index="index(i)">
+      <carouselApp class="content" :store="store">
+        <carousel-slide v-for="i in slides()"
+                        :key="i"
+                        :index="i-1">
           <h2><span></span></h2>
-          <img :src="imageMinusOne(i)">
+          <img :src="getUrl(i-1)">
         </carousel-slide>
       </carouselApp>
     </transition>
@@ -26,33 +28,26 @@
       return {
         component: 'Carousel',
         type: 'image',
-
-        slides: 8,
       };
     },
-    computed: {
-      urls() {
-        if (this.state.images.length) {
-          let urls = [];
-          this.state.images.forEach(i => { urls.push(i.url); });
-          return urls;
-        } else {
-          setTimeout(() => {
-            return this.urls; }, 2);
-        }
-      }
-    },
     methods: {
-      index(image) {
-        return this.state.images.indexOf(image)-1
-      },
-      imageMinusOne(image) {
+      getUrl(i) {
         if (this.state.images.length) {
-          return this.state.images[this.state.images.indexOf(image)].url
+          console.log(`i: ${i}`)
+          return this.store.state.images[i].url
         } else {
-          setTimeout(() => {this.imageMinusOne(image)}, 2)
+          setTimeout(() => { this.getUrl(i) }, 10)
         }
-      }
+      },
+      slides() {
+        console.log('ici');
+        console.log(this.state.images.length)
+        if (this.state.images.length) {
+          return this.state.images.length;
+        } else {
+          setTimeout(() => { this.getSlidesNumber(); }, 10)
+        }
+      },
     }
   };
 </script>
@@ -60,7 +55,7 @@
 <style scoped lang="scss">
   .carousel-fade-in-enter-active, .carousel-fade-in-leave-active {
     transition: opacity 3s ease;
-    transition-delay: 1s;
+    transition-delay: 1.5s;
   }
 
   .carousel-fade-in-enter, .carousel-fade-in-leave-active {

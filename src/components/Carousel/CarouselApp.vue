@@ -22,6 +22,9 @@
 
 <script>
   export default {
+    props: {
+      store: {type: Object},
+    },
     data() {
       return {
         index: 0,
@@ -29,19 +32,27 @@
         direction: 'right',
       };
     },
-
+    computed: {
+      slidesCount() { return this.slides.length; },
+      autoScroll: {
+        get() { return this.store.options.autoScroll; },
+        set(value) { this.store.options.autoScroll = value; }
+      },
+      scrollTimer: {
+        get() { return this.store.options.scrollTimer; },
+        set(value) { this.store.options.scrollTimer = value; }
+      },
+    },
     watch: {
       slides(slides) {
         if (this.index >= this.slidesCount) {
-          this.index = this.slidesCount -1;
+          this.index = this.slidesCount;
         }
+      },
+      autoScroll(value) {
+        if (value) { this.cycle() }
       }
     },
-
-    computed: {
-      slidesCount() { return this.slides.length; },
-    },
-
     methods: {
       next() {
         this.index++;
@@ -50,7 +61,6 @@
           this.index = 0;
         }
       },
-
       prev() {
         this.index--;
         this.direction = 'left';
@@ -58,15 +68,22 @@
           this.index = this.slidesCount - 1;
         }
       },
-
       goto(idx) {
-        this.direction = idx> this.index? 'right': 'left';
+        this.direction = idx > this.index ? 'right' : 'left';
         this.index = idx;
       },
+      cycle() {
+        if (this.autoScroll)
+        setTimeout(() => {
+          this.next();
+          this.cycle();
+        }, this.store.options.scrollTimer * 1000)
+      },
     },
-
-
-    mounted() { this.slides = this.$children; },
+    mounted() {
+      this.slides = this.$children;
+      this.store.options.autoScroll ? this.cycle() : null;
+    },
 
   };
 </script>
@@ -88,9 +105,9 @@
     position: relative;
     overflow: hidden;
 
-//    @media screen and (max-width: 376px) {
-//      margin-top: -100px;
-//    }
+    //    @media screen and (max-width: 376px) {
+    //      margin-top: -100px;
+    //    }
 
     .carousel__nav {
       transition: color .5s ease;

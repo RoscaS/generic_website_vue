@@ -51,6 +51,8 @@
     p {
       font-weight: bold;
       color: white;
+      font-size: 16px;
+      margin-top: -3px;
     }
     i {
       margin-top: -22px;

@@ -90,6 +90,7 @@
   @import '../../../static/sass/global';
 
   .corner-ribbon {
+    font-family: 'Open Sans', sans-serif;
     cursor: default;
     font-weight: bold;
     font-size: 20px;

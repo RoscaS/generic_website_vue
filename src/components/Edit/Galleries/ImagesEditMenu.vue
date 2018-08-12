@@ -25,7 +25,36 @@
         <div class="primary">
           <div class="card">
             <header class="card-header">
-              <h2 class="card-header-title">{{ store.title }}</h2>
+              <div class="card-header-title">
+                <div class="level">
+                  <div class="leve-left">
+                    <div class="level-item">
+                      <h2>{{ store.title }}</h2>
+                    </div>
+                  </div>
+
+
+                  <div class="field level-item auto-scroll"
+                       v-if="store.related=='Carousel'">
+                    <b-switch v-model="store.options.autoScroll"
+                              type="is-info"
+                              size="is-small">
+                      <small>Défilement automatique</small>
+                    </b-switch>
+                    <transition name="fade">
+                      <b-field class="timer" v-if="store.options.autoScroll">
+                        <b-input v-model="store.options.scrollTimer"
+                                 type="number"
+                                 min="5"
+                                 max="60">
+                        </b-input>
+                      </b-field>
+                    </transition>
+                  </div>
+
+
+                </div>
+              </div>
             </header>
             <div class="card-content imagesEdit">
               <b-tabs type="is-toggle"
@@ -89,6 +118,9 @@
           'columns is-multiline is-mobile',
           'column is-one-quarter'
         ],
+
+        autoScroll: false,
+
       };
     },
     computed: {
@@ -129,6 +161,18 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
+  .auto-scroll {
+    small {
+      margin-right: 20px;
+    }
+    .timer {
+      margin-top: -20px;
+      width: 60px;
+      height: 15px;
+    }
+  }
+
+
   h1 {
     z-index: 1000;
     color: white;
@@ -151,7 +195,10 @@
     max-width: 850px;
 
     .card-header-title {
-      margin-bottom: 0;
+      h2 {
+        margin-bottom: 0;
+        margin-right: 20px;
+      }
     }
   }
 

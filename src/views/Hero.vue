@@ -124,8 +124,8 @@
       font-size: 18px;
       line-height: 25px;
       text-decoration: none solid rgb(255, 255, 255);
-      word-spacing: 0px;
-      font-weight: 400;
+      word-spacing: 0;
+      font-weight: lighter;
 
     }
 

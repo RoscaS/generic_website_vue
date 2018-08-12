@@ -12,15 +12,17 @@
     props: {
       index: { type: Number, default:0 },
     },
-
     computed: {
       transition() {
         if (this.$parent.direction){
           return `slide-${this.$parent.direction}`
         }
       },
-
-      visible() { return this.index === this.$parent.index; }
+      visible() {
+        console.log(`this.index: ${this.index}`)
+        console.log(`parent.index ${this.$parent.index}`)
+        return this.index === this.$parent.index;
+      }
     }
 
   };
@@ -30,11 +32,11 @@
 <style scoped lang="scss">
 
   .slide-right-enter-active {
-    animation: slideRightIn .5s;
+    animation: slideRightIn 1s;
   }
 
   .slide-right-leave-active {
-    animation: slideRightOut .5s;
+    animation: slideRightOut 1s;
     position: absolute;
     top: 0;
     left: 0;
@@ -55,11 +57,11 @@
 
 
   .slide-left-enter-active {
-    animation: slideLeftIn .5s;
+    animation: slideLeftIn 1.5s;
   }
 
   .slide-left-leave-active {
-    animation: slideLeftOut .5s;
+    animation: slideLeftOut 1.5s;
     position: absolute;
     top: 0;
     left: 0;
