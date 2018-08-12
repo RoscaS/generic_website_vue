@@ -187,7 +187,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../static/sass/global';
 
   .sticky {
     position: fixed;

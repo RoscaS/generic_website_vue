@@ -1,5 +1,5 @@
 
-function GalleriesStores() {
+function BuildGalleriesStores() {
   return [
     {
       state: {images: []},
@@ -32,4 +32,4 @@ function GalleriesStores() {
   ];
 }
 
-export default GalleriesStores
+export default BuildGalleriesStores

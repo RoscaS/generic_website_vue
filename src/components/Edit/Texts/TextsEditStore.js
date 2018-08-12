@@ -1,44 +1,119 @@
+import BuildTextsStores from './BuildTextsStores';
+import axios from "axios";
 import Vue from 'vue';
 
 const TextsEditStore = new Vue({
-  name: 'TextEditStore',
+  name: 'TextsEditStore',
   data: {
-    component: null,
-    loading: false,
+    type: 'text',
+    state: new BuildTextsStores,
+    ActiveTab: 0,
+    Loading: false,
     active: false,
-    dirty: false,
+    Component: null,
+  },
 
-    pushSignal: false,
-    cancelSignal: false,
-
-    reOrder: false
+  computed: {
+    activeTab: {
+      get() { return this.ActiveTab; },
+      set(value) { this.ActiveTab = value; }
+    },
+    loading: {
+      get() { return this.Loading; },
+      set(value) { this.Loading = value; }
+    },
+    component: {
+      get() { return this.Component; },
+      set(value) { this.Component = value; }
+    }
   },
 
   methods: {
-    setComponent(value) { this.component = value; },
-    setLoading(value) { this.loading = value; },
-    setDirty(value) { this.dirty = value; },
+    setLoading() { this.Loading = true; },
+    unsetLoading() { this.Loading = false; },
 
-    sendPushSignal() {
-      this.loading = true;
-      this.pushSignal = true;
-      setTimeout(() => { this.pushSignal = false }, 10);
+    getStore(name) {
+      return this.state.filter(i => i.related == name)[0];
     },
-    sendCancelSignal() {
-      this.cancelSignal = true;
-      setTimeout(() => { this.cancelSignal = false }, 10);
+
+    fetchData() {
+      this.state.forEach(store => {
+        axios.get(store.url).then(response => {
+          this.setData(store, response.data);
+        }).catch(error => {
+          console.log(`${store.url}\n${error}`);
+        });
+      });
     },
+
+    setData(store, response) {
+      for (let i in store.state) {
+        store.state[i].data = response[i];
+        store.backup[i] = response[i]
+      }
+    },
+
+    update() {
+      this.setLoading();
+      let store = this.getStore(this.component);
+      let data = {};
+      for (let i in store.state) {
+        data[i] = store.state[i].data
+      }
+      axios.put(store.url, data).then(() => {
+        setTimeout(() => {
+          this.$Global.Tools.message(1);
+          this.unsetLoading();
+          this.active = false;
+          setTimeout(() => { this.component = null; }, 1000);
+        }, 2000);
+      }).catch(error => {
+        console.log(store.url);
+        console.log(error);
+      });
+    },
+
+    storeIsDirty() {
+      let store = this.getStore(this.component);
+      for (let i in store.state) {
+        if (store.state[i].data !== store.backup[i]) {
+          return true
+        }
+      }
+      return false
+    },
+
+    recoverData() {
+      let store = this.getStore(this.component);
+      for (let i in store.state) {
+        store.state[i].data = store.backup[i]
+      }
+      this.$Global.Tools.message(2);
+      this.end();
+    },
+
+    snackBar() {
+      let options = new this.$Global.Tools.SnackBarOptions();
+      options.onAction = this.recoverData;
+      this.$snackbar.open(options);
+    },
+
     start(component) {
       this.component = component;
       this.active = true;
     },
+
     end() {
-      this.loading = false;
-      this.active = false;
-      setTimeout(() => { this.component = null; }, 1000);
+      if (this.storeIsDirty()) {
+        this.snackBar();
+      } else {
+        this.unsetLoading();
+        this.active = false;
+        setTimeout(() => { this.component = null; }, 1000);
+      }
     },
-  },
+
+  }
 });
 
 export default TextsEditStore;
-

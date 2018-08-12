@@ -13,10 +13,10 @@
 </template>
 
 <script>
-  import ViewsMixin from '../../mixins/ViewsMixin';
-  import EditIcon from '../../components/Edit/EditIcon';
-  import CarouselApp from '../../components/Carousel/CarouselApp';
-  import CarouselSlide from '../../components/Carousel/CarouselSlide';
+  import ViewsMixin from '../mixins/ViewsMixin';
+  import EditIcon from '../components/Edit/EditIcon';
+  import CarouselApp from '../components/Carousel/CarouselApp';
+  import CarouselSlide from '../components/Carousel/CarouselSlide';
 
   export default {
     name: "Carousel",

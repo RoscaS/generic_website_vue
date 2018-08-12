@@ -41,9 +41,9 @@
 </template>
 
 <script>
-  import ViewsMixin from '../../mixins/ViewsMixin';
-  import ContactForm from '../../components/Forms/ContactForm';
-  import GoogleMap from '../../components/Maps';
+  import ViewsMixin from '../mixins/ViewsMixin';
+  import ContactForm from '../components/Forms/ContactForm';
+  import GoogleMap from '../components/Maps';
 
   export default {
     name: "Contact",
@@ -64,7 +64,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../static/sass/global';
 
   .line {
     margin-bottom: 10px;

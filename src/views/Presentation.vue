@@ -26,8 +26,8 @@
 </template>
 
 <script>
-  import DownArrow from '../../components/Carousel/DownArrow.vue'
-  import ViewsMixin from '../../mixins/ViewsMixin';
+  import DownArrow from '../components/Carousel/DownArrow.vue'
+  import ViewsMixin from '../mixins/ViewsMixin';
 
   export default {
     name: "Presentation",
@@ -66,7 +66,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../static/sass/global';
   .section {
     margin-top: -50px !important;
     @media screen and (max-width: 1366px) {

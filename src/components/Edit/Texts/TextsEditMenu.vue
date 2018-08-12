@@ -31,7 +31,7 @@
 <script>
   import {SpinLine} from 'vue-loading-spinner';
   import ValidationBtns from '../ValidationButtons';
-  import TextsEditStore from '../../../components/Edit/Texts/TTextsEditStore';
+  import TextsEditStore from './TextsEditStore';
 
   export default {
     name: "TextsEditMenu",

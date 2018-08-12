@@ -91,7 +91,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../static/sass/global';
 
   .hero {
     display: flex;

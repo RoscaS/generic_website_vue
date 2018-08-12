@@ -72,7 +72,7 @@
 
 <script>
   import moment from 'moment';
-  import ViewsMixin from '../../mixins/ViewsMixin';
+  import ViewsMixin from '../mixins/ViewsMixin';
 
   export default {
     name: "Review",
@@ -110,7 +110,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../static/sass/global';
 
   .overall {
     width: 350px;

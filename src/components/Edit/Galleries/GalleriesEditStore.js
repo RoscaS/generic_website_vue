@@ -1,4 +1,4 @@
-import BuildGalleriesStores from './GalleriesStores';
+import BuildGalleriesStores from './BuildGalleriesStores';
 import axios from "axios";
 import Vue from 'vue';
 

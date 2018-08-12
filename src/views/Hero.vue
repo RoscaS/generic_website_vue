@@ -64,11 +64,11 @@
 </template>
 
 <script>
-  import IconPicker from '../../components/IconPicker/IconPicker';
-  import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
-  import EditIcon from '../../components/Edit/EditIcon';
-  import FieldsLayout from '../FieldsLayout';
-  import ViewsMixin from '../../mixins/ViewsMixin';
+  import IconPicker from '../components/IconPicker/IconPicker';
+  import TextsEditMenu from '../components/Edit/Texts/TextsEditMenu';
+  import EditIcon from '../components/Edit/EditIcon';
+  import FieldsLayout from './Layouts/FieldsLayout';
+  import ViewsMixin from '../mixins/ViewsMixin';
 
   export default {
     name: "Hero",
@@ -100,7 +100,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../static/sass/global';
 
   .hero {
     text-align: center;

@@ -23,33 +23,33 @@
   import Parallax from '../components/Parallax/Parallax';
 
   import PromoRibbon from '../views/Promo/PromoRibbon';
-  import Header from '../views/Header/Header';
-  import Navbar from '../views/Navbar/Navbar';
-  import Carousel from '../views/Carousel/Carousel';
-  import Presentation from '../views/Presentation/Presentation';
-  import Articles from '../views/Articles/Articles';
-  import Hero from '../views/Hero/Hero';
+  import Header from '../views/Header';
+  import Navbar from '../views/Navbar';
+  import Carousel from '../views/Carousel';
+  import Presentation from '../views/Presentation';
+  import Articles from '../views/Articles';
+  import Hero from '../views/Hero';
   import Events from '../views/Events/Events';
-  import Contact from '../views/Contact/Contact';
-  import Review from '../views/Review/Review';
-  import Footer from '../views/Footer/Footer';
+  import Contact from '../views/Contact';
+  import Review from '../views/Review';
+  import Footer from '../views/Footer';
 
 
   import GalleriesEditStore
     from '../components/Edit/Galleries/GalleriesEditStore';
 
-  import TTextsEditStore
-    from '../components/Edit/Texts/TTextsEditStore';
+  import TextsEditStore
+    from '../components/Edit/Texts/TextsEditStore';
 
   export default {
     name: "Public",
     components: {
       Login, Parallax, PromoRibbon, Header, Navbar, Carousel, Presentation,
       Hero, Events, Articles, Contact, Review, Footer,
-      GalleriesEditStore, TTextsEditStore,
+      GalleriesEditStore, TextsEditStore,
     },
     mounted() {
-      TTextsEditStore.fetchData();
+      TextsEditStore.fetchData();
       GalleriesEditStore.fetchData();
     }
   };

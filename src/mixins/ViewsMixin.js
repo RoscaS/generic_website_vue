@@ -1,5 +1,5 @@
-import BaseLayout from '../views/BaseLayout';
-import TextsEditStore from '../components/Edit/Texts/TTextsEditStore';
+import BaseLayout from '../views/Layouts/BaseLayout';
+import TextsEditStore from '../components/Edit/Texts/TextsEditStore';
 import GalleriesEditStore from '../components/Edit/Galleries/GalleriesEditStore';
 
 

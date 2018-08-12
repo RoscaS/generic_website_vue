@@ -18,8 +18,8 @@
 </template>
 
 <script>
-  import FileUpload from '../components/Edit/FileUpload';
-  import TextsEditStore from '../components/Edit/Texts/TTextsEditStore';
+  import FileUpload from '../../components/Edit/FileUpload';
+  import TextsEditStore from '../../components/Edit/Texts/TextsEditStore';
 
   export default {
     name: "FieldsLayout",

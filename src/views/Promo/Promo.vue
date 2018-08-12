@@ -28,7 +28,7 @@
 <script>
   import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
   import EditIcon from '../../components/Edit/EditIcon';
-  import FieldsLayout from '../FieldsLayout';
+  import FieldsLayout from '../Layouts/FieldsLayout';
   import ViewsMixin from '../../mixins/ViewsMixin';
 
   export default {

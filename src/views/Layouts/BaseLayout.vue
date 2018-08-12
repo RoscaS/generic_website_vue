@@ -39,10 +39,10 @@
 </template>
 
 <script>
-  import EditIcon from '../components/Edit/EditIcon';
-  import TextsEditMenu from '../components/Edit/Texts/TextsEditMenu';
+  import EditIcon from '../../components/Edit/EditIcon';
+  import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
   import FieldsLayout from './FieldsLayout.vue';
-  import TextsEditStore from '../components/Edit/Texts/TTextsEditStore';
+  import TextsEditStore from '../../components/Edit/Texts/TextsEditStore';
 
   export default {
     name: "BaseLayout",
@@ -58,6 +58,6 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../static/sass/global';
+  @import '../../../static/sass/global';
 
 </style>

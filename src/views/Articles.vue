@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import EditIcon from '../../components/Edit/EditIcon';
+  import EditIcon from '../components/Edit/EditIcon';
 
   export default {
     name: "Articles",
@@ -33,7 +33,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../static/sass/global';
 
 
 </style>
