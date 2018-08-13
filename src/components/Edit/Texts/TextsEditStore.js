@@ -31,6 +31,8 @@ const TextsEditStore = new Vue({
   methods: {
     setLoading() { this.Loading = true; },
     unsetLoading() { this.Loading = false; },
+    message(type) { this.$Global.Tools.message(type);},
+
 
     getStore(name) {
       return this.state.filter(i => i.related == name)[0];
@@ -41,7 +43,7 @@ const TextsEditStore = new Vue({
         axios.get(store.url).then(response => {
           this.setData(store, response.data);
         }).catch(error => {
-          console.log(`${store.url}\n${error}`);
+          this.message('error', error, store.url);
         });
       });
     },
@@ -62,14 +64,13 @@ const TextsEditStore = new Vue({
       }
       axios.put(store.url, data).then(() => {
         setTimeout(() => {
-          this.$Global.Tools.message(1);
+          this.message('updated');
           this.unsetLoading();
           this.active = false;
           setTimeout(() => { this.component = null; }, 1000);
         }, 2000);
       }).catch(error => {
-        console.log(store.url);
-        console.log(error);
+        this.message('error', error, store.url);
       });
     },
 
@@ -88,12 +89,12 @@ const TextsEditStore = new Vue({
       for (let i in store.state) {
         store.state[i].data = store.backup[i]
       }
-      this.$Global.Tools.message(2);
+      this.message('cancel');
       this.end();
     },
 
     snackBar() {
-      let options = new this.$Global.Tools.SnackBarOptions();
+      let options = new this.$Global.Tools.SnackBarOptions('cancel');
       options.onAction = this.recoverData;
       this.$snackbar.open(options);
     },

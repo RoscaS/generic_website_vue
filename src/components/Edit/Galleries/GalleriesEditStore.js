@@ -10,7 +10,6 @@ const GalleriesEditStore = new Vue({
     ActiveTab: 0,
     Loading: false,
     SecondaryStore: null,
-    Deleted: [],
   },
 
   computed: {
@@ -31,6 +30,7 @@ const GalleriesEditStore = new Vue({
   methods: {
     setLoading() { this.Loading = true; },
     unsetLoading() { this.Loading = false; },
+    message(type) { this.$Global.Tools.message(type);},
 
     getStore(name) {
       return this.state.filter(i => i.related == name)[0];
@@ -43,7 +43,7 @@ const GalleriesEditStore = new Vue({
           i.state.images.length = 0;
           this.pushImage(i, response.data.images);
         }).catch(error => {
-          console.log(`${i.url}\n${error}`);
+          this.message('imageErr', error, i.url);
         });
       });
     },
@@ -61,7 +61,9 @@ const GalleriesEditStore = new Vue({
           description: i.description,
           position: i.position,
           id: i.id,
-          gallery: i.gallery,
+          gallery: i.gallery.split(/\s+/).map(w => {
+            return w[0].toUpperCase() + w.slice(1);
+          }).join(' ')
         });
       });
     },
@@ -81,7 +83,7 @@ const GalleriesEditStore = new Vue({
         this.patchData(i);
       });
       setTimeout(() => {
-        this.$Global.Tools.message(1);
+        this.message('updated');
         this.loading = false;
       }, 2000);
     },
@@ -103,12 +105,9 @@ const GalleriesEditStore = new Vue({
         let url = `images/${i.id}/`;
         axios.patch(url, this.getForm(i, store), {
           headers: {'content-type': 'multipart/form-data'}
-        }).then((response) => {
-          console.log(`OK: patchData: ${store.related}`);
-        }).catch(error => {
-          console.log(url);
-          console.log(error);
-        });
+        })
+        .then(() => {console.log(`OK: patchData: ${store.related}`);})
+        .catch(error => {this.message('error', error, url);});
       });
     },
     getForm(images, store) {
@@ -117,6 +116,20 @@ const GalleriesEditStore = new Vue({
       formData.append('position', images.position);
       formData.append('gallery', store.string);
       return formData;
+    },
+    deleteImage(image) {
+      let store = this.getStore(image.gallery);
+      let index = store.state.images.indexOf(image);
+      let url = `images/${image.id}/`;
+      let options = new this.$Global.Tools.SnackBarOptions('delete');
+      options.onAction = function() {
+        store.state.images.splice(index, 1);
+        store.state.images.find(i => i.id == image.id);
+        axios.delete(url)
+        .then(() => {this.message('imageDel');})
+        .catch(error => {this.message('error', error, url);});
+      };
+      this.$snackbar.open(options)
     },
   },
 });

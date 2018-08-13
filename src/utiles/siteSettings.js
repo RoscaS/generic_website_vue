@@ -46,8 +46,7 @@ const SiteOptions = new Vue({
       this.linkedin = data.linkedin;
       this.snapchat = data.snapchat;
     }).catch(error => {
-      console.log(this.url);
-      console.log(error);
+        this.$Global.Tools.message('error', error, this.url);
     });
   }
 });

@@ -14,7 +14,7 @@
                :class="classes[3]"
                class="image-slot"
                :key="image.id">
-            <ImageOverlay :isDragging="isDragging">
+            <ImageOverlay :image="image" :edit="edit">
               <img :src="image.url">
             </ImageOverlay>
           </div>
@@ -35,7 +35,6 @@
     name: "DragSortImages",
     components: {draggable, ImageOverlay},
     props: {
-      component: {type: String},
       classes: {type: Array},
       store: {type: Object},
     },

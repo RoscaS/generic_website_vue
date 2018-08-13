@@ -5,8 +5,8 @@
                 enter-active-class="fadeInDown"
                 leave-active-class="fadeOutUp">
       <div class="overlay" v-if="overlay && !$parent.isDragging">
-        <i class="fal fa-fw fa-pen-square" @click.prevent=""></i>
-        <i class="fal fa-fw fa-times-square" @click.prevent=""></i>
+        <i class="fal fa-fw fa-pen-square" @click.prevent="editDescription()"></i>
+        <i class="fal fa-fw fa-times-square" @click.prevent="deleteImage()"></i>
       </div>
     </transition>
     <div class="image-slot">
@@ -16,16 +16,14 @@
 </template>
 
 <script>
-  import GalleriesEditStore
-    from '../../../components/Edit/Galleries/GalleriesEditStore';
-
   import 'vue2-animate/dist/vue2-animate.min.css';
 
 
   export default {
     name: "ImageOverlay",
     props: {
-      isDragging: {type: Boolean},
+      image: {type: Object},
+      edit: {type: Object},
     },
     data() {
       return {
@@ -40,6 +38,12 @@
       hideOverlay() {
         clearTimeout(this.timeout);
         setTimeout(() => { this.overlay = false;}, 100);
+      },
+      deleteImage() {
+        this.edit.deleteImage(this.image)
+      },
+      editDescription() {
+
       },
     }
   };

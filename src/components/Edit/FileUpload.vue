@@ -50,12 +50,7 @@
           }, 2000);
 
         }).catch(error => {
-          this.$toast.open({
-            duration: 4000,
-            message: '.jpg ou .png uniquement!',
-            type: 'is-danger'
-          });
-          console.log(error);
+          this.$Global.Tools.message('error', error, url);
         });
       },
 
@@ -69,7 +64,7 @@
 
       commitGallery(response) {
         this.edit.pushImage(this.store, [response.data]);
-        this.$Global.Tools.message(3);
+        this.$Global.Tools.message('imageUp');
         setTimeout(() => {
           this.edit.activeTab = 0;
         }, 500);
