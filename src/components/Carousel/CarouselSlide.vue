@@ -19,8 +19,6 @@
         }
       },
       visible() {
-        console.log(`this.index: ${this.index}`)
-        console.log(`parent.index ${this.$parent.index}`)
         return this.index === this.$parent.index;
       }
     }

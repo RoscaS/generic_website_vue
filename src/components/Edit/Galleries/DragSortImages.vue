@@ -14,9 +14,9 @@
                :class="classes[3]"
                class="image-slot"
                :key="image.id">
-            <div class="">
+            <ImageOverlay :isDragging="isDragging">
               <img :src="image.url">
-            </div>
+            </ImageOverlay>
           </div>
         </transition-group>
       </draggable>
@@ -27,13 +27,13 @@
 
 <script>
   import draggable from 'vuedraggable';
-  import GalleriesEditStore
-    from '../components/Edit/Galleries/GalleriesEditStore';
+  import GalleriesEditStore from './GalleriesEditStore';
+  import ImageOverlay from './ImageOverlay';
 
 
   export default {
-    name: "DragSort",
-    components: {draggable},
+    name: "DragSortImages",
+    components: {draggable, ImageOverlay},
     props: {
       component: {type: String},
       classes: {type: Array},
@@ -64,13 +64,15 @@
       }
     },
     methods: {
-      onMove({relatedContext, draggedContext}) {},
+      onMove({relatedContext, draggedContext}) {
+        // console.log(this.isDragging)
+      },
     },
   };
 </script>
 
 <style scoped lang="scss">
-  @import '../../static/sass/global';
+  @import '../../../../static/sass/global';
 
   .level {
     overflow: auto;

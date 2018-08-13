@@ -33,6 +33,8 @@
   import ValidationBtns from '../ValidationButtons';
   import TextsEditStore from './TextsEditStore';
 
+  import 'vue2-animate/dist/vue2-animate.min.css';
+
   export default {
     name: "TextsEditMenu",
     components: {ValidationBtns, SpinLine},
@@ -50,6 +52,11 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  $animationDuration: 1s;
+  @import "~vue2-animate/src/sass/vue2-animate";
+
+
 
   .columns {
     margin-left: 14.5%;

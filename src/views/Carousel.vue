@@ -33,19 +33,16 @@
     methods: {
       getUrl(i) {
         if (this.state.images.length) {
-          console.log(`i: ${i}`)
           return this.store.state.images[i].url
         } else {
           setTimeout(() => { this.getUrl(i) }, 10)
         }
       },
       slides() {
-        console.log('ici');
-        console.log(this.state.images.length)
         if (this.state.images.length) {
           return this.state.images.length;
         } else {
-          setTimeout(() => { this.getSlidesNumber(); }, 10)
+          setTimeout(() => { this.slides(); }, 10)
         }
       },
     }

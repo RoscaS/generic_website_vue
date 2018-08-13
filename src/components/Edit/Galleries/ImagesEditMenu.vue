@@ -37,7 +37,7 @@
                   <div class="field level-item auto-scroll"
                        v-if="store.related=='Carousel'">
                     <b-switch v-model="store.options.autoScroll"
-                              type="is-info"
+                              type="is-primary"
                               size="is-small">
                       <small>Défilement automatique</small>
                     </b-switch>
@@ -82,7 +82,7 @@
 
 <script>
   import {SpinLine} from 'vue-loading-spinner';
-  import DragSort from '../../DragSort';
+  import DragSort from './DragSortImages';
   import FileUpload from '../FileUpload';
   import ValidationBtns from '../ValidationButtons';
   import GalleriesEditStore from './GalleriesEditStore';

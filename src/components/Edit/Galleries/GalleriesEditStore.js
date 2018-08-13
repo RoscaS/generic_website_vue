@@ -10,6 +10,7 @@ const GalleriesEditStore = new Vue({
     ActiveTab: 0,
     Loading: false,
     SecondaryStore: null,
+    Deleted: [],
   },
 
   computed: {
