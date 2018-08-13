@@ -1,9 +1,10 @@
 <template>
-  <div @mouseover="showOverlay()" @mouseleave="hideOverlay()"
+  <div @mouseover="showOverlay()"
+       @mouseleave="hideOverlay()"
        class="container">
     <transition name="delayedFade"
-                enter-active-class="fadeInDown"
-                leave-active-class="fadeOutUp">
+                enter-active-class="fadeIn"
+                leave-active-class="fadeOut">
       <div class="overlay" v-if="overlay && !$parent.isDragging">
         <i class="fal fa-fw fa-pen-square" @click.prevent="editDescription()"></i>
         <i class="fal fa-fw fa-times-square" @click.prevent="deleteImage()"></i>
@@ -55,8 +56,12 @@
   $animationDuration: .5s;
   @import "~vue2-animate/src/sass/vue2-animate";
 
+  .container {
+    width: 190px;
+  }
+
   .image-slot {
-    cursor: grab;
+    /*width: 190px;*/
   }
 
   .overlay {

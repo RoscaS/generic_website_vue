@@ -59,6 +59,7 @@
           return;
         }
         this.$nextTick(() => {
+          this.edit.update();
         });
       }
     },
@@ -73,6 +74,7 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
+
   .level {
     overflow: auto;
   }
@@ -81,8 +83,24 @@
     margin: 0 auto 0 auto;
   }
 
+  .columns {
+    width: 104%;
+  }
+
+  .column {
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+
+  .level-item {
+    min-height: 106px;
+    min-width: 210px;
+  }
+
   .image-slot {
-    width: 200px;
+    cursor: grab;
+    width: 210px;
+    min-height: 50px;
   }
 
   .flip-list-move {

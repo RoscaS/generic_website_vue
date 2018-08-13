@@ -82,10 +82,8 @@ const GalleriesEditStore = new Vue({
         this.updateGallery(i);
         this.patchData(i);
       });
-      setTimeout(() => {
-        this.message('updated');
-        this.loading = false;
-      }, 2000);
+      // this.message('updated');
+      this.loading = false;
     },
     updateGallery(store) {
       store.state.images.forEach(i => {
@@ -105,9 +103,8 @@ const GalleriesEditStore = new Vue({
         let url = `images/${i.id}/`;
         axios.patch(url, this.getForm(i, store), {
           headers: {'content-type': 'multipart/form-data'}
-        })
-        .then(() => {console.log(`OK: patchData: ${store.related}`);})
-        .catch(error => {this.message('error', error, url);});
+        }).then(() => {console.log(`OK: patchData: ${store.related}`);
+        }).catch(error => {this.message('error', error, url);});
       });
     },
     getForm(images, store) {
@@ -117,19 +114,27 @@ const GalleriesEditStore = new Vue({
       formData.append('gallery', store.string);
       return formData;
     },
+
     deleteImage(image) {
       let store = this.getStore(image.gallery);
       let index = store.state.images.indexOf(image);
       let url = `images/${image.id}/`;
       let options = new this.$Global.Tools.SnackBarOptions('delete');
+      let toast = this.$toast;
       options.onAction = function() {
         store.state.images.splice(index, 1);
         store.state.images.find(i => i.id == image.id);
-        axios.delete(url)
-        .then(() => {this.message('imageDel');})
-        .catch(error => {this.message('error', error, url);});
+        axios.delete(url).then(() => {
+          toast.open({
+            duration: 2000,
+            type: 'is-success',
+            message: "Image supprimée du serveur.",
+            position: 'is-bottom',
+          });
+        }).catch(error => {console.log(error);}
+        );
       };
-      this.$snackbar.open(options)
+      this.$snackbar.open(options);
     },
   },
 });

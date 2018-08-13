@@ -7,7 +7,7 @@
               @click="validateBtn">
         <i class="far fa-check"></i>
       </button>
-      <button class="button is-danger"
+      <button class="button is-danger" v-if="edit.type == 'text'"
               :disabled="disable || loading"
               @click="cancelBtn">
         <i class="far fa-times"></i>

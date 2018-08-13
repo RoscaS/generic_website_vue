@@ -5,9 +5,9 @@
     </div>
     <div class="container">
       <div class="content">
-        <ValidationBtns :edit="edit"
-                        :top="layout.top"
-                        right="0px"/>
+        <!--<ValidationBtns :edit="edit"-->
+                        <!--:top="layout.top"-->
+                        <!--right="0px"/>-->
         <h1>Edition: {{ store.title }}</h1>
 
         <div class="card secondary">
@@ -98,10 +98,6 @@
       SpinLine
     },
     props: {
-      component: {type: String},
-      classes: {type: Array},
-      top: {type: String},
-      right: {type: String, default: '88px'},
       store: {type: Object},
     },
     data() {
@@ -140,15 +136,9 @@
       },
       layoutData() {
         return {
-          events: {
-            height: '500px', top: '790px', classes: this.columnsClasses
-          },
-          carousel: {
-            height: '', top: '680px', classes: this.levelClasses
-          },
-          parallax: {
-            height: '', top: '650px', classes: this.levelClasses
-          },
+          events: {classes: this.columnsClasses},
+          carousel: {classes: this.levelClasses},
+          parallax: {classes: this.levelClasses},
         };
       },
     },
@@ -200,10 +190,12 @@
         margin-right: 20px;
       }
     }
+    .card-content {
+      /*padding-left: 0px;*/
+    }
   }
 
   .loading-animation {
-    z-index: 20;
     position: absolute;
     top: 80%;
     left: 49%;
