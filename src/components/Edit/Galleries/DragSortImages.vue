@@ -41,7 +41,6 @@
     data() {
       return {
         edit: GalleriesEditStore,
-
         isDragging: false,
         delayedDragging: false,
         reOrder: false,
@@ -49,7 +48,11 @@
     },
     computed: {
       dragOptions() {
-        return {animation: 250, group: 'description', ghostClass: 'none'};
+        return {
+          animation: 250,
+          group: 'description',
+          ghostClass: 'none'
+        };
       },
     },
     watch: {

@@ -44,7 +44,7 @@
         this.edit.deleteImage(this.image)
       },
       editDescription() {
-
+        this.edit.selectedImage = this.image;
       },
     }
   };
@@ -58,10 +58,6 @@
 
   .container {
     width: 190px;
-  }
-
-  .image-slot {
-    /*width: 190px;*/
   }
 
   .overlay {

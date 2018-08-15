@@ -29,8 +29,8 @@ const TextsEditStore = new Vue({
   },
 
   methods: {
-    setLoading() { this.Loading = true; },
-    unsetLoading() { this.Loading = false; },
+    setLoading() { this.loading = true; },
+    unsetLoading() { this.loading = false; },
     message(type) { this.$Global.Tools.message(type);},
 
 
@@ -105,6 +105,7 @@ const TextsEditStore = new Vue({
     },
 
     end() {
+      console.log('ici')
       if (this.storeIsDirty()) {
         this.snackBar();
       } else {

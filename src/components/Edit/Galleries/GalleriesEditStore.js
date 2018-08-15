@@ -10,6 +10,7 @@ const GalleriesEditStore = new Vue({
     ActiveTab: 0,
     Loading: false,
     SecondaryStore: null,
+    SelectedImage: null,
   },
 
   computed: {
@@ -25,12 +26,18 @@ const GalleriesEditStore = new Vue({
       get() { return this.SecondaryStore; },
       set(store) { this.SecondaryStore = store; }
     },
+    selectedImage: {
+      get() { return this.SelectedImage; },
+      set(image) { this.SelectedImage = image; }
+    }
   },
 
   methods: {
-    setLoading() { this.Loading = true; },
-    unsetLoading() { this.Loading = false; },
+    setLoading() { this.loading = true; },
+    unsetLoading() { this.loading = false; },
+    clearSelectedImage() { this.selectedImage = null; },
     message(type) { this.$Global.Tools.message(type);},
+
 
     getStore(name) {
       return this.state.filter(i => i.related == name)[0];
@@ -79,13 +86,12 @@ const GalleriesEditStore = new Vue({
       this.state.forEach(i => {
         console.log(`update: ${i.related}`);
         this.updatePosition(i);
-        this.updateGallery(i);
+        this.updateGalleryField(i);
         this.patchData(i);
       });
-      // this.message('updated');
       this.loading = false;
     },
-    updateGallery(store) {
+    updateGalleryField(store) {
       store.state.images.forEach(i => {
         i.gallery = store.string;
       });
@@ -103,16 +109,35 @@ const GalleriesEditStore = new Vue({
         let url = `images/${i.id}/`;
         axios.patch(url, this.getForm(i, store), {
           headers: {'content-type': 'multipart/form-data'}
-        }).then(() => {console.log(`OK: patchData: ${store.related}`);
+        }).then(() => {
+          console.log(`OK: patchData: ${store.related}`);
         }).catch(error => {this.message('error', error, url);});
       });
     },
-    getForm(images, store) {
+    getForm(image, store) {
+      let gallery = store ? store.string : image.gallery.toLowerCase();
       let formData = new FormData();
-      formData.append('id', images.id);
-      formData.append('position', images.position);
-      formData.append('gallery', store.string);
+      formData.append('id', image.id);
+      formData.append('position', image.position);
+      formData.append('gallery', gallery);
       return formData;
+    },
+
+    updateImage() {
+      this.setLoading();
+      let url = `images/${this.selectedImage.id}/`;
+      let formData = this.getForm(this.selectedImage);
+      formData.append('description', this.selectedImage.description);
+      axios.patch(url, formData, {
+        headers: {'content-type': 'multipart/form-data'}
+      }).then(() => {
+        setTimeout(() => {
+          this.message('updated');
+          this.unsetLoading();
+          this.clearSelectedImage();
+          setTimeout(() => { this.component = null; }, 1000);
+        }, 2000);
+      }).catch(error => {console.log(error);});
     },
 
     deleteImage(image) {

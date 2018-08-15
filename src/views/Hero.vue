@@ -36,7 +36,7 @@
       <b-tabs v-model="edit.activeTab" position="is-centered">
 
         <b-tab-item v-for="(i, idx) in store.subs" :key="idx" :label="i.label">
-          <div class="columns is-mobile is-variable is-8-desktop">
+          <div class="columns is-mobile is-variable fields-container">
             <div class="column is-6">
               <label>{{ i.data[0].label }}:</label>
               <b-input :len="i.data[0].len"
@@ -101,6 +101,10 @@
 
 <style scoped lang="scss">
   @import '../../static/sass/global';
+
+  .fields-container {
+    margin-top: -25px;
+  }
 
   .hero {
     text-align: center;

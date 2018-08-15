@@ -12,7 +12,7 @@ function SubTitle(label = 'Sous titre') {
   this.label = label;
 }
 
-function Text(label = 'Texte', rows = 4) {
+function Text(label = 'Texte', rows = 3) {
   this.data = '';
   this.type = 'textarea';
   this.len = '400';

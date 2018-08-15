@@ -1,26 +1,19 @@
 <template>
-  <transition name="slide"
-              enter-active-class="slideInUp"
-              leave-active-class="slideOutDown">
+  <transition name="fade"
+              enter-active-class="fadeInUp"
+              leave-active-class="fadeOutDown">
 
     <div class="navbar custom-tabs-wrapper textEdit" v-show="edit.active">
-
-      <div class="columns">
-        <div class="column
-                    is-6-desktop
-                    is-9-tablet
-                    is-12-mobile
-                    is-offset-2-desktop
-                    is-offset-1-tablet">
-
-          <div class="custom-tabs" :style="{height: height+'px'}">
-            <slot></slot>
-          </div>
-
+      <div class="custom-tabs" :style="{height: height+'px'}">
+        <div class="container">
+          <slot></slot>
         </div>
+        <ValidationBtns class="validation-btns"
+                        :loading="edit.loading"
+                        @validate="validate"
+                        @cancel="cancel">
+        </ValidationBtns>
       </div>
-
-      <ValidationBtns :edit="edit"/>
       <div class="loading-animation">
         <SpinLine v-show="edit.loading"/>
       </div>
@@ -47,6 +40,14 @@
         edit: TextsEditStore
       };
     },
+    methods: {
+      validate() {
+        this.edit.update();
+      },
+      cancel() {
+        this.edit.end();
+      },
+    },
   };
 </script>
 
@@ -56,20 +57,20 @@
   $animationDuration: 1s;
   @import "~vue2-animate/src/sass/vue2-animate";
 
+  .validation-btns {
+    position: absolute;
+    right: 20px;
+    top: 14px;
 
-
-  .columns {
-    margin-left: 14.5%;
-    @media screen and (max-width: 768px) {
-      margin-left: auto;
+    @media screen and (max-width: 640px) {
+      bottom: 0;
+      right: 0;
     }
   }
 
   .custom-tabs {
-    height: 200px;
-    /*width: 50%;*/
+    min-height: 220px;
     margin: 0 auto 0 auto;
-
   }
 
   .loading-animation {

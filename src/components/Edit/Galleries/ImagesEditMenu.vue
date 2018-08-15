@@ -1,80 +1,86 @@
 <template>
   <div>
+
     <div class="loading-animation">
       <SpinLine v-show="loading"/>
     </div>
+
+    <DescriptionPopup :edit="edit"/>
+
     <div class="container">
       <div class="content">
-        <!--<ValidationBtns :edit="edit"-->
-                        <!--:top="layout.top"-->
-                        <!--right="0px"/>-->
-        <h1>Edition: {{ store.title }}</h1>
+        <transition name="fade">
+          <div v-if="!edit.selectedImage">
+            <h1>Edition: {{ store.title }}</h1>
 
-        <div class="card secondary">
-          <header class="card-header">
-            <div class="card-header-title">
-              <GalleriesDropDown :store="store"/>
+            <div class="card secondary">
+              <header class="card-header">
+                <div class="card-header-title">
+                  <GalleriesDropDown :store="store"/>
+                </div>
+              </header>
+              <div class="card-content">
+                <DragSort :store="secondaryStore"
+                          :classes="levelClasses"/>
+              </div>
             </div>
-          </header>
-          <div class="card-content">
-            <DragSort :store="secondaryStore"
-                      :classes="levelClasses"/>
-          </div>
-        </div>
 
-        <div class="primary">
-          <div class="card">
-            <header class="card-header">
-              <div class="card-header-title">
-                <div class="level">
-                  <div class="leve-left">
-                    <div class="level-item">
-                      <h2>{{ store.title }}</h2>
+            <div class="primary">
+              <div class="card">
+                <header class="card-header">
+                  <div class="card-header-title">
+                    <div class="level">
+                      <div class="leve-left">
+                        <div class="level-item">
+                          <h2>{{ store.title }}</h2>
+                        </div>
+                      </div>
+
+
+                      <div class="field level-item auto-scroll"
+                           v-if="store.related=='Carousel'">
+                        <b-switch v-model="store.options.autoScroll"
+                                  type="is-primary"
+                                  size="is-small">
+                          <small>Défilement automatique</small>
+                        </b-switch>
+                        <transition name="fade">
+                          <b-field class="timer"
+                                   v-if="store.options.autoScroll">
+                            <b-input v-model="store.options.scrollTimer"
+                                     type="number"
+                                     min="5"
+                                     max="60">
+                            </b-input>
+                          </b-field>
+                        </transition>
+                      </div>
+
+
                     </div>
                   </div>
-
-
-                  <div class="field level-item auto-scroll"
-                       v-if="store.related=='Carousel'">
-                    <b-switch v-model="store.options.autoScroll"
-                              type="is-primary"
-                              size="is-small">
-                      <small>Défilement automatique</small>
-                    </b-switch>
-                    <transition name="fade">
-                      <b-field class="timer" v-if="store.options.autoScroll">
-                        <b-input v-model="store.options.scrollTimer"
-                                 type="number"
-                                 min="5"
-                                 max="60">
-                        </b-input>
-                      </b-field>
-                    </transition>
-                  </div>
-
-
+                </header>
+                <div class="card-content imagesEdit">
+                  <b-tabs type="is-toggle"
+                          v-model="activeTab"
+                          position="is-right">
+                    <b-tab-item icon="images"
+                                :disabled="loading">
+                      <DragSort :store="store"
+                                :classes="layout.classes"/>
+                    </b-tab-item>
+                    <b-tab-item icon="upload"
+                                :disabled="loading">
+                      <FileUpload :edit="edit"
+                                  :store="store"
+                                  :gallery="store.string"/>
+                    </b-tab-item>
+                  </b-tabs>
                 </div>
               </div>
-            </header>
-            <div class="card-content imagesEdit">
-              <b-tabs type="is-toggle"
-                      v-model="activeTab"
-                      position="is-right">
-                <b-tab-item icon="images"
-                            :disabled="loading">
-                  <DragSort :store="store"
-                            :classes="layout.classes"/>
-                </b-tab-item>
-                <b-tab-item icon="upload"
-                            :disabled="loading">
-                  <FileUpload :edit="edit"
-                              :store="store"
-                              :gallery="store.string"/>
-                </b-tab-item>
-              </b-tabs>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -84,18 +90,18 @@
   import {SpinLine} from 'vue-loading-spinner';
   import DragSort from './DragSortImages';
   import FileUpload from '../FileUpload';
-  import ValidationBtns from '../ValidationButtons';
   import GalleriesEditStore from './GalleriesEditStore';
   import GalleriesDropDown from './GalleriesDropDown';
+  import DescriptionPopup from './DescriptionPopup';
 
   export default {
     name: "ImagesEditMenu",
     components: {
       DragSort,
       GalleriesDropDown,
-      ValidationBtns,
       FileUpload,
-      SpinLine
+      SpinLine,
+      DescriptionPopup,
     },
     props: {
       store: {type: Object},
@@ -162,13 +168,13 @@
     }
   }
 
-
   h1 {
     z-index: 1000;
     color: white;
   }
 
   .container {
+    margin-top: 140px;
     width: 850px;
   }
 

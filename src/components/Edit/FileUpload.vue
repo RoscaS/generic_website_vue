@@ -97,7 +97,7 @@
     height: auto;
     width: 80%;
     margin: 0 auto 0 auto;
-    border-radius: 2%;
+    border-radius: 10px;
 
     &.mobile {
       margin-top: 20px;

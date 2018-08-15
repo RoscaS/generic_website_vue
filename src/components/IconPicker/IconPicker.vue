@@ -132,7 +132,7 @@
   }
 
   .block {
-    margin-top: 15px;
+    margin-top: 10px;
 
     @media screen and (max-width: 600px) {
       margin-top: 10px;

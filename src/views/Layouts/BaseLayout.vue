@@ -30,7 +30,7 @@
       </div>
 
     </section>
-    <TextsEditMenu v-if="$parent.checkComponent()" :height="editNavHeight">
+    <TextsEditMenu v-if="$parent.checkComponent()">
       <FieldsLayout :store="store">
         <slot name="moreFields"></slot>
       </FieldsLayout>
@@ -48,7 +48,6 @@
     name: "BaseLayout",
     props: {
       store: {type: Object},
-      editNavHeight: {type: String, default: '225'}
     },
     components: {EditIcon, TextsEditMenu, FieldsLayout},
     computed: {

@@ -1,18 +1,18 @@
 <template>
   <div class="field is-grouped">
-    <p class="control" :style="style">
-      <button class="button is-success"
-              :class="{'is-loading': loading}"
-              :disabled="loading"
-              @click="validateBtn">
-        <i class="far fa-check"></i>
-      </button>
-      <button class="button is-danger" v-if="edit.type == 'text'"
-              :disabled="disable || loading"
-              @click="cancelBtn">
+    <div class="control">
+      <div class="button is-success"
+           :disabled="loading"
+           @click="validateBtn">
+        <i class="fas fa-spinner fa-spin" v-if="loading"></i>
+        <i class="far fa-check" v-else></i>
+      </div>
+      <div class="button is-danger"
+           :disabled="loading"
+           @click="cancelBtn">
         <i class="far fa-times"></i>
-      </button>
-    </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,30 +20,19 @@
   export default {
     name: "ValidationButtons",
     props: {
-      edit: {type: Object},
-      right: {type: String, default: '30px'},
-      top: {type: String, default: '20px'},
+      loading: {type: Boolean},
     },
     data() {
       return {
         disable: false,
       };
     },
-    computed: {
-      style() {
-        return {right: this.right, top: this.top};
-      },
-      loading() {
-        return this.edit.loading;
-      },
-    },
     methods: {
       validateBtn() {
-        this.edit.update();
+        this.$emit('validate');
       },
       cancelBtn() {
-        this.edit.end();
-        this.disable = false;
+        this.$emit('cancel');
       },
     },
   };
@@ -54,8 +43,10 @@
 
   .control {
     z-index: 100;
-    position: absolute;
-    button {
+    .button {
+      padding: 0 21px 0 21px;
+      width: 30px;
+      height: 30px;
       &:first-child {
         transition: background-color .2s, color .2s;
         margin-right: 10px;
@@ -78,10 +69,6 @@
       }
     }
 
-    @media screen and (max-width: 1089px) {
-      top: auto;
-      bottom: 20px;
-    }
   }
 
 </style>

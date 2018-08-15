@@ -39,6 +39,7 @@
   };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import '../../../static/sass/global';
 
 </style>

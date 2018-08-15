@@ -9,21 +9,29 @@
     }
   }
 
+  .tab-content {
+    width: 100%;
+    margin: 15px auto 0 auto;
+
+    .tab-item {
+      margin: -7px auto 0 auto;
+      width: 900px;
+
+      @media screen and (max-width: 925px) {
+        width: 100%;
+      }
+
+      .field {
+        margin: 0 25px 0 25px;
+      }
+    }
+  }
+
   .b-tabs {
     margin: 0 auto 0 auto;
 
-    //@media screen and (max-width: 768px) {
-    //  width: 100%;
-    //  margin-bottom: 20px;
-    //}
-
     .tabs {
-      margin-top: -10px;
-      margin-bottom: 10px;
-
-      @media screen and (max-width: 1089px) {
-        margin-left: -10px;
-      }
+      margin: -22px auto  auto;
 
       ul {
         width: auto;
@@ -50,10 +58,12 @@
 
       li {
         border-radius: 5px;
-        margin-right: 10px;
+        margin-left: 2.5px;
+        margin-right: 2.5px;
         background-color: $top-title;
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 387px) {
+          margin-left: 0;
           margin-right: 0;
         }
 
@@ -72,8 +82,7 @@
   }
 
   .tab-item {
-    padding-top: 0px;
-    padding-bottom: 2000px;
+    //padding-bottom: 00px;
   }
 }
 

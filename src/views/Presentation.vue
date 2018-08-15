@@ -1,7 +1,7 @@
 <template>
   <div>
     <DownArrow></DownArrow>
-    <BaseLayout :store="store" editNavHeight="200">
+    <BaseLayout :store="store">
       <div class="text1"
            v-scroll-reveal="sReveal('left', 250, 400)">
         <p :class="{'highlighted': highlighted(2)}">
