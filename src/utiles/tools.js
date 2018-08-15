@@ -22,7 +22,6 @@ const snackBarMessage = {
 const Tools = new Vue({
   methods: {
     message(type, error = false, url) {
-      console.log('là')
       Toast.open({
         duration: 3000,
         message: message[type].message,

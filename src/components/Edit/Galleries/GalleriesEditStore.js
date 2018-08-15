@@ -22,6 +22,10 @@ const GalleriesEditStore = new Vue({
       get() { return this.Loading; },
       set(value) { this.Loading = value; }
     },
+    primaryStore: {
+      get() { return this.PrimaryStore; },
+      set(store) { this.PrimaryStore = store; }
+    },
     secondaryStore: {
       get() { return this.SecondaryStore; },
       set(store) { this.SecondaryStore = store; }
@@ -40,13 +44,24 @@ const GalleriesEditStore = new Vue({
 
 
     getStore(name) {
-      return this.state.filter(i => i.related == name)[0];
+      let capitalized = name[0].toUpperCase() + name.slice(1);
+      return this.state.filter(i => i.related == capitalized)[0];
+    },
+
+    getCount(name) {
+      return this.getStore(name).state.images.length;
+    },
+
+    isFull(name) {
+      let store = this.getStore(name);
+      return store.state.images.length >= store.limit
     },
 
     fetchData(store = null) {
       let stores = store ? [store] : this.state;
       stores.forEach(i => {
         axios.get(i.url).then(response => {
+          i.limit = response.data.limit;
           i.state.images.length = 0;
           this.pushImage(i, response.data.images);
         }).catch(error => {
@@ -68,9 +83,7 @@ const GalleriesEditStore = new Vue({
           description: i.description,
           position: i.position,
           id: i.id,
-          gallery: i.gallery.split(/\s+/).map(w => {
-            return w[0].toUpperCase() + w.slice(1);
-          }).join(' ')
+          gallery: i.gallery
         });
       });
     },
@@ -84,7 +97,6 @@ const GalleriesEditStore = new Vue({
     update() {
       this.loading = true;
       this.state.forEach(i => {
-        console.log(`update: ${i.related}`);
         this.updatePosition(i);
         this.updateGalleryField(i);
         this.patchData(i);
@@ -93,7 +105,7 @@ const GalleriesEditStore = new Vue({
     },
     updateGalleryField(store) {
       store.state.images.forEach(i => {
-        i.gallery = store.string;
+        i.gallery = store.related;
       });
     },
     updatePosition(store) {
@@ -110,16 +122,14 @@ const GalleriesEditStore = new Vue({
         axios.patch(url, this.getForm(i, store), {
           headers: {'content-type': 'multipart/form-data'}
         }).then(() => {
-          console.log(`OK: patchData: ${store.related}`);
         }).catch(error => {this.message('error', error, url);});
       });
     },
     getForm(image, store) {
-      let gallery = store ? store.string : image.gallery.toLowerCase();
       let formData = new FormData();
       formData.append('id', image.id);
       formData.append('position', image.position);
-      formData.append('gallery', gallery);
+      formData.append('gallery', store.related);
       return formData;
     },
 

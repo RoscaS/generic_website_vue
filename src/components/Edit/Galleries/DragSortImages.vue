@@ -15,7 +15,7 @@
                class="image-slot"
                :key="image.id">
             <ImageOverlay :image="image" :edit="edit">
-              <img :src="image.url">
+              <img :src="image.url" @mousedown="checkFull(image.gallery)">
             </ImageOverlay>
           </div>
         </transition-group>
@@ -47,10 +47,14 @@
       };
     },
     computed: {
+      editable() {
+        return !this.store.isLocked;
+      },
       dragOptions() {
         return {
           animation: 250,
           group: 'description',
+          disabled: !this.editable,
           ghostClass: 'none'
         };
       },
@@ -63,20 +67,35 @@
         }
         this.$nextTick(() => {
           this.edit.update();
+          this.unlockGalleries();
         });
       }
     },
     methods: {
-      onMove({relatedContext, draggedContext}) {
-        // console.log(this.isDragging)
+      onMove({relatedContext, draggedContext}) {},
+
+      checkFull(galleryName) {
+        // Check if the other gallery is full and lock it if true
+        let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
+        let clickedGallery = this.edit.getStore(galleryName);
+        let otherGallery = galleries.filter(i => i != clickedGallery)[0];
+        if (otherGallery.state.images.length >= otherGallery.limit) {
+          otherGallery.lock();
+        }
       },
+      unlockGalleries() {
+        // this.edit.primaryStore.full = false;
+        // this.edit.secondaryStore.full = false;
+        this.edit.primaryStore.unlock();
+        this.edit.secondaryStore.unlock();
+      },
+
     },
   };
 </script>
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
-
 
   .level {
     overflow: auto;

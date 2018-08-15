@@ -106,8 +106,6 @@
     p {
       font-size: 1.2em;
       text-align: center;
-      /*padding-top: 20px;*/
-      /*padding-bottom: 20px;*/
     }
 
     &:hover {
@@ -132,7 +130,6 @@
     opacity: 0; // invisible but it's there!
     width: 75%;
     height: 65%;
-    /*height: 138px;*/
     position: absolute;
     cursor: pointer;
   }

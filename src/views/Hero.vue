@@ -116,7 +116,8 @@
 
     h2 {
       font-size: 28px;
-      font-family: 'Montserrat', sans-serif;
+      /*font-family: 'Montserrat', sans-serif;*/
+      font-family: 'Open Sans', sans-serif;
       font-weight: 900;
       word-spacing: 0;
       line-height: 39.6px;
@@ -125,7 +126,7 @@
     }
 
     p {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 25px;
       text-decoration: none solid rgb(255, 255, 255);
       word-spacing: 0;

@@ -11,7 +11,7 @@
       <div class="content">
         <transition name="fade">
           <div v-if="!edit.selectedImage">
-            <h1>Edition: {{ store.title }}</h1>
+            <h1>Edition: {{ store.related }}</h1>
 
             <div class="card secondary">
               <header class="card-header">
@@ -32,30 +32,17 @@
                     <div class="level">
                       <div class="leve-left">
                         <div class="level-item">
-                          <h2>{{ store.title }}</h2>
+                          <h2>{{ store.related}}</h2>
                         </div>
                       </div>
 
-
-                      <div class="field level-item auto-scroll"
-                           v-if="store.related=='Carousel'">
-                        <b-switch v-model="store.options.autoScroll"
-                                  type="is-primary"
-                                  size="is-small">
-                          <small>Défilement automatique</small>
-                        </b-switch>
-                        <transition name="fade">
-                          <b-field class="timer"
-                                   v-if="store.options.autoScroll">
-                            <b-input v-model="store.options.scrollTimer"
-                                     type="number"
-                                     min="5"
-                                     max="60">
-                            </b-input>
-                          </b-field>
-                        </transition>
+                      <div class="level-item">
+                        ({{ edit.getCount(store.related) }} / {{ store.limit }})
                       </div>
 
+                      <div class="level-item">
+                        <GalleryOptions :store="store"/>
+                      </div>
 
                     </div>
                   </div>
@@ -70,10 +57,10 @@
                                 :classes="layout.classes"/>
                     </b-tab-item>
                     <b-tab-item icon="upload"
-                                :disabled="loading">
+                                :disabled="loading || store.isFull()">
                       <FileUpload :edit="edit"
                                   :store="store"
-                                  :gallery="store.string"/>
+                                  :gallery="store.related"/>
                     </b-tab-item>
                   </b-tabs>
                 </div>
@@ -92,6 +79,7 @@
   import FileUpload from '../FileUpload';
   import GalleriesEditStore from './GalleriesEditStore';
   import GalleriesDropDown from './GalleriesDropDown';
+  import GalleryOptions from './GalleryOptions';
   import DescriptionPopup from './DescriptionPopup';
 
   export default {
@@ -101,6 +89,7 @@
       GalleriesDropDown,
       FileUpload,
       SpinLine,
+      GalleryOptions,
       DescriptionPopup,
     },
     props: {
@@ -126,6 +115,10 @@
       };
     },
     computed: {
+      primaryStore: {
+        get() { return this.edit.primaryStore; },
+        set(store) { this.edit.primaryStore = store;},
+      },
       secondaryStore: {
         get() { return this.edit.secondaryStore; },
         set(store) { this.edit.secondaryStore = store;},
@@ -138,17 +131,18 @@
         return this.edit.loading;
       },
       layout() {
-        return this.layoutData[this.store.string];
+        return this.layoutData[this.store.related];
       },
       layoutData() {
         return {
-          events: {classes: this.columnsClasses},
-          carousel: {classes: this.levelClasses},
-          parallax: {classes: this.levelClasses},
+          Events: {classes: this.columnsClasses},
+          Carousel: {classes: this.levelClasses},
+          Parallax: {classes: this.levelClasses},
         };
       },
     },
     created() {
+      this.primaryStore = this.store;
       this.secondaryStore = this.edit.getStore('Stock');
     }
   };
@@ -156,17 +150,6 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
-
-  .auto-scroll {
-    small {
-      margin-right: 20px;
-    }
-    .timer {
-      margin-top: -20px;
-      width: 60px;
-      height: 15px;
-    }
-  }
 
   h1 {
     z-index: 1000;

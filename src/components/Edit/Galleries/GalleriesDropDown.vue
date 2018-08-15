@@ -1,7 +1,7 @@
 <template>
   <b-dropdown mobile-modal>
     <button class="button is-info" slot="trigger">
-      <p>{{ secondaryStore.title }}</p>
+      <p>{{ secondaryStore.related }}</p>
       <i class="fa fa-fw fa-sort-down"></i>
     </button>
     <b-dropdown-item v-for="gallery in dropDown"
@@ -9,7 +9,7 @@
                      class="no-tr"
                      @click="secondaryStore = gallery"
                      :disabled="disabled(gallery)">
-      {{ gallery.title }}
+      {{ gallery.related }}
     </b-dropdown-item>
   </b-dropdown>
 </template>
