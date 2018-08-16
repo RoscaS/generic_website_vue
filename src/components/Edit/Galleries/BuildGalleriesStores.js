@@ -1,4 +1,4 @@
-class GalleryObject {
+class Gallery {
   constructor(name) {
     this.state = {images: []};
     this.related = name;
@@ -13,16 +13,19 @@ class GalleryObject {
   unlock = () => this.isLocked = false;
 }
 
-
-function BuildGalleriesStores() {
-  let list = [
-    new GalleryObject('Stock'),
-    new GalleryObject('Carousel'),
-    new GalleryObject('Events'),
-    new GalleryObject('Parallax'),
-  ];
-  list[1]['options'] = {autoScroll: false, scrollTimer: 10};
-  return list;
+class Carousel extends Gallery {
+  constructor(name) {
+    super(name);
+    this.options = {autoScroll: false, scrollTimer: 10};
+  }
 }
 
-export default BuildGalleriesStores;
+function Galleries(lst = []) {
+  let galleries = ['Stock', 'Carousel', 'Events', 'Parallax', 'Articles'];
+  galleries.forEach(i => {
+    lst.push(i == 'Carousel' ? new Carousel(i) : new Gallery(i));
+  });
+  return lst;
+}
+
+export default Galleries;

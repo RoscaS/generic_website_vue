@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import GalleriesEditStore from './GalleriesEditStore';
+  import GalleriesStore from './GalleriesStore';
   import ImagesCounter from './ImagesCounter';
 
   export default {
@@ -37,7 +37,7 @@
     },
     data() {
       return {
-        edit: GalleriesEditStore,
+        edit: GalleriesStore,
       };
     },
     computed: {

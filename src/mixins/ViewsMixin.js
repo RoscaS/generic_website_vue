@@ -1,18 +1,18 @@
 import BaseLayout from '../views/Layouts/BaseLayout';
-import TextsEditStore from '../components/Edit/Texts/TextsEditStore';
-import GalleriesEditStore from '../components/Edit/Galleries/GalleriesEditStore';
+import TextsStore from '../components/Edit/Texts/TextsStore';
+import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
 
 
 export default {
   components: {BaseLayout},
   data() {
     return {
-      editTypes: {text: TextsEditStore, image: GalleriesEditStore},
+      editTypes: {text: TextsStore, image: GalleriesStore},
     };
   },
   computed: {
     edit() { return this.editTypes[this.type] },
-    store() { return this.edit.getStore(this.component); },
+    store() { return this.edit.getGallery(this.component); },
     state() { return this.store.state; },
     tools() { return this.$Global.Tools; },
   },

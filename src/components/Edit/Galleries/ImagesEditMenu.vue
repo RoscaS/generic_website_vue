@@ -86,7 +86,7 @@
   import {SpinLine} from 'vue-loading-spinner';
   import DragSort from './DragSortImages';
   import FileUpload from '../FileUpload';
-  import GalleriesEditStore from './GalleriesEditStore';
+  import GalleriesStore from './GalleriesStore';
   import GalleriesDropDown from './GalleriesDropDown';
   import GalleryOptions from './GalleryOptions';
   import DescriptionPopup from './DescriptionPopup';
@@ -108,7 +108,7 @@
     },
     data() {
       return {
-        edit: GalleriesEditStore,
+        edit: GalleriesStore,
         levelClasses: [
           'level is-mobile',
           'level-left',
@@ -154,7 +154,7 @@
     },
     created() {
       this.primaryStore = this.store;
-      this.secondaryStore = this.edit.getStore('Stock');
+      this.secondaryStore = this.edit.getGallery('Stock');
     }
   };
 </script>

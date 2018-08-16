@@ -31,7 +31,7 @@
 <script>
   import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
   import draggable from 'vuedraggable';
-  import GalleriesEditStore from './GalleriesEditStore';
+  import GalleriesStore from './GalleriesStore';
   import ImageOverlay from './ImageOverlay';
 
 
@@ -44,7 +44,7 @@
     },
     data() {
       return {
-        edit: GalleriesEditStore,
+        edit: GalleriesStore,
         isDragging: false,
         delayedDragging: false,
         reOrder: false,
@@ -81,7 +81,7 @@
       checkFull(galleryName) {
         // Check if the other gallery is full and lock it if true
         let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
-        let clickedGallery = this.edit.getStore(galleryName);
+        let clickedGallery = this.edit.getGallery(galleryName);
         let otherGallery = galleries.filter(i => i != clickedGallery)[0];
         if (otherGallery.state.images.length >= otherGallery.limit) {
           otherGallery.lock();

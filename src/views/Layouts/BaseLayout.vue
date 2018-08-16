@@ -42,7 +42,7 @@
   import EditIcon from '../../components/Edit/EditIcon';
   import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
   import FieldsLayout from './FieldsLayout.vue';
-  import TextsEditStore from '../../components/Edit/Texts/TextsEditStore';
+  import TextsStore from '../../components/Edit/Texts/TextsStore';
 
   export default {
     name: "BaseLayout",
@@ -51,7 +51,7 @@
     },
     components: {EditIcon, TextsEditMenu, FieldsLayout},
     computed: {
-      edit() { return TextsEditStore; },
+      edit() { return TextsStore; },
     }
   };
 </script>

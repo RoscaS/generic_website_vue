@@ -1,12 +1,12 @@
-import BuildGalleriesStores from './BuildGalleriesStores';
+import Galleries from './BuildGalleriesStores';
 import axios from "axios";
 import Vue from 'vue';
 
-const GalleriesEditStore = new Vue({
-  name: 'GalleriesEditStore',
+const GalleriesStore = new Vue({
+  name: 'GalleriesStore',
   data: {
     type: 'image',
-    state: new BuildGalleriesStores,
+    state: new Galleries,
     ActiveTab: 0,
     Loading: false,
     SecondaryStore: null,
@@ -42,18 +42,21 @@ const GalleriesEditStore = new Vue({
     clearSelectedImage() { this.selectedImage = null; },
     message(type) { this.$Global.Tools.message(type);},
 
-
-    getStore(name) {
+    getGallery(name) {
       let capitalized = name[0].toUpperCase() + name.slice(1);
       return this.state.filter(i => i.related == capitalized)[0];
     },
 
+    getImage(gallery, id) {
+      return this.getGallery(gallery).state.images.find(i => i.id == id);
+    },
+
     getCount(name) {
-      return this.getStore(name).state.images.length;
+      return this.getGallery(name).state.images.length;
     },
 
     isFull(name) {
-      let store = this.getStore(name);
+      let store = this.getGallery(name);
       return store.state.images.length >= store.limit
     },
 
@@ -152,7 +155,7 @@ const GalleriesEditStore = new Vue({
     },
 
     deleteImage(image) {
-      let store = this.getStore(image.gallery);
+      let store = this.getGallery(image.gallery);
       let index = store.state.images.indexOf(image);
       let url = `images/${image.id}/`;
       let options = new this.$Global.Tools.SnackBarOptions('delete');
@@ -175,5 +178,5 @@ const GalleriesEditStore = new Vue({
   },
 });
 
-export default GalleriesEditStore;
+export default GalleriesStore;
 

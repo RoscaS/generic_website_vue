@@ -19,7 +19,7 @@
 
 <script>
   import FileUpload from '../../components/Edit/FileUpload';
-  import TextsEditStore from '../../components/Edit/Texts/TextsEditStore';
+  import TextsStore from '../../components/Edit/Texts/TextsStore';
 
   export default {
     name: "FieldsLayout",
@@ -28,7 +28,7 @@
       store: {type: Object},
     },
     computed: {
-      edit() { return TextsEditStore; },
+      edit() { return TextsStore; },
       currentTab: {
         get() { return this.edit.activeTab; },
         set(value) {

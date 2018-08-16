@@ -2,7 +2,7 @@ import BuildTextsStores from './BuildTextsStores';
 import axios from "axios";
 import Vue from 'vue';
 
-const TextsEditStore = new Vue({
+const TextsStore = new Vue({
   name: 'TextsEditStore',
   data: {
     type: 'text',
@@ -34,7 +34,7 @@ const TextsEditStore = new Vue({
     message(type) { this.$Global.Tools.message(type);},
 
 
-    getStore(name) {
+    getGallery(name) {
       return this.state.filter(i => i.related == name)[0];
     },
 
@@ -57,7 +57,7 @@ const TextsEditStore = new Vue({
 
     update() {
       this.setLoading();
-      let store = this.getStore(this.component);
+      let store = this.getGallery(this.component);
       let data = {};
       for (let i in store.state) {
         data[i] = store.state[i].data
@@ -75,7 +75,7 @@ const TextsEditStore = new Vue({
     },
 
     storeIsDirty() {
-      let store = this.getStore(this.component);
+      let store = this.getGallery(this.component);
       for (let i in store.state) {
         if (store.state[i].data !== store.backup[i]) {
           return true
@@ -85,7 +85,7 @@ const TextsEditStore = new Vue({
     },
 
     recoverData() {
-      let store = this.getStore(this.component);
+      let store = this.getGallery(this.component);
       for (let i in store.state) {
         store.state[i].data = store.backup[i]
       }
@@ -118,4 +118,4 @@ const TextsEditStore = new Vue({
   }
 });
 
-export default TextsEditStore;
+export default TextsStore;

@@ -11,7 +11,7 @@
 <script>
   import ViewsMixin from '../../mixins/ViewsMixin';
   import EventsImages from './EventsImages';
-  import GalleriesEditStore from '../../components/Edit/Galleries/GalleriesEditStore';
+  import GalleriesStore from '../../components/Edit/Galleries/GalleriesStore';
   import EditIcon from '../../components/Edit/EditIcon';
 
 
@@ -23,8 +23,8 @@
       return {
         component: 'Events',
         type: 'text',
-        imagesEdit: GalleriesEditStore,
-        imagesStore: GalleriesEditStore.getStore('Events'),
+        imagesEdit: GalleriesStore,
+        imagesStore: GalleriesStore.getGallery('Events'),
       };
     },
   };

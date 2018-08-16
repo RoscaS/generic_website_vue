@@ -24,7 +24,7 @@
 <script>
   import {SpinLine} from 'vue-loading-spinner';
   import ValidationBtns from '../ValidationButtons';
-  import TextsEditStore from './TextsEditStore';
+  import TextsStore from './TextsStore';
 
   import 'vue2-animate/dist/vue2-animate.min.css';
 
@@ -37,7 +37,7 @@
     data() {
       return {
         activeTab: 0,
-        edit: TextsEditStore
+        edit: TextsStore
       };
     },
     methods: {

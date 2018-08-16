@@ -34,23 +34,25 @@
   import Review from '../views/Review';
   import Footer from '../views/Footer';
 
-
-  import GalleriesEditStore
-    from '../components/Edit/Galleries/GalleriesEditStore';
-
-  import TextsEditStore
-    from '../components/Edit/Texts/TextsEditStore';
+  import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
+  import TextsStore from '../components/Edit/Texts/TextsStore';
+  import ArticlesStore from '../components/Edit/Articles/ArticlesStore';
 
   export default {
     name: "Public",
     components: {
       Login, Parallax, PromoRibbon, Header, Navbar, Carousel, Presentation,
-      Hero, Events, Articles, Contact, Review, Footer,
-      GalleriesEditStore, TextsEditStore,
+      Hero, Events, Articles, Contact, Review, Footer
     },
-    mounted() {
-      TextsEditStore.fetchData();
-      GalleriesEditStore.fetchData();
+    created() {
+      TextsStore.fetchData();
+      GalleriesStore.fetchData();
+      // ArticlesStore.fetchData();
+      const Articles = ArticlesStore;
+      setTimeout(() => {
+        console.log(ArticlesStore)
+      }, 500);
+
     }
   };
 </script>
