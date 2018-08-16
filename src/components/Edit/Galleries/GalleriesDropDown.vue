@@ -9,16 +9,29 @@
                      class="no-tr"
                      @click="secondaryStore = gallery"
                      :disabled="disabled(gallery)">
-      {{ gallery.related }}
+      <div class="level">
+        <div class="level-left">
+          <div style="float: left">
+            {{ gallery.related }}
+          </div>
+        </div>
+        <div class="level-righ">
+          <div style="float: right">
+            <ImagesCounter class="image-counter" :store="gallery"/>
+          </div>
+        </div>
+      </div>
     </b-dropdown-item>
   </b-dropdown>
 </template>
 
 <script>
   import GalleriesEditStore from './GalleriesEditStore';
+  import ImagesCounter from './ImagesCounter';
 
   export default {
     name: "GalleriesDropDown",
+    components: {ImagesCounter},
     props: {
       store: {type: Object}
     },
@@ -46,6 +59,10 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  .image-counter {
+    margin-right: -28px;
+  }
 
   button {
     p {

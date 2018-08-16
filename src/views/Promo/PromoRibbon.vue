@@ -14,7 +14,11 @@
     </div>
 
     <VueSlideUpDown :active="isOpen" :duration="1000">
-      <Promo></Promo>
+      <transition enter-active-class="fadeInDown"
+                  leave-active-class="fadeOutUp">
+        <Promo v-if="animateContent">
+        </Promo>
+      </transition>
     </VueSlideUpDown>
 
   </div>
@@ -22,22 +26,27 @@
 
 <script>
   import VueSlideUpDown from 'vue-slide-up-down';
-  import Promo from './Promo'
+  import Promo from './Promo';
 
 
   export default {
     name: "PromoRibbon",
-    components: { Promo, VueSlideUpDown },
+    components: {Promo, VueSlideUpDown},
     data() {
       return {
         isOpen: false,
+        animateContent: false,
+        contentAnimation: false,
+        masterTimer: false,
         timeout: null,
         isLocked: false,
         hoverTitle: "Cliquez pour vérouiller.",
       };
     },
     computed: {
-      isTouch() { return window.innerWidth <= 1024; }
+      isTouch() {
+        return window.innerWidth <= 1024;
+      },
     },
     methods: {
       checkScroll() {
@@ -47,20 +56,27 @@
       },
       showPromo() {
         if (!this.isLocked) {
-          this.timeout = setTimeout(() => {this.isOpen = true;}, 200);
+          this.masterTimer = true;
+          setTimeout(() => { this.masterTimer = false; }, 1000);
+          setTimeout(() => { this.animateContent = true; }, 100);
+          this.timeout = setTimeout(() => { this.isOpen = true; }, 200);
         }
       },
       hidePromo() {
         clearTimeout(this.timeout);
-        if (!this.isLocked) {
+        if (!this.isLocked && !this.masterTimer) {
+          this.animateContent = false;
           this.isOpen = false;
+        } else {
+          setTimeout(() => { this.hidePromo(); }, 10);
         }
       },
       lockPromo() {
         if (this.isLocked) {
           this.hoverTitle = 'Cliquez pour vérouiller.';
           this.isLocked = false;
-          this.isOpen = false;
+          this.animateContent = false;
+          setTimeout(() => { this.isOpen = false;}, 50);
           window.removeEventListener('scroll', this.checkScroll);
           if (!this.isTouch) {
             this.$toast.open(
@@ -72,7 +88,8 @@
         else {
           this.hoverTitle = 'Cliquez pour dévérouiller.';
           this.isLocked = true;
-          this.isOpen = true;
+          setTimeout(() => { this.animateContent = true; }, 100);
+          this.timeout = setTimeout(() => { this.isOpen = true; }, 200);
           window.addEventListener('scroll', this.checkScroll);
           if (!this.isTouch) {
             this.$toast.open(
@@ -87,8 +104,6 @@
 </script>
 
 <style scoped lang="scss">
-
-
   @import '../../../static/sass/global';
 
   .corner-ribbon {

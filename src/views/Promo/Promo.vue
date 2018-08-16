@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container collapse-content">
+    <div class="container">
       <EditIcon :store="store" :edit="edit"/>
       <div class="columns content">
         <div class="column left is-offset-2 is-4">
@@ -54,17 +54,18 @@
   }
 
   .container {
-    height: 400px;
-    margin-top: 150px;
+    height: 370px;
+    margin-top: 100px;
 
     .column {
       h2 {
         display: block;
+        margin-bottom: 5px;
       }
       p {
         display: block;
-        font-size: 18px;
-        line-height: 28px;
+        font-size: 16px;
+        line-height: 22px;
       }
     }
 

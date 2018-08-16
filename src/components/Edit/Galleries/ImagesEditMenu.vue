@@ -16,8 +16,16 @@
             <div class="card secondary">
               <header class="card-header">
                 <div class="card-header-title">
-                  <GalleriesDropDown :store="store"/>
+                  <div class="level">
+                    <div class="level-item">
+                      <GalleriesDropDown :store="store"/>
+                    </div>
+                    <div class="level-item top-counter">
+                      <ImagesCounter :store="secondaryStore" :verbose="true"/>
+                    </div>
+                  </div>
                 </div>
+
               </header>
               <div class="card-content">
                 <DragSort :store="secondaryStore"
@@ -37,7 +45,7 @@
                       </div>
 
                       <div class="level-item">
-                        ({{ edit.getCount(store.related) }} / {{ store.limit }})
+                        <ImagesCounter :store="store" :verbose="true"/>
                       </div>
 
                       <div class="level-item">
@@ -57,6 +65,7 @@
                                 :classes="layout.classes"/>
                     </b-tab-item>
                     <b-tab-item icon="upload"
+                                :title="'Poulette'"
                                 :disabled="loading || store.isFull()">
                       <FileUpload :edit="edit"
                                   :store="store"
@@ -81,6 +90,7 @@
   import GalleriesDropDown from './GalleriesDropDown';
   import GalleryOptions from './GalleryOptions';
   import DescriptionPopup from './DescriptionPopup';
+  import ImagesCounter from './ImagesCounter';
 
   export default {
     name: "ImagesEditMenu",
@@ -91,6 +101,7 @@
       SpinLine,
       GalleryOptions,
       DescriptionPopup,
+      ImagesCounter,
     },
     props: {
       store: {type: Object},
@@ -179,9 +190,6 @@
         margin-right: 20px;
       }
     }
-    .card-content {
-      /*padding-left: 0px;*/
-    }
   }
 
   .loading-animation {
@@ -189,6 +197,10 @@
     top: 80%;
     left: 49%;
     transform: scale(3.5);
+  }
+
+  .top-counter {
+    margin-left: 20px;
   }
 
 </style>

@@ -1,21 +1,21 @@
 <template>
-<div class="wrapper">
-  <div v-if="store.related=='Carousel'">
-    <div class="level">
-      <div class="level-item">
-        <div class="field auto-scroll">
-          <b-switch v-model="store.options.autoScroll"
-                    type="is-info"
-                    size="is-small">
-          </b-switch>
+  <div class="wrapper">
+    <div v-if="store.related=='Carousel'">
+      <div class="level">
+        <div class="level-item">
+          <div class="block">
+            <b-switch v-model="store.options.autoScroll"
+                      type="is-info"
+                      size="is-small">
+            </b-switch>
+          </div>
         </div>
-      </div>
-      <div class="level-item">
-        <small class="text">Défilement automatique</small>
+        <div class="level-item">
+          <small class="text">Défilement automatique</small>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -30,7 +30,10 @@
 
   .wrapper {
     margin-left: 20px;
-    margin-bottom: -3px;
+  }
+
+  .block {
+    margin-bottom: -5px;
   }
 
   .timer {

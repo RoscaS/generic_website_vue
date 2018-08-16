@@ -1,19 +1,23 @@
 <template>
-  <div :class="classes[0]">
+  <div :class="classes[0]" class="wrapper">
     <div :class="classes[1]">
       <draggable v-model="store.state.images"
                  :options="dragOptions"
                  :move="onMove"
                  @start="isDragging=true"
                  @end="isDragging=false">
+
         <transition-group type="transition"
                           :class="classes[2]"
                           tag="div"
                           :name="reOrder? 'flip-store': ''">
+
+
           <div v-for="image in store.state.images"
                :class="classes[3]"
                class="image-slot"
                :key="image.id">
+
             <ImageOverlay :image="image" :edit="edit">
               <img :src="image.url" @mousedown="checkFull(image.gallery)">
             </ImageOverlay>
@@ -22,10 +26,10 @@
       </draggable>
     </div>
   </div>
-
 </template>
 
 <script>
+  import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
   import draggable from 'vuedraggable';
   import GalleriesEditStore from './GalleriesEditStore';
   import ImageOverlay from './ImageOverlay';
@@ -33,7 +37,7 @@
 
   export default {
     name: "DragSortImages",
-    components: {draggable, ImageOverlay},
+    components: {draggable, ImageOverlay, Scrolly, ScrollyViewport, ScrollyBar},
     props: {
       classes: {type: Array},
       store: {type: Object},
@@ -96,6 +100,10 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  .wrapper {
+    margin-right: 10px;
+  }
 
   .level {
     overflow: auto;
