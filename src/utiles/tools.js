@@ -1,15 +1,56 @@
 import Vue from 'vue';
 import {Toast} from 'buefy';
 
-
-
 const message = {
-  error: {type: 'is-danger', message: "Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur."},
-  updated: {type: 'is-success', message: "Donnée(s) mise(s) à jour!"},
-  cancel: {type: 'is-warning', message: "Modifications annulées."},
-  imageUp: {type: 'is-success', message: "Image chargée sur le serveur."},
-  imageDel: {type: 'is-success', message: "Image supprimée du serveur."},
-  imageErr: {type: 'is-danger', message: "Une erreur est survenue. jpg ou png uniquement."},
+  error: {
+    type: 'is-danger',
+    position: 'is-bottom',
+    message: "Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur."
+  },
+  updated: {
+    type: 'is-success',
+    position: 'is-bottom',
+    message: "Donnée(s) mise(s) à jour!"
+  },
+  cancel: {
+    type: 'is-warning',
+    position: 'is-bottom',
+    message: "Modifications annulées."
+  },
+
+  imageUp: {
+    type: 'is-success',
+    position: 'is-bottom',
+    message: "Image chargée sur le serveur."
+  },
+  imageDel: {
+    type: 'is-success',
+    position: 'is-bottom',
+    message: "Image supprimée du serveur."
+  },
+  imageMoved: {
+    type: 'is-success',
+    position: 'is-bottom',
+    message: "Nouvelles positions enregistrées."
+  },
+  imageErr: {
+    type: 'is-danger',
+    position: 'is-bottom',
+    message: "Une erreur est survenue. jpg ou png uniquement."
+  },
+
+
+
+  autoScrollOn: {
+      type: 'is-success',
+      position: 'is-top',
+      message: "Défilement automatique activé."
+    },
+  autoScrollOff: {
+      type: 'is-danger',
+      position: 'is-top',
+      message: "Défilement automatique désactivé."
+    },
 };
 
 const snackBarMessage = {
@@ -23,10 +64,11 @@ const Tools = new Vue({
   methods: {
     message(type, error = false, url) {
       Toast.open({
+        queue: false,
         duration: 3000,
         message: message[type].message,
         type: message[type].type,
-        position: 'is-bottom',
+        position: message[type].position,
       });
       if (error) console.log(`error @: ${url}\n${error}`)
     },

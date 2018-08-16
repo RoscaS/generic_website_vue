@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import {Toast} from 'buefy';
+
   export default {
     name: "ImagesCounter",
     props: {
@@ -18,8 +20,8 @@
     data() {
       return {
         colors: [
-          'is-danger',
           'is-warning',
+          'is-success',
           'is-success',
         ],
       }
@@ -31,6 +33,20 @@
         let delta = this.total - this.current;
         if (delta >= 2) delta = 2;
         return this.colors[delta]
+      }
+    },
+    watch: {
+      current(value) {
+        if (this.total == value && this.verbose && !this.timeOut) {
+          let name = this.store.related;
+          Toast.open({
+            queue: false,
+            duration: 3000,
+            message: `Attention, la gallerie "${name}" est pleine!`,
+            type: 'is-warning',
+            position: 'is-top',
+          })
+        }
       }
     },
     methods: {

@@ -88,8 +88,6 @@
         }
       },
       unlockGalleries() {
-        // this.edit.primaryStore.full = false;
-        // this.edit.secondaryStore.full = false;
         this.edit.primaryStore.unlock();
         this.edit.secondaryStore.unlock();
       },

@@ -102,6 +102,7 @@ const GalleriesEditStore = new Vue({
         this.patchData(i);
       });
       this.loading = false;
+      this.message('imageMoved');
     },
     updateGalleryField(store) {
       store.state.images.forEach(i => {

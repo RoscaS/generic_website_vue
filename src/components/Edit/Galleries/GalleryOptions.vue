@@ -3,7 +3,8 @@
     <div v-if="store.related=='Carousel'">
       <div class="level">
         <div class="level-item">
-          <div class="block">
+          <div class="block"
+               @click="message(!store.options.autoScroll)">
             <b-switch v-model="store.options.autoScroll"
                       type="is-info"
                       size="is-small">
@@ -22,6 +23,12 @@
   export default {
     name: "GalleryOptions",
     props: {store: {type: Object}},
+    methods: {
+      message(value) {
+        let message = value ? 'autoScrollOn' : 'autoScrollOff';
+        this.$Global.Tools.message(message);
+      }
+    }
   };
 </script>
 
