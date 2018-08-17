@@ -31,35 +31,35 @@ class Description extends Input {
 }
 
 
+class Item {
+  constructor(image) {
+    this.id = image.id;
+    this.name = new Name(image.name);
+    this.price = new Price(image.price);
+    this.position = image.position;
+    this.category = image.category;
+    this.description = new Description(image.description, 200, 2);
+    this.image = ((x) => GalleriesStore.getImage('Articles', x))(image.image)
+  }
+}
+
+
 class Category {
-  constructor(options) {
-    this.id = options.id;
-    this.slug = options.slug;
-    this.name = new Name(options.name);
-    this.description = new Description(options.description, 1000, 4);
-    this.position = options.position;
-    this.items = this.setItems(options.items);
+  constructor(category) {
+    this.id = category.id;
+    this.slug = category.slug;
+    this.name = new Name(category.name);
+    this.description = new Description(category.description, 1000, 4);
+    this.position = category.position;
+    this.items = this.setItems(category.items);
   }
 
   setItems(items, lst = []) {
-    items.forEach(item => {lst.push(new Item(item));});
+    items.forEach(i => {lst.push(new Item(i));});
     return lst
   }
-
 }
 
-class Item {
-  constructor(options) {
-    this.id = options.id;
-    this.name = new Name(options.name);
-    this.price = new Price(options.price);
-    this.position = options.position;
-    this.category = options.category;
-    this.description = new Description(options.description, 200, 2);
-    this.image = ((x) => GalleriesStore.getImage('Articles', x))(options.image)
-  }
-}
 
-export {
-  Category,
-};
+
+export {Category};

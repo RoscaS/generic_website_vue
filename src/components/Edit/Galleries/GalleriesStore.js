@@ -60,9 +60,8 @@ const GalleriesStore = new Vue({
       return store.state.images.length >= store.limit
     },
 
-    fetchData(store = null) {
-      let stores = store ? [store] : this.state;
-      stores.forEach(i => {
+    fetchData() {
+      this.state.forEach(i => {
         axios.get(i.url).then(response => {
           i.limit = response.data.limit;
           i.state.images.length = 0;

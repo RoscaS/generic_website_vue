@@ -1,7 +1,7 @@
 <template>
   <div :class="classes[0]" class="wrapper">
     <div :class="classes[1]">
-      <draggable v-model="store.state.images"
+      <draggable v-model="store.images"
                  :options="dragOptions"
                  :move="onMove"
                  @start="isDragging=true"
@@ -13,13 +13,13 @@
                           :name="reOrder? 'flip-store': ''">
 
 
-          <div v-for="image in store.state.images"
+          <div v-for="image in store.images"
                :class="classes[3]"
                class="image-slot"
                :key="image.id">
 
             <ImageOverlay :image="image" :edit="edit">
-              <img :src="image.url" @mousedown="checkFull(image.gallery)">
+              <img :src="image.image" @mousedown="checkFull(image.gallery)">
             </ImageOverlay>
           </div>
         </transition-group>
@@ -31,7 +31,7 @@
 <script>
   import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
   import draggable from 'vuedraggable';
-  import GalleriesStore from './GalleriesStore';
+  import GalleriesStore from './GGalleriesStore';
   import ImageOverlay from './ImageOverlay';
 
 
@@ -83,7 +83,7 @@
         let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
         let clickedGallery = this.edit.getGallery(galleryName);
         let otherGallery = galleries.filter(i => i != clickedGallery)[0];
-        if (otherGallery.state.images.length >= otherGallery.limit) {
+        if (otherGallery.count >= otherGallery.limit) {
           otherGallery.lock();
         }
       },

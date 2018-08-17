@@ -1,15 +1,15 @@
 <template>
   <transition name="bounceDown">
-    <div class="card popup" v-if="edit.selectedImage">
+    <div class="card popup" v-if="selectedImage">
       <div class="card-image">
-        <img :src="edit.selectedImage.url">
+        <img :src="selectedImage.image">
       </div>
       <div class="card-content">
         <div class="content">
-          <p>{{ edit.selectedImage.description }}</p>
+          <p>{{ selectedImage.description }}</p>
           <b-field type="is-info" label="Description:">
             <b-input type="text"
-                     v-model="edit.selectedImage.description"
+                     v-model="selectedImage.description"
                      :maxlength="100">
             </b-input>
           </b-field>
@@ -33,22 +33,27 @@
 </template>
 
 <script>
-  import ValidationBtns from '../ValidationButtons';
 
   export default {
     name: "DescriptionPopup",
-    components: {ValidationBtns},
     props: {
       edit: {type: Object},
     },
+    computed: {
+      selectedImage() { return this.edit.selectedImage }
+    },
     methods: {
       validate() {
-        this.edit.updateImage();
+        this.edit.selectedImage.patch();
+        this.edit.clearSelectedImage();
       },
       cancel() {
         this.edit.clearSelectedImage();
       },
     },
+    destroyed() {
+      this.edit.clearSelectedImage();
+    }
   };
 </script>
 

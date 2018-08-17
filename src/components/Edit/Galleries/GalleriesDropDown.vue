@@ -1,7 +1,7 @@
 <template>
   <b-dropdown mobile-modal>
     <button class="button is-info" slot="trigger">
-      <p>{{ secondaryStore.related }}</p>
+      <p>{{ secondaryStore.name }}</p>
       <i class="fa fa-fw fa-sort-down"></i>
     </button>
     <b-dropdown-item v-for="gallery in dropDown"
@@ -12,7 +12,7 @@
       <div class="level">
         <div class="level-left">
           <div style="float: left">
-            {{ gallery.related }}
+            {{ gallery.name }}
           </div>
         </div>
         <div class="level-righ">
@@ -26,14 +26,14 @@
 </template>
 
 <script>
-  import GalleriesStore from './GalleriesStore';
+  import GalleriesStore from './GGalleriesStore';
   import ImagesCounter from './ImagesCounter';
 
   export default {
     name: "GalleriesDropDown",
     components: {ImagesCounter},
     props: {
-      store: {type: Object}
+      store: {type: Object},
     },
     data() {
       return {
@@ -46,7 +46,7 @@
         set(store) { this.edit.secondaryStore = store;} ,
       },
       dropDown() {
-        return this.edit.state.filter(i => i != this.store)
+        return this.edit.state.galleries.filter(i => i != this.store)
       },
     },
     methods: {

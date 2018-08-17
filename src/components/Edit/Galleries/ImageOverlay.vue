@@ -19,7 +19,6 @@
 <script>
   import 'vue2-animate/dist/vue2-animate.min.css';
 
-
   export default {
     name: "ImageOverlay",
     props: {
@@ -41,7 +40,7 @@
         setTimeout(() => { this.overlay = false;}, 100);
       },
       deleteImage() {
-        this.edit.deleteImage(this.image)
+        this.image.delete();
       },
       editDescription() {
         this.edit.selectedImage = this.image;

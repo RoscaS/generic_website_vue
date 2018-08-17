@@ -19,7 +19,6 @@
 
 <script>
   import axios from 'axios';
-
   const url = 'images/';
 
   export default {
@@ -35,23 +34,45 @@
     },
 
     methods: {
+      // fileUpload() {
+      //   this.edit.loading = true;
+      //   axios.post(url, this.buildForm(), {
+      //     headers: {'content-type': 'multipart/form-data'},
+      //   }).then(response => {
+      //     setTimeout(() => {
+      //       if (this.gallery !== '_temp') {
+      //         this.commitGallery(response);
+      //       } else {
+      //         this.commitText(response);
+      //       }
+      //       this.edit.loading = false;
+      //     }, 2000);
+      //
+      //   }).catch(error => {
+      //     this.$Global.Tools.message('error', error, url);
+      //   });
+      // },
       fileUpload() {
-        this.edit.loading = true;
-        axios.post(url, this.buildForm(), {
-          headers: {'content-type': 'multipart/form-data'},
-        }).then(response => {
-          setTimeout(() => {
-            if (this.gallery !== '_temp') {
-              this.commitGallery(response);
-            } else {
+        if (this.gallery == '_temp') {
+          this.edit.loading = true;
+          axios.post(url, this.buildForm(), {
+            headers: {'content-type': 'multipart/form-data'},
+          }).then(response => {
+            setTimeout(() => {
               this.commitText(response);
-            }
-            this.edit.loading = false;
-          }, 2000);
+              this.edit.loading = false;
+            }, 2000);
+          }).catch(error => {
+            this.$Global.Tools.message('error', error, url);
+          });
+        }
+        else {
+          this.uploadImage()
+        }
+      },
 
-        }).catch(error => {
-          this.$Global.Tools.message('error', error, url);
-        });
+      uploadImage() {
+        this.edit.uploadImage(this.buildForm(), this.store)
       },
 
       buildForm() {
@@ -62,13 +83,13 @@
         return formData;
       },
 
-      commitGallery(response) {
-        this.edit.pushImage(this.store, [response.data]);
-        this.$Global.Tools.message('imageUp');
-        setTimeout(() => {
-          this.edit.activeTab = 0;
-        }, 500);
-      },
+      // commitGallery(response) {
+      //   this.edit.uploadImage(this.store, [response.data]);
+      //   this.$Global.Tools.message('imageUp');
+      //   setTimeout(() => {
+      //     this.edit.activeTab = 0;
+      //   }, 500);
+      // },
 
       commitText(response) {
         this.$emit('image-preview', response.data);

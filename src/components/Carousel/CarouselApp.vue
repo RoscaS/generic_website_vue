@@ -35,12 +35,14 @@
     computed: {
       slidesCount() { return this.slides.length; },
       autoScroll: {
-        get() { return this.store.options.autoScroll; },
-        set(value) { this.store.options.autoScroll = value; }
-      },
-      scrollTimer: {
-        get() { return this.store.options.scrollTimer; },
-        set(value) { this.store.options.scrollTimer = value; }
+        get() {
+          try {
+            return this.store.carouselAutoScroll;
+          } catch (e) {
+            setTimeout(() => { return this.autoScroll; },10)
+          }
+        },
+        set(value) { this.store.carouselAutoScroll = value; }
       },
     },
     watch: {
@@ -50,7 +52,7 @@
         }
       },
       autoScroll(value) {
-        if (value) { this.cycle() }
+        if (value) { this.cycle(); }
       }
     },
     methods: {
@@ -74,15 +76,15 @@
       },
       cycle() {
         if (this.autoScroll)
-        setTimeout(() => {
-          this.next();
-          this.cycle();
-        }, this.store.options.scrollTimer * 1000)
+          setTimeout(() => {
+            this.next();
+            this.cycle();
+          }, 5000);
       },
     },
     mounted() {
       this.slides = this.$children;
-      this.store.options.autoScroll ? this.cycle() : null;
+      this.autoScroll ? this.cycle() : null;
     },
 
   };

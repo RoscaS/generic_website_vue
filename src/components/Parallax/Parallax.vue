@@ -2,9 +2,7 @@
   <div>
     <EditIcon :store="store" :edit="edit" top="10px"/>
     <section :id="id" class="parallax has-text-centered" :style="style">
-      <h1 class="title">
-        {{ title }}
-      </h1>
+      <h1 class="title">{{ title }}</h1>
     </section>
 
   </div>
@@ -34,14 +32,12 @@
     computed: {
       id() {return `Parallax${this.idx}`;},
       style() {
-        if (this.state.images.length) {
-          this.title = this.state.images[this.idx].description;
+        if (this.storeLoaded()) {
+          this.title = this.images[this.idx].description;
           return {
-            backgroundImage: `url(${this.state.images[this.idx].url})`,
+            backgroundImage: `url(${this.images[this.idx].image})`,
             minHeight: this.height
           };
-        } else {
-          setTimeout(() => { return this.style; }, 2);
         }
       },
     },

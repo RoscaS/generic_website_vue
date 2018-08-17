@@ -7,7 +7,7 @@
                         :key="i"
                         :index="i-1">
           <h2><span></span></h2>
-          <img :src="getUrl(i-1)">
+          <img :src="images[i-1].image">
         </carousel-slide>
       </carouselApp>
     </transition>
@@ -31,19 +31,8 @@
       };
     },
     methods: {
-      getUrl(i) {
-        if (this.state.images.length) {
-          return this.store.state.images[i].url
-        } else {
-          setTimeout(() => { this.getUrl(i) }, 10)
-        }
-      },
       slides() {
-        if (this.state.images.length) {
-          return this.state.images.length;
-        } else {
-          setTimeout(() => { this.slides(); }, 10)
-        }
+        if (this.storeLoaded()) return this.store.count;
       },
     }
   };

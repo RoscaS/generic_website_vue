@@ -11,7 +11,7 @@
       <div class="content">
         <transition name="fade">
           <div v-if="!edit.selectedImage">
-            <h1>Edition: {{ store.related }}</h1>
+            <h1>Edition: {{ store.name }}</h1>
 
             <div class="card secondary">
               <header class="card-header">
@@ -40,7 +40,7 @@
                     <div class="level">
                       <div class="leve-left">
                         <div class="level-item">
-                          <h2>{{ store.related}}</h2>
+                          <h2>{{ store.name}}</h2>
                         </div>
                       </div>
 
@@ -62,14 +62,14 @@
                     <b-tab-item icon="images"
                                 :disabled="loading">
                       <DragSort :store="store"
-                                :classes="layout.classes"/>
+                                :classes="layout"/>
                     </b-tab-item>
                     <b-tab-item icon="upload"
                                 :title="'Poulette'"
                                 :disabled="loading || store.isFull()">
                       <FileUpload :edit="edit"
                                   :store="store"
-                                  :gallery="store.related"/>
+                                  :gallery="store.name"/>
                     </b-tab-item>
                   </b-tabs>
                 </div>
@@ -86,7 +86,8 @@
   import {SpinLine} from 'vue-loading-spinner';
   import DragSort from './DragSortImages';
   import FileUpload from '../FileUpload';
-  import GalleriesStore from './GalleriesStore';
+  // import GalleriesStore from './GalleriesStore';
+  import GalleriesStore from './GGalleriesStore';
   import GalleriesDropDown from './GalleriesDropDown';
   import GalleryOptions from './GalleryOptions';
   import DescriptionPopup from './DescriptionPopup';
@@ -120,16 +121,9 @@
           'columns is-multiline is-mobile',
           'column is-one-quarter'
         ],
-
-        autoScroll: false,
-
       };
     },
     computed: {
-      primaryStore: {
-        get() { return this.edit.primaryStore; },
-        set(store) { this.edit.primaryStore = store;},
-      },
       secondaryStore: {
         get() { return this.edit.secondaryStore; },
         set(store) { this.edit.secondaryStore = store;},
@@ -142,19 +136,23 @@
         return this.edit.loading;
       },
       layout() {
-        return this.layoutData[this.store.related];
+        return this.layoutData[this.store.name];
       },
       layoutData() {
         return {
-          Events: {classes: this.columnsClasses},
-          Carousel: {classes: this.levelClasses},
-          Parallax: {classes: this.levelClasses},
+          Events: this.columnsClasses,
+          Carousel: this.levelClasses,
+          Parallax: this.levelClasses,
         };
       },
     },
     created() {
-      this.primaryStore = this.store;
+      console.log('ici')
+      console.log(this.store);
+      this.edit.primaryStore = this.store;
       this.secondaryStore = this.edit.getGallery('Stock');
+      console.log(this.edit.primaryStore.name)
+      console.log(this.edit.secondaryStore.name)
     }
   };
 </script>

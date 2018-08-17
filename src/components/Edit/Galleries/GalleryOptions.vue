@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <div v-if="store.related=='Carousel'">
+    <div v-if="store.name=='Carousel'">
       <div class="level">
         <div class="level-item">
           <div class="block"
-               @click="message(!store.options.autoScroll)">
-            <b-switch v-model="store.options.autoScroll"
+               @click="message(!store.carouselAutoScroll)">
+            <b-switch v-model="store.carouselAutoScroll"
                       type="is-info"
                       size="is-small">
             </b-switch>

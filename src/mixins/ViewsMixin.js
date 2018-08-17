@@ -1,6 +1,7 @@
 import BaseLayout from '../views/Layouts/BaseLayout';
 import TextsStore from '../components/Edit/Texts/TextsStore';
-import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
+// import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
+import GalleriesStore from '../components/Edit/Galleries/GGalleriesStore';
 
 
 export default {
@@ -13,10 +14,17 @@ export default {
   computed: {
     edit() { return this.editTypes[this.type] },
     store() { return this.edit.getGallery(this.component); },
-    state() { return this.store.state; },
     tools() { return this.$Global.Tools; },
+    images() { return this.storeLoaded() ?  this.store.images : null}
   },
   methods: {
+    storeLoaded() {
+      try {
+        if (this.store.count) return this.store.count
+      } catch (e) {
+        setTimeout(() => { this.storeLoaded() }, 10)
+      }
+    },
     highlighted(idx) {
       return (this.edit.activeTab == idx) && this.checkComponent();
     },
@@ -25,7 +33,7 @@ export default {
     },
     sReveal(side, delay, distance = 100, duration = 1500) {
       return new this.tools.ScrollRevealOptions(
-        side, delay, distance, duration
+        side, delay, `${distance}px`, duration
       )
     },
   },

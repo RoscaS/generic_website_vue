@@ -20,8 +20,9 @@ class ArticlesStore {
       response.data.forEach(category => {
         this.state.categories.push(new Category(category));
       });
-    });
-  }
+    }).catch(error => {console.log(error);})
+  };
+
 }
 
 
