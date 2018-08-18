@@ -32,9 +32,9 @@
     },
     methods: {
       slides() {
-        if (this.storeLoaded()) return this.store.count;
+        if (this.isReady) return this.store.count;
       },
-    }
+    },
   };
 </script>
 

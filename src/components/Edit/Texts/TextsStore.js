@@ -1,120 +1,105 @@
-import BuildTextsStores from './BuildTextsStores';
 import axios from "axios";
-import Vue from 'vue';
+import BuildTextsStores from './BuildTextsStores';
+import {Dialog} from 'buefy';
 
-const TextsStore = new Vue({
-  name: 'TextsEditStore',
-  data: {
-    type: 'text',
-    state: new BuildTextsStores,
-    ActiveTab: 0,
-    Loading: false,
-    active: false,
-    Component: null,
-  },
+axios.defaults.baseURL = 'http://localhost:8000/';
 
-  computed: {
-    activeTab: {
-      get() { return this.ActiveTab; },
-      set(value) { this.ActiveTab = value; }
-    },
-    loading: {
-      get() { return this.Loading; },
-      set(value) { this.Loading = value; }
-    },
-    component: {
-      get() { return this.Component; },
-      set(value) { this.Component = value; }
-    }
-  },
+class TextsStore {
+  constructor() {
+    this.name = 'TextsEditStore';
+    this.type = 'text';
+    this.state = {
+      stores: new BuildTextsStores,
+      activeTab: 0,
+      loading: false,
 
-  methods: {
-    setLoading() { this.loading = true; },
-    unsetLoading() { this.loading = false; },
-    message(type) { this.$Global.Tools.message(type);},
-
-
-    getGallery(name) {
-      return this.state.filter(i => i.related == name)[0];
-    },
-
-    fetchData() {
-      this.state.forEach(store => {
-        axios.get(store.url).then(response => {
-          this.setData(store, response.data);
-        }).catch(error => {
-          this.message('error', error, store.url);
-        });
-      });
-    },
-
-    setData(store, response) {
-      for (let i in store.state) {
-        store.state[i].data = response[i];
-        store.backup[i] = response[i]
-      }
-    },
-
-    update() {
-      this.setLoading();
-      let store = this.getGallery(this.component);
-      let data = {};
-      for (let i in store.state) {
-        data[i] = store.state[i].data
-      }
-      axios.put(store.url, data).then(() => {
-        setTimeout(() => {
-          this.message('updated');
-          this.unsetLoading();
-          this.active = false;
-          setTimeout(() => { this.component = null; }, 1000);
-        }, 2000);
-      }).catch(error => {
-        this.message('error', error, store.url);
-      });
-    },
-
-    storeIsDirty() {
-      let store = this.getGallery(this.component);
-      for (let i in store.state) {
-        if (store.state[i].data !== store.backup[i]) {
-          return true
-        }
-      }
-      return false
-    },
-
-    recoverData() {
-      let store = this.getGallery(this.component);
-      for (let i in store.state) {
-        store.state[i].data = store.backup[i]
-      }
-      this.message('cancel');
-      this.end();
-    },
-
-    snackBar() {
-      let options = new this.$Global.Tools.SnackBarOptions('cancel');
-      options.onAction = this.recoverData;
-      this.$snackbar.open(options);
-    },
-
-    start(component) {
-      this.component = component;
-      this.active = true;
-    },
-
-    end() {
-      if (this.storeIsDirty()) {
-        this.snackBar();
-      } else {
-        this.unsetLoading();
-        this.active = false;
-        setTimeout(() => { this.component = null; }, 1000);
-      }
-    },
-
+      active: false,
+      currentStore: null,
+      dirtyImage: false,
+    };
+    this.fetchData();
   }
-});
 
-export default TextsStore;
+  get loading() {return this.state.loading;}
+  set loading(value) {this.state.loading = value;}
+
+  get activeTab() { return this.state.activeTab; }
+  set activeTab(value) { this.state.activeTab = value; }
+
+  get currentStore() { return this.state.currentStore; }
+  set currentStore(value) { this.state.currentStore = value; }
+
+  setDirtyImage() {this.state.dirtyImage = true;}
+  unsetDirtyImage() {this.state.dirtyImage = false;}
+
+  setLoading() {this.state.loading = true;}
+  unsetLoading() {this.state.loading = false;}
+
+  getStore(name) {
+    return this.state.stores.filter(i => i.name == name)[0];
+  }
+
+  cancelNotification() {
+    Dialog.confirm({
+      message: 'Cette action annulera les modifications!',
+      confirmText: "Continuer",
+      cancelText: 'Sauver & quiter',
+      type: 'is-danger',
+      hasIcon: true,
+      onConfirm: () => {
+        this.currentStore.recoverData();
+        this.end();
+      },
+      onCancel: () => {
+        this.update();
+      }
+    });
+  }
+  fetchData() {
+    this.state.stores.forEach(store => {
+      axios.get(store.url).then(response => {
+        this.setData(store, response.data);
+      });
+    });
+  }
+  setData(store, response) {
+    for (let i in store.state) {
+      store.state[i].data = response[i];
+      store.backup[i] = response[i];
+    }
+    this.getStore('Presentation').setImage();
+    this.getStore('Promo').setImage();
+  }
+  update() {
+    if (this.state.dirtyImage || this.currentStore.isDirty()) {
+      this.setLoading();
+      this.currentStore.update();
+      setTimeout(() => {
+        this.unsetLoading();
+        setTimeout(() => {this.end()}, 500);
+      }, 1500);
+      return;
+    }
+    setTimeout(() => {this.end()}, 500);
+  }
+  cancel() {
+    if (this.state.dirtyImage || this.currentStore.isDirty()){
+      this.cancelNotification()
+    } else {
+      this.end()
+    }
+  }
+  start(store) {
+    this.state.active = true;
+    this.currentStore = store;
+    this.currentStore.setBackup();
+  }
+  end() {
+    this.unsetDirtyImage();
+    this.unsetLoading();
+    this.state.active = false;
+    setTimeout(() => {this.state.currentStore = null;}, 1000);
+  }
+}
+
+export default new TextsStore;

@@ -32,7 +32,7 @@
     computed: {
       id() {return `Parallax${this.idx}`;},
       style() {
-        if (this.storeLoaded()) {
+        if (this.isReady) {
           this.title = this.images[this.idx].description;
           return {
             backgroundImage: `url(${this.images[this.idx].image})`,

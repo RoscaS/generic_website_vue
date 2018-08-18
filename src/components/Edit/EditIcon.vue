@@ -50,7 +50,7 @@
     methods: {
       startEdit() {
         if (this.edit.type == 'image') this.showModal = true;
-        else this.edit.start(this.store.related);
+        else this.edit.start(this.store);
       },
     },
   };

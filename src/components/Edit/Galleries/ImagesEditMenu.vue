@@ -148,7 +148,7 @@
     },
     created() {
       this.edit.primaryStore = this.store;
-      this.secondaryStore = this.edit.getGallery('Stock');
+      this.secondaryStore = this.edit.getStore('Stock');
     }
   };
 </script>

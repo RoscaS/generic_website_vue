@@ -11,24 +11,25 @@ export default {
   },
   computed: {
     edit() { return this.editTypes[this.type] },
-    store() { return this.edit.getGallery(this.component); },
+    store() { return this.edit.getStore(this.component); },
     state() { return this.store.state; },
     tools() { return this.$Global.Tools; },
-    images() { return this.storeLoaded() ?  this.store.images : null}
+    images() { return this.isReady ? this.store.images : null},
+    isReady() {
+      try {if (this.store.hasLoaded) return true;}
+      catch (e) {setTimeout(() => {return this.isReady}, 10);}
+    },
   },
   methods: {
-    storeLoaded() {
-      try {
-        if (this.store.count) return this.store.count
-      } catch (e) {
-        setTimeout(() => { this.storeLoaded() }, 10)
-      }
-    },
+
     highlighted(idx) {
-      return (this.edit.activeTab == idx) && this.checkComponent();
+      return (this.edit.state.activeTab == idx) && this.checkComponent();
     },
     checkComponent() {
-      return this.edit.component === this.store.related;
+      if (this.edit.state.active) {
+        return this.edit.state.currentStore.name === this.store.name;
+      }
+      return false
     },
     sReveal(side, delay, distance = 100, duration = 1500) {
       return new this.tools.ScrollRevealOptions(

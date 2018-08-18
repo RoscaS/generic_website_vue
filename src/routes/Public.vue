@@ -1,19 +1,19 @@
 <template>
   <div>
-    <!--<PromoRibbon/>-->
+    <PromoRibbon/>
     <Header/>
     <Navbar/>
     <Carousel/>
     <Presentation/>
-    <!--<Hero/>-->
+    <Hero/>
     <Parallax :idx="0" height="600px"/>
     <!--<Articles/>-->
     <Parallax :idx="1" height="400px"/>
-    <!--<Events/>-->
+    <Events/>
     <Parallax :idx="2" height="400px"/>
-    <!--<Contact/>-->
-    <!--<Review/>-->
-    <!--<Footer/>-->
+    <Contact/>
+    <Review/>
+    <Footer/>
   </div>
 </template>
 
@@ -35,8 +35,7 @@
   import Footer from '../views/Footer';
 
   import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
-  // import TextsStore from '../components/Edit/Texts/TextsStore';
-  import TextsStore from '../components/Edit/Texts/TTextsStore';
+  import TextsStore from '../components/Edit/Texts/TextsStore';
   import ArticlesStore from '../components/Edit/Articles/ArticlesStore';
 
   export default {
@@ -46,10 +45,9 @@
       Hero, Events, Articles, Contact, Review, Footer
     },
     created() {
-      // TextsStore.fetchData();
       const Galleries = GalleriesStore;
-      const Texts = TextsStore;
       const Articles = ArticlesStore;
+      const Texts = TextsStore;
     }
   };
 </script>

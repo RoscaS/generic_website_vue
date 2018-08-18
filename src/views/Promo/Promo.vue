@@ -19,9 +19,11 @@
         </div>
       </div>
     </div>
-    <TextsEditMenu v-if="checkComponent()" height="225">
-      <FieldsLayout :store="store"/>
-    </TextsEditMenu>
+    <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
+      <TextsEditMenu v-if="checkComponent()" height="225">
+        <FieldsLayout :store="store"/>
+      </TextsEditMenu>
+    </transition>
   </div>
 </template>
 

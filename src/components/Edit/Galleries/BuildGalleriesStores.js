@@ -53,8 +53,9 @@ class Gallery {
     this.name = gallery.name;
     this.limit = gallery.limit;
     this.url = `galleries/${gallery.name}`;
-    this.isLocked = false;
     this.images = [];
+    this.isLocked = false;
+    this.hasLoaded = false;
     this.initImages(gallery.images);
     this.sortByPosition();
   }
@@ -98,6 +99,7 @@ class Gallery {
   }
   initImages(images) {
     images.forEach(i => {this.images.push(new Image(i, this));});
+    this.hasLoaded = true;
   }
   removeImage(image) {
     this.images.splice(this.images.indexOf(image), 1);

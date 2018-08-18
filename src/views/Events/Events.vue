@@ -27,7 +27,7 @@
     },
     computed: {
       imagesEdit() { return GalleriesStore },
-      imagesStore() { return GalleriesStore.getGallery('Events')},
+      imagesStore() { return GalleriesStore.getStore('Events')},
     }
   };
 </script>

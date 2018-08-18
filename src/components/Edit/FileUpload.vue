@@ -34,40 +34,22 @@
     },
 
     methods: {
-      // fileUpload() {
-      //   this.edit.loading = true;
-      //   axios.post(url, this.buildForm(), {
-      //     headers: {'content-type': 'multipart/form-data'},
-      //   }).then(response => {
-      //     setTimeout(() => {
-      //       if (this.gallery !== '_temp') {
-      //         this.commitGallery(response);
-      //       } else {
-      //         this.commitText(response);
-      //       }
-      //       this.edit.loading = false;
-      //     }, 2000);
-      //
-      //   }).catch(error => {
-      //     this.$Global.Tools.message('error', error, url);
-      //   });
-      // },
       fileUpload() {
-        if (this.gallery == '_temp') {
-          this.edit.loading = true;
+        if (this.gallery !== '_temp') {
+          this.uploadImage()
+        } else {
+          this.edit.setLoading();
           axios.post(url, this.buildForm(), {
             headers: {'content-type': 'multipart/form-data'},
           }).then(response => {
             setTimeout(() => {
-              this.commitText(response);
-              this.edit.loading = false;
-            }, 2000);
+              this.edit.setDirtyImage()
+              this.$emit('image-preview', response.data);
+              this.edit.unsetLoading();
+            }, 1500);
           }).catch(error => {
             this.$Global.Tools.message('error', error, url);
           });
-        }
-        else {
-          this.uploadImage()
         }
       },
 
@@ -82,20 +64,6 @@
         formData.append('gallery', this.gallery);
         return formData;
       },
-
-      // commitGallery(response) {
-      //   this.edit.uploadImage(this.store, [response.data]);
-      //   this.$Global.Tools.message('imageUp');
-      //   setTimeout(() => {
-      //     this.edit.activeTab = 0;
-      //   }, 500);
-      // },
-
-      commitText(response) {
-        this.$emit('image-preview', response.data);
-        // this.edit.setDirty(true);
-      },
-
     },
   };
 </script>

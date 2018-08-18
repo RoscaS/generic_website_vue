@@ -4,6 +4,8 @@ import {Gallery} from './BuildGalleriesStores';
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 
+const galleries = ['Stock', 'Carousel', 'Events', 'Parallax', 'misc'];
+
 class GalleriesStore {
   constructor() {
     this.name = 'GalleriesStore';
@@ -38,28 +40,21 @@ class GalleriesStore {
   get selectedImage () { return this.state.selectedImage; }
   set selectedImage (image) { this.state.selectedImage = image; }
 
-  getGallery(name) {
-    return this.state.stores.filter(i => i.name == name)[0];
-  }
-  getImage(gallery, id) {
-    return this.getGallery(gallery).images.find(i => i.id == id);
-  }
-  setLoading() {
-    this.state.loading = true;
-  }
-  unsetLoading() {
-    this.state.loading = false;
-  }
-  clearSelectedImage() {
-    this.state.selectedImage = null;
-  }
+  getStore(name) {return this.state.stores.filter(i => i.name == name)[0];}
+  getImage(gallery, id) {return this.getStore(gallery).images.find(i => i.id == id);}
+  setLoading() {this.state.loading = true;}
+  unsetLoading() {this.state.loading = false;}
+  clearSelectedImage() {this.state.selectedImage = null;}
+
   fetchData() {
     axios.get('galleries/').then(response => {
       response.data.forEach(i => { this.setData(i); });
     });
   }
   setData(data) {
-    this.state.stores.push(new Gallery(data));
+    if (galleries.includes(data.name)) {
+      this.state.stores.push(new Gallery(data));
+    }
   }
   toggleLoading(message) {
     this.setLoading();

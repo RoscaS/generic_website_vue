@@ -1,6 +1,6 @@
 <template>
-  <b-tabs v-model="edit.activeTab" position="is-centered" slot="edit-nav">
-    <b-tab-item v-for="(i, idx) in store.state" :key="idx" :label="i.label">
+  <b-tabs v-model="edit.state.activeTab" position="is-centered" slot="edit-nav">
+    <b-tab-item v-for="(i, idx) in fieldList" :key="idx" :label="i.label">
       <b-field v-if="i.label !=='Image'"
                type="is-light">
         <b-input :type="i.type"
@@ -28,9 +28,20 @@
       store: {type: Object},
     },
     computed: {
+      fieldList() {
+        if (this.store.name == 'Review') {
+          return {
+            title: this.store.state.title,
+            sub_title: this.store.state.sub_title,
+          };
+        }
+        return this.store.state;
+      },
+
+
       edit() { return TextsStore; },
       currentTab: {
-        get() { return this.edit.activeTab; },
+        get() { return this.edit.state.activeTab; },
         set(value) {
           this.$emit('changeTab', value);
         }

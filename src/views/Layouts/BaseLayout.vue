@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section :id="store.related" class="section section-container">
+    <section :id="store.name" class="section section-container">
       <EditIcon :store="store" :edit="edit"/>
       <div class="container">
         <div class="content">
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <slot v-if="store.related =='Events'"></slot>
+      <slot v-if="store.name =='Events'"></slot>
 
       <div class="container" v-else>
         <div class="content">
@@ -30,11 +30,13 @@
       </div>
 
     </section>
-    <TextsEditMenu v-if="$parent.checkComponent()">
-      <FieldsLayout :store="store">
-        <slot name="moreFields"></slot>
-      </FieldsLayout>
-    </TextsEditMenu>
+    <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
+      <TextsEditMenu v-if="$parent.checkComponent()">
+        <FieldsLayout :store="store">
+          <slot name="moreFields"></slot>
+        </FieldsLayout>
+      </TextsEditMenu>
+    </transition>
   </div>
 </template>
 

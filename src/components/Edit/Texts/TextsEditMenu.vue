@@ -1,24 +1,19 @@
 <template>
-  <transition name="fade"
-              enter-active-class="fadeInUp"
-              leave-active-class="fadeOutDown">
-
-    <div class="navbar custom-tabs-wrapper textEdit" v-show="edit.active">
-      <div class="custom-tabs" :style="{height: height+'px'}">
-        <div class="container">
-          <slot></slot>
-        </div>
-        <ValidationBtns class="validation-btns"
-                        :loading="edit.loading"
-                        @validate="validate"
-                        @cancel="cancel">
-        </ValidationBtns>
+  <div class="navbar custom-tabs-wrapper textEdit" v-show="edit.state.active">
+    <div class="custom-tabs" :style="{height: height+'px'}">
+      <div class="container">
+        <slot></slot>
       </div>
-      <div class="loading-animation">
-        <SpinLine v-show="edit.loading"/>
-      </div>
+      <ValidationBtns class="validation-btns"
+                      :loading="edit.loading"
+                      @validate="validate"
+                      @cancel="cancel">
+      </ValidationBtns>
     </div>
-  </transition>
+    <div class="loading-animation">
+      <SpinLine v-show="edit.loading"/>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -45,7 +40,7 @@
         this.edit.update();
       },
       cancel() {
-        this.edit.end();
+        this.edit.cancel();
       },
     },
   };

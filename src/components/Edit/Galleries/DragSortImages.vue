@@ -80,7 +80,7 @@
       checkFull(galleryName) {
         // Check if the other gallery is full and lock it if true
         let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
-        let clickedGallery = this.edit.getGallery(galleryName);
+        let clickedGallery = this.edit.getStore(galleryName);
         let otherGallery = galleries.filter(i => i != clickedGallery)[0];
         if (otherGallery.count >= otherGallery.limit) {
           otherGallery.lock();
