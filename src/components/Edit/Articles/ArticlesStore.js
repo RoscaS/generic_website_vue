@@ -17,9 +17,11 @@ class ArticlesStore {
 
   fetchData() {
     axios.get('category/').then(response => {
+      // console.log(response.data)
       response.data.forEach(category => {
         this.state.categories.push(new Category(category));
       });
+      // setTimeout(() => {console.log(this.state.categories)}, 2000)
     }).catch(error => {console.log(error);})
   };
 

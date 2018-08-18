@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import GalleriesStore from './GGalleriesStore';
+  import GalleriesStore from './GalleriesStore';
   import ImagesCounter from './ImagesCounter';
 
   export default {
@@ -46,7 +46,7 @@
         set(store) { this.edit.secondaryStore = store;} ,
       },
       dropDown() {
-        return this.edit.state.galleries.filter(i => i != this.store)
+        return this.edit.state.stores.filter(i => i != this.store)
       },
     },
     methods: {

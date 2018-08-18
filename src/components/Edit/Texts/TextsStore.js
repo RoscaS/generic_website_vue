@@ -105,7 +105,6 @@ const TextsStore = new Vue({
     },
 
     end() {
-      console.log('ici')
       if (this.storeIsDirty()) {
         this.snackBar();
       } else {

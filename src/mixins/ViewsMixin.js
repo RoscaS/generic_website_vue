@@ -1,8 +1,6 @@
 import BaseLayout from '../views/Layouts/BaseLayout';
 import TextsStore from '../components/Edit/Texts/TextsStore';
-// import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
-import GalleriesStore from '../components/Edit/Galleries/GGalleriesStore';
-
+import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
 
 export default {
   components: {BaseLayout},
@@ -14,6 +12,7 @@ export default {
   computed: {
     edit() { return this.editTypes[this.type] },
     store() { return this.edit.getGallery(this.component); },
+    state() { return this.store.state; },
     tools() { return this.$Global.Tools; },
     images() { return this.storeLoaded() ?  this.store.images : null}
   },
@@ -33,7 +32,7 @@ export default {
     },
     sReveal(side, delay, distance = 100, duration = 1500) {
       return new this.tools.ScrollRevealOptions(
-        side, delay, `${distance}px`, duration
+        side, delay, distance, duration
       )
     },
   },

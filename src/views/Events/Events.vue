@@ -11,7 +11,7 @@
 <script>
   import ViewsMixin from '../../mixins/ViewsMixin';
   import EventsImages from './EventsImages';
-  import GalleriesStore from '../../components/Edit/Galleries/GGalleriesStore';
+  import GalleriesStore from '../../components/Edit/Galleries/GalleriesStore';
   import EditIcon from '../../components/Edit/EditIcon';
 
 

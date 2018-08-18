@@ -1,34 +1,5 @@
 import GalleriesStore from '../Galleries/GalleriesStore';
-
-
-class Input {
-  constructor({data, label, type = null, len = null}) {
-    this.data = data;
-    this.label = label;
-    this.type = type;
-    this.len = len;
-  }
-}
-
-class Name extends Input {
-  constructor(name) {
-    super({data: name, label: 'Nom', len: 30});
-  }
-}
-
-class Price extends Input {
-  constructor(price) {
-    super({data: price, label: 'Prix', type: 'number'});
-    this.min = 0;
-  }
-}
-
-class Description extends Input {
-  constructor(description, len, rows) {
-    super({data: description, label: 'Description', type: 'textarea', len: len});
-    this.rows = rows;
-  }
-}
+import {Name, Price, Description} from "../FieldsModels";
 
 
 class Item {
@@ -39,10 +10,16 @@ class Item {
     this.position = image.position;
     this.category = image.category;
     this.description = new Description(image.description, 200, 2);
-    this.image = ((x) => GalleriesStore.getImage('Articles', x))(image.image)
+    this.image = this.getImage(image.image);
+  }
+
+  getImage(id) {
+    try {
+      let img = GalleriesStore.getImage('Articles', id);
+      if (img) this.image = img;
+    } catch (e) { setTimeout(() => { this.getImage(id); }, 100);}
   }
 }
-
 
 class Category {
   constructor(category) {
@@ -56,10 +33,9 @@ class Category {
 
   setItems(items, lst = []) {
     items.forEach(i => {lst.push(new Item(i));});
-    return lst
+    return lst;
   }
 }
-
 
 
 export {Category};

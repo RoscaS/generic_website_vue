@@ -12,7 +12,6 @@
                           tag="div"
                           :name="reOrder? 'flip-store': ''">
 
-
           <div v-for="image in store.images"
                :class="classes[3]"
                class="image-slot"
@@ -31,7 +30,7 @@
 <script>
   import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
   import draggable from 'vuedraggable';
-  import GalleriesStore from './GGalleriesStore';
+  import GalleriesStore from './GalleriesStore';
   import ImageOverlay from './ImageOverlay';
 
 

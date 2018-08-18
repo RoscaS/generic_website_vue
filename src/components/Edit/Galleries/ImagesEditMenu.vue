@@ -87,7 +87,7 @@
   import DragSort from './DragSortImages';
   import FileUpload from '../FileUpload';
   // import GalleriesStore from './GalleriesStore';
-  import GalleriesStore from './GGalleriesStore';
+  import GalleriesStore from './GalleriesStore';
   import GalleriesDropDown from './GalleriesDropDown';
   import GalleryOptions from './GalleryOptions';
   import DescriptionPopup from './DescriptionPopup';
@@ -147,12 +147,8 @@
       },
     },
     created() {
-      console.log('ici')
-      console.log(this.store);
       this.edit.primaryStore = this.store;
       this.secondaryStore = this.edit.getGallery('Stock');
-      console.log(this.edit.primaryStore.name)
-      console.log(this.edit.secondaryStore.name)
     }
   };
 </script>

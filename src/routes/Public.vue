@@ -4,12 +4,12 @@
     <Header/>
     <Navbar/>
     <Carousel/>
-    <!--<Presentation/>-->
+    <Presentation/>
     <!--<Hero/>-->
     <Parallax :idx="0" height="600px"/>
     <!--<Articles/>-->
     <Parallax :idx="1" height="400px"/>
-    <Events/>
+    <!--<Events/>-->
     <Parallax :idx="2" height="400px"/>
     <!--<Contact/>-->
     <!--<Review/>-->
@@ -35,9 +35,9 @@
   import Footer from '../views/Footer';
 
   import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
-  import TextsStore from '../components/Edit/Texts/TextsStore';
+  // import TextsStore from '../components/Edit/Texts/TextsStore';
+  import TextsStore from '../components/Edit/Texts/TTextsStore';
   import ArticlesStore from '../components/Edit/Articles/ArticlesStore';
-  import GGalleriesStore from '../components/Edit/Galleries/GGalleriesStore';
 
   export default {
     name: "Public",
@@ -46,15 +46,10 @@
       Hero, Events, Articles, Contact, Review, Footer
     },
     created() {
-      TextsStore.fetchData();
-      GalleriesStore.fetchData();
+      // TextsStore.fetchData();
+      const Galleries = GalleriesStore;
+      const Texts = TextsStore;
       const Articles = ArticlesStore;
-      const GGalleries = GGalleriesStore;
-
-      // setTimeout(() => {
-      //   console.log(GGalleries)
-      // }, 500);
-
     }
   };
 </script>
