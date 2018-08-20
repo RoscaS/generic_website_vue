@@ -7,7 +7,7 @@
     <Presentation/>
     <Hero/>
     <Parallax :idx="0" height="600px"/>
-    <!--<Articles/>-->
+    <Articles/>
     <Parallax :idx="1" height="400px"/>
     <Events/>
     <Parallax :idx="2" height="400px"/>

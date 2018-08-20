@@ -21,7 +21,8 @@ export default {
     },
   },
   methods: {
-    image() { // Texts
+
+    image() { // Promo & Presentation
       if (this.isReady) return this.store.gallery.images[0].image;
       else setTimeout(() => {return this.image();}, 10);
     },

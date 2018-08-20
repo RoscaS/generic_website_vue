@@ -10,10 +10,9 @@
       </div>
       <div class="columns is-variable is-8">
         <div class="column">
-          <img :src="image()"
-
-               :class="{'highlighted': highlighted(4)}"
-               v-scroll-reveal="sReveal('bottom', 300, 10)">
+          <EditIcon :edit="galleriesEdit" :store="store.gallery"
+                    top="20px" right="20px" :small="true"/>
+          <img :src="image()" v-scroll-reveal="sReveal('bottom', 300, 10)"/>
         </div>
         <div class="column"
              v-scroll-reveal="sReveal('right', 350, 400)">
@@ -29,15 +28,19 @@
 <script>
   import DownArrow from '../components/Carousel/DownArrow.vue';
   import ViewsMixin from '../mixins/ViewsMixin';
+  import EditIcon from '../components/Edit/EditIcon';
+  import GalleriesStore from '../components/Edit/Galleries/GalleriesStore'
+
 
   export default {
     name: "Presentation",
     mixins: [ViewsMixin],
-    components: {DownArrow},
+    components: {DownArrow, EditIcon},
     data() {
       return {
         component: "Presentation",
         type: 'text',
+        galleriesEdit: GalleriesStore,
         downArrow: null,
       };
     },

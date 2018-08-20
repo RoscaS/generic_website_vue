@@ -18,59 +18,31 @@
 </template>
 
 <script>
-  const url = 'images/';
-  import GalleriesStore from './Galleries/GalleriesStore'
+  import GalleriesStore from './Galleries/GalleriesStore';
 
   export default {
     name: "FileUpload",
     props: {
-      gallery: {type: String},
       store: {type: Object},
     },
     data() {
       return {
         edit: GalleriesStore,
-      }
+      };
     },
-
     computed: {
-      // store() { return this.edit.getStore()}
       loading() { return this.edit.loading; },
     },
-
     methods: {
       fileUpload() {
-        if (this.gallery !== '_temp') {
-          this.uploadImage()
-        // } else {
-        //   this.edit.setLoading();
-        //   axios.post(url, this.buildForm(), {
-        //     headers: {'content-type': 'multipart/form-data'},
-        //   }).then(response => {
-        //     setTimeout(() => {
-        //       this.edit.setDirtyImage()
-        //       this.$emit('image-preview', response.data);
-        //       this.edit.unsetLoading();
-        //     }, 1500);
-        //   }).catch(error => {
-        //     this.$Global.Tools.message('error', error, url);
-        //   });
-        }
+        this.edit.uploadImage(this.buildForm(), this.store);
       },
-
-      uploadImage() {
-        this.edit.uploadImage(this.buildForm(), this.store)
-      },
-
       buildForm() {
         let file = this.$refs.file.files[0];
-        console.log(file);
-        console.log(this.gallery);
-
         let formData = new FormData();
         formData.append('name', 'upploaded');
         formData.append('image', file);
-        formData.append('gallery', this.gallery);
+        formData.append('gallery', this.store.name);
         return formData;
       },
     },

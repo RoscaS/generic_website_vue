@@ -10,24 +10,21 @@
                  v-model="i.data">
         </b-input>
       </b-field>
-      <FileUpload v-else :edit="edit" :gallery="store.name"
-                  @image-preview="i.data.image=$event.image"/>
     </b-tab-item>
     <slot></slot>
   </b-tabs>
 </template>
 
 <script>
-  import FileUpload from '../../components/Edit/FileUpload';
   import TextsStore from '../../components/Edit/Texts/TextsStore';
 
   export default {
     name: "FieldsLayout",
-    components: {FileUpload},
     props: {
       store: {type: Object},
     },
     computed: {
+      edit() { return TextsStore; },
       fieldList() {
         if (this.store.name == 'Review') {
           return {
@@ -37,20 +34,7 @@
         }
         return this.store.state;
       },
-
-
-      edit() { return TextsStore; },
-      currentTab: {
-        get() { return this.edit.state.activeTab; },
-        set(value) {
-          this.$emit('changeTab', value);
-        }
-      }
     },
   };
 </script>
 
-<style scoped lang="scss">
-  @import '../../../static/sass/global';
-
-</style>

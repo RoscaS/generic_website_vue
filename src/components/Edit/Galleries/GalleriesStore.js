@@ -1,11 +1,7 @@
 import axios from "axios";
 import tools from '../../../utiles/tools'
-import {Gallery} from './BuildGalleriesStores';
-
+import {Gallery} from './GalleryObject';
 axios.defaults.baseURL = 'http://localhost:8000/';
-
-// const galleries = ['Stock', 'Carousel', 'Events', 'Parallax', 'misc'];
-
 
 class GalleriesStore {
   constructor() {
@@ -16,13 +12,14 @@ class GalleriesStore {
       activeTab: 0,
       loading: false,
 
+      active: null,
+
       primaryStore: null,
       secondaryStore: null,
       selectedImage: null,
       carouselAutoScroll: false,
     };
     this.fetchData();
-    // setTimeout(() => {console.log(this.state.stores);}, 500);
   }
   get loading() {return this.state.loading;}
   set loading(value) {this.state.loading = value;}
@@ -54,9 +51,7 @@ class GalleriesStore {
     });
   }
   setData(data) {
-    // if (galleries.includes(data.name)) {
-      this.state.stores.push(new Gallery(data));
-    // }
+    this.state.stores.push(new Gallery(data));
   }
   toggleLoading(message) {
     this.setLoading();
@@ -77,6 +72,14 @@ class GalleriesStore {
   update() {
     this.primaryStore.update();
     this.secondaryStore.update();
+  }
+  start(store) {
+    if (this.state.stores.includes(store)) {
+      this.state.active = store;
+    }
+  }
+  end() {
+    this.state.active = null
   }
 }
 

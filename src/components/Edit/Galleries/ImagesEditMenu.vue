@@ -66,10 +66,8 @@
                     </b-tab-item>
                     <b-tab-item icon="upload"
                                 :title="'Poulette'"
-                                :disabled="loading || store.isFull()">
-                      <FileUpload :edit="edit"
-                                  :store="store"
-                                  :gallery="store.name"/>
+                                :disabled="loading || (store.isFull() &&!store.isEmpty)">
+                      <FileUpload :store="store"/>
                     </b-tab-item>
                   </b-tabs>
                 </div>
@@ -86,7 +84,6 @@
   import {SpinLine} from 'vue-loading-spinner';
   import DragSort from './DragSortImages';
   import FileUpload from '../FileUpload';
-  // import GalleriesStore from './GalleriesStore';
   import GalleriesStore from './GalleriesStore';
   import GalleriesDropDown from './GalleriesDropDown';
   import GalleryOptions from './GalleryOptions';
@@ -140,9 +137,11 @@
       },
       layoutData() {
         return {
+          Promo: this.levelClasses,
           Events: this.columnsClasses,
           Carousel: this.levelClasses,
           Parallax: this.levelClasses,
+          Presentation: this.levelClasses,
         };
       },
     },

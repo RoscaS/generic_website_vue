@@ -1,60 +1,9 @@
 import axios from "axios";
 import tools from '../../../utiles/tools';
-import {Dialog} from 'buefy';
-import GalleriesStore from "./GalleriesStore";
+import {Image} from './ImageObject'
 
 axios.defaults.baseURL = 'http://localhost:8000/';
-let imageUrl = id => `http://localhost:8000/images/${id}/`;
 const headers = {headers: {'content-type': 'multipart/form-data'}};
-
-class Image {
-  constructor(image, gallery) {
-    this.id = image.id;
-    this.name = image.name;
-    this.position = image.position;
-    this.gallery = image.gallery;
-    this.description = image.description;
-    this.image = image.image;
-    this.url = imageUrl(image.id);
-    this.parentGallery = gallery;
-  }
-
-  getForm() {
-    let formData = new FormData();
-    formData.append('id', this.id);
-    formData.append('position', this.position);
-    formData.append('gallery', this.gallery);
-    formData.append('description', this.description);
-    return formData;
-  }
-
-  delete(notification=true) {
-    if (notification) {
-      this.deleteNotification()
-    } else {
-      this.deleteImage(false)
-    }
-  }
-  deleteNotification() {
-    Dialog.confirm({
-      message: 'Operation définitive!',
-      confirmText: "Effacer l'image",
-      cancelText: 'Annuler',
-      type: 'is-danger',
-      hasIcon: true,
-      onConfirm: () => {this.deleteImage()},
-    });
-  }
-  deleteImage(message=true) {
-    axios.delete(this.url);
-    this.parentGallery.removeImage(this);
-    if (message) tools.message('imageDel');
-  }
-
-  patch() {
-    axios.patch(this.url, this.getForm(), headers);
-  }
-}
 
 class Gallery {
   constructor(gallery) {
@@ -71,34 +20,23 @@ class Gallery {
     this.initImages(gallery.images);
     this.sortByPosition();
   }
-  isFull() { return this.count >= this.limit; }
-
-  lock() {this.isLocked = true;}
-  unlock() {this.isLocked = false;}
-
   get count() {
     return this.images.length;
   };
-
+  isFull() { return this.count >= this.limit; }
+  lock() {this.isLocked = true;}
+  unlock() {this.isLocked = false;}
   setDirty(image) {
     if (!this.dirty.includes(image)) this.dirty.push(image);
   }
-
   sortByPosition() {
     this.images.sort((a, b) => {return a.position - b.position;});
   }
   update(message=true) {
-    if (!this.count && !this.isEmpty) {
-      this.setPlaceHolder();
-    }
-    if (this.count == 2 && this.isEmpty){
-      this.unsetPlaceholder();
-    }
+    if (!this.count && !this.isEmpty) this.setPlaceHolder();
+    if (this.count == 2 && this.isEmpty) this.unsetPlaceholder();
     this.checkFields(message);
-    if (this.dirty.length) {
-      this.updateDirtyImages();
-    }
-
+    if (this.dirty.length) this.updateDirtyImages();
   }
   checkFields() {
     for (let i = 0; i < this.count; i++) {
@@ -121,7 +59,6 @@ class Gallery {
   postImage(form) {
     axios.post('images/', form, headers).then(response => {
       this.initImages([response.data], true);
-
     });
   }
   initImages(images, update=false) {
@@ -160,4 +97,4 @@ class Gallery {
   }
 }
 
-export {Gallery, Image};
+export {Gallery};

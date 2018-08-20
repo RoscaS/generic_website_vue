@@ -4,8 +4,11 @@
       <EditIcon :store="store" :edit="edit"/>
       <div class="columns content">
         <div class="column left is-offset-2 is-4">
-          <img :class="{'highlighted': highlighted(2)}"
-               :src="image()">
+          <div>
+            <EditIcon :edit="galleriesEdit" :store="store.gallery"
+                      top="40px" right="175px" :small="true"/>
+            <img :src="image()" :class="{'highlighted': highlighted(2)}">
+          </div>
         </div>
         <div class="column right is-5">
           <div>
@@ -28,10 +31,13 @@
 </template>
 
 <script>
+  import ViewsMixin from '../../mixins/ViewsMixin';
   import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
   import EditIcon from '../../components/Edit/EditIcon';
   import FieldsLayout from '../Layouts/FieldsLayout';
-  import ViewsMixin from '../../mixins/ViewsMixin';
+
+  import GalleriesStore from '../../components/Edit/Galleries/GalleriesStore'
+
 
   export default {
     name: 'Promo',
@@ -41,6 +47,7 @@
       return {
         component: "Promo",
         type: 'text',
+        galleriesEdit: GalleriesStore,
       };
     },
   };

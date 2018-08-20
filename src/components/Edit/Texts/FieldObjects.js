@@ -72,16 +72,15 @@ class WithImage extends Base {
     this.gallery = null;
     this.hasLoaded = false;
   }
-  setImage() {
+  setGallery() {
     try {
       let gallery = GalleriesStore.getStore(this.name);
       if (gallery) {
         this.gallery = gallery;
-        this.state.image = {data: this.gallery.images[0], label: 'Image'};
         this.hasLoaded = true;
       }
     } catch (e) {
-      setTimeout(() => { this.setImage(); }, 100);}
+      setTimeout(() => { this.setGallery(); }, 100);}
   }
 }
 
@@ -93,7 +92,6 @@ class Promo extends WithImage {
     this.state = {
       title: new Title(),
       text: new Text(),
-      image: {data: ''},
     };
   }
 }
@@ -108,7 +106,6 @@ class Presentation extends WithImage {
       sub_title: new SubTitle(),
       text1: new Text('Texte 1'),
       text2: new Text('Texte 2'),
-      image: {data: ''},
     };
   };
 }
@@ -189,7 +186,7 @@ class Review extends Base {
   }
 }
 
-function BuildTextsStores() {
+function FieldObjects() {
   return [
     new Promo(),
     new Presentation(),
@@ -200,4 +197,4 @@ function BuildTextsStores() {
   ];
 }
 
-export default BuildTextsStores;
+export default FieldObjects;

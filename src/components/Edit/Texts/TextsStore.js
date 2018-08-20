@@ -1,5 +1,5 @@
 import axios from "axios";
-import BuildTextsStores from './BuildTextsStores';
+import FieldObjects from './FieldObjects';
 import {Dialog} from 'buefy';
 
 axios.defaults.baseURL = 'http://localhost:8000/';
@@ -9,13 +9,11 @@ class TextsStore {
     this.name = 'TextsEditStore';
     this.type = 'text';
     this.state = {
-      stores: new BuildTextsStores,
+      stores: new FieldObjects,
       activeTab: 0,
       loading: false,
-
       active: false,
       currentStore: null,
-      dirtyImage: false,
     };
     this.fetchData();
   }
@@ -28,9 +26,6 @@ class TextsStore {
 
   get currentStore() { return this.state.currentStore; }
   set currentStore(value) { this.state.currentStore = value; }
-
-  setDirtyImage() {this.state.dirtyImage = true;}
-  unsetDirtyImage() {this.state.dirtyImage = false;}
 
   setLoading() {this.state.loading = true;}
   unsetLoading() {this.state.loading = false;}
@@ -67,8 +62,8 @@ class TextsStore {
       store.state[i].data = response[i];
       store.backup[i] = response[i];
     }
-    this.getStore('Presentation').setImage();
-    this.getStore('Promo').setImage();
+    this.getStore('Presentation').setGallery();
+    this.getStore('Promo').setGallery();
   }
   update() {
     if (this.state.dirtyImage || this.currentStore.isDirty()) {
@@ -95,7 +90,6 @@ class TextsStore {
     this.currentStore.setBackup();
   }
   end() {
-    this.unsetDirtyImage();
     this.unsetLoading();
     this.state.active = false;
     setTimeout(() => {this.state.currentStore = null;}, 1000);
