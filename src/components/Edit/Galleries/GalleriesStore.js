@@ -4,7 +4,8 @@ import {Gallery} from './BuildGalleriesStores';
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 
-const galleries = ['Stock', 'Carousel', 'Events', 'Parallax', 'misc'];
+// const galleries = ['Stock', 'Carousel', 'Events', 'Parallax', 'misc'];
+
 
 class GalleriesStore {
   constructor() {
@@ -21,6 +22,7 @@ class GalleriesStore {
       carouselAutoScroll: false,
     };
     this.fetchData();
+    // setTimeout(() => {console.log(this.state.stores);}, 500);
   }
   get loading() {return this.state.loading;}
   set loading(value) {this.state.loading = value;}
@@ -52,9 +54,9 @@ class GalleriesStore {
     });
   }
   setData(data) {
-    if (galleries.includes(data.name)) {
+    // if (galleries.includes(data.name)) {
       this.state.stores.push(new Gallery(data));
-    }
+    // }
   }
   toggleLoading(message) {
     this.setLoading();
@@ -75,7 +77,6 @@ class GalleriesStore {
   update() {
     this.primaryStore.update();
     this.secondaryStore.update();
-    tools.message('imageMoved');
   }
 }
 

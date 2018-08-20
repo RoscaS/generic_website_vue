@@ -5,7 +5,7 @@
       <div class="columns content">
         <div class="column left is-offset-2 is-4">
           <img :class="{'highlighted': highlighted(2)}"
-               :src="state.image.data.image">
+               :src="image()">
         </div>
         <div class="column right is-5">
           <div>

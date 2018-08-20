@@ -27,7 +27,9 @@
       };
     },
     computed: {
-      current() { return this.store.count; },
+      current() {
+        return this.store.isEmpty ? 0 : this.store.count;
+      },
       total() { return this.store.limit; },
       color() {
         let delta = this.total - this.current;

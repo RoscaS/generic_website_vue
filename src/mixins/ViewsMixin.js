@@ -10,17 +10,21 @@ export default {
     };
   },
   computed: {
-    edit() { return this.editTypes[this.type] },
-    store() { return this.edit.getStore(this.component); },
-    state() { return this.store.state; },
-    tools() { return this.$Global.Tools; },
-    images() { return this.isReady ? this.store.images : null},
+    edit() {return this.editTypes[this.type];},
+    store() {return this.edit.getStore(this.component);},
+    state() {return this.store.state;},
+    tools() {return this.$Global.Tools;},
+    images() {return this.isReady ? this.store.images : null;}, // galleries
     isReady() {
       try {if (this.store.hasLoaded) return true;}
-      catch (e) {setTimeout(() => {return this.isReady}, 10);}
+      catch (e) {setTimeout(() => {return this.isReady;}, 10);}
     },
   },
   methods: {
+    image() { // Texts
+      if (this.isReady) return this.store.gallery.images[0].image;
+      else setTimeout(() => {return this.image();}, 10);
+    },
 
     highlighted(idx) {
       return (this.edit.state.activeTab == idx) && this.checkComponent();
@@ -29,12 +33,12 @@ export default {
       if (this.edit.state.active) {
         return this.edit.state.currentStore.name === this.store.name;
       }
-      return false
+      return false;
     },
     sReveal(side, delay, distance = 100, duration = 1500) {
       return new this.tools.ScrollRevealOptions(
         side, delay, distance, duration
-      )
+      );
     },
   },
 };

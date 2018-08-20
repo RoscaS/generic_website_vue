@@ -25,7 +25,7 @@
         component: 'Parallax',
         type: 'image',
 
-        image: null,
+        // image: null,
         title: null,
       };
     },

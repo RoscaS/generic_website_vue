@@ -13,12 +13,13 @@
                           :name="reOrder? 'flip-store': ''">
 
           <div v-for="image in store.images"
-               :class="classes[3]"
+               :class="[{placeHolder: isPlaceholder(image)}, classes[3]]"
                class="image-slot"
                :key="image.id">
 
             <ImageOverlay :image="image" :edit="edit">
-              <img :src="image.image" @mousedown="checkFull(image.gallery)">
+              <img :src="image.image"
+                   @mousedown="conditions(image.gallery)">
             </ImageOverlay>
           </div>
         </transition-group>
@@ -75,16 +76,28 @@
       }
     },
     methods: {
+      isPlaceholder(image) {return image.name.includes('placeholder');},
+
       onMove({relatedContext, draggedContext}) {},
 
-      checkFull(galleryName) {
-        // Check if the other gallery is full and lock it if true
+      conditions(galleryName) {
         let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
         let clickedGallery = this.edit.getStore(galleryName);
         let otherGallery = galleries.filter(i => i != clickedGallery)[0];
-        if (otherGallery.count >= otherGallery.limit) {
+        let gallery = this.edit.getStore(galleryName);
+        this.checkEmpty(gallery, otherGallery);
+        this.checkFull(otherGallery);
+      },
+
+      checkEmpty(gallery, otherGallery) {
+        if (gallery.placeholder) otherGallery.lock();
+      },
+
+      checkFull(otherGallery) {
+        if (!otherGallery.isEmpty && otherGallery.count >= otherGallery.limit) {
           otherGallery.lock();
         }
+
       },
       unlockGalleries() {
         this.edit.primaryStore.unlock();
@@ -153,6 +166,10 @@
 
   .list-group-item i {
     cursor: pointer;
+  }
+
+  .placeHolder {
+    cursor: default;
   }
 
 </style>

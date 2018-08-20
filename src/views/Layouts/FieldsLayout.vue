@@ -10,7 +10,7 @@
                  v-model="i.data">
         </b-input>
       </b-field>
-      <FileUpload v-else :edit="edit"
+      <FileUpload v-else :edit="edit" :gallery="store.name"
                   @image-preview="i.data.image=$event.image"/>
     </b-tab-item>
     <slot></slot>

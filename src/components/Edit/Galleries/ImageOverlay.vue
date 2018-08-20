@@ -5,7 +5,8 @@
     <transition name="delayedFade"
                 enter-active-class="fadeIn"
                 leave-active-class="fadeOut">
-      <div class="overlay" v-if="overlay && !$parent.isDragging">
+      <div class="overlay"
+           v-if="overlay && !$parent.isDragging && !isPlaceholder">
         <i class="fal fa-fw fa-pen-square" @click.prevent="editDescription()"></i>
         <i class="fal fa-fw fa-times-square" @click.prevent="deleteImage()"></i>
       </div>
@@ -30,6 +31,11 @@
         timeout: null,
         overlay: false,
       };
+    },
+    computed: {
+      isPlaceholder() {
+        return this.image.name.includes('placeholder');
+      },
     },
     methods: {
       showOverlay() {

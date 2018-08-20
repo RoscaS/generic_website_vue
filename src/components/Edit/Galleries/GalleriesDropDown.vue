@@ -4,21 +4,51 @@
       <p>{{ secondaryStore.name }}</p>
       <i class="fa fa-fw fa-sort-down"></i>
     </button>
-    <b-dropdown-item v-for="gallery in dropDown"
+    <b-dropdown-item v-for="gallery in mainGalleries"
                      :key="gallery.name"
                      class="no-tr"
                      @click="secondaryStore = gallery"
                      :disabled="disabled(gallery)">
       <div class="level">
         <div class="level-left">
-          <div style="float: left">
-            {{ gallery.name }}
-          </div>
+          {{ gallery.name }}
         </div>
         <div class="level-righ">
-          <div style="float: right">
-            <ImagesCounter class="image-counter" :store="gallery"/>
-          </div>
+          <ImagesCounter class="image-counter" :store="gallery"/>
+        </div>
+      </div>
+    </b-dropdown-item>
+
+    <b-dropdown-item separator></b-dropdown-item>
+
+    <b-dropdown-item v-for="gallery in miscGalleries"
+                     :key="gallery.name"
+                     class="no-tr"
+                     @click="secondaryStore = gallery"
+                     :disabled="disabled(gallery)">
+      <div class="level">
+        <div class="level-left">
+          {{ gallery.name }}
+        </div>
+        <div class="level-righ">
+          <ImagesCounter class="image-counter" :store="gallery"/>
+        </div>
+      </div>
+    </b-dropdown-item>
+
+    <b-dropdown-item separator></b-dropdown-item>
+
+    <b-dropdown-item v-for="gallery in articlesGalleries"
+                     :key="gallery.name"
+                     class="no-tr"
+                     @click="secondaryStore = gallery"
+                     :disabled="disabled(gallery)">
+      <div class="level">
+        <div class="level-left">
+          {{ gallery.name }}
+        </div>
+        <div class="level-righ">
+          <ImagesCounter class="image-counter" :store="gallery"/>
         </div>
       </div>
     </b-dropdown-item>
@@ -43,10 +73,25 @@
     computed: {
       secondaryStore: {
         get() { return this.edit.secondaryStore; },
-        set(store) { this.edit.secondaryStore = store;} ,
+        set(store) { this.edit.secondaryStore = store;},
       },
-      dropDown() {
-        return this.edit.state.stores.filter(i => i != this.store)
+      mainGalleries() {
+        let galleries = ['Stock', 'Carousel', 'Events', 'Parallax'];
+        return this.edit.state.stores.filter(i => {
+          return i != this.store && galleries.includes(i.name)
+        });
+      },
+      miscGalleries() {
+        let galleries = ['Presentation', 'Promo'];
+        return this.edit.state.stores.filter(i => {
+          return i != this.store && galleries.includes(i.name)
+        });
+      },
+      articlesGalleries() {
+        let galleries = ['Articles'];
+        return this.edit.state.stores.filter(i => {
+          return i != this.store && galleries.includes(i.name)
+        });
       },
     },
     methods: {
@@ -59,6 +104,10 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  .level-left {
+    font-size: 16px;
+  }
 
   .image-counter {
     margin-right: -28px;

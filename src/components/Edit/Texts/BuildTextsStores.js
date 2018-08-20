@@ -32,12 +32,10 @@ function Icon() {
 }
 
 class Base {
-  setImage() {
-    try {
-      let img = GalleriesStore.getImage('misc', this.state.image.data.id);
-      if (img) this.state.image = {data: img, label: 'Image'}
-    } catch (e) { setTimeout(() => { this.setImage(); }, 100);}
+  constructor() {
+    this.backup = {};
   }
+
   setBackup() {
     for (let i in this.state) {
       this.backup[i] = this.state[i].data
@@ -68,12 +66,30 @@ class Base {
   }
 }
 
-class Promo extends Base {
+class WithImage extends Base {
+  constructor() {
+    super();
+    this.gallery = null;
+    this.hasLoaded = false;
+  }
+  setImage() {
+    try {
+      let gallery = GalleriesStore.getStore(this.name);
+      if (gallery) {
+        this.gallery = gallery;
+        this.state.image = {data: this.gallery.images[0], label: 'Image'};
+        this.hasLoaded = true;
+      }
+    } catch (e) {
+      setTimeout(() => { this.setImage(); }, 100);}
+  }
+}
+
+class Promo extends WithImage {
   constructor() {
     super();
     this.name = 'Promo';
     this.url = 'promo/1/';
-    this.backup = {};
     this.state = {
       title: new Title(),
       text: new Text(),
@@ -82,18 +98,17 @@ class Promo extends Base {
   }
 }
 
-class Presentation extends Base {
+class Presentation extends WithImage {
   constructor() {
     super();
     this.name = 'Presentation';
     this.url = 'presentation/1/';
-    this.backup = {};
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
       text1: new Text('Texte 1'),
       text2: new Text('Texte 2'),
-      image: {data: '', label: ''},
+      image: {data: ''},
     };
   };
 }
@@ -103,7 +118,6 @@ class Events extends Base {
     super();
     this.name = 'Events';
     this.url = 'events/1/';
-    this.backup = {};
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
@@ -116,7 +130,6 @@ class Hero extends Base {
     super();
     this.name = 'Hero';
     this.url = 'hero/1/';
-    this.backup = {};
     this.state = {
       icon1: new Icon(),
       icon2: new Icon(),
@@ -150,7 +163,6 @@ class Contact extends Base {
     super();
     this.name = 'Contact';
     this.url = 'contact/1/';
-    this.backup = {};
     this.state = {
       title: new Title(),
       sub_title: new SubTitle('Sous titre 1'),
@@ -165,7 +177,6 @@ class Review extends Base {
     super();
     this.name = 'Review';
     this.url = 'review/1/';
-    this.backup = {};
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
