@@ -34,7 +34,6 @@ class Image {
     } else {
       this.deleteImage(false)
     }
-    // notification? this.deleteNotification() : this.deleteImage();
   }
   deleteNotification() {
     Dialog.confirm({
