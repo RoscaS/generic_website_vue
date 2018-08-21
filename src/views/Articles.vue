@@ -45,15 +45,15 @@
 
 <script>
   import EditIcon from '../components/Edit/EditIcon';
-  import ArticlesStore from '../components/Edit/Articles/ArticlesStore';
+  import CategoriesStore from '../components/Edit/Articles/CategoriesStore';
 
   export default {
     name: "Articles",
     components: {EditIcon},
     data() {
       return {
-        store: ArticlesStore,
-        categories: ArticlesStore.state.categories
+        store: CategoriesStore,
+        categories: CategoriesStore.state.stores
       };
     },
   };

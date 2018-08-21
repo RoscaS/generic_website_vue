@@ -1,35 +1,9 @@
 import GalleriesStore from "../Galleries/GalleriesStore";
+import {Title, SubTitle, Text, Icon} from "../FieldsModels";
 import tools from '../../../utiles/tools';
 import axios from "axios";
+
 axios.defaults.baseURL = 'http://localhost:8000/';
-
-
-function Title() {
-  this.data = '';
-  this.len = '35';
-  this.label = 'Titre';
-}
-
-function SubTitle(label = 'Sous titre') {
-  this.data = '';
-  this.type = 'textarea';
-  this.len = '200';
-  this.rows = '2';
-  this.label = label;
-}
-
-function Text(label = 'Texte', rows = 3) {
-  this.data = '';
-  this.type = 'textarea';
-  this.len = '400';
-  this.rows = rows;
-  this.label = label;
-}
-
-function Icon() {
-  this.data = '';
-  this.label = 'Icone';
-}
 
 class Base {
   constructor() {
@@ -38,31 +12,33 @@ class Base {
 
   setBackup() {
     for (let i in this.state) {
-      this.backup[i] = this.state[i].data
+      this.backup[i] = this.state[i].data;
     }
   }
+
   isDirty() {
     for (let i in this.state) {
       if (this.state[i].data !== this.backup[i]) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
+
   update() {
     let data = {};
     for (let i in this.state) {
       if (i != 'image') data[i] = this.state[i].data;
       else data[i] = this.state[i].data.image;
     }
-    axios.put(this.url, data)
-    .then(() => {setTimeout(() => {tools.message('updated')}, 1500);})
+    axios.put(this.url, data).then(() => {setTimeout(() => {tools.message('updated');}, 1500);});
   }
+
   recoverData() {
     for (let i in this.state) {
       this.state[i].data = this.backup[i];
     }
-    tools.message('cancel')
+    tools.message('cancel');
   }
 }
 
@@ -72,6 +48,7 @@ class WithImage extends Base {
     this.gallery = null;
     this.hasLoaded = false;
   }
+
   setGallery() {
     try {
       let gallery = GalleriesStore.getStore(this.name);
@@ -80,7 +57,8 @@ class WithImage extends Base {
         this.hasLoaded = true;
       }
     } catch (e) {
-      setTimeout(() => { this.setGallery(); }, 100);}
+      setTimeout(() => { this.setGallery(); }, 100);
+    }
   }
 }
 
@@ -128,15 +106,9 @@ class Hero extends Base {
     this.name = 'Hero';
     this.url = 'hero/1/';
     this.state = {
-      icon1: new Icon(),
-      icon2: new Icon(),
-      icon3: new Icon(),
-      title1: new Title(),
-      title2: new Title(),
-      title3: new Title(),
-      text1: new Text(),
-      text2: new Text(),
-      text3: new Text(),
+      icon1: new Icon(), icon2: new Icon(), icon3: new Icon(),
+      title1: new Title(), title2: new Title(), title3: new Title(),
+      text1: new Text(), text2: new Text(), text3: new Text(),
     };
     this.subs = [
       {
@@ -186,15 +158,4 @@ class Review extends Base {
   }
 }
 
-function FieldObjects() {
-  return [
-    new Promo(),
-    new Presentation(),
-    new Events(),
-    new Hero(),
-    new Contact(),
-    new Review(),
-  ];
-}
-
-export default FieldObjects;
+export {Promo, Presentation, Events, Hero, Contact, Review};

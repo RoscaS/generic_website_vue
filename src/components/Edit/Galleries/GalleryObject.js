@@ -25,9 +25,9 @@ class Gallery {
   lock() {this.isLocked = true;}
   unlock() {this.isLocked = false;}
 
-  getImage(idx) {
+  imageAtIndex(idx) {
     if (this.hasLoaded) return this.images[idx];
-    else return setTimeout(() => {this.getImage(idx)}, 500);
+    else return setTimeout(() => {this.imageAtIndex(idx)}, 500);
   }
 
   initData() {

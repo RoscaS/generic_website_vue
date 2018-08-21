@@ -16,7 +16,7 @@ export default {
     state() {return this.store.state;},
   },
   methods: {
-    getImage(idx, store = this.store) {return store.getImage(idx)},
+    getImage(idx, store = this.store) {return store.imageAtIndex(idx)},
 
     highlighted(idx) {
       return (this.edit.state.activeTab == idx) && this.checkComponent();

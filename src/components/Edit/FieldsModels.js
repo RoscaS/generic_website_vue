@@ -1,69 +1,69 @@
-
-class Field {
-  constructor({data, label, type = null, len = null}) {
-    this.data = data;
-    this.label = label;
-    this.type = type;
-    this.len = len;
-  }
-}
-
-// ARTICLES
-class Name extends Field {
-  constructor(name) {
-    super({data: name, label: 'Nom', len: 30});
-  }
-}
-
-class Price extends Field {
-  constructor(price) {
-    super({data: price, label: 'Prix', type: 'number'});
-    this.min = 0;
-  }
-}
-
-class Description extends Field {
-  constructor(description, len, rows) {
-    super({data: description, label: 'Description', type: 'textarea', len: len});
-    this.rows = rows;
-  }
-}
-
 // TEXTS
 
-class Title extends Field {
-  constructor(title) {
-    super({data: title, label: 'Titre', len: 35})
+ class Title {
+  constructor() {
+    this.data = '';
+    this.len = 35;
+    this.label = 'Titre';
   }
 }
 
-class SubTitle extends Field {
-  constructor(subTitle, idx) {
-    super({data: subTitle, label:`Sous titre ${idx}`, type: 'textarea', len: 100});
-    this.rows = 2;
+class SubTitle {
+  constructor(label = 'Sous titre') {
+    this.data = '';
+    this.type = 'textarea';
+    this.len = 200;
+    this.rows = '2';
+    this.label = label;
   }
 }
 
-class Text extends Field {
-  constructor(text, idx) {
-    super({data: text, label:`Texte ${idx}`, type: 'textarea', len: 400});
-    this.rows = 3;
+class Text {
+  constructor(label = 'Texte', rows = 3) {
+    this.data = '';
+    this.type = 'textarea';
+    this.len = 400;
+    this.rows = rows;
+    this.label = label;
   }
 }
 
-class Icon extends Field {
-  constructor(icon) {
-    super({data: icon, label: 'Icone', len: 50})
+class Icon {
+  constructor() {
+    this.data = '';
+    this.label = 'Icone';
   }
 }
 
-export {
-  Field,
-  Name,
-  Price,
-  Description,
-  Title,
-  SubTitle,
-  Text,
-  Icon,
+
+
+
+// ARTICLES
+
+class Name {
+  constructor(data) {
+    this.data = data;
+    this.len = 30;
+    this.label = 'Nom';
+  }
 }
+
+class Price {
+  constructor(data) {
+    this.data = data;
+    this.type = 'number';
+    this.label = 'Prix';
+  }
+}
+
+class Description {
+  constructor(data, len=200, rows=2) {
+    this.data = data;
+    this.type = 'textarea';
+    this.len = len;
+    this.rows = rows;
+    this.label = 'Description';
+  }
+}
+
+export {Title, SubTitle, Text, Icon, Name, Price, Description}

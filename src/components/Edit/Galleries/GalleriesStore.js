@@ -44,12 +44,19 @@ class GalleriesStore {
   get selectedImage () { return this.state.selectedImage; }
   set selectedImage (image) { this.state.selectedImage = image; }
 
-  getStore(name) {return this.state.stores.filter(i => i.name == name)[0];}
-  getImage(gallery, id) {return this.getStore(gallery).images.find(i => i.id == id);}
   setLoading() {this.state.loading = true;}
+
   unsetLoading() {this.state.loading = false;}
+
   clearSelectedImage() {this.state.selectedImage = null;}
 
+  getStore(name) {return this.state.stores.filter(i => i.name == name)[0];}
+
+  getImage(gallery, id) {
+    let store = this.getStore(gallery);
+    if (store.hasLoaded) return store.images.find(i => i.id == id);
+    else return setTimeout(() => {this.getImage(gallery, id)}, 500);
+  }
   toggleLoading(message) {
     this.setLoading();
     setTimeout(() => {

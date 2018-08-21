@@ -1,6 +1,13 @@
 import axios from "axios";
-import FieldObjects from './FieldObjects';
 import {Dialog} from 'buefy';
+import {
+  Promo,
+  Presentation,
+  Events,
+  Hero,
+  Contact,
+  Review
+} from './SectionsObjects';
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 
@@ -9,7 +16,14 @@ class TextsStore {
     this.name = 'TextsEditStore';
     this.type = 'text';
     this.state = {
-      stores: new FieldObjects,
+      stores: [
+        new Promo(),
+        new Presentation(),
+        new Events(),
+        new Hero(),
+        new Contact(),
+        new Review(),
+      ],
       activeTab: 0,
       loading: false,
       active: false,
@@ -19,15 +33,19 @@ class TextsStore {
   }
 
   get loading() {return this.state.loading;}
+
   set loading(value) {this.state.loading = value;}
 
   get activeTab() { return this.state.activeTab; }
+
   set activeTab(value) { this.state.activeTab = value; }
 
   get currentStore() { return this.state.currentStore; }
+
   set currentStore(value) { this.state.currentStore = value; }
 
   setLoading() {this.state.loading = true;}
+
   unsetLoading() {this.state.loading = false;}
 
   getStore(name) {
@@ -50,6 +68,7 @@ class TextsStore {
       }
     });
   }
+
   fetchData() {
     this.state.stores.forEach(store => {
       axios.get(store.url).then(response => {
@@ -57,6 +76,7 @@ class TextsStore {
       });
     });
   }
+
   setData(store, response) {
     for (let i in store.state) {
       store.state[i].data = response[i];
@@ -65,30 +85,34 @@ class TextsStore {
     this.getStore('Presentation').setGallery();
     this.getStore('Promo').setGallery();
   }
+
   update() {
     if (this.state.dirtyImage || this.currentStore.isDirty()) {
       this.setLoading();
       this.currentStore.update();
       setTimeout(() => {
         this.unsetLoading();
-        setTimeout(() => {this.end()}, 500);
+        setTimeout(() => {this.end();}, 500);
       }, 1500);
       return;
     }
-    setTimeout(() => {this.end()}, 500);
+    setTimeout(() => {this.end();}, 500);
   }
+
   cancel() {
-    if (this.state.dirtyImage || this.currentStore.isDirty()){
-      this.cancelNotification()
+    if (this.state.dirtyImage || this.currentStore.isDirty()) {
+      this.cancelNotification();
     } else {
-      this.end()
+      this.end();
     }
   }
+
   start(store) {
     this.state.active = true;
     this.currentStore = store;
     this.currentStore.setBackup();
   }
+
   end() {
     this.unsetLoading();
     this.state.active = false;
