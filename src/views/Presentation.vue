@@ -1,6 +1,5 @@
 <template>
   <div>
-    <DownArrow></DownArrow>
     <BaseLayout :store="store">
       <div class="text1"
            v-scroll-reveal="sReveal('left', 250, 400)">
@@ -12,7 +11,8 @@
         <div class="column">
           <EditIcon :edit="galleriesEdit" :store="store.gallery"
                     top="20px" right="20px" :small="true"/>
-          <img :src="image()" v-scroll-reveal="sReveal('bottom', 300, 10)"/>
+          <img :src="image"
+               v-scroll-reveal="sReveal('bottom', 300, 10)"/>
         </div>
         <div class="column"
              v-scroll-reveal="sReveal('right', 350, 400)">
@@ -26,46 +26,25 @@
 </template>
 
 <script>
-  import DownArrow from '../components/Carousel/DownArrow.vue';
   import ViewsMixin from '../mixins/ViewsMixin';
   import EditIcon from '../components/Edit/EditIcon';
-  import GalleriesStore from '../components/Edit/Galleries/GalleriesStore'
 
 
   export default {
     name: "Presentation",
     mixins: [ViewsMixin],
-    components: {DownArrow, EditIcon},
-    data() {
-      return {
-        component: "Presentation",
-        type: 'text',
-        galleriesEdit: GalleriesStore,
-        downArrow: null,
-      };
-    },
-    methods: {
-      scrollWatch() {
-        if (window.pageYOffset >= 165) {
-          this.downArrow.classList.remove('fadeInDown');
-          this.downArrow.classList.add('fadeOutDown');
-          window.removeEventListener('scroll', this.scrollWatch);
-        }
-      },
-      setDownArrow() {
-        setTimeout(() => {
-          this.downArrow = document.getElementsByClassName('down-arrow')[0];
-          this.downArrow.classList.add('fadeInDown');
-          setTimeout(() => {
-            Velocity(this.downArrow, {opacity: '1'});
-          }, 1000);
-        }, 1800);
+    components: {EditIcon},
+    data: () => ({
+      component: "Presentation",
+      type: 'text',
+      downArrow: null,
+    }),
+    computed: {
+      image() {
+        let gallery = this.galleriesEdit.getStore('Presentation');
+        return this.getImage(0, gallery).image;
       }
     },
-    mounted() {
-      window.addEventListener('scroll', this.scrollWatch);
-      this.setDownArrow();
-    }
   };
 </script>
 

@@ -28,7 +28,7 @@
     },
     computed: {
       current() {
-        return this.store.isEmpty ? 0 : this.store.count;
+        return this.store.isEmpty ? 0 : this.store.count();
       },
       total() { return this.store.limit; },
       color() {

@@ -34,9 +34,6 @@
   import Review from '../views/Review';
   import Footer from '../views/Footer';
 
-  import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
-  import TextsStore from '../components/Edit/Texts/TextsStore';
-  import ArticlesStore from '../components/Edit/Articles/ArticlesStore';
 
   export default {
     name: "Public",
@@ -44,10 +41,9 @@
       Login, Parallax, PromoRibbon, Header, Navbar, Carousel, Presentation,
       Hero, Events, Articles, Contact, Review, Footer
     },
-    created() {
-      const Galleries = GalleriesStore;
-      const Articles = ArticlesStore;
-      const Texts = TextsStore;
+    beforeCreate: () => {
+    },
+    created: () => {
     }
   };
 </script>

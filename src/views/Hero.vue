@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section hero">
-      <EditIcon :store="store" :edit="edit" top="-35px"/>
+      <EditIcon :store="store" :edit="edit" top="0px"/>
       <div class="container">
         <div class="columns is-variable is-8">
           <div class="column is-one-third"

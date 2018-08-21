@@ -4,7 +4,7 @@
       <div class="content">
         <div class="columns is-multiline">
           <div class="column is-3 gallery-col"
-               v-for="image in images"
+               v-for="image in store.images"
                v-scroll-reveal="sReveal('left', 200, 100, 1500)">
             <a class="no-tr"
                :href="image.image"
@@ -16,8 +16,7 @@
         </div>
       </div>
     </div>
-
-    <Lightbox v-if="!isAdmin"></Lightbox>
+    <Lightbox/>
   </div>
 </template>
 
@@ -29,13 +28,11 @@
     name: "EventsImages",
     mixins: [ViewsMixin],
     components: {Lightbox},
-    data() {
-      return {
-        component: 'Events',
-        type: 'image',
-        isAdmin: false,
-      };
-    },
+    data: () => ({
+      component: 'Events',
+      type: 'image',
+      isAdmin: false,
+    }),
   };
 </script>
 

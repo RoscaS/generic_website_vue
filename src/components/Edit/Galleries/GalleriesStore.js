@@ -8,18 +8,23 @@ class GalleriesStore {
     this.name = 'GalleriesStore';
     this.type = 'image';
     this.state = {
-      stores: [],
+      stores: [
+        new Gallery('Carousel'),
+        new Gallery('Promo'),
+        new Gallery('Presentation'),
+        new Gallery('Parallax'),
+        new Gallery('Events'),
+        new Gallery('Stock'),
+        new Gallery('Articles'),
+      ],
       activeTab: 0,
       loading: false,
-
       active: null,
-
       primaryStore: null,
       secondaryStore: null,
       selectedImage: null,
       carouselAutoScroll: false,
     };
-    this.fetchData();
   }
   get loading() {return this.state.loading;}
   set loading(value) {this.state.loading = value;}
@@ -45,14 +50,6 @@ class GalleriesStore {
   unsetLoading() {this.state.loading = false;}
   clearSelectedImage() {this.state.selectedImage = null;}
 
-  fetchData() {
-    axios.get('galleries/').then(response => {
-      response.data.forEach(i => { this.setData(i); });
-    });
-  }
-  setData(data) {
-    this.state.stores.push(new Gallery(data));
-  }
   toggleLoading(message) {
     this.setLoading();
     setTimeout(() => {

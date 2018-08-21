@@ -198,7 +198,7 @@
   #Navbar {
     width: 100%;
     padding: 10px 0 10px 0 !important;;
-    z-index: 2;
+    z-index: 5;
 
     #Brand {
       opacity: 0;

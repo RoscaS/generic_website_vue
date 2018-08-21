@@ -94,7 +94,7 @@
       },
 
       checkFull(otherGallery) {
-        if (!otherGallery.isEmpty && otherGallery.count >= otherGallery.limit) {
+        if (!otherGallery.isEmpty && otherGallery.count() >= otherGallery.limit) {
           otherGallery.lock();
         }
 

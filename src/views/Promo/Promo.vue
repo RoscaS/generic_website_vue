@@ -7,7 +7,7 @@
           <div>
             <EditIcon :edit="galleriesEdit" :store="store.gallery"
                       top="40px" right="175px" :small="true"/>
-            <img :src="image()" :class="{'highlighted': highlighted(2)}">
+            <img :src="image" :class="{'highlighted': highlighted(2)}">
           </div>
         </div>
         <div class="column right is-5">
@@ -36,19 +36,19 @@
   import EditIcon from '../../components/Edit/EditIcon';
   import FieldsLayout from '../Layouts/FieldsLayout';
 
-  import GalleriesStore from '../../components/Edit/Galleries/GalleriesStore'
-
-
   export default {
     name: 'Promo',
     mixins: [ViewsMixin],
     components: {TextsEditMenu, EditIcon, FieldsLayout},
-    data() {
-      return {
-        component: "Promo",
-        type: 'text',
-        galleriesEdit: GalleriesStore,
-      };
+    data: () => ({
+      component: "Promo",
+      type: 'text',
+    }),
+    computed: {
+      image() {
+        let gallery = this.galleriesEdit.getStore('Promo');
+        return this.getImage(0, gallery).image;
+      }
     },
   };
 </script>

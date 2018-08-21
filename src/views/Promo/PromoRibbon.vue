@@ -1,27 +1,27 @@
 <template>
-  <div class="collapse">
+  <transition name="promo-fade-in" appear>
+    <div class="collapse">
+      <div class="collapse-trigger"
+           @mouseenter="showPromo"
+           @mouseleave="hidePromo"
+           @click="lockPromo">
 
-    <div class="collapse-trigger"
-         @mouseenter="showPromo"
-         @mouseleave="hidePromo"
-         @click="lockPromo">
-
-      <div class="corner-ribbon top-right"
-           :title="hoverTitle"
-           slot="trigger">
-        Action spéciale !
+        <div class="corner-ribbon top-right"
+             :title="hoverTitle"
+             slot="trigger">
+          Action spéciale !
+        </div>
       </div>
+
+      <VueSlideUpDown :active="isOpen" :duration="1000">
+        <transition enter-active-class="fadeInDown"
+                    leave-active-class="fadeOutUp">
+          <Promo v-if="animateContent">
+          </Promo>
+        </transition>
+      </VueSlideUpDown>
     </div>
-
-    <VueSlideUpDown :active="isOpen" :duration="1000">
-      <transition enter-active-class="fadeInDown"
-                  leave-active-class="fadeOutUp">
-        <Promo v-if="animateContent">
-        </Promo>
-      </transition>
-    </VueSlideUpDown>
-
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -105,6 +105,15 @@
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
+
+  .promo-fade-in-enter-active, .promo-fade-in-leave-active {
+    transition: opacity 3s ease;
+    transition-delay: .5s;
+  }
+
+  .promo-fade-in-enter, .promo-fade-in-leave-active {
+    opacity: 0;
+  }
 
   .corner-ribbon {
     font-family: 'Open Sans', sans-serif;

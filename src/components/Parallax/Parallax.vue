@@ -1,16 +1,16 @@
 <template>
   <div>
-    <EditIcon :store="store" :edit="edit" top="10px"/>
+    <EditIcon :store="store" :edit="edit" top="50px"/>
     <section :id="id" class="parallax has-text-centered" :style="style">
       <h1 class="title">{{ title }}</h1>
     </section>
-
   </div>
 </template>
 
 <script>
-  import EditIcon from '../Edit/EditIcon';
+  import 'vueperslides/dist/vueperslides.min.css';
   import ViewsMixin from '../../mixins/ViewsMixin';
+  import EditIcon from '../Edit/EditIcon';
 
   export default {
     name: 'Parallax',
@@ -20,27 +20,24 @@
       idx: {type: Number},
       height: {type: String}
     },
-    data() {
-      return {
-        component: 'Parallax',
-        type: 'image',
-
-        // image: null,
-        title: null,
-      };
-    },
+    data: () => ({
+      component: 'Parallax',
+      type: 'image',
+    }),
     computed: {
-      id() {return `Parallax${this.idx}`;},
-      style() {
-        if (this.isReady) {
-          this.title = this.images[this.idx].description;
-          return {
-            backgroundImage: `url(${this.images[this.idx].image})`,
-            minHeight: this.height
-          };
-        }
+      id() {
+        return `Parallax${this.idx}`;
       },
-    },
+      title() {
+        return this.getImage(this.idx).description;
+      },
+      style() {
+        return {
+          backgroundImage: `url(${this.getImage(this.idx).image})`,
+          minHeight: this.height
+        };
+      }
+    }
   };
 </script>
 

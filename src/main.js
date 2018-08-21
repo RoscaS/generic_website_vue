@@ -1,8 +1,7 @@
 // Vendor
+import Buefy from 'buefy';
 import Vue from 'vue';
 import axios from 'axios';
-import Buefy from 'buefy';
-import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 
 import VueScrollTo from 'vue-scrollto';
@@ -14,7 +13,6 @@ import '../static/js/velocity';
 import '../static/fonts/font-awesome/css/fontawesome-all.css';
 // import 'vue2-animate/dist/vue2-animate.min.css';
 
-Vue.use(Vuex);
 // Vue.use(Sticky);
 Vue.use(VueRouter);
 Vue.use(VueScrollTo);
@@ -24,6 +22,8 @@ Vue.use(Buefy, {
   defaultIconPack: 'fas',
   defaultTooltipAnimated: true,
 });
+
+
 
 
 // Perso
@@ -51,7 +51,6 @@ import InOut from './components/InOut';
 
 Vue.component('Title', Title);
 Vue.component('InOut', InOut);
-
 
 
 
