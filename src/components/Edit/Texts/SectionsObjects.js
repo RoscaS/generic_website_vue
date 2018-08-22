@@ -48,17 +48,9 @@ class WithImage extends Base {
     this.gallery = null;
     this.hasLoaded = false;
   }
-
   setGallery() {
-    try {
-      let gallery = GalleriesStore.getStore(this.name);
-      if (gallery) {
-        this.gallery = gallery;
-        this.hasLoaded = true;
-      }
-    } catch (e) {
-      setTimeout(() => { this.setGallery(); }, 100);
-    }
+    this.gallery = GalleriesStore.getStore(this.name);
+    this.hasLoaded = true;
   }
 }
 
@@ -93,6 +85,18 @@ class Events extends Base {
     super();
     this.name = 'Events';
     this.url = 'events/1/';
+    this.state = {
+      title: new Title(),
+      sub_title: new SubTitle(),
+    };
+  }
+}
+
+class Article extends Base {
+  constructor() {
+    super();
+    this.name = 'Article';
+    this.url = 'article/1/';
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
@@ -158,4 +162,4 @@ class Review extends Base {
   }
 }
 
-export {Promo, Presentation, Events, Hero, Contact, Review};
+export {Promo, Presentation, Events, Article, Hero, Contact, Review};

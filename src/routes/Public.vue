@@ -27,7 +27,7 @@
   import Navbar from '../views/Navbar';
   import Carousel from '../views/Carousel';
   import Presentation from '../views/Presentation';
-  import Articles from '../views/Articles';
+  import Articles from '../views/Articles/Articles';
   import Hero from '../views/Hero';
   import Events from '../views/Events/Events';
   import Contact from '../views/Contact';

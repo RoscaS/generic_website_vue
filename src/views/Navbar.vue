@@ -81,7 +81,7 @@
         canCancel: [true, false, true],
         links: [
           {id: 'Presentation',name: 'Presentation', icon: 'fa-info'},
-          {id: 'Articles',name: 'Articles', icon: 'fa-shopping-bag'},
+          {id: 'Article',name: 'Articles', icon: 'fa-shopping-bag'},
           {id: 'Events',name: 'Galerie', icon: 'fa-th'},
           {id: 'Contact',name: 'Contact', icon: 'fa-envelope'},
         ]

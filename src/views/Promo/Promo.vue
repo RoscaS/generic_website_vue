@@ -46,8 +46,10 @@
     }),
     computed: {
       image() {
-        let gallery = this.galleriesEdit.getStore('Promo');
-        return this.getImage(0, gallery).image;
+        try {
+          let gallery = this.galleriesEdit.getStore('Promo');
+          return this.getImage(0, gallery).image;
+        } catch (e) {setTimeout(() => {return this.computed;}, 100);}
       }
     },
   };

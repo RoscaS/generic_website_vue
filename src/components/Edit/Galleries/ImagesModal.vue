@@ -22,12 +22,15 @@
     },
     data() {
       return {
-        edit: GalleriesStore,
+        // edit: GalleriesStore,
       }
     },
     computed: {
+      edit() {return GalleriesStore},
+
       modalSync: {
-        get() {return this.store == this.edit.state.active;},
+        get() {
+          return this.store == this.edit.active;},
         set(value) {if (!value) this.edit.end();}
       },
       cancelModalOptions() {

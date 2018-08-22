@@ -25,7 +25,7 @@
   import Lightbox from '../../components/Lightbox/Lightbox';
 
   export default {
-    name: "EventsImages",
+    name: "EventsGallery",
     mixins: [ViewsMixin],
     components: {Lightbox},
     data: () => ({

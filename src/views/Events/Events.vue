@@ -2,7 +2,7 @@
   <div>
     <BaseLayout :store="store">
       <EditIcon :store="imagesStore" :edit="imagesEdit"/>
-      <EventsImages/>
+      <EventsGallery></EventsGallery>
     </BaseLayout>
   </div>
 
@@ -10,15 +10,14 @@
 
 <script>
   import ViewsMixin from '../../mixins/ViewsMixin';
-  import EventsImages from './EventsImages';
-  import GalleriesStore from '../../components/Edit/Galleries/GalleriesStore';
+  import EventsGallery from './EventsGallery';
   import EditIcon from '../../components/Edit/EditIcon';
 
 
   export default {
     name: "Events",
     mixins: [ViewsMixin],
-    components: {EventsImages, EditIcon},
+    components: {EventsGallery, EditIcon},
     data() {
       return {
         component: 'Events',
@@ -26,8 +25,8 @@
       };
     },
     computed: {
-      imagesEdit() { return GalleriesStore },
-      imagesStore() { return GalleriesStore.getStore('Events')},
+      imagesEdit() { return this.galleriesEdit },
+      imagesStore() { return this.galleriesEdit.getStore('Events')},
     }
   };
 </script>

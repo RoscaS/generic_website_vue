@@ -1,13 +1,19 @@
 import BaseLayout from '../views/Layouts/BaseLayout';
 import TextsStore from '../components/Edit/Texts/TextsStore';
 import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
+import CategoriesStore from '../components/Edit/Articles/CategoriesStore';
 
 export default {
   components: {BaseLayout},
   data: () => ({
     textsEdit: TextsStore,
     galleriesEdit: GalleriesStore,
-    editTypes: {text: TextsStore, image: GalleriesStore},
+    categoriesEdit: CategoriesStore,
+    editTypes: {
+      text: TextsStore,
+      image: GalleriesStore,
+      article: CategoriesStore,
+    },
   }),
   computed: {
     tools() {return this.$Global.Tools;},

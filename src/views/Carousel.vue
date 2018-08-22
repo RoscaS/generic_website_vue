@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="carousel-top">
   <EditIcon class="edit-icon" :store="store" :edit="edit" top="50px"/>
   <transition name="carousel-fade-in" appear>
     <vueper-slides :breakpoints="breakpoints"
@@ -49,26 +49,28 @@
 </script>
 
 <style>
-  .edit-icon{
+  .carousel-top .edit-icon{
     z-index: 4;
     position: absolute;
   }
 
-  .carousel-fade-in-enter-active, .carousel-fade-in-leave-active {
+  .carousel-top .carousel-fade-in-enter-active,
+  .carousel-top .carousel-fade-in-leave-active {
     transition: opacity 3s ease;
     transition-delay: 1.5s;
   }
 
-  .carousel-fade-in-enter, .carousel-fade-in-leave-active {
+  .carousel-top .carousel-fade-in-enter,
+  .carousel-top .carousel-fade-in-leave-active {
     opacity: 0;
   }
 
-  .vueperslides__arrow {
+  .carousel-top .vueperslides__arrow {
     color: white;
     font-size: 60px;
   }
 
-  .vueperslides__bullet {
+  .carousel-top .vueperslides__bullet {
     background-color: transparent;
     border: 1.5px solid #3D5B95;;
     box-shadow: none;
@@ -77,7 +79,7 @@
     height: 10px;
   }
 
-  .vueperslides__bullet--active {
+  .carousel-top .vueperslides__bullet--active {
     background-color: #3D5B95;
     width: 10px;
     height: 10px;

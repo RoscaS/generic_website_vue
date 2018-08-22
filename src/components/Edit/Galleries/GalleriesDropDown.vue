@@ -77,19 +77,19 @@
       },
       mainGalleries() {
         let galleries = ['Stock', 'Carousel', 'Events', 'Parallax'];
-        return this.edit.state.stores.filter(i => {
+        return this.edit.stores.filter(i => {
           return i != this.store && galleries.includes(i.name)
         });
       },
       miscGalleries() {
         let galleries = ['Presentation', 'Promo'];
-        return this.edit.state.stores.filter(i => {
+        return this.edit.stores.filter(i => {
           return i != this.store && galleries.includes(i.name)
         });
       },
       articlesGalleries() {
         let galleries = ['Articles'];
-        return this.edit.state.stores.filter(i => {
+        return this.edit.stores.filter(i => {
           return i != this.store && galleries.includes(i.name)
         });
       },

@@ -21,7 +21,7 @@ class Category {
 
   initArticles(articles) {
     articles.forEach(i => {
-      this.articles.push(new Article(i, this));
+      this.articles.push(Article(i, this));
     });
   }
 

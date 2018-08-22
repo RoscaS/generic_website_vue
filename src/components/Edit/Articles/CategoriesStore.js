@@ -1,34 +1,38 @@
 import axios from "axios";
+import Vue from 'vue';
 import tools from '../../../utiles/tools';
 import {Category} from "./CategoryObject";
-
 axios.defaults.baseURL = 'http://localhost:8000/';
 const url = 'categories/';
 
-class CategoriesStore {
-  constructor() {
-    this.name = 'CategoriesStore';
-    this.type = 'article';
-    this.state = {
+const CategoriesStore = new Vue ({
+  data: () => ({
+    name: 'CategoriesStore',
+    type: 'article',
+    state: {
       stores: [],
       activeTab: 0,
       loading: false,
-    };
+      selectedArticle: null,
+      hasLoaded:false,
+    }
+  }),
+  methods: {
+    fetchData() {
+      axios.get(url).then(response => {
+        response.data.forEach(i => {
+          this.state.stores.push(new Category(i));
+        });
+        this.state.hasLoaded = true;
+      });
+    }
+  },
+  created() {
     this.fetchData();
   }
+});
 
-  fetchData() {
-    axios.get(url).then(response => {
-      response.data.forEach(i => {
-        this.state.stores.push(new Category(i));
-      });
-    });
-  }
-
-
-}
-
-export default new CategoriesStore;
+export default CategoriesStore;
 
 
 

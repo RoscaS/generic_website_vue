@@ -4,6 +4,7 @@ import {
   Promo,
   Presentation,
   Events,
+  Article,
   Hero,
   Contact,
   Review
@@ -20,6 +21,7 @@ class TextsStore {
         new Promo(),
         new Presentation(),
         new Events(),
+        new Article(),
         new Hero(),
         new Contact(),
         new Review(),
