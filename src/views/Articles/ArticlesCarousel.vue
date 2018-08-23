@@ -1,5 +1,41 @@
 <template>
-  <div>
+  <section>
+    <div class="debug-articles">
+      <div class="level">
+        <div class="level-item">
+          <ul>
+            <li><b>idx</b></li>
+            <li><b>id</b></li>
+            <li><b>pos</b></li>
+          </ul>
+        </div>
+        <div v-for="(slide, i) in slides"
+             class="level-item"
+             :class="{current: currentIdx==getIndex(slide)}">
+          <ul>
+            <li>{{getIndex(slide)}}</li>
+            <li>{{slide.id}}</li>
+            <li>{{slide.position}}</li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <b-field grouped group-multiline>
+        <button class="button is-outlined is-primary" @click="previous()"> <
+        </button>
+        <button class="button is-outlined is-primary" @click="next()"> >
+        </button>
+        <p class="control">
+          <b-input type="number" :min="0" v-model="jumpTo"></b-input>
+        </p>
+        <button class="go button is-outlined is-primary" @click="initJump()">
+          Go
+        </button>
+        <button class="go button is-outlined is-primary" @click="reset()">
+          Reset
+        </button>
+      </b-field>
+    </div>
     <carousel-3d ref="mycarousel"
                  :startIndex="0"
                  :controlsVisible="false"
@@ -9,12 +45,13 @@
                  :border="0"
                  :display="9"
                  :animationSpeed="speed"
-                 @before-slide-change="beforeChange">
+                 @before-slide-change="beforeChange"
+                 @after-slide-change="afterChange">
       <slide v-for="(slide, i) in slides" :key="i" :index="i">
         <img :src="slide.image">
       </slide>
     </carousel-3d>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -25,15 +62,21 @@
   export default {
     name: "ArticleCarousel",
     components: {Carousel3d, Slide},
+    props: {
+      categories: {type: Array}
+    },
     data: () => ({
       component: 'Carousel',
       type: 'image',
+      count: null,
       currentIdx: 0,
       jumpTo: 23,
       delta: null,
       direction: null,
       speed: 200,
       timeout: 50,
+      moving: false,
+      c: 0,
     }),
     computed: {
       edit() {return GalleriesStore;},
@@ -41,27 +84,46 @@
       state() {return this.store.state;},
       selectedArticle() {return CategoriesStore.state.selectedArticle;},
 
+      articles(lst=[]) {
+        this.categories.forEach(i => {i.articles.forEach(j => {lst.push(j)})});
+        return lst;
+      },
+
       slides() {
         if (this.store.hasLoaded) {
+          this.count = this.store.images.length;
           return this.store.images;
         }
         else return setTimeout(() => {return this.slides;}, 100);
       },
     },
     watch: {
-      seletedArticle(value) {
-        console.log(`[watch] selectedArticle\tvalue: ${value}`);
-        // this.jumpToSlide()
+      selectedArticle() {
+        if (this.selectedArticle) {
+
+          let oldData = this.selectedArticle;
+          setTimeout(() => {
+            if (this.selectedArticle == oldData) {
+              this.initJump(this.getIndex(this.selectedArticle));
+            }
+          }, 300);
+        }
       }
     },
     methods: {
+      getArticles() {
+        if (this.store.hasLoaded) {
+          return CategoriesStore.allArticles;
+        }
+        else return setTimeout(() => {return this.getArticles()}, 300);
+      },
       reset() {
         this._goToSlide(0);
         this.jumpTo = 0;
       },
-      getIndex(slide) {
-        if (this.store.hasLoaded) return this.slides.indexOf(slide);
-        else return setTimeout(() => {return this.getIndex(slide);}, 100);
+      getIndex(img) {
+        let image = this.slides.find(i => i.id == img.id);
+        return this.slides.indexOf(image);
       },
       next() {
         if (this.currentIdx == this.slides.length - 1) this._goToSlide(0);
@@ -71,16 +133,42 @@
         if (this.currentIdx == 0) this._goToSlide(this.slides.length - 1);
         else this._goToSlide(this.currentIdx - 1);
       },
-      jumpToSlide(idx = this.currentIdx) {
+      initJump(idx) {
+        this.jumpTo = idx;
         this.delta = this.jumpTo - this.currentIdx;
-        if (this.currentIdx != this.jumpTo) {
-          setTimeout(() => {
-            this.direction();
-            this.jumpToSlide(idx - 1);
-          }, this.timeout);
+        this.jumpToSlide();
+        this.c ++;
+      },
+      setSpeed() {
+        let delta = Math.abs(this.delta);
+        if (delta <= 12) {
+          this.speed = 800 - delta * 50;
+          this.timeout = 300 - delta * 40;
         } else {
           this.speed = 200;
           this.timeout = 50;
+        }
+      },
+      setDirection() {
+        if (this.delta > 0) {
+          let right = Math.abs(this.delta);
+          let left = this.count - this.jumpTo + this.currentIdx;
+          return right >= left ? this.previous() : this.next();
+        } else {
+          let right = this.count + this.jumpTo - this.currentIdx;
+          let left = Math.abs(this.delta);
+          return right >= left ? this.previous() : this.next();
+        }
+      },
+      jumpToSlide(idx = this.currentIdx) {
+        this.delta = this.jumpTo - this.currentIdx;
+        this.setSpeed();
+        if (this.currentIdx != this.jumpTo) {
+          setTimeout(() => {
+            this.setDirection();
+            this.jumpToSlide(idx - 1);
+          }, this.timeout);
+        } else {
         }
       },
       _goToSlide(idx) {
@@ -89,7 +177,9 @@
       beforeChange(idx) {
         this.currentIdx = idx;
       },
-    }
+      afterChange(idx) {
+      },
+    },
   };
 </script>
 
@@ -127,39 +217,7 @@
 </style>
 
 
-<!--<div class="debug-articles">-->
-  <!--<div class="level">-->
-    <!--<div class="level-item">-->
-      <!--<ul>-->
-        <!--<li><b>idx</b></li>-->
-        <!--<li><b>id</b></li>-->
-        <!--<li><b>pos</b></li>-->
-      <!--</ul>-->
-    <!--</div>-->
-    <!--<div v-for="(slide, i) in slides"-->
-         <!--class="level-item"-->
-         <!--:class="{current: currentIdx==getIndex(slide)}">-->
-      <!--<ul>-->
-        <!--<li>{{getIndex(slide)}}</li>-->
-        <!--<li>{{slide.id}}</li>-->
-        <!--<li>{{slide.position}}</li>-->
-      <!--</ul>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<hr>-->
-  <!--<b-field grouped group-multiline>-->
-    <!--<button class="button is-outlined is-primary" @click="previous()"> <-->
-    <!--</button>-->
-    <!--<button class="button is-outlined is-primary" @click="next()"> >-->
-    <!--</button>-->
-    <!--<p class="control">-->
-      <!--<b-input type="number" :min="0" v-model="jumpTo"></b-input>-->
-    <!--</p>-->
-    <!--<button class="go button is-outlined is-primary" @click="initJump()">-->
-      <!--Go-->
-    <!--</button>-->
-    <!--<button class="go button is-outlined is-primary" @click="reset()">-->
-      <!--Reset-->
-    <!--</button>-->
-  <!--</b-field>-->
-<!--</div>-->
+
+
+
+

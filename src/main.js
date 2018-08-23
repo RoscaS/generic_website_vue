@@ -3,11 +3,31 @@ import Buefy from 'buefy';
 import Vue from 'vue';
 import axios from 'axios';
 import VueRouter from 'vue-router';
-
 import VueScrollTo from 'vue-scrollto';
 import VueScrollReveal from 'vue-scroll-reveal';
 import VeeValidate from 'vee-validate';
 // import Sticky from 'vue-sticky-directive'
+
+
+require('vuetify/src/stylus/app.styl');
+import VApp from 'vuetify/es5/components/VApp';
+import Vuetify from 'vuetify/es5/components/Vuetify';
+import VTabs from 'vuetify/es5/components/VTabs';
+import VCard from 'vuetify/es5/components/VCard';
+// import VGrid from 'vuetify/es5/components/VGrid';
+
+Vue.use(Vuetify, {
+	components: {
+		VApp,
+		VTabs,
+		VCard,
+		// VGrid,
+	}
+});
+
+
+
+
 
 import '../static/js/velocity';
 import '../static/fonts/font-awesome/css/fontawesome-all.css';

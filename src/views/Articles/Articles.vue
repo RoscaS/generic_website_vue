@@ -1,13 +1,14 @@
 <template>
   <BaseLayout :store="store">
-    <ArticlesCarousel></ArticlesCarousel>
+    <ArticlesCarousel :categories="categories"></ArticlesCarousel>
     <br>
     <br>
-    <ArticlesData></ArticlesData>
+    <ArticlesData :categories="categories"></ArticlesData>
   </BaseLayout>
 </template>
 
 <script>
+
   import EditIcon from '../../components/Edit/EditIcon';
   import ViewsMixin from '../../mixins/ViewsMixin';
 
@@ -23,8 +24,20 @@
       component: 'Article',
       type: 'text',
     }),
-    mounted() {
-    }
+    computed: {
+      categories() {
+        return this.getCategories();
+      },
+    },
+    methods: {
+      getCategories() {
+        let categories = this.editTypes['article'];
+        if (categories.state.hasLoaded) {
+          return categories.state.stores;
+        }
+        else setTimeout(() => {return this.getCategories();}, 100);
+      }
+    },
   };
 </script>
 

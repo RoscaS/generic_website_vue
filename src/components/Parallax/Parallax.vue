@@ -63,8 +63,8 @@
 
     h1 {
       color: white;
-      font-size: 50px;
-      font-weight: normal;
+      font-size: 50px !important;
+      font-weight: lighter;
     }
   }
 </style>

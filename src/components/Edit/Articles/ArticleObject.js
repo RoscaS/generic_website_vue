@@ -29,11 +29,12 @@ function Article(article, category) {
       position: article.position,
       category: category,
       description: new Description(article.description, 200, 2),
-      imageId: article.image,
+      image: article.image,
+      // imageId: article.image,
     }),
     computed: {
-      galleryStore() { return GalleriesStore; },
-      image() {return this.galleryStore.getImage('Articles', this.imageId) }
+      // galleriesStore() { return GalleriesStore; },
+      // image() {return this.galleriesStore.getImage('Articles', this.imageId) }
     }
   })
 }

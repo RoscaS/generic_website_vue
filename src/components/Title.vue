@@ -15,8 +15,6 @@
 <style scoped lang="scss">
   @import '../../static/sass/global';
 
-
-
   .underline {
     opacity: .65;
     margin: 15px auto 0 auto;

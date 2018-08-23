@@ -17,6 +17,17 @@ const CategoriesStore = new Vue ({
       hasLoaded:false,
     }
   }),
+  computed: {
+    allArticles() {
+      let lst = [];
+      this.state.stores.forEach(i => {
+        i.articles.forEach(j => {
+          lst.push(j)
+        })
+      });
+      return lst;
+    }
+  },
   methods: {
     fetchData() {
       axios.get(url).then(response => {
