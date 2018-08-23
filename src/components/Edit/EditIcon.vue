@@ -7,16 +7,18 @@
             @click="startEdit">
       <i class="fal fa-pencil-alt"></i>
     </button>
-    <ImagesModal v-if="showModal" :enable="showModal" :store="store"/>
+    <ImagesModal v-if="imagesModal" :enable="imagesModal" :store="store"/>
+    <ArticlesModal v-if="articlesModal" :enable="articlesModal" :store="store"/>
   </div>
 </template>
 
 <script>
   import ImagesModal from './Galleries/ImagesModal';
+  import ArticlesModal from './Articles/ArticlesModal';
 
   export default {
     name: "EditIcon",
-    components: {ImagesModal},
+    components: {ImagesModal, ArticlesModal},
     props: {
       right: {type: String},
       top: {type: String},
@@ -26,7 +28,8 @@
     },
     data() {
       return {
-        showModal: false,
+        imagesModal: false,
+        articlesModal: false,
         timeout: false,
       };
     },
@@ -43,7 +46,8 @@
     methods: {
       startEdit() {
         this.edit.start(this.store);
-        this.showModal = this.edit.type == 'image';
+        this.imagesModal = this.edit.type == 'image';
+        this.articlesModal = this.edit.type == 'article';
       },
       sReveal(side, delay, distance = 100, duration = 1500) {
         return new this.tools.ScrollRevealOptions(

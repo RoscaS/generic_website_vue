@@ -29,7 +29,6 @@
 </template>
 
 <script>
-  import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
   import draggable from 'vuedraggable';
   import GalleriesStore from './GalleriesStore';
   import ImageOverlay from './ImageOverlay';
@@ -37,19 +36,17 @@
 
   export default {
     name: "DragSortImages",
-    components: {draggable, ImageOverlay, Scrolly, ScrollyViewport, ScrollyBar},
+    components: {draggable, ImageOverlay},
     props: {
       classes: {type: Array},
       store: {type: Object},
     },
-    data() {
-      return {
-        edit: GalleriesStore,
-        isDragging: false,
-        delayedDragging: false,
-        reOrder: false,
-      };
-    },
+    data: () => ({
+      edit: GalleriesStore,
+      isDragging: false,
+      delayedDragging: false,
+      reOrder: false,
+    }),
     computed: {
       editable() {
         return !this.store.isLocked;

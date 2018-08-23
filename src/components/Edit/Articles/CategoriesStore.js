@@ -13,29 +13,47 @@ const CategoriesStore = new Vue ({
       stores: [],
       activeTab: 0,
       loading: false,
-      selectedArticle: null,
       hasLoaded:false,
+      active:false,
+
+      editPopup: null,
+      selectedCategory: null,
+      hoveredImage: null,
+
+      primaryStore: null,
+      secondaryStore: null,
     }
   }),
-  computed: {
-    allArticles() {
-      let lst = [];
-      this.state.stores.forEach(i => {
-        i.articles.forEach(j => {
-          lst.push(j)
-        })
-      });
-      return lst;
-    }
-  },
   methods: {
     fetchData() {
       axios.get(url).then(response => {
         response.data.forEach(i => {
           this.state.stores.push(new Category(i));
         });
+        this.sortByPosition();
         this.state.hasLoaded = true;
       });
+    },
+    updatePosition() {
+      for (let i = 0; i < this.state.stores.length; i++) {
+        if (this.state.stores[i].position != i + 1) {
+          this.state.stores[i].position = i + 1;
+          this.state.stores[i].put();
+        }
+      }
+    },
+    sortByPosition() {
+      this.state.stores.sort((a, b) => {
+        return a.position - b.position;});
+    },
+    clearEditPopup() {
+      this.state.editPopup = false;
+    },
+    start(store) {
+      this.state.active = true;
+    },
+    end() {
+      this.state.active = false;
     }
   },
   created() {

@@ -1,22 +1,39 @@
 <template>
-  <b-table :data="data"
-           hoverable>
-    <template slot-scope="props">
-      <b-table-column field="id" label="ID" width="40" numeric>
-      <div class="hover" @mouseleave="mouseOut()" @mouseenter="mouseIn(props.row.data)">{{ props.row.id }}</div>
-      </b-table-column>
-      <b-table-column field="name" label="NOM" width="40">
-        <div class="hover" @mouseleave="mouseOut()" @mouseenter="mouseIn(props.row.data)">{{ props.row.name }}</div>
-      </b-table-column>
-      <b-table-column field="description" label="DESCRIPTION" width="40">
-        <div class="hover" @mouseleave="mouseOut()" @mouseenter="mouseIn(props.row.data)">{{ props.row.description }}</div>
-      </b-table-column>
-      <b-table-column field="price" label="Prix" width="40" numeric>
-        <div class="hover" @mouseleave="mouseOut()" @mouseenter="mouseIn(props.row.data)">{{ props.row.price }}</div>
-      </b-table-column>
-    </template>
+  <section>
+    <div class="columns is-centered">
+      <div class="column is-9">
+        <div class="card"
+             v-for="(article, i) in category.articles"
+             :key="i"
+             @mouseenter="mouseIn(article)"
+             @mouseleave="mouseOut()">
+          <header class="card-header level">
+            <div class="level-left">
 
-  </b-table>
+              <div class="level-item">
+                <span class="diez">#</span>
+                <span class="id">{{article.id}}</span>
+              </div>
+
+              <div class="level-item">
+                <span class="name">{{article.name.data}}</span>
+              </div>
+
+              <div class="level-item">
+                <span class="description">{{article.description.data}}</span>
+              </div>
+            </div>
+
+            <div class="level-right">
+              <div class="level-item pprice">
+                <span class="price">{{article.price.data}} chf</span>
+              </div>
+            </div>
+          </header>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -27,47 +44,65 @@
     props: {
       category: {type: Object}
     },
-    data: () => ({
-      data: [],
-      columns: [
-        {field: 'data'},
-        {field: 'id', label: 'ID', width: '40', numeric: true},
-        {field: 'name', label: 'Article',},
-        {field: 'description', label: 'Description',},
-        {field: 'price', label: 'Prix', centered: true},
-      ]
-    }),
+    data: () => ({}),
     methods: {
       mouseIn(data) {
-        CategoriesStore.state.selectedArticle = data.image;
+        CategoriesStore.state.hoveredImage = data.image;
       },
       mouseOut() {
-        CategoriesStore.state.selectedArticle = null
+        CategoriesStore.state.hoveredImage = null;
       },
-      tableData() {
-        this.category.articles.forEach(i => {
-          this.data.push({
-            data: i,
-            id: i.id,
-            name: i.name.data,
-            description: i.description.data,
-            price: i.price.data
-          });
-        });
-      }
     },
     mounted() {
-      this.tableData();
+      console.log(this.category);
     }
   };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import '../../../static/sass/global';
 
-  .hover {
-    padding: 5px;
-    height: 100%;
-    width: 100%;
-    /*background-color: #45a875;*/
+  .columns {
+    .card {
+      margin-bottom: 10px;
+      box-shadow: none;
+
+      .card-header {
+        box-shadow: none;
+        border-bottom: 1px solid lightgray;
+
+        .level-left {
+          margin-left: 10px;
+          .diez {
+            font-weight: lighter;
+            font-size: 25px;
+            opacity: 0.35;
+            z-index: 1;
+          }
+
+          .name {
+            width: 150px;
+            font-size: 20px;
+            padding-top: 0;
+            padding-bottom: 0;
+            color: #4C4C4C;
+          }
+
+          .description {
+            width: 310px;
+            font-weight: bold;
+          }
+        }
+
+        .level-right {
+          margin-right: 15px;
+
+          .price {
+          }
+        }
+      }
+    }
   }
+
+
 </style>

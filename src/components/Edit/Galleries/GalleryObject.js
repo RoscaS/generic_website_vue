@@ -20,12 +20,6 @@ class Gallery {
     this.initData();
   }
 
-  // get images() {
-  //   try { return this.Images }
-  //   catch (e) { setTimeout(() => {return this.images}, 500);
-  //   }
-  // }
-
   count() { return this.images.length;};
 
   isFull() { return this.count() >= this.limit; }

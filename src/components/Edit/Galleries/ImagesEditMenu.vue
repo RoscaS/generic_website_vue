@@ -28,8 +28,7 @@
 
               </header>
               <div class="card-content">
-                <DragSort :store="secondaryStore"
-                          :classes="levelClasses"/>
+                <DragSortImages :store="secondaryStore" :classes="levelClasses"/>
               </div>
             </div>
 
@@ -61,7 +60,7 @@
                           position="is-right">
                     <b-tab-item icon="images"
                                 :disabled="loading">
-                      <DragSort :store="store"
+                      <DragSortImages :store="store"
                                 :classes="layout"/>
                     </b-tab-item>
                     <b-tab-item icon="upload"
@@ -82,7 +81,7 @@
 
 <script>
   import {SpinLine} from 'vue-loading-spinner';
-  import DragSort from './DragSortImages';
+  import DragSortImages from './DragSortImages';
   import FileUpload from '../FileUpload';
   import GalleriesStore from './GalleriesStore';
   import GalleriesDropDown from './GalleriesDropDown';
@@ -93,7 +92,7 @@
   export default {
     name: "ImagesEditMenu",
     components: {
-      DragSort,
+      DragSortImages,
       GalleriesDropDown,
       FileUpload,
       SpinLine,

@@ -1,11 +1,8 @@
 import axios from "axios";
 import tools from '../../../utiles/tools';
-import GalleriesStore from '../Galleries/GalleriesStore';
 import {Description, Name} from "../FieldsModels";
 import {Article} from "./ArticleObject";
 axios.defaults.baseURL = 'http://localhost:8000/';
-const headers = {headers: {'content-type': 'multipart/form-data'}};
-
 
 class Category {
   constructor(category) {
@@ -14,10 +11,16 @@ class Category {
     this.name = new Name(category.name);
     this.description = new Description(category.description, 1000, 4);
     this.position = category.position;
-    this.url = `category/${category.slug}`;
+    this.url = `categories/${category.slug}/`;
     this.articles = [];
     this.initArticles(category.articles);
+    this.sortByPosition();
   }
+
+  count() { return this.articles.length;};
+  isFull() { return this.count() >= this.limit; }
+  lock() {this.isLocked = true;}
+  unlock() {this.isLocked = false;}
 
   initArticles(articles) {
     articles.forEach(i => {
@@ -25,13 +28,22 @@ class Category {
     });
   }
 
-  count() { return this.articles.length;};
+  sortByPosition() {
+    this.articles.sort((a, b) => {return a.position - b.position;});
+  }
 
-  isFull() { return this.count() >= this.limit; }
+  put() {
+    axios.put(this.url, {
+      slug: this.name.data,
+      name: this.name.data,
+      description: this.description.data,
+      position: this.position,
+    }).then(response => {
+      this.slug = this.name.data;
+      console.log(response)
+    });
+  }
 
-  lock() {this.isLocked = true;}
-
-  unlock() {this.isLocked = false;}
 
 }
 

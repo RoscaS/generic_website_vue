@@ -1,41 +1,5 @@
 <template>
   <section>
-    <div class="debug-articles">
-      <div class="level">
-        <div class="level-item">
-          <ul>
-            <li><b>idx</b></li>
-            <li><b>id</b></li>
-            <li><b>pos</b></li>
-          </ul>
-        </div>
-        <div v-for="(slide, i) in slides"
-             class="level-item"
-             :class="{current: currentIdx==getIndex(slide)}">
-          <ul>
-            <li>{{getIndex(slide)}}</li>
-            <li>{{slide.id}}</li>
-            <li>{{slide.position}}</li>
-          </ul>
-        </div>
-      </div>
-      <hr>
-      <b-field grouped group-multiline>
-        <button class="button is-outlined is-primary" @click="previous()"> <
-        </button>
-        <button class="button is-outlined is-primary" @click="next()"> >
-        </button>
-        <p class="control">
-          <b-input type="number" :min="0" v-model="jumpTo"></b-input>
-        </p>
-        <button class="go button is-outlined is-primary" @click="initJump()">
-          Go
-        </button>
-        <button class="go button is-outlined is-primary" @click="reset()">
-          Reset
-        </button>
-      </b-field>
-    </div>
     <carousel-3d ref="mycarousel"
                  :startIndex="0"
                  :controlsVisible="false"
@@ -62,9 +26,6 @@
   export default {
     name: "ArticleCarousel",
     components: {Carousel3d, Slide},
-    props: {
-      categories: {type: Array}
-    },
     data: () => ({
       component: 'Carousel',
       type: 'image',
@@ -82,12 +43,8 @@
       edit() {return GalleriesStore;},
       store() {return this.edit.getStore('Articles');},
       state() {return this.store.state;},
-      selectedArticle() {return CategoriesStore.state.selectedArticle;},
-
-      articles(lst=[]) {
-        this.categories.forEach(i => {i.articles.forEach(j => {lst.push(j)})});
-        return lst;
-      },
+      categories() {return CategoriesStore.state.stores},
+      hoveredImage() {return CategoriesStore.state.hoveredImage;},
 
       slides() {
         if (this.store.hasLoaded) {
@@ -98,29 +55,18 @@
       },
     },
     watch: {
-      selectedArticle() {
-        if (this.selectedArticle) {
-
-          let oldData = this.selectedArticle;
+      hoveredImage() {
+        if (this.hoveredImage) {
+          let oldData = this.hoveredImage;
           setTimeout(() => {
-            if (this.selectedArticle == oldData) {
-              this.initJump(this.getIndex(this.selectedArticle));
+            if (this.hoveredImage == oldData) {
+              this.initJump(this.getIndex(this.hoveredImage));
             }
           }, 300);
         }
       }
     },
     methods: {
-      getArticles() {
-        if (this.store.hasLoaded) {
-          return CategoriesStore.allArticles;
-        }
-        else return setTimeout(() => {return this.getArticles()}, 300);
-      },
-      reset() {
-        this._goToSlide(0);
-        this.jumpTo = 0;
-      },
       getIndex(img) {
         let image = this.slides.find(i => i.id == img.id);
         return this.slides.indexOf(image);
@@ -221,3 +167,39 @@
 
 
 
+<!--<div class="debug-articles">-->
+  <!--<div class="level">-->
+    <!--<div class="level-item">-->
+      <!--<ul>-->
+        <!--<li><b>idx</b></li>-->
+        <!--<li><b>id</b></li>-->
+        <!--<li><b>pos</b></li>-->
+      <!--</ul>-->
+    <!--</div>-->
+    <!--<div v-for="(slide, i) in slides"-->
+         <!--class="level-item"-->
+         <!--:class="{current: currentIdx==getIndex(slide)}">-->
+      <!--<ul>-->
+        <!--<li>{{getIndex(slide)}}</li>-->
+        <!--<li>{{slide.id}}</li>-->
+        <!--<li>{{slide.position}}</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<hr>-->
+  <!--<b-field grouped group-multiline>-->
+    <!--<button class="button is-outlined is-primary" @click="previous()"> <-->
+    <!--</button>-->
+    <!--<button class="button is-outlined is-primary" @click="next()"> >-->
+    <!--</button>-->
+    <!--<p class="control">-->
+      <!--<b-input type="number" :min="0" v-model="jumpTo"></b-input>-->
+    <!--</p>-->
+    <!--<button class="go button is-outlined is-primary" @click="initJump()">-->
+      <!--Go-->
+    <!--</button>-->
+    <!--<button class="go button is-outlined is-primary" @click="reset()">-->
+      <!--Reset-->
+    <!--</button>-->
+  <!--</b-field>-->
+<!--</div>-->

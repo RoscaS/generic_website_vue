@@ -1,40 +1,54 @@
 <template>
-  <section>
-    <v-tabs fixed-tabs v-model="activeTab"
-            color="white"
-            slider-color="blue">
-      <v-tab v-for="(category, i) in categories"
-             :key="i"
-             :ripple="false">
-        {{ category.name.data }}
-      </v-tab>
-      <v-tab-item v-for="(category, i) in categories" :key="i">
+  <div>
+    <EditIcon class="edit-icon" :store="edit" :edit="edit" top="100px"/>
+    <section class="section section-container">
+      <div class="container">
         <div class="content">
-          <CategoryTable :category="category"></CategoryTable>
+          <v-tabs fixed-tabs v-model="activeTab"
+                  color="white"
+                  slider-color="blue">
+            <v-tab v-for="(category, i) in stores"
+                   :key="i"
+                   :ripple="false">
+              {{ category.name.data }}
+            </v-tab>
+            <v-tab-item v-for="(category, i) in stores" :key="i">
+              <div class="content">
+                <CategoryTable :category="category"></CategoryTable>
+              </div>
+            </v-tab-item>
+          </v-tabs>
         </div>
-      </v-tab-item>
-    </v-tabs>
-  </section>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
-
+  import EditIcon from '../../components/Edit/EditIcon';
   import CategoryTable from './CategoryTable';
+  import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
   export default {
     name: "ArticlesData",
-    components: {CategoryTable},
-    props: {
-      categories: {type: Array}
-    },
+    components: {CategoryTable, EditIcon},
     data: () => ({
       activeTab: 0,
+      type: 'article',
     }),
+    computed: {
+      edit() {return CategoriesStore;},
+      stores() {return CategoriesStore.state.stores;}
+    },
   };
 </script>
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
+
+  .section-container {
+    margin-top: -200px;
+  }
 
   .content {
     margin-top: 40px;

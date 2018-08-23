@@ -1,10 +1,12 @@
 <template>
-  <BaseLayout :store="store">
-    <ArticlesCarousel :categories="categories"></ArticlesCarousel>
-    <br>
-    <br>
-    <ArticlesData :categories="categories"></ArticlesData>
-  </BaseLayout>
+  <section>
+    <BaseLayout :store="store">
+      <ArticlesCarousel></ArticlesCarousel>
+      <br>
+      <br>
+    </BaseLayout>
+    <ArticlesData></ArticlesData>
+  </section>
 </template>
 
 <script>
