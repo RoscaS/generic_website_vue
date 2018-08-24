@@ -2,28 +2,28 @@
   <section>
     <h3>Catégories</h3>
 
-    <DragSortArticles :edit="edit">
+    <DragSortCategories>
       <CategoryBox v-for="(category, idx) in categories"
                    :key="idx"
                    :edit="edit"
                    :category="category">
       </CategoryBox>
-    </DragSortArticles>
+    </DragSortCategories>
   </section>
 </template>
 
 <script>
-  import CategoryBox from './CategoryBox'
-  import DragSortArticles from './DragSortArticles'
+  import CategoryBox from './CategoryBox';
+  import DragSortCategories from './DragSortCategories';
 
-	export default {
-		name: "CategoriesEdit",
-    components: {CategoryBox, DragSortArticles},
-	  props: {
-		  edit: {type: Object},
-	    categories: {type: Array},
+  export default {
+    name: "CategoriesEdit",
+    components: {CategoryBox, DragSortCategories},
+    props: {
+      edit: {type: Object},
+      categories: {type: Array},
     },
-	};
+  };
 </script>
 
 <style scoped lang="scss">

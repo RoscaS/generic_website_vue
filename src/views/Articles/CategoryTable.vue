@@ -53,9 +53,6 @@
         CategoriesStore.state.hoveredImage = null;
       },
     },
-    mounted() {
-      console.log(this.category);
-    }
   };
 </script>
 

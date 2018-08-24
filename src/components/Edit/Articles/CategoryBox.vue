@@ -1,5 +1,6 @@
 <template>
-  <div class="box">
+  <div class="box"
+       @mouseover="edit.state.draggingType = 'category'">
     <div class="level">
       <div class="level-left">
         <h5 class="level-item">{{category.name.data}}</h5>
@@ -85,7 +86,7 @@
     methods: {
       startEdit() {
         this.edit.state.editPopup = this.category;
-      }
+      },
     }
   };
 </script>

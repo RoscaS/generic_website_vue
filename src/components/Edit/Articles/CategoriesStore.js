@@ -2,10 +2,11 @@ import axios from "axios";
 import Vue from 'vue';
 import tools from '../../../utiles/tools';
 import {Category} from "./CategoryObject";
+
 axios.defaults.baseURL = 'http://localhost:8000/';
 const url = 'categories/';
 
-const CategoriesStore = new Vue ({
+const CategoriesStore = new Vue({
   data: () => ({
     name: 'CategoriesStore',
     type: 'article',
@@ -13,8 +14,8 @@ const CategoriesStore = new Vue ({
       stores: [],
       activeTab: 0,
       loading: false,
-      hasLoaded:false,
-      active:false,
+      hasLoaded: false,
+      active: false,
 
       editPopup: null,
       selectedCategory: null,
@@ -22,6 +23,8 @@ const CategoriesStore = new Vue ({
 
       primaryStore: null,
       secondaryStore: null,
+
+      draggingType: null,
     }
   }),
   methods: {
@@ -35,16 +38,17 @@ const CategoriesStore = new Vue ({
       });
     },
     updatePosition() {
-      for (let i = 0; i < this.state.stores.length; i++) {
-        if (this.state.stores[i].position != i + 1) {
-          this.state.stores[i].position = i + 1;
-          this.state.stores[i].put();
+      this.state.stores.forEach((i, idx) => {
+        if (i.position != idx + 1) {
+          i.position = idx + 1;
+          i.put();
         }
-      }
+      });
     },
     sortByPosition() {
       this.state.stores.sort((a, b) => {
-        return a.position - b.position;});
+        return a.position - b.position;
+      });
     },
     clearEditPopup() {
       this.state.editPopup = false;

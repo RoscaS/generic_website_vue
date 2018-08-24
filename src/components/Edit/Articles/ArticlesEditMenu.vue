@@ -6,13 +6,12 @@
         <transition name="fade">
           <div v-if="!edit.state.editPopup">
             <div class="box main-box">
-              <div class="columns">
-                <div class="column is-4">
-                  <CategoriesEdit :categories="edit.state.stores"
-                                  :edit="edit"/>
+              <div class="columns is-variable is-4 is-mobile">
+                <div class="column is-3">
+                  <CategoriesSide :categories="edit.state.stores" :edit="edit"/>
                 </div>
-                <div class="column is-8">
-                  <h3>Articles</h3>
+                <div class="column">
+                  <ArticlesSide></ArticlesSide>
                 </div>
               </div>
             </div>
@@ -24,12 +23,13 @@
 </template>
 
 <script>
-  import CategoriesEdit from './CategoriesEdit';
+  import CategoriesSide from './CategoriesSide';
+  import ArticlesSide from './ArticlesSide';
   import EditPopup from './EditPopup';
 
   export default {
     name: "ArticlesEditMenu",
-    components: {CategoriesEdit, EditPopup},
+    components: {CategoriesSide, ArticlesSide, EditPopup},
     props: {
       edit: {type: Object},
     },

@@ -1,5 +1,5 @@
 <template>
-  <draggable v-model="store.articles"
+  <draggable v-model="edit.state.stores"
              :options="dragOptions"
              :move="onMove"
              @start="isDragging=true"
@@ -24,18 +24,19 @@
     },
     data: () => ({
       edit: CategoriesStore,
-
       isDragging: false,
       delayedDragging: false,
       reOrder: false,
     }),
     computed: {
+      disabled() {
+        return this.edit.state.draggingType != 'category'
+      },
       dragOptions() {
-        let disable =  this.edit.state.draggingType != 'article';
         return {
           animation: 250,
           group: 'description',
-          disabled: disable,
+          disabled: this.disabled,
           ghostClass: 'none'
         };
       },
@@ -47,15 +48,12 @@
           return;
         }
         this.$nextTick(() => {
-          this.edit.state.primaryStore.updateData();
-          this.edit.state.secondaryStore.updateData();
+          this.edit.updatePosition();
         });
       }
     },
     methods: {
-      onMove({relatedContext, draggedContext}) {
-        console.log(draggedContext)
-      },
+      onMove({relatedContext, draggedContext}) {},
     },
   };
 </script>

@@ -24,8 +24,25 @@ class Category {
 
   initArticles(articles) {
     articles.forEach(i => {
-      this.articles.push(Article(i, this));
+      this.articles.push(new Article(i, this));
     });
+  }
+
+  updateData() {
+    this.articles.forEach((i, idx) => {
+      let dirty = false;
+      if (i.position != idx + 1) {
+        i.position = idx + 1;
+        dirty = true;
+      }
+      if (i.category != this) {
+        i.category = this;
+        dirty = true;
+      }
+      if (dirty) {
+        i.patch()
+      }
+    })
   }
 
   sortByPosition() {
@@ -43,6 +60,10 @@ class Category {
       console.log(response)
     });
   }
+
+
+
+
 
 
 }
