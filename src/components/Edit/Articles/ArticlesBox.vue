@@ -24,8 +24,8 @@
 
       <div class="level-right">
         <div class="level-item">
-          <i class="edit far fa-fw fa-edit"></i>
-          <i class="remove far fa-fw fa-times-square"></i>
+          <i @click="startEdit" class="edit far fa-fw fa-edit"></i>
+          <i @click="remove" class="remove far fa-fw fa-times-square"></i>
         </div>
       </div>
     </div>
@@ -53,6 +53,14 @@
         return {backgroundColor: this.color};
       }
     },
+    methods: {
+      startEdit() {
+
+      },
+      remove() {
+
+      }
+    }
   };
 </script>
 
