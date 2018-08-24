@@ -111,10 +111,20 @@
         margin-right: .5rem;
 
         .edit {
+          color: white;
           margin-right: .5rem;
+          &:hover {
+            transition: color .3s ease;
+            color: $is-warning;
+          }
         }
         .remove {
+          color: white;
           font-size: 17px;
+          &:hover {
+            transition: color .3s ease;
+            color: $is-danger
+          }
         }
         /*margin-right: 15px;*/
 

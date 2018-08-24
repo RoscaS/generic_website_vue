@@ -1,6 +1,5 @@
 <template>
   <div>
-    <EditIcon class="edit-icon" :store="edit" :edit="edit" top="100px"/>
     <section class="section section-container">
       <div class="container">
         <div class="content">

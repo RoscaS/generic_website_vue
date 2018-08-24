@@ -1,11 +1,14 @@
 <template>
   <section>
     <BaseLayout :store="store">
-      <ArticlesCarousel></ArticlesCarousel>
-      <br>
-      <br>
+      <ArticlesCarousel v-scroll-reveal="sReveal('top', 100, 100, 1500)"/>
+
+      <br><br>
     </BaseLayout>
-    <ArticlesData></ArticlesData>
+    <EditIcon class="edit-icon"
+              :store="categoriesStore"
+              :edit="categoriesStore"/>
+    <ArticlesData v-scroll-reveal="sReveal('bottom', 150, 100, 1500)"/>
   </section>
 </template>
 
@@ -17,6 +20,7 @@
   import ArticlesData from './ArticlessData';
   import ArticlesCarousel from './ArticlesCarousel';
 
+  import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
   export default {
     name: "Articles",
@@ -25,6 +29,7 @@
     data: () => ({
       component: 'Article',
       type: 'text',
+      categoriesStore: CategoriesStore,
     }),
     computed: {
       categories() {

@@ -65,17 +65,19 @@
   }
 
   .container {
-    height: 370px;
-    margin-top: 100px;
+    height: 300px;
+    margin-top: 60px;
 
     .column {
       h2 {
         display: block;
+        font-size: 28px !important;
+        line-height: 40px !important;
         margin-bottom: 5px;
       }
       p {
         display: block;
-        font-size: 16px;
+        font-size: 18px;
         line-height: 22px;
       }
     }

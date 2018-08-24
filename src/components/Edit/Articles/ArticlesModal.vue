@@ -11,7 +11,7 @@
 
 <script>
   import ArticlesEditMenu from './ArticlesEditMenu';
-  import CategoriesStore from './CategoriesStore'
+  import CategoriesStore from './CategoriesStore';
 
 	export default {
 		name: "ArticlesModal",
