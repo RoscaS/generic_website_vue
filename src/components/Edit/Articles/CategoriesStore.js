@@ -28,6 +28,8 @@ const CategoriesStore = new Vue({
     }
   }),
   methods: {
+    setLoading() {this.state.loading = true;},
+    unsetLoading() {this.state.loading = false;},
     fetchData() {
       axios.get(url).then(response => {
         response.data.forEach(i => {
@@ -51,7 +53,12 @@ const CategoriesStore = new Vue({
       });
     },
     clearEditPopup() {
-      this.state.editPopup = false;
+      if (!this.state.loading) this.state.editPopup = false;
+      else setTimeout(() => {this.clearEditPopup();}, 500);
+    },
+    removeCategory(category) {
+      let idx = this.state.stores.indexOf(category);
+      this.state.stores.splice(idx, 1);
     },
     start(store) {
       this.state.active = true;

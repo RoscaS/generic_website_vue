@@ -1,14 +1,18 @@
 import axios from "axios";
-import Vue from 'vue';
 import tools from '../../../utiles/tools';
-import GalleriesStore from '../Galleries/GalleriesStore'
+import CategoriesStore from './CategoriesStore';
+import GalleriesStore from '../Galleries/GalleriesStore';
 import {Name, Price, Description} from "../FieldsModels";
+import {Dialog} from "buefy";
+
 axios.defaults.baseURL = 'http://localhost:8000/';
 const headers = {headers: {'content-type': 'multipart/form-data'}};
 
 
 class Article {
   constructor(article, category) {
+    this.type = 'article';
+    this.url = `articles/${article.id}/`;
     this.id = article.id;
     this.name = new Name(article.name);
     this.price = new Price(article.price);
@@ -18,9 +22,20 @@ class Article {
     this.image = article.image;
   }
 
-  patch() {
+  get relatedImage() {return GalleriesStore.getImage('Articles', this.image.id);}
+  get edit() {return CategoriesStore;};
+
+  patch(message=true) {
+    if (this.edit.state.editPopup && message) this.edit.setLoading();
     axios.patch(`articles/${this.id}/`, this.getForm(), headers)
-    .then(response => {console.log(response)});
+    .then( () => {
+      if (this.edit.state.editPopup && message) {
+        setTimeout(() => {
+          tools.message('updated');
+          this.edit.unsetLoading();
+        }, 1500);
+      }
+    }).catch(() => {tools.message('error')});
   }
 
   getForm() {
@@ -31,27 +46,34 @@ class Article {
     formData.append('position', this.position);
     formData.append('category', this.category.name.data);
     formData.append('description', this.description.data);
+    formData.append('description', this.description.data);
     return formData;
+  }
+
+  delete(notification=true) {
+    if (notification) {
+      this.deleteNotification()
+    } else {
+      this.deleteArticle(false)
+    }
+  }
+  deleteNotification() {
+    Dialog.confirm({
+      message: 'Operation définitive!',
+      confirmText: "Supprimer l'article",
+      cancelText: 'Annuler',
+      type: 'is-danger',
+      hasIcon: true,
+      onConfirm: () => {this.deleteArticle()},
+    });
+  }
+  deleteArticle(message=true) {
+    axios.delete(this.url);
+    this.category.removeArticle(this);
+    this.relatedImage.delete(false);
+    if (message) tools.message('imageDel');
   }
 }
 
-// function Article(article, category) {
-//   return new Vue ({
-//     data: () => ({
-//       id: article.id,
-//       name: new Name(article.name),
-//       price: new Price(article.price),
-//       position: article.position,
-//       category: category,
-//       description: new Description(article.description, 200, 2),
-//       image: article.image,
-//     }),
-//     computed: {
-//       // galleriesStore() { return GalleriesStore; },
-//       // image() {return this.galleriesStore.getImage('Articles', this.imageId) }
-//     }
-//   })
-// }
 
-
-export {Article}
+export {Article};

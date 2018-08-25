@@ -23,10 +23,7 @@
       </div>
 
       <div class="level-right">
-        <div class="level-item">
-          <i @click="startEdit" class="edit far fa-fw fa-edit"></i>
-          <i @click="remove" class="remove far fa-fw fa-times-square"></i>
-        </div>
+        <ControlButtons :element="article"/>
       </div>
     </div>
   </div>
@@ -34,9 +31,11 @@
 
 <script>
   import CategoriesStore from "./CategoriesStore";
+  import ControlButtons from "./ControlButtons";
 
   export default {
     name: "ArticlesBox",
+    components: {ControlButtons},
     props: {
       article: {type: Object},
       color: {type: String},
@@ -53,14 +52,6 @@
         return {backgroundColor: this.color};
       }
     },
-    methods: {
-      startEdit() {
-
-      },
-      remove() {
-
-      }
-    }
   };
 </script>
 
@@ -111,31 +102,6 @@
         color: white;
         font-size: 16px;
         font-weight: bold;
-      }
-
-      .level-right {
-        /*width: 10px;*/
-        color: white;
-        margin-right: .5rem;
-
-        .edit {
-          color: white;
-          margin-right: .5rem;
-          &:hover {
-            transition: color .3s ease;
-            color: $is-warning;
-          }
-        }
-        .remove {
-          color: white;
-          font-size: 17px;
-          &:hover {
-            transition: color .3s ease;
-            color: $is-danger
-          }
-        }
-        /*margin-right: 15px;*/
-
       }
     }
   }

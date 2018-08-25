@@ -25,7 +25,7 @@
 
 <script>
   import EditIcon from '../../components/Edit/EditIcon';
-  import CategoryTable from './CategoryTable';
+  import CategoryTable from './ArticlesTable';
   import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
   export default {

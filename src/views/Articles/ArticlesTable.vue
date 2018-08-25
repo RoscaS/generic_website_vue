@@ -40,7 +40,7 @@
   import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
   export default {
-    name: "CategoryTable",
+    name: "ArticlesTable",
     props: {
       category: {type: Object}
     },

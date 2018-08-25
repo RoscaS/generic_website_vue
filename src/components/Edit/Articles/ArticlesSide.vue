@@ -14,6 +14,9 @@
                            color="#209CEE">
               </ArticlesBox>
             </DragSortArticles>
+            <div v-if="!primary.articles.length" class="has-text-centered">
+              <h4 style="color: #209CEE">Vide</h4>
+            </div>
           </div>
         </transition>
       </div>
@@ -29,6 +32,9 @@
                            color="#00D1B2">
               </ArticlesBox>
             </DragSortArticles>
+            <div v-if="!secondary.articles.length" class="has-text-centered">
+              <h4 style="color: #00D1B2">Vide</h4>
+            </div>
           </div>
         </transition>
       </div>

@@ -17,7 +17,7 @@
   import CategoriesStore from './CategoriesStore'
 
   export default {
-    name: "DragSortArticleBis",
+    name: "DragSortArticles",
     components: {draggable},
     props: {
       store: {type: Object},
@@ -48,14 +48,13 @@
         }
         this.$nextTick(() => {
           this.edit.state.primaryStore.updateData();
-          this.edit.state.secondaryStore.updateData();
+          try {this.edit.state.secondaryStore.updateData();}
+          catch (e) {return e}
         });
       }
     },
     methods: {
-      onMove({relatedContext, draggedContext}) {
-        console.log(draggedContext)
-      },
+      onMove({relatedContext, draggedContext}) {},
     },
   };
 </script>

@@ -38,6 +38,16 @@ const message = {
     position: 'is-bottom',
     message: "Une erreur est survenue. jpg ou png uniquement."
   },
+  articleDel: {
+    type: 'is-success',
+    position: 'is-bottom',
+    message: "Article supprimée du serveur."
+  },
+  categoryDel: {
+    type: 'is-success',
+    position: 'is-bottom',
+    message: "Catégorie supprimée du serveur."
+  },
 
 
 

@@ -3,15 +3,16 @@
        @mouseover="edit.state.draggingType = 'category'">
     <div class="level">
       <div class="level-left">
-        <h5 class="level-item">{{category.name.data}}</h5>
-      </div>
-      <div class="level-right">
-        <i @click="startEdit" class="level-item fa-fw far fa-edit"></i>
         <b-checkbox class="level-item checkbox"
                     size="is-small"
                     v-model="checked"
                     :type="color">
         </b-checkbox>
+        <h5 class="level-item">{{category.name.data}}</h5>
+      </div>
+      <div class="level-right">
+        <ControlButtons :element="category" :dark="true"/>
+        <!--<i @click="startEdit" class="level-item fa-fw far fa-edit"></i>-->
       </div>
     </div>
   </div>
@@ -19,9 +20,12 @@
 
 <script>
   import CategoriesStore from "./CategoriesStore";
+  import ControlButtons from "./ControlButtons";
+
 
   export default {
     name: "CategorieBox",
+    components: {ControlButtons},
     props: {
       category: {type: Object},
     },
@@ -83,11 +87,7 @@
         }
       }
     },
-    methods: {
-      startEdit() {
-        this.edit.state.editPopup = this.category;
-      },
-    }
+
   };
 </script>
 
@@ -95,11 +95,12 @@
   @import '../../../../static/sass/global';
 
   .checkbox {
-    margin-bottom: -2.5px;
+    margin-top: -1px;
   }
 
   .box {
-    padding: 10px;
+    /*padding: 10px;*/
+    padding: 10px 2px 10px 10px;
     margin-bottom: 1rem;
     cursor: grab;
 

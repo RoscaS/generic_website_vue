@@ -38,7 +38,7 @@ class Image {
   deleteNotification() {
     Dialog.confirm({
       message: 'Operation définitive!',
-      confirmText: "Effacer l'image",
+      confirmText: "Supprimer l'image",
       cancelText: 'Annuler',
       type: 'is-danger',
       hasIcon: true,
