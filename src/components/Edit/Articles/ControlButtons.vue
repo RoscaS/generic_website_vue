@@ -19,7 +19,7 @@
     },
     methods: {
       startEdit() {
-        this.edit.state.editPopup = this.element;
+        this.edit.state.editItem = this.element;
       },
       remove() {
         this.element.delete();

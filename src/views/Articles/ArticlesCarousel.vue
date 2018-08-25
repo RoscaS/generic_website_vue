@@ -7,7 +7,7 @@
                  :space="300"
                  :clickable="false"
                  :border="0"
-                 :display="9"
+                 :display="17"
                  :animationSpeed="speed"
                  @before-slide-change="beforeChange"
                  @after-slide-change="afterChange">
@@ -131,6 +131,14 @@
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
+
+  section {
+    margin: 20px 0px -150px 0px;
+  }
+
+  img {
+    border-radius: 20px;
+  }
 
   .debug-articles {
     .control {

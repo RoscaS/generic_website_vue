@@ -1,78 +1,105 @@
 <template>
   <section>
-    <h3>Articles</h3>
-
-    <div class="columns is-variable is-2 ">
-      <div class="column is-6 primary">
-        <transition name="fade">
-          <div v-if="primary">
-            <DragSortArticles :store="primary">
-              <ArticlesBox v-for="(article, idx) in primary.articles"
-                           :key="idx"
-                           :article="article"
-                           :description="false"
-                           color="#209CEE">
-              </ArticlesBox>
-            </DragSortArticles>
-            <div v-if="!primary.articles.length" class="has-text-centered">
-              <h4 style="color: #209CEE">Vide</h4>
-            </div>
-          </div>
-        </transition>
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <h3>Articles:</h3>
+        </div>
       </div>
-
-      <div class="column is-6 secondary">
-        <transition name="fade">
-          <div v-if="secondary">
-            <DragSortArticles :store="secondary">
-              <ArticlesBox v-for="(article, idx) in secondary.articles"
-                           :key="idx"
-                           :article="article"
-                           :description="false"
-                           color="#00D1B2">
-              </ArticlesBox>
-            </DragSortArticles>
-            <div v-if="!secondary.articles.length" class="has-text-centered">
-              <h4 style="color: #00D1B2">Vide</h4>
-            </div>
+      <div class="level-right">
+        <div class="level-item">
+          <div class="button is-outlined is-white" @click="createCategory()">
+            Ajouter une catégorie
           </div>
-        </transition>
+        </div>
+        <div class="level-item">
+          <div class="button is-outlined is-white" @click="createArticle()">
+            Ajouter un article
+          </div>
+        </div>
       </div>
     </div>
 
+    <div class="columns is-variable is-2">
+
+      <transition name="custom-fade">
+        <div v-if="!primary && !secondary" class="no-selection">
+          <h4>{{ noSelection }}</h4>
+        </div>
+      </transition>
+
+      <div class="column is-6 primary">
+        <CategoryDetail :category="primary" color="#209CEE"/>
+      </div>
+
+      <div class="column is-6 secondary">
+        <CategoryDetail :category="secondary" color="#00D1B2"/>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
   import CategoriesStore from "./CategoriesStore";
-  import ArticlesBox from "./ArticlesBox";
-  import DragSortArticles from './DragSortArticles';
+  import CategoryDetail from './CategoryDetail';
 
   export default {
     name: "ArticlesSide",
-    components: {ArticlesBox, DragSortArticles},
-    data: () => ({}),
+    components: {CategoryDetail},
+    data: () => ({
+      noSelection: "Sélectionnez jusqu'à deux catégories pour les éditer.",
+    }),
     computed: {
-      edit() {
-        return CategoriesStore;
-      },
-      primary: {
-        get() {return this.edit.state.primaryStore;},
-        set(value) {this.edit.state.primaryStore = value;}
-      },
-      secondary: {
-        get() {return this.edit.state.secondaryStore;},
-        set(value) {this.edit.state.secondaryStore = value;}
-      },
+      edit() {return CategoriesStore;},
+      primary() {return this.edit.state.primaryStore;},
+      secondary() {return this.edit.state.secondaryStore;},
     },
+    methods: {
+      createCategory() {
+        this.edit.state.newItem = 'category';
+      },
+      createArticle() {
+        this.edit.state.newItem = 'article';
+      }
+    }
   };
 </script>
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
+  .custom-fade-enter-active {
+    transition: opacity .2s;
+    transition-delay: 1.5s;
+  }
+
+  .custom-fade-leave-active {
+    transition: opacity .4s;
+  }
+
+  .custom-fade-enter,
+  .custom-fade-leave-to {
+    opacity: 0;
+  }
+
   h3 {
     margin-bottom: 0;
+    color: white;
+  }
+
+  .no-selection {
+    position: absolute;
+    top: 20%;
+    left: 32%;
+
+    h4 {
+      width: 100%;
+      color: #adadad;
+    }
+  }
+
+  .level-right {
+    margin-right: 5px;
   }
 
   .columns {

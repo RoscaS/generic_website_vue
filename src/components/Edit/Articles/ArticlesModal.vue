@@ -2,10 +2,10 @@
   <b-modal v-if="enable"
            :active.sync="modalSync"
            scroll="clip"
-           :width="850"
+           :width="960"
            :canCancel="cancelModalOptions"
            has-modal-card>
-    <ArticlesEditMenu :edit="edit"/>
+    <ArticlesEditMenu/>
   </b-modal>
 </template>
 

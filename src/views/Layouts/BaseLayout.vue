@@ -26,10 +26,12 @@
       <div class="container" v-else>
         <div class="content">
           <slot></slot>
+          <slot name="outsite"></slot>
         </div>
       </div>
 
     </section>
+
     <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
       <TextsEditMenu v-if="$parent.checkComponent()">
         <FieldsLayout :store="store">

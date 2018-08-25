@@ -71,7 +71,8 @@
             }
             else if (this.primary && this.secondary) {
               this.color = 'is-info';
-              this.primary = this.category;
+              this.primary = null;
+              setTimeout(() => {this.primary = this.category;}, 1000);
             }
           }
           else {

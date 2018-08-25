@@ -49,7 +49,7 @@
         this.image.delete();
       },
       editDescription() {
-        this.edit.selectedImage = this.image;
+        this.edit.editItem = this.image;
       },
     }
   };

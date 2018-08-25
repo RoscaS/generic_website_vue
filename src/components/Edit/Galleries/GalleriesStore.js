@@ -8,7 +8,6 @@ axios.defaults.baseURL = 'http://localhost:8000/';
 const GalleriesStore =  new Vue ({
   data: () => ({
     name: 'GalleriesStore',
-    type: 'image',
     state: {
       stores: [
         new Gallery('Carousel'),
@@ -24,7 +23,7 @@ const GalleriesStore =  new Vue ({
       active: null,
       primaryStore: null,
       secondaryStore: null,
-      selectedImage: null,
+      editItem: null,
       carouselAutoScroll: false,
     }
   }),
@@ -56,15 +55,15 @@ const GalleriesStore =  new Vue ({
       get(){return this.state.carouselAutoScroll;},
       set(value) {this.state.carouselAutoScroll = value;}
     },
-    selectedImage: {
-      get(){ return this.state.selectedImage;},
-      set(value) { this.state.selectedImage = value;}
+    editItem: {
+      get(){ return this.state.editItem;},
+      set(value) { this.state.editItem = value;}
     },
   },
   methods: {
     setLoading() {this.loading = true;},
     unsetLoading() {this.loading = false;},
-    clearSelectedImage() {this.selectedImage = null;},
+    clearEditItem() {this.editItem = null;},
     getStore(name) {return this.stores.filter(i => i.name == name)[0];},
     getImage(gallery, id) {
       let store = this.getStore(gallery);
@@ -123,7 +122,7 @@ export default GalleriesStore
 //       active: null,
 //       primaryStore: null,
 //       secondaryStore: null,
-//       selectedImage: null,
+//       editItem: null,
 //       carouselAutoScroll: false,
 //     };
 //   }
@@ -137,12 +136,12 @@ export default GalleriesStore
 //   set secondaryStore(store) { this.state.secondaryStore = store;}
 //   get carouselAutoScroll() {return this.state.carouselAutoScroll;}
 //   set carouselAutoScroll(value) {this.state.carouselAutoScroll = value;}
-//   get selectedImage() { return this.state.selectedImage;}
-//   set selectedImage(image) { this.state.selectedImage = image;}
+//   get editItem() { return this.state.editItem;}
+//   set editItem(image) { this.state.editItem = image;}
 //
 //   setLoading() {this.state.loading = true;}
 //   unsetLoading() {this.state.loading = false;}
-//   clearSelectedImage() {this.state.selectedImage = null;}
+//   clearEditItem() {this.state.editItem = null;}
 //   getStore(name) {return this.state.stores.filter(i => i.name == name)[0];}
 //   getImage(gallery, id) {
 //     let store = this.getStore(gallery);

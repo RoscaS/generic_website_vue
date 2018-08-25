@@ -15,7 +15,7 @@ axios.defaults.baseURL = 'http://localhost:8000/';
 class TextsStore {
   constructor() {
     this.name = 'TextsEditStore';
-    this.type = 'text';
+    // this.type = 'textsStore';
     this.state = {
       stores: [
         new Promo(),
@@ -35,15 +35,12 @@ class TextsStore {
   }
 
   get loading() {return this.state.loading;}
-
   set loading(value) {this.state.loading = value;}
 
   get activeTab() { return this.state.activeTab; }
-
   set activeTab(value) { this.state.activeTab = value; }
 
   get currentStore() { return this.state.currentStore; }
-
   set currentStore(value) { this.state.currentStore = value; }
 
   setLoading() {this.state.loading = true;}

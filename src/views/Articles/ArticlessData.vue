@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="section section-container">
+    <section class="section">
       <div class="container">
         <div class="content">
           <v-tabs fixed-tabs v-model="activeTab"
@@ -44,10 +44,6 @@
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
-
-  .section-container {
-    margin-top: -200px;
-  }
 
   .content {
     margin-top: 40px;

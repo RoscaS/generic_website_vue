@@ -24,11 +24,8 @@ class Category {
   get edit() {return CategoriesStore;};
 
   count() { return this.articles.length;};
-
   isFull() { return this.count() >= this.limit; }
-
   lock() {this.isLocked = true;}
-
   unlock() {this.isLocked = false;}
 
   removeArticle(article) {
@@ -36,9 +33,11 @@ class Category {
   }
 
   initArticles(articles) {
-    articles.forEach(i => {
-      this.articles.push(new Article(i, this));
-    });
+    if (articles) {
+      articles.forEach(i => {
+        this.articles.push(new Article(i, this));
+      });
+    }
   }
 
   updateData() {
@@ -63,17 +62,12 @@ class Category {
   }
 
   put() {
-    this.edit.setLoading();
     axios.put(this.url, {
       slug: this.name.data,
       name: this.name.data,
       description: this.description.data,
       position: this.position,
-    }).then(response => {
-      setTimeout(() => {
-        tools.message('updated');
-        this.edit.unsetLoading();
-      }, 1500);
+    }).then(() => {
       this.slug = this.name.data;
     }).catch(() => {tools.message('error');});
   }

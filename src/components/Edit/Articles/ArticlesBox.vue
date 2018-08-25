@@ -3,25 +3,20 @@
        @mouseover="edit.state.draggingType = 'article'">
     <div class="level">
       <div class="level-left">
-
         <div class="level-item" v-if="id">
           <span class="diez">#</span>
           <span class="id">{{article.id}}</span>
         </div>
-
         <div class="level-item" v-if="name">
           <span class="name">{{article.name.data}}</span>
         </div>
-
         <div class="level-item" v-if="description">
           <span class="description">{{article.description.data}}</span>
         </div>
       </div>
-
       <div class="level-item" v-if="price">
         <span class="price">{{article.price.data}}</span>
       </div>
-
       <div class="level-right">
         <ControlButtons :element="article"/>
       </div>
@@ -46,7 +41,7 @@
     },
     computed: {
       edit() {
-        return CategoriesStore
+        return CategoriesStore;
       },
       setStyle() {
         return {backgroundColor: this.color};

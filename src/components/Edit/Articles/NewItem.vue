@@ -1,52 +1,63 @@
 <template>
   <transition name="bounceDown">
-    <div class="card" v-if="editItem" :style="setStyle()">
-      <header class="card-header level" v-if="!isArticle">
+    <div class="card" v-if="newItem" :style="setStyle()">
+      <header class="card-header level" v-if="newItem == 'category'">
         <div class="card-header-title">
-          <p>Catégorie</p>
+          <p>Nouvelle Catégorie</p>
         </div>
         <div class="card-header-icon">
           <i class="fal fa-pen"></i>
         </div>
       </header>
       <div class="card-image" v-else>
-        <p>Article</p>
+        <p>Nouvel Article</p>
         <i class="fal fa-pen"></i>
-        <img :src="editItem.image.image">
+        <img src="https://via.placeholder.com/350x250">
       </div>
       <div class="card-content">
         <div class="content">
-          <b-field v-if="name" class="fieldStyle"
+          <b-field class="fieldStyle"
                    type="is-info" label="Nom:">
-            <b-input v-model="editItem.name.data"
-                     :maxlength="editItem.name.len">
+            <b-input v-model="name"
+                     :maxlength="30">
             </b-input>
           </b-field>
-          <b-field v-if="description" class="fieldStyle" type="is-info"
+          <b-field class="fieldStyle" type="is-info"
                    label="Description:">
             <b-input type="textarea" rows="2"
-                     v-model="editItem.description.data"
-                     :maxlength="editItem.description.len">
+                     v-model="description"
+                     :maxlength="200">
             </b-input>
           </b-field>
-          <b-field v-if="isArticle" label="Prix:"
-                   type="is-info" class="fieldStyle">
-            <b-input type="number" :min="0" :step=".01"
-                     v-model="editItem.price.data">
-            </b-input>
-          </b-field>
+          <div v-if="newItem == 'article'">
+            <b-field label="Catégorie">
+              <b-select placeholder="Select a name">
+                <option
+                  v-for="category in categories"
+                  :value="category"
+                  :key="category.id">
+                  {{ category.name.data }}
+                </option>
+              </b-select>
+            </b-field>
+            <b-field class="fieldStyle" label="Prix:" type="is-info">
+              <b-input type="number" :min="0" :step=".01"
+                       v-model="price">
+              </b-input>
+            </b-field>
+          </div>
         </div>
       </div>
       <footer class="card-footer">
         <a class="card-footer-item no-tr validate"
            :disabled="edit.loading"
-           @click="validate">
+           @click="validate()">
           <i class="fas fa-spinner fa-spin" v-if="edit.loading"></i>
           <i class="far fa-check" v-else></i>
         </a>
         <a class="card-footer-item no-tr cancel"
            :disabled="edit.loading"
-           @click="cancel">
+           @click="cancel()">
           <i class="far fa-times"></i>
         </a>
       </footer>
@@ -58,36 +69,48 @@
   import CategoriesStore from "./CategoriesStore";
 
   export default {
-    name: "EditPopup",
-    props: {
-      name: {type: Boolean, default: true},
-      description: {type: Boolean, default: true},
-    },
+    name: "newItem",
+    data: () => ({
+      name: '',
+      description: '',
+      price: 0,
+    }),
     computed: {
       edit() {return CategoriesStore;},
-      isArticle() {return this.edit.state.editItem.type == 'article';},
-      editItem() {return this.edit.state.editItem;},
+      categories() {return this.edit.state.stores;},
+      newItem: {
+        get() {return this.edit.state.newItem;},
+        set(value) {this.edit.state.newItem = value}
+      },
     },
     methods: {
       setStyle() {
-        if (this.editItem.type == 'article') return {top: '20%'};
-        else return {top: '25%'};
+        if (this.newItem == 'article') return {top: '10%'};
+        else return {top: '15%'};
       },
       validate() {
-        if (this.editItem.type == 'article') this.editItem.patch();
-        else this.edit.state.editItem.put();
-        this.edit.clearEditItem();
+        if (this.newItem == 'article') this.createArticle();
+        else this.createCategory();
+
       },
       cancel() {
-        this.edit.clearEditItem();
+        this.edit.clearNewItem();
       },
+
+      createCategory() {
+        this.edit.createCategory({
+          slug: this.name,
+          name: this.name,
+          description: this.description,
+        });
+      },
+
+      createArticle() {
+
+      }
     },
-    destroyed() {
-      this.edit.clearEditItem();
-    }
   };
 </script>
-
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
@@ -97,10 +120,6 @@
     width: 350px;
     /*left: 37%;*/
     left: 40.7%;
-
-    -webkit-box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
-    -moz-box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
-    box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
 
     .fieldStyle {
       margin-bottom: -10px;
@@ -145,38 +164,25 @@
       padding-top: 0;
     }
 
-    .validation-btns {
-      position: relative;
-    }
 
-    .card-image {
-      img {
-        width: 100%;
+    .validate {
+      color: $is-success;
+      transition: background-color .2s, color .2s;
+      &:hover {
+        transition: background-color .2s, color .2s;
+        background-color: $is-success;
+        color: white;
       }
     }
-  }
 
-  .validate {
-    color: $is-success;
-    transition: background-color .2s, color .2s;
-    &:hover {
+    .cancel {
       transition: background-color .2s, color .2s;
-      background-color: $is-success;
-      color: white;
+      &:hover {
+        transition: background-color .2s, color .2s;
+        background-color: $is-danger;
+        color: white;
+      }
     }
-  }
-
-  .cancel {
-    transition: background-color .2s, color .2s;
-    &:hover {
-      transition: background-color .2s, color .2s;
-      background-color: $is-danger;
-      color: white;
-    }
-  }
-
-  i {
-    font-size: 22px;
   }
 
 </style>

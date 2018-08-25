@@ -1,10 +1,11 @@
 <template>
   <section>
-    <EditPopup :edit="edit"></EditPopup>
+    <EditPopup></EditPopup>
+    <NewItem></NewItem>
     <div class="container">
       <div class="content">
         <transition name="fade">
-          <div v-if="!edit.state.editPopup">
+          <div v-if="!edit.state.editItem && !edit.state.newItem">
             <div class="box main-box">
               <div class="columns is-variable is-4 is-mobile">
                 <div class="column is-3">
@@ -23,16 +24,19 @@
 </template>
 
 <script>
+  import CategoriesStore from "./CategoriesStore";
+
   import CategoriesSide from './CategoriesSide';
   import ArticlesSide from './ArticlesSide';
   import EditPopup from './EditPopup';
+  import NewItem from './NewItem';
 
   export default {
     name: "ArticlesEditMenu",
-    components: {CategoriesSide, ArticlesSide, EditPopup},
-    props: {
-      edit: {type: Object},
-    },
+    components: {CategoriesSide, ArticlesSide, EditPopup, NewItem},
+    computed: {
+      edit() {return CategoriesStore;},
+    }
   };
 </script>
 
@@ -42,6 +46,7 @@
   .main-box {
     width: 100%;
     height: 600px;
-    /*background-color: #45a875;*/
+    background-color: rgba(48, 93, 120, 0.66);
+    /*background-color: rgba(48, 93, 120, 0.53);*/
   }
 </style>

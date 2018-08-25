@@ -1,7 +1,6 @@
 <template>
   <section>
-    <h3>Catégories</h3>
-
+    <h3>Catégories:</h3>
     <DragSortCategories>
       <CategoryBox v-for="(category, idx) in categories"
                    :key="idx"
@@ -28,5 +27,14 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  section {
+    margin-top: 5px;
+  }
+
+  h3 {
+    color: white;
+    margin-bottom: 32px;
+  }
 
 </style>

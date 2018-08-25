@@ -9,7 +9,6 @@ const url = 'categories/';
 const CategoriesStore = new Vue({
   data: () => ({
     name: 'CategoriesStore',
-    type: 'article',
     state: {
       stores: [],
       activeTab: 0,
@@ -17,9 +16,9 @@ const CategoriesStore = new Vue({
       hasLoaded: false,
       active: false,
 
-      editPopup: null,
-      selectedCategory: null,
+      newItem: null,
       hoveredImage: null,
+      editItem: null,
 
       primaryStore: null,
       secondaryStore: null,
@@ -27,6 +26,12 @@ const CategoriesStore = new Vue({
       draggingType: null,
     }
   }),
+  computed : {
+    loading: {
+      get(){return this.state.loading;},
+      set(value) {this.state.loading = value;}
+    },
+  },
   methods: {
     setLoading() {this.state.loading = true;},
     unsetLoading() {this.state.loading = false;},
@@ -39,22 +44,42 @@ const CategoriesStore = new Vue({
         this.state.hasLoaded = true;
       });
     },
+    createCategory(data) {
+      this.setLoading();
+      axios.post(`categories/`, data).then(response => {
+        this.state.stores.push(new Category(response.data));
+        setTimeout(() => {
+          tools.message('categoryNew');
+          this.unsetLoading();
+          this.clearNewItem();
+        }, 1500);
+      });
+    },
     updatePosition() {
+      this.setLoading();
       this.state.stores.forEach((i, idx) => {
         if (i.position != idx + 1) {
           i.position = idx + 1;
           i.put();
         }
       });
+      setTimeout(() => {
+        tools.message('updated');
+        this.unsetLoading();
+      }, 1500);
     },
     sortByPosition() {
       this.state.stores.sort((a, b) => {
         return a.position - b.position;
       });
     },
-    clearEditPopup() {
-      if (!this.state.loading) this.state.editPopup = false;
-      else setTimeout(() => {this.clearEditPopup();}, 500);
+    clearEditItem() {
+      if (!this.state.loading) this.state.editItem = null;
+      else setTimeout(() => {this.clearEditItem();}, 500);
+    },
+    clearNewItem() {
+      if (!this.loading) this.state.newItem = null;
+      else setTimeout(() => {this.clearNewItem()}, 500);
     },
     removeCategory(category) {
       let idx = this.state.stores.indexOf(category);

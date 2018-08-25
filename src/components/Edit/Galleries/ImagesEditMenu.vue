@@ -10,7 +10,7 @@
     <div class="container">
       <div class="content">
         <transition name="fade">
-          <div v-if="!edit.selectedImage">
+          <div v-if="!edit.editItem">
             <h1>Edition: {{ store.name }}</h1>
 
             <div class="card secondary">

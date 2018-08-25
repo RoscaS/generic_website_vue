@@ -38,10 +38,23 @@ const message = {
     position: 'is-bottom',
     message: "Une erreur est survenue. jpg ou png uniquement."
   },
+
+
+  articleNew: {
+    type: 'is-success',
+    position: 'is-bottom',
+    message: "Article créé."
+  },
   articleDel: {
     type: 'is-success',
     position: 'is-bottom',
     message: "Article supprimée du serveur."
+  },
+
+  categoryNew: {
+    type: 'is-success',
+    position: 'is-bottom',
+    message: "Catégorie créée."
   },
   categoryDel: {
     type: 'is-success',

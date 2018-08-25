@@ -46,8 +46,8 @@
     methods: {
       startEdit() {
         this.edit.start(this.store);
-        this.imagesModal = this.edit.type == 'image';
-        this.articlesModal = this.edit.type == 'article';
+        this.imagesModal = this.edit.name == 'GalleriesStore';
+        this.articlesModal = this.edit.name == 'CategoriesStore';
       },
       sReveal(side, delay, distance = 100, duration = 1500) {
         return new this.tools.ScrollRevealOptions(

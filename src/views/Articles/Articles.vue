@@ -1,7 +1,10 @@
 <template>
   <section>
     <BaseLayout :store="store">
-      <ArticlesCarousel v-scroll-reveal="sReveal('top', 100, 100, 1500)"/>
+
+      <div class="carousel">
+        <ArticlesCarousel v-scroll-reveal="sReveal('top', 100, 100, 1500)"/>
+      </div>
 
       <br><br>
     </BaseLayout>
@@ -16,10 +19,8 @@
 
   import EditIcon from '../../components/Edit/EditIcon';
   import ViewsMixin from '../../mixins/ViewsMixin';
-
   import ArticlesData from './ArticlessData';
   import ArticlesCarousel from './ArticlesCarousel';
-
   import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
   export default {
@@ -51,8 +52,8 @@
 <style scoped lang="scss">
   @import '../../../static/sass/global';
 
-  .poule {
-    width: 120px;
+  .carousel {
+    margin: 0 -60px 0 -60px;
   }
 
 </style>

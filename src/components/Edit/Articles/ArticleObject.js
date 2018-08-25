@@ -26,10 +26,10 @@ class Article {
   get edit() {return CategoriesStore;};
 
   patch(message=true) {
-    if (this.edit.state.editPopup && message) this.edit.setLoading();
+    if (this.edit.state.editItem && message) this.edit.setLoading();
     axios.patch(`articles/${this.id}/`, this.getForm(), headers)
     .then( () => {
-      if (this.edit.state.editPopup && message) {
+      if (this.edit.state.editItem && message) {
         setTimeout(() => {
           tools.message('updated');
           this.edit.unsetLoading();

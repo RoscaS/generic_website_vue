@@ -1,15 +1,15 @@
 <template>
   <transition name="bounceDown">
-    <div class="card popup" v-if="selectedImage">
+    <div class="card popup" v-if="editItem">
       <div class="card-image">
-        <img :src="selectedImage.image">
+        <img :src="editItem.image">
       </div>
       <div class="card-content">
         <div class="content">
-          <p>{{ selectedImage.description }}</p>
+          <p>{{ editItem.description }}</p>
           <b-field type="is-info" label="Description:">
             <b-input type="text"
-                     v-model="selectedImage.description"
+                     v-model="editItem.description"
                      :maxlength="100">
             </b-input>
           </b-field>
@@ -39,19 +39,19 @@
       edit: {type: Object},
     },
     computed: {
-      selectedImage() { return this.edit.selectedImage }
+      editItem() { return this.edit.editItem }
     },
     methods: {
       validate() {
-        this.edit.selectedImage.patch();
-        this.edit.clearSelectedImage();
+        this.edit.editItem.patch();
+        this.edit.clearEditItem();
       },
       cancel() {
-        this.edit.clearSelectedImage();
+        this.edit.clearEditItem();
       },
     },
     destroyed() {
-      this.edit.clearSelectedImage();
+      this.edit.clearEditItem();
     }
   };
 </script>
@@ -63,7 +63,7 @@
     position: relative;
   }
 
-  .popup {
+  .card {
     position: absolute;
     z-index: 100;
     width: 350px;
