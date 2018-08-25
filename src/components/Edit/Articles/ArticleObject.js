@@ -19,8 +19,11 @@ class Article {
     this.position = article.position;
     this.category = category;
     this.description = new Description(article.description, 200, 2);
-    this.image = article.image;
+    this.imageId = article.image;
   }
+  get image() {return GalleriesStore.getImage('Articles', this.imageId)}
+  set image(value) {this.imageId = value}
+
 
   get relatedImage() {return GalleriesStore.getImage('Articles', this.image.id);}
   get edit() {return CategoriesStore;};
@@ -45,7 +48,6 @@ class Article {
     formData.append('price', this.price.data);
     formData.append('position', this.position);
     formData.append('category', this.category.name.data);
-    formData.append('description', this.description.data);
     formData.append('description', this.description.data);
     return formData;
   }

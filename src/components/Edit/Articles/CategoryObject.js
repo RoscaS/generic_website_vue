@@ -6,6 +6,8 @@ import {Article} from "./ArticleObject";
 import {Dialog} from "buefy";
 
 axios.defaults.baseURL = 'http://localhost:8000/';
+const headers = {headers: {'content-type': 'multipart/form-data'}};
+
 
 class Category {
   constructor(category) {
@@ -61,6 +63,17 @@ class Category {
     this.articles.sort((a, b) => {return a.position - b.position;});
   }
 
+  getForm(article) {
+    let formData = new FormData();
+    formData.append('name', article.name);
+    formData.append('image', article.file);
+    formData.append('category', article.category);
+    formData.append('description', article.description);
+    formData.append('price', article.price);
+    formData.append('image', article.image);
+    return formData;
+  }
+
   put() {
     axios.put(this.url, {
       slug: this.name.data,
@@ -70,6 +83,25 @@ class Category {
     }).then(() => {
       this.slug = this.name.data;
     }).catch(() => {tools.message('error');});
+  }
+
+  postArticle(article) {
+    this.edit.setLoading();
+    let form = this.getForm(article);
+    axios.post('articles/', form, headers).then(response => {
+      this.initArticles([response.data]);
+      this.edit.state.tempImage.gallery = 'Articles';
+      this.edit.state.tempImage.name = response.data.name.data;
+      setTimeout(() => {
+        tools.message('articleNew');
+        this.edit.unsetLoading();
+        this.edit.state.newItem = null;
+        this.edit.state.tempImage = null;
+      }, 500);
+    }).catch(error => {
+      tools.message('error');
+      this.edit.state.tempImage.delete(false);
+    })
   }
 
   delete(notification = true) {

@@ -2,6 +2,7 @@ import axios from "axios";
 import Vue from 'vue';
 import tools from '../../../utiles/tools';
 import {Category} from "./CategoryObject";
+import GalleriesStore from "../Galleries/GalleriesStore";
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 const url = 'categories/';
@@ -17,6 +18,7 @@ const CategoriesStore = new Vue({
       active: false,
 
       newItem: null,
+      tempImage: null,
       hoveredImage: null,
       editItem: null,
 
@@ -33,6 +35,8 @@ const CategoriesStore = new Vue({
     },
   },
   methods: {
+    getStore(name) {return this.state.stores.filter(i => i.name.data == name)[0];},
+
     setLoading() {this.state.loading = true;},
     unsetLoading() {this.state.loading = false;},
     fetchData() {
@@ -84,6 +88,22 @@ const CategoriesStore = new Vue({
     removeCategory(category) {
       let idx = this.state.stores.indexOf(category);
       this.state.stores.splice(idx, 1);
+    },
+    uploadImage(file) {
+      let gallery = GalleriesStore.getStore('Articles');
+      gallery.postImage(this.getForm(file, gallery.name));
+      setTimeout(() => {
+        let image = gallery.images[gallery.images.length-1];
+        if (image.name == 'tempArticleImage') this.state.tempImage = image;
+        console.log(this.state.tempImage);
+      }, 500);
+    },
+    getForm(file, gallery) {
+      let formData = new FormData();
+      formData.append('name', 'tempArticleImage');
+      formData.append('image', file);
+      formData.append('gallery', gallery);
+      return formData;
     },
     start(store) {
       this.state.active = true;
