@@ -87,7 +87,7 @@
 
           .description {
             width: 310px;
-            font-weight: bold;
+            font-weight: lighter;
           }
         }
 
