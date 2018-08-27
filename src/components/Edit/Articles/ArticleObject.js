@@ -1,5 +1,6 @@
 import axios from "axios";
 import tools from '../../../utils/tools';
+import urls from '../../../routes/Urls';
 import CategoriesStore from './CategoriesStore';
 import GalleriesStore from '../Galleries/GalleriesStore';
 import {Dialog} from "buefy";
@@ -10,7 +11,7 @@ const headers = {headers: {'content-type': 'multipart/form-data'}};
 class Article {
   constructor(article, category) {
     this.type = 'article';
-    this.url = `articles/${article.id}/`;
+    this.url = urls.articles + article.id + '/';
     this.id = article.id;
     this.name = article.name;
     this.price = article.price;

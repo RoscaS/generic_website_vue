@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import axios from 'axios';
 import tools from './tools';
+import urls from '../routes/Urls'
 
 
 const SiteOptions = new Vue({
   data: {
-    url: 'http://localhost:8000/options',
+    url: urls.options,
     data: '',
     projectName: '',
     name: '',
@@ -28,7 +29,6 @@ const SiteOptions = new Vue({
   created() {
     axios.get(this.url).then(response => {
       let data = response.data[0];
-      this.url = 'http://localhost:8000/options';
       this.projectName = data.project_name;
       this.name = data.name;
       this.nameAdd = data.name_add;

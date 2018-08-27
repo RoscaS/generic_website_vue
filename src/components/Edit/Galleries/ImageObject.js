@@ -1,9 +1,10 @@
 import axios from "axios";
 import tools from '../../../utils/tools';
 import {Dialog} from 'buefy';
+import urls from '../../../routes/Urls'
 
 const headers = {headers: {'content-type': 'multipart/form-data'}};
-let imageUrl = id => `${axios.defaults.baseURL}images/${id}/`;
+let imageUrl = id => urls.images + id + '/';
 
 
 class Image {

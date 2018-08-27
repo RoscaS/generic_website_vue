@@ -1,5 +1,6 @@
 import axios from "axios";
 import tools from '../../../utils/tools';
+import urls from '../../../routes/Urls';
 import CategoriesStore from './CategoriesStore';
 import {Article} from "./ArticleObject";
 import {Dialog} from "buefy";
@@ -15,7 +16,7 @@ class Category {
     this.name = category.name;
     this.description = category.description;
     this.position = category.position;
-    this.url = `categories/${category.slug}/`;
+    this.url = urls.categories + category.slug + '/';
     this.articles = [];
     this.backup = {};
     this.initArticles(category.articles);
@@ -45,14 +46,14 @@ class Category {
     this.backup.slug = this.slug;
     this.backup.name = this.name;
     this.backup.description = this.description;
-    this.backup.url = `categories/${this.slug}/`;
+    this.backup.url = urls.categories + this.slug + '/';
   }
 
   restore() {
     this.slug = this.backup.slug;
     this.name = this.backup.name;
     this.description = this.backup.description;
-    this.url = `categories/${this.slug}/`;
+    this.url = urls.categories + this.slug + '/';
   }
 
   updateData() {
@@ -99,7 +100,7 @@ class Category {
       position: this.position,
     }).then(() => {
       this.slug = this.name;
-      this.url = `categories/${this.slug}/`;
+      this.url = urls.categories + this.slug + '/';
       setTimeout(() => {
         tools.message('updated');
         this.edit.unsetLoading();

@@ -1,5 +1,6 @@
 import axios from "axios";
 import tools from '../../../utils/tools';
+import urls from '../../../routes/Urls'
 import {Image} from './ImageObject';
 import GalleriesStore from './GalleriesStore';
 
@@ -16,7 +17,7 @@ class Gallery {
     this.isLocked = false;
     this.hasLoaded = false;
     this.placeholder = null;
-    this.url = `galleries/${this.name}`;
+    this.url = urls.galleries + this.name;
     this.initData();
   }
 

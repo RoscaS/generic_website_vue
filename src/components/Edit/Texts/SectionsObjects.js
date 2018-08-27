@@ -1,6 +1,7 @@
 import GalleriesStore from "../Galleries/GalleriesStore";
 import {Title, SubTitle, Text, Icon} from "../FieldsModels";
 import tools from '../../../utils/tools';
+import urls from '../../../routes/Urls';
 
 class Base {
   constructor() {
@@ -55,7 +56,7 @@ class Promo extends WithImage {
   constructor() {
     super();
     this.name = 'Promo';
-    this.url = 'promo/1/';
+    this.url = urls.promo;
     this.state = {
       title: new Title(),
       text: new Text(),
@@ -67,7 +68,7 @@ class Presentation extends WithImage {
   constructor() {
     super();
     this.name = 'Presentation';
-    this.url = 'presentation/1/';
+    this.url = urls.presentation;
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
@@ -81,7 +82,7 @@ class Events extends Base {
   constructor() {
     super();
     this.name = 'Events';
-    this.url = 'events/1/';
+    this.url = urls.events;
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
@@ -93,7 +94,7 @@ class Article extends Base {
   constructor() {
     super();
     this.name = 'Article';
-    this.url = 'article/1/';
+    this.url = urls.article;
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
@@ -105,7 +106,7 @@ class Hero extends Base {
   constructor() {
     super();
     this.name = 'Hero';
-    this.url = 'hero/1/';
+    this.url = urls.hero;
     this.state = {
       icon1: new Icon(), icon2: new Icon(), icon3: new Icon(),
       title1: new Title(), title2: new Title(), title3: new Title(),
@@ -132,7 +133,7 @@ class Contact extends Base {
   constructor() {
     super();
     this.name = 'Contact';
-    this.url = 'contact/1/';
+    this.url = urls.contact;
     this.state = {
       title: new Title(),
       sub_title: new SubTitle('Sous titre 1'),
@@ -146,7 +147,7 @@ class Review extends Base {
   constructor() {
     super();
     this.name = 'Review';
-    this.url = 'review/1/';
+    this.url = urls.review;
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
