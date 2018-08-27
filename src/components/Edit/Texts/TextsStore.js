@@ -10,7 +10,7 @@ import {
   Review
 } from './SectionsObjects';
 
-axios.defaults.baseURL = 'http://localhost:8000/';
+// axios.defaults.baseURL = 'http://localhost:8000/';
 
 class TextsStore {
   constructor() {

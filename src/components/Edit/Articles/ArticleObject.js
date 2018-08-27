@@ -1,10 +1,9 @@
 import axios from "axios";
-import tools from '../../../utiles/tools';
+import tools from '../../../utils/tools';
 import CategoriesStore from './CategoriesStore';
 import GalleriesStore from '../Galleries/GalleriesStore';
 import {Dialog} from "buefy";
 
-axios.defaults.baseURL = 'http://localhost:8000/';
 const headers = {headers: {'content-type': 'multipart/form-data'}};
 
 

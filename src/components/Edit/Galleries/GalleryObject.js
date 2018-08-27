@@ -1,9 +1,8 @@
 import axios from "axios";
-import tools from '../../../utiles/tools';
+import tools from '../../../utils/tools';
 import {Image} from './ImageObject';
 import GalleriesStore from './GalleriesStore';
 
-axios.defaults.baseURL = 'http://localhost:8000/';
 const headers = {headers: {'content-type': 'multipart/form-data'}};
 
 class Gallery {

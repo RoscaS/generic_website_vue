@@ -1,8 +1,7 @@
 import axios from "axios";
-import tools from '../../../utiles/tools';
+import tools from '../../../utils/tools';
 import {Dialog} from 'buefy';
 
-axios.defaults.baseURL = 'http://localhost:8000/';
 const headers = {headers: {'content-type': 'multipart/form-data'}};
 let imageUrl = id => `${axios.defaults.baseURL}images/${id}/`;
 

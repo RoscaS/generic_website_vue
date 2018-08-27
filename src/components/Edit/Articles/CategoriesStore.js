@@ -1,10 +1,9 @@
 import axios from "axios";
 import Vue from 'vue';
-import tools from '../../../utiles/tools';
+import tools from '../../../utils/tools';
 import {Category} from "./CategoryObject";
 import GalleriesStore from "../Galleries/GalleriesStore";
 
-axios.defaults.baseURL = 'http://localhost:8000/';
 const url = 'categories/';
 
 const CategoriesStore = new Vue({
@@ -28,9 +27,11 @@ const CategoriesStore = new Vue({
       draggingType: null,
     }
   }),
-  computed : {
+  computed: {
+    gallery() {return GalleriesStore.getStore('Articles');},
+
     loading: {
-      get(){return this.state.loading;},
+      get() {return this.state.loading;},
       set(value) {this.state.loading = value;}
     },
     editItem: {
@@ -48,7 +49,6 @@ const CategoriesStore = new Vue({
   },
   methods: {
     getStore(name) {return this.state.stores.filter(i => i.name == name)[0];},
-
     setLoading() {this.state.loading = true;},
     unsetLoading() {this.state.loading = false;},
     fetchData() {
@@ -58,6 +58,16 @@ const CategoriesStore = new Vue({
         });
         this.sortByPosition();
         this.state.hasLoaded = true;
+      });
+    },
+    sortImages(patch=true) {
+      let count = this.gallery.images.length;
+      this.state.stores.forEach(store => {
+        store.articles.forEach(article => {
+          console.log(`pos: ${article.image.position}\t count: ${count}\t${article.name}`);
+          article.image.position = count--;
+          if (patch) article.image.patch();
+        });
       });
     },
     createCategory(data) {
@@ -95,7 +105,7 @@ const CategoriesStore = new Vue({
     },
     clearNewItem() {
       if (!this.loading) this.state.newItem = null;
-      else setTimeout(() => {this.clearNewItem()}, 500);
+      else setTimeout(() => {this.clearNewItem();}, 500);
     },
     removeCategory(category) {
       let idx = this.state.stores.indexOf(category);
@@ -105,7 +115,7 @@ const CategoriesStore = new Vue({
       let gallery = GalleriesStore.getStore('Articles');
       gallery.postImage(form, false);
       setTimeout(() => {
-        let image = gallery.images[gallery.images.length-1];
+        let image = gallery.images[gallery.images.length - 1];
         if (image.name == 'tempArticleImage') this.state.tempImage = image;
       }, 500);
     },

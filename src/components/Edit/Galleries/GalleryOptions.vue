@@ -20,13 +20,15 @@
 </template>
 
 <script>
+  import tools from '../../../utils/tools';
+
   export default {
     name: "GalleryOptions",
     props: {store: {type: Object}},
     methods: {
       message(value) {
         let message = value ? 'autoScrollOn' : 'autoScrollOff';
-        this.$Global.Tools.message(message);
+        this.tools.message(message);
       }
     }
   };

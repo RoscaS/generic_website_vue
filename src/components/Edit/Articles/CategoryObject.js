@@ -1,10 +1,9 @@
 import axios from "axios";
-import tools from '../../../utiles/tools';
+import tools from '../../../utils/tools';
 import CategoriesStore from './CategoriesStore';
 import {Article} from "./ArticleObject";
 import {Dialog} from "buefy";
 
-axios.defaults.baseURL = 'http://localhost:8000/';
 const headers = {headers: {'content-type': 'multipart/form-data'}};
 
 
@@ -57,20 +56,23 @@ class Category {
   }
 
   updateData() {
-    this.articles.forEach((i, idx) => {
-      let dirty = false;
-      if (i.position != idx + 1) {
-        i.position = idx + 1;
-        dirty = true;
-      }
-      if (i.category != this) {
-        i.category = this;
-        dirty = true;
-      }
-      if (dirty) {
-        i.patch(false);
-      }
-    });
+    this.edit.sortImages();
+    // this.articles.forEach((i, idx) => {
+    //   let dirty = false;
+    //   if (i.position != idx + 1) {
+    //     i.position = idx + 1;
+    //     dirty = true;
+    //   }
+    //   if (i.category != this) {
+    //     i.category = this;
+    //     dirty = true;
+    //   }
+    //   this.edit.sortImages();
+    //
+    //   if (dirty) {
+    //     i.patch(false);
+    //   }
+    // });
   }
 
   sortByPosition() {
@@ -108,6 +110,7 @@ class Category {
   postArticle(article) {
     this.edit.setLoading();
     let form = this.getForm(article);
+    this.edit.sortImages();
     axios.post('articles/', form, headers).then(response => {
       this.initArticles([response.data]);
       this.edit.state.tempImage.gallery = 'Articles';

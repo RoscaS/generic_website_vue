@@ -10,10 +10,10 @@
           <header class="card-header level">
             <div class="level-left">
 
-              <div class="level-item">
-                <span class="diez">#</span>
-                <span class="id">{{article.id}}</span>
-              </div>
+              <!--<div class="level-item">-->
+                <!--<span class="diez">#</span>-->
+                <!--<span class="id">{{article.id}}</span>-->
+              <!--</div>-->
 
               <div class="level-item">
                 <span class="name">{{article.name}}</span>

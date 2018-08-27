@@ -59,6 +59,7 @@
 </template>
 
 <script>
+  import SiteOptions from '../utils/siteSettings';
   import moment from 'moment';
 
 
@@ -66,25 +67,25 @@
     name: "Footer",
     data() {
       return {
-        siteSettings: this.$Global.SiteSettings,
+        site: SiteOptions,
       };
     },
     computed: {
       icons() {
         return [
-          {icon: 'fa-facebook', url: this.siteSettings.facebook,},
-          {icon: 'fa-tripadvisor', url: this.siteSettings.tripadvisor,},
-          {icon: 'fa-google', url: this.siteSettings.google,},
-          {icon: 'fa-twitter', url: this.siteSettings.twitter,},
-          {icon: 'fa-instagram', url: this.siteSettings.instagram,},
-          {icon: 'fa-linkedin', url: this.siteSettings.linkedin,},
-          {icon: 'fa-snapchat', url: this.siteSettings.snapchat,},
+          {icon: 'fa-facebook', url: this.site.facebook,},
+          {icon: 'fa-tripadvisor', url: this.site.tripadvisor,},
+          {icon: 'fa-google', url: this.site.google,},
+          {icon: 'fa-twitter', url: this.site.twitter,},
+          {icon: 'fa-instagram', url: this.site.instagram,},
+          {icon: 'fa-linkedin', url: this.site.linkedin,},
+          {icon: 'fa-snapchat', url: this.site.snapchat,},
         ];
       }
     },
     methods: {
       getCopyright() {
-        return moment().format('Y') + ' ' + this.siteSettings.projectName;
+        return moment().format('Y') + ' ' + this.site.projectName;
       },
     }
   };

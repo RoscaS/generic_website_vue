@@ -43,17 +43,18 @@
 </template>
 
 <script>
+  import Title from '../../components/Title';
   import EditIcon from '../../components/Edit/EditIcon';
-  import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
-  import FieldsLayout from './FieldsLayout.vue';
   import TextsStore from '../../components/Edit/Texts/TextsStore';
+  import FieldsLayout from './FieldsLayout.vue';
+  import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
 
   export default {
     name: "BaseLayout",
     props: {
       store: {type: Object},
     },
-    components: {EditIcon, TextsEditMenu, FieldsLayout},
+    components: {Title, EditIcon, TextsEditMenu, FieldsLayout},
     computed: {
       edit() { return TextsStore; },
     }

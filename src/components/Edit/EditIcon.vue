@@ -15,6 +15,7 @@
 <script>
   import ImagesModal from './Galleries/ImagesModal';
   import ArticlesModal from './Articles/ArticlesModal';
+  import tools from '../../utils/tools';
 
   export default {
     name: "EditIcon",
@@ -31,11 +32,10 @@
         imagesModal: false,
         articlesModal: false,
         timeout: false,
+        tools: tools,
       };
     },
     computed: {
-      tools() {return this.$Global.Tools;},
-
       isActive() {
         return this.edit.state.active;
       },

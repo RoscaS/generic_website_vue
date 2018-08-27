@@ -1,9 +1,6 @@
 import GalleriesStore from "../Galleries/GalleriesStore";
 import {Title, SubTitle, Text, Icon} from "../FieldsModels";
-import tools from '../../../utiles/tools';
-import axios from "axios";
-
-axios.defaults.baseURL = 'http://localhost:8000/';
+import tools from '../../../utils/tools';
 
 class Base {
   constructor() {

@@ -75,8 +75,8 @@
 </template>
 
 <script>
-  import moment from 'moment';
   import ViewsMixin from '../mixins/ViewsMixin';
+  import moment from 'moment';
 
   export default {
     name: "Review",

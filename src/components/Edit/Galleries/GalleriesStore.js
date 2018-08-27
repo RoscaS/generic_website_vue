@@ -1,9 +1,5 @@
-import axios from "axios";
-import tools from '../../../utiles/tools';
 import {Gallery} from './GalleryObject';
 import Vue from 'vue';
-
-axios.defaults.baseURL = 'http://localhost:8000/';
 
 const GalleriesStore =  new Vue ({
   data: () => ({

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import tools from './tools';
 
 
 const SiteOptions = new Vue({
@@ -46,7 +47,7 @@ const SiteOptions = new Vue({
       this.linkedin = data.linkedin;
       this.snapchat = data.snapchat;
     }).catch(error => {
-        this.$Global.Tools.message('error', error, this.url);
+        tools.message('error', error, this.url);
     });
   }
 });

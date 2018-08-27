@@ -11,17 +11,17 @@
              v-scroll-reveal="sReveal('right', 50, 400, 1500)">
           <div class="line">
             <i class="fas fa-map-marker-alt fa-fw"></i>
-            <a :href="siteSettings.google">{{ siteSettings.city }}</a>
+            <a :href="site.google">{{ site.city }}</a>
           </div>
 
           <div class="line">
             <i class="fas fa-phone fa-fw"></i>
-            <a :href="phoneHref">{{ siteSettings.phone }}</a>
+            <a :href="phoneHref">{{ site.phone }}</a>
           </div>
 
           <div class="line">
             <i class="fas fa-envelope fa-fw"></i>
-            <a :href="mailHref">{{ siteSettings.mail }}</a>
+            <a :href="mailHref">{{ site.mail }}</a>
           </div>
         </div>
         <p class="subtitle"
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+  import SiteOptions from '../utils/siteSettings';
   import ViewsMixin from '../mixins/ViewsMixin';
   import ContactForm from '../components/Forms/ContactForm';
   import GoogleMap from '../components/Maps';
@@ -51,14 +52,14 @@
     components: {ContactForm, GoogleMap},
     data() {
       return {
-        siteSettings: this.$Global.SiteSettings,
+        site: SiteOptions,
         component: "Contact",
         type: 'text',
       };
     },
     computed: {
-      phoneHref() { return `tel:${this.siteSettings.phone}`; },
-      mailHref() { return `mailto:${this.siteSettings.mail}`; },
+      phoneHref() { return `tel:${this.site.phone}`; },
+      mailHref() { return `mailto:${this.site.mail}`; },
     },
   };
 </script>

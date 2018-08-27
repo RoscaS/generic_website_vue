@@ -1,3 +1,4 @@
+import tools from '../utils/tools';
 import BaseLayout from '../views/Layouts/BaseLayout';
 import TextsStore from '../components/Edit/Texts/TextsStore';
 import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
@@ -6,6 +7,7 @@ import CategoriesStore from '../components/Edit/Articles/CategoriesStore';
 export default {
   components: {BaseLayout},
   data: () => ({
+    tools: tools,
     textsEdit: TextsStore,
     galleriesEdit: GalleriesStore,
     categoriesEdit: CategoriesStore,
@@ -16,7 +18,6 @@ export default {
     },
   }),
   computed: {
-    tools() {return this.$Global.Tools;},
     edit() {return this.editTypes[this.type];},
     store() {return this.edit.getStore(this.component);},
     state() {return this.store.state;},
