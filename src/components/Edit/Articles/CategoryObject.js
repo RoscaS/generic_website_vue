@@ -117,7 +117,7 @@ class Category {
         this.edit.unsetLoading();
         this.edit.state.newItem = null;
         this.edit.state.tempImage = null;
-      }, 500);
+      }, 2000);
     }).catch(error => {
       tools.message('error');
       this.edit.state.tempImage.delete(false);

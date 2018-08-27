@@ -48,7 +48,10 @@
       }
     },
     methods: {
-      modify() {this.edit.state.editItem = this.article},
+      modify() {
+        this.article.setBackup();
+        this.edit.state.editItem = this.article;
+      },
       remove() {this.article.delete()},
     }
   };

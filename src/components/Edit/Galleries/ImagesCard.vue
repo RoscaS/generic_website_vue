@@ -40,7 +40,7 @@
 
 <script>
   export default {
-    name: "DescriptionPopup",
+    name: "ImagesCard",
     props: {
       edit: {type: Object},
     },

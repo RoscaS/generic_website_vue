@@ -5,7 +5,7 @@
       <SpinLine v-show="edit.loading"/>
     </div>
 
-    <DescriptionPopup :edit="edit"/>
+    <ImagesCard :edit="edit"/>
 
     <div class="content">
       <transition name="fade">
@@ -81,7 +81,7 @@
   import GalleriesStore from './GalleriesStore';
   import GalleriesDropDown from './GalleriesDropDown';
   import GalleryOptions from './GalleryOptions';
-  import DescriptionPopup from './DescriptionPopup';
+  import ImagesCard from './ImagesCard';
   import ImagesCounter from './ImagesCounter';
 
   export default {
@@ -92,7 +92,7 @@
       GalleriesDropDown,
       SpinLine,
       GalleryOptions,
-      DescriptionPopup,
+      ImagesCard,
       ImagesCounter,
     },
     props: {

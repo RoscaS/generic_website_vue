@@ -41,6 +41,10 @@ const CategoriesStore = new Vue({
       get() {return this.state.newItem;},
       set(value) {this.state.newItem = value;}
     },
+    tempImage: {
+      get() {return this.state.tempImage;},
+      set(value) {this.state.tempImage = value;}
+    },
   },
   methods: {
     getStore(name) {return this.state.stores.filter(i => i.name == name)[0];},
@@ -103,7 +107,6 @@ const CategoriesStore = new Vue({
       setTimeout(() => {
         let image = gallery.images[gallery.images.length-1];
         if (image.name == 'tempArticleImage') this.state.tempImage = image;
-        console.log(this.state.tempImage);
       }, 500);
     },
     start() {

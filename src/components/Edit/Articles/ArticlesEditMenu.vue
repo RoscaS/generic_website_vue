@@ -1,8 +1,6 @@
 <template>
   <section>
-    <EditPopup></EditPopup>
-    <NewItem></NewItem>
-    <Card></Card>
+    <ArticlesCard></ArticlesCard>
     <div class="container">
       <div class="content">
         <transition name="fade">
@@ -29,13 +27,11 @@
 
   import CategoriesSide from './CategoriesSide';
   import ArticlesSide from './ArticlesSide';
-  import EditPopup from './EditPopup';
-  import NewItem from './NewItem';
-  import Card from "../Card";
+  import ArticlesCard from "./ArticlesCard";
 
   export default {
     name: "ArticlesEditMenu",
-    components: {Card, CategoriesSide, ArticlesSide, EditPopup, NewItem},
+    components: {ArticlesCard, CategoriesSide, ArticlesSide},
     computed: {
       edit() {return CategoriesStore;},
     }
