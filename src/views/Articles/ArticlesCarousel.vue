@@ -12,7 +12,7 @@
                  @before-slide-change="beforeChange"
                  @after-slide-change="afterChange">
       <slide v-for="(slide, i) in slides" :key="i" :index="i">
-        <img :src="slide.image">
+        <img :src="slide.image" height="270px" width="360px">
       </slide>
     </carousel-3d>
   </section>
@@ -43,7 +43,7 @@
       edit() {return GalleriesStore;},
       store() {return this.edit.getStore('Articles');},
       state() {return this.store.state;},
-      categories() {return CategoriesStore.state.stores},
+      categories() {return CategoriesStore.state.stores;},
       hoveredImage() {return CategoriesStore.state.hoveredImage;},
 
       slides() {
@@ -83,7 +83,7 @@
         this.jumpTo = idx;
         this.delta = this.jumpTo - this.currentIdx;
         this.jumpToSlide();
-        this.c ++;
+        this.c++;
       },
       setSpeed() {
         let delta = Math.abs(this.delta);
@@ -132,11 +132,15 @@
 <style scoped lang="scss">
   @import '../../../static/sass/global';
 
+
   section {
     margin: 20px 0px -150px 0px;
   }
 
   img {
+    object-fit: cover;
+    width: $article-width;
+    height: $article-height;
     border-radius: 20px;
   }
 
@@ -171,43 +175,39 @@
 </style>
 
 
-
-
-
-
 <!--<div class="debug-articles">-->
-  <!--<div class="level">-->
-    <!--<div class="level-item">-->
-      <!--<ul>-->
-        <!--<li><b>idx</b></li>-->
-        <!--<li><b>id</b></li>-->
-        <!--<li><b>pos</b></li>-->
-      <!--</ul>-->
-    <!--</div>-->
-    <!--<div v-for="(slide, i) in slides"-->
-         <!--class="level-item"-->
-         <!--:class="{current: currentIdx==getIndex(slide)}">-->
-      <!--<ul>-->
-        <!--<li>{{getIndex(slide)}}</li>-->
-        <!--<li>{{slide.id}}</li>-->
-        <!--<li>{{slide.position}}</li>-->
-      <!--</ul>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<hr>-->
-  <!--<b-field grouped group-multiline>-->
-    <!--<button class="button is-outlined is-primary" @click="previous()"> <-->
-    <!--</button>-->
-    <!--<button class="button is-outlined is-primary" @click="next()"> >-->
-    <!--</button>-->
-    <!--<p class="control">-->
-      <!--<b-input type="number" :min="0" v-model="jumpTo"></b-input>-->
-    <!--</p>-->
-    <!--<button class="go button is-outlined is-primary" @click="initJump()">-->
-      <!--Go-->
-    <!--</button>-->
-    <!--<button class="go button is-outlined is-primary" @click="reset()">-->
-      <!--Reset-->
-    <!--</button>-->
-  <!--</b-field>-->
+<!--<div class="level">-->
+<!--<div class="level-item">-->
+<!--<ul>-->
+<!--<li><b>idx</b></li>-->
+<!--<li><b>id</b></li>-->
+<!--<li><b>pos</b></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<div v-for="(slide, i) in slides"-->
+<!--class="level-item"-->
+<!--:class="{current: currentIdx==getIndex(slide)}">-->
+<!--<ul>-->
+<!--<li>{{getIndex(slide)}}</li>-->
+<!--<li>{{slide.id}}</li>-->
+<!--<li>{{slide.position}}</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+<!--<hr>-->
+<!--<b-field grouped group-multiline>-->
+<!--<button class="button is-outlined is-primary" @click="previous()"> <-->
+<!--</button>-->
+<!--<button class="button is-outlined is-primary" @click="next()"> >-->
+<!--</button>-->
+<!--<p class="control">-->
+<!--<b-input type="number" :min="0" v-model="jumpTo"></b-input>-->
+<!--</p>-->
+<!--<button class="go button is-outlined is-primary" @click="initJump()">-->
+<!--Go-->
+<!--</button>-->
+<!--<button class="go button is-outlined is-primary" @click="reset()">-->
+<!--Reset-->
+<!--</button>-->
+<!--</b-field>-->
 <!--</div>-->

@@ -2,7 +2,6 @@ import axios from "axios";
 import tools from '../../../utiles/tools';
 import CategoriesStore from './CategoriesStore';
 import GalleriesStore from '../Galleries/GalleriesStore';
-import {Name, Price, Description} from "../FieldsModels";
 import {Dialog} from "buefy";
 
 axios.defaults.baseURL = 'http://localhost:8000/';
@@ -14,19 +13,31 @@ class Article {
     this.type = 'article';
     this.url = `articles/${article.id}/`;
     this.id = article.id;
-    this.name = new Name(article.name);
-    this.price = new Price(article.price);
+    this.name = article.name;
+    this.price = article.price;
+    this.description = article.description;
     this.position = article.position;
     this.category = category;
-    this.description = new Description(article.description, 200, 2);
     this.imageId = article.image;
+    this.backup = {};
   }
   get image() {return GalleriesStore.getImage('Articles', this.imageId)}
   set image(value) {this.imageId = value}
 
-
   get relatedImage() {return GalleriesStore.getImage('Articles', this.image.id);}
   get edit() {return CategoriesStore;};
+
+  setBackup() {
+    this.backup.name = this.name;
+    this.backup.price = this.price;
+    this.backup.description = this.description;
+  }
+
+  restore() {
+    this.name = this.backup.name;
+    this.price = this.backup.price;
+    this.description = this.backup.description;
+  }
 
   patch(message=true) {
     if (this.edit.state.editItem && message) this.edit.setLoading();
@@ -44,11 +55,11 @@ class Article {
   getForm() {
     let formData = new FormData();
     formData.append('id', this.id);
-    formData.append('name', this.name.data);
-    formData.append('price', this.price.data);
+    formData.append('name', this.name);
+    formData.append('price', this.price);
     formData.append('position', this.position);
-    formData.append('category', this.category.name.data);
-    formData.append('description', this.description.data);
+    formData.append('category', this.category.name);
+    formData.append('description', this.description);
     return formData;
   }
 

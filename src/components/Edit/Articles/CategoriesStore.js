@@ -33,9 +33,17 @@ const CategoriesStore = new Vue({
       get(){return this.state.loading;},
       set(value) {this.state.loading = value;}
     },
+    editItem: {
+      get() {return this.state.editItem;},
+      set(value) {this.state.editItem = value;}
+    },
+    newItem: {
+      get() {return this.state.newItem;},
+      set(value) {this.state.newItem = value;}
+    },
   },
   methods: {
-    getStore(name) {return this.state.stores.filter(i => i.name.data == name)[0];},
+    getStore(name) {return this.state.stores.filter(i => i.name == name)[0];},
 
     setLoading() {this.state.loading = true;},
     unsetLoading() {this.state.loading = false;},
@@ -89,23 +97,16 @@ const CategoriesStore = new Vue({
       let idx = this.state.stores.indexOf(category);
       this.state.stores.splice(idx, 1);
     },
-    uploadImage(file) {
+    uploadImage(form) {
       let gallery = GalleriesStore.getStore('Articles');
-      gallery.postImage(this.getForm(file, gallery.name));
+      gallery.postImage(form, false);
       setTimeout(() => {
         let image = gallery.images[gallery.images.length-1];
         if (image.name == 'tempArticleImage') this.state.tempImage = image;
         console.log(this.state.tempImage);
       }, 500);
     },
-    getForm(file, gallery) {
-      let formData = new FormData();
-      formData.append('name', 'tempArticleImage');
-      formData.append('image', file);
-      formData.append('gallery', gallery);
-      return formData;
-    },
-    start(store) {
+    start() {
       this.state.active = true;
     },
     end() {

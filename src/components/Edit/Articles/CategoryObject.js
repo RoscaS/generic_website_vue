@@ -1,7 +1,6 @@
 import axios from "axios";
 import tools from '../../../utiles/tools';
 import CategoriesStore from './CategoriesStore';
-import {Description, Name} from "../FieldsModels";
 import {Article} from "./ArticleObject";
 import {Dialog} from "buefy";
 
@@ -14,11 +13,12 @@ class Category {
     this.type = 'category';
     this.id = category.id;
     this.slug = category.slug;
-    this.name = new Name(category.name);
-    this.description = new Description(category.description, 1000, 4);
+    this.name = category.name;
+    this.description = category.description;
     this.position = category.position;
     this.url = `categories/${category.slug}/`;
     this.articles = [];
+    this.backup = {};
     this.initArticles(category.articles);
     this.sortByPosition();
   }
@@ -40,6 +40,20 @@ class Category {
         this.articles.push(new Article(i, this));
       });
     }
+  }
+
+  setBackup() {
+    this.backup.slug = this.slug;
+    this.backup.name = this.name;
+    this.backup.description = this.description;
+    this.backup.url = `categories/${this.slug}/`;
+  }
+
+  restore() {
+    this.slug = this.backup.slug;
+    this.name = this.backup.name;
+    this.description = this.backup.description;
+    this.url = `categories/${this.slug}/`;
   }
 
   updateData() {
@@ -75,13 +89,19 @@ class Category {
   }
 
   put() {
+    this.edit.setLoading();
     axios.put(this.url, {
-      slug: this.name.data,
-      name: this.name.data,
-      description: this.description.data,
+      slug: this.name,
+      name: this.name,
+      description: this.description,
       position: this.position,
     }).then(() => {
-      this.slug = this.name.data;
+      this.slug = this.name;
+      this.url = `categories/${this.slug}/`;
+      setTimeout(() => {
+        tools.message('updated');
+        this.edit.unsetLoading();
+      }, 1500);
     }).catch(() => {tools.message('error');});
   }
 
@@ -91,7 +111,7 @@ class Category {
     axios.post('articles/', form, headers).then(response => {
       this.initArticles([response.data]);
       this.edit.state.tempImage.gallery = 'Articles';
-      this.edit.state.tempImage.name = response.data.name.data;
+      this.edit.state.tempImage.name = response.data.name;
       setTimeout(() => {
         tools.message('articleNew');
         this.edit.unsetLoading();
@@ -114,7 +134,7 @@ class Category {
 
   deleteNotification() {
     Dialog.confirm({
-      message: `Cette opération supprimera la catégorie ${this.name.data}
+      message: `Cette opération supprimera la catégorie ${this.name}
       ainsi que tous les articles qu'elle contient`,
       confirmText: 'Supprimer la catégories',
       cancelText: 'Annuler',

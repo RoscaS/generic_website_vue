@@ -8,17 +8,17 @@
           <span class="id">{{article.id}}</span>
         </div>
         <div class="level-item" v-if="name">
-          <span class="name">{{article.name.data}}</span>
+          <span class="name">{{article.name}}</span>
         </div>
         <div class="level-item" v-if="description">
-          <span class="description">{{article.description.data}}</span>
+          <span class="description">{{article.description}}</span>
         </div>
       </div>
       <div class="level-item" v-if="price">
-        <span class="price">{{article.price.data}}</span>
+        <span class="price">{{article.price}}</span>
       </div>
       <div class="level-right">
-        <ControlButtons :element="article"/>
+        <ControlButtons class="level-item" @modify="modify" @remove="remove"/>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
 
 <script>
   import CategoriesStore from "./CategoriesStore";
-  import ControlButtons from "./ControlButtons";
+  import ControlButtons from "../ControlButtons";
 
   export default {
     name: "ArticlesBox",
@@ -47,6 +47,10 @@
         return {backgroundColor: this.color};
       }
     },
+    methods: {
+      modify() {this.edit.state.editItem = this.article},
+      remove() {this.article.delete()},
+    }
   };
 </script>
 

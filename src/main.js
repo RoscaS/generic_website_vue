@@ -14,6 +14,14 @@ import VApp from 'vuetify/es5/components/VApp';
 import Vuetify from 'vuetify/es5/components/Vuetify';
 import VTabs from 'vuetify/es5/components/VTabs';
 import VCard from 'vuetify/es5/components/VCard';
+import VForm from 'vuetify/es5/components/VForm';
+import VTextarea from 'vuetify/es5/components/VTextarea';
+import VTextField from 'vuetify/es5/components/VTextField';
+import VSelect from 'vuetify/es5/components/VSelect';
+import VCheckbox from 'vuetify/es5/components/VCheckbox';
+import VSwitch from 'vuetify/es5/components/VSwitch';
+
+
 // import VGrid from 'vuetify/es5/components/VGrid';
 
 Vue.use(Vuetify, {
@@ -21,11 +29,15 @@ Vue.use(Vuetify, {
 		VApp,
 		VTabs,
 		VCard,
+    VForm,
+    VTextarea,
+    VTextField,
+    VSelect,
+    VCheckbox,
+    VSwitch,
 		// VGrid,
 	}
 });
-
-
 
 
 

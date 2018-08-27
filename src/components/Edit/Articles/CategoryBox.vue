@@ -8,11 +8,14 @@
                     v-model="checked"
                     :type="color">
         </b-checkbox>
-        <h5 class="level-item">{{category.name.data}}</h5>
+        <h5 class="level-item">{{category.name}}</h5>
       </div>
       <div class="level-right">
-        <ControlButtons :element="category" :dark="true"/>
-        <!--<i @click="startEdit" class="level-item fa-fw far fa-edit"></i>-->
+        <ControlButtons class="level-item"
+                        :dark="true"
+                        @modify="modify"
+                        @remove="remove">
+        </ControlButtons>
       </div>
     </div>
   </div>
@@ -20,8 +23,7 @@
 
 <script>
   import CategoriesStore from "./CategoriesStore";
-  import ControlButtons from "./ControlButtons";
-
+  import ControlButtons from "../ControlButtons";
 
   export default {
     name: "CategorieBox",
@@ -88,6 +90,13 @@
         }
       }
     },
+    methods: {
+      modify() {
+        this.category.setBackup();
+        this.edit.editItem = this.category;
+      },
+      remove() {this.category.delete()},
+    }
 
   };
 </script>

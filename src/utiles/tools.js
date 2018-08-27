@@ -63,39 +63,48 @@ const message = {
   },
 
 
-
   autoScrollOn: {
-      type: 'is-success',
-      position: 'is-top',
-      message: "Défilement automatique activé."
-    },
+    type: 'is-success',
+    position: 'is-top',
+    message: "Défilement automatique activé."
+  },
   autoScrollOff: {
-      type: 'is-danger',
-      position: 'is-top',
-      message: "Défilement automatique désactivé."
-    },
+    type: 'is-danger',
+    position: 'is-top',
+    message: "Défilement automatique désactivé."
+  },
 };
 
 const snackBarMessage = {
-  cancel: {type: 'is-warning', message: `Les modifications seront perdues! (bouton vert pour sauver)`},
+  cancel: {
+    type: 'is-warning',
+    message: `Les modifications seront perdues! (bouton vert pour sauver)`
+  },
   delete: {type: 'is-danger', message: `L'image sera définitivement éffacée`}
 };
-
 
 
 const Tools = new Vue({
   methods: {
     message(type, error = false, url) {
-      Toast.open({
-        queue: false,
-        duration: 3000,
-        message: message[type].message,
-        type: message[type].type,
-        position: message[type].position,
-      });
-      if (error) console.log(`error @: ${url}\n${error}`)
+      if (typeof message[type] !== 'undefined') {
+        Toast.open({
+          queue: false,
+          duration: 3000,
+          message: message[type].message,
+          type: message[type].type,
+          position: message[type].position,
+        });
+      } else {
+        Toast.open({
+          queue: false,
+          duration: 4000,
+          message: type,
+          type: 'is-danger',
+          position: 'is-top'
+        });
+      }
     },
-
 
 
     SnackBarOptions(type) {

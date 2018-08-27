@@ -16,17 +16,17 @@
               </div>
 
               <div class="level-item">
-                <span class="name">{{article.name.data}}</span>
+                <span class="name">{{article.name}}</span>
               </div>
 
               <div class="level-item">
-                <span class="description">{{article.description.data}}</span>
+                <span class="description">{{article.description}}</span>
               </div>
             </div>
 
             <div class="level-right">
               <div class="level-item pprice">
-                <span class="price">{{article.price.data}} chf</span>
+                <span class="price">{{article.price}} chf</span>
               </div>
             </div>
           </header>

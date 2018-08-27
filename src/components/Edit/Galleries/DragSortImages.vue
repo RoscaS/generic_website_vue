@@ -1,31 +1,24 @@
 <template>
-  <div :class="classes[0]" class="wrapper">
-    <div :class="classes[1]">
-      <draggable v-model="store.images"
-                 :options="dragOptions"
-                 :move="onMove"
-                 @start="isDragging=true"
-                 @end="isDragging=false">
+  <draggable v-model="store.images"
+             :options="dragOptions"
+             :move="onMove"
+             @start="isDragging=true"
+             @end="isDragging=false">
 
-        <transition-group type="transition"
-                          :class="classes[2]"
-                          tag="div"
-                          :name="reOrder? 'flip-store': ''">
+    <transition-group type="transition"
+                      class="columns is-mobile"
+                      tag="div"
+                      :class="{'is-multiline cols-margins': primaryIsEvents}"
+                      :name="reOrder? 'flip-store': ''">
 
-          <div v-for="image in store.images"
-               :class="[{placeHolder: isPlaceholder(image)}, classes[3]]"
-               class="image-slot"
-               :key="image.id">
-
-            <ImageOverlay :image="image" :edit="edit">
-              <img :src="image.image"
-                   @mousedown="conditions(image.gallery)">
-            </ImageOverlay>
-          </div>
-        </transition-group>
-      </draggable>
-    </div>
-  </div>
+      <div v-for="image in store.images"
+           class="column is-one-quarter"
+           :class="[{placeHolder: isPlaceholder(image)}]"
+           :key="image.id">
+        <ImageOverlay :image="image" @mousedown="conditions(image.gallery)"/>
+      </div>
+    </transition-group>
+  </draggable>
 </template>
 
 <script>
@@ -33,21 +26,19 @@
   import GalleriesStore from './GalleriesStore';
   import ImageOverlay from './ImageOverlay';
 
-
   export default {
     name: "DragSortImages",
     components: {draggable, ImageOverlay},
     props: {
-      classes: {type: Array},
       store: {type: Object},
     },
     data: () => ({
-      edit: GalleriesStore,
       isDragging: false,
       delayedDragging: false,
       reOrder: false,
     }),
     computed: {
+      edit() {return GalleriesStore},
       editable() {
         return !this.store.isLocked;
       },
@@ -58,6 +49,11 @@
           disabled: !this.editable,
           ghostClass: 'none'
         };
+      },
+      primaryIsEvents() {
+        let a = this.edit.primaryStore.name == 'Events';
+        let b = this.store.name == 'Events';
+        return a && b
       },
     },
     watch: {
@@ -73,6 +69,7 @@
       }
     },
     methods: {
+
       isPlaceholder(image) {return image.name.includes('placeholder');},
 
       onMove({relatedContext, draggedContext}) {},
@@ -107,65 +104,22 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  .wrapper {
-    margin-right: 10px;
-  }
-
-  .level {
-    overflow: auto;
-  }
-
-  .center-content {
-    margin: 0 auto 0 auto;
+  .cols-margins {
+    margin: 0 5% 0 5%;
   }
 
   .columns {
-    width: 104%;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 550px;
   }
 
   .column {
-    padding-bottom: 0px;
-    padding-left: 0px;
-  }
-
-  .level-item {
-    min-height: 106px;
-    min-width: 210px;
-  }
-
-  .image-slot {
     cursor: grab;
-    width: 210px;
-    min-height: 50px;
-  }
-
-  .flip-list-move {
-    transition: transform 0.5s;
-  }
-
-  .no-move {
-    transition: transform 0s;
-  }
-
-  .ghost {
-    opacity: .5;
-    background: #C8EBFB;
-  }
-
-  .list-group {
-    min-height: 20px;
-  }
-
-  .list-group-item {
-    cursor: move;
-  }
-
-  .list-group-item i {
-    cursor: pointer;
-  }
-
-  .placeHolder {
-    cursor: default;
+    margin: 2px 2px 2px 2px;
+    padding: 0!important;
+    width: $edit-width !important;
+    height: $edit-height !important;
   }
 
 </style>

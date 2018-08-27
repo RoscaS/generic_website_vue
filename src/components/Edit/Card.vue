@@ -1,19 +1,43 @@
 <template>
   <transition name="bounceDown">
-    <div class="card" v-if="editItem" :style="setStyle()">
+    <div class="card" v-if="isEdit || isCreate">
 
       <header>
-        <div v-if="!isArticle" class="card-header">
-          <p class="card-header-title">Catégorie</p>
-          <i class="card-header-icon far fa-pen"></i>
+        <!--EDIT-->
+        <div v-if="isCategory && isEdit" class="card-header">
+          <p class="card-header-title">{{ title }}</p>
+          <i class="card-header-icon far" :class="icon"></i>
         </div>
 
-        <div v-else class="card-image">
-          <p class="card-header-title">Article</p>
-          <i class="card-header-icon far fa-pen"></i>
+        <div v-if="isArticle && isEdit" class="card-image">
+          <p class="card-header-title">{{ title }}</p>
+          <i class="card-header-icon far" :class="icon"></i>
           <img :src="editItem.image.image">
         </div>
+
+        <!--CREATE-->
+        <div v-if="isCategory && isCreate" class="card-header">
+          <p class="card-header-title">{{ title }}</p>
+          <i class="card-header-icon far" :class="icon"></i>
+        </div>
+
+        <div v-if="isArticle && isCreate && !tempImage" class="card-upload">
+          <div class="drop-zone">
+            <Upload @file="uploadImage" :padding="'45px'"/>
+          </div>
+          <a class="show-stock no-tr">Afficher le stock</a>
+        </div>
+
+        <div v-if="isArticle && isCreate && tempImage" class="card-image">
+          <p class="card-header-title">{{ title }}</p>
+          <i class="card-header-icon far" :class="icon"></i>
+          <img :src="tempImage.image">
+        </div>
+
+
       </header>
+
+
 
       <div class="card-content">
         <v-text-field required v-model="editItem.name" color="blue"
@@ -46,46 +70,72 @@
           <i class="fal fa-times"></i>
         </div>
       </footer>
+
     </div>
   </transition>
 </template>
 
 <script>
-  import CategoriesStore from "./CategoriesStore";
+	import CategoriesStore from "./Articles/CategoriesStore";
+  import Upload from "./Upload";
 
   export default {
-    name: "EditPopup",
-    props: {
-      // name: {type: Boolean, default: true},
-      // description: {type: Boolean, default: true},
-    },
-    data: () => ({}),
+		name: "Card",
+    components: {Upload},
+    data: () => ({
+      isEdit: false,
+      isCreate: false,
+      isArticle: false,
+      isCategory: false,
+
+      title: '',
+      icon: '',
+    }),
     computed: {
       edit() {return CategoriesStore;},
-      isArticle() {return this.edit.state.editItem.type == 'article';},
-      editItem() {return this.edit.state.editItem;},
-
+      newItem() {return this.edit.newItem;},
+      editItem() {return this.edit.editItem;},
+      tempImage() {return this.edit.tempImage;},
+    },
+    watch: {
+      newItem(value) {
+        if (value) {
+          this.isCreate = true;
+          this.setType(value);
+          this.icon = 'fa-pen';
+        } else this.clear();
+      },
+      editItem(value) {
+        if (value) {
+          this.isEdit = true;
+          this.icon = 'fa-plus';
+          this.setType(value.type)
+        } else this.clear();
+      },
     },
     methods: {
-      setStyle() {
-        if (this.editItem.type == 'article') return {top: '20%'};
-        else return {top: '25%'};
+		  setType(type) {
+        if (type == 'article') {
+          this.isArticle = true;
+          this.title = 'Article';
+        }
+        else if (type == 'category') {
+          this.isCategory = true;
+          this.title = 'Catégorie';
+        }
       },
-      validate() {
-        if (this.editItem.type == 'article') this.editItem.patch();
-        else this.edit.state.editItem.put();
-        this.edit.clearEditItem();
-      },
-      cancel() {
-        this.editItem.restore();
-        this.edit.clearEditItem();
-      },
-    },
-  };
+      clear() {
+		    this.isEdit = false;
+        this.isCreate = false;
+        // this.isArticle = false;
+        // this.isCategory = false;
+      }
+    }
+	};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../static/sass/global';
 
   .card {
     border-radius: 9px;
@@ -124,6 +174,9 @@
           border-top-right-radius: 8px;
         }
       }
+      .card-upload {
+
+      }
     }
     .card-content {
       .content {
@@ -158,6 +211,5 @@
       }
     }
   }
-
 
 </style>

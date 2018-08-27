@@ -70,22 +70,6 @@ const GalleriesStore =  new Vue ({
       if (store.hasLoaded) return store.images.find(i => i.id == id);
       else return setTimeout(() => {this.getImage(gallery, id);}, 100);
     },
-    toggleLoading(message) {
-      this.setLoading();
-      setTimeout(() => {
-        this.unsetLoading();
-        if (message == 'imageUp') {
-          setTimeout(() => {
-            this.activeTab = 0;
-          }, 500);
-          tools.message(message);
-        }
-      }, 2000);
-    },
-    uploadImage(form, store) {
-      this.toggleLoading('imageUp');
-      store.postImage(form);
-    },
 
     update() {
       this.primaryStore.update();
@@ -97,6 +81,7 @@ const GalleriesStore =  new Vue ({
       }
     },
     end() {
+      this.activeTab = 0;
       this.state.active = null;
     }
   },

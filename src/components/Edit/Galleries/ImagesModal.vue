@@ -2,7 +2,6 @@
   <b-modal v-if="enable"
            :active.sync="modalSync"
            scroll="clip"
-           :width="850"
            :canCancel="cancelModalOptions"
            has-modal-card>
     <ImagesEditMenu :store="store"/>
@@ -20,21 +19,16 @@
       store: {type: Object},
       enable: {type: Boolean},
     },
-    data() {
-      return {
-        // edit: GalleriesStore,
-      }
-    },
     computed: {
       edit() {return GalleriesStore},
 
       modalSync: {
-        get() {
-          return this.store == this.edit.active;},
+        get() {return this.store == this.edit.active;},
         set(value) {if (!value) this.edit.end();}
       },
       cancelModalOptions() {
-        return this.edit.loading ? [] : ['outside', 'x', 'escape'];
+        if (this.edit.state.editItem || this.edit.loading) return [];
+        else return ['outside', 'x', 'escape'];
       }
     },
   };

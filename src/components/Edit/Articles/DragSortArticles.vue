@@ -61,32 +61,5 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
-  .flip-list-move {
-    transition: transform 0.5s;
-  }
 
-  .no-move {
-    transition: transform 0s;
-  }
-
-  .ghost {
-    opacity: .5;
-    background: #C8EBFB;
-  }
-
-  .list-group {
-    min-height: 20px;
-  }
-
-  .list-group-item {
-    cursor: move;
-  }
-
-  .list-group-item i {
-    cursor: pointer;
-  }
-
-  .placeHolder {
-    cursor: default;
-  }
 </style>

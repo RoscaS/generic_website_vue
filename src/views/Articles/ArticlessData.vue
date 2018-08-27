@@ -9,7 +9,7 @@
             <v-tab v-for="(category, i) in stores"
                    :key="i"
                    :ripple="false">
-              {{ category.name.data }}
+              {{ category.name }}
             </v-tab>
             <v-tab-item v-for="(category, i) in stores" :key="i">
               <div class="content">

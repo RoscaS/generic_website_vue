@@ -1,30 +1,27 @@
 <template>
-  <div @mouseover="showOverlay()"
-       @mouseleave="hideOverlay()"
-       class="container">
-    <transition name="delayedFade"
-                enter-active-class="fadeIn"
-                leave-active-class="fadeOut">
-      <div class="overlay"
-           v-if="overlay && !$parent.isDragging && !isPlaceholder">
-        <i class="fal fa-fw fa-pen-square" @click.prevent="editDescription()"></i>
-        <i class="fal fa-fw fa-times-square" @click.prevent="deleteImage()"></i>
+  <div class="overlay-wrapper">
+    <div class="overlay" v-if="!isPlaceholder">
+      <div class="level">
+        <div class="level-left"></div>
+        <div class="level-right">
+          <Ctrl class="level-item" @modify="modify" @remove="remove"/>
+        </div>
       </div>
-    </transition>
-    <div class="image-slot">
-      <slot></slot>
     </div>
+    <img :src="image.image">
   </div>
 </template>
 
 <script>
   import 'vue2-animate/dist/vue2-animate.min.css';
+  import Ctrl from "../ControlButtons";
+  import GalleriesStore from "./GalleriesStore";
 
   export default {
     name: "ImageOverlay",
+    components: {Ctrl},
     props: {
       image: {type: Object},
-      edit: {type: Object},
     },
     data() {
       return {
@@ -33,23 +30,17 @@
       };
     },
     computed: {
+      edit() {return GalleriesStore;},
       isPlaceholder() {
         return this.image.name.includes('placeholder');
       },
     },
     methods: {
-      showOverlay() {
-        this.timeout = setTimeout(() => {this.overlay = true;}, 250);
-      },
-      hideOverlay() {
-        clearTimeout(this.timeout);
-        setTimeout(() => { this.overlay = false;}, 100);
-      },
-      deleteImage() {
-        this.image.delete();
-      },
-      editDescription() {
+      modify() {
         this.edit.editItem = this.image;
+      },
+      remove() {
+        this.image.delete();
       },
     }
   };
@@ -58,26 +49,37 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  $animationDuration: .5s;
-  @import "~vue2-animate/src/sass/vue2-animate";
+  .overlay-wrapper {
+    position: relative;
+    &:hover {
+      .overlay {
+        bottom: 75%;
+        height: 25%;
+      }
+    }
+  }
 
-  .container {
-    width: 190px;
+  img {
+    display: block;
+    object-fit: cover;
+    width: $edit-width;
+    height: $edit-height;
   }
 
   .overlay {
-    background-color: $is-info;
-    width: 100%;
+    opacity: .9;
+    background-color: #209CEE;
     position: absolute;
-    color: white;
-    font-size: 22px;
-    font-weight: lighter;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+  }
 
-    i {
-      position: relative;
-      left: 69%;
-      cursor: pointer;
-    }
-
+  .level {
+    padding-top: 5px;
   }
 </style>

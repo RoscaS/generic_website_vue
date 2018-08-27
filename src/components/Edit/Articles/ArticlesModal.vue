@@ -2,7 +2,6 @@
   <b-modal v-if="enable"
            :active.sync="modalSync"
            scroll="clip"
-           :width="960"
            :canCancel="cancelModalOptions"
            has-modal-card>
     <ArticlesEditMenu/>
@@ -30,7 +29,9 @@
         set(value) {if (!value) this.edit.end();}
       },
       cancelModalOptions() {
-        return this.edit.loading ? [] : ['outside', 'x', 'escape'];
+        let a = this.edit.state.newItem || this.edit.state.editItem;
+        if (a || this.edit.loading) return [];
+        else return ['outside', 'x', 'escape'];
       }
     },
 	};

@@ -51,6 +51,7 @@
   @import '../../static/sass/global';
 
   .google-map {
+    border-radius: 8px;
     width: 380px;
     height: 500px;
     margin: 0 auto;

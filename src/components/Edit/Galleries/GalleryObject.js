@@ -1,6 +1,7 @@
 import axios from "axios";
 import tools from '../../../utiles/tools';
 import {Image} from './ImageObject';
+import GalleriesStore from './GalleriesStore';
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 const headers = {headers: {'content-type': 'multipart/form-data'}};
@@ -21,13 +22,9 @@ class Gallery {
   }
 
   count() { return this.images.length;};
-
   isFull() { return this.count() >= this.limit; }
-
   lock() {this.isLocked = true;}
-
   unlock() {this.isLocked = false;}
-
   imageAtIndex(idx) {
     if (this.hasLoaded) return this.images[idx];
     else return setTimeout(() => {this.imageAtIndex(idx);}, 500);
@@ -90,10 +87,22 @@ class Gallery {
     if (message) tools.message('imageMoved');
   }
 
-  postImage(form) {
+  toggleLoading(message) {
+    GalleriesStore.setLoading();
+    setTimeout(() => {
+      GalleriesStore.unsetLoading();
+      setTimeout(() => {GalleriesStore.activeTab = 0;}, 500);
+      message ? tools.message('imageUp') : null;
+    }, 2000);
+  }
+
+  postImage(form, message=true) {
+    this.toggleLoading(message);
     axios.post('images/', form, headers).then(response => {
       this.initImages([response.data]);
-    });
+    }).catch(() => {
+      tools.message('Fichier jpg ou png uniquement!');
+    })
   }
 
   removeImage(image) {

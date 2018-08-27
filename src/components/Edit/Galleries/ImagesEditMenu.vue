@@ -1,88 +1,83 @@
 <template>
-  <div>
+  <section>
 
     <div class="loading-animation">
-      <SpinLine v-show="loading"/>
+      <SpinLine v-show="edit.loading"/>
     </div>
 
     <DescriptionPopup :edit="edit"/>
 
-    <div class="container">
-      <div class="content">
-        <transition name="fade">
-          <div v-if="!edit.editItem">
-            <h1>Edition: {{ store.name }}</h1>
+    <div class="content">
+      <transition name="fade">
+        <div v-if="!edit.editItem">
+          <h1>Edition: {{ store.name }}</h1>
 
-            <div class="card secondary">
-              <header class="card-header">
-                <div class="card-header-title">
-                  <div class="level">
-                    <div class="level-item">
-                      <GalleriesDropDown :store="store"/>
-                    </div>
-                    <div class="level-item top-counter">
-                      <ImagesCounter :store="secondaryStore" :verbose="true"/>
-                    </div>
+          <div class="card secondary">
+            <header class="card-header">
+              <div class="card-header-title">
+                <div class="level">
+                  <div class="level-item">
+                    <GalleriesDropDown :store="store"/>
+                  </div>
+                  <div class="level-item top-counter">
+                    <ImagesCounter :store="edit.secondaryStore"
+                                   :verbose="true"/>
                   </div>
                 </div>
-
-              </header>
-              <div class="card-content">
-                <DragSortImages :store="secondaryStore" :classes="levelClasses"/>
               </div>
-            </div>
-
-            <div class="primary">
-              <div class="card">
-                <header class="card-header">
-                  <div class="card-header-title">
-                    <div class="level">
-                      <div class="leve-left">
-                        <div class="level-item">
-                          <h2>{{ store.name}}</h2>
-                        </div>
-                      </div>
-
-                      <div class="level-item">
-                        <ImagesCounter :store="store" :verbose="true"/>
-                      </div>
-
-                      <div class="level-item">
-                        <GalleryOptions :store="store"/>
-                      </div>
-
-                    </div>
-                  </div>
-                </header>
-                <div class="card-content imagesEdit">
-                  <b-tabs type="is-toggle"
-                          v-model="activeTab"
-                          position="is-right">
-                    <b-tab-item icon="images"
-                                :disabled="loading">
-                      <DragSortImages :store="store"
-                                :classes="layout"/>
-                    </b-tab-item>
-                    <b-tab-item icon="upload"
-                                :title="'Poulette'"
-                                :disabled="loading || (store.isFull() &&!store.isEmpty)">
-                      <FileUpload :store="store"/>
-                    </b-tab-item>
-                  </b-tabs>
-                </div>
-              </div>
+            </header>
+            <div class="card-content">
+              <DragSortImages :store="edit.secondaryStore"/>
             </div>
           </div>
-        </transition>
-      </div>
+
+          <div class="card primary">
+            <header class="card-header">
+              <div class="card-header-title">
+                <div class="level">
+                  <div class="leve-left">
+                    <div class="level-item">
+                      <h2>{{ store.name}}</h2>
+                    </div>
+                  </div>
+
+                  <div class="level-item">
+                    <ImagesCounter :store="store" :verbose="true"/>
+                  </div>
+
+                  <div class="level-item">
+                    <GalleryOptions :store="store"/>
+                  </div>
+
+                </div>
+              </div>
+            </header>
+            <div class="card-content imagesEdit">
+              <b-tabs type="is-toggle"
+                      v-model="edit.activeTab"
+                      position="is-right">
+                <b-tab-item icon="images"
+                            :disabled="edit.loading">
+                  <DragSortImages :store="store"/>
+                </b-tab-item>
+                <b-tab-item icon="upload"
+                            :title="'Poulette'"
+                            :disabled="conditions">
+                  <Upload @file="uploadImage"/>
+                </b-tab-item>
+              </b-tabs>
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
   import {SpinLine} from 'vue-loading-spinner';
   import DragSortImages from './DragSortImages';
-  import FileUpload from '../FileUpload';
+  import Upload from "../Upload";
   import GalleriesStore from './GalleriesStore';
   import GalleriesDropDown from './GalleriesDropDown';
   import GalleryOptions from './GalleryOptions';
@@ -92,9 +87,9 @@
   export default {
     name: "ImagesEditMenu",
     components: {
+      Upload,
       DragSortImages,
       GalleriesDropDown,
-      FileUpload,
       SpinLine,
       GalleryOptions,
       DescriptionPopup,
@@ -103,50 +98,26 @@
     props: {
       store: {type: Object},
     },
-    data() {
-      return {
-        edit: GalleriesStore,
-        levelClasses: [
-          'level is-mobile',
-          'level-left',
-          'level-item',
-          'level-item'
-        ],
-        columnsClasses: [
-          '', '',
-          'columns is-multiline is-mobile',
-          'column is-one-quarter'
-        ],
-      };
-    },
+    data: () => ({}),
     computed: {
-      secondaryStore: {
-        get() { return this.edit.secondaryStore; },
-        set(store) { this.edit.secondaryStore = store;},
-      },
-      activeTab: {
-        get() { return this.edit.activeTab; },
-        set(value) { this.edit.activeTab = value; }
-      },
-      loading() {
-        return this.edit.loading;
-      },
-      layout() {
-        return this.layoutData[this.store.name];
-      },
-      layoutData() {
-        return {
-          Promo: this.levelClasses,
-          Events: this.columnsClasses,
-          Carousel: this.levelClasses,
-          Parallax: this.levelClasses,
-          Presentation: this.levelClasses,
-        };
+      edit() {return GalleriesStore;},
+      conditions() {
+        let storeConditions = this.store.isFull() && !this.store.isEmpty;
+        return this.edit.loading || storeConditions;
+      }
+    },
+    methods: {
+      uploadImage(file) {
+        let formData = new FormData();
+        formData.append('image', file);
+        formData.append('name', `${this.store.name}_${this.store.count()}`);
+        formData.append('gallery', this.store.name);
+        this.store.postImage(formData);
       },
     },
     created() {
       this.edit.primaryStore = this.store;
-      this.secondaryStore = this.edit.getStore('Stock');
+      this.edit.secondaryStore = this.edit.getStore('Stock');
     }
   };
 </script>
@@ -154,28 +125,34 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
+  section {
+    min-width: 360px;
+    width: 960px;
+
+    @media screen and (max-width: 1000px) {
+      width: 520px;
+    }
+    @media screen and (max-width: 520px) {
+      width: 320px;
+    }
+  }
+
   h1 {
+    position: relative;
     z-index: 1000;
     color: white;
   }
 
-  .container {
-    margin-top: 140px;
-    width: 850px;
-  }
-
   .primary {
-    height: 450px;
+    max-height: 550px;
   }
 
   .secondary {
-    height: 245px;
   }
 
   .card {
+    border-radius: 8px;
     margin-bottom: 60px;
-    max-width: 850px;
-
     .card-header-title {
       h2 {
         margin-bottom: 0;

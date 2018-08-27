@@ -40,6 +40,7 @@
   @import '../../../static/sass/global';
 
   img {
+    border-radius: 8px;
     cursor: pointer;
     transition: box-shadow .5s ease, transform .5s ease-out;
     box-shadow: none;
