@@ -141,6 +141,7 @@
     position: relative;
     z-index: 1000;
     color: white;
+
   }
 
   .primary {
@@ -157,6 +158,7 @@
       h2 {
         margin-bottom: 0;
         margin-right: 20px;
+        line-height: 40px;
       }
     }
   }

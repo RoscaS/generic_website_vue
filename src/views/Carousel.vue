@@ -60,7 +60,7 @@ export default {
 }
 
 .carousel-top .edit-icon {
-  z-index: 4;
+  z-index: 3;
   position: absolute;
 }
 
