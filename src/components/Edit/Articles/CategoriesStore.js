@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../../http";
 import Vue from 'vue';
 import tools from '../../../utils/tools';
 import {Category} from "./CategoryObject";

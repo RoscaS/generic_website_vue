@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../../http";
 import {Dialog} from 'buefy';
 import {
   Promo,

@@ -1,10 +1,10 @@
-import axios from "axios";
-import tools from '../../../utils/tools';
-import urls from '../../../routes/Urls'
-import {Image} from './ImageObject';
-import GalleriesStore from './GalleriesStore';
+import axios from "../../../http";
+import tools from "../../../utils/tools";
+import urls from "../../../urls";
+import { Image } from "./ImageObject";
+import GalleriesStore from "./GalleriesStore";
 
-const headers = {headers: {'content-type': 'multipart/form-data'}};
+const headers = { headers: { "content-type": "multipart/form-data" } };
 
 class Gallery {
   constructor(name) {
@@ -21,13 +21,24 @@ class Gallery {
     this.initData();
   }
 
-  count() { return this.images.length;};
-  isFull() { return this.count() >= this.limit; }
-  lock() {this.isLocked = true;}
-  unlock() {this.isLocked = false;}
+  count() {
+    return this.images.length;
+  }
+  isFull() {
+    return this.count() >= this.limit;
+  }
+  lock() {
+    this.isLocked = true;
+  }
+  unlock() {
+    this.isLocked = false;
+  }
   imageAtIndex(idx) {
     if (this.hasLoaded) return this.images[idx];
-    else return setTimeout(() => {this.imageAtIndex(idx);}, 500);
+    else
+      return setTimeout(() => {
+        this.imageAtIndex(idx);
+      }, 500);
   }
 
   initData() {
@@ -42,7 +53,7 @@ class Gallery {
     images.forEach(i => {
       let image = new Image(i, this);
       this.images.push(image);
-      if (images.length == 1 && images[0].name.includes('placeholder')) {
+      if (images.length == 1 && images[0].name.includes("placeholder")) {
         this.isEmpty = true;
         this.placeholder = image;
       }
@@ -53,7 +64,9 @@ class Gallery {
   }
 
   sortByPosition() {
-    this.images.sort((a, b) => {return a.position - b.position;});
+    this.images.sort((a, b) => {
+      return a.position - b.position;
+    });
   }
 
   setDirty(image) {
@@ -82,27 +95,34 @@ class Gallery {
   }
 
   updateDirtyImages(message) {
-    this.dirty.forEach(i => {i.patch();});
+    this.dirty.forEach(i => {
+      i.patch();
+    });
     this.dirty.splice(0, this.dirty.length);
-    if (message) tools.message('imageMoved');
+    if (message) tools.message("imageMoved");
   }
 
   toggleLoading(message) {
     GalleriesStore.setLoading();
     setTimeout(() => {
       GalleriesStore.unsetLoading();
-      setTimeout(() => {GalleriesStore.activeTab = 0;}, 500);
-      message ? tools.message('imageUp') : null;
+      setTimeout(() => {
+        GalleriesStore.activeTab = 0;
+      }, 500);
+      message ? tools.message("imageUp") : null;
     }, 2000);
   }
 
-  postImage(form, message=true) {
+  postImage(form, message = true) {
     this.toggleLoading(message);
-    axios.post('images/', form, headers).then(response => {
-      this.initImages([response.data]);
-    }).catch(() => {
-      tools.message('Fichier jpg ou png uniquement!');
-    })
+    axios
+      .post("images/", form, headers)
+      .then(response => {
+        this.initImages([response.data]);
+      })
+      .catch(() => {
+        tools.message("Fichier jpg ou png uniquement!");
+      });
   }
 
   removeImage(image) {
@@ -122,13 +142,15 @@ class Gallery {
   }
 
   getPlaceHolder() {
-    axios.post('galleries/get_placeholder/', {gallery: this.name}).then(response => {
-      let data = response.data;
-      data.image = axios.defaults.baseURL + data.image.slice(1);
-      this.isEmpty = true;
-      this.initImages([data]);
-    });
+    axios
+      .post("galleries/get_placeholder/", { gallery: this.name })
+      .then(response => {
+        let data = response.data;
+        data.image = axios.defaults.baseURL + data.image.slice(1);
+        this.isEmpty = true;
+        this.initImages([data]);
+      });
   }
 }
 
-export {Gallery};
+export { Gallery };

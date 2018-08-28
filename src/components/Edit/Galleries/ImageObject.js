@@ -1,11 +1,10 @@
-import axios from "axios";
-import tools from '../../../utils/tools';
-import {Dialog} from 'buefy';
-import urls from '../../../routes/Urls'
+import axios from "../../../http";
+import tools from "../../../utils/tools";
+import { Dialog } from "buefy";
+import urls from "../../../urls";
 
-const headers = {headers: {'content-type': 'multipart/form-data'}};
-let imageUrl = id => urls.images + id + '/';
-
+const headers = { headers: { "content-type": "multipart/form-data" } };
+let imageUrl = id => urls.images + id + "/";
 
 class Image {
   constructor(image, gallery) {
@@ -21,34 +20,36 @@ class Image {
 
   getForm() {
     let formData = new FormData();
-    formData.append('id', this.id);
-    formData.append('position', this.position);
-    formData.append('gallery', this.gallery);
-    formData.append('description', this.description);
+    formData.append("id", this.id);
+    formData.append("position", this.position);
+    formData.append("gallery", this.gallery);
+    formData.append("description", this.description);
     return formData;
   }
 
-  delete(notification=true) {
+  delete(notification = true) {
     if (notification) {
-      this.deleteNotification()
+      this.deleteNotification();
     } else {
-      this.deleteImage(false)
+      this.deleteImage(false);
     }
   }
   deleteNotification() {
     Dialog.confirm({
-      message: 'Operation définitive!',
+      message: "Operation définitive!",
       confirmText: "Supprimer l'image",
-      cancelText: 'Annuler',
-      type: 'is-danger',
+      cancelText: "Annuler",
+      type: "is-danger",
       hasIcon: true,
-      onConfirm: () => {this.deleteImage()},
+      onConfirm: () => {
+        this.deleteImage();
+      }
     });
   }
-  deleteImage(message=true) {
+  deleteImage(message = true) {
     axios.delete(this.url);
     this.parentGallery.removeImage(this);
-    if (message) tools.message('imageDel');
+    if (message) tools.message("imageDel");
   }
 
   patch() {
@@ -56,4 +57,4 @@ class Image {
   }
 }
 
-export {Image}
+export { Image };

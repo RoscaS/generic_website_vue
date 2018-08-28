@@ -1,5 +1,5 @@
 <template>
-  <section id="Home" class="section">
+  <section id="Home" class="section header-wrapper">
     <div class="container _wrapper">
       <div class="columns">
 
@@ -93,188 +93,185 @@
 </template>
 
 <script>
-  import SiteOptions from '../utils/siteSettings';
+import SiteOptions from "../utils/siteSettings";
+const titles = [{ class: "horaire", title: "Voir l'horaire complet." }];
 
-  const titles = [
-    {class: 'horaire', title: "Voir l'horaire complet."},
-  ];
+export default {
+  name: "Header",
+  data() {
+    return {
+      site: SiteOptions,
+      titles: titles
+    };
+  },
 
-
-  export default {
-    name: 'Header',
-    data() {
-      return {
-        site: SiteOptions,
-        titles: titles,
-      };
-    },
-
-    computed: {
-      phoneHref() { return `tel:${this.site.phone}` }
-    },
-
-    methods: {
-      getTitle(title) {
-        return this.titles.find(i => i.class == title).title;
-      }
+  computed: {
+    phoneHref() {
+      return `tel:${this.site.phone}`;
     }
-  };
+  },
+
+  methods: {
+    getTitle(title) {
+      return this.titles.find(i => i.class == title).title;
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../static/sass/global';
+@import "../../static/sass/global";
 
-  a {
-    font-size: 13px;
-  }
+a {
+  font-size: 13px;
+}
 
-  ._mobile {
-    font-size: 13px;
-    text-align: center;
-    color: $top-text;
+._mobile {
+  font-size: 13px;
+  text-align: center;
+  color: $top-text;
 
-    ._top {
-      border-top: 1px solid black;
-    }
-
-    ._bottom {
-      border-bottom: 1px solid black;
-    }
-  }
-
-
-  .subtitle-fade-in-enter-active, .subtitle-fade-in-leave-active {
-    transition: opacity 3s ease;
-    transition-delay: 1s;
-  }
-
-  .subtitle-fade-in-enter, .subtitle-fade-in-leave-active {
-    opacity: 0;
-  }
-
-  ._wrapper {
-    margin-top: 30px;
-    margin-bottom: 20px;
-  }
-
-  ._sides {
-    color: $top-text;
-    font-size: 13px;
-    padding: 10px 0 10px 0;
+  ._top {
     border-top: 1px solid black;
+  }
+
+  ._bottom {
     border-bottom: 1px solid black;
-    position: relative;
-    top: 150px;
-    max-height: 60px;
+  }
+}
 
+.subtitle-fade-in-enter-active,
+.subtitle-fade-in-leave-active {
+  transition: opacity 3s ease;
+  transition-delay: 1s;
+}
 
-    &._left {
-      text-align: right;
-      left: 60px;
-    }
-    &._right {
-      right: 60px;
-      a {
-        padding-left: 6px;
-        position: absolute;
-      }
+.subtitle-fade-in-enter,
+.subtitle-fade-in-leave-active {
+  opacity: 0;
+}
 
+._wrapper {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+._sides {
+  color: $top-text;
+  font-size: 13px;
+  padding: 10px 0 10px 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  position: relative;
+  top: 150px;
+  max-height: 60px;
+
+  &._left {
+    text-align: right;
+    left: 60px;
+  }
+  &._right {
+    right: 60px;
+    a {
+      padding-left: 6px;
+      position: absolute;
     }
   }
+}
 
-  .second-line {
+.second-line {
+  display: block;
+  .phone {
+    white-space: nowrap;
+  }
+}
+
+._center {
+  ._title {
+    font-family: "Dancing Script", cursive, bold;
+    font-size: 130px;
+    text-align: center;
+    color: $top-title;
     display: block;
-    .phone {
-      white-space: nowrap;
-    }
   }
 
-  ._center {
+  ._ribbon {
+    z-index: -1;
+    display: block;
+    letter-spacing: 0.1em;
+    padding: 0.26em 0 0.26em 2em;
+    margin: -40px auto 0 auto;
+    position: relative;
+    max-width: fit-content;
+    color: $ribbon-text;
+    background: $ribbon;
 
-    ._title {
-      font-family: 'Dancing Script', cursive, bold;
-      font-size: 130px;
-      text-align: center;
-      color: $top-title;
+    &:before,
+    &:after {
+      content: "";
+      width: 0.2em;
+      bottom: 0;
+      position: absolute;
       display: block;
+      border: 1.7em solid $ribbon;
+      z-index: -1;
     }
 
-    ._ribbon {
-      z-index: -1;
-      display: block;
-      letter-spacing: 0.1em;
-      padding: .26em 0 .26em 2em;
-      margin: -40px auto 0 auto;
-      position: relative;
-      max-width: fit-content;
-      color: $ribbon-text;
-      background: $ribbon;
+    &:before {
+      top: 0;
+      left: -1.95em;
+      border-right-width: 0.75em;
+      border-left-color: transparent;
+    }
 
-      &:before, &:after {
+    &:after {
+      top: 0;
+      right: -1.95em;
+      border-left-width: 0.75em;
+      border-right-color: transparent;
+    }
+
+    // Text
+    & :first-child {
+      text-align: center;
+      margin-left: -11px;
+      font-size: 28px;
+      letter-spacing: 20px;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+
+      &:before,
+      &:after {
         content: "";
-        width: .2em;
-        bottom: 0;
+        bottom: -0.5em;
         position: absolute;
         display: block;
-        border: 1.5em solid $ribbon;
+        border-style: solid;
+        border-color: $ribbon transparent transparent transparent;
         z-index: -1;
       }
 
       &:before {
         top: 0;
-        left: -1.95em;
-        border-right-width: .75em;
-        border-left-color: transparent;
+        left: 0;
+        border-width: 0.5em 0 0 0.5em;
       }
 
       &:after {
         top: 0;
-        right: -1.95em;
-        border-left-width: .75em;
-        border-right-color: transparent;
+        right: 0;
+        border-width: 0.5em 0.5em 0 0;
       }
-
-      // Text
-      & :first-child {
-        text-align: center;
-        margin-left: -11px;
-        font-size: 28px;
-        letter-spacing: 20px;
-        font-weight: bold;
-        font-family: Arial, Helvetica, sans-serif;
-
-        &:before, &:after {
-          content: "";
-          bottom: -.5em;
-          position: absolute;
-          display: block;
-          border-style: solid;
-          border-color: $ribbon transparent transparent transparent;
-          z-index: -1;
-        }
-
-        &:before {
-          top: 0;
-          left: 0;
-          border-width: .5em 0 0 .5em;
-        }
-
-        &:after {
-          top: 0;
-          right: 0;
-          border-width: .5em .5em 0 0;
-        }
-      }
-    }
-
-    ._subtitle {
-      text-align: center;
-      margin-top: 5px;
-      font-size: 20px;
-      /*font-weight: bold;*/
-      font-family: Arial, Helvetica, sans-serif;
-      color: $top-title;
     }
   }
 
+  ._subtitle {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 20px;
+    /*font-weight: bold;*/
+    font-family: Arial, Helvetica, sans-serif;
+    color: $top-title;
+  }
+}
 </style>

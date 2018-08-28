@@ -31,83 +31,87 @@
 </template>
 
 <script>
-  import ViewsMixin from '../../mixins/ViewsMixin';
-  import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
-  import EditIcon from '../../components/Edit/EditIcon';
-  import FieldsLayout from '../Layouts/FieldsLayout';
+import ViewsMixin from "../../mixins/ViewsMixin";
+import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
+import EditIcon from "../../components/Edit/EditIcon";
+import FieldsLayout from "../Layouts/FieldsLayout";
 
-  export default {
-    name: 'Promo',
-    mixins: [ViewsMixin],
-    components: {TextsEditMenu, EditIcon, FieldsLayout},
-    data: () => ({
-      component: "Promo",
-      type: 'text',
-    }),
-    computed: {
-      image() {
-        try {
-          let gallery = this.galleriesEdit.getStore('Promo');
-          return this.getImage(0, gallery).image;
-        } catch (e) {setTimeout(() => {return this.computed;}, 100);}
+export default {
+  name: "Promo",
+  mixins: [ViewsMixin],
+  components: { TextsEditMenu, EditIcon, FieldsLayout },
+  data: () => ({
+    component: "Promo",
+    type: "text"
+  }),
+  computed: {
+    image() {
+      try {
+        let gallery = this.galleriesEdit.getStore("Promo");
+        return this.getImage(0, gallery).image;
+      } catch (e) {
+        setTimeout(() => {
+          return this.computed;
+        }, 100);
       }
-    },
-  };
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+@import "../../../static/sass/global";
 
-  .edit-area {
-    .label {
-      color: white;
+.edit-area {
+  .label {
+    color: white;
+  }
+}
+
+.container {
+  height: 300px;
+  margin-top: 60px;
+
+  .column {
+    h2 {
+      display: block;
+      font-size: 28px !important;
+      line-height: 40px !important;
+      margin-bottom: 5px;
+    }
+    p {
+      display: block;
+      font-size: 18px;
+      line-height: 22px;
     }
   }
 
-  .container {
-    height: 300px;
-    margin-top: 60px;
+  @media screen and (max-width: 768px) {
+    height: 800px;
 
     .column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       h2 {
         display: block;
-        font-size: 28px !important;
-        line-height: 40px !important;
-        margin-bottom: 5px;
       }
       p {
         display: block;
-        font-size: 18px;
-        line-height: 22px;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      height: 800px;
-
-      .column {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        h2 {
-          display: block;
-        }
-        p {
-          display: block;
-        }
-      }
-    }
-
-    img {
-      width: 400px;
-      margin-top: 30px;
-    }
-
-    .right {
-      padding: 40px;
-      @media screen and (max-width: 768px) {
-        padding: 80px;
       }
     }
   }
+
+  img {
+    width: 400px;
+    margin-top: 30px;
+  }
+
+  .right {
+    padding: 40px;
+    @media screen and (max-width: 768px) {
+      padding: 80px;
+    }
+  }
+}
 </style>

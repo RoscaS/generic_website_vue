@@ -43,25 +43,26 @@
 </template>
 
 <script>
-  import Title from '../../components/Title';
-  import EditIcon from '../../components/Edit/EditIcon';
-  import TextsStore from '../../components/Edit/Texts/TextsStore';
-  import FieldsLayout from './FieldsLayout.vue';
-  import TextsEditMenu from '../../components/Edit/Texts/TextsEditMenu';
+import Title from "../../components/Title";
+import EditIcon from "../../components/Edit/EditIcon";
+import TextsStore from "../../components/Edit/Texts/TextsStore";
+import FieldsLayout from "./FieldsLayout.vue";
+import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
 
-  export default {
-    name: "BaseLayout",
-    props: {
-      store: {type: Object},
-    },
-    components: {Title, EditIcon, TextsEditMenu, FieldsLayout},
-    computed: {
-      edit() { return TextsStore; },
+export default {
+  name: "BaseLayout",
+  props: {
+    store: { type: Object }
+  },
+  components: { Title, EditIcon, TextsEditMenu, FieldsLayout },
+  computed: {
+    edit() {
+      return TextsStore;
     }
-  };
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
-
+@import "../../../static/sass/global";
 </style>
