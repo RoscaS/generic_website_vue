@@ -2,7 +2,7 @@
   <BaseLayout :store="store">
     <div class="level">
       <div class="level-item">
-        <div class="level is-mobile overall">
+        <div class="level overall">
           <div class="level-left"
                v-scroll-reveal="sReveal('left', 0, 100, duration=1500)">
             {{ overall }}

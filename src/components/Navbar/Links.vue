@@ -1,13 +1,21 @@
 <template>
   <transition name="animation" appear>
-    <div id="Links" class="links"
-         :class="{'hiddenLinks': initialDelay}">
+    <div id="Links" class="links" :class="{'hiddenLinks': initialDelay}">
+      <scrollactive active-class="active"
+                    :offset="20"
+                    :duration="4500"
+                    bezier-easing-value="0.455, 0.03, 0.515, 0.955"
+                    @itemchanged="onItemChanged">
+        <a v-for="(link, i) in links" :key="i"
+           :href="link.id"
+           :class="{'activeEl no-tr': poule(link.id)}"
+           class="scrollactive-item">
+          <i class="far fa-fw" :class="link.icon"></i>
+          {{link.name}}
+        </a>
+      </scrollactive>
 
-      <a v-for="(link, i) in links" :key="i"
-         v-scroll-to="{ el: '#' + link.id, duration: 2000, offset: -50 }">
-        <i class="fa fa-fw" :class="link.icon"></i>
-        {{link.name}}
-      </a>
+
     </div>
   </transition>
 </template>
@@ -17,9 +25,23 @@
 		name: "Links",
 		data: () => ({
 			initialDelay: true,
+			isActive: '',
 		}),
 		props: {
 			links: {type: Array}
+		},
+		methods: {
+			onItemChanged(event, currentItem, lastActiveItem) {
+				if (currentItem) {
+					let s = String(currentItem).split('#');
+					this.isActive = '#' + s[s.length - 1];
+				} else this.isActive = '';
+			},
+			poule(linkId) {
+				if (this.isActive) {
+					return this.isActive === linkId;
+				} else return false;
+			}
 		},
 		mounted() {
 			setTimeout(() => {this.initialDelay = false;}, 1200);
@@ -29,6 +51,12 @@
 
 <style scoped lang="scss">
   @import "../../../static/sass/global";
+
+  .activeEl {
+    transition: color .3s ease;
+    color: $link-hover !important;
+    cursor: default;
+  }
 
   .hiddenLinks {
     opacity: 0;

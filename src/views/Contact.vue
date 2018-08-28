@@ -1,6 +1,6 @@
 <template>
   <BaseLayout :store="store">
-    <div class="columns">
+    <div class="columns is-multiline is-mobile">
       <div class="column left">
         <div v-scroll-reveal="sReveal('left', 100, 100, 2500)">
           <GoogleMap name="map"></GoogleMap>

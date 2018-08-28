@@ -9,11 +9,7 @@
           easing: 'ease',
          }">
       <a class="button _btn no-tr"
-              v-scroll-to="{
-              el: '#Home',
-              duration: 2000,
-              offset: -50
-            }">
+              v-scroll-to="'#Home'">
         <i class="fas fa-arrow-up"></i>
         &nbsp; Haut de la page
       </a>

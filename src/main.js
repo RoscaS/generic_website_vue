@@ -5,8 +5,8 @@ import router from "./router";
 import FontAwesome from "@fortawesome/fontawesome-pro/css/all.min.css";
 import VueAnimate from "vue2-animate/dist/vue2-animate.min.css";
 import Moment from "moment";
-// import Velocity from "velocity-animate/velocity";
 import Affix from "vue-affix";
+import ScrollActive from 'vue-scrollactive';
 
 import Buefy from "buefy";
 import VueRouter from "vue-router";
@@ -27,36 +27,47 @@ import VCheckbox from "vuetify/es5/components/VCheckbox";
 import VSwitch from "vuetify/es5/components/VSwitch";
 
 Vue.use(Buefy, {
-  defaultIconPack: "fas",
-  defaultTooltipAnimated: true
+	defaultIconPack: "fas",
+	defaultTooltipAnimated: true
 });
 
 Vue.use(Vuetify, {
-  iconfont: "fa",
-  components: {
-    VApp,
-    VTabs,
-    VCard,
-    VForm,
-    VTextarea,
-    VTextField,
-    VCheckbox,
-    VSwitch
-  }
+	iconfont: "fa",
+	components: {
+		VApp,
+		VTabs,
+		VCard,
+		VForm,
+		VTextarea,
+		VTextField,
+		VCheckbox,
+		VSwitch
+	}
 });
 Vue.use(VueRouter);
-Vue.use(VueScrollTo);
 Vue.use(VueScrollReveal);
 Vue.use(VeeValidate);
 Vue.use(Moment);
-// Vue.use(Velocity);
 Vue.use(FontAwesome);
 Vue.use(VueAnimate);
 Vue.use(Affix);
+Vue.use(ScrollActive);
+Vue.use(VueScrollTo, {
+	container: "body",
+	duration: 4500,
+	easing: "ease",
+	offset: 0,
+	cancelable: true,
+	onStart: false,
+	onDone: false,
+	onCancel: false,
+	x: false,
+	y: true
+});
 
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  render: h => h(App)
+	router,
+	render: h => h(App)
 }).$mount("#app");
