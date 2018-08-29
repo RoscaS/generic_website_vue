@@ -7,7 +7,7 @@
                  :space="300"
                  :clickable="false"
                  :border="0"
-                 :display="17"
+                 :display="9"
                  :animationSpeed="speed"
                  @before-slide-change="beforeChange"
                  @after-slide-change="afterChange">

@@ -44,14 +44,6 @@ Vue.use(Vuetify, {
 		VSwitch
 	}
 });
-Vue.use(VueRouter);
-Vue.use(VueScrollReveal);
-Vue.use(VeeValidate);
-Vue.use(Moment);
-Vue.use(FontAwesome);
-Vue.use(VueAnimate);
-Vue.use(Affix);
-Vue.use(ScrollActive);
 Vue.use(VueScrollTo, {
 	container: "body",
 	duration: 4500,
@@ -64,6 +56,15 @@ Vue.use(VueScrollTo, {
 	x: false,
 	y: true
 });
+Vue.use(VueRouter);
+Vue.use(VueScrollReveal);
+Vue.use(VeeValidate);
+Vue.use(Moment);
+Vue.use(FontAwesome);
+Vue.use(VueAnimate);
+Vue.use(Affix);
+Vue.use(ScrollActive);
+
 
 Vue.config.productionTip = false;
 
