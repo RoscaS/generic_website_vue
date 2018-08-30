@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="modal-wrapper">
 
     <div class="loading-animation">
       <SpinLine v-show="edit.loading"/>
@@ -152,6 +152,7 @@
   }
 
   .card {
+    z-index: 10;
     border-radius: 8px;
     margin-bottom: 60px;
     .card-header-title {

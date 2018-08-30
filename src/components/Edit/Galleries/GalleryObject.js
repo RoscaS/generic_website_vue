@@ -59,7 +59,7 @@ class Gallery {
       }
     });
     this.sortByPosition();
-    this.update();
+    // this.update();        // TEST AUTH
     this.hasLoaded = true;
   }
 

@@ -1,7 +1,7 @@
 <template>
   <b-modal v-if="enable"
            :active.sync="modalSync"
-           scroll="clip"
+           scroll="keep"
            :canCancel="cancelModalOptions"
            has-modal-card>
     <ImagesEditMenu :store="store"/>
@@ -33,3 +33,6 @@
     },
   };
 </script>
+
+<style scoped lang="scss">
+</style>

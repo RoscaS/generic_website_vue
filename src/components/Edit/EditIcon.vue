@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="authenticated">
     <button class="button is-danger"
             :class="{smallIcon: small}"
             :style="style"
@@ -13,44 +13,49 @@
 </template>
 
 <script>
-  import ImagesModal from './Galleries/ImagesModal';
-  import ArticlesModal from './Articles/ArticlesModal';
-  import tools from '../../utils/tools';
+	import ImagesModal from './Galleries/ImagesModal';
+	import ArticlesModal from './Articles/ArticlesModal';
+	import tools from '../../utils/tools';
+  // import Auth from '../../auth';
 
-  export default {
-    name: "EditIcon",
-    components: {ImagesModal, ArticlesModal},
-    props: {
-      right: {type: String},
-      top: {type: String},
-      edit: {type: Object},
-      store: {type: Object},
-      small: {type: Boolean, default: false},
-    },
-    data() {
-      return {
-        imagesModal: false,
-        articlesModal: false,
-        timeout: false,
-        tools: tools,
-      };
-    },
-    computed: {
-      isActive() {
-        return this.edit.state.active;
-      },
-      style() {
-        return {marginTop: this.top, left: this.right};
-      },
-    },
-    methods: {
-      startEdit() {
-        this.edit.start(this.store);
-        this.imagesModal = this.edit.name == 'GalleriesStore';
-        this.articlesModal = this.edit.name == 'CategoriesStore';
-      },
-    },
-  };
+	export default {
+		name: "EditIcon",
+		components: {ImagesModal, ArticlesModal},
+		props: {
+			right: {type: String},
+			top: {type: String},
+			edit: {type: Object},
+			store: {type: Object},
+			small: {type: Boolean, default: false},
+		},
+		data: () => ({
+      authenticated: true,
+			imagesModal: false,
+			articlesModal: false,
+			timeout: false,
+			tools: tools,
+		}),
+		computed: {
+			isActive() {
+				return this.edit.state.active;
+			},
+			style() {
+				return {marginTop: this.top, left: this.right};
+			},
+		},
+		methods: {
+			startEdit() {
+				this.edit.start(this.store);
+				this.imagesModal = this.edit.name == 'GalleriesStore';
+				this.articlesModal = this.edit.name == 'CategoriesStore';
+			},
+		},
+    // mounted() {
+		// 	Auth.authNotifier.on('authChange', authState => {
+		// 		this.authenticated = authState.authenticated || false;
+    //   })
+    // }
+	};
 </script>
 
 <style scoped lang="scss">
