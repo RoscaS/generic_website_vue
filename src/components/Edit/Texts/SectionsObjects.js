@@ -2,6 +2,8 @@ import GalleriesStore from "../Galleries/GalleriesStore";
 import { Title, SubTitle, Text, Icon } from "../FieldsModels";
 import tools from "../../../utils/tools";
 import urls from "../../../urls";
+import axios from "../../../http";
+
 
 class Base {
   constructor() {

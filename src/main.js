@@ -67,23 +67,26 @@ Vue.use(ScrollActive);
 
 Vue.config.productionTip = false;
 
+
+
+
 // import auth from './auth';
-// Vue.use(auth);
+// import axios from 'axios';
+//
+// axios.interceptors.response.use(response => {
+// 	return response
+// }, function (error) {
+// 	if (error.response.status === 401) {
+// 		console.log('unauthorized, logging out...');
+// 		auth.logout();
+// 		router.replace('/login')
+// 	}
+// 	return Promise.reject(error)
+// });
 
 
 import auth from './auth';
-import axios from 'axios';
-
-axios.interceptors.response.use(response => {
-	return response
-}, function (error) {
-	if (error.response.status === 401) {
-		console.log('unauthorized, logging out...');
-		auth.logout();
-		router.replace('/login')
-	}
-	return Promise.reject(error)
-});
+Vue.use(auth);
 
 
 new Vue({

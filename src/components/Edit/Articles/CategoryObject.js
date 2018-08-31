@@ -104,6 +104,7 @@ class Category {
 
   put() {
     this.edit.setLoading();
+    this.edit.sortImages();
     axios
       .put(this.url, {
         slug: this.name,

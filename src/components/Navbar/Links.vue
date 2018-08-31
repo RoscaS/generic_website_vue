@@ -8,14 +8,12 @@
                     @itemchanged="onItemChanged">
         <a v-for="(link, i) in links" :key="i"
            :href="link.id"
-           :class="{'activeEl no-tr': poule(link.id)}"
+           :class="{'activeEl no-tr': activeCheck(link.id)}"
            class="scrollactive-item">
           <i class="far fa-fw" :class="link.icon"></i>
           {{link.name}}
         </a>
       </scrollactive>
-
-
     </div>
   </transition>
 </template>
@@ -37,7 +35,7 @@
 					this.isActive = '#' + s[s.length - 1];
 				} else this.isActive = '';
 			},
-			poule(linkId) {
+			activeCheck(linkId) {
 				if (this.isActive) {
 					return this.isActive === linkId;
 				} else return false;

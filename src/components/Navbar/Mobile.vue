@@ -27,13 +27,18 @@
             </a>
           </h2>
         </li>
+        <li>
+          <Logout></Logout>
+        </li>
       </ul>
     </b-modal>
   </div>
 </template>
 
 <script>
+	import Logout from "./Logout";
 	export default {
+		components: {Logout},
 		props: {links: {type: Array}},
 		name: "NavbarMobile",
 		data: () => ({
@@ -82,6 +87,7 @@
 
 
   #SmallLinkList {
+    height: 300px;
     margin-left: 25%;
     li {
       list-style: none;

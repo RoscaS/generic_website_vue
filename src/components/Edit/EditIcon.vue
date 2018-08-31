@@ -1,4 +1,5 @@
 <template>
+<transition name="fade" appear>
   <div v-if="authenticated">
     <button class="button is-danger"
             :class="{smallIcon: small}"
@@ -10,13 +11,13 @@
     <ImagesModal v-if="imagesModal" :enable="imagesModal" :store="store"/>
     <ArticlesModal v-if="articlesModal" :enable="articlesModal" :store="store"/>
   </div>
+</transition>
 </template>
 
 <script>
 	import ImagesModal from './Galleries/ImagesModal';
 	import ArticlesModal from './Articles/ArticlesModal';
 	import tools from '../../utils/tools';
-  // import Auth from '../../auth';
 
 	export default {
 		name: "EditIcon",
@@ -29,7 +30,6 @@
 			small: {type: Boolean, default: false},
 		},
 		data: () => ({
-      authenticated: true,
 			imagesModal: false,
 			articlesModal: false,
 			timeout: false,
@@ -39,6 +39,9 @@
 			isActive() {
 				return this.edit.state.active;
 			},
+      authenticated() {
+				return this.$auth.isAuthenticated();
+      },
 			style() {
 				return {marginTop: this.top, left: this.right};
 			},
@@ -50,16 +53,18 @@
 				this.articlesModal = this.edit.name == 'CategoriesStore';
 			},
 		},
-    // mounted() {
-		// 	Auth.authNotifier.on('authChange', authState => {
-		// 		this.authenticated = authState.authenticated || false;
-    //   })
-    // }
 	};
 </script>
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
+
+  $animationDuration: 3s;
+  @import "~vue2-animate/src/sass/vue2-animate";
+
+  .fade-enter-active {
+    animation-delay: 1s;
+  }
 
   .smallIcon {
     font-size: 14px !important;

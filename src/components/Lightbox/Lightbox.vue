@@ -74,10 +74,10 @@
     background-color: rgba(#000, 0.9);
 
     .description {
-      font-family: 'Open Sans', sans-serif;
+      /*font-family: 'Open Sans', sans-serif;*/
 
       font-size: 30px;
-      font-weight: 400;
+      font-weight: bolder;
       line-height: 39.6px;
 
       display: flex;
@@ -85,7 +85,8 @@
       align-items: center;
       position: relative;
       color: white;
-      top: 90%;
+
+      top: 92%;
       width: 100%;
     }
 

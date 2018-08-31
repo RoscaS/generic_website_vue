@@ -1,5 +1,6 @@
 import auth0 from 'auth0-js';
 import Vue from 'vue';
+import axios from 'axios';
 
 let webAuth = new auth0.WebAuth({
 	domain: 'jrosk.eu.auth0.com',
@@ -8,6 +9,7 @@ let webAuth = new auth0.WebAuth({
 	audience: 'http://jrosk.ch:8000',
 	responseType: 'token id_token',
 	scope: 'openid profile',
+
 });
 
 let auth = new Vue({
@@ -46,7 +48,7 @@ let auth = new Vue({
 				localStorage.removeItem('id_token');
 				localStorage.removeItem('expires_at');
 				localStorage.removeItem('user');
-				webAuth.authorize();
+				webAuth.logout()
 			});
 		},
 		isAuthenticated() {
@@ -57,28 +59,15 @@ let auth = new Vue({
 			return new Promise((resolve, reject) => {
 				console.log('>>> handleAuthentication callback');
 				webAuth.parseHash((err, authResult) => {
-					// if (!authResult.scope.includes("full_access")) {
-					// 	console.log('>>> REJECTED');
-					// 	console.log(err);
-					// 	this.logout();
-					// 	reject(err)
-					// }
-
 					if (authResult && authResult.accessToken && authResult.idToken) {
 						console.log('>>> accept');
 						console.log(authResult);
-						// let scope = authResult.scope;
-						// console.log(scope)
-						// if (!String(scope.includes("full_access"))) {
-						// 	console.log('>>> REJECTED');
-						// 	this.logout();
-						// 	reject();
-						// }
-
 						this.expiresAt = authResult.expiresIn;
 						this.accessToken = authResult.accessToken;
 						this.token = authResult.idToken;
 						this.user = authResult.idTokenPayload;
+
+						axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.accessToken;
 
 						resolve();
 
@@ -91,7 +80,7 @@ let auth = new Vue({
 				});
 			});
 		}
-	}
+	},
 });
 
 export default {
@@ -99,99 +88,6 @@ export default {
 		Vue.prototype.$auth = auth;
 	}
 };
-
-
-
-
-
-
-
-
-
-
-
-
-// import auth0 from 'auth0-js';
-// import Vue from 'vue';
-// import axios from 'axios'
-//
-// let auth = new auth0.WebAuth({
-// 	domain: 'jrosk.eu.auth0.com',
-// 	clientID: '3zna8lwrR2rHoWxxwQHEqgRn6dPezrcI',
-// 	responseType: 'token id_token',
-// 	callbackURL: window.location.origin + '/',
-//
-// 	// redirectUri: 'http://localhost:8080/callback',
-// 	// audience: 'http://jrosk.ch:8000',
-// 	// scope: 'openid profile',
-// });
-//
-//
-// let login = (username, password) => {
-//   auth.login({
-//     connection: 'Username-Password-Authentication',
-//     responseType: 'token',
-//     email: username,
-//     password: password,
-//     scope: 'openid email'
-//   },
-//   function (err) {
-//     if (err) alert('something went wrong: ' + err.message)
-//   })
-// };
-//
-// let logout = () => {
-// 	localStorage.removeItem('id_token');
-// 	localStorage.removeItem('profile');
-// };
-//
-// let checkAuth = () => {
-// 	if (localStorage.getItem('id_token')) {
-// 		return true;
-// 	} else {
-// 		return false;
-// 	}
-// };
-//
-// let requireAuth = (to, from, next) => {
-// 	if (!checkAuth()) {
-// 		console.log('auth failed...');
-// 		let path = '/login';
-// 		let result = auth0.parseHash(window.location.hash);
-// 		if (result && result.idToken) {
-// 			localStorage.setItem('id_token', result.idToken);
-// 			axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token')
-// 			path = '/';
-// 			auth0.getProfile(result.idToken, function (err, profile) {
-// 				if (err) {
-// 					alert(err)
-// 				}
-// 				let user = JSON.stringify(profile);
-// 				localStorage.setItem('profile', user)
-// 			})
-// 		}
-// 		next({
-// 			path: path
-// 		})
-// 	} else {
-// 		next()
-// 	}
-// };
-//
-// if (localStorage.getItem('id_token')) {
-//   axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token')
-// }
-//
-// export default {
-// 	checkAuth,
-// 	login,
-// 	logout,
-// 	requireAuth
-// }
-//
-//
-//
-
 
 
 
