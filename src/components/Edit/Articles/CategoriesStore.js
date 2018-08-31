@@ -74,6 +74,7 @@ const CategoriesStore = new Vue({
       this.setLoading();
       axios.post(`categories/`, data).then(response => {
         this.state.stores.push(new Category(response.data));
+        this.
         setTimeout(() => {
           tools.message('categoryNew');
           this.unsetLoading();

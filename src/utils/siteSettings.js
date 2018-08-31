@@ -23,7 +23,8 @@ const SiteOptions = new Vue({
     twitter: "",
     instagram: "",
     linkedin: "",
-    snapchat: ""
+    snapchat: "",
+    mapBox: "",
   },
   created() {
     axios
@@ -47,7 +48,8 @@ const SiteOptions = new Vue({
         this.instagram = data.instagram;
         this.linkedin = data.linkedin;
         this.snapchat = data.snapchat;
-      })
+        this.mapBox = data.mapBox;
+    })
       .catch(error => {
         tools.message("error", error, this.url);
       });

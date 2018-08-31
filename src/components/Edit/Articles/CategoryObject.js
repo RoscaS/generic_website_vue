@@ -67,22 +67,20 @@ class Category {
 
   updateData() {
     this.edit.sortImages();
-    // this.articles.forEach((i, idx) => {
-    //   let dirty = false;
-    //   if (i.position != idx + 1) {
-    //     i.position = idx + 1;
-    //     dirty = true;
-    //   }
-    //   if (i.category != this) {
-    //     i.category = this;
-    //     dirty = true;
-    //   }
-    //   this.edit.sortImages();
-    //
-    //   if (dirty) {
-    //     i.patch(false);
-    //   }
-    // });
+    this.articles.forEach((i, idx) => {
+      let dirty = false;
+      if (i.position != idx + 1) {
+        i.position = idx + 1;
+        dirty = true;
+      }
+      if (i.category != this) {
+        i.category = this;
+        dirty = true;
+      }
+      if (dirty) {
+        i.patch(false);
+      }
+    });
   }
 
   sortByPosition() {

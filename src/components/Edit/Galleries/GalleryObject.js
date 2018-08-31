@@ -53,7 +53,7 @@ class Gallery {
     images.forEach(i => {
       let image = new Image(i, this);
       this.images.push(image);
-      if (images.length == 1 && images[0].name.includes("placeholder")) {
+      if (images.length === 1 && images[0].name.includes("placeholder")) {
         this.isEmpty = true;
         this.placeholder = image;
       }
