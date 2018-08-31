@@ -1,7 +1,6 @@
 <template>
   <b-modal v-if="enable"
            :active.sync="modalSync"
-           scroll="keep"
            :canCancel="cancelModalOptions"
            has-modal-card>
     <ImagesEditMenu :store="store"/>

@@ -1,10 +1,6 @@
-<template>
-
-</template>
+<template></template>
 
 <script>
-  import auth from '../auth';
-
 	export default {
 		name: "Login",
     data: () => ({
@@ -21,6 +17,3 @@
 	};
 </script>
 
-<style scoped>
-
-</style>

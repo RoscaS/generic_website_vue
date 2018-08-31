@@ -13,6 +13,9 @@ let webAuth = new auth0.WebAuth({
 });
 
 let auth = new Vue({
+	deta: () => ({
+		tokenIsSet: false,
+	}),
 	computed: {
 		token: {
 			get() { return localStorage.getItem('id_token'); },
@@ -39,6 +42,14 @@ let auth = new Vue({
 		}
 	},
 	methods: {
+		setToken() {
+			if (this.accessToken && !this.tokenIsSet) {
+				let token = `Bearer ${auth.accessToken}`;
+				console.log(token);
+				axios.defaults.headers.common['Authorization'] = token;
+				this.tokenIsSet = true;
+			}
+		},
 		login() {
 			webAuth.authorize();
 		},
@@ -48,6 +59,7 @@ let auth = new Vue({
 				localStorage.removeItem('id_token');
 				localStorage.removeItem('expires_at');
 				localStorage.removeItem('user');
+				this.tokenIsSet = false;
 				webAuth.logout()
 			});
 		},
@@ -67,7 +79,9 @@ let auth = new Vue({
 						this.token = authResult.idToken;
 						this.user = authResult.idTokenPayload;
 
-						axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.accessToken;
+						this.setToken();
+
+						// axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.accessToken;
 
 						resolve();
 
