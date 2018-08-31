@@ -10,7 +10,8 @@
                      speed="10000"
                      :slideRatio="1/4"
                      transition-speed='1250'>
-        <vueper-slide v-for="(slide, i) in slides" :key="i"
+        <vueper-slide v-for="(slide, i) in slides"
+                      :key="i"
                       :image="slide.image">
         </vueper-slide>
       </vueper-slides>

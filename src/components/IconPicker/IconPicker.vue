@@ -92,8 +92,6 @@
           this.icons = filter;
         }
       },
-
-
     },
   };
 </script>

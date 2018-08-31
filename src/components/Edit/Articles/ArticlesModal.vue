@@ -1,6 +1,5 @@
 <template>
-  <b-modal v-if="enable"
-           :active.sync="modalSync"
+  <b-modal :active.sync="modalSync"
            scroll="clip"
            :canCancel="cancelModalOptions"
            has-modal-card>
@@ -15,17 +14,13 @@
 	export default {
 		name: "ArticlesModal",
     components: {ArticlesEditMenu},
-    props: {
-      store: {type: Object},
-      enable: {type: Boolean},
-    },
     data: () => ({
     }),
     computed: {
       edit() {return CategoriesStore},
 
       modalSync: {
-        get() {return this.store.state.active},
+        get() {return this.edit.state.active},
         set(value) {if (!value) this.edit.end();}
       },
       cancelModalOptions() {

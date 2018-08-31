@@ -56,6 +56,7 @@ Vue.use(VueScrollTo, {
 	x: false,
 	y: true
 });
+
 Vue.use(VueRouter);
 Vue.use(VueScrollReveal);
 Vue.use(VeeValidate);

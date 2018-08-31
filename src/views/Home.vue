@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Modals/>
+
     <PromoRibbon/>
     <Header/>
     <StickyNav/>
@@ -20,8 +22,6 @@
 </template>
 
 <script>
-  import axios from 'axios';
-
 	import Parallax from "../components/Parallax/Parallax";
 	import PromoRibbon from "../views/Promo/PromoRibbon";
 	import Header from "../views/Header";
@@ -34,10 +34,12 @@
 	import Review from "../views/Review";
 	import Footer from "../views/Footer";
 	import StickyNav from "../components/Navbar/StickyNav";
+	import Modals from "./Layouts/Modals";
 
 	export default {
 		name: "Public",
 		components: {
+			Modals,
 			StickyNav,
 			Parallax,
 			PromoRibbon,

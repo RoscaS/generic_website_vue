@@ -27,7 +27,7 @@
     computed: {
       imagesEdit() { return this.galleriesEdit },
       imagesStore() { return this.galleriesEdit.getStore('Events')},
-    }
+    },
   };
 </script>
 

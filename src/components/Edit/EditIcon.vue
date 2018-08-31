@@ -1,27 +1,20 @@
 <template>
-<transition name="fade" appear>
-  <div v-if="authenticated">
-    <button class="button is-danger"
-            :class="{smallIcon: small}"
-            :style="style"
-            :disabled="isActive"
-            @click="startEdit">
-      <i class="fal fa-pencil-alt"></i>
-    </button>
-    <ImagesModal v-if="imagesModal" :enable="imagesModal" :store="store"/>
-    <ArticlesModal v-if="articlesModal" :enable="articlesModal" :store="store"/>
-  </div>
-</transition>
+  <transition name="fade" appear>
+    <div v-show="authenticated">
+      <button class="button is-danger"
+              :class="{smallIcon: small}"
+              :style="style"
+              :disabled="isActive"
+              @click="startEdit">
+        <i class="fal fa-pencil-alt"></i>
+      </button>
+    </div>
+  </transition>
 </template>
 
 <script>
-	import ImagesModal from './Galleries/ImagesModal';
-	import ArticlesModal from './Articles/ArticlesModal';
-	import tools from '../../utils/tools';
-
 	export default {
 		name: "EditIcon",
-		components: {ImagesModal, ArticlesModal},
 		props: {
 			right: {type: String},
 			top: {type: String},
@@ -30,18 +23,15 @@
 			small: {type: Boolean, default: false},
 		},
 		data: () => ({
-			imagesModal: false,
-			articlesModal: false,
-			timeout: false,
-			tools: tools,
+
 		}),
 		computed: {
 			isActive() {
 				return this.edit.state.active;
 			},
-      authenticated() {
+			authenticated() {
 				return this.$auth.isAuthenticated();
-      },
+			},
 			style() {
 				return {marginTop: this.top, left: this.right};
 			},
@@ -49,8 +39,6 @@
 		methods: {
 			startEdit() {
 				this.edit.start(this.store);
-				this.imagesModal = this.edit.name == 'GalleriesStore';
-				this.articlesModal = this.edit.name == 'CategoriesStore';
 			},
 		},
 	};
