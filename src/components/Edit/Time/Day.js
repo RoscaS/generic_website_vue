@@ -1,15 +1,17 @@
 import {Slot} from './Slot';
+import {DateTime} from 'luxon';
 import {getTime} from './utils';
 
 
 class Day {
 	constructor(day, idx) {
 		this.slots = [];
-		this.name = day;
+		this.name = day.name;
 		this.index = idx;
 		this.checked = false;
 		this.min = getTime(0, 0);
 		this.max = getTime(23, 59);
+		this.initSlots(day.slots);
 	}
 
 	get count() { return this.slots.length; }
@@ -22,11 +24,22 @@ class Day {
 		return this.name[0].toUpperCase() + this.name.slice(1, this.name.length);
 	}
 
+	initSlots(slots) {
+		slots.forEach(slot => {
+			let start = DateTime.fromISO(slot.start);
+			let end = DateTime.fromISO(slot.end);
+			let from = [start.hour, start.minute];
+			let to = [end.hour, end.minute];
+			this.slots.push(new Slot(from, to, this, slot.id, this.count -1));
+		});
+	}
+
 	setSlot(from, to) {
 		let slot = new Slot(from, to, this, this.count -1);
 		if (slot.interval) {
 			if (!this.count || this.isValid(slot)) {
 				this.slots.push(slot);
+				slot.postSlot();
 				this.setMinMax();
 			}
 		}
@@ -45,10 +58,10 @@ class Day {
 	setMinMax() {
 		this.min = this.lastSlot.interval.end;
 		this.max = getTime(23, 59);
-		// this.max = this.firstSlot.interval.start;
 	}
 
 	removeSlot(idx) {
+		console.log('idx:', idx)
 		// delete this.slots[idx];
 		console.log(this.pretty)
 		this.slots.splice(idx, 1)

@@ -1,26 +1,41 @@
-import {Info, Settings} from 'luxon';
+import axios from "../../../http";
+import Vue from 'vue';
+import {Settings} from 'luxon';
 import {Day} from './Day';
 
 Settings.defaultLocale = 'fr';
+const url = 'days/';
 
-class OpeningHours {
-	constructor() {
-		this.init();
+
+const OpeningHours = new Vue({
+	name: 'OpeningHours',
+	data: () => ({
+		days: [],
+	}),
+	computed: {
+		pretty() {
+				let str = '';
+				for (let day in this) str += `\n${this[day].pretty}`
+				return str;
+			}
+	},
+	methods: {
+		fetchData() {
+			axios.get(url).then(response => {
+				response.data.forEach((day, idx) => {
+					this.initData(day, idx)
+				});
+			})
+		},
+		initData(day, idx) {
+			this.days.push(new Day(day, idx))
+		}
+
+	},
+	created() {
+		this.fetchData();
 	}
 
-	static get weekDays() { return Info.weekdays('long'); }
+});
 
-	init() {
-		OpeningHours.weekDays.forEach((day, idx) => {
-			this[day] = new Day(day, idx);
-		});
-	}
-
-	get pretty() {
-		let str = '';
-		for (let day in this) str += `\n${this[day].pretty}`
-		return str;
-	}
-}
-
-export default new OpeningHours
+export default OpeningHours

@@ -22,7 +22,6 @@
 		props: {interval: {type: Object}},
 		methods: {
 			remove() {
-				console.log(this.interval.pretty);
 				this.interval.remove();
 			}
 		}

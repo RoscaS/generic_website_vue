@@ -9,6 +9,7 @@
         </div>
       </div>
     </div>
+    <br><br>
 
     <b-modal :active.sync="modalSync" scroll="clip" has-modal-card>
       <section>
@@ -55,9 +56,12 @@
 		components: {TimeInput, Title, TimeSlot},
 		data: () => ({
 			modalSync: false,
-			days: OpeningHours,
+			// days: OpeningHours,
 			selected: [],
 		}),
+    computed: {
+			days() { return OpeningHours.days },
+    },
 		methods: {
 			select(day) {
 				if (day.checked) {
@@ -73,11 +77,11 @@
 				if (value) {
 					setTimeout(() => {
             this.$snackbar.open({
-              message: 'Todo: small tuto',
+              message: "Sélectionnez un ou plusieurs jours pour éditer l'horaire.",
               type: 'is-warning',
               position: 'is-top',
               actionText: 'Ok',
-              indefinite: true,
+              duration: 15000,
             });
           }, 500);
 				}
