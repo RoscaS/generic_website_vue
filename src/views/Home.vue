@@ -16,7 +16,7 @@
       <Events/>
       <Parallax :idx="2" height="400px"/>
       <Contact/>
-      <Time></Time>
+      <OpeningHours/>
       <!--<Review/>-->
       <Footer/>
     </div>
@@ -37,11 +37,13 @@
 	import Footer from "../views/Footer";
 	import StickyNav from "../components/Navbar/StickyNav";
 	import Modals from "./Layouts/Modals";
-	import Time from "../components/Edit/Time/Time";
+	import Time from "../components/Edit/Time/TimeEditMenu";
+	import OpeningHours from "./OpeningHours";
 
 	export default {
 		name: "Public",
 		components: {
+			OpeningHours,
 			Time,
 			Modals,
 			StickyNav,

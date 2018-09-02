@@ -1,6 +1,7 @@
 import {Slot} from './Slot';
 import {DateTime} from 'luxon';
 import {getTime} from './utils';
+import Tools from "../../../utils/tools";
 
 
 class Day {
@@ -31,6 +32,7 @@ class Day {
 			let from = [start.hour, start.minute];
 			let to = [end.hour, end.minute];
 			this.slots.push(new Slot(from, to, this, slot.id, this.count -1));
+			this.setMinMax();
 		});
 	}
 
@@ -48,7 +50,7 @@ class Day {
 	isValid(slot) {
 		for (let i of this.slots) {
 			if (slot.interval.overlaps(i.interval)) {
-				console.log(`Error (Day.isValid(): slot overlap`);
+				Tools.message('intervalOverlap');
 				return false;
 			}
 		}
@@ -61,11 +63,8 @@ class Day {
 	}
 
 	removeSlot(idx) {
-		console.log('idx:', idx)
-		// delete this.slots[idx];
-		console.log(this.pretty)
+		Tools.message('intervalDelete');
 		this.slots.splice(idx, 1)
-		console.log(this.pretty)
 	}
 
 	get pretty() {

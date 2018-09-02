@@ -1,6 +1,7 @@
 import axios from "../../../http";
 import {Interval} from 'luxon';
 import {getTime} from './utils';
+import Tools from "../../../utils/tools";
 
 const url = 'slots/';
 
@@ -29,7 +30,8 @@ class Slot {
 		let slot = Interval.fromDateTimes(start, end);
 
 		if (slot.invalid) {
-			console.log(`Error (Slot.validate(): ${slot.invalid}`);
+			Tools.message('intervalIncoherent');
+
 			return null;
 
 		} else {
@@ -49,7 +51,10 @@ class Slot {
 	postSlot() {
 		axios
 			.post(url, this.getForm())
-			.then(response => {this.id = response.data.id})
+			.then(response => {
+				Tools.message('intervalNew');
+				this.id = response.data.id;
+			})
 			.catch(error => {console.log(error)})
 	}
 

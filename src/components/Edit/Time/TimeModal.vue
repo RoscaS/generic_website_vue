@@ -1,0 +1,52 @@
+<template>
+  <b-modal :active.sync="modalSync"
+           scroll="clip"
+           has-modal-card>
+    <TimeEditMenu/>
+  </b-modal>
+</template>
+
+<script>
+	import TimeStore from './TimeStore';
+	import TimeEditMenu from "./TimeEditMenu";
+
+
+	export default {
+		name: "TimeModal",
+		components: {TimeEditMenu},
+		computed: {
+			edit() { return TimeStore; },
+      selected: {
+	      get() { return this.edit.state.selected; },
+        set(value) {this.edit.state.selected = value; }
+      },
+			modalSync: {
+				get() { return this.edit.state.active; },
+				set(value) {this.edit.state.active = value; },
+			}
+		},
+    watch: {
+  			modalSync(value) {
+  				console.log(value);
+  				if (value) {
+  					setTimeout(() => {
+  						this.$snackbar.open({
+  							message: "Sélectionnez un ou plusieurs jours pour éditer l'horaire.",
+  							type: 'is-warning',
+  							position: 'is-top',
+  							actionText: 'Ok',
+  							duration: 15000,
+  						});
+  					}, 500);
+  				} else {
+  					this.selected = [];
+  					this.edit.end();
+          }
+  			}
+  		}
+	};
+</script>
+
+<style scoped>
+
+</style>

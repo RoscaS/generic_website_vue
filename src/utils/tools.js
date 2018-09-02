@@ -73,6 +73,27 @@ const message = {
     position: 'is-top',
     message: "Défilement automatique désactivé."
   },
+
+  intervalNew: {
+    type: 'is-success',
+    position: 'is-top',
+    message: "Intervalle(s) créé(s)"
+  },
+  intervalDelete: {
+    type: 'is-success',
+    position: 'is-top',
+    message: "Intervalle supprimé."
+  },
+  intervalIncoherent: {
+    type: 'is-danger',
+    position: 'is-top',
+    message: "Interval incohérent."
+  },
+  intervalOverlap: {
+    type: 'is-danger',
+    position: 'is-top',
+    message: "Problème de chevauchement!."
+  },
 };
 
 const snackBarMessage = {

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-	import OpeningHours from './OpeningHours';
+	import TimeStore from './TimeStore';
 
 	export default {
 		name: "TimeInput",
