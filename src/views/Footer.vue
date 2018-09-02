@@ -9,7 +9,7 @@
           easing: 'ease',
          }">
       <a class="button _btn no-tr"
-              v-scroll-to="'#Home'">
+         v-scroll-to="'#Home'">
         <i class="fas fa-arrow-up"></i>
         &nbsp; Haut de la page
       </a>
@@ -55,36 +55,35 @@
 </template>
 
 <script>
-  import SiteOptions from '../utils/siteSettings';
-  import moment from 'moment';
+	import moment from 'moment';
+	import TextsStore from "../components/Edit/Texts/TextsStore";
 
 
-  export default {
-    name: "Footer",
-    data() {
-      return {
-        site: SiteOptions,
-      };
-    },
-    computed: {
-      icons() {
-        return [
-          {icon: 'fa-facebook', url: this.site.facebook,},
-          {icon: 'fa-tripadvisor', url: this.site.tripadvisor,},
-          {icon: 'fa-google', url: this.site.google,},
-          {icon: 'fa-twitter', url: this.site.twitter,},
-          {icon: 'fa-instagram', url: this.site.instagram,},
-          {icon: 'fa-linkedin', url: this.site.linkedin,},
-          {icon: 'fa-snapchat', url: this.site.snapchat,},
-        ];
-      }
-    },
-    methods: {
-      getCopyright() {
-        return moment().format('Y') + ' ' + this.site.projectName;
-      },
-    }
-  };
+	export default {
+		name: "Footer",
+		data: () => ({
+		}),
+		computed: {
+			contact() { return TextsStore.getStore("SiteContact").state; },
+
+			icons() {
+				return [
+					{icon: 'fa-facebook', url: this.contact.facebook.data,},
+					{icon: 'fa-tripadvisor', url: this.contact.tripadvisor.data,},
+					{icon: 'fa-google', url: this.contact.google.data,},
+					{icon: 'fa-twitter', url: this.contact.twitter.data,},
+					{icon: 'fa-instagram', url: this.contact.instagram.data,},
+					{icon: 'fa-linkedin', url: this.contact.linkedin.data,},
+					{icon: 'fa-snapchat', url: this.contact.snapchat.data,},
+				];
+			}
+		},
+		methods: {
+			getCopyright() {
+				return moment().format('Y') + ' ' + this.contact.project_name.data;
+			},
+		}
+	};
 </script>
 
 <style scoped lang="scss">

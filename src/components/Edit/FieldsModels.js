@@ -35,6 +35,16 @@ class Icon {
   }
 }
 
+// OPTIONS
+
+class Field {
+	constructor(label, len) {
+		this.data = '';
+		this.label = label;
+		this.len = len;
+	}
+}
+
 
 
 
@@ -66,4 +76,4 @@ class Description {
   }
 }
 
-export {Title, SubTitle, Text, Icon, Name, Price, Description}
+export {Title, SubTitle, Text, Icon, Field, Name, Price, Description}

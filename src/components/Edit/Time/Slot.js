@@ -2,8 +2,7 @@ import axios from "../../../http";
 import {Interval} from 'luxon';
 import {getTime} from './utils';
 import Tools from "../../../utils/tools";
-
-const url = 'slots/';
+import urls from "../../../urls";
 
 
 class Slot {
@@ -50,7 +49,7 @@ class Slot {
 
 	postSlot() {
 		axios
-			.post(url, this.getForm())
+			.post(urls.slots, this.getForm())
 			.then(response => {
 				Tools.message('intervalNew');
 				this.id = response.data.id;
@@ -59,7 +58,9 @@ class Slot {
 	}
 
 	deleteSlot() {
-		axios.delete(`${url}${this.id}/`).then(response => {console.log('deleted');});
+		axios.delete(`${urls.slots}${this.id}/`).then(() => {
+			Tools.message('intervalDelete');
+		})
 	}
 
 	remove() {

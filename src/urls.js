@@ -13,7 +13,14 @@ const urls = {
   images: "images/",
 
   categories: "categories/",
-  articles: "articles/"
+  articles: "articles/",
+
+	slots: "slots/",
+	days: "days/",
+
+
+  siteInfo: "siteInfo/1/",
+	siteContact: "siteContact/1/"
 };
 
 export default urls;

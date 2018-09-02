@@ -11,17 +11,17 @@
              v-scroll-reveal="sReveal('right', 50, 400, 1500)">
           <div class="line">
             <i class="fas fa-map-marker-alt fa-fw"></i>
-            <a :href="site.google">{{ site.city }}</a>
+            <a :href="siteContact.google.data">{{ siteInfo.city.data }}</a>
           </div>
 
           <div class="line">
             <i class="fas fa-phone fa-fw"></i>
-            <a :href="phoneHref">{{ site.phone }}</a>
+            <a :href="phoneHref">{{ siteInfo.phone.data }}</a>
           </div>
 
           <div class="line">
             <i class="fas fa-envelope fa-fw"></i>
-            <a :href="mailHref">{{ site.mail }}</a>
+            <a :href="mailHref">{{ siteInfo.mail.data }}</a>
           </div>
         </div>
         <p class="subtitle"
@@ -41,10 +41,10 @@
 </template>
 
 <script>
-  import SiteOptions from '../utils/siteSettings';
   import ViewsMixin from '../mixins/ViewsMixin';
   import ContactForm from '../components/Forms/ContactForm';
   import GoogleMap from '../components/Maps';
+  import TextsStore from "../components/Edit/Texts/TextsStore";
 
   export default {
     name: "Contact",
@@ -52,15 +52,20 @@
     components: {ContactForm, GoogleMap},
     data() {
       return {
-        site: SiteOptions,
         component: "Contact",
         type: 'text',
       };
     },
     computed: {
-      phoneHref() { return `tel:${this.site.phone}`; },
-      mailHref() { return `mailto:${this.site.mail}`; },
+      siteInfo() { return TextsStore.getStore("SiteInfo").state; },
+      siteContact() { return TextsStore.getStore("SiteContact").state; },
+
+      phoneHref() { return `tel:${this.siteInfo.phone.data}`; },
+      mailHref() { return `mailto:${this.siteInfo.mail.data}`; },
     },
+    mounted() {
+    	console.log(this.siteInfo)
+    }
   };
 </script>
 

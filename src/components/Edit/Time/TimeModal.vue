@@ -27,7 +27,6 @@
 		},
     watch: {
   			modalSync(value) {
-  				console.log(value);
   				if (value) {
   					setTimeout(() => {
   						this.$snackbar.open({

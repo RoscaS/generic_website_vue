@@ -1,12 +1,10 @@
+import urls from "../../../urls";
 import axios from "../../../http";
 import Vue from 'vue';
 import {Settings} from 'luxon';
 import {Day} from './Day';
 
 Settings.defaultLocale = 'fr';
-
-const url = 'days/';
-
 
 const TimeStore = new Vue({
 	name: 'TimeStore',
@@ -26,7 +24,7 @@ const TimeStore = new Vue({
 	},
 	methods: {
 		fetchData() {
-			axios.get(url).then(response => {
+			axios.get(urls.days).then(response => {
 				response.data.forEach((day, idx) => {
 					this.initData(day, idx);
 				});

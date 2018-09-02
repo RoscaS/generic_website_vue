@@ -27,7 +27,6 @@
   import ViewsMixin from '../mixins/ViewsMixin';
   import EditIcon from '../components/Edit/EditIcon';
 
-
   export default {
     name: "Presentation",
     mixins: [ViewsMixin],
@@ -35,7 +34,6 @@
     data: () => ({
       component: "Presentation",
       type: 'text',
-      downArrow: null,
     }),
     computed: {
       image() {

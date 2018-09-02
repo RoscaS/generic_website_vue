@@ -63,7 +63,6 @@ class Day {
 	}
 
 	removeSlot(idx) {
-		Tools.message('intervalDelete');
 		this.slots.splice(idx, 1)
 	}
 

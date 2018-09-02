@@ -26,7 +26,7 @@
 <script>
 	import Parallax from "../components/Parallax/Parallax";
 	import PromoRibbon from "../views/Promo/PromoRibbon";
-	import Header from "../views/Header";
+	import Header from "./Header/Header";
 	import Carousel from "../views/Carousel";
 	import Presentation from "../views/Presentation";
 	import Articles from "../views/Articles/Articles";

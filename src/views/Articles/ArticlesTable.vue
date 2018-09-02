@@ -86,8 +86,9 @@
           }
 
           .description {
+
             width: 310px;
-            font-weight: lighter;
+            /*font-weight: lighter;*/
           }
         }
 
