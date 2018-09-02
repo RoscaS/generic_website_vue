@@ -23,25 +23,26 @@
 </template>
 
 <script>
-  import CategoriesStore from "./CategoriesStore";
+	import CategoriesStore from "./CategoriesStore";
+	import CategoriesSide from './CategoriesSide';
+	import ArticlesSide from './ArticlesSide';
+	import ArticlesCard from "./ArticlesCard";
+	import BaseLayout from "../../../views/Layouts/BaseLayout";
 
-  import CategoriesSide from './CategoriesSide';
-  import ArticlesSide from './ArticlesSide';
-  import ArticlesCard from "./ArticlesCard";
-
-  export default {
-    name: "ArticlesEditMenu",
-    components: {ArticlesCard, CategoriesSide, ArticlesSide},
-    computed: {
-      edit() {return CategoriesStore;},
-    }
-  };
+	export default {
+		name: "ArticlesEditMenu",
+		components: {BaseLayout, ArticlesCard, CategoriesSide, ArticlesSide},
+		computed: {
+			edit() {return CategoriesStore;},
+		}
+	};
 </script>
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
   .main-box {
+    border: 1px solid black;
     width: 100%;
     height: 600px;
     background-color: rgba(48, 93, 120, 0.66);

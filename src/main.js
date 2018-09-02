@@ -36,12 +36,12 @@ Vue.use(Vuetify, {
 	components: {
 		VApp,
 		VTabs,
-		VCard,
-		VForm,
+		// VCard,
+		// VForm,
 		VTextarea,
 		VTextField,
-		VCheckbox,
-		VSwitch
+		// VCheckbox,
+		// VSwitch,
 	}
 });
 Vue.use(VueScrollTo, {

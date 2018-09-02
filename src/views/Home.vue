@@ -2,6 +2,7 @@
   <div>
     <Modals/>
 
+
     <PromoRibbon/>
     <Header/>
     <StickyNav/>
@@ -15,6 +16,7 @@
       <Events/>
       <Parallax :idx="2" height="400px"/>
       <Contact/>
+      <Time></Time>
       <Review/>
       <Footer/>
     </div>
@@ -35,10 +37,12 @@
 	import Footer from "../views/Footer";
 	import StickyNav from "../components/Navbar/StickyNav";
 	import Modals from "./Layouts/Modals";
+	import Time from "../components/Edit/Time/Time";
 
 	export default {
 		name: "Public",
 		components: {
+			Time,
 			Modals,
 			StickyNav,
 			Parallax,

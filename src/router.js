@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Callback from './views/Login/Callback';
 import Login from './views/Login/Login';
+// import Time from './components/Edit/Time/Time';
 
 Vue.use(Router);
 
@@ -23,7 +24,7 @@ export default new Router({
 			path: '/callback',
 			name: 'callback',
 			component: Callback,
-		}
+		},
 	]
 })
 
