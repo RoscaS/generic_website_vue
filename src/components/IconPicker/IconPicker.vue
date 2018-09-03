@@ -1,11 +1,21 @@
 <template>
 
   <div id="iconPicker" class="">
-    <b-input maxlength="200"
-             placeholder="Recherche"
-             :has-counter='false'
-             v-model="search">
-    </b-input>
+
+    <v-text-field v-model="search"
+                  class="searchField"
+                  color="white"
+                  label="Recherche">
+    </v-text-field>
+
+
+
+    <!--<b-input maxlength="200"-->
+             <!--placeholder="Recherche"-->
+             <!--:has-counter='false'-->
+             <!--v-model="search">-->
+    <!--</b-input>-->
+
     <scrolly class="body"
              :parentScroll="false"
              :style="{ width: '', height: '500px' }">
@@ -103,9 +113,10 @@
     border-radius: 2px;
   }
 
-  input {
-    border-radius: 2%;
+  .searchField {
+
   }
+
 
   .body {
     position: relative;

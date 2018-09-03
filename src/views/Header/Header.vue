@@ -13,12 +13,13 @@
                  duration: 1000,
                  delay: 1500
                  }">
-              <a class="no-tr" href="#" v-scroll-to="'#'">
-                <i class="fal fa-calendar fa-fw"
-                   :title="getTitle('horaire')"></i>
-              </a>
-              <span class="first-line">HORAIRE NON SPÉCIFIÉ</span>
-              <span class="second-line">CLIQUEZ SUR LE LIEN</span>
+              <!--<a class="no-tr" href="#" v-scroll-to="'#'">-->
+                <!--<i class="fal fa-calendar fa-fw"-->
+                   <!--:title="getTitle('horaire')"></i>-->
+              <!--</a>-->
+              <TimeWidget></TimeWidget>
+              <!--<span class="first-line">HORAIRE NON SPÉCIFIÉ</span>-->
+              <!--<span class="second-line">CLIQUEZ SUR LE LIEN</span>-->
             </div>
           </div>
 
@@ -127,13 +128,14 @@
 	import EditIcon from '../../components/Edit/EditIcon';
 	import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
 	import FieldsLayout from "../Layouts/FieldsLayout";
+	import TimeWidget from "./TimeWidget";
 
 	const titles = [{class: "horaire", title: "Voir l'horaire complet."}];
 
 	export default {
 		name: "Header",
 		mixins: [ViewsMixin],
-		components: {FieldsLayout, TextsEditMenu, EditIcon},
+		components: {TimeWidget, FieldsLayout, TextsEditMenu, EditIcon},
 
 		data: () => ({
 			type: 'text',
@@ -215,6 +217,7 @@
     max-height: 60px;
 
     &._left {
+      width: 200px;
       text-align: right;
       left: 60px;
     }

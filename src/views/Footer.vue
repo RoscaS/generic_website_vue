@@ -1,88 +1,147 @@
 <template>
-  <section class="section hero">
+  <div>
+    <EditIcon :edit="edit" :store="contact" class="edit-icon" top="35px"/>
+    <section class="section hero">
 
-    <div v-scroll-reveal="{
+      <div v-scroll-reveal="{
           origin: 'top',
           distance: '20px',
           duration: 1500,
           delay: 0,
           easing: 'ease',
          }">
-      <a class="button _btn no-tr"
-         v-scroll-to="'#Home'">
-        <i class="fas fa-arrow-up"></i>
-        &nbsp; Haut de la page
-      </a>
-    </div>
+        <a class="button _btn no-tr"
+           v-scroll-to="'#Home'">
+          <i class="fas fa-arrow-up"></i>
+          &nbsp; Haut de la page
+        </a>
+      </div>
 
-    <div class="level is-mobile">
-      <div class="level-item"
-           v-for="icon in icons"
-           v-scroll-reveal="{
+      <div class="level is-mobile">
+        <div class="level-item"
+             v-for="icon in getIcons"
+             v-scroll-reveal="{
                    origin: 'bottom',
                    distance: '20px',
                    duration: 1500,
                    delay: 0,
                    easing: 'ease',
                   }">
-        <a class="no-tr" target="_blank" :href="icon.url">
-          <i class="grow fab" :class="icon.icon"></i>
-        </a>
+          <a class="no-tr"
+             target="_blank"
+             :href="icon.url">
+            <i class="grow fab" :class="icon.icon"></i>
+          </a>
+        </div>
       </div>
-    </div>
 
-    <p v-scroll-reveal="{
+      <p v-scroll-reveal="{
         origin: 'left',
         distance: '200px',
         duration: 1500,
         delay: 0,
         easing: 'ease',
        }">
-      Copyright &copy; {{ getCopyright() }}
-    </p>
-    <p v-scroll-reveal="{
+        Copyright &copy; {{ getCopyright() }}
+      </p>
+      <p v-scroll-reveal="{
         origin: 'right',
         distance: '200px',
         duration: 1500,
         delay: 0,
         easing: 'ease',
        }">
-      Design & code:
-      <a class="jrosk" href="mailto:jrosk.ad@gmail.com" title="With  by JrosK">JrosK</a>
-    </p>
+        Design & code:
+        <a class="jrosk" href="mailto:jrosk.ad@gmail.com"
+           title="With  by JrosK">JrosK</a>
+      </p>
+    </section>
 
-  </section>
+    <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
+      <TextsEditMenu v-if="checkComponent()">
+        <FieldsLayout :store="contact">
+        </FieldsLayout>
+      </TextsEditMenu>
+    </transition>
+
+
+  </div>
 </template>
 
 <script>
 	import moment from 'moment';
 	import TextsStore from "../components/Edit/Texts/TextsStore";
+	import EditIcon from "../components/Edit/EditIcon";
+	import TextsEditMenu from "../components/Edit/Texts/TextsEditMenu";
+	import FieldsLayout from "./Layouts/FieldsLayout";
 
+	const snackBarmsg = `
+	Inserez le lien complet (https:// compris) d'un réseau social pour
+	afficher son icon active.
+	`
 
 	export default {
 		name: "Footer",
+
+		components: {FieldsLayout, TextsEditMenu, EditIcon},
 		data: () => ({
+			type: 'text',
+			component: "SiteContact",
+      helpText: true,
 		}),
 		computed: {
-			contact() { return TextsStore.getStore("SiteContact").state; },
+			edit() { return TextsStore; },
+			contact() { return this.edit.getStore("SiteContact"); },
 
 			icons() {
 				return [
-					{icon: 'fa-facebook', url: this.contact.facebook.data,},
-					{icon: 'fa-tripadvisor', url: this.contact.tripadvisor.data,},
-					{icon: 'fa-google', url: this.contact.google.data,},
-					{icon: 'fa-twitter', url: this.contact.twitter.data,},
-					{icon: 'fa-instagram', url: this.contact.instagram.data,},
-					{icon: 'fa-linkedin', url: this.contact.linkedin.data,},
-					{icon: 'fa-snapchat', url: this.contact.snapchat.data,},
+					{icon: 'fa-facebook', url: this.contact.state.facebook.data,},
+					{icon: 'fa-tripadvisor', url: this.contact.state.tripadvisor.data,},
+					{icon: 'fa-google', url: this.contact.state.google.data,},
+					{icon: 'fa-twitter', url: this.contact.state.twitter.data,},
+					{icon: 'fa-instagram', url: this.contact.state.instagram.data,},
+					{icon: 'fa-linkedin', url: this.contact.state.linkedin.data,},
+					{icon: 'fa-snapchat', url: this.contact.state.snapchat.data,},
 				];
-			}
+			},
+
+      getIcons() {
+				let lst = [];
+				for (let i = 0; i < this.icons.length; i++) {
+					if (this.icons[i].url !== '') {
+						lst.push(this.icons[i]);
+          }
+        }
+        return lst;
+      }
 		},
+
 		methods: {
 			getCopyright() {
-				return moment().format('Y') + ' ' + this.contact.project_name.data;
+				return moment().format('Y') + ' ' + 'PersonnalWebsiteForall';
 			},
-		}
+			checkComponent() {
+				if (this.edit.state.active) {
+					let a = this.edit.state.currentStore.name === this.component;
+					if (a && this.helpText) {
+						this.helpText = false;
+						setTimeout(() => {
+							this.$snackbar.open({
+								message: snackBarmsg,
+								type: 'is-warning',
+								position: 'is-top',
+								actionText: 'Ok',
+                queu: 'false',
+								duration: 15000,
+							});
+						}, 500);
+					}
+
+					return a;
+				}
+				return false;
+			},
+		},
 	};
 </script>
 
@@ -95,7 +154,6 @@
     align-items: center;
     text-align: center;
     background-color: $separator;
-    /*height: 250px;*/
 
     ._btn {
       border-color: white;
@@ -110,7 +168,6 @@
 
   .level {
     margin-top: 30px;
-    width: 400px;
     .level-item {
       a {
         color: white;
@@ -119,6 +176,13 @@
           transition: transform .2s ease;
           font-size: 30px;
           transform: scale(1);
+          margin-left: 10px;
+          margin-right: 10px;
+
+          @media screen and (max-width: 430px) {
+            margin-left: 2px;
+            margin-right: 2px;
+          }
 
           &:hover {
             transition: transform .2s ease;

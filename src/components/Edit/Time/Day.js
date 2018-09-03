@@ -1,6 +1,7 @@
 import {Slot} from './Slot';
 import {DateTime} from 'luxon';
 import {getTime} from './utils';
+import TimeStore from './TimeStore';
 import Tools from "../../../utils/tools";
 
 
@@ -21,6 +22,16 @@ class Day {
 
 	get lastSlot() { return this.count ? this.slots[this.count - 1] : null; }
 
+	get next() {
+		if (this.index === 6) return TimeStore.state.days[0];
+		else return TimeStore.state.days[this.index + 1];
+	}
+
+	get prev() {
+		if (this.index === 0) return TimeStore.state.days[6];
+		else return TimeStore.state.days[this.index - 1];
+	}
+
 	upper() {
 		return this.name[0].toUpperCase() + this.name.slice(1, this.name.length);
 	}
@@ -31,7 +42,7 @@ class Day {
 			let end = DateTime.fromISO(slot.end);
 			let from = [start.hour, start.minute];
 			let to = [end.hour, end.minute];
-			this.slots.push(new Slot(from, to, this, slot.id, this.count -1));
+			this.slots.push(new Slot(from, to, this, slot.id, this.count));
 			this.setMinMax();
 		});
 	}

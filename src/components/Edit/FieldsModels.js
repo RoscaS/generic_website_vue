@@ -19,7 +19,7 @@ class SubTitle {
 }
 
 class Text {
-  constructor(label = 'Texte', rows = 3) {
+  constructor(label = 'Texte', rows = 4) {
     this.data = '';
     this.type = 'textarea';
     this.len = 400;

@@ -182,7 +182,6 @@ class SiteInfo extends Base {
 			name: new Field('Nom', 15),
 			name_add: new Field('Supplément', 9),
 			oppening: new Field("Date d'ouverture", 4),
-
 			adress: new Field('Adresse', 30),
 			city: new Field('Ville', 30),
 			post_code: new Field('CodePostal', 8),
@@ -198,15 +197,13 @@ class SiteContact extends Base {
 		this.name = "SiteContact";
 		this.url = urls.siteContact;
 		this.state = {
-			project_name: new Field(''),
-
-			facebook: new Field(),
-			tripadvisor: new Field(),
-			google: new Field(),
-			twitter: new Field(),
-			instagram: new Field(),
-			linkedin: new Field(),
-			snapchat: new Field(),
+			facebook: new Field('Facebook', 1000),
+			tripadvisor: new Field('Tripadvisor', 1000),
+			google: new Field('Google', 1000),
+			twitter: new Field('Twitter', 1000),
+			instagram: new Field('Instagram', 1000),
+			linkedin: new Field('Linkedin', 1000),
+			snapchat: new Field('Snapchat', 1000),
 		};
 	}
 }

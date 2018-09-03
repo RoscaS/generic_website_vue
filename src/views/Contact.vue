@@ -63,9 +63,6 @@
       phoneHref() { return `tel:${this.siteInfo.phone.data}`; },
       mailHref() { return `mailto:${this.siteInfo.mail.data}`; },
     },
-    mounted() {
-    	console.log(this.siteInfo)
-    }
   };
 </script>
 

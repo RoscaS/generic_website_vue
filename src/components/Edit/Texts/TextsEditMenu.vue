@@ -64,7 +64,7 @@
   }
 
   .custom-tabs {
-    min-height: 220px;
+    min-height: 240px;
     margin: 0 auto 0 auto;
   }
 

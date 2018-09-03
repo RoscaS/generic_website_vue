@@ -29,6 +29,7 @@
 			isActive() {
 				return this.edit.state.active;
 			},
+
 			authenticated() {
 				return this.$auth.isAuthenticated();
 			},

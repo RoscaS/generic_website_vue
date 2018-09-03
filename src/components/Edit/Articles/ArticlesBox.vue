@@ -75,6 +75,7 @@
       .level-left {
         margin-left: 5px;
         .diez {
+          font-style: italic;
           font-weight: bold;
           font-size: 25px;
           opacity: 0.35;
@@ -84,7 +85,7 @@
         .id {
           font-weight: bold;
           margin-top: 2px;
-          margin-left: -6px;
+          margin-left: -5px;
           font-size: 16px;
           z-index: 2;
         }

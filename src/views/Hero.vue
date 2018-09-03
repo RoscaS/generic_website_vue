@@ -40,21 +40,51 @@
                       :label="i.label">
             <div class="columns is-mobile is-variable fields-container">
               <div class="column is-6">
-                <label>{{ i.data[0].label }}:</label>
-                <b-input :len="i.data[0].len"
-                         :disabled="edit.loading"
-                         v-model="i.data[0].data">
-                </b-input>
-                <label>{{ i.data[1].label }}:</label>
-                <b-input :type="i.data[1].type"
-                         :rows="i.data[1].rows"
-                         maxlength="200"
-                         :disabled="edit.loading"
-                         v-model="i.data[1].data">
-                </b-input>
+
+
+
+
+                <!--<label>{{ i.data[0].label }}:</label>-->
+                <!--<b-input :len="i.data[0].len"-->
+                         <!--:disabled="edit.loading"-->
+                         <!--v-model="i.data[0].data">-->
+                <!--</b-input>-->
+
+                <v-text-field required
+                              v-model="i.data[0].data"
+                              color="white"
+                              :label="i.data[0].label"
+                              :counter="i.data[0].len"
+                              :disabled="edit.loading"
+                              :loading="edit.loading">
+                </v-text-field>
+
+                <v-textarea auto-grow required
+                            v-model="i.data[1].data"
+                            color="white"
+                            :label="i.data[1].label"
+                            :counter="200"
+                            :disabled="edit.loading"
+                            :loading="edit.loading">
+                </v-textarea>
+
+
+
+
+                <!--<label>{{ i.data[1].label }}:</label>-->
+                <!--<b-input :type="i.data[1].type"-->
+                         <!--:rows="i.data[1].rows"-->
+                         <!--maxlength="200"-->
+                         <!--:disabled="edit.loading"-->
+                         <!--v-model="i.data[1].data">-->
+                <!--</b-input>-->
+
+
+
+
               </div>
               <div class="column is-6">
-                <label>{{ i.data[2].label }}:</label>
+                <!--<label>{{ i.data[2].label }}:</label>-->
                 <IconPicker @selectIcon="returnIcon" :position="i.label"/>
               </div>
             </div>

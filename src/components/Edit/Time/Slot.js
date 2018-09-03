@@ -3,6 +3,7 @@ import {Interval} from 'luxon';
 import {getTime} from './utils';
 import Tools from "../../../utils/tools";
 import urls from "../../../urls";
+import TimeStore from "./TimeStore";
 
 
 class Slot {
@@ -16,6 +17,16 @@ class Slot {
 	get start() { return this.interval.start.toFormat('HH:mm'); }
 
 	get end() { return this.interval.end.toFormat('HH:mm'); }
+
+	get next() {
+		try { return this.day.slots[this.index + 1]; }
+		catch (e) { return null }
+	}
+
+	get prev() {
+		try { return this.day.slots[this.index - 1]; }
+		catch (e) { return null }
+	}
 
 	get pretty() {
 		let start = this.interval.start.toFormat('HH:mm');
