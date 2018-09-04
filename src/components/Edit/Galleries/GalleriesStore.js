@@ -1,8 +1,8 @@
 import {Gallery} from './GalleryObject';
 import Vue from 'vue';
 
-const logoUrl = 'http://bin.staticlocal.ch/localplace-logo/cc/cc7f8a75b95ae9509545dbe45aa341356db00e67/logo.png';
-// const logoUrl = false;
+// const logoUrl = 'http://bin.staticlocal.ch/localplace-logo/cc/cc7f8a75b95ae9509545dbe45aa341356db00e67/logo.png';
+const logoUrl = false;
 
 const GalleriesStore =  new Vue ({
   data: () => ({

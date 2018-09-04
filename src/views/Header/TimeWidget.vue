@@ -37,7 +37,6 @@
 
 			getMessage() {
 				let open = `background-color: #45a875`;
-				let pause = `background-color: #ffdd57`;
 				let closed = `background-color: #e0385a`;
 
 				if (this.isOpen) {
@@ -51,10 +50,10 @@
 				if (slot) {
 					let today = this.timeStore.today;
 					if (slot.day.name === today.name) {
-						this.color = pause;
+						this.color = closed;
 						return [
-							`Nous sommes en pause.`,
-							`Reprise à ${slot.start}`
+							`Nous sommes fermés.`,
+							`Ouverture à ${slot.start}`
 						];
 					} else if (slot.day.name === today.next.name) {
 						this.color = closed;

@@ -15,6 +15,13 @@
 <style scoped lang="scss">
   @import '../../static/sass/global';
 
+  h1 {
+    font-weight: bold !important;
+    font-family: 'Montserrat', sans-serif !important;
+    /*font-family: 'Open Sans', sans-serif;*/
+
+  }
+
   .underline {
     opacity: .65;
     margin: 15px auto 0 auto;
