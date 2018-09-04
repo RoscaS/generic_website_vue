@@ -4,7 +4,7 @@ import router from "./router";
 
 import FontAwesome from "@fortawesome/fontawesome-pro/css/all.min.css";
 import VueAnimate from "vue2-animate/dist/vue2-animate.min.css";
-// import Moment from "moment";
+import Moment from "moment";
 import Affix from "vue-affix";
 import ScrollActive from 'vue-scrollactive';
 
@@ -52,7 +52,7 @@ Vue.use(VueScrollTo, {
 Vue.use(VueRouter);
 Vue.use(VueScrollReveal);
 Vue.use(VeeValidate);
-// Vue.use(Moment);
+Vue.use(Moment);
 Vue.use(FontAwesome);
 Vue.use(VueAnimate);
 Vue.use(Affix);
