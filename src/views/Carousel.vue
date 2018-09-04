@@ -7,7 +7,7 @@
                      class="shadow"
                      bullets-outside
                      :autoplay="false"
-                     :parallax="false"
+                     :parallax="true"
                      speed="10000"
                      :slideRatio="1/3.7"
                      transition-speed='1250'>
