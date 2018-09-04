@@ -76,7 +76,6 @@
       onMove({relatedContext, draggedContext}) {},
 
       conditions(galleryName) {
-      	console.log('CONDITIONS')
         let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
         let clickedGallery = this.edit.getStore(galleryName);
         let otherGallery = galleries.filter(i => i != clickedGallery)[0];
@@ -90,9 +89,6 @@
       },
 
       checkFull(otherGallery) {
-      	console.log(otherGallery.isEmpty)
-      	console.log(otherGallery.count())
-      	console.log(otherGallery.limit)
         if (!otherGallery.isEmpty && otherGallery.count() >= otherGallery.limit) {
           otherGallery.lock();
         }
