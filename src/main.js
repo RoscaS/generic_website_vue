@@ -38,7 +38,7 @@ Vue.use(Vuetify, {
 });
 Vue.use(VueScrollTo, {
 	container: "body",
-	duration: 4500,
+	duration: 1500,
 	easing: "ease",
 	offset: 0,
 	cancelable: true,
