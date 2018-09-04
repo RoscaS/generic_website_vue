@@ -65,8 +65,8 @@
 					} else {
             this.color = closed;
 						return [
-							`Nous sommes fermés jusque`,
-							`${slot.day.name} à ${slot.start}`
+							`Nous sommes fermés.`,
+							`Ouverture: ${slot.day.name} à ${slot.start}`
 						];
 					}
 				} else {

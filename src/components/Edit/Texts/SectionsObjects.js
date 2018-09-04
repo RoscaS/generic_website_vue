@@ -179,8 +179,8 @@ class SiteInfo extends Base {
 		this.name = "SiteInfo";
 		this.url = urls.siteInfo;
 		this.state = {
-			name: new Field('Nom', 15),
-			name_add: new Field('Supplément', 9),
+			name: new Field('Nom', 25),
+			name_add: new Field('Supplément', 15),
 			oppening: new Field("Date d'ouverture", 4),
 			adress: new Field('Adresse', 30),
 			city: new Field('Ville', 30),

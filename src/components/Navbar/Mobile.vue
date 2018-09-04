@@ -2,7 +2,8 @@
   <div>
     <transition name="bounceLeft">
       <a class="no-tr" @click="toggleModal" v-show="!smallMenu">
-        <i class="far fa-bars fa-2x"></i>
+        <i class="far fa-bars fa-2x"
+           :class="{'burger-nav': logo}"></i>
       </a>
     </transition>
 
@@ -37,6 +38,7 @@
 
 <script>
 	import Logout from "./Logout";
+	import GalleriesStore from "../Edit/Galleries/GalleriesStore";
 	export default {
 		components: {Logout},
 		props: {links: {type: Array}},
@@ -46,6 +48,9 @@
 			canCancel: [true, false, true],
 
 		}),
+    computed: {
+			logo() { return GalleriesStore.logo; },
+    },
 		methods: {
 			toggleModal() {
 				this.smallMenu = !this.smallMenu;
@@ -84,6 +89,12 @@
 
 <style scoped lang="scss">
   @import "../../../static/sass/global";
+
+  .burger-nav {
+    position: absolute;
+    right: 20px;
+    top: 23px;
+  }
 
 
   #SmallLinkList {

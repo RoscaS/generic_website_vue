@@ -5,8 +5,8 @@
 
     <PromoRibbon/>
     <Header/>
-    <StickyNav/>
     <div id="StickyNav">
+    <StickyNav/>
       <Carousel/>
       <Presentation/>
       <Hero/>
@@ -26,7 +26,6 @@
 <script>
 	import Parallax from "../components/Parallax/Parallax";
 	import PromoRibbon from "../views/Promo/PromoRibbon";
-	import Header from "./Header/Header";
 	import Carousel from "../views/Carousel";
 	import Presentation from "../views/Presentation";
 	import Articles from "../views/Articles/Articles";
@@ -39,6 +38,7 @@
 	import Modals from "./Layouts/Modals";
 	import Time from "../components/Edit/Time/TimeEditMenu";
 	import OpeningHours from "./OpeningHours";
+	import Header from "./Header/Header";
 
 	export default {
 		name: "Public",

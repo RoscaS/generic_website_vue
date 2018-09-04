@@ -1,14 +1,15 @@
 <template>
+<section>
+  <EditIcon class="edit-icon" :store="store" :edit="edit" top="50px"/>
   <div class="carousel-top carousel-wrapper">
-    <EditIcon class="edit-icon" :store="store" :edit="edit" top="50px"/>
     <transition name="carousel-fade-in" appear>
       <vueper-slides :breakpoints="breakpoints"
-                     class="no-shadow"
+                     class="shadow"
                      bullets-outside
                      :autoplay="false"
-                     parallax
+                     :parallax="false"
                      speed="10000"
-                     :slideRatio="1/4"
+                     :slideRatio="1/3.7"
                      transition-speed='1250'>
         <vueper-slide v-for="(slide, i) in slides"
                       :key="i"
@@ -17,6 +18,7 @@
       </vueper-slides>
     </transition>
   </div>
+</section>
 </template>
 
 <script>
@@ -33,11 +35,13 @@
 			component: "Carousel",
 			type: "image",
 			breakpoints: {
-				1600: {slideRatio: 1 / 3.5},
-				1400: {slideRatio: 1 / 3},
-				1200: {slideRatio: 1 / 2.5},
-				1000: {slideRatio: 1 / 2},
-				600: {slideRatio: 1 / 1.5, arrows: false, touchable: true}
+				1600: {slideRatio: 1 / 3.1},
+				1450: {slideRatio: 1 / 2.7},
+				1367: {slideRatio: 1 / 3.7},
+				1281: {slideRatio: 1 / 3.9},
+				1025: {slideRatio: 1 / 3.2},
+				1000: {slideRatio: 1 / 1.9 , arrows: false, touchable: true},
+				915: {slideRatio: 1 / 1.7, arrows: false, touchable: true},
 			}
 		}),
 		computed: {
@@ -48,20 +52,18 @@
 						return this.slides;
 					}, 100);
 			}
-			// slides() {
-			//   return this.store.images;
-			// }
 		}
 	};
 </script>
 
 <style>
+
   .carousel-wrapper {
-    margin-top: 51px;
-    z-index: 0;
+  margin-top: 50px;
+  z-index: 0;
   }
 
-  .carousel-top .edit-icon {
+  .edit-icon {
     z-index: 2;
     position: absolute;
   }

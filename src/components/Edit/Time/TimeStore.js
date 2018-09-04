@@ -43,7 +43,10 @@ const TimeStore = new Vue({
 					slot = iterator.slots[0];
 
 					do {
-						if (slot.interval.isAfter(this.now)) return slot;
+						if (slot.interval.isAfter(this.now)) {
+
+							return slot;
+						}
 						slot = slot.next;
 
 					} while (slot);

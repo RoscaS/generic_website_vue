@@ -45,7 +45,7 @@
 
   .nav-bar {
     width: 100%;
-    z-index: 2;
+    z-index: 3;
   }
 
 </style>

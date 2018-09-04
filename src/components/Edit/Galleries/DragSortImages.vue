@@ -14,8 +14,9 @@
       <div v-for="image in store.images"
            class="column is-one-quarter"
            :class="[{placeHolder: isPlaceholder(image)}]"
+           @mousedown="conditions(image.gallery)"
            :key="image.id">
-        <ImageOverlay :image="image" @mousedown="conditions(image.gallery)"/>
+        <ImageOverlay :image="image"/>
       </div>
     </transition-group>
   </draggable>
@@ -75,6 +76,7 @@
       onMove({relatedContext, draggedContext}) {},
 
       conditions(galleryName) {
+      	console.log('CONDITIONS')
         let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
         let clickedGallery = this.edit.getStore(galleryName);
         let otherGallery = galleries.filter(i => i != clickedGallery)[0];
@@ -88,6 +90,9 @@
       },
 
       checkFull(otherGallery) {
+      	console.log(otherGallery.isEmpty)
+      	console.log(otherGallery.count())
+      	console.log(otherGallery.limit)
         if (!otherGallery.isEmpty && otherGallery.count() >= otherGallery.limit) {
           otherGallery.lock();
         }

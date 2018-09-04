@@ -7,113 +7,110 @@
 @import 'scrollBar';
 @import 'dragDrop';
 
-
 .container {
-  //width: 948px;
-  max-width: 948px;
+    //width: 948px;
+    max-width: 948px;
 }
 
 .debug {
-  border: 1px solid black;
+    border: 1px solid black;
+    z-index: 1000;
 }
 
 a {
-  font-family: 'Open Sans', sans-serif;
-  transition: color .2s ease;
-  color: $link;
-  font-size: 18px;
-
-  &:not(.no-tr) {
-    @extend .tr;
-  }
-
-  &:hover {
+    font-family: 'Open Sans', sans-serif;
     transition: color .2s ease;
-    color: $link-hover;
-  }
+    color: $link;
+    font-size: 18px;
+
+    &:not(.no-tr) {
+        @extend .tr;
+    }
+
+    &:hover {
+        transition: color .2s ease;
+        color: $link-hover;
+    }
 }
 
 p {
-  color: $paragraph;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 19px;
-  line-height: 30px;
-  text-decoration: none solid rgb(51, 51, 51);
-  word-spacing: 0;
-  //font-family: 'Lato', sans-serif;
+    color: $paragraph;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 19px;
+    line-height: 30px;
+    text-decoration: none solid rgb(51, 51, 51);
+    word-spacing: 0;
+    //font-family: 'Lato', sans-serif;
 }
 
 small {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-  font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
 
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
-  color: $header;
+    font-family: 'Montserrat', sans-serif;
+    color: $header;
 }
 
 .header {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 34px !important;
-  font-weight: 900;
-  line-height: 39.6px;
-  text-decoration: none solid rgb(255, 255, 255);
-  word-spacing: 0;
-  text-align: center;
-  width: 400px;
-  margin: 0 auto 0 auto;
-  padding-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px !important;
+    font-weight: 900;
+    line-height: 39.6px;
+    text-decoration: none solid rgb(255, 255, 255);
+    word-spacing: 0;
+    text-align: center;
+    width: 400px;
+    margin: 0 auto 0 auto;
+    padding-bottom: 10px;
 }
 
 ._btn {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
-  transition: 0.2s color ease-out, 0.3s background-color ease-out;
-  border-radius: 0;
-  border-color: $accent;
-  color: $accent;
-  background-color: transparent;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    transition: 0.2s color ease-out, 0.3s background-color ease-out;
+    border-radius: 0;
+    border-color: $accent;
+    color: $accent;
+    background-color: transparent;
 
-  &:hover {
-    transition: 0.2s color ease-in, 0.3s background-color ease-out;
-    color: white;
-    background-color: $accent;
-  }
+    &:hover {
+        transition: 0.2s color ease-in, 0.3s background-color ease-out;
+        color: white;
+        background-color: $accent;
+    }
 
-  &:focus {
-    box-shadow: none;
-  }
+    &:focus {
+        box-shadow: none;
+    }
 }
 
-
 .section-container {
-  margin: 0 auto 50px auto;
+    margin: 0 auto 50px auto;
 
-  @media screen and (max-width: 1366px) {
-    //margin-top: 60px;
-  }
+    @media screen and (max-width: 1366px) {
+        //margin-top: 60px;
+    }
 }
 
 .sub-title {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
-  line-height: 25px;
-  text-decoration: none solid rgb(255, 255, 255);
-  word-spacing: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    line-height: 25px;
+    text-decoration: none solid rgb(255, 255, 255);
+    word-spacing: 0;
 
-  margin: 15px auto 80px auto !important;
-  //font-size: 14px;
-  text-align: center;
-  font-style: italic;
+    margin: 15px auto 80px auto !important;
+    //font-size: 14px;
+    text-align: center;
+    font-style: italic;
 }
 
-
-
 .highlighted {
-  transition: background-color .5s ease;
-  background-color: $is-info;
+    transition: background-color .5s ease;
+    background-color: $is-info;
 }
 

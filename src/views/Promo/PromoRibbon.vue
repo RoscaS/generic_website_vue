@@ -14,11 +14,11 @@
       </div>
 
       <VueSlideUpDown :active="isOpen" :duration="1000">
-        <transition enter-active-class="fadeInDown"
-                    leave-active-class="fadeOutUp">
-          <Promo v-if="animateContent">
-          </Promo>
-        </transition>
+        <!--<transition enter-active-class="fadeInDown"-->
+                    <!--leave-active-class="fadeOutUp">-->
+          <!--<Promo v-if="animateContent">-->
+          <Promo></Promo>
+        <!--</transition>-->
       </VueSlideUpDown>
     </div>
   </transition>
@@ -59,9 +59,9 @@ export default {
         setTimeout(() => {
           this.masterTimer = false;
         }, 1000);
-        setTimeout(() => {
-          this.animateContent = true;
-        }, 100);
+        // setTimeout(() => {
+        //   this.animateContent = true;
+        // }, 100);
         this.timeout = setTimeout(() => {
           this.isOpen = true;
         }, 200);
@@ -70,7 +70,7 @@ export default {
     hidePromo() {
       clearTimeout(this.timeout);
       if (!this.isLocked && !this.masterTimer) {
-        this.animateContent = false;
+        // this.animateContent = false;
         this.isOpen = false;
       } else {
         setTimeout(() => {
@@ -82,7 +82,7 @@ export default {
       if (this.isLocked) {
         this.hoverTitle = "Cliquez pour vérouiller.";
         this.isLocked = false;
-        this.animateContent = false;
+        // this.animateContent = false;
         setTimeout(() => {
           this.isOpen = false;
         }, 50);
@@ -97,11 +97,11 @@ export default {
         this.hoverTitle = "Cliquez pour dévérouiller.";
         this.isLocked = true;
         setTimeout(() => {
-          this.animateContent = true;
+          // this.animateContent = true;
         }, 100);
         this.timeout = setTimeout(() => {
           this.isOpen = true;
-        }, 200);
+        }, 100);
         window.addEventListener("scroll", this.checkScroll);
         if (!this.isTouch) {
           this.$toast.open(
@@ -141,7 +141,7 @@ export default {
   line-height: 50px;
   letter-spacing: 1px;
   color: $ribbon-action-text;
-  z-index: 2;
+  z-index: 3;
   top: 55px;
   right: -70px;
   left: auto;
