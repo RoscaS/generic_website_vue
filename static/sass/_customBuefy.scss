@@ -2,6 +2,20 @@
 @import '~buefy/src/scss/utils/variables';
 @import '~buefy/src/scss/components/tabs';
 
+
+.custom-tabs-articles {
+    .b-tabs {
+
+      .tabs {
+        .is-active {
+          a {
+            color: $link-hover;
+          }
+        }
+      }
+    }
+}
+
 .custom-tabs-wrapper.textEdit {
   input {
     @media screen and (max-width: 768px) {

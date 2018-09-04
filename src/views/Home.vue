@@ -15,7 +15,7 @@
       <Parallax :idx="2" height="400px"/>
       <Contact/>
       <OpeningHours/>
-      <Review/>
+      <!--<Review/>-->
       <Footer/>
     </div>
   </div>
@@ -37,6 +37,8 @@
 	import Time from "../components/Edit/Time/TimeEditMenu";
 	import OpeningHours from "./OpeningHours";
 	import Header from "./Header/Header";
+
+
 
 	export default {
 		name: "Public",

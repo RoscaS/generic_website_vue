@@ -1,23 +1,14 @@
 <template>
   <div>
     <section class="section">
-      <div class="container">
-        <div class="content">
-          <v-tabs fixed-tabs v-model="activeTab"
-                  color="white"
-                  slider-color="blue">
-            <v-tab v-for="(category, i) in stores"
-                   :key="i"
-                   :ripple="false">
-              {{ category.name }}
-            </v-tab>
-            <v-tab-item v-for="(category, i) in stores" :key="i">
+      <div class="container custom-tabs-articles">
+          <b-tabs position="is-centered" class="block" v-model="activeTab" type="is-boxed">
+            <b-tab-item v-for="(category, i) in stores" :key="i" :label="category.name">
               <div class="content">
                 <CategoryTable :category="category"></CategoryTable>
               </div>
-            </v-tab-item>
-          </v-tabs>
-        </div>
+            </b-tab-item>
+          </b-tabs>
       </div>
     </section>
   </div>
@@ -45,7 +36,10 @@
 <style scoped lang="scss">
   @import '../../../static/sass/global';
 
+
   .content {
     margin-top: 40px;
   }
 </style>
+
+

@@ -3,12 +3,12 @@
     <div>
       <b-taglist attached div class="control">
         <div class="arrow-icon">
-          <i class="fal fa-long-arrow-right fa-2x"></i>
+          <i class="fas fa-long-arrow-right"></i>
         </div>
-        <b-tag size="is-large" type="is-dark">
+        <b-tag size="is-medium" type="is-dark">
           {{interval.start}}
         </b-tag>
-        <b-tag size="is-large" type="is-light" closable @close="remove">
+        <b-tag size="is-medium" type="is-light" closable @close="remove">
           {{interval.end}}
         </b-tag>
       </b-taglist>
@@ -34,7 +34,7 @@
     color: black;
     position: absolute;
     top: 9%;
-    left: 38.5%;
+    left: 44%;
     transform: scale(0.8);
   }
 

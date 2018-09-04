@@ -69,12 +69,13 @@ class Day {
 	}
 
 	setMinMax() {
-		this.min = this.lastSlot.interval.end;
+		this.min = this.lastSlot ? this.lastSlot.interval.end : getTime(0, 0);
 		this.max = getTime(23, 59);
 	}
 
 	removeSlot(idx) {
-		this.slots.splice(idx, 1)
+		this.slots.splice(idx, 1);
+		this.setMinMax();
 	}
 
 	get pretty() {

@@ -31,8 +31,7 @@
     "vue-slide-up-down": "^1.3.3",
     "vue2-animate": "^2.0.0",
     "vuedraggable": "^2.16.0",
-    "vueperslides": "^1.13.1",
-    "vuetify": "^1.1.14"
+    "vueperslides": "^1.13.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",

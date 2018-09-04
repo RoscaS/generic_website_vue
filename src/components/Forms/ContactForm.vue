@@ -3,9 +3,9 @@
   <form @submit.prevent="preValidate" class="form">
     <section>
 
-      <b-field class="name"
-               :message="errors.first('name')"
+      <b-field class="name" type="is-light"
                :type="errors.first('name')? 'is-danger': 'input'"
+               :message="errors.first('name')"
                v-scroll-reveal="{
                  origin: 'right',
                  distance: '100px',
@@ -23,7 +23,7 @@
         </b-input>
       </b-field>
 
-      <b-field class="email"
+      <b-field class="email" type="is-light"
                :message="errors.first('email')"
                :type="errors.first('email')? 'is-danger': 'input'"
                v-scroll-reveal="{
@@ -42,7 +42,7 @@
         </b-input>
       </b-field>
 
-      <b-field :message="errors.first('textarea')"
+      <b-field :message="errors.first('textarea')" type="is-light"
                :type="errors.first('textarea')? 'is-danger': 'input'"
                v-scroll-reveal="{
                  origin: 'right',

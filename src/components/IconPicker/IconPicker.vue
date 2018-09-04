@@ -2,19 +2,11 @@
 
   <div id="iconPicker" class="">
 
-    <v-text-field v-model="search"
-                  class="searchField"
-                  color="white"
-                  label="Recherche">
-    </v-text-field>
-
-
-
-    <!--<b-input maxlength="200"-->
-             <!--placeholder="Recherche"-->
-             <!--:has-counter='false'-->
-             <!--v-model="search">-->
-    <!--</b-input>-->
+    <b-input maxlength="200"
+             placeholder="Recherche"
+             :has-counter='false'
+             v-model="search">
+    </b-input>
 
     <scrolly class="body"
              :parentScroll="false"

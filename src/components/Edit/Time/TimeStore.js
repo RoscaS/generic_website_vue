@@ -28,7 +28,7 @@ const TimeStore = new Vue({
 		isOpen() {
 			let slot = this.today.slots[0];
 			while (slot) {
-				if (slot.interval.contains(this.now)) return slot.start;
+				if (slot.interval.contains(this.now)) return slot.end;
 				slot = slot.next;
 			}
 			return false;

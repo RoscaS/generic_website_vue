@@ -30,11 +30,12 @@
   				if (value) {
   					setTimeout(() => {
   						this.$snackbar.open({
-  							message: "Sélectionnez un ou plusieurs jours pour éditer l'horaire.",
-  							type: 'is-warning',
+  							message: "Sélectionnez un ou plusieurs jours pour en éditer l'horaire.",
+  							type: 'is-success',
   							position: 'is-top',
+                queue: false,
   							actionText: 'Ok',
-  							duration: 15000,
+  							duration: 10000,
   						});
   					}, 500);
   				} else {

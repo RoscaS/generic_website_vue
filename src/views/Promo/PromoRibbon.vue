@@ -35,8 +35,7 @@ export default {
     return {
       isOpen: false,
       animateContent: false,
-      contentAnimation: false,
-      masterTimer: false,
+      // masterTimer: false,
       timeout: null,
       isLocked: false,
       hoverTitle: "Cliquez pour vérouiller."
@@ -55,10 +54,10 @@ export default {
     },
     showPromo() {
       if (!this.isLocked) {
-        this.masterTimer = true;
-        setTimeout(() => {
-          this.masterTimer = false;
-        }, 1000);
+        // this.masterTimer = true;
+        // setTimeout(() => {
+          // this.masterTimer = false;
+        // }, 1000);
         // setTimeout(() => {
         //   this.animateContent = true;
         // }, 100);
@@ -69,7 +68,7 @@ export default {
     },
     hidePromo() {
       clearTimeout(this.timeout);
-      if (!this.isLocked && !this.masterTimer) {
+      if (!this.isLocked) {
         // this.animateContent = false;
         this.isOpen = false;
       } else {

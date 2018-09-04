@@ -5,8 +5,8 @@ import axios from 'axios';
 let webAuth = new auth0.WebAuth({
 	domain: 'jrosk.eu.auth0.com',
 	clientID: '3zna8lwrR2rHoWxxwQHEqgRn6dPezrcI',
-	// redirectUri: 'http://localhost:8080/callback',
-	redirectUri: 'http://jrosk.ch/callback',
+	redirectUri: 'http://localhost:8080/callback',
+	// redirectUri: 'http://jrosk.ch/callback',
 	audience: 'http://jrosk.ch:8000',
 	responseType: 'token id_token',
 	scope: 'openid profile',
@@ -67,13 +67,9 @@ let auth = new Vue({
 			return new Date().getTime() < this.expiresAt;
 		},
 		handleAuthentication() {
-			console.log('>>> handleAuthentication');
 			return new Promise((resolve, reject) => {
-				console.log('>>> handleAuthentication callback');
 				webAuth.parseHash((err, authResult) => {
 					if (authResult && authResult.accessToken && authResult.idToken) {
-						console.log('>>> accept');
-						console.log(authResult);
 						this.expiresAt = authResult.expiresIn;
 						this.accessToken = authResult.accessToken;
 						this.token = authResult.idToken;

@@ -7,7 +7,7 @@
           <div class="drop-zone">
             <Upload @file="uploadImage" :padding="'40px'"/>
           </div>
-          <a class="show-stock no-tr">Afficher le stock</a>
+          <!--<a class="show-stock no-tr">Afficher le stock</a>-->
         </div>
 
         <div v-else
@@ -19,33 +19,43 @@
         </div>
       </header>
 
+
       <div class="card-content">
-        <v-text-field required v-model="data.name" color="blue" label="Nom"
-                      :counter="30" :disabled="edit.loading"
-                      :loading="edit.loading">
-        </v-text-field>
+        <b-input v-model="data.name"
+                 placeholder="Nom"
+                 :maxlength="30"
+                 :loading="edit.loading"
+                 :disabled="edit.loading">
+        </b-input>
 
-        <v-textarea auto-grow v-model="data.description" color="blue"
-                    :counter="200" rows="0" label="Description"
-                    :disabled="edit.loading" :loading="edit.loading">
-        </v-textarea>
+        <b-input v-model="data.description"
+                 type="textarea"
+                 placeholder="Description"
+                 :rows="1"
+                 :maxlength="200"
+                 :loading="edit.loading"
+                 :disabled="edit.loading">
+        </b-input>
 
-        <div class="is-pulled-right categories">
-          <b-field grouped v-if="is.article && is.create" type="is-dark">
-            <b-select placeholder="Catégorie"
-                      @input="selectCat" :disabled="edit.loading">
-              <option v-for="cat in categories" :value="cat" :key="cat.id">
-                {{ cat.name }}
-              </option>
-            </b-select>
-          </b-field>
-        </div>
-
-        <v-text-field v-if="is.article" required v-model="data.price"
-                      color="blue" type="number" label="Prix" :min="0"
-                      :step=".01" :disabled="edit.loading"
-                      :loading="edit.loading">
-        </v-text-field>
+        <b-field grouped v-if="is.article && is.create">
+          <b-select placeholder="Catégorie"
+                    @input="selectCat" :disabled="edit.loading">
+            <option v-for="cat in categories" :value="cat" :key="cat.id">
+              {{ cat.name }}
+            </option>
+          </b-select>
+          <b-input v-if="is.article"
+                   style="width: 175px"
+                   class="price-style"
+                   type="number"
+                   v-model="data.price"
+                   placeholder="Prix"
+                   :maxlength="30"
+                   :min="0"
+                   :loading="edit.loading"
+                   :disabled="edit.loading">
+          </b-input>
+        </b-field>
       </div>
 
       <footer class="card-footer">
@@ -65,122 +75,122 @@
 </template>
 
 <script>
-  import CategoriesStore from "./CategoriesStore";
-  import Upload from "../Upload";
+	import CategoriesStore from "./CategoriesStore";
+	import Upload from "../Upload";
 
-  export default {
-    name: "ArticlesCard",
-    components: {Upload},
-    data: () => ({
-      title: '',
-      icon: '',
-      is: {edit: false, create: false, article: false, category: false},
-      data: {name: '', description: '', price: '', category: ''},
+	export default {
+		name: "ArticlesCard",
+		components: {Upload},
+		data: () => ({
+			title: '',
+			icon: '',
+			is: {edit: false, create: false, article: false, category: false},
+			data: {name: '', description: '', price: '', category: ''},
 
-    }),
-    computed: {
-      edit() {return CategoriesStore;},
-      newItem() {return this.edit.newItem;},
-      editItem() {return this.edit.editItem;},
-      tempImage() {return this.edit.state.tempImage;},
-      categories() {return this.edit.state.stores;},
-    },
-    watch: {
-      newItem(value) {
-        if (value) {
-          this.is.create = true;
-          this.icon = 'fa-plus';
-          this.setType(value);
-          this.icon = 'fa-pen';
-        } else this.end();
-      },
-      editItem(value) {
-        if (value) {
-          this.is.edit = true;
-          this.icon = 'fa-pen';
-          this.setType(value.type);
-          for (let i in this.data) {
-            this.editItem[i] ? this.data[i] = this.editItem[i] : null;
-          }
-        } else this.end();
-      },
-    },
-    methods: {
-      selectCat(value) {this.data.category = value;},
-      setType(type) {
-        if (type == 'article') {
-          this.is.article = true;
-          this.title = 'Article';
-        }
-        else if (type == 'category') {
-          this.is.category = true;
-          this.title = 'Catégorie';
-        }
-      },
-      setPosition() {
-        if (this.is.article) return {top: '10%'};
-        else return {top: '15%'};
-      },
-      setBackground() {
-        if (this.is.article && this.is.create) return {backgroundColor: '#CCC'};
-        else return {backgroundColor: '#167DF0'};
-      },
-      updateStore() {
-        for (let i in this.data) {
-          if (this.editItem[i]) this.edit.editItem[i] = this.data[i];
-        }
-      },
-      uploadImage(file) {
-        let formData = new FormData();
-        formData.append('name', 'tempArticleImage');
-        formData.append('image', file);
-        formData.append('gallery', 'Articles');
-        this.edit.uploadImage(formData);
-      },
-      validate() {
-        if (this.is.edit) {
-          this.updateStore();
-          if (this.is.article) this.editItem.patch();
-          else this.edit.state.editItem.put();
-        } else {
-          if (this.is.article) this.createArticle();
-          else this.createCategory();
-        }
-        setTimeout(() => {this.end();}, 2000);
-      },
-      createCategory() {
-        this.edit.createCategory({
-          slug: this.data.name,
-          name: this.data.name,
-          description: this.data.description,
-        });
-      },
-      createArticle() {
-        let category = this.edit.getStore(this.data.category.name);
-        category.postArticle({
-          name: this.data.name,
-          description: this.data.description,
-          price: this.data.price,
-          category: this.data.category.name,
-          image: this.edit.state.tempImage.id
-        });
-      },
-      cancel() {
-        if (this.is.edit) this.editItem.restore();
-        if (this.tempImage) {
-          this.tempImage.delete(false);
-          this.edit.tempImage = null;
-        }
-        this.end();
-      },
-      end() {
-        for (let i in this.is) this.is[i] = false;
-        for (let i in this.data) this.data[i] = '';
-        this.edit.clearNewItem();
-        this.edit.clearEditItem();
-      },
-    }
-  };
+		}),
+		computed: {
+			edit() {return CategoriesStore;},
+			newItem() {return this.edit.newItem;},
+			editItem() {return this.edit.editItem;},
+			tempImage() {return this.edit.state.tempImage;},
+			categories() {return this.edit.state.stores;},
+		},
+		watch: {
+			newItem(value) {
+				if (value) {
+					this.is.create = true;
+					this.icon = 'fa-plus';
+					this.setType(value);
+					this.icon = 'fa-pen';
+				} else this.end();
+			},
+			editItem(value) {
+				if (value) {
+					this.is.edit = true;
+					this.icon = 'fa-pen';
+					this.setType(value.type);
+					for (let i in this.data) {
+						this.editItem[i] ? this.data[i] = this.editItem[i] : null;
+					}
+				} else this.end();
+			},
+		},
+		methods: {
+			selectCat(value) {this.data.category = value;},
+			setType(type) {
+				if (type == 'article') {
+					this.is.article = true;
+					this.title = 'Article';
+				}
+				else if (type == 'category') {
+					this.is.category = true;
+					this.title = 'Catégorie';
+				}
+			},
+			setPosition() {
+				if (this.is.article) return {top: '10%'};
+				else return {top: '15%'};
+			},
+			setBackground() {
+				if (this.is.article && this.is.create) return {backgroundColor: '#CCC'};
+				else return {backgroundColor: '#167DF0'};
+			},
+			updateStore() {
+				for (let i in this.data) {
+					if (this.editItem[i]) this.edit.editItem[i] = this.data[i];
+				}
+			},
+			uploadImage(file) {
+				let formData = new FormData();
+				formData.append('name', 'tempArticleImage');
+				formData.append('image', file);
+				formData.append('gallery', 'Articles');
+				this.edit.uploadImage(formData);
+			},
+			validate() {
+				if (this.is.edit) {
+					this.updateStore();
+					if (this.is.article) this.editItem.patch();
+					else this.edit.state.editItem.put();
+				} else {
+					if (this.is.article) this.createArticle();
+					else this.createCategory();
+				}
+				setTimeout(() => {this.end();}, 2000);
+			},
+			createCategory() {
+				this.edit.createCategory({
+					slug: this.data.name,
+					name: this.data.name,
+					description: this.data.description,
+				});
+			},
+			createArticle() {
+				let category = this.edit.getStore(this.data.category.name);
+				category.postArticle({
+					name: this.data.name,
+					description: this.data.description,
+					price: this.data.price,
+					category: this.data.category.name,
+					image: this.edit.state.tempImage.id
+				});
+			},
+			cancel() {
+				if (this.is.edit) this.editItem.restore();
+				if (this.tempImage) {
+					this.tempImage.delete(false);
+					this.edit.tempImage = null;
+				}
+				this.end();
+			},
+			end() {
+				for (let i in this.is) this.is[i] = false;
+				for (let i in this.data) this.data[i] = '';
+				this.edit.clearNewItem();
+				this.edit.clearEditItem();
+			},
+		}
+	};
 </script>
 
 <style scoped lang="scss">

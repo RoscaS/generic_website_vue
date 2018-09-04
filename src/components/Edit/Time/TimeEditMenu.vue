@@ -9,7 +9,7 @@
                 <b-checkbox v-model="day.checked"
                             @input="select(day)"></b-checkbox>
               </div>
-              <h3>{{day.upper()}}:</h3>
+              <h4>{{day.upper()}}:</h4>
             </div>
             <div class="time-slots">
               <div class="time-slot" v-for="slot in day.slots">
@@ -43,20 +43,39 @@
 		name: "TimeEditMenu",
 		components: {TimeInput, Title, TimeSlot},
 		data: () => ({
+			help: true,
 		}),
 		computed: {
 			edit() { return TimeStore; },
 			days() { return this.edit.state.days; },
-      selected() { return this.edit.state.selected; },
+			selected() { return this.edit.state.selected; },
 		},
 		methods: {
 			select(day) {
 				if (day.checked) {
+					this.helpText();
 					this.selected.push(day);
 				} else {
 					let idx = this.selected.indexOf(this.selected.find(i => i === day));
 					this.selected.splice(idx, 1);
 				}
+			},
+			helpText() {
+				if (this.help) {
+					this.help = false;
+          setTimeout(() => {
+            this.$snackbar.open({
+              message:
+                `Introduisez une heure de début pour débloquer le second champ.
+                Pour déselectionner toutes les selections, utilisez le bouton jaune.`,
+              type: 'is-success',
+              position: 'is-bottom',
+              queue: false,
+              actionText: 'Ok',
+              duration: 10000,
+            });
+          }, 100);
+        }
 			}
 		},
 
@@ -71,21 +90,22 @@
     border-radius: 10px;
     padding: 40px;
     padding-bottom: 50px;
-    min-height: 530px;
+    min-height: 568px;
     background-color: rgba(48, 93, 120, 0.66);
 
     .weekdays {
-      margin: 3px 0 3px 0;
+      margin: 4px 0 4px 0;
 
       .weekday {
         display: inline-block;
         width: 160px;
+        margin-right: 10px;
 
         .check-box {
           margin-right: 10px;
           display: inline-block;
         }
-        h3 {
+        h4 {
           display: inline-block;
 
           color: white;
@@ -115,10 +135,10 @@
         border-radius: 4px;
         background-color: #FFDD57;
         cursor: pointer;
-        width: 20px;
-        padding: 0 3px 0 3px;
+        width: 24px;
+        padding: 0 4px 0 4px;
         margin-top: -25px;
-        margin-left: -1px;
+        margin-left: -2px;
       }
 
       h2 {

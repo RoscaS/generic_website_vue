@@ -5,20 +5,22 @@
                     class="start level-item"
                     v-model="start"
                     :increment-minutes="15"
-                    :min-time="minTime"
-                    :max-time="maxTime">
+                    :min-time="startMinTime">
+                    <!--:max-time="startMaxTime">-->
       </b-timepicker>
       <div class="arrow-icon level-item">
         <i class="far fa-long-arrow-right fa-2x"></i>
       </div>
       <b-timepicker placeholder="Fin"
                     class="end level-item"
+                    :disabled="!start"
                     v-model="end"
                     :increment-minutes="15"
-                    :min-time="minTime"
-                    :max-time="maxTime">
+                    :min-time="endMinTime">
+                    <!--:max-time="endMaxTime">-->
       </b-timepicker>
-      <button class="button is-success" @click="addSlot">
+      <button class="button is-success" @click="addSlot"
+              :disabled="!start || !end">
         <i class="fa fa-check"></i>
       </button>
     </div>
@@ -26,28 +28,21 @@
 </template>
 
 <script>
-	import TimeStore from './TimeStore';
+	import {getTime} from './utils';
 
 	export default {
 		name: "TimeInput",
 		props: {
 			selected: {type: Array}
 		},
-    data: () => ({
-      start: null,
-      end: null,
-    }),
-		methods: {
-			addSlot() {
-				let start = [this.start.getHours(), this.start.getMinutes()];
-				let end = [this.end.getHours(), this.end.getMinutes()];
-				this.selected.forEach(i => {
-					i.setSlot(start, end)
-				});
-			}
-		},
+		data: () => ({
+      endMinTime: null,
+      // endMaxTime: null,
+			start: null,
+			end: null,
+		}),
 		computed: {
-			minTime: {
+			startMinTime: {
 				get() {
 					let min = this.selected[0].min;
 					this.selected.forEach(i => {
@@ -58,16 +53,34 @@
 					return new Date(min.toISO());
 				}
 			},
-			maxTime: {
-				get() {
-					let max = this.selected[0].max;
-					this.selected.forEach(i => {
-						if (i.max > max) {
-							max = i.max;
-						}
-					});
-					return new Date(max.toISO());
-				}
+			// startMaxTime: {
+			// 	get() {
+			// 		let max = this.selected[0].max;
+			// 		this.selected.forEach(i => {
+			// 			if (i.max > max) {
+			// 				max = i.max;
+			// 			}
+			// 		});
+			// 		return new Date(max.toISO());
+			// 	}
+			// }
+		},
+    watch: {
+			start(value) {
+				let minTime = getTime(value.getHours(), value.getMinutes());
+        this.endMinTime = new Date(minTime.toISO())
+      }
+    },
+		methods: {
+			addSlot() {
+				let start = [this.start.getHours(), this.start.getMinutes()];
+				let end = [this.end.getHours(), this.end.getMinutes()];
+				this.selected.forEach(i => {
+					i.setSlot(start, end);
+				});
+			},
+			poule() {
+				console.log('ici');
 			}
 		},
 	};

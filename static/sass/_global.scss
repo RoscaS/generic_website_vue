@@ -7,6 +7,8 @@
 @import 'scrollBar';
 @import 'dragDrop';
 
+$link: hsl(348, 73%, 55%);
+
 .container {
     //width: 948px;
     max-width: 948px;
@@ -18,6 +20,7 @@
 }
 
 a {
+    outline: 0;
     font-family: 'Open Sans', sans-serif;
     transition: color .2s ease;
     color: $link;
@@ -32,6 +35,12 @@ a {
         color: $link-hover;
     }
 }
+
+
+select {
+    outline: 0;
+}
+
 
 p {
     color: $paragraph;
@@ -113,4 +122,5 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color .5s ease;
     background-color: $is-info;
 }
+
 
