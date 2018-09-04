@@ -1,8 +1,6 @@
 <template>
   <div>
     <Modals/>
-
-
     <PromoRibbon/>
     <Header/>
     <div id="StickyNav">
@@ -17,7 +15,7 @@
       <Parallax :idx="2" height="400px"/>
       <Contact/>
       <OpeningHours/>
-      <!--<Review/>-->
+      <Review/>
       <Footer/>
     </div>
   </div>
