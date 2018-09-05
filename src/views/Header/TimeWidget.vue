@@ -49,7 +49,8 @@
 				let slot = this.nextTimeOpen;
 				if (slot) {
 					let today = this.timeStore.today;
-					if (slot.day.name === today.name) {
+					let now = this.timeStore.now;
+					if (slot.day.name === today.name && slot.interval.start > now) {
 						this.color = closed;
 						return [
 							`Nous sommes fermés.`,

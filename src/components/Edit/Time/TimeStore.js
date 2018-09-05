@@ -44,7 +44,6 @@ const TimeStore = new Vue({
 
 					do {
 						if (slot.interval.isAfter(this.now)) {
-
 							return slot;
 						}
 						slot = slot.next;
@@ -52,6 +51,10 @@ const TimeStore = new Vue({
 					} while (slot);
 				}
 				iterator = iterator.next;
+
+				if (iterator.name === initial && iterator.count) {
+					return iterator.slots[0]
+				}
 
 			} while (iterator.name !== initial);
 

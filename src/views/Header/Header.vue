@@ -1,5 +1,5 @@
 <template>
-  <section id="Home" class="">
+  <section class="home">
     <EditIcon :edit="edit" :store="store" top="20px"/>
 
     <div class="site-title columns is-centered is-mobile">
@@ -100,7 +100,7 @@
     margin-top: 120px !important;
   }
 
-  #Home {
+  .home {
     height: 260px;
     margin-top: 50px;
     margin-bottom: 100px;
