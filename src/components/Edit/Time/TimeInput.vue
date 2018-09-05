@@ -79,9 +79,6 @@
 					i.setSlot(start, end);
 				});
 			},
-			poule() {
-				console.log('ici');
-			}
 		},
 	};
 </script>

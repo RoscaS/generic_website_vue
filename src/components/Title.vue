@@ -14,18 +14,10 @@
 <style scoped lang="scss">
   @import '../../static/sass/global';
 
-  /*h1 {*/
-    /*font-family: 'Montserrat', sans-serif !important;*/
-    /*font-family: 'Open Sans', sans-serif;*/
-
-  /*}*/
-
   .header {
       font-family: 'Montserrat', sans-serif;
       font-weight: bold;
       text-align: center;
-      /*width: 400px;*/
-      /*margin: 0 auto 0 auto;*/
       padding-bottom: 10px;
   }
 

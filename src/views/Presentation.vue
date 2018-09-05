@@ -8,10 +8,14 @@
     </div>
     <div class="columns is-variable is-8">
       <div class="column">
-        <EditIcon :edit="galleriesEdit" :store="store.gallery"
-                  top="20px" right="20px" :small="true"/>
-        <img :src="image"
-             v-scroll-reveal="sReveal('bottom', 300, 10)"/>
+        <SectionImage v-scroll-reveal="sReveal('bottom', 300, 10)"
+                      class="image"
+                      top="20px"
+                      right="20px"
+                      :image="image"
+                      :edit="galleriesEdit"
+                      :store="store.gallery">
+        </SectionImage>
       </div>
       <div class="column"
            v-scroll-reveal="sReveal('right', 350, 400)">
@@ -24,42 +28,37 @@
 </template>
 
 <script>
-  import ViewsMixin from '../mixins/ViewsMixin';
-  import EditIcon from '../components/Edit/EditIcon';
+	import ViewsMixin from '../mixins/ViewsMixin';
+	import EditIcon from '../components/Edit/EditIcon';
+	import SectionImage from "../components/SectionImage";
 
-  export default {
-    name: "Presentation",
-    mixins: [ViewsMixin],
-    components: {EditIcon},
-    data: () => ({
-      component: "Presentation",
-      type: 'text',
-    }),
-    computed: {
-      image() {
-        try {
-          let gallery = this.galleriesEdit.getStore('Presentation');
-          return this.getImage(0, gallery).image;
-        } catch (e) {
-          setTimeout(() => {return this.computed}, 100);
-        }
-      }
-    },
-  };
+	export default {
+		name: "Presentation",
+		mixins: [ViewsMixin],
+		components: {SectionImage, EditIcon},
+		data: () => ({
+			component: "Presentation",
+			type: 'text',
+		}),
+		computed: {
+			image() {
+				try {
+					let gallery = this.galleriesEdit.getStore('Presentation');
+					return this.getImage(0, gallery).image;
+				} catch (e) {
+					setTimeout(() => {return this.computed;}, 100);
+				}
+			}
+		},
+	};
 </script>
 
 <style scoped lang="scss">
   @import '../../static/sass/global';
 
-  .section {
-    margin-top: -50px !important;
-    @media screen and (max-width: 1366px) {
-      margin-top: 25px !important;
-    }
-  }
-
   .text1 {
     margin-bottom: 40px !important;
   }
+
 </style>
 

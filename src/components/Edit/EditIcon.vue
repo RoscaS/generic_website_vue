@@ -70,6 +70,10 @@
       transition: .5s background-color ease;
       background-color: #d03656;
     }
+
+    i {
+      outline: 0;
+    }
   }
 </style>
 

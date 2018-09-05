@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Modals/>
+    <Modals id="Home"/>
     <PromoRibbon/>
     <Header/>
     <div id="StickyNav">

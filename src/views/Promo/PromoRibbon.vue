@@ -1,38 +1,25 @@
 <template>
-  <div>
-    <div id="Home"></div>
-    <transition name="promo-fade-in" appear>
-      <div class="collapse">
-        <div class="collapse-trigger"
-             @mouseenter="showPromo"
-             @mouseleave="hidePromo"
-             @click="lockPromo">
+  <transition name="promo-fade-in" appear>
+    <div class="collapse">
+      <div class="collapse-trigger"
+           @mouseenter="showPromo"
+           @mouseleave="hidePromo"
+           @click="lockPromo">
 
-          <div class="mobile-ribbon-wrapper">
-
-            <div class="corner-ribbon top-right"
-                 :title="hoverTitle"
-                 slot="trigger">
-              Action spéciale !
-            </div>
-            <!--<div class="corner-ribbon-mobile top-right is-hidden-desktop"-->
-                 <!--:title="hoverTitle"-->
-                 <!--slot="trigger">-->
-              <!--Action spéciale !-->
-            <!--</div>-->
+        <div class="ribbon-wrapper">
+          <div class="corner-ribbon top-right"
+               :title="hoverTitle"
+               slot="trigger">
+            Action spéciale !
           </div>
         </div>
-
-        <VueSlideUpDown :active="isOpen" :duration="1000">
-          <!--<transition enter-active-class="fadeInDown"-->
-          <!--leave-active-class="fadeOutUp">-->
-          <!--<Promo v-if="animateContent">-->
-          <Promo></Promo>
-          <!--</transition>-->
-        </VueSlideUpDown>
       </div>
-    </transition>
-  </div>
+
+      <VueSlideUpDown :active="isOpen" :duration="1000">
+        <Promo></Promo>
+      </VueSlideUpDown>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -46,7 +33,6 @@
 			return {
 				isOpen: false,
 				animateContent: false,
-				// masterTimer: false,
 				timeout: null,
 				isLocked: false,
 				hoverTitle: "Cliquez pour vérouiller."
@@ -65,13 +51,6 @@
 			},
 			showPromo() {
 				if (!this.isLocked) {
-					// this.masterTimer = true;
-					// setTimeout(() => {
-					// this.masterTimer = false;
-					// }, 1000);
-					// setTimeout(() => {
-					//   this.animateContent = true;
-					// }, 100);
 					this.timeout = setTimeout(() => {
 						this.isOpen = true;
 					}, 200);
@@ -80,7 +59,6 @@
 			hidePromo() {
 				clearTimeout(this.timeout);
 				if (!this.isLocked) {
-					// this.animateContent = false;
 					this.isOpen = false;
 				} else {
 					setTimeout(() => {
@@ -92,7 +70,6 @@
 				if (this.isLocked) {
 					this.hoverTitle = "Cliquez pour vérouiller.";
 					this.isLocked = false;
-					// this.animateContent = false;
 					setTimeout(() => {
 						this.isOpen = false;
 					}, 50);
@@ -107,7 +84,6 @@
 					this.hoverTitle = "Cliquez pour dévérouiller.";
 					this.isLocked = true;
 					setTimeout(() => {
-						// this.animateContent = true;
 					}, 100);
 					this.timeout = setTimeout(() => {
 						this.isOpen = true;
@@ -157,28 +133,14 @@
     left: auto;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+    @media screen and (max-width: 768px) {
+      top: 40px;
+      right: -84px;
+    }
   }
 
-  .mobile-ribbon-wrapper {
+  .ribbon-wrapper {
     position: relative;
   }
 
-  .corner-ribbon-mobile {
-    font-family: "Open Sans", sans-serif;
-    cursor: default;
-    font-weight: bold;
-    font-size: 20px;
-    width: 250px;
-    background: $ribbon-action;
-    position: absolute;
-    text-align: center;
-    line-height: 50px;
-    letter-spacing: 1px;
-    color: $ribbon-action-text;
-    z-index: 3;
-    top: 40px;
-    left: 180px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }
 </style>
