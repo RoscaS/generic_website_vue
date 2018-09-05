@@ -22,7 +22,7 @@
       <ul id="SmallLinkList" class="content">
         <li v-for="link in links">
           <h2>
-            <a :href="'#' + link.id">
+            <a :href="link.id">
               <i class="far fa-fw" :class="link.icon"></i>
               {{link.name}}
             </a>

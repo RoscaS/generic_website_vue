@@ -65,5 +65,9 @@
 	};
 </script>
 
-<style scoped>
+<style>
+  body {
+      overflow-x: hidden !important;
+  }
+
 </style>

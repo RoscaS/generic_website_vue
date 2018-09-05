@@ -64,7 +64,7 @@ const TextsStore = new Vue({
 			Dialog.confirm({
 				message: 'Cette action annulera les modifications!',
 				confirmText: "Continuer",
-				cancelText: 'Sauver & quiter',
+				cancelText: 'Sauver & quitter',
 				type: 'is-danger',
 				hasIcon: true,
 				onConfirm: () => {

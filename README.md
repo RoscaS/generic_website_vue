@@ -1,24 +1,42 @@
 # spa1
 
-> A Vue.js project
+## Beta 1
+### Todo
 
-## Build Setup
+**features**
+* possibilité de pagnier les articles
+* implémenter la possibilité de changer d'image à la création d'un article
+* implémenter la possibilité de changer d'image d'article
+* possibilité de cacher une catégorie de la partie publique 
+* ajouté la possibilité de faire un plage horaire "fermé"
 
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+**bugs**
 
-# build for production with minification
-npm run build
+* gestion des parallaxes
+    * description/position
+    * incohérence notifications (Attention la galerie est pleine)
+   
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+* soucis avec certaines images en portrait dans le popup d'édition des images   
 
-## Google place api
+* format des images de l'edit popup des articles 
+    * soucis avec images en portrait
+    
+* si clique sur `[v]` alors que pas de changement dans le popup d'édition des articles => gros bug
+
+* le prix ne s'affiche pas dans le popup d'édition des articles.
+* message d'erreur si il manque un champ ou l'image d'un nouvel article
+
+
+
+* augmenter le padding des icones d'édition
+
+
+
+
+
+## Divers
 
 ### Fetch place's data:
 * https://maps.googleapis.com/maps/api/place/details/json?placeid=--PLACEID--&key=--API-KEY--

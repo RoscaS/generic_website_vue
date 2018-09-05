@@ -8,10 +8,18 @@
              @mouseleave="hidePromo"
              @click="lockPromo">
 
-          <div class="corner-ribbon top-right"
-               :title="hoverTitle"
-               slot="trigger">
-            Action spéciale !
+          <div class="mobile-ribbon-wrapper">
+
+            <div class="corner-ribbon top-right"
+                 :title="hoverTitle"
+                 slot="trigger">
+              Action spéciale !
+            </div>
+            <!--<div class="corner-ribbon-mobile top-right is-hidden-desktop"-->
+                 <!--:title="hoverTitle"-->
+                 <!--slot="trigger">-->
+              <!--Action spéciale !-->
+            <!--</div>-->
           </div>
         </div>
 
@@ -133,7 +141,7 @@
 
   .corner-ribbon {
     font-family: "Open Sans", sans-serif;
-    cursor: default;
+    cursor: pointer;
     font-weight: bold;
     font-size: 20px;
     width: 300px;
@@ -147,6 +155,29 @@
     top: 55px;
     right: -70px;
     left: auto;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+  .mobile-ribbon-wrapper {
+    position: relative;
+  }
+
+  .corner-ribbon-mobile {
+    font-family: "Open Sans", sans-serif;
+    cursor: default;
+    font-weight: bold;
+    font-size: 20px;
+    width: 250px;
+    background: $ribbon-action;
+    position: absolute;
+    text-align: center;
+    line-height: 50px;
+    letter-spacing: 1px;
+    color: $ribbon-action-text;
+    z-index: 3;
+    top: 40px;
+    left: 180px;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }

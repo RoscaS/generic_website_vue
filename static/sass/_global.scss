@@ -9,6 +9,7 @@
 
 $link: hsl(348, 73%, 55%);
 
+
 .container {
     //width: 948px;
     max-width: 948px;
@@ -64,18 +65,18 @@ h1, h2, h3, h4, h5, h6 {
     color: $header;
 }
 
-.header {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 34px !important;
-    font-weight: 900;
-    line-height: 39.6px;
-    text-decoration: none solid rgb(255, 255, 255);
-    word-spacing: 0;
-    text-align: center;
-    width: 400px;
-    margin: 0 auto 0 auto;
-    padding-bottom: 10px;
-}
+//.header {
+//    font-family: 'Montserrat', sans-serif;
+//    font-size: 34px !important;
+//    font-weight: 900;
+//    line-height: 39.6px;
+//    text-decoration: none solid rgb(255, 255, 255);
+//    word-spacing: 0;
+//    text-align: center;
+//    width: 400px;
+//    margin: 0 auto 0 auto;
+//    padding-bottom: 10px;
+//}
 
 ._btn {
     font-family: 'Open Sans', sans-serif;
