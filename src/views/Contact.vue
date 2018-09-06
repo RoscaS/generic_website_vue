@@ -3,7 +3,7 @@
     <div class="columns is-multiline">
       <div class="column left">
         <div v-scroll-reveal="sReveal('left', 100, 100, 2500)">
-          <!--<GoogleMap name="map" class="map"></GoogleMap>-->
+          <GoogleMap name="map" class="map"></GoogleMap>
         </div>
       </div>
       <div class="column right">
