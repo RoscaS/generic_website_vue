@@ -8,9 +8,9 @@
                        class="shadow"
                        bullets-outside
                        :autoplay="autoplay"
-                       :pauseOnHover="false"
                        :speed="speed"
                        :parallax="true"
+                       :dragging-distance="70"
                        :slideRatio="1/3.7"
                        transition-speed='1250'>
           <vueper-slide v-for="(slide, i) in slides"
