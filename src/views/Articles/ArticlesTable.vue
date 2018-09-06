@@ -10,11 +10,6 @@
           <header class="card-header level">
             <div class="level-left">
 
-              <!--<div class="level-item">-->
-                <!--<span class="diez">#</span>-->
-                <!--<span class="id">{{article.id}}</span>-->
-              <!--</div>-->
-
               <div class="level-item">
                 <span class="name">{{article.name}}</span>
               </div>
@@ -37,23 +32,28 @@
 </template>
 
 <script>
-  import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
+	import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
-  export default {
-    name: "ArticlesTable",
-    props: {
-      category: {type: Object}
+
+	export default {
+		name: "ArticlesTable",
+		props: {
+			category: {type: Object}
+		},
+		data: () => ({
+    }),
+    computed: {
+			articles() {return this.category.articles;}
     },
-    data: () => ({}),
-    methods: {
-      mouseIn(data) {
-        CategoriesStore.state.hoveredImage = data.image;
-      },
-      mouseOut() {
-        CategoriesStore.state.hoveredImage = null;
-      },
-    },
-  };
+		methods: {
+			mouseIn(data) {
+				CategoriesStore.state.hoveredImage = data.image;
+			},
+			mouseOut() {
+				CategoriesStore.state.hoveredImage = null;
+			},
+		},
+	};
 </script>
 
 <style scoped lang="scss">

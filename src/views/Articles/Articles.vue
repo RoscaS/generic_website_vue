@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="articles">
     <BaseLayout :store="store">
 
       <div class="carousel">
@@ -9,6 +9,7 @@
       <br><br>
     </BaseLayout>
     <EditIcon class="edit-icon"
+              top="40px"
               :store="categoriesStore"
               :edit="categoriesStore"/>
     <ArticlesData v-scroll-reveal="sReveal('bottom', 150, 100, 1500)"/>
@@ -51,6 +52,10 @@
 
 <style scoped lang="scss">
   @import '../../../static/sass/global';
+
+  .articles {
+    /*min-height: 1000px;*/
+  }
 
   .carousel {
     margin: 0 -60px 0 -60px;

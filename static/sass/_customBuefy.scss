@@ -2,134 +2,144 @@
 @import '~buefy/src/scss/utils/variables';
 @import '~buefy/src/scss/components/tabs';
 
-
 .custom-tabs-articles {
-    .b-tabs {
 
-      .tabs {
-        .is-active {
-          a {
-            color: $link-hover;
-          }
+    .tab-content {
+        padding-top: 0;
+        margin-top: -15px;
+
+        .tab-item {
+            margin: -7px auto 0 auto;
+            width: 900px;
         }
-      }
+    }
+    .b-tabs {
+        .tabs {
+            .is-active {
+                a {
+                    border-color: $link-hover;
+                    background-color: $link-hover;
+                    color: white;
+                }
+            }
+        }
     }
 }
 
 .custom-tabs-wrapper.textEdit {
-  input {
-    @media screen and (max-width: 768px) {
-      width: 100%;
+    input {
+        @media screen and (max-width: 768px) {
+            width: 100%;
+        }
     }
-  }
 
-  .tab-content {
-    width: 100%;
-    margin: 15px auto 0 auto;
+    .tab-content {
+        width: 100%;
+        margin: 15px auto 0 auto;
+
+        .tab-item {
+            margin: -7px auto 0 auto;
+            width: 900px;
+
+            @media screen and (max-width: 925px) {
+                width: 100%;
+            }
+
+            .field {
+                margin: 0 25px 0 25px;
+            }
+        }
+    }
+
+    .b-tabs {
+        margin: 0 auto 0 auto;
+
+        .tabs {
+            margin: -22px auto auto;
+
+            ul {
+                width: auto;
+                border-bottom-color: $top-title;
+                margin-bottom: 15px;
+            }
+
+            a {
+                padding-top: 0;
+
+                @media screen and (max-width: 768px) {
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            }
+
+            .is-active {
+                a {
+                    transition: border-bottom-color .5s ease;
+                    color: $link-hover;
+                    border-bottom-color: $link-hover;
+                }
+            }
+
+            li {
+                border-radius: 5px;
+                margin-left: 2.5px;
+                margin-right: 2.5px;
+                background-color: $top-title;
+
+                @media screen and (max-width: 387px) {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                a {
+                    transition: border-bottom-color .5s ease;
+                    color: white;
+                    &:hover {
+                        transition: border-bottom-color .5s ease;
+                        border-bottom-color: $link-hover;
+                    }
+                    border-bottom-color: $top-title;
+                }
+
+            }
+        }
+    }
 
     .tab-item {
-      margin: -7px auto 0 auto;
-      width: 900px;
-
-      @media screen and (max-width: 925px) {
-        width: 100%;
-      }
-
-      .field {
-        margin: 0 25px 0 25px;
-      }
+        //padding-bottom: 00px;
     }
-  }
-
-  .b-tabs {
-    margin: 0 auto 0 auto;
-
-    .tabs {
-      margin: -22px auto  auto;
-
-      ul {
-        width: auto;
-        border-bottom-color: $top-title;
-        margin-bottom: 15px;
-      }
-
-      a {
-        padding-top: 0;
-
-        @media screen and (max-width: 768px) {
-          padding-left: 10px;
-          padding-right: 10px;
-        }
-      }
-
-      .is-active {
-        a {
-          transition: border-bottom-color .5s ease;
-          color: $link-hover;
-          border-bottom-color: $link-hover;
-        }
-      }
-
-      li {
-        border-radius: 5px;
-        margin-left: 2.5px;
-        margin-right: 2.5px;
-        background-color: $top-title;
-
-        @media screen and (max-width: 387px) {
-          margin-left: 0;
-          margin-right: 0;
-        }
-
-        a {
-          transition: border-bottom-color .5s ease;
-          color: white;
-          &:hover {
-            transition: border-bottom-color .5s ease;
-            border-bottom-color: $link-hover;
-          }
-          border-bottom-color: $top-title;
-        }
-
-      }
-    }
-  }
-
-  .tab-item {
-    //padding-bottom: 00px;
-  }
 }
 
 .imagesEdit {
-  .b-tabs {
-    margin: 0 auto -10px auto;
+    .b-tabs {
+        margin: 0 auto -10px auto;
 
-    @media screen and (max-width: 768px) {
+        @media screen and (max-width: 768px) {
 
-    }
-
-    .tabs {
-      margin-top: -88px;
-      margin-bottom: 10px;
-      //height: 40px;
-
-      @media screen and (max-width: 1089px) {
-        //margin-bottom: -20px;
-      }
-
-      ul {
-        li {
-          margin: 0;
         }
-        li.is-active {
-          a {
-            background-color: #167DF0;
-            border-color: #167DF0;
-          }
+
+        .tabs {
+            margin-top: -88px;
+            margin-bottom: 10px;
+            //height: 40px;
+
+            @media screen and (max-width: 1089px) {
+                //margin-bottom: -20px;
+            }
+
+            ul {
+                li {
+                    margin: 0;
+                }
+                li.is-active {
+                    a {
+                        background-color: #167DF0;
+                        border-color: #167DF0;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 

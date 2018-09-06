@@ -37,6 +37,11 @@
     height: 500px;
     margin: 0 auto;
     background: gray;
+
+    @media screen and (max-width: 414px) {
+      width: 100%;
+      height: 250px;
+    }
   }
 
 </style>

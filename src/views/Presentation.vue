@@ -58,6 +58,7 @@
 
   .text1 {
     margin-bottom: 40px !important;
+
   }
 
 </style>

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content">
         <div class="columns is-multiline is-mobile">
-          <div class="column is-3 gallery-col"
+          <div class="column is-3-desktop is-6-mobile gallery-col"
                v-for="image in store.images"
                v-scroll-reveal="sReveal('left', 200, 100, 1500)">
             <a class="no-tr"

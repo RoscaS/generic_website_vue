@@ -93,8 +93,8 @@ h1, h2, h3, h4, h5, h6 {
 .section-container {
     margin: 0 auto 50px auto;
 
-    @media screen and (max-width: 1366px) {
-        //margin-top: 60px;
+    @media screen and (max-width: 414px) {
+        margin-bottom: 0;
     }
 }
 
@@ -106,9 +106,12 @@ h1, h2, h3, h4, h5, h6 {
     word-spacing: 0;
 
     margin: 15px auto 80px auto !important;
-    //font-size: 14px;
     text-align: center;
     font-style: italic;
+
+    @media screen and (max-width: 414px) {
+        margin-bottom: 40px !important;
+    }
 }
 
 .highlighted {

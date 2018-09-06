@@ -42,14 +42,14 @@
               <div class="column is-6">
 
                 <label>{{ i.data[0].label }}:</label>
-                <b-input :len="i.data[0].len"
+                <b-input :maxlength="20"
                          :disabled="edit.loading"
                          v-model="i.data[0].data">
                 </b-input>
 
                 <label>{{ i.data[1].label }}:</label>
                 <b-input :type="i.data[1].type"
-                         :rows="i.data[1].rows"
+                         :rows="3"
                          maxlength="200"
                          :disabled="edit.loading"
                          v-model="i.data[1].data">

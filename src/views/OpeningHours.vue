@@ -3,10 +3,9 @@
     <EditIcon :edit="edit"></EditIcon>
     <div class="container">
       <div class="content">
-
-        <div class="columns is-multiline" :style="setSize"
+        <div class="columns is-multiline is-mobile" :style="setSize"
              v-for="(day, i) in days" :key="i">
-          <div class="column is-5">
+          <div class="column is-5-desktop is-3-mobile">
             <span class="name">{{day.name}}:</span>
           </div>
           <div class="column is-narrow" v-for="interval in day.slots">
@@ -17,8 +16,6 @@
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
     <br><br>
@@ -55,11 +52,23 @@
 
   section {
     margin-top: -100px !important;
+    @media screen and (max-width: 414px) {
+      margin: 0;
+      padding-left: 5px;
+      padding-right: 0;
+    }
   }
 
   .columns {
-    border-bottom: 1px solid lightgray;
     margin: 0 auto 0 auto;
+    border-bottom: 1px solid lightgray;
+
+    .column {
+      @media screen and (max-width: 414px) {
+        border-bottom: 1px solid lightgray;
+        padding-bottom: 0;
+      }
+    }
 
     .name {
       font-size: 20px;
@@ -72,6 +81,11 @@
     .box {
       padding-top: 0;
       padding-bottom: 0;
+      @media screen and (max-width: 414px) {
+        padding-left: 4px;
+        padding-right: 4px !important;
+        width: 110px;
+      }
     }
 
     .interval {

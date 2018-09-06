@@ -10,6 +10,8 @@
 * possibilité de cacher une catégorie de la partie publique 
 * ajouté la possibilité de faire un plage horaire "fermé"
 
+* Erreurs création articles en cas de conflit de nom
+
 
 **bugs**
 
