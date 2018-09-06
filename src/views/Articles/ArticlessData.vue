@@ -7,8 +7,7 @@
           <b-tab-item v-for="(category, i) in stores" :key="i"
                       :label="category.name">
             <div class="content" :id="'Category'+category.id">
-              <CategoryTable :category="category">
-              </CategoryTable>
+              <CategoryTable :category="category"></CategoryTable>
             </div>
           </b-tab-item>
         </b-tabs>

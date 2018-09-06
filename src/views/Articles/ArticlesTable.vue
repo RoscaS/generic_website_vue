@@ -39,13 +39,16 @@
 		props: {
 			category: {type: Object}
 		},
-		data: () => ({}),
+		data: () => ({
+      timeout: 50,
+    }),
 		computed: {
 			articles() {return this.category.articles;}
 		},
 		methods: {
 			mouseIn(data) {
 				CategoriesStore.state.hoveredImage = data.image;
+				setTimeout(() => {}, 500);
 			},
 			mouseOut() {
 				CategoriesStore.state.hoveredImage = null;
@@ -62,12 +65,30 @@
 
   .columns {
     .card {
+      cursor: default;
+      transition: background-color .5s ease;
+      border-radius: 20px;
       margin-bottom: 10px;
       box-shadow: none;
+      background-color: transparent;
+
+      &:hover {
+        transition: background-color .5s ease;
+        transition-delay: .2s;
+        background-color: $is-info;
+
+      }
 
       .card-header {
+        transition: border-bottom-color .5s ease;
         box-shadow: none;
         border-bottom: 1px solid lightgray;
+
+        &:hover {
+          transition: border-bottom-color .5s ease;
+          transition-delay: .2s;
+          border-bottom-color: transparent;
+        }
 
         .level-left {
           margin-left: 10px;

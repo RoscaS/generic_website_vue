@@ -11,10 +11,9 @@
                      :height="180"
                      :clickable="false"
                      :border="0"
-                     :display="9"
+                     :display="13"
                      :animationSpeed="speed"
-                     @before-slide-change="beforeChange"
-                     @after-slide-change="afterChange">
+                     @before-slide-change="beforeChange">
           <slide v-for="(slide, i) in slides" :key="i" :index="i"
                  class="slide-wrapper">
             <img :src="slide.image">
@@ -121,7 +120,6 @@
 						this.setDirection();
 						this.jumpToSlide(idx - 1);
 					}, this.timeout);
-				} else {
 				}
 			},
 			_goToSlide(idx) {
@@ -129,8 +127,6 @@
 			},
 			beforeChange(idx) {
 				this.currentIdx = idx;
-			},
-			afterChange(idx) {
 			},
 		},
 	};
@@ -145,7 +141,7 @@
 
   .columns {
     .carousel-wrapper {
-      width: 814px;
+      width: 100%;
     }
   }
 
