@@ -1,24 +1,27 @@
 <template>
-<section>
-  <EditIcon class="edit-icon" :store="store" :edit="edit" top="50px"/>
-  <div class="carousel-top carousel-wrapper">
-    <transition name="carousel-fade-in" appear>
-      <vueper-slides :breakpoints="breakpoints"
-                     class="shadow"
-                     bullets-outside
-                     :autoplay="false"
-                     :parallax="true"
-                     speed="10000"
-                     :slideRatio="1/3.7"
-                     transition-speed='1250'>
-        <vueper-slide v-for="(slide, i) in slides"
-                      :key="i"
-                      :image="slide.image">
-        </vueper-slide>
-      </vueper-slides>
-    </transition>
-  </div>
-</section>
+  <section>
+    <EditIcon class="edit-icon" :store="store" :edit="edit" top="50px"/>
+    <div class="carousel-top carousel-wrapper">
+      <transition name="carousel-fade-in" appear>
+        <vueper-slides ref="carouselTop"
+                       :breakpoints="breakpoints"
+                       class="shadow"
+                       bullets-outside
+                       :autoplay="autoplay"
+                       :pauseOnHover="false"
+                       :speed="speed"
+                       :parallax="true"
+                       :slideRatio="1/3.7"
+                       transition-speed='1250'>
+          <vueper-slide v-for="(slide, i) in slides"
+                        :key="i"
+                        :image="slide.image">
+          </vueper-slide>
+        </vueper-slides>
+
+      </transition>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -40,7 +43,7 @@
 				1367: {slideRatio: 1 / 3.7},
 				1281: {slideRatio: 1 / 3.9},
 				1025: {slideRatio: 1 / 3.2},
-				1000: {slideRatio: 1 / 1.9 , arrows: false, touchable: true},
+				1000: {slideRatio: 1 / 1.9, arrows: false, touchable: true},
 				915: {slideRatio: 1 / 1.7, arrows: false, touchable: true},
 			}
 		}),
@@ -51,16 +54,24 @@
 					return setTimeout(() => {
 						return this.slides;
 					}, 100);
-			}
-		}
+			},
+			autoplay() {
+				setTimeout(() => {this.$refs.carouselTop.goToSlide(0);}, 500);
+				return this.$siteOptions.state.carousel_auto_scroll.data;
+			},
+			speed() {
+        console.log(this.$siteOptions.state.carousel_auto_scroll_speed.data);
+        return this.$siteOptions.state.carousel_auto_scroll_speed.data;
+      }
+		},
 	};
 </script>
 
 <style>
 
   .carousel-wrapper {
-  margin-top: 50px;
-  z-index: 0;
+    margin-top: 50px;
+    z-index: 0;
   }
 
   .edit-icon {

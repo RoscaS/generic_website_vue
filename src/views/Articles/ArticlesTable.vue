@@ -34,17 +34,15 @@
 <script>
 	import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
-
 	export default {
 		name: "ArticlesTable",
 		props: {
 			category: {type: Object}
 		},
-		data: () => ({
-    }),
-    computed: {
+		data: () => ({}),
+		computed: {
 			articles() {return this.category.articles;}
-    },
+		},
 		methods: {
 			mouseIn(data) {
 				CategoriesStore.state.hoveredImage = data.image;
@@ -53,6 +51,9 @@
 				CategoriesStore.state.hoveredImage = null;
 			},
 		},
+    mounted() {
+
+    }
 	};
 </script>
 

@@ -12,25 +12,6 @@
         <div v-if="!edit.editItem">
           <h1>Edition: {{ store.name }}</h1>
 
-          <div class="card secondary">
-            <header class="card-header">
-              <div class="card-header-title">
-                <div class="level">
-                  <div class="level-item">
-                    <GalleriesDropDown :store="store"/>
-                  </div>
-                  <div class="level-item top-counter">
-                    <ImagesCounter :store="edit.secondaryStore"
-                                   :verbose="true"/>
-                  </div>
-                </div>
-              </div>
-            </header>
-            <div class="card-content">
-              <DragSortImages :store="edit.secondaryStore"/>
-            </div>
-          </div>
-
           <div class="card primary">
             <header class="card-header">
               <div class="card-header-title">
@@ -68,6 +49,26 @@
               </b-tabs>
             </div>
           </div>
+
+          <div class="card secondary">
+            <header class="card-header">
+              <div class="card-header-title">
+                <div class="level">
+                  <div class="level-item">
+                    <GalleriesDropDown :store="store"/>
+                  </div>
+                  <div class="level-item top-counter">
+                    <ImagesCounter :store="edit.secondaryStore"
+                                   :verbose="true"/>
+                  </div>
+                </div>
+              </div>
+            </header>
+            <div class="card-content">
+              <DragSortImages :store="edit.secondaryStore"/>
+            </div>
+          </div>
+
         </div>
       </transition>
     </div>

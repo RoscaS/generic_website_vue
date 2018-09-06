@@ -6,8 +6,9 @@
                 type="is-toggle-rounded">
           <b-tab-item v-for="(category, i) in stores" :key="i"
                       :label="category.name">
-            <div class="content" :style="">
-              <CategoryTable :category="category" class=""></CategoryTable>
+            <div class="content" :id="'Category'+category.id">
+              <CategoryTable :category="category">
+              </CategoryTable>
             </div>
           </b-tab-item>
         </b-tabs>
@@ -21,32 +22,66 @@
 	import CategoryTable from './ArticlesTable';
 	import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
-	import smoothReflow from 'vue-smooth-reflow';
-
 	export default {
 		name: "ArticlesData",
-		mixins: [smoothReflow],
 		components: {CategoryTable, EditIcon},
 		data: () => ({
-			activeTab: 0,
 			type: 'article',
+			activeTab: 0,
+
+
+      heightDelta: 43,
+      step: 10,
+      speed: 10,
+
+			element: null,
+			previousHeight: null,
+			target: null,
 		}),
 		computed: {
 			edit() {return CategoriesStore;},
 			stores() {return CategoriesStore.state.stores;},
 		},
-    methods: {
-			// dynamicHeight(category) {
-			// 	console.log('ici')
-			// 	return `heigh:${category.count()*40}px ;transition: height .5s ease`
-      // }
-    },
+		watch: {
+			activeTab(value) {
+				const id = this.stores[value].id;
+				const count = this.stores[value].count();
+
+				this.element = document.getElementById(`Category${id}`);
+				this.element.style.height = this.previousHeight + 'px';
+
+				this.target = count * this.heightDelta;
+        this.target > this.previousHeight ? this.grow() : this.shrink();
+			}
+		},
+		methods: {
+			grow() {
+				if (this.target >= this.previousHeight) {
+          this.element.style.height = this.previousHeight + 'px';
+					setTimeout(() => {
+            this.previousHeight += this.step;
+						this.grow();
+					}, this.speed);
+				} else {
+          this.previousHeight = this.target;
+				}
+			},
+			shrink() {
+				if (this.target <= this.previousHeight) {
+          this.element.style.height = this.previousHeight + 'px';
+					setTimeout(() => {
+						this.previousHeight -= this.step;
+						this.shrink();
+					}, this.speed);
+				} else {
+          this.previousHeight = this.target
+				}
+			}
+		},
 		mounted() {
-			// this.$smoothReflow({
-				// el: '.POULE',
-				// property: ['height', 'width'],
-				// transition: 'height .25s ease-in-out, width .75s ease-out'
-			// });
+			setTimeout(() => {
+				this.previousHeight = this.stores[0].count() * this.heightDelta;
+			}, 1000);
 		}
 	};
 </script>
@@ -54,9 +89,11 @@
 <style scoped lang="scss">
   @import '../../../static/sass/global';
 
+
   .content {
     transition: height .5s ease;
     /*height: auto;*/
+    height: 260px;
     margin-top: 40px;
   }
 </style>

@@ -73,6 +73,11 @@ const message = {
     position: 'is-top',
     message: "Défilement automatique désactivé."
   },
+  autoScrollMin: {
+    type: 'is-warning',
+    position: 'is-top',
+    message: 'Valeur minimale atteinte.'
+  },
 
   intervalNew: {
     type: 'is-success',

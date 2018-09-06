@@ -20,7 +20,8 @@ const urls = {
 
 
   siteInfo: "siteInfo/1/",
-	siteContact: "siteContact/1/"
+	siteContact: "siteContact/1/",
+  siteOptions: "siteOptions/1/",
 };
 
 export default urls;

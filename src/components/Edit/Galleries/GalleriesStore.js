@@ -23,6 +23,7 @@ const GalleriesStore =  new Vue ({
       primaryStore: null,
       secondaryStore: null,
       editItem: null,
+
       carouselAutoScroll: false,
     }
   }),

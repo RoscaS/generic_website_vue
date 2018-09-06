@@ -17,7 +17,6 @@
 </template>
 
 <script>
-
 	import EditIcon from '../../components/Edit/EditIcon';
 	import ViewsMixin from '../../mixins/ViewsMixin';
 	import ArticlesData from './ArticlessData';

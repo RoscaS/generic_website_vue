@@ -25,7 +25,7 @@ class Base {
 		return false;
 	}
 
-	update() {
+	update(message=true) {
 		let data = {};
 		for (let i in this.state) {
 			if (i != "image") data[i] = this.state[i].data;
@@ -33,7 +33,7 @@ class Base {
 		}
 		axios.put(this.url, data).then(() => {
 			setTimeout(() => {
-				tools.message("updated");
+				message ? tools.message("updated") : null;
 			}, 1500);
 		});
 	}
@@ -208,6 +208,19 @@ class SiteContact extends Base {
 	}
 }
 
+
+class SiteOptions extends Base {
+	constructor() {
+		super();
+		this.name = "SiteOptions";
+		this.url = urls.siteOptions;
+		this.state = {
+			carousel_auto_scroll: {data: false},
+			carousel_auto_scroll_speed: {data: 5000},
+		};
+	}
+}
+
 export {
 	Promo,
 	Presentation,
@@ -218,4 +231,5 @@ export {
 	Review,
 	SiteInfo,
 	SiteContact,
+	SiteOptions,
 };

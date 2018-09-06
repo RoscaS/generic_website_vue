@@ -12,6 +12,7 @@ import {
 	Review,
 	SiteInfo,
 	SiteContact,
+	SiteOptions,
 } from './SectionsObjects';
 
 const TextsStore = new Vue({
@@ -28,6 +29,7 @@ const TextsStore = new Vue({
 				new Review(),
 				new SiteInfo(),
 				new SiteContact(),
+				new SiteOptions(),
 			],
 			activeTab: 0,
 			loading: false,
@@ -95,7 +97,7 @@ const TextsStore = new Vue({
 		},
 
 		update() {
-			if (this.state.dirtyImage || this.currentStore.isDirty()) {
+			if (this.currentStore.isDirty()) {
 				this.setLoading();
 				this.currentStore.update();
 				setTimeout(() => {
@@ -108,7 +110,7 @@ const TextsStore = new Vue({
 		},
 
 		cancel() {
-			if (this.state.dirtyImage || this.currentStore.isDirty()) {
+			if (this.currentStore.isDirty()) {
 				this.cancelNotification();
 			} else {
 				this.end();
@@ -131,6 +133,7 @@ const TextsStore = new Vue({
 	},
 	created() {
 		this.fetchData();
+		Vue.prototype.$siteOptions = this.getStore('SiteOptions');
 	}
 });
 
