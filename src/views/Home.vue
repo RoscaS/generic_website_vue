@@ -15,7 +15,7 @@
       <Parallax :idx="2" height="400px"/>
       <Contact/>
       <OpeningHours/>
-      <Review/>
+      <!--<Review/>-->
       <Footer/>
     </div>
   </div>
