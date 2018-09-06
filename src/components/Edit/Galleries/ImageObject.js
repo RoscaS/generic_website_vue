@@ -15,6 +15,10 @@ class Image {
     this.description = image.description;
     this.image = image.image;
     this.url = imageUrl(image.id);
+    this.article = image.article ? {
+    	id: image.article.id,
+	    category: image.article.category
+    } : null;
     this.parentGallery = gallery;
   }
 

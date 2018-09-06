@@ -1,20 +1,20 @@
 <template>
   <section>
     <div class="columns is-centered">
-      <div class="column is-9">
+      <div class="column is-9-desktop">
         <div class="card"
              v-for="(article, i) in category.articles"
              :key="i"
              @mouseenter="mouseIn(article)"
              @mouseleave="mouseOut()">
-          <header class="card-header level">
+          <header class="card-header desktop level is-hidden-mobile">
             <div class="level-left">
 
               <div class="level-item">
                 <span class="name">{{article.name}}</span>
               </div>
 
-              <div class="level-item">
+              <div class="level-item ">
                 <span class="description">{{article.description}}</span>
               </div>
             </div>
@@ -24,6 +24,9 @@
                 <span class="price">{{article.price}} chf</span>
               </div>
             </div>
+          </header>
+          <header class="card-header mobile is-hidden-desktop">
+            <span class="name">{{ article.name }}</span>
           </header>
         </div>
       </div>
@@ -41,17 +44,18 @@
 		},
 		data: () => ({
       timeout: 50,
+      pulsedArticleId: null,
     }),
 		computed: {
-			articles() {return this.category.articles;}
+			articles() {return this.category.articles;},
 		},
 		methods: {
 			mouseIn(data) {
-				CategoriesStore.state.hoveredImage = data.image;
-				setTimeout(() => {}, 500);
+				CategoriesStore.state.hoveredArticle = data.image;
+				this.$emit('description', data.description)
 			},
 			mouseOut() {
-				CategoriesStore.state.hoveredImage = null;
+				CategoriesStore.state.hoveredArticle = null;
 			},
 		},
     mounted() {
@@ -72,6 +76,10 @@
       box-shadow: none;
       background-color: transparent;
 
+      @media screen and (max-width: 900px) {
+        padding-bottom: 0;
+      }
+
       &:hover {
         transition: background-color .5s ease;
         transition-delay: .2s;
@@ -88,6 +96,17 @@
           transition: border-bottom-color .5s ease;
           transition-delay: .2s;
           border-bottom-color: transparent;
+        }
+
+        &.desktop {
+          margin-bottom: 15px;
+        }
+
+        &.mobile {
+          .name {
+            padding-left: 30px;
+            /*width: 150px*/
+          }
         }
 
         .level-left {
@@ -108,7 +127,6 @@
           }
 
           .description {
-
             width: 310px;
             /*font-weight: lighter;*/
           }

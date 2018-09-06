@@ -18,7 +18,7 @@ const CategoriesStore = new Vue({
 
       newItem: null,
       tempImage: null,
-      hoveredImage: null,
+      hoveredArticle: null,
       editItem: null,
 
       primaryStore: null,

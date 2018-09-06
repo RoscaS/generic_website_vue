@@ -31,6 +31,7 @@
 			component: 'Article',
 			type: 'text',
 			categoriesStore: CategoriesStore,
+      flash: false,
 		}),
 		computed: {
 			categories() {

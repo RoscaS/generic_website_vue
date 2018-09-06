@@ -2,12 +2,20 @@
   <div>
     <section class="section">
       <div class="container custom-tabs-articles">
+        <div class="mobile-description is-hidden-desktop">
+          <transition name="fade">
+            <small v-if="mobileDescription">{{ mobileDescription }}</small>
+          </transition>
+        </div>
         <b-tabs position="is-centered" class="block" v-model="activeTab"
                 type="is-toggle-rounded">
           <b-tab-item v-for="(category, i) in stores" :key="i"
                       :label="category.name">
             <div class="content" :id="'Category'+category.id">
-              <CategoryTable :category="category"></CategoryTable>
+
+              <ArticlesTable :category="category"
+                             @description="setMobileDescription">
+              </ArticlesTable>
             </div>
           </b-tab-item>
         </b-tabs>
@@ -18,16 +26,15 @@
 
 <script>
 	import EditIcon from '../../components/Edit/EditIcon';
-	import CategoryTable from './ArticlesTable';
+	import ArticlesTable from './ArticlesTable';
 	import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
 
 	export default {
 		name: "ArticlesData",
-		components: {CategoryTable, EditIcon},
+		components: {ArticlesTable, EditIcon},
 		data: () => ({
 			type: 'article',
 			activeTab: 0,
-
 
       heightDelta: 43,
       step: 10,
@@ -36,6 +43,8 @@
 			element: null,
 			previousHeight: null,
 			target: null,
+
+      mobileDescription: false,
 		}),
 		computed: {
 			edit() {return CategoriesStore;},
@@ -51,7 +60,7 @@
 
 				this.target = count * this.heightDelta;
         this.target > this.previousHeight ? this.grow() : this.shrink();
-			}
+			},
 		},
 		methods: {
 			grow() {
@@ -75,12 +84,18 @@
 				} else {
           this.previousHeight = this.target
 				}
-			}
+			},
+      setMobileDescription(data) {
+				this.mobileDescription = false;
+				setTimeout(() => {this.mobileDescription = data;}, 350);
+      }
 		},
 		mounted() {
+			this.heightDelta = window.innerWidth >= 900 ? 50 : 36;
+
 			setTimeout(() => {
 				this.previousHeight = this.stores[0].count() * this.heightDelta;
-			}, 1000);
+			}, 1500);
 		}
 	};
 </script>
@@ -88,12 +103,18 @@
 <style scoped lang="scss">
   @import '../../../static/sass/global';
 
-
   .content {
     transition: height .5s ease;
-    /*height: auto;*/
     height: 260px;
     margin-top: 40px;
+  }
+
+  .mobile-description{
+    color: $link-hover;
+    text-align: center;
+    margin-top: -30px;
+    padding: 0 10px 10px 10px;
+    height: 58px;
   }
 </style>
 

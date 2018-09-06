@@ -52,7 +52,7 @@
 
   section {
     margin-top: -100px !important;
-    @media screen and (max-width: 414px) {
+    @media screen and (max-width: 900px) {
       margin: 0;
       padding-left: 5px;
       padding-right: 0;
@@ -64,7 +64,7 @@
     border-bottom: 1px solid lightgray;
 
     .column {
-      @media screen and (max-width: 414px) {
+      @media screen and (max-width: 900px) {
         border-bottom: 1px solid lightgray;
         padding-bottom: 0;
       }
@@ -81,7 +81,7 @@
     .box {
       padding-top: 0;
       padding-bottom: 0;
-      @media screen and (max-width: 414px) {
+      @media screen and (max-width: 900px) {
         padding-left: 4px;
         padding-right: 4px !important;
         width: 110px;

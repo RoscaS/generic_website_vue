@@ -1,15 +1,16 @@
 <template>
   <section>
     <div class="columns is-centered">
-      <div class="carousel-wrapper">
+      <div class="carousel-wrapper" @click="showHelp">
         <carousel-3d ref="mycarousel"
                      :startIndex="0"
                      :controlsVisible="false"
                      :count="slides.length"
-                     :space="234"
-                     :width="270"
-                     :height="180"
+                     :space="space"
+                     :width="width"
+                     :height="height"
                      :clickable="false"
+                     :minSwipeDistance="2000"
                      :border="0"
                      :display="13"
                      :animationSpeed="speed"
@@ -28,6 +29,7 @@
 	import {Carousel3d, Slide} from 'vue-carousel-3d';
 	import GalleriesStore from '../../components/Edit/Galleries/GalleriesStore';
 	import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
+	import Tools from '../../utils/tools';
 
 	export default {
 		name: "ArticleCarousel",
@@ -35,6 +37,11 @@
 		data: () => ({
 			component: 'Carousel',
 			type: 'image',
+
+			width: 270,
+			height: 180,
+      space: 234,
+
 			count: null,
 			currentIdx: 0,
 			jumpTo: 23,
@@ -50,7 +57,7 @@
 			store() {return this.edit.getStore('Articles');},
 			state() {return this.store.state;},
 			categories() {return CategoriesStore.state.stores;},
-			hoveredImage() {return CategoriesStore.state.hoveredImage;},
+			hoveredArticle() {return CategoriesStore.state.hoveredArticle;},
 
 			slides() {
 				if (this.store.hasLoaded) {
@@ -61,18 +68,22 @@
 			},
 		},
 		watch: {
-			hoveredImage() {
-				if (this.hoveredImage) {
-					let oldData = this.hoveredImage;
+			hoveredArticle() {
+				if (this.hoveredArticle) {
+					let oldData = this.hoveredArticle;
 					setTimeout(() => {
-						if (this.hoveredImage == oldData) {
-							this.initJump(this.getIndex(this.hoveredImage));
+						if (this.hoveredArticle == oldData) {
+							this.initJump(this.getIndex(this.hoveredArticle));
 						}
 					}, 300);
 				}
 			}
 		},
 		methods: {
+			showHelp() {
+        Tools.message('articlesHelp');
+        this.$emit('flash')
+      },
 			getIndex(img) {
 				let image = this.slides.find(i => i.id == img.id);
 				return this.slides.indexOf(image);
@@ -129,6 +140,13 @@
 				this.currentIdx = idx;
 			},
 		},
+		mounted() {
+			if (window.innerWidth < 900) {
+				this.width = 200;
+				this.height = 120;
+				this.space = 150;
+			}
+		}
 	};
 </script>
 
@@ -137,11 +155,20 @@
 
   section {
     margin: -90px 0px -150px 0px;
+
+    @media screen and (max-width: 900px) {
+      margin-top: 0;
+      margin-bottom: -120px;
+    }
   }
 
   .columns {
     .carousel-wrapper {
-      width: 100%;
+      width: 815px;
+
+      @media screen and (max-width: 900px) {
+        width: 100%;
+      }
     }
   }
 
@@ -185,40 +212,3 @@
   }
 </style>
 
-
-<!--<div class="debug-articles">-->
-<!--<div class="level">-->
-<!--<div class="level-item">-->
-<!--<ul>-->
-<!--<li><b>idx</b></li>-->
-<!--<li><b>id</b></li>-->
-<!--<li><b>pos</b></li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--<div v-for="(slide, i) in slides"-->
-<!--class="level-item"-->
-<!--:class="{current: currentIdx==getIndex(slide)}">-->
-<!--<ul>-->
-<!--<li>{{getIndex(slide)}}</li>-->
-<!--<li>{{slide.id}}</li>-->
-<!--<li>{{slide.position}}</li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</div>-->
-<!--<hr>-->
-<!--<b-field grouped group-multiline>-->
-<!--<button class="button is-outlined is-primary" @click="previous()"> <-->
-<!--</button>-->
-<!--<button class="button is-outlined is-primary" @click="next()"> >-->
-<!--</button>-->
-<!--<p class="control">-->
-<!--<b-input type="number" :min="0" v-model="jumpTo"></b-input>-->
-<!--</p>-->
-<!--<button class="go button is-outlined is-primary" @click="initJump()">-->
-<!--Go-->
-<!--</button>-->
-<!--<button class="go button is-outlined is-primary" @click="reset()">-->
-<!--Reset-->
-<!--</button>-->
-<!--</b-field>-->
-<!--</div>-->
