@@ -29,6 +29,7 @@
   @import '../../../../static/sass/global';
 
   section {
+    min-height: 400px;
   }
 
   h3 {

@@ -83,7 +83,7 @@
       &:hover {
         transition: background-color .5s ease;
         transition-delay: .2s;
-        background-color: $is-info;
+        background-color: rgba(22, 125, 240, 0.37);
 
       }
 

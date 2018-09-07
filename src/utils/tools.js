@@ -66,6 +66,11 @@ const message = {
 		position: 'is-bottom',
 		message: "Catégorie supprimée du serveur."
 	},
+	categoryCantChangeOrder: {
+		type: 'is-warning',
+		position: 'is-top',
+		message: "Déselectionnez les catégories pour en changer l'ordre!"
+	},
 
 
 	autoScrollOn: {

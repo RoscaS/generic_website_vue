@@ -16,6 +16,12 @@
           <i class="card-header-icon far" :class="icon"></i>
           <img v-if="is.article"
                :src="is.edit ? editItem.image.image : tempImage.image">
+          <button v-if="is.create && is.article"
+                  @click="changeImage()"
+                  class="button is-info is-outlined card-header-reupp">
+            <i class="far fa-recycle"></i>
+            <span>Remplacer l'image</span>
+          </button>
         </div>
       </header>
 
@@ -37,8 +43,9 @@
                  :disabled="edit.loading">
         </b-input>
 
-        <b-field grouped v-if="is.article && is.create">
-          <b-select placeholder="Catégorie"
+        <b-field grouped v-if="is.article">
+          <b-select v-if="is.create"
+                    placeholder="Catégorie"
                     @input="selectCat" :disabled="edit.loading">
             <option v-for="cat in categories" :value="cat" :key="cat.id">
               {{ cat.name }}
@@ -50,6 +57,7 @@
                    type="number"
                    v-model="data.price"
                    placeholder="Prix"
+                   :step=".01"
                    :maxlength="30"
                    :min="0"
                    :loading="edit.loading"
@@ -60,7 +68,7 @@
 
       <footer class="card-footer">
         <div class="card-footer-item"
-             :disabled="edit.loading" @click="validate">
+             @click="validate">
           <i v-if="edit.loading" class="fas fa-spinner fa-spin"></i>
           <i v-else class="fal fa-check"></i>
         </div>
@@ -94,6 +102,18 @@
 			editItem() {return this.edit.editItem;},
 			tempImage() {return this.edit.state.tempImage;},
 			categories() {return this.edit.state.stores;},
+			isDirty() {
+				if (this.is.edit) {
+					for (let i in this.data) {
+						if (this.data[i] !== '') {
+							if (this.data[i] !== this.editItem[i]) {
+								return true;
+							}
+						}
+					}
+					return false;
+				}
+			},
 		},
 		watch: {
 			newItem(value) {
@@ -102,7 +122,9 @@
 					this.icon = 'fa-plus';
 					this.setType(value);
 					this.icon = 'fa-pen';
-				} else this.end();
+				} else {
+					this.end();
+				}
 			},
 			editItem(value) {
 				if (value) {
@@ -112,7 +134,9 @@
 					for (let i in this.data) {
 						this.editItem[i] ? this.data[i] = this.editItem[i] : null;
 					}
-				} else this.end();
+				} else {
+					this.end();
+				}
 			},
 		},
 		methods: {
@@ -147,12 +171,19 @@
 				formData.append('gallery', 'Articles');
 				this.edit.uploadImage(formData);
 			},
+			changeImage() {
+				this.edit.state.tempImage.delete(false);
+				this.edit.tempImage = null;
+			},
 			validate() {
 				if (this.is.edit) {
-					this.updateStore();
-					if (this.is.article) this.editItem.patch();
-					else this.edit.state.editItem.put();
-				} else {
+					if (this.isDirty) {
+						this.updateStore();
+						if (this.is.article) this.editItem.patch();
+						else this.edit.state.editItem.put();
+					}
+				}
+				else {
 					if (this.is.article) this.createArticle();
 					else this.createCategory();
 				}
@@ -189,7 +220,7 @@
 				this.edit.clearNewItem();
 				this.edit.clearEditItem();
 			},
-		}
+		},
 	};
 </script>
 
@@ -230,6 +261,21 @@
           height: $article-height;
           border-top-left-radius: 8px;
           border-top-right-radius: 8px;
+        }
+        .card-header-reupp {
+          display: flex;
+          top: 83%;
+          left: 10px;
+          position: absolute;
+
+          &:hover {
+          }
+
+          span {
+            margin-left: 10px;
+            font-size: 18px;
+            font-weight: bold;
+          }
         }
       }
       .card-upload {

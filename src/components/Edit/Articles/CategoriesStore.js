@@ -64,7 +64,6 @@ const CategoriesStore = new Vue({
       let count = this.gallery.images.length;
       this.state.stores.forEach(store => {
         store.articles.forEach(article => {
-          console.log(`pos: ${article.image.position}\t count: ${count}\t${article.name}`);
           article.image.position = count--;
           if (patch) article.image.patch();
         });
@@ -82,17 +81,13 @@ const CategoriesStore = new Vue({
       });
     },
     updatePosition() {
-      this.setLoading();
       this.state.stores.forEach((i, idx) => {
         if (i.position != idx + 1) {
           i.position = idx + 1;
-          i.put();
+          i.put(false);
         }
       });
-      setTimeout(() => {
-        tools.message('updated');
-        this.unsetLoading();
-      }, 1500);
+
     },
     sortByPosition() {
       this.state.stores.sort((a, b) => {
@@ -112,6 +107,10 @@ const CategoriesStore = new Vue({
       this.state.stores.splice(idx, 1);
     },
     uploadImage(form) {
+      if (this.state.tempImage) {
+        this.state.tempImage.delete(false)
+      }
+
       let gallery = GalleriesStore.getStore('Articles');
       gallery.postImage(form, false);
       setTimeout(() => {

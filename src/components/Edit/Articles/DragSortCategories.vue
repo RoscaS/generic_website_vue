@@ -13,49 +13,68 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable';
-  import CategoriesStore from './CategoriesStore'
+	import draggable from 'vuedraggable';
+	import CategoriesStore from './CategoriesStore';
+	import tools from '../../../utils/tools';
 
-  export default {
-    name: "DragSortCategories",
-    components: {draggable},
-    props: {
-      store: {type: Object},
-    },
-    data: () => ({
-      edit: CategoriesStore,
-      isDragging: false,
-      delayedDragging: false,
-      reOrder: false,
-    }),
-    computed: {
-      disabled() {
-        return this.edit.state.draggingType != 'category'
-      },
-      dragOptions() {
-        return {
-          animation: 250,
-          group: 'description',
-          disabled: this.disabled,
-          ghostClass: 'none'
-        };
-      },
-    },
-    watch: {
-      isDragging(newValue) {
-        if (newValue) {
-          this.delayedDragging = true;
-          return;
-        }
-        this.$nextTick(() => {
-          this.edit.updatePosition();
-        });
-      }
-    },
-    methods: {
-      onMove({relatedContext, draggedContext}) {},
-    },
-  };
+	export default {
+		name: "DragSortCategories",
+		components: {draggable},
+		data: () => ({
+			edit: CategoriesStore,
+			isDragging: false,
+			delayedDragging: false,
+			reOrder: false,
+			lock: false,
+		}),
+		computed: {
+			primary: {
+				get() { return this.edit.state.primaryStore; },
+				set(value) { this.edit.state.primaryStore = value; }
+			},
+			secondary: {
+				get() { return this.edit.state.primaryStore; },
+				set(value) {this.edit.state.primaryStore = value; }
+			},
+			disabled() {
+				return this.edit.state.draggingType !== 'category' || this.lock;
+			},
+			dragOptions() {
+				return {
+					animation: 250,
+					group: 'description',
+					disabled: this.disabled,
+					ghostClass: 'none'
+				};
+			},
+		},
+		watch: {
+			isDragging(newValue) {
+				if (newValue) {
+					if (this.primary || this.secondary) {
+						this.lock = true;
+						tools.message('categoryCantChangeOrder');
+					}
+					this.delayedDragging = true;
+					return;
+				}
+				this.$nextTick(() => {
+					if (!this.lock) {
+						this.edit.updatePosition();
+						setTimeout(() => {
+							tools.message('updated');
+						}, 500);
+					}
+					this.lock = false;
+
+				});
+			}
+		},
+		methods: {
+			onMove({relatedContext, draggedContext}) {
+			},
+		},
+	};
 </script>
 
 <style scoped lang="scss">

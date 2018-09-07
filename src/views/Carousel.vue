@@ -60,7 +60,6 @@
 				return this.$siteOptions.state.carousel_auto_scroll.data;
 			},
 			speed() {
-        console.log(this.$siteOptions.state.carousel_auto_scroll_speed.data);
         return this.$siteOptions.state.carousel_auto_scroll_speed.data;
       }
 		},

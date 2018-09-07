@@ -2,100 +2,101 @@
   <div class="box"
        :title="category.name"
        @mouseover="edit.state.draggingType = 'category'">
-      <div class="category-wrapper">
-        <b-checkbox class="checkbox"
-                    size="is-small"
-                    v-model="checked"
-                    :type="color">
-        </b-checkbox>
-        <span class="name">{{category.name}}</span>
-        <ControlButtons class="control-buttons"
-                        :dark="true"
-                        @modify="modify"
-                        @remove="remove">
-        </ControlButtons>
-      </div>
+    <div class="category-wrapper">
+      <b-checkbox class="checkbox"
+                  size="is-small"
+                  v-model="checked"
+                  :type="color">
+      </b-checkbox>
+      <span class="name">{{category.name}}</span>
+      <ControlButtons class="control-buttons"
+                      :dark="true"
+                      @modify="modify"
+                      @remove="remove">
+      </ControlButtons>
+    </div>
   </div>
 </template>
 
 <script>
-  import CategoriesStore from "./CategoriesStore";
-  import ControlButtons from "../ControlButtons";
+	import CategoriesStore from "./CategoriesStore";
+	import ControlButtons from "../ControlButtons";
 
-  export default {
-    name: "CategorieBox",
-    components: {ControlButtons},
-    props: {
-      category: {type: Object},
-    },
-    data: () => ({
-      color: 'is-info',
-      init: false,
-    }),
-    computed: {
-      edit() {
-        return CategoriesStore
-      },
-      primary: {
-        get() {return this.edit.state.primaryStore},
-        set(value) {this.edit.state.primaryStore = value}
-      },
-      secondary: {
-        get() {return this.edit.state.secondaryStore},
-        set(value) {this.edit.state.secondaryStore = value}
-      },
-      checked: {
-        get() {
-          if (this.primary == this.category) {
-            this.color = 'is-info';
-            return true;
+	export default {
+		name: "CategorieBox",
+		components: {ControlButtons},
+		props: {
+			category: {type: Object},
+		},
+		data: () => ({
+			color: 'is-info',
+			init: false,
+		}),
+		computed: {
+			edit() {
+				return CategoriesStore;
+			},
+			primary: {
+				get() {return this.edit.state.primaryStore;},
+				set(value) {this.edit.state.primaryStore = value;}
+			},
+			secondary: {
+				get() {return this.edit.state.secondaryStore;},
+				set(value) {this.edit.state.secondaryStore = value;}
+			},
+			checked: {
+				get() {
+					if (this.primary === this.category) {
+						this.color = 'is-info';
+						return true;
+					}
+					else if (this.secondary === this.category) {
+						this.color = 'is-primary';
+						return true;
+					} else if (this.secondary === null && this.primary === null){
+						return false;
+					} else {
+						return false;
           }
-          else if (this.secondary == this.category) {
-            this.color = 'is-primary';
-            return true
-          } else {
-            this.color = 'is-dark';
-            return false;
-          }
-        },
-        set(value) {
-          if (value) {
-            if (!this.primary) {
-              this.color = 'is-info';
-              this.primary = this.category;
-            }
-            else if (!this.secondary) {
-              this.color = 'is-primary';
-              this.secondary = this.category;
-            }
-            else if (this.primary && this.secondary) {
-              this.color = 'is-info';
-              this.primary = null;
-              setTimeout(() => {this.primary = this.category;}, 1000);
-            }
-          }
-          else {
-            if (this.primary == this.category) {
-              this.color = 'is-dark';
-              this.primary = null;
-            }
-            else if (this.secondary == this.category) {
-              this.color = 'is-dark';
-              this.secondary = null;
-            }
-          }
-        }
-      }
-    },
-    methods: {
-      modify() {
-        this.category.setBackup();
-        this.edit.editItem = this.category;
-      },
-      remove() {this.category.delete()},
-    }
+				},
+				set(value) {
+					if (value) {
+						if (!this.primary) {
+							this.color = 'is-info';
+							this.primary = this.category;
+						}
+						else if (!this.secondary) {
+							this.color = 'is-primary';
+							this.secondary = this.category;
+						}
+						else if (this.primary && this.secondary) {
+							this.color = 'is-info';
+							this.primary = null;
+							setTimeout(() => {this.primary = this.category;}, 10);
+						}
+					}
+					else {
+						if (this.primary === this.category) {
+							this.color = 'is-dark';
+							this.primary = null;
+						}
+						else if (this.secondary === this.category) {
+							this.color = 'is-dark';
+							this.secondary = null;
+						}
+					}
+				}
+			}
+		},
+		methods: {
+			modify() {
+				this.category.setBackup();
+				this.edit.editItem = this.category;
+			},
+			remove() {this.category.delete();},
+		}
 
-  };
+	};
 </script>
 
 <style scoped lang="scss">
@@ -114,10 +115,10 @@
 
       @media screen and (max-width: 1100px) {
         flex-direction: column;
-       }
+      }
       @media screen and (max-width: 769px) {
         flex-direction: row;
-       }
+      }
 
       .checkbox {
 
@@ -133,7 +134,7 @@
         @media screen and (max-width: 769px) {
           text-overflow: unset;
           max-width: 100%;
-         }
+        }
       }
 
       .control-buttons {
@@ -141,13 +142,12 @@
         z-index: 10;
         @media screen and (max-width: 1100px) {
           margin-left: 0;
-         }
+        }
         @media screen and (max-width: 769px) {
           margin-left: auto;
-         }
+        }
       }
     }
-
 
   }
 </style>
