@@ -59,7 +59,6 @@ class Gallery {
       }
     });
     this.sortByPosition();
-    // this.update();        // TEST AUTH
     this.hasLoaded = true;
   }
 
@@ -119,6 +118,9 @@ class Gallery {
       .post("images/", form, headers)
       .then(response => {
         this.initImages([response.data]);
+        if (this.placeholder) {
+          this.unsetPlaceholder();
+        }
       })
       .catch(() => {
         tools.message("Fichier jpg ou png uniquement!");

@@ -166,6 +166,7 @@
   }
 
   .loading-animation {
+    z-index: 50;
     position: absolute;
     top: 80%;
     left: 49%;

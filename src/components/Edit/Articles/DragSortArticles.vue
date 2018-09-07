@@ -14,7 +14,7 @@
 
 <script>
   import draggable from 'vuedraggable';
-  import CategoriesStore from './CategoriesStore'
+  import CategoriesStore from './CategoriesStore';
 
   export default {
     name: "DragSortArticles",
@@ -31,7 +31,7 @@
     }),
     computed: {
       dragOptions() {
-        let disable =  this.edit.state.draggingType != 'article';
+        let disable =  this.edit.state.draggingType !== 'article';
         return {
           animation: 250,
           group: 'description',

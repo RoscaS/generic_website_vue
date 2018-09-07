@@ -58,6 +58,7 @@ class Image {
 
   patch() {
     axios.patch(this.url, this.getForm(), headers);
+
   }
 }
 

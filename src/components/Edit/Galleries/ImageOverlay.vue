@@ -1,11 +1,8 @@
 <template>
   <div class="overlay-wrapper">
     <div class="overlay" v-if="!isPlaceholder">
-      <div class="level">
-        <div class="level-left"></div>
-        <div class="level-right">
-          <Ctrl class="level-item" @modify="modify" @remove="remove"/>
-        </div>
+      <div class="buttons-wrapper">
+          <Ctrl class="ctrl-buttons" @modify="modify" @remove="remove"/>
       </div>
     </div>
     <img :src="image.image">
@@ -79,7 +76,13 @@
     transition: .5s ease;
   }
 
-  .level {
-    padding-top: 5px;
+  .buttons-wrapper {
+    display: flex;
+
+    .ctrl-buttons {
+      padding: 4px 4px 4px 0;
+      margin-left: auto;
+    }
+
   }
 </style>

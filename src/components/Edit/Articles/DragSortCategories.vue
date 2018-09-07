@@ -28,14 +28,6 @@
 			lock: false,
 		}),
 		computed: {
-			primary: {
-				get() { return this.edit.state.primaryStore; },
-				set(value) { this.edit.state.primaryStore = value; }
-			},
-			secondary: {
-				get() { return this.edit.state.primaryStore; },
-				set(value) {this.edit.state.primaryStore = value; }
-			},
 			disabled() {
 				return this.edit.state.draggingType !== 'category' || this.lock;
 			},
@@ -51,7 +43,7 @@
 		watch: {
 			isDragging(newValue) {
 				if (newValue) {
-					if (this.primary || this.secondary) {
+					if (this.this.edit.state.primaryStore || this.edit.state.primaryStore) {
 						this.lock = true;
 						tools.message('categoryCantChangeOrder');
 					}

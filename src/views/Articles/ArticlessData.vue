@@ -36,7 +36,7 @@
 			type: 'article',
 			activeTab: 0,
 
-      heightDelta: 43,
+      heightDelta: 40,
       step: 10,
       speed: 10,
 
@@ -91,8 +91,6 @@
       }
 		},
 		mounted() {
-			this.heightDelta = window.innerWidth >= 900 ? 50 : 36;
-
 			setTimeout(() => {
 				this.previousHeight = this.stores[0].count() * this.heightDelta;
 			}, 1500);
@@ -110,7 +108,7 @@
   }
 
   .mobile-description{
-    color: $link-hover;
+    color: #777;
     text-align: center;
     margin-top: -30px;
     padding: 0 10px 10px 10px;

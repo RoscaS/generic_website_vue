@@ -3,15 +3,15 @@
     <div class="card" v-if="editItem">
 
       <header class="card-header">
-        <div class="card-image">
+        <!--<div class="card-image">-->
           <img :src="editItem.image">
-        </div>
+        <!--</div>-->
       </header>
 
       <div class="card-content">
         <div class="content">
           <p>{{ editItem.description }}</p>
-          <b-field type="is-info" label="Description:">
+          <b-field type="is-link" label="Description:">
             <b-input type="textarea" rows="2"
                      v-model="editItem.description"
                      :maxlength="100">
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+  import tools from '../../../utils/tools';
+
   export default {
     name: "ImagesCard",
     props: {
@@ -49,11 +51,17 @@
     },
     methods: {
       validate() {
+      	this.edit.setLoading();
+      	setTimeout(() => {
+      		this.edit.unsetLoading();
+      		tools.message('updated');
+          this.edit.clearEditItem();
+        }, 500);
         this.edit.editItem.patch();
-        this.edit.clearEditItem();
       },
       cancel() {
         this.edit.clearEditItem();
+        tools.message('cancel');
       },
     },
     destroyed() {
@@ -68,9 +76,9 @@
   .card {
     border-radius: 9px;
     position: absolute;
-    z-index: 100;
+    z-index: 3;
     width: $article-width;
-    /*width: 350px;*/
+
     top: 25%;
     left: 40.5%;
 
@@ -78,13 +86,14 @@
     -moz-box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
     box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
 
-    .card-image {
+    header {
       img {
         object-fit: cover;
+        height: $article-height;
         width: $article-width;
+
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
-        /*width: 100%;*/
       }
     }
   }

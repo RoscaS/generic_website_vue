@@ -85,6 +85,7 @@
 <script>
 	import CategoriesStore from "./CategoriesStore";
 	import Upload from "../Upload";
+	import tools from "../../../utils/tools";
 
 	export default {
 		name: "ArticlesCard",
@@ -212,6 +213,7 @@
 					this.tempImage.delete(false);
 					this.edit.tempImage = null;
 				}
+				tools.message('cancel');
 				this.end();
 			},
 			end() {

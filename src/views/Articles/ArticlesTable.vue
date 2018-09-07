@@ -1,36 +1,20 @@
 <template>
   <section>
-    <div class="columns is-centered">
-      <div class="column is-9-desktop">
-        <div class="card"
-             v-for="(article, i) in category.articles"
-             :key="i"
-             @mouseenter="mouseIn(article)"
-             @mouseleave="mouseOut()">
-          <header class="card-header desktop level is-hidden-mobile">
-            <div class="level-left">
 
-              <div class="level-item">
-                <span class="name">{{article.name}}</span>
-              </div>
-
-              <div class="level-item ">
-                <span class="description">{{article.description}}</span>
-              </div>
-            </div>
-
-            <div class="level-right">
-              <div class="level-item pprice">
-                <span class="price">{{article.price}} chf</span>
-              </div>
-            </div>
-          </header>
-          <header class="card-header mobile is-hidden-desktop">
-            <span class="name">{{ article.name }}</span>
-          </header>
-        </div>
+    <div class="articles">
+      <div class="article"
+           v-for="(article, i) in category.articles"
+           :key="i"
+           @mouseenter="mouseIn(article)"
+           @mouseleave="mouseOut()">
+        <span class="name">{{ article.name }}</span>
+        <span class="description is-hidden-mobile" :title="article.description">
+          {{ article.description }}
+        </span>
+        <span class="price">{{ article.price }} Chf</span>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -67,80 +51,60 @@
 <style scoped lang="scss">
   @import '../../../static/sass/global';
 
-  .columns {
-    .card {
+  .articles {
+    display: block;
+    width: 79%;
+    margin: 0 auto 0 auto;
+    @media screen and (max-width: 980px) {
+      width: 100%;
+    }
+
+    .article {
       cursor: default;
-      transition: background-color .5s ease;
+      transition: all .5s ease;
       border-radius: 20px;
-      margin-bottom: 10px;
-      box-shadow: none;
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid rgba(77, 87, 99, 0.24);
       background-color: transparent;
-
-      @media screen and (max-width: 960px) {
-        padding-bottom: 0;
+      padding: 0 10px 0 10px;
+      &:not(:first-child) {
+        margin-top: 15px;
       }
-
       &:hover {
-        transition: background-color .5s ease;
+        transition: all .5s ease;
         transition-delay: .2s;
+        border-bottom-color: transparent;
         background-color: rgba(22, 125, 240, 0.37);
+      }
+
+      .name {
+        width: 130px;
+        min-width: 120px;
+        font-size: 18px;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #4C4C4C;
 
       }
 
-      .card-header {
-        transition: border-bottom-color .5s ease;
-        box-shadow: none;
-        border-bottom: 1px solid lightgray;
-
-        &:hover {
-          transition: border-bottom-color .5s ease;
-          transition-delay: .2s;
-          border-bottom-color: transparent;
-        }
-
-        &.desktop {
-          margin-bottom: 15px;
-        }
-
-        &.mobile {
-          .name {
-            padding-left: 30px;
-            /*width: 150px*/
-          }
-        }
-
-        .level-left {
-          margin-left: 10px;
-          .diez {
-            font-weight: lighter;
-            font-size: 25px;
-            opacity: 0.35;
-            z-index: 1;
-          }
-
-          .name {
-            width: 150px;
-            font-size: 20px;
-            padding-top: 0;
-            padding-bottom: 0;
-            color: #4C4C4C;
-          }
-
-          .description {
-            width: 310px;
-            /*font-weight: lighter;*/
-          }
-        }
-
-        .level-right {
-          margin-right: 15px;
-
-          .price {
-          }
-        }
+      .description {
+        width: 440px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
+
+      .price {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        white-space: nowrap;
+      }
+
     }
   }
-
 
 </style>

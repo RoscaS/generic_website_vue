@@ -69,11 +69,11 @@ class Category {
     this.edit.sortImages();
     this.articles.forEach((i, idx) => {
       let dirty = false;
-      if (i.position != idx + 1) {
+      if (i.position !== idx + 1) {
         i.position = idx + 1;
         dirty = true;
       }
-      if (i.category != this) {
+      if (i.category !== this) {
         i.category = this;
         dirty = true;
       }
