@@ -49,10 +49,10 @@
   .header-ribbon {
     color: $ribbon-text;
     font-size: 28px;
+
     letter-spacing: 20px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    /*height: 50px;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,16 +75,17 @@
       background: $ribbon;
       padding-left: 20px;
       padding-top: 4.5px;
-      padding-bottom: 1px;
+      padding-bottom: 2px;
+
+      @media screen and (max-width: 690px) {
+        padding-bottom: 1.5px;
+      }
     }
 
     &:before,
     &:after {
       content: "";
       width: 0.2em;
-      /*bottom: 1em;*/
-      /*position: absolute;*/
-      /*display: block;*/
       border: .87em solid $ribbon;
       z-index: 0;
 

@@ -1,8 +1,8 @@
 <template>
   <div>
     <EditIcon :store="store" :edit="edit" top="50px"/>
-    <section :id="id" class="parallax has-text-centered" :style="style">
-      <h1 class="title">{{ title }}</h1>
+    <section class="parallax has-text-centered" :style="style">
+      <h1 class="title">{{ text }}</h1>
     </section>
   </div>
 </template>
@@ -18,16 +18,14 @@
     components: {EditIcon},
     props: {
       idx: {type: Number},
-      height: {type: String}
+      height: {type: String},
+      text: {type: String},
     },
     data: () => ({
       component: 'Parallax',
       type: 'image',
     }),
     computed: {
-      id() {
-        return `Parallax${this.idx}`;
-      },
       title() {
         return this.getImage(this.idx).description;
       },

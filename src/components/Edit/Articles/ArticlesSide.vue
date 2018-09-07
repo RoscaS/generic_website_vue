@@ -1,26 +1,7 @@
 <template>
   <section>
-    <div class="level">
-      <div class="level-left">
-        <div class="level-item">
-          <h3>Articles:</h3>
-        </div>
-      </div>
-      <div class="level-right">
-        <div class="level-item">
-          <div class="button is-outlined is-white" @click="createCategory()">
-            Ajouter une catégorie
-          </div>
-        </div>
-        <div class="level-item">
-          <div class="button is-outlined is-white" @click="createArticle()">
-            Ajouter un article
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns is-variable is-2">
+    <h3>Articles:</h3>
+    <div class="columns is-mobile is-variable is-2">
 
       <transition name="custom-fade">
         <div v-if="!primary && !secondary" class="no-selection">
@@ -54,14 +35,7 @@
       primary() {return this.edit.state.primaryStore;},
       secondary() {return this.edit.state.secondaryStore;},
     },
-    methods: {
-      createCategory() {
-        this.edit.state.newItem = 'category';
-      },
-      createArticle() {
-        this.edit.state.newItem = 'article';
-      }
-    }
+
   };
 </script>
 
@@ -83,7 +57,6 @@
   }
 
   h3 {
-    margin-bottom: 0;
     color: white;
   }
 
@@ -96,16 +69,6 @@
       width: 100%;
       color: #adadad;
     }
-  }
-
-  .level-right {
-    margin-right: 5px;
-  }
-
-  .columns {
-    padding: .25rem;
-    margin-top: 1rem;
-    /*width: 70%;*/
   }
 
 

@@ -8,11 +8,11 @@
       <Carousel/>
       <Presentation/>
       <Hero/>
-      <Parallax :idx="0" height="600px"/>
+      <Parallax :idx="0" height="600px" text="Articles"/>
       <Articles/>
-      <Parallax :idx="1" height="400px"/>
+      <Parallax :idx="1" height="400px" text="Galerie"/>
       <Events/>
-      <Parallax :idx="2" height="400px"/>
+      <Parallax :idx="2" height="400px" text="Contact"/>
       <Contact/>
       <OpeningHours/>
       <!--<Review/>-->

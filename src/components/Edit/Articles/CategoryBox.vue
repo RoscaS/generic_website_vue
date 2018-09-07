@@ -1,23 +1,20 @@
 <template>
   <div class="box"
+       :title="category.name"
        @mouseover="edit.state.draggingType = 'category'">
-    <div class="level">
-      <div class="level-left">
-        <b-checkbox class="level-item checkbox"
+      <div class="category-wrapper">
+        <b-checkbox class="checkbox"
                     size="is-small"
                     v-model="checked"
                     :type="color">
         </b-checkbox>
-        <h5 class="level-item">{{category.name}}</h5>
-      </div>
-      <div class="level-right">
-        <ControlButtons class="level-item"
+        <span class="name">{{category.name}}</span>
+        <ControlButtons class="control-buttons"
                         :dark="true"
                         @modify="modify"
                         @remove="remove">
         </ControlButtons>
       </div>
-    </div>
   </div>
 </template>
 
@@ -104,28 +101,53 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  .checkbox {
-    margin-top: -1px;
-  }
-
   .box {
-    /*padding: 10px;*/
-    padding: 10px 2px 10px 10px;
-    margin-bottom: 1rem;
+    padding: .5rem;
+    margin-bottom: .7rem;
     cursor: grab;
 
-    h5 {
-      margin-bottom: 0;
-    }
+    .category-wrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
 
-    i {
-      transition: color .3s ease;
-      cursor: pointer;
+      @media screen and (max-width: 1100px) {
+        flex-direction: column;
+       }
+      @media screen and (max-width: 769px) {
+        flex-direction: row;
+       }
 
-      &:hover {
-        transition: color .3s ease;
-        color: $link-hover;
+      .checkbox {
+
+      }
+      .name {
+        font-weight: bold;
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 6rem;
+
+        @media screen and (max-width: 769px) {
+          text-overflow: unset;
+          max-width: 100%;
+         }
+      }
+
+      .control-buttons {
+        margin-left: auto;
+        z-index: 10;
+        @media screen and (max-width: 1100px) {
+          margin-left: 0;
+         }
+        @media screen and (max-width: 769px) {
+          margin-left: auto;
+         }
       }
     }
+
+
   }
 </style>

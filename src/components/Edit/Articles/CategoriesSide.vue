@@ -29,12 +29,10 @@
   @import '../../../../static/sass/global';
 
   section {
-    margin-top: 5px;
   }
 
   h3 {
     color: white;
-    margin-bottom: 32px;
   }
 
 </style>
