@@ -1,5 +1,5 @@
 <template>
-  <div v-show="authenticated">
+  <div v-if="authenticated">
     <ImagesModal/>
     <ArticlesModal/>
     <TimeModal/>

@@ -7,7 +7,7 @@
       </a>
     </transition>
 
-    <b-modal :active.sync="smallMenu" :width="640" scroll="keep"
+    <b-modal :active.sync="smallMenu" :width="640" scroll="clip"
              :canCancel="['escape', 'outside', 'button']">
 
       <div class="burger-wrapper">
@@ -22,7 +22,7 @@
       <ul id="SmallLinkList" class="content">
         <li v-for="link in links">
           <h2>
-            <a :href="link.id">
+            <a :href="link.id" @click="closeModal()">
               <i class="far fa-fw" :class="link.icon"></i>
               {{link.name}}
             </a>
@@ -52,6 +52,9 @@
 			logo() { return GalleriesStore.logo; },
     },
 		methods: {
+      closeModal() {
+        this.smallMenu = false;
+      },
 			toggleModal() {
 				this.smallMenu = !this.smallMenu;
 				this.showSmallLinks();
