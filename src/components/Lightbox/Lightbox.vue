@@ -9,55 +9,58 @@
     <i class="far fa-chevron-left fa-3x arrows prev"
        @click.stop.prevent="prev"></i>
 
-    <h2 class="description">{{ description }}</h2>
+    <div class="center">
+      <h2 class="description">{{ description }}</h2>
+    </div>
+
     <p class="counter">{{ index }}/{{ total }}</p>
   </div>
 </template>
 
 <script>
-  import './LightboxDirective';
-  import LightboxImage from './LightboxImage';
-  import store from './LightboxStore';
+	import './LightboxDirective';
+	import LightboxImage from './LightboxImage';
+	import store from './LightboxStore';
 
-  export default {
-    name: "Lightbox",
-    components: {LightboxImage},
+	export default {
+		name: "Lightbox",
+		components: {LightboxImage},
 
-    data() {
-      return {
-        state: store.state,
-        direction: 'next',
-      };
-    },
+		data() {
+			return {
+				state: store.state,
+				direction: 'next',
+			};
+		},
 
-    computed: {
-      image() { return this.state.images[this.state.index]; },
-      description() { return this.state.descriptions[this.state.index]; },
-      index() { return this.state.index + 1; },
-      total() { return this.state.images.length; },
-      transition() { return 'lightbox-' + this.direction; }
-    },
+		computed: {
+			image() { return this.state.images[this.state.index]; },
+			description() { return this.state.descriptions[this.state.index]; },
+			index() { return this.state.index + 1; },
+			total() { return this.state.images.length; },
+			transition() { return 'lightbox-' + this.direction; }
+		},
 
-    methods: {
+		methods: {
 
-      enableScrolling() {
-        window.onscroll = function() {};
-      },
+			enableScrolling() {
+				window.onscroll = function() {};
+			},
 
-      close() {
-        this.enableScrolling();
-        store.close();
-      },
-      next() {
-        this.direction = 'next';
-        store.next();
-      },
-      prev() {
-        this.direction = 'prev';
-        store.prev();
-      },
-    }
-  };
+			close() {
+				this.enableScrolling();
+				store.close();
+			},
+			next() {
+				this.direction = 'next';
+				store.next();
+			},
+			prev() {
+				this.direction = 'prev';
+				store.prev();
+			},
+		}
+	};
 </script>
 
 <style scoped lang="scss">
@@ -73,21 +76,51 @@
     background-color: #FFF;
     background-color: rgba(#000, 0.9);
 
-    .description {
-      /*font-family: 'Open Sans', sans-serif;*/
-
-      font-size: 30px;
-      font-weight: bolder;
-      line-height: 39.6px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .center {
       position: relative;
-      color: white;
+      top: 83%;
+      margin: auto;
+      max-width: 70%;
+      padding: 10px;
 
-      top: 92%;
-      width: 100%;
+      @media screen and (max-width: 1366px) {
+        top: 80%;
+      }
+      @media screen and (max-width: 650px) {
+        top: 72%;
+      }
+      @media screen and (max-width: 340px) {
+        top: 65%;
+      }
+
+      .description {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 30px;
+        /*font-size: 3vw;*/
+        /*line-height: 30px;*/
+        text-align: center;
+        color: white;
+        width: fit-content;
+        margin: 0 auto 0 auto;
+        padding: 5px 8px 5px 8px;
+
+        background-color: rgba(77, 87, 99, 0.68);
+        border-radius: 10px;
+
+        @media screen and (max-width: 1366px) {
+          font-size: 25px;
+        }
+        @media screen and (max-width: 960px) {
+          font-size: 20px;
+        }
+        @media screen and (max-width: 650px) {
+          font-size: 16px;
+        }
+        @media screen and (max-width: 340px) {
+          font-size: 14px;
+        }
+
+      }
     }
 
     .counter {
@@ -102,8 +135,7 @@
       color: #a3a3a3;
       cursor: pointer;
       position: fixed;
-      top: 50%;
-      margin-top: -40px;
+      top: 46%;
 
       &:hover {
         transition: color .1s, transform .1s;
@@ -124,15 +156,27 @@
     }
 
     @keyframes next-arrow {
-      0% {transform: translate(0px);}
-      60% {transform: translate(3px);}
-      100% {transform: translate(0px);}
+      0% {
+        transform: translate(0px);
+      }
+      60% {
+        transform: translate(3px);
+      }
+      100% {
+        transform: translate(0px);
+      }
     }
 
     @keyframes prev-arrow {
-      0% {transform: translate(0px);}
-      60% {transform: translate(-3px);}
-      100% {transform: translate(0px);}
+      0% {
+        transform: translate(0px);
+      }
+      60% {
+        transform: translate(-3px);
+      }
+      100% {
+        transform: translate(0px);
+      }
     }
 
     .close {

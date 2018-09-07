@@ -76,7 +76,7 @@
       box-shadow: none;
       background-color: transparent;
 
-      @media screen and (max-width: 900px) {
+      @media screen and (max-width: 960px) {
         padding-bottom: 0;
       }
 

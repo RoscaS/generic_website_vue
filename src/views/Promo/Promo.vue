@@ -77,7 +77,7 @@
   .container {
     margin-top: 60px;
 
-    @media screen and (max-width: 900) {
+    @media screen and (max-width: 960) {
       height: 440px;
       margin-top: 0;
     }
@@ -97,7 +97,7 @@
 
     .right {
       padding-left: 40px;
-      @media screen and (max-width: 900) {
+      @media screen and (max-width: 960) {
         padding: 0 50px 0 30px;
       }
     }

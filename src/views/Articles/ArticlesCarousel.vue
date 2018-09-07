@@ -156,7 +156,7 @@
   section {
     margin: -90px 0px -150px 0px;
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 960px) {
       margin-top: 0;
       margin-bottom: -120px;
     }
@@ -166,7 +166,7 @@
     .carousel-wrapper {
       width: 815px;
 
-      @media screen and (max-width: 900px) {
+      @media screen and (max-width: 960px) {
         width: 100%;
       }
     }

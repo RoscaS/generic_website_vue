@@ -2,81 +2,96 @@
   <div @click.stop>
     <div class="loading" v-if="loading"></div>
     <transition name="lightbox-fade">
-      <img :src="src" class="image" :style="style" :key="src">
+      <div class="wrapper">
+        <img :src="src" class="image"  :key="src">
+      </div>
     </transition>
   </div>
 </template>
 
 <script>
-  export default {
+	export default {
 
-    name: "LigthboxImage",
+		name: "LigthboxImage",
 
-    props: {
-      image: String,
-    },
+		props: {
+			image: String,
+		},
 
-    data() {
-      return {
-        loading: true,
-        src: false,
-        style: {},
-      };
-    },
+		data() {
+			return {
+				loading: true,
+				src: false,
+				style: {},
+			};
+		},
 
-    mounted() {
-      let image = new window.Image();
-      image.onload = () => {
-        this.loading = false;
-        this.src = this.image;
-        this.resizeImage(image);
-      };
-      image.src = this.image;
+		mounted() {
+			let image = new window.Image();
+			image.onload = () => {
+				this.loading = false;
+				this.src = this.image;
+				// this.resizeImage(image);
+			};
+			image.src = this.image;
 
-      this.resizeEvent = () => {
-        this.resizeImage(image)
-      };
+			// this.resizeEvent = () => {
+			//   this.resizeImage(image)
+			// };
 
-      window.addEventListener('resize', this.resizeEvent);
-    },
+			// window.addEventListener('resize', this.resizeEvent);
+		},
 
-    destroyed() {
-      window.removeEventListener('resize', this.resizeEvent);
-    },
+		destroyed() {
+			window.removeEventListener('resize', this.resizeEvent);
+		},
 
-    methods: {
-      resizeImage(image) {
-        let width = image.width;
-        let height = image.height;
-
-        if (width > window.innerWidth || height > window.innerHeight) {
-          let ratio = width / height;
-          let windowRatio = window.innerWidth / window.innerHeight;
-          if (ratio > windowRatio) {
-            width = window.innerWidth;
-            height = width / ratio;
-          }
-          else {
-            height = window.innerHeight;
-            width = height * ratio;
-          }
-        }
-
-        this.style = {
-          wdth: width-200 + 'px',
-          height: height-200 + 'px',
-          top: ((window.innerHeight - height) * 0.5)+100 + 'px',
-          left: ((window.innerWidth - width) * 0.5)+165 + 'px',
-        };
-      }
-    },
-  };
+		methods: {
+			// resizeImage(image) {
+			//   let width = image.width;
+			//   let height = image.height;
+			//
+			//   if (width > window.innerWidth || height > window.innerHeight) {
+			//     let ratio = width / height;
+			//     let windowRatio = window.innerWidth / window.innerHeight;
+			//     if (ratio > windowRatio) {
+			//       width = window.innerWidth;
+			//       height = width / ratio;
+			//     }
+			//     else {
+			//       height = window.innerHeight;
+			//       width = height * ratio;
+			//     }
+			//   }
+			//
+			//   this.style = {
+			//     wdth: width-200 + 'px',
+			//     height: height-200 + 'px',
+			//     top: ((window.innerHeight - height) * 0.5)+100 + 'px',
+			//     left: ((window.innerWidth - width) * 0.5)+165 + 'px',
+			//   };
+			// }
+		},
+	};
 </script>
 
 <style scoped lang="scss">
-  .image {
-    position: fixed;
 
+  .wrapper {
+    /*display: table;*/
+
+    img {
+      width: 80%;
+      height: auto;
+      vertical-align: middle;
+      position:absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+
+    }
   }
 
   .loading {

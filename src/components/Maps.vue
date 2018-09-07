@@ -38,7 +38,7 @@
     margin: 0 auto;
     background: gray;
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 960px) {
       width: 100%;
       height: 250px;
     }
