@@ -1,75 +1,73 @@
 <template>
-<div class="columns is-centered">
-  <transition name="bounceDown">
-    <div class="card" v-if="editItem">
+  <div class="columns is-centered">
+    <transition name="bounceDown">
+      <div class="card" v-if="editItem">
 
-      <header class="card-header">
-        <!--<div class="card-image">-->
+        <header class="card-header">
           <img :src="editItem.image">
-        <!--</div>-->
-      </header>
+        </header>
 
-      <div class="card-content">
-        <div class="content">
-          <p>{{ editItem.description }}</p>
-          <b-field type="is-link" label="Description:">
-            <b-input type="textarea" rows="2"
-                     v-model="editItem.description"
-                     :maxlength="100">
-            </b-input>
-          </b-field>
+        <div class="card-content">
+          <div class="content">
+            <p>{{ editItem.description }}</p>
+            <b-field type="is-link" label="Description:">
+              <b-input type="textarea" rows="2"
+                       v-model="editItem.description"
+                       :maxlength="100">
+              </b-input>
+            </b-field>
+          </div>
         </div>
-      </div>
 
-      <footer class="card-footer">
-        <a class="card-footer-item no-tr validate"
-           :disabled="edit.loading"
-           @click="validate">
-          <i class="fas fa-spinner fa-spin"
-             v-if="edit.loading"></i>
-          <i class="far fa-check" v-else></i>
-        </a>
-        <a class="card-footer-item no-tr cancel"
-           :disabled="edit.loading"
-           @click="cancel">
-          <i class="far fa-times"></i>
-        </a>
-      </footer>
-    </div>
-  </transition>
-</div>
+        <footer class="card-footer">
+          <a class="card-footer-item no-tr validate"
+             :disabled="edit.loading"
+             @click="validate">
+            <i class="fas fa-spinner fa-spin"
+               v-if="edit.loading"></i>
+            <i class="far fa-check" v-else></i>
+          </a>
+          <a class="card-footer-item no-tr cancel"
+             :disabled="edit.loading"
+             @click="cancel">
+            <i class="far fa-times"></i>
+          </a>
+        </footer>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
-  import tools from '../../../utils/tools';
+	import tools from '../../../utils/tools';
 
-  export default {
-    name: "ImagesCard",
-    props: {
-      edit: {type: Object},
-    },
-    computed: {
-      editItem() { return this.edit.editItem; }
-    },
-    methods: {
-      validate() {
-      	this.edit.setLoading();
-      	setTimeout(() => {
-      		this.edit.unsetLoading();
-      		tools.message('updated');
-          this.edit.clearEditItem();
-        }, 500);
-        this.edit.editItem.patch();
-      },
-      cancel() {
-        this.edit.clearEditItem();
-        tools.message('cancel');
-      },
-    },
-    destroyed() {
-      this.edit.clearEditItem();
-    }
-  };
+	export default {
+		name: "ImagesCard",
+		props: {
+			edit: {type: Object},
+		},
+		computed: {
+			editItem() { return this.edit.editItem; }
+		},
+		methods: {
+			validate() {
+				this.edit.setLoading();
+				setTimeout(() => {
+					this.edit.unsetLoading();
+					tools.message('updated');
+					this.edit.clearEditItem();
+				}, 500);
+				this.edit.editItem.patch();
+			},
+			cancel() {
+				this.edit.clearEditItem();
+				tools.message('cancel');
+			},
+		},
+		destroyed() {
+			this.edit.clearEditItem();
+		}
+	};
 </script>
 
 <style scoped lang="scss">

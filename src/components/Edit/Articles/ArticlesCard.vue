@@ -26,9 +26,7 @@
         </div>
       </header>
 
-
       <div class="card-content">
-
         <b-field :type="error.name">
           <b-input v-model="data.name"
                    placeholder="Nom"
@@ -155,7 +153,6 @@
 		methods: {
 			isValid() {
 				if (this.is.category) {
-					console.log('CATEGORY');
 					if (this.data.name === '') {
 						this.error.name = 'is-danger';
 						this.messages.push('validNoName');
@@ -163,7 +160,6 @@
 					}
 				}
 				else if (this.is.article) {
-					console.log('ARTICLE');
 					if (this.data.name === '') {
 						this.error.name = 'is-danger';
 						this.messages.push('validNoName');
@@ -246,45 +242,32 @@
 				this.edit.tempImage = null;
 			},
 			validate() {
-				console.log('validate');
         for (let i in this.error) {
         	this.error[i] = '';
         }
 				if (this.isValid()) {
-					console.log('this.isValid: ok')
 					if (this.is.edit) {
-            console.log('this.is.edit')
-
 						this.updateStore();
 
 						if (this.is.article) {
-              console.log('this.is.article')
 							this.editItem.patch();
 						}
 						else if (this.is.category) {
-              console.log('this.is.category')
 							this.edit.state.editItem.put();
 						}
 					}
 					else if (this.is.create) {
-            console.log('this.is.create')
 
 						if (this.is.article) {
-              console.log('this.is.createArticle()')
-
 							this.createArticle();
 						}
 						else if (this.is.category) {
-              console.log('this.is.createCategory()')
-
 							this.createCategory();
 						}
 					}
 					setTimeout(() => {this.end();}, 2000);
 				} else {
-					console.log('this.isValid: fail')
 					let time = 0;
-					console.log(this.messages);
 					for (let i of this.messages) {
 						setTimeout(() => {tools.message(i);}, time);
 						time += 200;
