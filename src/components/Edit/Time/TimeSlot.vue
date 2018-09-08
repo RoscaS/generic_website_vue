@@ -1,18 +1,16 @@
 <template>
   <transition name="fadeLeft">
-    <div>
-      <b-taglist attached div class="control">
-        <div class="arrow-icon">
-          <i class="fas fa-long-arrow-right"></i>
-        </div>
-        <b-tag size="is-medium" type="is-dark">
-          {{interval.start}}
-        </b-tag>
-        <b-tag size="is-medium" type="is-light" closable @close="remove">
-          {{interval.end}}
-        </b-tag>
-      </b-taglist>
-    </div>
+    <b-taglist attached div class="control time-tag">
+      <div class="arrow-icon">
+        <i class="fas fa-long-arrow-right"></i>
+      </div>
+      <b-tag size="is-medium" type="is-dark">
+        <span class="start-text">{{interval.start}}</span>
+      </b-tag>
+      <b-tag size="is-medium" type="is-light" closable @close="remove">
+        <span class="end-text">{{interval.end}}</span>
+      </b-tag>
+    </b-taglist>
   </transition>
 </template>
 
@@ -30,12 +28,20 @@
 
 <style scoped lang="scss">
 
+  .time-tag {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+  }
+
   .arrow-icon {
     color: black;
     position: absolute;
-    top: 9%;
-    left: 44%;
-    transform: scale(0.8);
+    z-index: 10;
+    left: 60px;
+    top: 4px;
   }
 
 </style>

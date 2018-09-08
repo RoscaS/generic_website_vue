@@ -75,7 +75,7 @@
       background: $ribbon;
       padding-left: 20px;
       padding-top: 4.5px;
-      padding-bottom: 2px;
+      padding-bottom: 1.95px;
 
       @media screen and (max-width: 690px) {
         padding-bottom: 1.5px;

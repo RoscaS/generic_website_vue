@@ -7,7 +7,7 @@
            :key="i"
            @mouseenter="mouseIn(article)"
            @mouseleave="mouseOut()">
-        <span class="name">{{ article.name }}</span>
+        <span class="name" :title="article.name">{{ article.name }}</span>
         <span class="description is-hidden-mobile" :title="article.description">
           {{ article.description }}
         </span>
@@ -79,7 +79,7 @@
       }
 
       .name {
-        width: 130px;
+        width: 150px;
         min-width: 120px;
         font-size: 18px;
         font-weight: bold;

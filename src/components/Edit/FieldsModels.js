@@ -1,9 +1,9 @@
 // TEXTS
 
  class Title {
-  constructor() {
+  constructor(len=35) {
     this.data = '';
-    this.len = 35;
+    this.len = len;
     this.label = 'Titre';
   }
 }

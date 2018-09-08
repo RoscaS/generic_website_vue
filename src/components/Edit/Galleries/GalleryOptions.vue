@@ -78,9 +78,11 @@
       width: 50px;
     }
     .auto-scroll-text {
-
+      margin-top: -2px;
+      margin-left: -5px;
     }
     .auto-scroll-speed-wrapper {
+      margin-top: -2px;
       .auto-scroll-column {
 
       }

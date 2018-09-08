@@ -65,7 +65,7 @@ class Promo extends WithImage {
 		this.name = "Promo";
 		this.url = urls.promo;
 		this.state = {
-			title: new Title(),
+			title: new Title(22),
 			text: new Text()
 		};
 	}

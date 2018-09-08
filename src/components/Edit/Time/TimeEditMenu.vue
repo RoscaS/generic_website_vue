@@ -1,35 +1,27 @@
 <template>
-  <section>
-    <div class="container">
-      <div class="content flex">
-        <div class="main-box">
-          <div class="weekdays" v-for="day in days">
-            <div class="weekday">
-              <div class="field check-box">
-                <b-checkbox v-model="day.checked"
-                            @input="select(day)"></b-checkbox>
-              </div>
-              <h4>{{day.upper()}}:</h4>
-            </div>
-            <div class="time-slots">
-              <div class="time-slot" v-for="slot in day.slots">
-                <TimeSlot :interval="slot"></TimeSlot>
-              </div>
-            </div>
-          </div>
-          <transition name="fade">
-            <div class="control-pannel" v-if="selected.length">
-              <div class="deselect" @click="edit.unselectAll()">
-                <i class="fa fa-ban"></i>
-              </div>
-              <h2>Ajouter une plage horaire</h2>
-              <TimeInput :selected="selected"></TimeInput>
-            </div>
-          </transition>
+  <div class="container">
+    <div class="content">
+      <div class="weekdays" v-for="day in days">
+        <b-checkbox class="check-box"
+                    v-model="day.checked"
+                    @input="select(day)">
+        </b-checkbox>
+        <h4 class="name">{{ day.upper() }}:</h4>
+        <div class="time-slots" v-for="slot in day.slots">
+          <TimeSlot :interval="slot"/>
         </div>
       </div>
+      <transition name="fade">
+        <div class="new-slot" v-if="selected.length">
+          <div class="deselect" @click="edit.unselectAll()">
+            <i class="fa fa-ban"></i>
+          </div>
+          <h2 class="new-text">Ajouter une plage horaire</h2>
+          <TimeInput :selected="selected"/>
+        </div>
+      </transition>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -63,19 +55,19 @@
 			helpText() {
 				if (this.help) {
 					this.help = false;
-          setTimeout(() => {
-            this.$snackbar.open({
-              message:
-                `Introduisez une heure de début pour débloquer le second champ.
+					setTimeout(() => {
+						this.$snackbar.open({
+							message:
+								`Introduisez une heure de début pour débloquer le second champ.
                 Pour déselectionner toutes les selections, utilisez le bouton jaune.`,
-              type: 'is-success',
-              position: 'is-bottom',
-              queue: false,
-              actionText: 'Ok',
-              duration: 10000,
-            });
-          }, 100);
-        }
+							type: 'is-success',
+							position: 'is-bottom',
+							queue: false,
+							actionText: 'Ok',
+							duration: 10000,
+						});
+					}, 100);
+				}
 			}
 		},
 
@@ -85,7 +77,7 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  .main-box {
+  .content {
     border: 1px solid black;
     border-radius: 10px;
     padding: 40px;
@@ -94,57 +86,42 @@
     background-color: rgba(48, 93, 120, 0.66);
 
     .weekdays {
-      margin: 4px 0 4px 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: baseline;
+      width: 100%;
 
-      .weekday {
-        display: inline-block;
-        width: 160px;
-        margin-right: 10px;
+      .check-box {
 
-        .check-box {
-          margin-right: 10px;
-          display: inline-block;
-        }
-        h4 {
-          display: inline-block;
-
-          color: white;
-          font-weight: bold;
-          margin: 0;
-          padding: 7px 0 2px 0;
-        }
-
+      }
+      .name {
+        color: white;
+        width: 150px;
       }
       .time-slots {
-        display: inline-block;
-        width: auto;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        width: 170px;
 
-        .time-slot {
-          padding-top: 2px;
-          padding-bottom: 2px;
-          margin-right: 20px;
-          display: inline-block;
-
-        }
       }
     }
-    .control-pannel {
-      margin-top: 30px;
-
+    .new-slot {
       .deselect {
         border-radius: 4px;
         background-color: #FFDD57;
         cursor: pointer;
-        width: 24px;
-        padding: 0 4px 0 4px;
-        margin-top: -25px;
-        margin-left: -2px;
+        width: 25px;
+        padding: 0 5px 0 4.5px;
+        margin-top: -5px;
+        margin-left: -1.5px;
       }
-
-      h2 {
+      .new-text {
         color: white;
+        margin-top: 25px;
       }
     }
   }
+
 
 </style>
