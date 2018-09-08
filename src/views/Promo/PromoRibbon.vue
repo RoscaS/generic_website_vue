@@ -116,6 +116,7 @@
   }
 
   .corner-ribbon {
+    user-select: none;
     font-family: "Open Sans", sans-serif;
     cursor: pointer;
     font-weight: bold;

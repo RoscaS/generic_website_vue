@@ -94,6 +94,7 @@
   @import "../../../static/sass/global";
 
   .burger-nav {
+    user-select: none;
     position: absolute;
     right: 20px;
     top: 23px;

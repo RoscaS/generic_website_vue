@@ -60,6 +60,7 @@
     }
 
     .article {
+      user-select: none;
       cursor: default;
       transition: all .5s ease;
       border-radius: 20px;

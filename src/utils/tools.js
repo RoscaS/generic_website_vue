@@ -53,7 +53,7 @@ const message = {
 	articlesHelp: {
 		type: 'is-warning',
 		position: 'is-bottom',
-		message: "Survolez un article pour l'afficher."
+		message: "Survolez ou cliquez un article pour l'afficher."
 	},
 
 	categoryNew: {
