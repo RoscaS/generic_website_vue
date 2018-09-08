@@ -1,4 +1,5 @@
 <template>
+<div class="columns is-centered">
   <transition name="bounceDown">
     <div class="card" v-if="is.edit || is.create" :style="setPosition()">
 
@@ -27,42 +28,51 @@
 
 
       <div class="card-content">
-        <b-input v-model="data.name"
-                 placeholder="Nom"
-                 :maxlength="30"
-                 :loading="edit.loading"
-                 :disabled="edit.loading">
-        </b-input>
 
-        <b-input v-model="data.description"
-                 type="textarea"
-                 placeholder="Description"
-                 :rows="1"
-                 :maxlength="200"
-                 :loading="edit.loading"
-                 :disabled="edit.loading">
-        </b-input>
-
-        <b-field grouped v-if="is.article">
-          <b-select v-if="is.create"
-                    placeholder="Catégorie"
-                    @input="selectCat" :disabled="edit.loading">
-            <option v-for="cat in categories" :value="cat" :key="cat.id">
-              {{ cat.name }}
-            </option>
-          </b-select>
-          <b-input v-if="is.article"
-                   style="width: 175px"
-                   class="price-style"
-                   type="number"
-                   v-model="data.price"
-                   placeholder="Prix"
-                   :step=".01"
+        <b-field :type="error.name">
+          <b-input v-model="data.name"
+                   placeholder="Nom"
                    :maxlength="30"
-                   :min="0"
                    :loading="edit.loading"
                    :disabled="edit.loading">
           </b-input>
+        </b-field>
+
+        <b-field :type="error.description">
+          <b-input v-model="data.description"
+                   type="textarea"
+                   placeholder="Description"
+                   :rows="1"
+                   :maxlength="200"
+                   :loading="edit.loading"
+                   :disabled="edit.loading">
+          </b-input>
+        </b-field>
+
+        <b-field grouped v-if="is.article">
+          <b-field :type="error.category">
+            <b-select v-if="is.create"
+                      placeholder="Catégorie"
+                      @input="selectCat" :disabled="edit.loading">
+              <option v-for="cat in categories" :value="cat" :key="cat.id">
+                {{ cat.name }}
+              </option>
+            </b-select>
+          </b-field>
+
+          <b-field :type="error.price">
+            <b-input v-if="is.article"
+                     style="width: 175px"
+                     class="price-style"
+                     type="number"
+                     v-model="data.price"
+                     placeholder="Prix"
+                     :step=".01"
+                     :maxlength="30"
+                     :loading="edit.loading"
+                     :disabled="edit.loading">
+            </b-input>
+          </b-field>
         </b-field>
       </div>
 
@@ -80,6 +90,7 @@
 
     </div>
   </transition>
+</div>
 </template>
 
 <script>
@@ -95,7 +106,8 @@
 			icon: '',
 			is: {edit: false, create: false, article: false, category: false},
 			data: {name: '', description: '', price: '', category: ''},
-
+			error: {name: '', description: '', price: '', category: ''},
+			messages: [],
 		}),
 		computed: {
 			edit() {return CategoriesStore;},
@@ -141,13 +153,70 @@
 			},
 		},
 		methods: {
+			isValid() {
+				if (this.is.category) {
+					console.log('CATEGORY');
+					if (this.data.name === '') {
+						this.error.name = 'is-danger';
+						this.messages.push('validNoName');
+						return false;
+					}
+				}
+				else if (this.is.article) {
+					console.log('ARTICLE');
+					if (this.data.name === '') {
+						this.error.name = 'is-danger';
+						this.messages.push('validNoName');
+						return false;
+					}
+					else if (this.data.description === '') {
+						this.error.description = 'is-danger';
+						this.messages.push('validNoDescription');
+						return false;
+					}
+					else if (this.data.price === '') {
+						this.error.price = 'is-danger';
+						this.messages.push('validNoPrice');
+						return false;
+					}
+					else if (Number(this.data.price) < 0) {
+						this.error.price = 'is-danger';
+						this.messages.push('validNegPrice');
+						return false;
+					}
+					else if (this.data.category === '') {
+						this.error.category = 'is-danger';
+						this.messages.push('validNoCategory');
+						return false;
+					}
+				}
+				for (let i of this.categories) {
+					if (this.is.category) {
+						if (i.name === this.data.name) {
+							this.error.name = 'is-danger';
+							this.messages.push('validUniqCatName');
+							return false;
+						}
+					}
+					else if (this.is.article) {
+						for (let j of i.articles) {
+							if (j.name === this.data.name) {
+								this.error.name = 'is-danger';
+								this.messages.push('validUniqArtName');
+								return false;
+							}
+						}
+					}
+				}
+				return true;
+			},
 			selectCat(value) {this.data.category = value;},
 			setType(type) {
-				if (type == 'article') {
+				if (type === 'article') {
 					this.is.article = true;
 					this.title = 'Article';
 				}
-				else if (type == 'category') {
+				else if (type === 'category') {
 					this.is.category = true;
 					this.title = 'Catégorie';
 				}
@@ -177,18 +246,51 @@
 				this.edit.tempImage = null;
 			},
 			validate() {
-				if (this.is.edit) {
-					if (this.isDirty) {
+				console.log('validate');
+        for (let i in this.error) {
+        	this.error[i] = '';
+        }
+				if (this.isValid()) {
+					console.log('this.isValid: ok')
+					if (this.is.edit) {
+            console.log('this.is.edit')
+
 						this.updateStore();
-						if (this.is.article) this.editItem.patch();
-						else this.edit.state.editItem.put();
+
+						if (this.is.article) {
+              console.log('this.is.article')
+							this.editItem.patch();
+						}
+						else if (this.is.category) {
+              console.log('this.is.category')
+							this.edit.state.editItem.put();
+						}
 					}
+					else if (this.is.create) {
+            console.log('this.is.create')
+
+						if (this.is.article) {
+              console.log('this.is.createArticle()')
+
+							this.createArticle();
+						}
+						else if (this.is.category) {
+              console.log('this.is.createCategory()')
+
+							this.createCategory();
+						}
+					}
+					setTimeout(() => {this.end();}, 2000);
+				} else {
+					console.log('this.isValid: fail')
+					let time = 0;
+					console.log(this.messages);
+					for (let i of this.messages) {
+						setTimeout(() => {tools.message(i);}, time);
+						time += 200;
+					}
+					this.messages = [];
 				}
-				else {
-					if (this.is.article) this.createArticle();
-					else this.createCategory();
-				}
-				setTimeout(() => {this.end();}, 2000);
 			},
 			createCategory() {
 				this.edit.createCategory({
@@ -219,6 +321,8 @@
 			end() {
 				for (let i in this.is) this.is[i] = false;
 				for (let i in this.data) this.data[i] = '';
+				for (let i in this.error) this.error[i] = '';
+				this.message = [];
 				this.edit.clearNewItem();
 				this.edit.clearEditItem();
 			},
@@ -234,7 +338,6 @@
     position: absolute;
     z-index: 100;
     width: $article-width;
-    left: 40.7%;
     box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
 
     header {

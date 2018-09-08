@@ -72,6 +72,43 @@ const message = {
 		message: "Déselectionnez les catégories pour en changer l'ordre!"
 	},
 
+	validNoName: {
+		type: 'is-danger',
+		position: 'is-top',
+		message: "Nom requis!"
+	},
+	validNoDescription: {
+		type: 'is-danger',
+		position: 'is-top',
+		message: "Description requise!"
+	},
+	validNoPrice: {
+		type: 'is-danger',
+		position: 'is-top',
+		message: "Prix requise!"
+	},
+	validNegPrice: {
+		type: 'is-danger',
+		position: 'is-top',
+		message: "Prix négatif interdit!"
+	},
+	validNoCategory: {
+		type: 'is-danger',
+		position: 'is-top',
+		message: "Catégorie requise!"
+	},
+	validUniqCatName: {
+		type: 'is-danger',
+		position: 'is-top',
+		message: "Ce nom de catégorie existe déja!"
+	},
+	validUniqArtName: {
+		type: 'is-danger',
+		position: 'is-top',
+		message: "Ce nom d'article existe déja!"
+	},
+
+
 
 	autoScrollOn: {
 		type: 'is-success',

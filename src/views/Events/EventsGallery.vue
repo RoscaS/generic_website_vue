@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content">
         <div class="columns is-multiline is-mobile">
-          <div class="column is-3-desktop is-6-mobile gallery-col"
+          <div class="column is-3-desktop is-3-tablet is-6-mobile"
                v-for="image in store.images"
                v-scroll-reveal="sReveal('left', 200, 100, 1500)">
             <a class="no-tr"
@@ -40,6 +40,9 @@
   @import '../../../static/sass/global';
 
   img {
+    object-fit: cover;
+    width: 100%;
+    max-height: 123px;
     border-radius: 8px;
     cursor: pointer;
     transition: box-shadow .5s ease, transform .5s ease-out;
@@ -48,12 +51,6 @@
     -moz-box-shadow: none;
     transform: scale(1);
 
-    &:hover {
-      transition: box-shadow .5s ease, transform .5s ease-out;
-      -webkit-box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
-      box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
-      transform: scale(1.1);
-    }
+
   }
 </style>

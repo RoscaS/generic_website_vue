@@ -1,4 +1,5 @@
 <template>
+<div class="columns is-centered">
   <transition name="bounceDown">
     <div class="card" v-if="editItem">
 
@@ -36,6 +37,7 @@
       </footer>
     </div>
   </transition>
+</div>
 </template>
 
 <script>
@@ -77,13 +79,9 @@
     border-radius: 9px;
     position: absolute;
     z-index: 3;
+    top: 25%;
     width: $article-width;
 
-    top: 25%;
-    left: 40.5%;
-
-    -webkit-box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
-    -moz-box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
     box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
 
     header {
@@ -96,28 +94,28 @@
         border-top-right-radius: 8px;
       }
     }
-  }
 
-  footer {
-    .validate {
-      color: $is-success;
-      transition: background-color .2s, color .2s;
-      border-bottom-left-radius: 8px;
-      &:hover {
+    footer {
+      .validate {
+        color: $is-success;
         transition: background-color .2s, color .2s;
-        background-color: $is-success;
-        color: white;
         border-bottom-left-radius: 8px;
+        &:hover {
+          transition: background-color .2s, color .2s;
+          background-color: $is-success;
+          color: white;
+          border-bottom-left-radius: 8px;
+        }
       }
-    }
-    .cancel {
-      transition: background-color .2s, color .2s;
-      border-bottom-right-radius: 8px;
-      &:hover {
+      .cancel {
         transition: background-color .2s, color .2s;
-        background-color: $is-danger;
-        color: white;
         border-bottom-right-radius: 8px;
+        &:hover {
+          transition: background-color .2s, color .2s;
+          background-color: $is-danger;
+          color: white;
+          border-bottom-right-radius: 8px;
+        }
       }
     }
   }
