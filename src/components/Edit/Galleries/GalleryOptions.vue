@@ -1,37 +1,28 @@
 <template>
-  <div class="wrapper">
-    <div v-if="store.name==='Carousel'">
-      <div class="level">
-        <div class="level-item">
-          <div class="block"
-               @click="message(!carouselAutoScroll)">
-            <b-switch v-model="carouselAutoScroll"
-                      type="is-info"
-                      size="is-small">
-            </b-switch>
-          </div>
-        </div>
-        <div class="level-item">
-          <small class="text">Défilement automatique</small>
-        </div>
-        <small>:</small>
-        <div class="level-item auto-scroll-speed" v-if="carouselAutoScroll">
-          <div class="decrement" @click="decrement">
-            <i class="fa fa-minus"></i>
-          </div>
-          <span class="speed">{{ carouselAutoScrollSpeed/1000 }}</span>
-          <div class="increment" @click="increment">
-            <i class="fa fa-plus"></i>
-          </div>
-          <small class="secondes">secondes</small>
-        </div>
-      </div>
+  <div class="auto-scroll" v-if="store.name === 'Carousel'">
+    <div class="auto-scroll-switch" @click="message(!carouselAutoScroll)">
+      <b-switch v-model="carouselAutoScroll"
+                type="is-info"
+                size="is-small">
+      </b-switch>
     </div>
+    <small class="auto-scroll-text">Défilement automatique</small>
+    <transition name="fade">
+      <div class="auto-scroll-speed-wrapper" v-if="carouselAutoScroll">
+        <small class="auto-scroll-column">:</small>
+        <span class="decrement" @click="decrement">
+          <i class="fa fa-minus"></i></span>
+        <span class="speed-text">{{ carouselAutoScrollSpeed/1000 }}</span>
+        <span class="increment" @click="increment">
+          <i class="fa fa-plus"></i></span>
+        <small class="auto-scroll-seconds">secondes</small>
+      </div>
+    </transition>
   </div>
+
 </template>
 
 <script>
-
 	import Tools from "../../../utils/tools";
 
 	export default {
@@ -58,17 +49,17 @@
 			message(value) {
 				Tools.message(value ? 'autoScrollOn' : 'autoScrollOff');
 			},
-      increment() {
+			increment() {
 				this.carouselAutoScrollSpeed += 1000;
-      },
-      decrement() {
+			},
+			decrement() {
 				if (this.carouselAutoScrollSpeed > 2000) {
-          this.carouselAutoScrollSpeed -= 1000;
-        }
-        else {
-        	Tools.message('autoScrollMin')
-        }
-      }
+					this.carouselAutoScrollSpeed -= 1000;
+				}
+				else {
+					Tools.message('autoScrollMin');
+				}
+			}
 		}
 	};
 </script>
@@ -76,33 +67,43 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  .wrapper {
-    margin-left: 20px;
-  }
+  .auto-scroll {
+    z-index: 6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
 
-  .block {
-    margin-bottom: -5px;
-  }
+    .auto-scroll-switch {
+      width: 50px;
+    }
+    .auto-scroll-text {
 
-  .auto-scroll-speed {
-    margin: 0 5px 0 5px;
-    width: 120px;
+    }
+    .auto-scroll-speed-wrapper {
+      .auto-scroll-column {
 
-    .decrement {
-      margin-left: 10px;
-      padding-left: 10px;
-      padding-right: 10px;
-      color: $is-info;
-      cursor: pointer;
+      }
+      .decrement {
+        color: $is-info;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .speed-text {
+
+      }
+      .increment {
+        color: $is-info;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .auto-scroll-seconds {
+
+      }
     }
-    .increment {
-      padding-left: 10px;
-      color: $is-info;
-      cursor: pointer;
-    }
-    .secondes {
-      margin-left: 10px;
-    }
+
   }
 
 </style>

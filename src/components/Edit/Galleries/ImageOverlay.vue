@@ -80,7 +80,7 @@
     display: flex;
 
     .ctrl-buttons {
-      padding: 4px 4px 4px 0;
+      padding: 2px 4px 2px 0;
       margin-left: auto;
     }
 

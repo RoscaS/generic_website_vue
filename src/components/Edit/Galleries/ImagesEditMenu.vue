@@ -10,35 +10,19 @@
     <div class="content">
       <transition name="fade">
         <div v-if="!edit.editItem">
-          <h1>Edition: {{ store.name }}</h1>
+          <h1 class="menu-title">Edition: {{ store.name }}</h1>
 
           <div class="card primary">
             <header class="card-header">
-              <div class="card-header-title">
-                <div class="level">
-                  <div class="leve-left">
-                    <div class="level-item">
-                      <h2>{{ store.name}}</h2>
-                    </div>
-                  </div>
-
-                  <div class="level-item">
-                    <ImagesCounter :store="store" :verbose="true"/>
-                  </div>
-
-                  <div class="level-item">
-                    <GalleryOptions :store="store"/>
-                  </div>
-
-                </div>
-              </div>
+              <h2 class="store-name">{{ store.name}}</h2>
+              <ImagesCounter class="img-counter" :store="store" :verbose="true"/>
+              <GalleryOptions class="img-options" :store="store"/>
             </header>
-            <div class="card-content imagesEdit">
+            <div class="card-content images-edit-tabs">
               <b-tabs type="is-toggle"
                       v-model="edit.activeTab"
                       position="is-right">
-                <b-tab-item icon="images"
-                            :disabled="edit.loading">
+                <b-tab-item icon="images" :disabled="edit.loading">
                   <DragSortImages :store="store"/>
                 </b-tab-item>
                 <b-tab-item icon="upload"
@@ -52,17 +36,11 @@
 
           <div class="card secondary">
             <header class="card-header">
-              <div class="card-header-title">
-                <div class="level">
-                  <div class="level-item">
-                    <GalleriesDropDown :store="store"/>
-                  </div>
-                  <div class="level-item top-counter">
-                    <ImagesCounter :store="edit.secondaryStore"
-                                   :verbose="true"/>
-                  </div>
-                </div>
-              </div>
+              <GalleriesDropDown class="gallery-dropdown" :store="store"/>
+              <ImagesCounter class="img-counter"
+                             :store="edit.secondaryStore"
+                             :verbose="true">
+              </ImagesCounter>
             </header>
             <div class="card-content">
               <DragSortImages :store="edit.secondaryStore"/>
@@ -126,55 +104,62 @@
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
 
-  section {
-    min-width: 360px;
-    width: 960px;
-
-    @media screen and (max-width: 1000px) {
-      width: 520px;
-    }
-    @media screen and (max-width: 520px) {
-      width: 320px;
-    }
-  }
-
-  h1 {
+.content {
+  .menu-title {
     position: relative;
-    z-index: 1000;
     color: white;
-
   }
-
-  .primary {
-    max-height: 550px;
-  }
-
-  .secondary {
-  }
-
   .card {
-    z-index: 10;
     border-radius: 8px;
     margin-bottom: 60px;
-    .card-header-title {
-      h2 {
-        margin-bottom: 0;
-        margin-right: 20px;
-        line-height: 40px;
+    width: 960px;
+    border: 1px solid black;
+
+    &.primary {
+      header {
+        user-select: none;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        height: 50px;
+        width: 100%;
+
+        .store-name {
+          margin: 0;
+        }
+        .img-counter {
+          margin: 8px 15px 0 15px;
+        }
+        .img-options {
+          margin: 3px 0 0 0;
+        }
+      }
+      .card-content {
+        &.images-edit-tabs {
+
+        }
+      }
+    }
+
+    &.secondary {
+      header {
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        height: 50px;
+        width: 100%;
+        .gallery-dropdown {
+        }
+        .img-counter {
+          margin: 15px 15px 0 15px;
+        }
+      }
+      .card-content {
+
       }
     }
   }
-
-  .loading-animation {
-    z-index: 50;
-    position: absolute;
-    top: 80%;
-    left: 49%;
-    transform: scale(3.5);
-  }
-
-  .top-counter {
-    margin-left: 20px;
-  }
-
+}
 </style>

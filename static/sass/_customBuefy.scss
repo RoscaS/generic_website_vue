@@ -113,23 +113,13 @@
     }
 }
 
-.imagesEdit {
+.images-edit-tabs {
     .b-tabs {
         margin: 0 auto -10px auto;
-
-        @media screen and (max-width: 768px) {
-
-        }
-
         .tabs {
-            margin-top: -88px;
+            z-index: 5;
+            margin-top: -85px;
             margin-bottom: 10px;
-            //height: 40px;
-
-            @media screen and (max-width: 1089px) {
-                //margin-bottom: -20px;
-            }
-
             ul {
                 li {
                     margin: 0;

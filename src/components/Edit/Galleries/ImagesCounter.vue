@@ -1,5 +1,5 @@
 <template>
-  <b-taglist attached>
+  <b-taglist attached class="wrapper">
     <b-tag :type="color">{{ current }}</b-tag>
     <b-tag type="is-light">
       <span v-if="verbose">sur</span>
@@ -56,5 +56,11 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  .wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
 
 </style>

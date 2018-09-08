@@ -77,7 +77,7 @@
     border-radius: 9px;
     position: absolute;
     z-index: 3;
-    top: 25%;
+    top: 10%;
     width: $article-width;
 
     box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
