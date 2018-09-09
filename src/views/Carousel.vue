@@ -94,19 +94,19 @@
   }
 
   .carousel-top .vueperslides__bullet {
-    z-index: 1;
-    background-color: transparent;
-    border: 1.5px solid white;
-    box-shadow: none;
-    transition: 0.3s;
-    width: 10px;
-    height: 10px;
+    /*z-index: 1;*/
+    /*background-color: transparent;*/
+    /*border: 1.5px solid white;*/
+    /*box-shadow: none;*/
+    /*transition: 0.3s;*/
+    /*width: 10px;*/
+    /*height: 10px;*/
   }
 
   .carousel-top .vueperslides__bullet--active {
-    z-index: 1;
-    background-color: white;
-    width: 10px;
-    height: 10px;
+    /*z-index: 1;*/
+    /*background-color: white;*/
+    /*width: 10px;*/
+    /*height: 10px;*/
   }
 </style>
