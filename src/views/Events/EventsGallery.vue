@@ -51,6 +51,12 @@
     -moz-box-shadow: none;
     transform: scale(1);
 
-
+    &:hover {
+      transition: box-shadow .5s ease, transform .5s ease-out;
+      -webkit-box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
+      box-shadow: 10px 10px 29px -7px rgba(0, 0, 0, 0.75);
+      transform: scale(1.05);
+    }
   }
 </style>

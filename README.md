@@ -37,6 +37,53 @@
 
 
 
+## Deploy
+
+104.248.29.118
+
+### Infomaniak
+https://manager.infomaniak.com/
+jrosk.ad@gmail.com
+$j'aimelepouletE88
+
+* records dns
+
+
+### Digital Ocean
+admin@jrosk.ch
+
+
+
+### Firewall (ufw)
+
+[digital ocean tuto](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04)
+
+* install: `sudo apt install ufw`
+* defaults path: `sudo nano /etc/default/ufw`
+
+### reinit
+* `sudo ufw default deny incoming`
+* `sudo ufw default allow outgoing`
+* `sudo ufw allow ssh`
+* `sudo ufw enable`
+* `sudo ufw allow 80`
+* ...
+
+
+### SSL
+
+[digital ocean tuto](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04)
+
+### Issues (mixed content...)
+[why no padlock](https://www.whynopadlock.com/)
+
+mixed content solved replacing:
+`proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;`
+with
+`proxy_set_header X-Forwarded-Proto $scheme;`
+in the backend nginx file.
+
+
 
 
 ## Divers
