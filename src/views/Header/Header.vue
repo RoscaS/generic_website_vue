@@ -85,7 +85,7 @@
         const width = window.innerWidth;
         if (width <= 414) {
           return {
-          	height: height / 1.7 + 'px',
+          	height: (4 / 7) * height + 'px',
             paddingTop: (height / 100) * 8.27 + 'px'
           }
         } else {
