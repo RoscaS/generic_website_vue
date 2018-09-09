@@ -3,7 +3,16 @@
     <EditIcon :edit="edit"></EditIcon>
     <div class="container">
 
-      <div class="columns is-mobile weekday" v-for="(day, i) in days" :key="i">
+      <div class="columns is-mobile is-centered weekday"
+           :style="setSize()"
+           v-for="(day, i) in days" :key="i"
+           v-scroll-reveal="{
+             origin: 'right',
+             distance: '100px',
+             duration: 1500,
+             delay: 150,
+             easing: 'ease',
+             }">
         <div class="column name">
           <span>{{day.name}}:</span>
         </div>
@@ -16,7 +25,7 @@
             </div>
           </div>
           <div class="columns slots" v-else>
-            <div class="column is-4 interval">
+            <div class="column is-2 interval">
               <div class="box closed">
                 <span>fermé</span>
               </div>
@@ -44,14 +53,20 @@
 				set(value) {this.edit.state.active = value; }
 			}
 		},
-		mounted() {
-			setTimeout(() => {
-				for (let i of this.days) {
-					console.log(i.name);
-					console.log(i.count);
-					console.log('\n');
+		methods: {
+			setSize() {
+				let max = 1;
+				this.days.forEach(i => {i.count > max ? max = i.count : null;});
+				if (window.innerWidth > 768) {
+					if (max === 1) {
+						return `marginLeft: ${37}%`;
+					} else if (max === 2) {
+						return `marginLeft: ${29}%`;
+					} else if (max === 3) {
+						return `marginLeft: ${29}%`;
+					}
 				}
-			}, 500);
+			}
 		}
 	};
 </script>
@@ -68,10 +83,16 @@
   .weekday {
     user-select: none;
     max-width: 545px;
-    margin: 0 auto 0 auto;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: 29%;
     @media screen and (max-width: 768px) {
       max-width: 245px;
-      margin: 15px auto 10px auto;
+      margin-top: 15px;
+      margin-right: auto;
+      margin-bottom: 10px;
+      margin-left: 33%;
       padding-bottom: 5px;
       border-bottom: 1px solid rgba(119, 119, 119, 0.21);
     }
