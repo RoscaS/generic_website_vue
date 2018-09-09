@@ -43,7 +43,7 @@
 		watch: {
 			isDragging(newValue) {
 				if (newValue) {
-					if (this.this.edit.state.primaryStore || this.edit.state.primaryStore) {
+					if (this.edit.state.primaryStore || this.edit.state.primaryStore) {
 						this.lock = true;
 						tools.message('categoryCantChangeOrder');
 					}

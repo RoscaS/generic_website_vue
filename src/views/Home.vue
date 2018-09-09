@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Modals id="Home"/>
+  <div id="Home">
+    <Modals/>
     <PromoRibbon/>
     <Header/>
     <div id="StickyNav">
@@ -37,8 +37,6 @@
 	import Time from "../components/Edit/Time/TimeEditMenu";
 	import OpeningHours from "./OpeningHours";
 	import Header from "./Header/Header";
-
-
 
 	export default {
 		name: "Public",

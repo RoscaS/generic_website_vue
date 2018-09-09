@@ -1,7 +1,7 @@
 <template>
 <div class="nav-wrapper">
   <nav id="Navbar" class="has-background-white"
-       :class="[{'setShadow': stiky}, {'logo': logo}]">
+       :class="[{'setShadow': stiky }, {'logo': logo}]">
 
     <div class="level is-mobile">
 
@@ -49,7 +49,7 @@
 		}),
     computed: {
 			logo() { return GalleriesStore.logo; },
-    }
+    },
 	};
 </script>
 

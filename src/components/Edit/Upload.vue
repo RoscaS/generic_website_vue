@@ -26,13 +26,14 @@
     },
     data: () => ({
       dropFiles: [],
-      accept: ".png, .jpeg, .jpg",
+      accept: "image/*",
     }),
     computed: {
       setStyle() {return {padding: this.padding}}
     },
     watch: {
       dropFiles(value) {
+      	console.log(value);
         this.$emit('file', value[0]);
       }
     }

@@ -71,7 +71,7 @@
 	const galleriesHelp =
 		`
     Affin d'assurer la cohérence et la qualité d'affichage il est recommandé
-    d'utiliser des images de format 16:9 ou 4:3 (base plus grande que la hauteur ou carré).
+    d'utiliser des images dont la hauteur est au maximum aussi grande que la largeur.
     De plus la résolution doit être maximisée sans aller dans l'extrème (idéalement, un poids
     entre 0.5mo et 1mo).
     `;

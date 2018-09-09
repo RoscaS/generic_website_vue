@@ -29,6 +29,11 @@
         else return ['outside', 'x', 'escape'];
       }
     },
+    watch: {
+			modalSync(value) {
+        !value ? this.edit.end() : null
+      }
+    }
 	};
 </script>
 

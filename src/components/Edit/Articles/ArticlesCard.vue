@@ -3,7 +3,7 @@
   <transition name="bounceDown">
     <div class="card" v-if="is.edit || is.create" :style="setPosition()">
 
-      <header :style="setBackground()">
+      <header :style="setBackground()" :class="errorImage">
         <div v-if="is.article && is.create && !tempImage" class="card-upload">
           <div class="drop-zone">
             <Upload @file="uploadImage" :padding="'40px'"/>
@@ -104,7 +104,7 @@
 			icon: '',
 			is: {edit: false, create: false, article: false, category: false},
 			data: {name: '', description: '', price: '', category: ''},
-			error: {name: '', description: '', price: '', category: ''},
+			error: {image: '', name: '', description: '', price: '', category: ''},
 			messages: [],
 		}),
 		computed: {
@@ -113,6 +113,7 @@
 			editItem() {return this.edit.editItem;},
 			tempImage() {return this.edit.state.tempImage;},
 			categories() {return this.edit.state.stores;},
+      errorImage() {return !this.tempImage ? this.error.image : null;},
 			isDirty() {
 				if (this.is.edit) {
 					for (let i in this.data) {
@@ -160,7 +161,13 @@
 					}
 				}
 				else if (this.is.article) {
-					if (this.data.name === '') {
+
+					if (!this.tempImage) {
+						this.error.image = 'image-error';
+						this.messages.push('validNoImg');
+						return false;
+					}
+					else if (this.data.name === '') {
 						this.error.name = 'is-danger';
 						this.messages.push('validNoName');
 						return false;
@@ -315,6 +322,10 @@
 
 <style scoped lang="scss">
   @import '../../../../static/sass/global';
+
+  .image-error {
+    border: 3px solid $is-danger;
+  }
 
   .card {
     border-radius: 9px;

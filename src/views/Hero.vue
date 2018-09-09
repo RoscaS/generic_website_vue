@@ -113,6 +113,7 @@
   }
 
   .hero {
+    user-select: none;
     text-align: center;
     background-color: $separator;
 

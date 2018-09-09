@@ -5,6 +5,7 @@
       <div class="article"
            v-for="(article, i) in category.articles"
            :key="i"
+           @click="mouseIn(article)"
            @mouseenter="mouseIn(article)"
            @mouseleave="mouseOut()">
         <span class="name" :title="article.name">{{ article.name }}</span>

@@ -131,8 +131,8 @@
         }
         .box {
           transition: background-color .6s ease;
-          padding: 0 5px 0 5px;
-          width: 110px;
+          padding: 0 5px 0 8px;
+          width: 115px;
           &.closed {
             text-align: center;
           }

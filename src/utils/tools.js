@@ -72,6 +72,11 @@ const message = {
 		message: "Déselectionnez les catégories pour en changer l'ordre!"
 	},
 
+	validNoImg: {
+		type: 'is-danger',
+		position: 'is-top',
+		message: "Une image est requise"
+	},
 	validNoName: {
 		type: 'is-danger',
 		position: 'is-top',

@@ -123,6 +123,8 @@ const CategoriesStore = new Vue({
     },
     end() {
       this.state.active = false;
+      this.state.primaryStore = null;
+      this.state.secondaryStore = null;
     }
   },
   created() {
