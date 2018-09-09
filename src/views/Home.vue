@@ -5,7 +5,7 @@
     <Header/>
     <div id="StickyNav">
     <StickyNav/>
-      <!--<Carousel/>-->
+      <Carousel/>
       <Presentation/>
       <Hero/>
       <Parallax :idx="0" height="600px" text="Articles"/>

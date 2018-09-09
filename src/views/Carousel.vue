@@ -6,13 +6,12 @@
         <vueper-slides ref="carouselTop"
                        :breakpoints="breakpoints"
                        class="shadow"
-                       bullets-outside
                        :autoplay="autoplay"
                        :speed="speed"
                        :parallax="true"
-                       :dragging-distance="70"
+                       :dragging-distance="50"
                        :slideRatio="1/3.7"
-                       transition-speed='1250'>
+                       transition-speed='600'>
           <vueper-slide v-for="(slide, i) in slides"
                         :key="i"
                         :image="slide.image">
@@ -69,8 +68,8 @@
 <style>
 
   .carousel-wrapper {
-    margin-top: 50px;
-    z-index: 0;
+    /*margin-top: 50px;*/
+    /*z-index: 0;*/
   }
 
   .edit-icon {
@@ -97,7 +96,7 @@
   .carousel-top .vueperslides__bullet {
     z-index: 1;
     background-color: transparent;
-    border: 1.5px solid #3d5b95;
+    border: 1.5px solid white;
     box-shadow: none;
     transition: 0.3s;
     width: 10px;
@@ -106,9 +105,8 @@
 
   .carousel-top .vueperslides__bullet--active {
     z-index: 1;
-    background-color: #3d5b95;
+    background-color: white;
     width: 10px;
     height: 10px;
-    /*border: none;*/
   }
 </style>
