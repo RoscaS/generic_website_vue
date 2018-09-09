@@ -1,11 +1,11 @@
 <template>
-  <div id="Home">
-    <Modals/>
+  <div>
+    <Modals id="Home"/>
     <PromoRibbon/>
     <Header/>
     <div id="StickyNav">
     <StickyNav/>
-      <Carousel/>
+      <!--<Carousel/>-->
       <Presentation/>
       <Hero/>
       <Parallax :idx="0" height="600px" text="Articles"/>
