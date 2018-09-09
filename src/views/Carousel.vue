@@ -94,6 +94,7 @@
   }
 
   .carousel-top .vueperslides__bullet {
+    position: relative;
     /*z-index: 1;*/
     /*background-color: transparent;*/
     /*border: 1.5px solid white;*/
@@ -104,6 +105,7 @@
   }
 
   .carousel-top .vueperslides__bullet--active {
+    position: relative;
     /*z-index: 1;*/
     /*background-color: white;*/
     /*width: 10px;*/
