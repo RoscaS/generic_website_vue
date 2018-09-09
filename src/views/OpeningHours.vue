@@ -88,11 +88,8 @@
     margin-bottom: 0;
     margin-left: 29%;
     @media screen and (max-width: 768px) {
+      margin: 15px auto 10px 33%;
       max-width: 245px;
-      margin-top: 15px;
-      margin-right: auto;
-      margin-bottom: 10px;
-      margin-left: 33%;
       padding-bottom: 5px;
       border-bottom: 1px solid rgba(119, 119, 119, 0.21);
     }
