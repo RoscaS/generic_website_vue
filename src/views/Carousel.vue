@@ -3,8 +3,8 @@
     <EditIcon class="edit-icon" :store="store" :edit="edit" top="50px"/>
     <div class="carousel-top carousel-wrapper">
       <transition name="carousel-fade-in" appear>
-                       <!--:breakpoints="breakpoints"-->
         <vueper-slides ref="carouselTop"
+                       :breakpoints="breakpoints"
                        class="shadow"
                        :autoplay="autoplay"
                        :speed="speed"
@@ -37,15 +37,9 @@
 		data: () => ({
 			component: "Carousel",
 			type: "image",
-			// breakpoints: {
-			// 	1600: {slideRatio: 1 / 3.1},
-			// 	1450: {slideRatio: 1 / 2.7},
-			// 	1367: {slideRatio: 1 / 3.7},
-			// 	1281: {slideRatio: 1 / 3.9},
-			// 	1025: {slideRatio: 1 / 3.2},
-			// 	1000: {slideRatio: 1 / 1.9, arrows: false, touchable: true},
-			// 	915: {slideRatio: 1 / 1.7, arrows: false, touchable: true},
-			// }
+			breakpoints: {
+				915: {arrows: false, touchable: true},
+			}
 		}),
 		computed: {
 			slides() {
