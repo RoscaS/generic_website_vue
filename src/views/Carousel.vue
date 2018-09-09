@@ -3,15 +3,15 @@
     <EditIcon class="edit-icon" :store="store" :edit="edit" top="50px"/>
     <div class="carousel-top carousel-wrapper">
       <transition name="carousel-fade-in" appear>
+                       <!--:breakpoints="breakpoints"-->
         <vueper-slides ref="carouselTop"
-                       :breakpoints="breakpoints"
                        class="shadow"
                        :autoplay="autoplay"
                        :speed="speed"
                        :parallax="true"
                        :dragging-distance="50"
+                       :fixedHeight="fixedHeight"
                        :slideRatio="1/3.7"
-                       bullets-outside
                        transition-speed='600'>
           <vueper-slide v-for="(slide, i) in slides"
                         :key="i"
@@ -37,15 +37,15 @@
 		data: () => ({
 			component: "Carousel",
 			type: "image",
-			breakpoints: {
-				1600: {slideRatio: 1 / 3.1},
-				1450: {slideRatio: 1 / 2.7},
-				1367: {slideRatio: 1 / 3.7},
-				1281: {slideRatio: 1 / 3.9},
-				1025: {slideRatio: 1 / 3.2},
-				1000: {slideRatio: 1 / 1.9, arrows: false, touchable: true},
-				915: {slideRatio: 1 / 1.7, arrows: false, touchable: true},
-			}
+			// breakpoints: {
+			// 	1600: {slideRatio: 1 / 3.1},
+			// 	1450: {slideRatio: 1 / 2.7},
+			// 	1367: {slideRatio: 1 / 3.7},
+			// 	1281: {slideRatio: 1 / 3.9},
+			// 	1025: {slideRatio: 1 / 3.2},
+			// 	1000: {slideRatio: 1 / 1.9, arrows: false, touchable: true},
+			// 	915: {slideRatio: 1 / 1.7, arrows: false, touchable: true},
+			// }
 		}),
 		computed: {
 			slides() {
@@ -61,6 +61,15 @@
 			},
 			speed() {
         return this.$siteOptions.state.carousel_auto_scroll_speed.data;
+      },
+      fixedHeight() {
+        const height = window.innerHeight;
+        const width = window.innerWidth;
+        if (width <= 414) {
+        	return window.innerHeight / 2.2 + 'px';
+        } else {
+          return window.innerHeight / 2 + 'px';
+        }
       }
 		},
 	};
@@ -96,20 +105,19 @@
   }
 
   .carousel-top .vueperslides__bullet {
-    display: none;
-    background-color: transparent;
-    border: 1.5px solid #3d5b95;
-    box-shadow: none;
-    transition: 0.3s;
-    width: 10px;
-    height: 10px;
+    /*background-color: transparent;*/
+    /*border: 1.5px solid #3d5b95;*/
+    /*box-shadow: none;*/
+    /*transition: 0.3s;*/
+    /*width: 10px;*/
+    /*height: 10px;*/
   }
 
   .carousel-top .vueperslides__bullet--active {
-    z-index: 1;
-    background-color: #3d5b95;
-    width: 10px;
-    height: 10px;
+    /*z-index: 1;*/
+    /*background-color: #3d5b95;*/
+    /*width: 10px;*/
+    /*height: 10px;*/
     /*border: none;*/
   }
 </style>

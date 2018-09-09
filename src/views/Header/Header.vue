@@ -1,5 +1,5 @@
 <template>
-  <section class="home">
+  <section class="home" :style="fixedHeight">
     <EditIcon :edit="edit" :store="store" top="20px"/>
 
     <div class="site-title columns is-centered is-mobile">
@@ -79,7 +79,26 @@
 		computed: {
 			logo() { return GalleriesStore.logo; },
 			state() { return this.store.state; },
-		}
+      fixedHeight() {
+				// return `height: ${window.innerHeight / 2}px;`
+        const height = window.innerHeight;
+        const width = window.innerWidth;
+        if (width <= 414) {
+          return {
+          	height: height / 1.8 + 'px',
+            paddingTop: (height / 100) * 8.27 + 'px'
+          }
+        } else {
+          return {
+          	height: height / 2 + 'px',
+            paddingTop: (height / 100) * 8.27 + 'px'
+          }
+        }
+      }
+		},
+    mounted() {
+			console.log(window.innerHeight)
+    }
 	};
 </script>
 
@@ -91,26 +110,12 @@
     width: 480px
   }
 
-  /*.responsive-logo {*/
-  /*width: 100%;*/
-  /*height: auto;*/
-  /*}*/
-
   .sides-logo {
     margin-top: 120px !important;
   }
 
-  .home {
-    height: 260px;
-    margin-top: 50px;
-    margin-bottom: 100px;
-
-    @media screen and (max-width: 915px) {
-      /*margin-top: 0;*/
-    }
-  }
-
   .mobile {
+    z-index: 10;
     display: none;
     max-width: 260px !important;
 
