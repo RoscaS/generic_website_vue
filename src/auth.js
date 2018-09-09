@@ -5,8 +5,8 @@ import axios from 'axios';
 let webAuth = new auth0.WebAuth({
 	domain: 'jrosk.eu.auth0.com',
 	clientID: '3zna8lwrR2rHoWxxwQHEqgRn6dPezrcI',
-	// redirectUri: 'http://localhost:8080/callback',
-	redirectUri: 'https://jrosk.ch/callback',
+	redirectUri: 'http://localhost:8080/callback',
+	// redirectUri: 'https://jrosk.ch/callback',
 	audience: 'http://jrosk.ch:8000',
 	responseType: 'token id_token',
 	scope: 'openid profile',
