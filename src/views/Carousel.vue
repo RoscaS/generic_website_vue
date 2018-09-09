@@ -11,6 +11,7 @@
                        :parallax="true"
                        :dragging-distance="50"
                        :slideRatio="1/3.7"
+                       bullets-outside
                        transition-speed='600'>
           <vueper-slide v-for="(slide, i) in slides"
                         :key="i"
@@ -68,6 +69,7 @@
 <style>
 
   .carousel-wrapper {
+    position: center;
     /*margin-top: 50px;*/
     /*z-index: 0;*/
   }
@@ -94,21 +96,20 @@
   }
 
   .carousel-top .vueperslides__bullet {
-    position: relative;
-    /*z-index: 1;*/
-    /*background-color: transparent;*/
-    /*border: 1.5px solid white;*/
-    /*box-shadow: none;*/
-    /*transition: 0.3s;*/
-    /*width: 10px;*/
-    /*height: 10px;*/
+    display: none;
+    background-color: transparent;
+    border: 1.5px solid #3d5b95;
+    box-shadow: none;
+    transition: 0.3s;
+    width: 10px;
+    height: 10px;
   }
 
   .carousel-top .vueperslides__bullet--active {
-    position: relative;
-    /*z-index: 1;*/
-    /*background-color: white;*/
-    /*width: 10px;*/
-    /*height: 10px;*/
+    z-index: 1;
+    background-color: #3d5b95;
+    width: 10px;
+    height: 10px;
+    /*border: none;*/
   }
 </style>
