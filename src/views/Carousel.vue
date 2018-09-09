@@ -60,7 +60,7 @@
         const height = window.innerHeight;
         const width = window.innerWidth;
         if (width <= 414) {
-        	return window.innerHeight / 2.2 + 'px';
+        	return window.innerHeight / 2.3 + 'px';
         } else {
           return window.innerHeight / 2 + 'px';
         }

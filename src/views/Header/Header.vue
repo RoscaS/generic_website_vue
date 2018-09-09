@@ -85,7 +85,7 @@
         const width = window.innerWidth;
         if (width <= 414) {
           return {
-          	height: height / 1.8 + 'px',
+          	height: height / 1.7 + 'px',
             paddingTop: (height / 100) * 8.27 + 'px'
           }
         } else {
@@ -115,7 +115,7 @@
   }
 
   .mobile {
-    z-index: 10;
+    z-index: 3;
     display: none;
     max-width: 260px !important;
 
