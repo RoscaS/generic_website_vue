@@ -65,7 +65,7 @@
 
   .overlay {
     opacity: .9;
-    background-color: #209CEE;
+    background-color: $is-info;
     position: absolute;
     bottom: 100%;
     left: 0;

@@ -36,22 +36,22 @@
       </div>
     </b-dropdown-item>
 
-    <b-dropdown-item separator></b-dropdown-item>
+    <!--<b-dropdown-item separator></b-dropdown-item>-->
 
-    <b-dropdown-item v-for="gallery in articlesGalleries"
-                     :key="gallery.name"
-                     class="no-tr"
-                     @click="secondaryStore = gallery"
-                     :disabled="disabled(gallery)">
-      <div class="level">
-        <div class="level-left">
-          {{ gallery.name }}
-        </div>
-        <div class="level-righ">
-          <ImagesCounter class="image-counter" :store="gallery"/>
-        </div>
-      </div>
-    </b-dropdown-item>
+    <!--<b-dropdown-item v-for="gallery in articlesGalleries"-->
+                     <!--:key="gallery.name"-->
+                     <!--class="no-tr"-->
+                     <!--@click="secondaryStore = gallery"-->
+                     <!--:disabled="disabled(gallery)">-->
+      <!--<div class="level">-->
+        <!--<div class="level-left">-->
+          <!--{{ gallery.name }}-->
+        <!--</div>-->
+        <!--<div class="level-righ">-->
+          <!--<ImagesCounter class="image-counter" :store="gallery"/>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</b-dropdown-item>-->
   </b-dropdown>
 </template>
 

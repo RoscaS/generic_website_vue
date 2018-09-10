@@ -127,7 +127,7 @@
     text-align: center;
     line-height: 50px;
     letter-spacing: 1px;
-    color: $ribbon-action-text;
+    color: white;
     z-index: 3;
     top: 55px;
     right: -70px;

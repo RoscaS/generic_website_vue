@@ -11,9 +11,7 @@
              v-scroll-reveal="sReveal('right', 50, 400, 1500)">
           <div class="line">
             <i class="fas fa-map-marker-alt fa-fw"></i>
-            <a :href="adressHref" target="_blank">
-              {{ siteInfo.city.data }}
-            </a>
+            <a :href="adressHref" target="_blank">{{ siteInfo.city.data }}</a>
           </div>
 
           <div class="line">
@@ -30,6 +28,8 @@
            :class="{'highlighted': highlighted(2)}"
            v-scroll-reveal="sReveal('right', 100, 200, 1500)">
           {{ state.sub_title2.data }}</p>
+
+        <div id="Hours"></div>
         <ContactForm url="message/"></ContactForm>
       </div>
     </div>
@@ -78,6 +78,11 @@
 
 <style scoped lang="scss">
   @import '../../static/sass/global';
+
+  i {
+    color: $contact-icons;
+    margin-right: 10px;
+  }
 
   .line {
     margin-bottom: 10px;

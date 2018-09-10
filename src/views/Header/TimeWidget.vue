@@ -42,7 +42,7 @@
 				if (this.isOpen) {
 					this.color = open;
 					return [
-						`Ouvert jusque ${this.isOpen}.`,
+						`Ouvert jusque ${this.isOpen}`,
 						`Nous vous attendons!`
 					];
 				}

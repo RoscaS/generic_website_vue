@@ -47,7 +47,7 @@
   @import "../../../static/sass/global";
 
   .header-ribbon {
-    color: $ribbon-text;
+    color: white;
     font-size: 28px;
 
     letter-spacing: 20px;

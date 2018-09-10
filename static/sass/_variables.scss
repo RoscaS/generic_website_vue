@@ -1,50 +1,37 @@
-// Perso
+
+// Thème
 $top-title: #3D5B95;
 $top-text: #193F6E;
-$ribbon-action: #F23839;
-$ribbon-action-text: #FFFFFF;
 $ribbon: #72A5D3;
-$ribbon-text: #FFFFFF;
-$links-nav: #000000;
-$paragraph: #4D5763;
-$header: #4D5763;
-$emphasis: #4D5763;
-$accent: #4D5763;
-//$link: hsl(348, 73%, 55%);
-//$link: hsl(208, 42%, 57%);
+$ribbon-action: #F23839;
 
+$link-normal: hsl(348, 73%, 55%);
 $link-hover: hsl(208, 42%, 57%);
-$background: #FFFFFF;
-$separator: #193F6E;
-$nav: #FFFFFF;
-$tab-hover-text: #72A5D3;
-$tab-selected-text: #CB132D;
-$tabs-text: #4D5763;
-$tabs-frame: rgba(123, 136, 154, 0.5);
-$tabs-content: #4D5763;
-$contact-icons: #4D5763;
-$footer-text: #FFFFFF;
-$social-icons: #FFFFFF;
-$btn: #4D5763;
 
-$highlight: rgba(22, 125, 240, 0.47);
+$header: #4D5763;
+$underline: hsl(348, 73%, 55%);
+$paragraph: #4D5763;
+$sub-titles: #777;
+$accent: hsl(208, 42%, 57%);
 
+$bg-hero: #193F6E;
+$paragraph-hero: #D9D9D9;
+$contact-icons: #777;
 
-$star-full: #e7711b;
-$star-empty: #d1d1d1;
+$bg-text-edit: #3D5B95;
+$accent-text-edit: hsl(208, 42%, 57%);
+$highlight: rgba(22, 125, 240, 0.25);
 
 
-
+// Helpers
 $is-primary: hsla(171, 100%, 41%, 0.37);
 $is-info: rgb(22, 125, 240);
 $is-success: #45a875;
 $is-warning: hsl(48, 100%, 67%);
 $is-danger: hsl(348, 73%, 55%);
 
+
 // SIZES
-
-
-
 $article-width: 360px;
 $article-height: 270px;
 
@@ -54,3 +41,10 @@ $edit-height: 107px;
 $section-image-width: 442px;
 $section-image-height: 250px;
 
+
+
+
+
+
+//$star-full: #e7711b;
+//$star-empty: #d1d1d1;

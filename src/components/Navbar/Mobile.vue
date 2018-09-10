@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="bounceLeft">
-      <a class="no-tr" @click="toggleModal" v-show="!smallMenu">
+      <a class="no-tr burger-icon" @click="toggleModal" v-show="!smallMenu">
         <i class="far fa-bars fa-2x"
            :class="{'burger-nav': logo}"></i>
       </a>
@@ -93,10 +93,16 @@
 <style scoped lang="scss">
   @import "../../../static/sass/global";
 
-  .burger-nav {
-    user-select: none;
+  .burger-icon {
     position: absolute;
-    right: 20px;
+    right: 3%;
+    padding-top: 30px;
+    /*top: 23px;*/
+  }
+
+  .burger-nav {
+    position: absolute;
+    right: 5%;
     top: 23px;
   }
 

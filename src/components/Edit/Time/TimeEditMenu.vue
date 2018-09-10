@@ -109,7 +109,7 @@
     .new-slot {
       .deselect {
         border-radius: 4px;
-        background-color: #FFDD57;
+        background-color: $is-warning;
         cursor: pointer;
         width: 25px;
         padding: 0 5px 0 4.5px;

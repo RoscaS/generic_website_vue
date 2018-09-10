@@ -115,7 +115,7 @@
   .hero {
     user-select: none;
     text-align: center;
-    background-color: $separator;
+    background-color: $bg-hero;
 
     h1, h2, p {
       color: white;
@@ -123,19 +123,17 @@
 
     h2 {
       font-size: 28px;
-      /*font-family: 'Montserrat', sans-serif;*/
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       word-spacing: 0;
       line-height: 39.6px;
-      text-decoration: none solid rgb(255, 255, 255);
 
     }
 
     p {
+      color: $paragraph-hero;
       font-size: 16px;
       line-height: 25px;
-      text-decoration: none solid rgb(255, 255, 255);
       word-spacing: 0;
       font-weight: lighter;
 

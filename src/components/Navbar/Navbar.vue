@@ -10,15 +10,15 @@
       </div>
 
 
-      <div class="level-item is-hidden-mobile">
+      <div class="level-item is-hidden-touch">
         <Links :links="links"/>
       </div>
 
-      <div class="level-right logout is-hidden-mobile">
+      <div class="level-right logout is-hidden-touch">
         <LogOut></LogOut>
       </div>
 
-      <div class="is-hidden-tablet level-right">
+      <div class="is-hidden-desktop burger-icon level-right">
         <NavbarMobile class="level-item" :links="links"/>
       </div>
 
@@ -42,9 +42,11 @@
 			initialDelay: true,
 			links: [
 				{id: "#Presentation", name: "Presentation", icon: "fa-info"},
-				{id: "#Article", name: "Articles", icon: "fa-shopping-bag"},
+				{id: "#Articles", name: "Articles", icon: "fa-shopping-bag"},
 				{id: "#Events", name: "Galerie", icon: "fa-th"},
-				{id: "#Contact", name: "Contact", icon: "fa-envelope"}
+				{id: "#Contact", name: "Contact", icon: "fa-envelope"},
+        {id: "#Hours", name: "Horaire", icon: "fa-calendar-alt"},
+
 			],
 		}),
     computed: {
@@ -69,6 +71,7 @@
   }
 
   #Navbar {
+    user-select: none;
     margin-top: -50px;
     transition: box-shadow .5s ease;
     position: absolute;
@@ -76,9 +79,7 @@
     width: 100%;
     padding: 12px 0 0 0;
 
-    @media screen and (max-width: 769px) {
-      padding: 7px 0 0 0;
-    }
+
 
     .level {
       .logout {

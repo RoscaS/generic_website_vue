@@ -154,11 +154,11 @@
   @import '../../../static/sass/global';
 
   section {
-    margin: -90px 0px -150px 0px;
+    margin: 0 0px -150px 0px;
 
     @media screen and (max-width: 960px) {
-      margin-top: 0;
-      margin-bottom: -120px;
+      /*margin-top: 0;*/
+      margin-bottom: -105px;
     }
   }
 
@@ -191,24 +191,10 @@
       margin-left: 20px;
     }
 
-    .current {
-      ul {
-        transition: background-color .3s ease;
-        background-color: #45a875;
-      }
-    }
     .level {
       max-width: 100%;
     }
-    ul {
-      transition: background-color .3s ease;
-      border: 1px solid lightgray;
-      margin: 0;
-      padding: 5px;
-    }
-    li {
-      list-style: none;
-    }
+
   }
 </style>
 

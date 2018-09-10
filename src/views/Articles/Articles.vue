@@ -58,7 +58,6 @@
   }
 
   .carousel {
-    margin: 0 -60px 0 -60px;
   }
 
 </style>

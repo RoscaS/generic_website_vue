@@ -52,16 +52,10 @@
   #Brand {
     position: absolute;
     z-index: 3;
-    margin: 0 10% 0 15%;
-
-    @media screen and (max-width: 1000px) {
-      margin: 0 10% 0 10%;
+    left: 10%;
+    @media screen and (max-width: 1088px) {
+      padding-top: 27px;
     }
-
-    @media screen and (max-width: 800px) {
-      margin: 0 10% 0 5%;
-    }
-
 
     .title {
       color: $ribbon;
@@ -74,8 +68,7 @@
 
     h1 {
       cursor: pointer;
-      /*transform: scale(1.3);*/
-
+      font-size: 27px;
     }
   }
 </style>

@@ -77,7 +77,7 @@
         transition: all .5s ease;
         transition-delay: .2s;
         border-bottom-color: transparent;
-        background-color: rgba(22, 125, 240, 0.37);
+        background-color: $highlight;
       }
 
       .name {

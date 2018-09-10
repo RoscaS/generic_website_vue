@@ -153,7 +153,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: $separator;
+    background-color: $bg-hero;
 
     ._btn {
       border-color: white;
@@ -199,17 +199,17 @@
   }
 
   .jrosk {
-    color: #FFFFFF;
+    color: white;
     font-weight: bold;
     font-size: 20px;
     margin-left: 5px;
 
     &:hover {
-      color: #FFFFFF;
+      color: white;
     }
 
     &:after {
-      background: #FFFFFF;
+      background: white;
     }
   }
 

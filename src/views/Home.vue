@@ -6,16 +6,15 @@
     <div id="StickyNav">
     <StickyNav/>
       <Carousel/>
-      <Presentation/>
+      <Presentation id="Presentation"/>
       <Hero/>
       <Parallax :idx="0" height="600px" text="Articles"/>
-      <Articles/>
+      <Articles id="Articles"/>
       <Parallax :idx="1" height="400px" text="Galerie"/>
-      <Events/>
+      <Events id="Events"/>
       <Parallax :idx="2" height="400px" text="Contact"/>
-      <Contact/>
+      <Contact id="Contact"/>
       <OpeningHours/>
-      <!--<Review/>-->
       <Footer/>
     </div>
   </div>
@@ -30,7 +29,6 @@
 	import Hero from "../views/Hero";
 	import Events from "../views/Events/Events";
 	import Contact from "../views/Contact";
-	import Review from "../views/Review";
 	import Footer from "../views/Footer";
 	import StickyNav from "../components/Navbar/StickyNav";
 	import Modals from "./Layouts/Modals";
@@ -54,7 +52,6 @@
 			Events,
 			Articles,
 			Contact,
-			Review,
 			Footer
 		},
     mounted() {

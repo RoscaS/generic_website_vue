@@ -2,7 +2,7 @@
   <transition name="animation" appear>
     <div id="Links" class="links" :class="{'hiddenLinks': initialDelay}">
       <scrollactive active-class="active"
-                    :offset="20"
+                    :offset="50"
                     :duration="1500"
                     bezier-easing-value="0.455, 0.03, 0.515, 0.955"
                     @itemchanged="onItemChanged">
@@ -63,12 +63,12 @@
   .links {
 
     a {
-      color: $links-nav;
+      color: black;
       margin-left: 10px;
       margin-right: 10px;
 
       &.tr:after {
-        background-color: $links-nav;
+        background-color: black;
       }
     }
   }

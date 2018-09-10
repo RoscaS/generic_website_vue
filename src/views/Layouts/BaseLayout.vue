@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section :id="store.name" class="section section-container">
+    <section class="section section-container">
       <EditIcon :store="store" :edit="edit"/>
       <div class="container">
         <div class="content">

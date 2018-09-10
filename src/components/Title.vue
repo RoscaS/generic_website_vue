@@ -25,7 +25,7 @@
     opacity: .65;
     margin: 15px auto 0 auto;
     width: 100px;
-    border-bottom: 4px solid $is-danger;
+    border-bottom: 4px solid $underline;
   }
 
 </style>
