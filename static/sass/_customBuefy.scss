@@ -18,6 +18,15 @@
     }
     .b-tabs {
         .tabs {
+            li {
+                a {
+                    transition: background-color .5s ease;
+                    &:hover {
+                        transition: background-color .5s ease;
+                    }
+                }
+
+            }
             .is-active {
                 a {
                     border-color: $accent-text-edit;
@@ -56,8 +65,8 @@
 
     .b-tabs {
         margin: 0 auto 0 auto;
-
         .tabs {
+
             margin: -22px auto auto;
 
             ul {
