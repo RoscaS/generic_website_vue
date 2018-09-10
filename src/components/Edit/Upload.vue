@@ -33,7 +33,6 @@
     },
     watch: {
       dropFiles(value) {
-      	console.log(value);
         this.$emit('file', value[0]);
       }
     }
