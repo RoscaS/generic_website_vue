@@ -11,7 +11,9 @@
              v-scroll-reveal="sReveal('right', 50, 400, 1500)">
           <div class="line">
             <i class="fas fa-map-marker-alt fa-fw"></i>
-            <a :href="siteContact.google.data">{{ siteInfo.city.data }}</a>
+            <a :href="adressHref" target="_blank">
+              {{ siteInfo.city.data }}
+            </a>
           </div>
 
           <div class="line">
@@ -62,6 +64,14 @@
 
       phoneHref() { return `tel:${this.siteInfo.phone.data}`; },
       mailHref() { return `mailto:${this.siteInfo.mail.data}`; },
+      adressHref() {
+        let adress = this.siteInfo.adress.data;
+        let post = this.siteInfo.post_code.data;
+        let city = this.siteInfo.city.data;
+        let name = this.siteInfo.name.data;
+        let google = 'https://www.google.ch/maps/search/';
+      	return `${google}${name}+${adress}+${post}+${city}`;
+      }
     },
   };
 </script>
