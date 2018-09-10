@@ -80,7 +80,6 @@
 			logo() { return GalleriesStore.logo; },
 			state() { return this.store.state; },
       fixedHeight() {
-				// return `height: ${window.innerHeight / 2}px;`
         const height = window.innerHeight;
         const width = window.innerWidth;
         if (width <= 414) {
@@ -96,9 +95,6 @@
         }
       }
 		},
-    mounted() {
-			console.log(window.innerHeight)
-    }
 	};
 </script>
 

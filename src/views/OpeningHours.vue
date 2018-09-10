@@ -4,7 +4,7 @@
     <div class="container">
 
       <div class="columns is-mobile is-centered weekday"
-           :style="setSize()"
+           :style="dynamicCenter()"
            v-for="(day, i) in days" :key="i"
            v-scroll-reveal="{
              origin: 'right',
@@ -54,18 +54,24 @@
 			}
 		},
 		methods: {
-			setSize() {
+			dynamicCenter() {
 				let max = 1;
+				const width = window.innerWidth;
 				this.days.forEach(i => {i.count > max ? max = i.count : null;});
-				if (window.innerWidth > 768) {
+				if (width > 768) {
 					if (max === 1) {
-						return `marginLeft: ${37}%`;
+						return {marginLeft: 37 + '%'};
 					} else if (max === 2) {
-						return `marginLeft: ${29}%`;
+						return {marginLeft: 29 + '%'};
 					} else if (max === 3) {
-						return `marginLeft: ${29}%`;
+						return {marginLeft: 24 + '%'};
 					}
-				}
+
+				} else if (width <= 768 && width >= 400) {
+					return {marginLeft: 15 + '%'}
+        } else {
+          return {marginLeft: 10 + '%'}
+        }
 			}
 		}
 	};
@@ -86,9 +92,10 @@
     margin-top: 0;
     margin-right: auto;
     margin-bottom: 0;
-    margin-left: 29%;
     @media screen and (max-width: 768px) {
-      margin: 15px auto 10px 33%;
+      margin-top: 15px;
+      margin-right: auto;
+      margin-bottom: 10px;
       max-width: 245px;
       padding-bottom: 5px;
       border-bottom: 1px solid rgba(119, 119, 119, 0.21);
@@ -130,9 +137,11 @@
           padding-bottom: 2px;
         }
         .box {
+          text-align: center;
           transition: background-color .6s ease;
-          padding: 0 5px 0 8px;
-          width: 115px;
+          /*padding: 0 5px 0 8px;*/
+          padding: 2px;
+          width: 125px;
           &.closed {
             text-align: center;
           }
