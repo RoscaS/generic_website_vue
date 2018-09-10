@@ -1,5 +1,4 @@
 import requests, os, git, subprocess, sys
-from time import sleep
 from pathlib import Path
 
 URL = 'https://api.jrosk.ch'
@@ -8,15 +7,19 @@ repo = git.Repo(ROOT)
 
 
 def build_dist():
-	print('\nStart npm build')
+	print('\nStart npm build...')
 	output = subprocess.call(['npm', 'run', 'build', '-s'])
 	if output:
 		print(f'\nBuild: fail')
 	else:
 		print(f"\nBuild: success")
+
+def git_add():
+	print('\nAdd files...')
+	a = repo.git.add('.')
+	print(a)
 		
-def commit():
-	sleep(1)
+def git_commit():
 	print('\ntry commiting...')
 	try:
 		c = repo.git.commit('-a', '-m', '"maj dist"')
@@ -24,9 +27,8 @@ def commit():
 	except Exception as e:
 		print(f'\ncommit: error\n{e}')
 
-def push():
-	sleep(1)
-	print('\nPushing to remote')
+def git_push():
+	print('\nPushing to remote...')
 	p = repo.remote().push()[0]
 	if '[up to date]' in p.summary:
 		print('\nPush fail: nothing to update')
@@ -34,8 +36,7 @@ def push():
 		print('\nPush success')
 
 def send_signal(url):
-	sleep(1)
-	print('\nSending signal to server')
+	print('\nSending signal to server...')
 	r = requests.get(f'{url}/git-pull')
 	print('Server response:\n')
 	print(r.text)
@@ -46,6 +47,7 @@ def decode(bin):
 
 
 build_dist()
-commit()
-push()
+git_add()
+git_commit()
+git_push()
 send_signal(URL)
