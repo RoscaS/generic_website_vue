@@ -105,7 +105,7 @@ local = Config(
 staging = Config(
 	name='staging',
 	http='const url = "https://api.jrosk.ch/";\n',
-	vars='@import "themes/staging";\n',
+	vars='@import "themes/generic";\n',
 	auth=[
 		'const clientID = "3zna8lwrR2rHoWxxwQHEqgRn6dPezrcI";\n',
 		'const redirectUri = "https://jrosk.ch/callback";\n',
