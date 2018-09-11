@@ -36,8 +36,8 @@
       },
 
 			getMessage() {
-				let open = `background-color: #45a875`;
-				let closed = `background-color: #e0385a`;
+				let open = 'background-color: #45a875';
+				let closed = 'background-color: #e0385a';
 
 				if (this.isOpen) {
 					this.color = open;
