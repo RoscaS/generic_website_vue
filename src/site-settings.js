@@ -1,8 +1,8 @@
-const admin = "admin@jura-coiffure.com";
-const url = "https://jura-coiffure-api.jrosk.ch/";
-const clientID = "jDtlSDX4Sr4CxX9C4jD4uHxe5wrNpNnZ";
-const redirectUri = "https://jura-coiffure.jrosk.ch/callback";
-const audience = "https://jura-coiffure-api.jrosk.ch";
+const admin = "admin@jrosk.com";
+const url = "https://api.jrosk.ch/";
+const clientID = "3zna8lwrR2rHoWxxwQHEqgRn6dPezrcI";
+const redirectUri = "https://jrosk.ch/callback";
+const audience = "http://jrosk.ch:8000";
 
 const settings = {
 	admin: admin,
