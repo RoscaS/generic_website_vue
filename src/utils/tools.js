@@ -151,6 +151,18 @@ const message = {
 		position: 'is-top',
 		message: "Problème de chevauchement!."
 	},
+
+	authUserNotAllowed: {
+			type: 'is-danger',
+			position: 'is-top',
+			message: "Connexion refusée: Utilisateur non autorisé!"
+		},
+
+	authUserIsAdmin: {
+			type: 'is-success',
+			position: 'is-top',
+			message: "Connecté en tant qu'administrateur du site."
+		},
 };
 
 const snackBarMessage = {

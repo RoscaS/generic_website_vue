@@ -36,6 +36,9 @@
 	import OpeningHours from "./OpeningHours";
 	import Header from "./Header/Header";
 
+	import settings from '../site-settings';
+	import Tools from "../utils/tools";
+
 	export default {
 		name: "Public",
 		components: {
@@ -55,7 +58,11 @@
 			Footer
 		},
     mounted() {
-	    this.$auth.setToken();
+			let auth = this.$auth;
+	    auth.setToken();
+	    if (auth.isAuthenticated() && auth.user.name === settings.admin){
+	    	Tools.message('authUserIsAdmin')
+      }
     }
 	};
 </script>
