@@ -20,6 +20,6 @@ yarn-error.log*
 *.sw*
 
 
-build_script.sh
+build.py
 http.js
 auth.js
