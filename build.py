@@ -66,9 +66,8 @@ class Build(object):
 			print(f"\nBuild: success")
 
 	def git_add(self):
-		print('\nAdd files...')
+		print('\nAdding files...')
 		a = repo.git.add('.')
-		print(a)
 			
 	def git_commit(self):
 		print('\ntry commiting...')
@@ -106,7 +105,7 @@ local = Config(
 staging = Config(
 	name='staging',
 	http='const url = "https://api.jrosk.ch/";\n',
-	vars='@import "themes/generic";\n',
+	vars='@import "themes/staging";\n',
 	auth=[
 		'const clientID = "3zna8lwrR2rHoWxxwQHEqgRn6dPezrcI";\n',
 		'const redirectUri = "https://jrosk.ch/callback";\n',
@@ -114,8 +113,9 @@ staging = Config(
 	]
 )
 
+def buildStaging():
+	SetConfig(staging)
+	Build(URL)
+	SetConfig(local)
 
-
-SetConfig(staging)
-Build(URL)
-SetConfig(local)
+buildStaging()
