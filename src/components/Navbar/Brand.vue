@@ -55,12 +55,12 @@
 
 
   #Brand {
-    position: absolute;
-    z-index: 3;
-    left: 5%;
-    @media screen and (max-width: 1088px) {
-      padding-top: 27px;
-    }
+    /*position: absolute;*/
+    /*z-index: 3;*/
+    /*left: 5%;*/
+    /*@media screen and (max-width: 1088px) {*/
+      /*padding-top: 27px;*/
+    /*}*/
 
     .title {
       color: $ribbon;

@@ -1,30 +1,12 @@
 <template>
-<div class="nav-wrapper">
-  <nav id="Navbar" class="has-background-white"
-       :class="[{'setShadow': stiky }, {'logo': logo}]">
-
-    <div class="">
-
-      <!--<div class="level-left">-->
-        <Brand :stiky="stiky"/>
-      <!--</div>-->
-
-
-      <div class="is-hidden-touch">
-        <Links :links="links"/>
-      </div>
-
-      <div class="logout is-hidden-touch">
-        <LogOut></LogOut>
-      </div>
-
-      <div class="is-hidden-desktop burger-icon level-right">
-        <BurgerIcon class="level-item" :links="links"/>
-      </div>
-
+  <div id="Navbar" :class="[{'setShadow': stiky }, {'logo': logo}]">
+    <div class="navbar-wrapper">
+      <Brand class="brand" :stiky="stiky"/>
+      <Links class="links is-hidden-touch" :links="links"/>
+      <LogOut class="logout is-hidden-touch"/>
+      <BurgerIcon class="burger-icon is-hidden-desktop" :links="links"/>
     </div>
-  </nav>
-</div>
+  </div>
 </template>
 
 <script>
@@ -45,12 +27,12 @@
 				{id: "#Articles", name: "Articles", icon: "fa-shopping-bag"},
 				{id: "#Events", name: "Galerie", icon: "fa-th"},
 				{id: "#Contact", name: "Contact", icon: "fa-envelope"},
-        {id: "#Hours", name: "Horaire", icon: "fa-calendar-alt"},
+				{id: "#Hours", name: "Horaire", icon: "fa-calendar-alt"},
 			],
 		}),
-    computed: {
+		computed: {
 			logo() { return GalleriesStore.logo; },
-    },
+		},
 	};
 </script>
 
@@ -59,7 +41,7 @@
 
   .setShadow {
     transition: box-shadow .5s ease;
-    box-shadow: 0px 4px 20px -1px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 20px -1px rgba(0, 0, 0, 0.8);
   }
 
   .logo {
@@ -70,21 +52,41 @@
   }
 
   #Navbar {
-    user-select: none;
-    margin-top: -50px;
-    transition: box-shadow .5s ease;
+    background-color: white;
     position: absolute;
-    height: 50px;
+    margin-top: -50px;
     width: 100%;
-    padding: 12px 0 0 0;
+    transition: box-shadow .5s ease;
+    .navbar-wrapper {
+      height: 50px;
+      user-select: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
 
-
-
-    .level {
+      width: 100%;
+      .brand {
+        position: absolute;
+        left: 5%;
+      }
+      .links {
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
       .logout {
         position: absolute;
-        right: 10px;
+        right: 2%;
+      }
+      .burger-icon {
+        padding-top: 3px;
+        margin-left: auto;
+        margin-right: 20px;
       }
     }
   }
+
+
+
+
 </style>

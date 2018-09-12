@@ -36,10 +36,7 @@
   @import "../../../static/sass/global";
 
   .burger-icon {
-    position: absolute;
-    right: 3%;
-    padding-top: 30px;
-    /*top: 23px;*/
+    /*padding-top: 30px;*/
   }
 
   .burger-nav {
