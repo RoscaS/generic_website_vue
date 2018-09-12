@@ -2,8 +2,11 @@
   <transition name="bounceLeft">
     <div id="Brand" v-if="stiky && !logo">
       <a class="no-tr" v-scroll-to="'#Home'">
-        <h1 class="title">
+        <h1 class="title" v-if="siteName.includes('MySite')">
           my<span>site</span>
+        </h1>
+        <h1 class="title" v-else>
+          {{splitTitle()[0]}}<span>{{splitTitle()[1]}}</span>
         </h1>
       </a>
     </div>
@@ -15,12 +18,24 @@
 
 <script>
   import GalleriesStore from '../Edit/Galleries/GalleriesStore';
+  import TextsStore from "../../components/Edit/Texts/TextsStore";
 
 	export default {
 		props: {stiky: {type: Boolean}},
 		name: "Brand",
     computed: {
       logo() { return GalleriesStore.logo; },
+      siteInfo() { return TextsStore.getStore("SiteInfo").state; },
+      siteName() { return this.siteInfo.name.data; },
+    },
+    methods: {
+			splitTitle() {
+				let split = this.siteName.split(' ');
+        return split.length > 1 ? split : false
+      }
+    },
+    mounted() {
+			setTimeout(() => {console.log(this.splitTitle());}, 500);
     }
 	};
 </script>
@@ -52,7 +67,7 @@
   #Brand {
     position: absolute;
     z-index: 3;
-    left: 10%;
+    left: 5%;
     @media screen and (max-width: 1088px) {
       padding-top: 27px;
     }

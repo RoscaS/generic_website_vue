@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Delius');
 
 // Thème
 $top-title: red;
+$top-title: #3D5B95;
 $top-text: #193F6E;
 $ribbon: #72A5D3;
 $ribbon-action: #F23839;
+
+$top-title-font: 'Delius', cursive;
+$top-title-letter-spacing: -5px;
+$top-title-fontsize: 18vw;
+$top-title-margin-top: 50px;
 
 $link-normal: hsl(348, 73%, 55%);
 $link-hover: hsl(208, 42%, 57%);
@@ -29,3 +36,6 @@ $is-info: rgb(22, 125, 240);
 $is-success: #45a875;
 $is-warning: hsl(48, 100%, 67%);
 $is-danger: hsl(348, 73%, 55%);
+
+
+

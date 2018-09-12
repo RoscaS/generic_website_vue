@@ -26,16 +26,17 @@
   @import "../../../static/sass/global";
 
   .site-title {
-    font-family: "Dancing Script", cursive, bold;
+    font-family: $top-title-font;
+    letter-spacing: $top-title-letter-spacing;
     font-size: 130px;
-    letter-spacing: 0;
     text-align: right;
     color: $top-title;
-    margin-bottom: -5px;
-    z-index: 2;
+    margin-bottom: -10px;
+    z-index: 3;
 
     @media screen and (max-width: 690px) {
-      font-size: 100px;
+      margin-top: $top-title-margin-top;
+      font-size: $top-title-fontsize;
     }
   }
 

@@ -83,7 +83,7 @@
         margin-top: -1px;
         a {
           font-size: 14px;
-          padding-left: 2.5px;
+          /*padding-left: 2.5px;*/
           padding-right: 2.5px;
           &:first-child {
             margin-left: 4px;

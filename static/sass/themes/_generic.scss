@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 
 // Thème
 $top-title: #3D5B95;
 $top-text: #193F6E;
 $ribbon: #72A5D3;
 $ribbon-action: #F23839;
+
+$top-title-font: "Dancing Script", cursive, bold;
+$top-title-letter-spacing: 0;
+$top-title-fontsize: 100px;
+$top-title-margin-top: inherit;
 
 $link-normal: hsl(348, 73%, 55%);
 $link-hover: hsl(208, 42%, 57%);
@@ -21,6 +27,8 @@ $contact-icons: #777;
 $bg-text-edit: #3D5B95;
 $accent-text-edit: hsl(208, 42%, 57%);
 $highlight: rgba(22, 125, 240, 0.25);
+
+
 
 
 // Helpers
