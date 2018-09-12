@@ -1,34 +1,45 @@
 @import url('https://fonts.googleapis.com/css?family=Delius');
 
 // Theme
-$top-title: red;
-$top-title: #3D5B95;
-$top-text: #193F6E;
-$ribbon: #72A5D3;
-$ribbon-action: #F23839;
+$top-title: #e30613;
+$top-text: #56423e;
+$ribbon: #56423e;
+$ribbon-action: #e30613;
 
-$link-normal: hsl(348, 73%, 55%);
-$link-hover: hsl(208, 42%, 57%);
+$link-normal: #e30613;
+$link-hover: #008c63;
+
+$active-section-link: #e30613;
 
 $header: #4D5763;
-$underline: hsl(348, 73%, 55%);
+$underline: #e30613;
 $paragraph: #4D5763;
 $sub-titles: #777;
-$accent: hsl(348, 73%, 55%);
+$accent: #56423e;
 
-$bg-hero: #193F6E;
+$bg-hero: #56423e;
 $paragraph-hero: #D9D9D9;
 $contact-icons: #777;
 
 $bg-text-edit: #3D5B95;
 $accent-text-edit: hsl(208, 42%, 57%);
-$highlight: rgba(22, 125, 240, 0.25);
+$highlight-text-edit: rgba(22, 125, 240, 0.25);
+
+$highlight-strong: #008c63;
+$highlight: rgba(0, 140, 99, 0.5);
+
+$articles-tabs-bg: #56423e;
+$article-mobile-description: #777;
 
 // Values
 $top-title-font: 'Delius', cursive;
 $top-title-letter-spacing: -5px;
 $top-title-fontsize: 18vw;
 $top-title-margin-top: 50px;
+
+$logo-breakpoint: 500px;
+$logo-mobile-width: 345px;
+$logo-mobile-margin: -20px;
 
 $navbar-logo-width: 120px;
 $nav-bar-height: 50px;
@@ -42,4 +53,5 @@ $is-warning: hsl(48, 100%, 67%);
 $is-danger: hsl(348, 73%, 55%);
 
 
-
+// https://mycolor.space/?hex=%23E30613&sub=1
+// matching palette

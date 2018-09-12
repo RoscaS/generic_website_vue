@@ -3,6 +3,8 @@
 </template>
 
 <script>
+  import siteSettings from '../site-settings';
+
   export default {
     name: "Maps",
     data() {
@@ -13,8 +15,8 @@
       };
     },
     mounted() {
-    	let coords = [7.083608799999979, 47.2233392];
-    	mapboxgl.accessToken = "pk.eyJ1Ijoicm9zY2FzIiwiYSI6ImNqbGlka2p2YjAwNGEzcG5qdGltMDR0aDgifQ.Z0Fl0VypHnN0gLMU50W2BQ";
+    	let coords = [siteSettings.long, siteSettings.lat];
+    	mapboxgl.accessToken = siteSettings.mapBox;
       let map = new mapboxgl.Map({
           container: 'map', // container id
           style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location

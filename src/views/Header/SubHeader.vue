@@ -34,7 +34,6 @@
   .sub-header {
     font-size: 20px;
     line-height: 30px;
-    text-decoration: none solid rgb(61, 91, 149);
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     color: $top-title;

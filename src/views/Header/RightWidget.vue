@@ -19,13 +19,13 @@
       </span>
       <div class="contact-icons">
         <a class="no-tr" :href="adressHref" target="_blank">
-          <i class="fal fa-fw fa-map-marker-alt"></i>
+          <i class="far fa-fw fa-map-marker-alt"></i>
         </a>
         <a class="no-tr" :href="mailHref" :title="state.mail.data">
-          <i class="fal fa-fw fa-envelope"></i>
+          <i class="far fa-fw fa-envelope"></i>
         </a>
         <a class="no-tr" :href="phoneHref" :title="state.phone.data">
-          <i class="fal fa-fw fa-phone"></i>
+          <i class="far fa-fw fa-phone"></i>
         </a>
       </div>
     </div>

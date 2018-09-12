@@ -1,22 +1,22 @@
 <template>
-  <img class="logo"
-       v-if="logo"
-       :src="logo"
-       v-scroll-reveal="{
-           origin: 'bottom',
-           distance:'20px',
-           duration: 2000,
-           delay: 500
-         }"/>
-  <div v-else
-       class="site-title"
+  <div class="site-title"
        :class="{'highlighted': highlighted(0)}"
        v-scroll-reveal="{
         origin: 'top',
         duration: 1000,
         delay: 500
        }">
-    <span>{{ state.name.data }}</span>
+    <img class="logo"
+         v-if="logo"
+         :src="logo"
+         v-scroll-reveal="{
+             origin: 'bottom',
+             distance:'20px',
+             duration: 2000,
+             delay: 500
+           }"/>
+    <span v-else>{{ state.name.data }}</span>
+
   </div>
 </template>
 
@@ -41,9 +41,12 @@
   @import "../../../static/sass/global";
 
   .logo {
-    margin-top: 50px;
     width: 450px;
     height: auto;
+    @media screen and (max-width: $logo-breakpoint) {
+      width: $logo-mobile-width;
+      margin-left: $logo-mobile-margin;
+    }
   }
 
   .site-title {

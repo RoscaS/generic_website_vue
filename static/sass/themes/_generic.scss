@@ -9,6 +9,8 @@ $ribbon-action: #F23839;
 $link-normal: hsl(348, 73%, 55%);
 $link-hover: hsl(208, 42%, 57%);
 
+$active-section-link: hsl(208, 42%, 57%);
+
 $header: #4D5763;
 $underline: hsl(348, 73%, 55%);
 $paragraph: #4D5763;
@@ -21,13 +23,24 @@ $contact-icons: #777;
 
 $bg-text-edit: #3D5B95;
 $accent-text-edit: hsl(208, 42%, 57%);
+$highlight-text-edit: rgba(22, 125, 240, 0.25);
+
+
+$highlight-strong: rgba(22, 125, 240, 0.25);
 $highlight: rgba(22, 125, 240, 0.25);
+
+$articles-tabs-bg:hsl(208, 42%, 57%);
+$article-mobile-description: #777;
 
 // Values
 $top-title-font: "Dancing Script", cursive, bold;
 $top-title-letter-spacing: 0;
 $top-title-fontsize: 100px;
 $top-title-margin-top: inherit;
+
+$logo-breakpoint: 1px;
+$logo-mobile-width: 1px;
+$logo-mobile-margin: 0;
 
 $navbar-logo-width: '';
 $nav-bar-height: 50px;

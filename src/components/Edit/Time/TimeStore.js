@@ -36,6 +36,7 @@ const TimeStore = new Vue({
 		nextTimeOpen() {
 			const initial = this.today.name;
 			let iterator = this.today;
+			let control = 0;
 
 			do {
 				let slot;
@@ -43,7 +44,11 @@ const TimeStore = new Vue({
 					slot = iterator.slots[0];
 
 					do {
-						if (slot.interval.isAfter(this.now)) {
+
+						if (slot.day !== initial) {
+							return slot;
+						}
+						else if (slot.interval.isAfter(this.now)) {
 							return slot;
 						}
 						slot = slot.next;
@@ -51,13 +56,16 @@ const TimeStore = new Vue({
 					} while (slot);
 				}
 				iterator = iterator.next;
+				console.log('ici');
 
 				if (iterator.name === initial && iterator.count) {
-					return iterator.slots[0]
+					console.log('iterator.name === initial && iterator.count');
+					return iterator.slots[0];
 				}
 
 			} while (iterator.name !== initial);
 
+			console.log('null');
 			return null;
 		},
 		pretty() {

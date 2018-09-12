@@ -81,7 +81,7 @@
     display: block;
     position: fixed;
     bottom: 0;
-    background-color: $top-title;
+    background-color: $bg-text-edit;
     -webkit-box-shadow: -1px -3px 24px -2px rgba(0, 0, 0, 0.59);
     -moz-box-shadow: -1px -3px 24px -2px rgba(0, 0, 0, 0.59);
     box-shadow: -1px -3px 24px -2px rgba(0, 0, 0, 0.59);

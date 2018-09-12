@@ -15,8 +15,8 @@
 	export default {
 		name: "TimeWidget",
 		data: () => ({
-      color: null,
-    }),
+			color: null,
+		}),
 		computed: {
 			timeStore() { return TimeStore; },
 			isOpen() {
@@ -33,9 +33,9 @@
 					return setTimeout(() => {return this.timeStore.nextTimeOpen;}, 500);
 				}
 			},
-      getColor() {
+			getColor() {
 				return this.color;
-      },
+			},
 
 			getMessage() {
 				let open = 'background-color: #45a875';
@@ -52,20 +52,20 @@
 				if (slot) {
 					let today = this.timeStore.today;
 					let now = this.timeStore.now;
-					if (slot.day.name === today.name && slot.interval.start > now) {
-						this.color = closed;
-						return [
-							`Nous sommes fermés.`,
-							`Ouverture à ${slot.start}`
-						];
-					} else if (slot.day.name === today.next.name) {
+					if (slot.day.name === today.next.name) {
 						this.color = closed;
 						return [
 							`Nous sommes fermés.`,
 							`Ouverture: demain à ${slot.start}`
 						];
+					} else if (slot.day.name === today.name && slot.interval.start > now) {
+						this.color = closed;
+						return [
+							`Nous sommes fermés.`,
+							`Ouverture à ${slot.start}`
+						];
 					} else {
-            this.color = closed;
+						this.color = closed;
 						return [
 							`Nous sommes fermés.`,
 							`Ouverture: ${slot.day.name} à ${slot.start}`
@@ -76,11 +76,11 @@
 				}
 			}
 		},
-    methods: {
-	    upper(data) {
-		    return data.toUpperCase();
-	    },
-    }
+		methods: {
+			upper(data) {
+				return data.toUpperCase();
+			},
+		}
 	};
 </script>
 
@@ -98,7 +98,6 @@
       @media screen and (max-width: 560px) {
         text-align: center;
       }
-
 
       .led {
         padding: 0 9px 0 9px;
@@ -119,10 +118,6 @@
 
     }
   }
-
-
-
-
 
 
 </style>

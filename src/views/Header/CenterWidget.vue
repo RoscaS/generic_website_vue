@@ -39,6 +39,9 @@
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
+    @media screen and (max-width: $logo-breakpoint) {
+      font-size: 6vw;
+    }
 
     .ribbon-text {
       background: $ribbon;

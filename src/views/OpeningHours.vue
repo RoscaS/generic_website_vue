@@ -103,11 +103,11 @@
     &:hover {
       .name {
         transition: color .6s ease;
-        color: rgba(22, 125, 240, 0.54);
+        color: $link-normal
       }
       .box {
         transition: background-color .6s ease;
-        background-color: rgba(22, 125, 240, 0.08);
+        background-color: $highlight
       }
     }
 

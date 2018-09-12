@@ -52,7 +52,7 @@
 
   .activeEl {
     transition: color .3s ease;
-    color: $link-hover !important;
+    color: $active-section-link !important;
     cursor: default;
   }
 
