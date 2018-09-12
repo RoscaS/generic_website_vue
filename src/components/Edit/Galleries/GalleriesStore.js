@@ -1,8 +1,6 @@
 import {Gallery} from './GalleryObject';
 import Vue from 'vue';
-
-// const logoUrl = 'http://bin.staticlocal.ch/localplace-logo/cc/cc7f8a75b95ae9509545dbe45aa341356db00e67/logo.png';
-const logoUrl = false;
+import settings from "../../../site-settings";
 
 const GalleriesStore =  new Vue ({
   data: () => ({
@@ -29,7 +27,7 @@ const GalleriesStore =  new Vue ({
   }),
   computed: {
   	logo: {
-  		get() { return logoUrl ? logoUrl : false; }
+  		get() { return settings.logo ? settings.logo : false; }
 	  },
     stores: {
       get() {return this.state.stores;}

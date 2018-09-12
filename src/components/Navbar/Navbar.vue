@@ -3,23 +3,23 @@
   <nav id="Navbar" class="has-background-white"
        :class="[{'setShadow': stiky }, {'logo': logo}]">
 
-    <div class="level is-mobile">
+    <div class="">
 
-      <div class="level-left">
-        <Brand class="level-item" :stiky="stiky"/>
-      </div>
+      <!--<div class="level-left">-->
+        <Brand :stiky="stiky"/>
+      <!--</div>-->
 
 
-      <div class="level-item is-hidden-touch">
+      <div class="is-hidden-touch">
         <Links :links="links"/>
       </div>
 
-      <div class="level-right logout is-hidden-touch">
+      <div class="logout is-hidden-touch">
         <LogOut></LogOut>
       </div>
 
       <div class="is-hidden-desktop burger-icon level-right">
-        <NavbarMobile class="level-item" :links="links"/>
+        <BurgerIcon class="level-item" :links="links"/>
       </div>
 
     </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-	import NavbarMobile from "./Mobile";
+	import BurgerIcon from "./BurgerIcon";
 	import Brand from "./Brand";
 	import Links from "./Links";
 	import LogOut from "./Logout";
@@ -36,7 +36,7 @@
 
 	export default {
 		name: "Navbar",
-		components: {LogOut, Links, Brand, NavbarMobile},
+		components: {LogOut, Links, Brand, BurgerIcon},
 		props: {stiky: {type: Boolean}},
 		data: () => ({
 			initialDelay: true,
@@ -46,7 +46,6 @@
 				{id: "#Events", name: "Galerie", icon: "fa-th"},
 				{id: "#Contact", name: "Contact", icon: "fa-envelope"},
         {id: "#Hours", name: "Horaire", icon: "fa-calendar-alt"},
-
 			],
 		}),
     computed: {

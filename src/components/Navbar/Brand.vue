@@ -34,9 +34,6 @@
         return split.length > 1 ? split : false
       }
     },
-    mounted() {
-			setTimeout(() => {console.log(this.splitTitle());}, 500);
-    }
 	};
 </script>
 
@@ -46,21 +43,14 @@
   #Logo {
     position: absolute;
     z-index: 3;
-    width: 170px;
-    left: 150px;
+    width: 160px;
+    left: 5%;
 
 
     @media screen and (max-width: 1181px) {
       left: 50px;
+      padding-top: 27px;
     }
-
-    @media screen and (max-width: 980px) {
-      left: 5px;
-    }
-    @media screen and (max-width: 768px) {
-      left: 80px;
-    }
-
   }
 
 

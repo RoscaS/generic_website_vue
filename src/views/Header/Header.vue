@@ -102,8 +102,8 @@
   @import "../../../static/sass/global";
 
   .logo {
-    margin-top: 10px;
-    width: 480px
+    margin-top: 50px;
+    width: 450px
   }
 
   .sides-logo {

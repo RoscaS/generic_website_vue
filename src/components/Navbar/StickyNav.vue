@@ -10,7 +10,7 @@
 
 <script>
 	import Navbar from "./Navbar";
-	import NavbarMobile from "./Mobile";
+	import NavbarMobile from "./BurgerIcon";
 	export default {
 		name: "StickyNav",
 		components: {NavbarMobile, Navbar},
