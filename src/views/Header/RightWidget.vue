@@ -1,5 +1,5 @@
 <template>
-  <div class="right-side"
+  <div class="widget-wrapper"
        v-scroll-reveal="{
        origin: 'right',
        distance: '400px',
@@ -9,7 +9,6 @@
     <span class="first-line" :class="{'highlighted': highlighted(3)}">
       {{ upper(state.adress.data) }}
     </span>
-    <br>
     <div class="second-line">
       <span :class="{'highlighted': highlighted(5)}">
         {{ state.post_code.data }}
@@ -18,7 +17,7 @@
       <span :class="{'highlighted': highlighted(4)}">
        {{ upper(state.city.data) }}
       </span>
-      <div class="icons">
+      <div class="contact-icons">
         <a class="no-tr" :href="adressHref" target="_blank">
           <i class="fal fa-fw fa-map-marker-alt"></i>
         </a>
@@ -64,35 +63,52 @@
 <style scoped lang="scss">
   @import "../../../static/sass/global";
 
-  .right-side {
+  .widget-wrapper {
     color: $top-text;
     font-size: 13px;
     padding: 10px 0 10px 0;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    text-align: left;
-    @media screen and (max-width: 915px) {
+    border-top: 1px solid $accent;
+    border-bottom: 1px solid $accent;
+    height: 60px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 230px;
+    position: relative;
+    z-index: 6;
+
+    @media screen and (max-width: 1087px) {
       border-top: none;
       border-bottom: none;
     }
+
+    .first-line {
+      text-align: left;
+      height: 20px;
+
+    }
+
     .second-line {
+      text-align: left;
       display: flex;
-      flex-wrap: nowrap;
-      text-align: center;
-      .icons {
-        margin-top: -1px;
+      align-items: center;
+
+
+      .contact-icons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-left: 5px;
+
+
         a {
+          margin-top: -2px;
+          padding-right: 4px;
+          position: relative;
+          z-index: 15;
           font-size: 14px;
-          /*padding-left: 2.5px;*/
-          padding-right: 2.5px;
-          &:first-child {
-            margin-left: 4px;
-          }
-          &:last-child {
-
-          }
         }
-
       }
     }
   }

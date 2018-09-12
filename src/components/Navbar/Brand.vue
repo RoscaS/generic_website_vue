@@ -41,36 +41,19 @@
   @import "../../../static/sass/global";
 
   #Logo {
-    position: absolute;
-    z-index: 3;
-    width: 160px;
-    left: 5%;
-
-
-    @media screen and (max-width: 1181px) {
-      left: 50px;
-      padding-top: 27px;
-    }
+    width: $navbar-logo-width;
+    padding-top: 5px;
   }
 
 
   #Brand {
-    /*position: absolute;*/
-    /*z-index: 3;*/
-    /*left: 5%;*/
-    /*@media screen and (max-width: 1088px) {*/
-      /*padding-top: 27px;*/
-    /*}*/
-
     .title {
       color: $ribbon;
-
       & :first-child {
         background-color: $ribbon;
         color: white;
       }
     }
-
     h1 {
       cursor: pointer;
       font-size: 27px;

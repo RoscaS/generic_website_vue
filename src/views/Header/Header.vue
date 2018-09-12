@@ -1,47 +1,33 @@
 <template>
-  <section class="home" :style="fixedHeight">
-    <EditIcon :edit="edit" :store="store" top="20px"/>
+  <section :style="fixedHeight">
+    <EditIcon class="edit-icon" :edit="edit" :store="store" top="20px"/>
 
-    <div class="site-title columns is-centered is-mobile">
-      <SiteTitle :state="state" v-if="!logo"/>
+    <SiteTitle class="site-title" :state="state"/>
+
+    <div class="widgets">
+      <LeftWidget class="left wings is-hidden-touch"
+                  :class="{'sides-logo': logo}"/>
+      <CenterWidget class="center" :state="state"/>
+      <RightWidget class="right wings is-hidden-touch"
+                   :class="{'sides-logo': logo}"
+                   :state="state">
+      </RightWidget>
     </div>
 
-    <div class="widgets columns is-centered is-mobile">
-      <div class="side left column is-4" :class="{'sides-logo': logo}">
-        <LeftWidget/>
-      </div>
+    <SubHeader class="sub-header" :state="state"/>
 
-      <div class="center column is-narrow">
-        <CenterWidget :state="state" v-if="!logo"/>
-        <img class="logo"
-             v-if="logo"
-             :src="logo"
-             v-scroll-reveal="{
-                 origin: 'bottom',
-                 distance:'20px',
-                 duration: 2000,
-                 delay: 500
-               }">
-      </div>
-
-      <div class="side right column is-4" :class="{'sides-logo': logo}">
-        <RightWidget :state="state"/>
-      </div>
+    <div class="widgets-mobile is-hidden-desktop">
+      <LeftWidget class="left wings" :class="{'sides-logo': logo}"/>
+      <RightWidget class="right wings"
+                   :class="{'sides-logo': logo}"
+                   :state="state">
+      </RightWidget>
     </div>
 
-    <div class="columns is-mobile mobile-left is-centered">
-      <div class="column mobile">
-        <LeftWidget/>
-      </div>
-      <div class="column mobile mobile-right">
-        <RightWidget :state="state"/>
-      </div>
-    </div>
 
     <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
       <TextsEditMenu v-if="checkComponent()">
-        <FieldsLayout :store="store">
-        </FieldsLayout>
+        <FieldsLayout :store="store"/>
       </TextsEditMenu>
     </transition>
   </section>
@@ -49,21 +35,23 @@
 </template>
 
 <script>
-	import EditIcon from '../../components/Edit/EditIcon';
+	import GalleriesStore from "../../components/Edit/Galleries/GalleriesStore";
 	import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
+	import EditIcon from '../../components/Edit/EditIcon';
 	import FieldsLayout from "../Layouts/FieldsLayout";
 	import ViewsMixin from '../../mixins/ViewsMixin';
-	import LeftWidget from "./LeftWidget";
 	import CenterWidget from "./CenterWidget";
 	import RightWidget from "./RightWidget";
+	import LeftWidget from "./LeftWidget";
 	import SiteTitle from "./SiteTitle";
-	import GalleriesStore from "../../components/Edit/Galleries/GalleriesStore";
+	import SubHeader from "./SubHeader";
 
 
 	export default {
 		name: "Header",
 		mixins: [ViewsMixin],
 		components: {
+			SubHeader,
 			SiteTitle,
 			RightWidget,
 			CenterWidget,
@@ -79,21 +67,21 @@
 		computed: {
 			logo() { return GalleriesStore.logo; },
 			state() { return this.store.state; },
-      fixedHeight() {
-        const height = window.innerHeight;
-        const width = window.innerWidth;
-        if (width <= 414) {
-          return {
-          	height: (4 / 7) * height + 'px',
-            paddingTop: (height / 100) * 8.27 + 'px'
-          }
-        } else {
-          return {
-          	height: height / 2 + 'px',
-            paddingTop: (height / 100) * 8.27 + 'px'
-          }
-        }
-      }
+			fixedHeight() {
+				const height = window.innerHeight;
+				const width = window.innerWidth;
+				if (width <= 414) {
+					return {
+						height: (4 / 7) * height + 'px',
+						paddingTop: (height / 100) * 8.27 + 'px'
+					};
+				} else {
+					return {
+						height: height / 2 + 'px',
+						paddingTop: (height / 100) * 8.27 + 'px'
+					};
+				}
+			}
 		},
 	};
 </script>
@@ -101,42 +89,58 @@
 <style scoped lang="scss">
   @import "../../../static/sass/global";
 
-  .logo {
-    margin-top: 50px;
-    width: 450px
+  .edit-icon {
+    display: block;
+    z-index: 6;
   }
 
-  .sides-logo {
-    margin-top: 120px !important;
-  }
-
-  .mobile {
-    z-index: 3;
-    display: none;
-    max-width: 260px !important;
-
-    @media screen and (max-width: 915px) {
-      display: inline-block;
-    }
+  .site-title {
+    margin-bottom: -45px;
+    position: relative;
+    z-index: 5;
   }
 
   .widgets {
-    .side {
-      width: 260px !important;
-      margin-top: -49px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    height: 60px;
 
+    .wings {
+      width: 230px;
       &.left {
-        margin-right: 40px;
-        @media screen and (max-width: 915px) {
-          display: none;
-        }
+        margin-right: 50px;
       }
       &.right {
-        margin-left: 40px;
-        @media screen and (max-width: 915px) {
+        margin-left: 50px;
+      }
+    }
+  }
+
+  .widgets-mobile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    @media screen and (max-width: 560px) {
+      flex-direction: column;
+    }
+
+    .wings {
+      width: 230px;
+      &.left {
+        margin-right: 10px;
+      }
+      &.right {
+        margin-left: 10px;
+        @media screen and (max-width: 560px) {
           display: none;
         }
       }
     }
   }
+
 </style>

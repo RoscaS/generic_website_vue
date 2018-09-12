@@ -25,14 +25,18 @@
     color: $top-text;
     font-size: 13px;
     padding: 10px 0 10px 0;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid $accent;
+    border-bottom: 1px solid $accent;
     text-align: right;
+    position: relative;
+    z-index: 6;
 
-    @media screen and (max-width: 915px) {
+    @media screen and (max-width: 1087px) {
       border-top: none;
       border-bottom: none;
     }
+
+
   }
 
 </style>

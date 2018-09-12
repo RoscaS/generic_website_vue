@@ -1,5 +1,7 @@
 <template>
-  <b-modal :active.sync="showModal" :width="640" scroll="clip"
+  <b-modal :active.sync="showModal"
+           :width="640"
+           scroll="clip"
            :canCancel="['outside', 'x', 'escape']">
     <div class="modal-links">
       <ul id="ModalLinks">
@@ -15,7 +17,7 @@
           </transition>
         </li>
         <li>
-          <Logout></Logout>
+          <Logout/>
         </li>
       </ul>
     </div>

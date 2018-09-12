@@ -1,16 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Delius');
 
-// Thème
+// Theme
 $top-title: red;
 $top-title: #3D5B95;
 $top-text: #193F6E;
 $ribbon: #72A5D3;
 $ribbon-action: #F23839;
-
-$top-title-font: 'Delius', cursive;
-$top-title-letter-spacing: -5px;
-$top-title-fontsize: 18vw;
-$top-title-margin-top: 50px;
 
 $link-normal: hsl(348, 73%, 55%);
 $link-hover: hsl(208, 42%, 57%);
@@ -19,7 +14,7 @@ $header: #4D5763;
 $underline: hsl(348, 73%, 55%);
 $paragraph: #4D5763;
 $sub-titles: #777;
-$accent: hsl(208, 42%, 57%);
+$accent: hsl(348, 73%, 55%);
 
 $bg-hero: #193F6E;
 $paragraph-hero: #D9D9D9;
@@ -28,6 +23,15 @@ $contact-icons: #777;
 $bg-text-edit: #3D5B95;
 $accent-text-edit: hsl(208, 42%, 57%);
 $highlight: rgba(22, 125, 240, 0.25);
+
+// Values
+$top-title-font: 'Delius', cursive;
+$top-title-letter-spacing: -5px;
+$top-title-fontsize: 18vw;
+$top-title-margin-top: 50px;
+
+$navbar-logo-width: 120px;
+$nav-bar-height: 50px;
 
 
 // Helpers

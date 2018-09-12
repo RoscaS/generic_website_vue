@@ -4,7 +4,7 @@
       <a class="no-tr burger-icon"
          @click="mobileModal = true"
          v-show="!mobileModal">
-        <i class="far fa-bars fa-2x" :class="{'burger-nav': logo}"></i>
+        <i class="far fa-bars fa-2x"></i>
       </a>
     </transition>
 
@@ -34,16 +34,6 @@
 
 <style scoped lang="scss">
   @import "../../../static/sass/global";
-
-  .burger-icon {
-    /*padding-top: 30px;*/
-  }
-
-  .burger-nav {
-    position: absolute;
-    right: 5%;
-    top: 23px;
-  }
 
 
 </style>

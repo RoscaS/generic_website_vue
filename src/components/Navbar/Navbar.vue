@@ -1,11 +1,9 @@
 <template>
-  <div id="Navbar" :class="[{'setShadow': stiky }, {'logo': logo}]">
-    <div class="navbar-wrapper">
-      <Brand class="brand" :stiky="stiky"/>
-      <Links class="links is-hidden-touch" :links="links"/>
-      <LogOut class="logout is-hidden-touch"/>
-      <BurgerIcon class="burger-icon is-hidden-desktop" :links="links"/>
-    </div>
+  <div id="Navbar" :class="{'setShadow': stiky }">
+    <Brand class="brand" :stiky="stiky"/>
+    <Links class="links is-hidden-touch" :links="links"/>
+    <LogOut class="logout is-hidden-touch"/>
+    <BurgerIcon class="burger-icon is-hidden-desktop" :links="links"/>
   </div>
 </template>
 
@@ -44,49 +42,35 @@
     box-shadow: 0 4px 20px -1px rgba(0, 0, 0, 0.8);
   }
 
-  .logo {
-    padding: 0 !important;
-    height: 68px !important;
-    display: flex;
-    justify-content: center;
-  }
-
   #Navbar {
     background-color: white;
     position: absolute;
     margin-top: -50px;
     width: 100%;
+    height: $nav-bar-height;
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     transition: box-shadow .5s ease;
-    .navbar-wrapper {
-      height: 50px;
-      user-select: none;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      width: 100%;
-      .brand {
-        position: absolute;
-        left: 5%;
-      }
-      .links {
-        justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .logout {
-        position: absolute;
-        right: 2%;
-      }
-      .burger-icon {
-        padding-top: 3px;
-        margin-left: auto;
-        margin-right: 20px;
-      }
+    .brand {
+      position: absolute;
+      left: 5%;
+    }
+    .links {
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .logout {
+      position: absolute;
+      right: 2%;
+    }
+    .burger-icon {
+      position: absolute;
+      right: 2%;
     }
   }
-
-
 
 
 </style>

@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <span class="led" :style="getColor"></span>
-    <span class="first-line">{{upper(getMessage[0])}}</span> <br>
+  <div class="widget-wrapper">
+    <div class="first-line">
+      <span class="led" :style="getColor"></span>
+      <span class="first-line-text">{{upper(getMessage[0])}}</span>
+    </div>
     <span class="second-line">{{upper(getMessage[1])}}</span>
   </div>
 </template>
@@ -85,19 +87,42 @@
 <style scoped lang="scss">
   @import "../../../static/sass/global";
 
-  .led {
-    padding: 0 9px 0 9px;
-    margin-right: 10px;
-    border-radius: 50%;
-    opacity: .8;
+  .widget-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 230px;
+
+    .first-line {
+      text-align: right;
+      @media screen and (max-width: 560px) {
+        text-align: center;
+      }
+
+
+      .led {
+        padding: 0 9px 0 9px;
+        margin-right: 10px;
+        border-radius: 50%;
+        opacity: .8;
+      }
+      .first-line-text {
+
+      }
+    }
+
+    .second-line {
+      text-align: right;
+      @media screen and (max-width: 560px) {
+        text-align: center;
+      }
+
+    }
   }
 
-  .first-line {
-    width: 330px
-  }
 
-  .second-line {
 
-  }
+
+
 
 </style>
