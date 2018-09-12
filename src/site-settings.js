@@ -1,7 +1,7 @@
 const admin = "admin@jrosk.com";
-const url = "https://api.jrosk.ch/";
+const url = "https://www.api.jrosk.ch/";
 const clientID = "3zna8lwrR2rHoWxxwQHEqgRn6dPezrcI";
-const redirectUri = "https://jrosk.ch/callback";
+const redirectUri = "https://www.jrosk.ch/callback";
 const audience = "http://jrosk.ch:8000";
 
 const settings = {
