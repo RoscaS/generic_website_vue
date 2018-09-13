@@ -43,49 +43,49 @@
 </template>
 
 <script>
-	import Title from "../../components/Title";
-	import EditIcon from "../../components/Edit/EditIcon";
-	import TextsStore from "../../components/Edit/Texts/TextsStore";
-	import FieldsLayout from "./FieldsLayout.vue";
-	import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
+import Title from "../../components/Title";
+import EditIcon from "../../components/Edit/EditIcon";
+import TextsStore from "../../components/Edit/Texts/TextsStore";
+import FieldsLayout from "./FieldsLayout.vue";
+import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
 
-	export default {
-		name: "BaseLayout",
-		props: {
-			store: {type: Object}
-		},
-		components: {Title, EditIcon, TextsEditMenu, FieldsLayout},
-		computed: {
-			edit() {
-				return TextsStore;
-			}
-		},
-	};
+export default {
+  name: "BaseLayout",
+  props: {
+    store: { type: Object }
+  },
+  components: { Title, EditIcon, TextsEditMenu, FieldsLayout },
+  computed: {
+    edit() {
+      return TextsStore;
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .section-container {
-    margin: 0 auto 50px auto;
+.section-container {
+  margin: 0 auto 50px auto;
 
-    @media screen and (max-width: 960px) {
-      margin-bottom: 0;
-    }
+  @media screen and (max-width: 960px) {
+    margin-bottom: 0;
   }
+}
 
-  .sub-title {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 18px;
-      line-height: 25px;
-      word-spacing: 0;
-      margin: 15px auto 80px auto !important;
-      text-align: center;
-      font-style: italic;
-      color: $sub-titles;
+.sub-title {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  line-height: 25px;
+  word-spacing: 0;
+  margin: 15px auto 80px auto !important;
+  text-align: center;
+  font-style: italic;
+  color: $sub-titles;
 
-      @media screen and (max-width: 960px) {
-          margin-bottom: 40px !important;
-      }
+  @media screen and (max-width: 960px) {
+    margin-bottom: 40px !important;
   }
+}
 </style>

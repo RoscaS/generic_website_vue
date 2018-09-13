@@ -13,67 +13,64 @@
 </template>
 
 <script>
-	export default {
-		name: "EditIcon",
-		props: {
-			right: {type: String},
-			top: {type: String},
-			edit: {type: Object},
-			store: {type: Object},
-			small: {type: Boolean, default: false},
-		},
-		data: () => ({
+export default {
+  name: "EditIcon",
+  props: {
+    right: { type: String },
+    top: { type: String },
+    edit: { type: Object },
+    store: { type: Object },
+    small: { type: Boolean, default: false }
+  },
+  data: () => ({}),
+  computed: {
+    isActive() {
+      return this.edit.state.active;
+    },
 
-		}),
-		computed: {
-			isActive() {
-				return this.edit.state.active;
-			},
-
-			authenticated() {
-				return this.$auth.isAuthenticated();
-			},
-			style() {
-				return {marginTop: this.top, left: this.right};
-			},
-		},
-		methods: {
-			startEdit() {
-				this.edit.start(this.store);
-			},
-		},
-	};
+    authenticated() {
+      return this.$auth.isAuthenticated();
+    },
+    style() {
+      return { marginTop: this.top, left: this.right };
+    }
+  },
+  methods: {
+    startEdit() {
+      this.edit.start(this.store);
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  $animationDuration: 3s;
-  @import "~vue2-animate/src/sass/vue2-animate";
+$animationDuration: 3s;
+@import "~vue2-animate/src/sass/vue2-animate";
 
-  .fade-enter-active {
-    animation-delay: 1s;
+.fade-enter-active {
+  animation-delay: 1s;
+}
+
+.smallIcon {
+  font-size: 14px !important;
+}
+
+.button {
+  transition: 0.5s background-color ease;
+  font-size: 20px;
+  left: 50px;
+  position: absolute;
+  z-index: 1;
+
+  &:hover {
+    transition: 0.5s background-color ease;
+    background-color: #d03656;
   }
 
-  .smallIcon {
-    font-size: 14px !important;
+  i {
+    outline: 0;
   }
-
-  .button {
-    transition: .5s background-color ease;
-    font-size: 20px;
-    left: 50px;
-    position: absolute;
-    z-index: 1;
-
-    &:hover {
-      transition: .5s background-color ease;
-      background-color: #d03656;
-    }
-
-    i {
-      outline: 0;
-    }
-  }
+}
 </style>
-

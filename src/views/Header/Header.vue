@@ -35,112 +35,114 @@
 </template>
 
 <script>
-	import GalleriesStore from "../../components/Edit/Galleries/GalleriesStore";
-	import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
-	import EditIcon from '../../components/Edit/EditIcon';
-	import FieldsLayout from "../Layouts/FieldsLayout";
-	import ViewsMixin from '../../mixins/ViewsMixin';
-	import CenterWidget from "./CenterWidget";
-	import RightWidget from "./RightWidget";
-	import LeftWidget from "./LeftWidget";
-	import SiteTitle from "./SiteTitle";
-	import SubHeader from "./SubHeader";
+import GalleriesStore from "../../components/Edit/Galleries/GalleriesStore";
+import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
+import EditIcon from "../../components/Edit/EditIcon";
+import FieldsLayout from "../Layouts/FieldsLayout";
+import ViewsMixin from "../../mixins/ViewsMixin";
+import CenterWidget from "./CenterWidget";
+import RightWidget from "./RightWidget";
+import LeftWidget from "./LeftWidget";
+import SiteTitle from "./SiteTitle";
+import SubHeader from "./SubHeader";
 
-
-	export default {
-		name: "Header",
-		mixins: [ViewsMixin],
-		components: {
-			SubHeader,
-			SiteTitle,
-			RightWidget,
-			CenterWidget,
-			LeftWidget,
-			EditIcon,
-			TextsEditMenu,
-			FieldsLayout,
-		},
-		data: () => ({
-			type: 'text',
-			component: "SiteInfo",
-		}),
-		computed: {
-			logo() { return GalleriesStore.logo; },
-			state() { return this.store.state; },
-			fixedHeight() {
-				const height = window.innerHeight;
-				const width = window.innerWidth;
-				if (width <= 414) {
-					return {
-						height: (4 / 7) * height + 'px',
-						paddingTop: (height / 100) * 8.27 + 'px'
-					};
-				} else {
-					return {
-						height: height / 2 + 'px',
-						paddingTop: (height / 100) * 8.27 + 'px'
-					};
-				}
-			}
-		},
-	};
+export default {
+  name: "Header",
+  mixins: [ViewsMixin],
+  components: {
+    SubHeader,
+    SiteTitle,
+    RightWidget,
+    CenterWidget,
+    LeftWidget,
+    EditIcon,
+    TextsEditMenu,
+    FieldsLayout
+  },
+  data: () => ({
+    type: "text",
+    component: "SiteInfo"
+  }),
+  computed: {
+    logo() {
+      return GalleriesStore.logo;
+    },
+    state() {
+      return this.store.state;
+    },
+    fixedHeight() {
+      const height = window.innerHeight;
+      const width = window.innerWidth;
+      if (width <= 414) {
+        return {
+          height: (4 / 7) * height + "px",
+          paddingTop: (height / 100) * 8.27 + "px"
+        };
+      } else {
+        return {
+          height: height / 2 + "px",
+          paddingTop: (height / 100) * 8.27 + "px"
+        };
+      }
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .edit-icon {
-    display: block;
-    z-index: 6;
+.edit-icon {
+  display: block;
+  z-index: 6;
+}
+
+.site-title {
+  margin-bottom: -45px;
+  position: relative;
+  z-index: 5;
+}
+
+.widgets {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  height: 60px;
+
+  .wings {
+    width: 230px;
+    &.left {
+      margin-right: 50px;
+    }
+    &.right {
+      margin-left: 50px;
+    }
+  }
+}
+
+.widgets-mobile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
   }
 
-  .site-title {
-    margin-bottom: -45px;
-    position: relative;
-    z-index: 5;
-  }
-
-  .widgets {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    height: 60px;
-
-    .wings {
-      width: 230px;
-      &.left {
-        margin-right: 50px;
-      }
-      &.right {
-        margin-left: 50px;
+  .wings {
+    width: 230px;
+    &.left {
+      margin-right: 10px;
+    }
+    &.right {
+      margin-left: 10px;
+      @media screen and (max-width: 560px) {
+        display: none;
       }
     }
   }
-
-  .widgets-mobile {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    @media screen and (max-width: 560px) {
-      flex-direction: column;
-    }
-
-    .wings {
-      width: 230px;
-      &.left {
-        margin-right: 10px;
-      }
-      &.right {
-        margin-left: 10px;
-        @media screen and (max-width: 560px) {
-          display: none;
-        }
-      }
-    }
-  }
-
+}
 </style>

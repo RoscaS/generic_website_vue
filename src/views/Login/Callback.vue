@@ -3,19 +3,18 @@
 </template>
 
 <script>
-	export default {
-		name: 'callback',
-		data: () => ({
-		}),
-		mounted() {
-			this.$auth.handleAuthentication().then(data => {
-        this.$router.push({name: 'home'});
-			});
-		}
-	};
+export default {
+  name: "callback",
+  data: () => ({}),
+  mounted() {
+    this.$auth.handleAuthentication().then(data => {
+      this.$router.push({ name: "home" });
+    });
+  }
+};
 </script>
 
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 </style>

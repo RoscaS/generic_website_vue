@@ -15,13 +15,12 @@ const urls = {
   categories: "categories/",
   articles: "articles/",
 
-	slots: "slots/",
-	days: "days/",
-
+  slots: "slots/",
+  days: "days/",
 
   siteInfo: "siteInfo/1/",
-	siteContact: "siteContact/1/",
-  siteOptions: "siteOptions/1/",
+  siteContact: "siteContact/1/",
+  siteOptions: "siteOptions/1/"
 };
 
 export default urls;

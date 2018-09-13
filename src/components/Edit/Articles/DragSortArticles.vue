@@ -13,53 +13,55 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable';
-  import CategoriesStore from './CategoriesStore';
+import draggable from "vuedraggable";
+import CategoriesStore from "./CategoriesStore";
 
-  export default {
-    name: "DragSortArticles",
-    components: {draggable},
-    props: {
-      store: {type: Object},
-    },
-    data: () => ({
-      edit: CategoriesStore,
+export default {
+  name: "DragSortArticles",
+  components: { draggable },
+  props: {
+    store: { type: Object }
+  },
+  data: () => ({
+    edit: CategoriesStore,
 
-      isDragging: false,
-      delayedDragging: false,
-      reOrder: false,
-    }),
-    computed: {
-      dragOptions() {
-        let disable =  this.edit.state.draggingType !== 'article';
-        return {
-          animation: 250,
-          group: 'description',
-          disabled: disable,
-          ghostClass: 'none'
-        };
-      },
-    },
-    watch: {
-      isDragging(newValue) {
-        if (newValue) {
-          this.delayedDragging = true;
-          return;
-        }
-        this.$nextTick(() => {
-          this.edit.state.primaryStore.updateData();
-          try {this.edit.state.secondaryStore.updateData();}
-          catch (e) {return e}
-        });
+    isDragging: false,
+    delayedDragging: false,
+    reOrder: false
+  }),
+  computed: {
+    dragOptions() {
+      let disable = this.edit.state.draggingType !== "article";
+      return {
+        animation: 250,
+        group: "description",
+        disabled: disable,
+        ghostClass: "none"
+      };
+    }
+  },
+  watch: {
+    isDragging(newValue) {
+      if (newValue) {
+        this.delayedDragging = true;
+        return;
       }
-    },
-    methods: {
-      onMove({relatedContext, draggedContext}) {},
-    },
-  };
+      this.$nextTick(() => {
+        this.edit.state.primaryStore.updateData();
+        try {
+          this.edit.state.secondaryStore.updateData();
+        } catch (e) {
+          return e;
+        }
+      });
+    }
+  },
+  methods: {
+    onMove({ relatedContext, draggedContext }) {}
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
-
+@import "../../../scss/global";
 </style>

@@ -83,91 +83,94 @@
 
 
 <script>
-	import axios from "../../http";
+import axios from "../../http";
 
-	const messages = {
-		success: {
-			message: "Message envoyé, merci!",
-			type: "is-success"
-		},
-		errorFront: {
-			message: "Veuillez compléter correctement tous les champs svp.",
-			type: "is-danger"
-		},
-		errorBack: {
-			message: "Erreur coté serveur, merci de tenter à un autre moment.",
-			type: "is-danger"
-		}
-	};
-	export default {
-		name: "ContactForm",
-		props: {
-			url: {type: String}
-		},
-		data() {
-			return {
-				show: false,
-				isLoading: false,
+const messages = {
+  success: {
+    message: "Message envoyé, merci!",
+    type: "is-success"
+  },
+  errorFront: {
+    message: "Veuillez compléter correctement tous les champs svp.",
+    type: "is-danger"
+  },
+  errorBack: {
+    message: "Erreur coté serveur, merci de tenter à un autre moment.",
+    type: "is-danger"
+  }
+};
+export default {
+  name: "ContactForm",
+  props: {
+    url: { type: String }
+  },
+  data() {
+    return {
+      show: false,
+      isLoading: false,
 
-				name: null,
-				email: null,
-				message: null
-			};
-		},
-		methods: {
-			preValidate() {
-				this.$validator.validateAll().then(result => {
-					if (result) {
-						this.isLoading = true;
-						this.commit();
-					} else {
-						this.toast(messages.errorFront.message, messages.errorFront.type);
-					}
-				});
-			},
-			commit() {
-				axios.post(this.url, {
-					name: this.name,
-					email: this.email,
-					message: this.message
-				}).then(response => {
-					this.isLoading = false;
-					this.toast(messages.success.message, messages.success.type);
-					this.clearForm();
-				}).catch(error => {
-					this.isLoading = false;
-					this.toast(messages.errorBack.message, messages.errorBack.type);
-					console.log(this.url);
-					console.log(error);
-				});
-			},
-			toast(errors, type) {
-				this.$toast.open({
-					duration: 5000,
-					message: errors,
-					position: "is-bottom",
-					type: type
-				});
-			},
-			clearForm() {
-				this.name = null;
-				this.email = null;
-				this.message = null;
-				this.$validator.reset();
-			}
-		}
-	};
+      name: null,
+      email: null,
+      message: null
+    };
+  },
+  methods: {
+    preValidate() {
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          this.isLoading = true;
+          this.commit();
+        } else {
+          this.toast(messages.errorFront.message, messages.errorFront.type);
+        }
+      });
+    },
+    commit() {
+      axios
+        .post(this.url, {
+          name: this.name,
+          email: this.email,
+          message: this.message
+        })
+        .then(response => {
+          this.isLoading = false;
+          this.toast(messages.success.message, messages.success.type);
+          this.clearForm();
+        })
+        .catch(error => {
+          this.isLoading = false;
+          this.toast(messages.errorBack.message, messages.errorBack.type);
+          console.log(this.url);
+          console.log(error);
+        });
+    },
+    toast(errors, type) {
+      this.$toast.open({
+        duration: 5000,
+        message: errors,
+        position: "is-bottom",
+        type: type
+      });
+    },
+    clearForm() {
+      this.name = null;
+      this.email = null;
+      this.message = null;
+      this.$validator.reset();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .form {
-    .name {
-      width: 65%;
-    }
-    .email {
-      width: 65%;
-    }
+.form {
+  .name {
+    width: 65%;
   }
+  .email {
+    width: 65%;
+  }
+}
 </style>

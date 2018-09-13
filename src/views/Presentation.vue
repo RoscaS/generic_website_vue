@@ -28,38 +28,37 @@
 </template>
 
 <script>
-	import ViewsMixin from '../mixins/ViewsMixin';
-	import EditIcon from '../components/Edit/EditIcon';
-	import SectionImage from "../components/SectionImage";
+import ViewsMixin from "../mixins/ViewsMixin";
+import EditIcon from "../components/Edit/EditIcon";
+import SectionImage from "../components/SectionImage";
 
-	export default {
-		name: "Presentation",
-		mixins: [ViewsMixin],
-		components: {SectionImage, EditIcon},
-		data: () => ({
-			component: "Presentation",
-			type: 'text',
-		}),
-		computed: {
-			image() {
-				try {
-					let gallery = this.galleriesEdit.getStore('Presentation');
-					return this.getImage(0, gallery).image;
-				} catch (e) {
-					setTimeout(() => {return this.computed;}, 100);
-				}
-			}
-		},
-	};
+export default {
+  name: "Presentation",
+  mixins: [ViewsMixin],
+  components: { SectionImage, EditIcon },
+  data: () => ({
+    component: "Presentation",
+    type: "text"
+  }),
+  computed: {
+    image() {
+      try {
+        let gallery = this.galleriesEdit.getStore("Presentation");
+        return this.getImage(0, gallery).image;
+      } catch (e) {
+        setTimeout(() => {
+          return this.computed;
+        }, 100);
+      }
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../scss/global';
+@import "../scss/global";
 
-  .text1 {
-    margin-bottom: 40px !important;
-
-  }
-
+.text1 {
+  margin-bottom: 40px !important;
+}
 </style>
-

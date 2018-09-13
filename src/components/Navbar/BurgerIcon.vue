@@ -16,25 +16,24 @@
 </template>
 
 <script>
-	import GalleriesStore from "../Edit/Galleries/GalleriesStore";
-	import MobileModal from "./MobileModal";
+import GalleriesStore from "../Edit/Galleries/GalleriesStore";
+import MobileModal from "./MobileModal";
 
-	export default {
-		components: {MobileModal},
-		props: {links: {type: Array}},
-		name: "BurgerIcon",
-		data: () => ({
-			mobileModal: false,
-		}),
-		computed: {
-			logo() { return GalleriesStore.logo; },
-		},
-	};
+export default {
+  components: { MobileModal },
+  props: { links: { type: Array } },
+  name: "BurgerIcon",
+  data: () => ({
+    mobileModal: false
+  }),
+  computed: {
+    logo() {
+      return GalleriesStore.logo;
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
-
-
-
+@import "../../scss/global";
 </style>

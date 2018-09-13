@@ -70,85 +70,84 @@
 </template>
 
 <script>
-  import IconPicker from '../components/IconPicker/IconPicker';
-  import TextsEditMenu from '../components/Edit/Texts/TextsEditMenu';
-  import EditIcon from '../components/Edit/EditIcon';
-  import FieldsLayout from './Layouts/FieldsLayout';
-  import ViewsMixin from '../mixins/ViewsMixin';
+import IconPicker from "../components/IconPicker/IconPicker";
+import TextsEditMenu from "../components/Edit/Texts/TextsEditMenu";
+import EditIcon from "../components/Edit/EditIcon";
+import FieldsLayout from "./Layouts/FieldsLayout";
+import ViewsMixin from "../mixins/ViewsMixin";
 
-  export default {
-    name: "Hero",
-    mixins: [ViewsMixin],
-    components: {TextsEditMenu, EditIcon, FieldsLayout, IconPicker},
+export default {
+  name: "Hero",
+  mixins: [ViewsMixin],
+  components: { TextsEditMenu, EditIcon, FieldsLayout, IconPicker },
 
-    data() {
-      return {
-        component: "Hero",
-        type: 'text',
-      };
-    },
-    methods: {
-      returnIcon(icon) {
-        switch (icon.position) {
-          case 'Gauche':
-            this.state.icon1.data = `${icon.weight} fa-${icon.className}`;
-            break;
-          case 'Centre':
-            this.state.icon2.data = `${icon.weight} fa-${icon.className}`;
-            break;
-          case 'Droite':
-            this.state.icon3.data = `${icon.weight} fa-${icon.className}`;
-            break;
-        }
-      },
-    },
-  };
+  data() {
+    return {
+      component: "Hero",
+      type: "text"
+    };
+  },
+  methods: {
+    returnIcon(icon) {
+      switch (icon.position) {
+        case "Gauche":
+          this.state.icon1.data = `${icon.weight} fa-${icon.className}`;
+          break;
+        case "Centre":
+          this.state.icon2.data = `${icon.weight} fa-${icon.className}`;
+          break;
+        case "Droite":
+          this.state.icon3.data = `${icon.weight} fa-${icon.className}`;
+          break;
+      }
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../scss/global';
+@import "../scss/global";
 
-  .fields-container {
-    margin-top: -25px;
+.fields-container {
+  margin-top: -25px;
+}
+
+.hero {
+  user-select: none;
+  text-align: center;
+  background-color: $bg-hero;
+
+  h1,
+  h2,
+  p {
+    color: white;
   }
 
-  .hero {
-    user-select: none;
-    text-align: center;
-    background-color: $bg-hero;
-
-    h1, h2, p {
-      color: white;
-    }
-
-    h2 {
-      font-size: 28px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      word-spacing: 0;
-      line-height: 39.6px;
-
-    }
-
-    p {
-      color: $paragraph-hero;
-      font-size: 16px;
-      line-height: 25px;
-      word-spacing: 0;
-      font-weight: lighter;
-
-    }
-
-    i {
-      font-size: 60px;
-      color: white;
-      margin-bottom: 30px;
-    }
+  h2 {
+    font-size: 28px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    word-spacing: 0;
+    line-height: 39.6px;
   }
 
-  label {
-    font-weight: bolder;
-    color: white !important;
+  p {
+    color: $paragraph-hero;
+    font-size: 16px;
+    line-height: 25px;
+    word-spacing: 0;
+    font-weight: lighter;
   }
 
+  i {
+    font-size: 60px;
+    color: white;
+    margin-bottom: 30px;
+  }
+}
+
+label {
+  font-weight: bolder;
+  color: white !important;
+}
 </style>

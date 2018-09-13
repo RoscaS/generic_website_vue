@@ -92,335 +92,340 @@
 </template>
 
 <script>
-	import CategoriesStore from "./CategoriesStore";
-	import Upload from "../Upload";
-	import tools from "../../../utils/tools";
+import CategoriesStore from "./CategoriesStore";
+import Upload from "../Upload";
+import tools from "../../../utils/tools";
 
-	export default {
-		name: "ArticlesCard",
-		components: {Upload},
-		data: () => ({
-			title: '',
-			icon: '',
-			is: {edit: false, create: false, article: false, category: false},
-			data: {name: '', description: '', price: '', category: ''},
-			error: {image: '', name: '', description: '', price: '', category: ''},
-			messages: [],
-		}),
-		computed: {
-			edit() {return CategoriesStore;},
-			newItem() {return this.edit.newItem;},
-			editItem() {return this.edit.editItem;},
-			tempImage() {return this.edit.state.tempImage;},
-			categories() {return this.edit.state.stores;},
-      errorImage() {return !this.tempImage ? this.error.image : null;},
-			isDirty() {
-				if (this.is.edit) {
-					for (let i in this.data) {
-						if (this.data[i] !== '') {
-							if (this.data[i] !== this.editItem[i]) {
-								return true;
-							}
-						}
-					}
-					return false;
-				}
-			},
-		},
-		watch: {
-			newItem(value) {
-				if (value) {
-					this.is.create = true;
-					this.icon = 'fa-plus';
-					this.setType(value);
-					this.icon = 'fa-pen';
-				} else {
-					this.end();
-				}
-			},
-			editItem(value) {
-				if (value) {
-					this.is.edit = true;
-					this.icon = 'fa-pen';
-					this.setType(value.type);
-					for (let i in this.data) {
-						this.editItem[i] ? this.data[i] = this.editItem[i] : null;
-					}
-				} else {
-					this.end();
-				}
-			},
-		},
-		methods: {
-			isValid() {
-				if (this.is.category) {
-					if (this.data.name === '') {
-						this.error.name = 'is-danger';
-						this.messages.push('validNoName');
-						return false;
-					}
-				}
-				else if (this.is.article) {
-
-					if (!this.tempImage) {
-						this.error.image = 'image-error';
-						this.messages.push('validNoImg');
-						return false;
-					}
-					else if (this.data.name === '') {
-						this.error.name = 'is-danger';
-						this.messages.push('validNoName');
-						return false;
-					}
-					else if (this.data.description === '') {
-						this.error.description = 'is-danger';
-						this.messages.push('validNoDescription');
-						return false;
-					}
-					else if (this.data.price === '') {
-						this.error.price = 'is-danger';
-						this.messages.push('validNoPrice');
-						return false;
-					}
-					else if (Number(this.data.price) < 0) {
-						this.error.price = 'is-danger';
-						this.messages.push('validNegPrice');
-						return false;
-					}
-					else if (this.data.category === '') {
-						this.error.category = 'is-danger';
-						this.messages.push('validNoCategory');
-						return false;
-					}
-				}
-				for (let i of this.categories) {
-					if (this.is.category) {
-						if (i.name === this.data.name) {
-							this.error.name = 'is-danger';
-							this.messages.push('validUniqCatName');
-							return false;
-						}
-					}
-					else if (this.is.article) {
-						for (let j of i.articles) {
-							if (j.name === this.data.name) {
-								this.error.name = 'is-danger';
-								this.messages.push('validUniqArtName');
-								return false;
-							}
-						}
-					}
-				}
-				return true;
-			},
-			selectCat(value) {this.data.category = value;},
-			setType(type) {
-				if (type === 'article') {
-					this.is.article = true;
-					this.title = 'Article';
-				}
-				else if (type === 'category') {
-					this.is.category = true;
-					this.title = 'Catégorie';
-				}
-			},
-			setPosition() {
-				if (this.is.article) return {top: '10%'};
-				else return {top: '15%'};
-			},
-			setBackground() {
-				if (this.is.article && this.is.create) return {backgroundColor: '#CCC'};
-				else return {backgroundColor: '#167DF0'};
-			},
-			updateStore() {
-				for (let i in this.data) {
-					if (this.editItem[i]) this.edit.editItem[i] = this.data[i];
-				}
-			},
-			uploadImage(file) {
-				let formData = new FormData();
-				formData.append('name', 'tempArticleImage');
-				formData.append('image', file);
-				formData.append('gallery', 'Articles');
-				this.edit.uploadImage(formData);
-			},
-			changeImage() {
-				this.edit.state.tempImage.delete(false);
-				this.edit.tempImage = null;
-			},
-			validate() {
-        for (let i in this.error) {
-        	this.error[i] = '';
+export default {
+  name: "ArticlesCard",
+  components: { Upload },
+  data: () => ({
+    title: "",
+    icon: "",
+    is: { edit: false, create: false, article: false, category: false },
+    data: { name: "", description: "", price: "", category: "" },
+    error: { image: "", name: "", description: "", price: "", category: "" },
+    messages: []
+  }),
+  computed: {
+    edit() {
+      return CategoriesStore;
+    },
+    newItem() {
+      return this.edit.newItem;
+    },
+    editItem() {
+      return this.edit.editItem;
+    },
+    tempImage() {
+      return this.edit.state.tempImage;
+    },
+    categories() {
+      return this.edit.state.stores;
+    },
+    errorImage() {
+      return !this.tempImage ? this.error.image : null;
+    },
+    isDirty() {
+      if (this.is.edit) {
+        for (let i in this.data) {
+          if (this.data[i] !== "") {
+            if (this.data[i] !== this.editItem[i]) {
+              return true;
+            }
+          }
         }
-				if (this.isValid()) {
-					if (this.is.edit) {
-						this.updateStore();
+        return false;
+      }
+    }
+  },
+  watch: {
+    newItem(value) {
+      if (value) {
+        this.is.create = true;
+        this.icon = "fa-plus";
+        this.setType(value);
+        this.icon = "fa-pen";
+      } else {
+        this.end();
+      }
+    },
+    editItem(value) {
+      if (value) {
+        this.is.edit = true;
+        this.icon = "fa-pen";
+        this.setType(value.type);
+        for (let i in this.data) {
+          this.editItem[i] ? (this.data[i] = this.editItem[i]) : null;
+        }
+      } else {
+        this.end();
+      }
+    }
+  },
+  methods: {
+    isValid() {
+      if (this.is.category) {
+        if (this.data.name === "") {
+          this.error.name = "is-danger";
+          this.messages.push("validNoName");
+          return false;
+        }
+      } else if (this.is.article) {
+        if (!this.tempImage) {
+          this.error.image = "image-error";
+          this.messages.push("validNoImg");
+          return false;
+        } else if (this.data.name === "") {
+          this.error.name = "is-danger";
+          this.messages.push("validNoName");
+          return false;
+        } else if (this.data.description === "") {
+          this.error.description = "is-danger";
+          this.messages.push("validNoDescription");
+          return false;
+        } else if (this.data.price === "") {
+          this.error.price = "is-danger";
+          this.messages.push("validNoPrice");
+          return false;
+        } else if (Number(this.data.price) < 0) {
+          this.error.price = "is-danger";
+          this.messages.push("validNegPrice");
+          return false;
+        } else if (this.data.category === "") {
+          this.error.category = "is-danger";
+          this.messages.push("validNoCategory");
+          return false;
+        }
+      }
+      for (let i of this.categories) {
+        if (this.is.category) {
+          if (i.name === this.data.name) {
+            this.error.name = "is-danger";
+            this.messages.push("validUniqCatName");
+            return false;
+          }
+        } else if (this.is.article) {
+          for (let j of i.articles) {
+            if (j.name === this.data.name) {
+              this.error.name = "is-danger";
+              this.messages.push("validUniqArtName");
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    },
+    selectCat(value) {
+      this.data.category = value;
+    },
+    setType(type) {
+      if (type === "article") {
+        this.is.article = true;
+        this.title = "Article";
+      } else if (type === "category") {
+        this.is.category = true;
+        this.title = "Catégorie";
+      }
+    },
+    setPosition() {
+      if (this.is.article) return { top: "10%" };
+      else return { top: "15%" };
+    },
+    setBackground() {
+      if (this.is.article && this.is.create) return { backgroundColor: "#CCC" };
+      else return { backgroundColor: "#167DF0" };
+    },
+    updateStore() {
+      for (let i in this.data) {
+        if (this.editItem[i]) this.edit.editItem[i] = this.data[i];
+      }
+    },
+    uploadImage(file) {
+      let formData = new FormData();
+      formData.append("name", "tempArticleImage");
+      formData.append("image", file);
+      formData.append("gallery", "Articles");
+      this.edit.uploadImage(formData);
+    },
+    changeImage() {
+      this.edit.state.tempImage.delete(false);
+      this.edit.tempImage = null;
+    },
+    validate() {
+      for (let i in this.error) {
+        this.error[i] = "";
+      }
+      if (this.isValid()) {
+        if (this.is.edit) {
+          this.updateStore();
 
-						if (this.is.article) {
-							this.editItem.patch();
-						}
-						else if (this.is.category) {
-							this.edit.state.editItem.put();
-						}
-					}
-					else if (this.is.create) {
-
-						if (this.is.article) {
-							this.createArticle();
-						}
-						else if (this.is.category) {
-							this.createCategory();
-						}
-					}
-					setTimeout(() => {this.end();}, 2000);
-				} else {
-					let time = 0;
-					for (let i of this.messages) {
-						setTimeout(() => {tools.message(i);}, time);
-						time += 200;
-					}
-					this.messages = [];
-				}
-			},
-			createCategory() {
-				this.edit.createCategory({
-					slug: this.data.name,
-					name: this.data.name,
-					description: this.data.description,
-				});
-			},
-			createArticle() {
-				let category = this.edit.getStore(this.data.category.name);
-				category.postArticle({
-					name: this.data.name,
-					description: this.data.description,
-					price: this.data.price,
-					category: this.data.category.name,
-					image: this.edit.state.tempImage.id
-				});
-			},
-			cancel() {
-				if (this.is.edit) this.editItem.restore();
-				if (this.tempImage) {
-					this.tempImage.delete(false);
-					this.edit.tempImage = null;
-				}
-				tools.message('cancel');
-				this.end();
-			},
-			end() {
-				for (let i in this.is) this.is[i] = false;
-				for (let i in this.data) this.data[i] = '';
-				for (let i in this.error) this.error[i] = '';
-				this.message = [];
-				this.edit.clearNewItem();
-				this.edit.clearEditItem();
-			},
-		},
-	};
+          if (this.is.article) {
+            this.editItem.patch();
+          } else if (this.is.category) {
+            this.edit.state.editItem.put();
+          }
+        } else if (this.is.create) {
+          if (this.is.article) {
+            this.createArticle();
+          } else if (this.is.category) {
+            this.createCategory();
+          }
+        }
+        setTimeout(() => {
+          this.end();
+        }, 2000);
+      } else {
+        let time = 0;
+        for (let i of this.messages) {
+          setTimeout(() => {
+            tools.message(i);
+          }, time);
+          time += 200;
+        }
+        this.messages = [];
+      }
+    },
+    createCategory() {
+      this.edit.createCategory({
+        slug: this.data.name,
+        name: this.data.name,
+        description: this.data.description
+      });
+    },
+    createArticle() {
+      let category = this.edit.getStore(this.data.category.name);
+      category.postArticle({
+        name: this.data.name,
+        description: this.data.description,
+        price: this.data.price,
+        category: this.data.category.name,
+        image: this.edit.state.tempImage.id
+      });
+    },
+    cancel() {
+      if (this.is.edit) this.editItem.restore();
+      if (this.tempImage) {
+        this.tempImage.delete(false);
+        this.edit.tempImage = null;
+      }
+      tools.message("cancel");
+      this.end();
+    },
+    end() {
+      for (let i in this.is) this.is[i] = false;
+      for (let i in this.data) this.data[i] = "";
+      for (let i in this.error) this.error[i] = "";
+      this.message = [];
+      this.edit.clearNewItem();
+      this.edit.clearEditItem();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  .image-error {
-    border: 3px solid $is-danger;
-  }
+.image-error {
+  border: 3px solid $is-danger;
+}
 
-  .card {
-    border-radius: 9px;
-    position: absolute;
-    z-index: 100;
-    width: $article-width;
-    box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
+.card {
+  border-radius: 9px;
+  position: absolute;
+  z-index: 100;
+  width: $article-width;
+  box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
 
-    header {
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
+  header {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 
-      p, i {
-        color: white;
-        font-size: 24px;
-        cursor: default;
+    p,
+    i {
+      color: white;
+      font-size: 24px;
+      cursor: default;
+    }
+    .card-image {
+      width: $article-width;
+      height: $article-height;
+
+      .card-header-title {
+        position: absolute;
       }
-      .card-image {
+      .card-header-icon {
+        position: absolute;
+        right: 0.5rem;
+      }
+      img {
+        object-fit: cover;
         width: $article-width;
         height: $article-height;
-
-        .card-header-title {
-          position: absolute;
-        }
-        .card-header-icon {
-          position: absolute;
-          right: .5rem;
-        }
-        img {
-          object-fit: cover;
-          width: $article-width;
-          height: $article-height;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
-        }
-        .card-header-reupp {
-          display: flex;
-          top: 83%;
-          left: 10px;
-          position: absolute;
-
-          &:hover {
-          }
-
-          span {
-            margin-left: 10px;
-            font-size: 18px;
-            font-weight: bold;
-          }
-        }
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
       }
-      .card-upload {
-        .drop-zone {
-          padding-top: 25px;
-          padding-bottom: 10px;
+      .card-header-reupp {
+        display: flex;
+        top: 83%;
+        left: 10px;
+        position: absolute;
+
+        &:hover {
         }
-        a {
-          padding-left: 27px;
+
+        span {
+          margin-left: 10px;
+          font-size: 18px;
+          font-weight: bold;
         }
       }
     }
-    .card-content {
-      .categories {
-        display: block;
-        margin-top: 15px !important;
-        margin-left: 40px;
+    .card-upload {
+      .drop-zone {
+        padding-top: 25px;
+        padding-bottom: 10px;
+      }
+      a {
+        padding-left: 27px;
       }
     }
-    footer {
-      cursor: pointer;
-      .card-footer-item {
-        transition: background-color .2s, color .2s;
-        font-size: 24px;
-        &:first-child {
+  }
+  .card-content {
+    .categories {
+      display: block;
+      margin-top: 15px !important;
+      margin-left: 40px;
+    }
+  }
+  footer {
+    cursor: pointer;
+    .card-footer-item {
+      transition: background-color 0.2s, color 0.2s;
+      font-size: 24px;
+      &:first-child {
+        border-bottom-left-radius: 8px;
+        color: $is-success;
+        &:hover {
           border-bottom-left-radius: 8px;
-          color: $is-success;
-          &:hover {
-            border-bottom-left-radius: 8px;
-            transition: background-color .2s, color .2s;
-            background-color: $is-success;
-            color: white;
-          }
+          transition: background-color 0.2s, color 0.2s;
+          background-color: $is-success;
+          color: white;
         }
-        &:last-child {
+      }
+      &:last-child {
+        border-bottom-right-radius: 8px;
+        color: $is-danger;
+        &:hover {
           border-bottom-right-radius: 8px;
-          color: $is-danger;
-          &:hover {
-            border-bottom-right-radius: 8px;
-            transition: background-color .2s, color .2s;
-            background-color: $is-danger;
-            color: white;
-          }
+          transition: background-color 0.2s, color 0.2s;
+          background-color: $is-danger;
+          color: white;
         }
       }
     }
   }
-
+}
 </style>

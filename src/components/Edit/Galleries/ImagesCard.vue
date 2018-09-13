@@ -39,88 +39,88 @@
 </template>
 
 <script>
-	import tools from '../../../utils/tools';
+import tools from "../../../utils/tools";
 
-	export default {
-		name: "ImagesCard",
-		props: {
-			edit: {type: Object},
-		},
-		computed: {
-			editItem() { return this.edit.editItem; }
-		},
-		methods: {
-			validate() {
-				this.edit.setLoading();
-				setTimeout(() => {
-					this.edit.unsetLoading();
-					tools.message('updated');
-					this.edit.clearEditItem();
-				}, 500);
-				this.edit.editItem.patch();
-			},
-			cancel() {
-				this.edit.clearEditItem();
-				tools.message('cancel');
-			},
-		},
-		destroyed() {
-			this.edit.clearEditItem();
-		}
-	};
+export default {
+  name: "ImagesCard",
+  props: {
+    edit: { type: Object }
+  },
+  computed: {
+    editItem() {
+      return this.edit.editItem;
+    }
+  },
+  methods: {
+    validate() {
+      this.edit.setLoading();
+      setTimeout(() => {
+        this.edit.unsetLoading();
+        tools.message("updated");
+        this.edit.clearEditItem();
+      }, 500);
+      this.edit.editItem.patch();
+    },
+    cancel() {
+      this.edit.clearEditItem();
+      tools.message("cancel");
+    }
+  },
+  destroyed() {
+    this.edit.clearEditItem();
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  .card {
-    border-radius: 9px;
-    position: absolute;
-    z-index: 3;
-    top: 10%;
-    width: $article-width;
+.card {
+  border-radius: 9px;
+  position: absolute;
+  z-index: 3;
+  top: 10%;
+  width: $article-width;
 
-    box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
+  box-shadow: 15px 7px 41px 10px rgba(0, 0, 0, 0.65);
 
-    header {
-      img {
-        object-fit: cover;
-        height: $article-height;
-        width: $article-width;
+  header {
+    img {
+      object-fit: cover;
+      height: $article-height;
+      width: $article-width;
 
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-      }
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
     }
+  }
 
-    footer {
-      .validate {
-        color: $is-success;
-        transition: background-color .2s, color .2s;
+  footer {
+    .validate {
+      color: $is-success;
+      transition: background-color 0.2s, color 0.2s;
+      border-bottom-left-radius: 8px;
+      &:hover {
+        transition: background-color 0.2s, color 0.2s;
+        background-color: $is-success;
+        color: white;
         border-bottom-left-radius: 8px;
-        &:hover {
-          transition: background-color .2s, color .2s;
-          background-color: $is-success;
-          color: white;
-          border-bottom-left-radius: 8px;
-        }
       }
-      .cancel {
-        transition: background-color .2s, color .2s;
+    }
+    .cancel {
+      transition: background-color 0.2s, color 0.2s;
+      border-bottom-right-radius: 8px;
+      &:hover {
+        transition: background-color 0.2s, color 0.2s;
+        background-color: $is-danger;
+        color: white;
         border-bottom-right-radius: 8px;
-        &:hover {
-          transition: background-color .2s, color .2s;
-          background-color: $is-danger;
-          color: white;
-          border-bottom-right-radius: 8px;
-        }
       }
     }
   }
+}
 
-  i {
-    font-size: 22px;
-  }
-
-
+i {
+  font-size: 22px;
+}
 </style>

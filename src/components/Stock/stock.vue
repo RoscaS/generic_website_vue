@@ -3,12 +3,11 @@
 </template>
 
 <script>
-  export default {
-    name: "stock"
-  };
+export default {
+  name: "stock"
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
-
+@import "../../scss/global";
 </style>

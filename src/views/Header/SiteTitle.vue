@@ -21,45 +21,48 @@
 </template>
 
 <script>
-  import GalleriesStore from "../../components/Edit/Galleries/GalleriesStore";
+import GalleriesStore from "../../components/Edit/Galleries/GalleriesStore";
 
-	export default {
-		name: "SiteTitle",
-		props: {
-			state: {type: Object}
-		},
-    computed: {
-	    logo() { return GalleriesStore.logo; },
-    },
-		methods: {
-			highlighted(value) { return this.$parent.highlighted(value); },
-		}
-	};
+export default {
+  name: "SiteTitle",
+  props: {
+    state: { type: Object }
+  },
+  computed: {
+    logo() {
+      return GalleriesStore.logo;
+    }
+  },
+  methods: {
+    highlighted(value) {
+      return this.$parent.highlighted(value);
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .logo {
-    width: 450px;
-    height: auto;
-    @media screen and (max-width: $logo-breakpoint) {
-      width: $logo-mobile-width;
-      margin-left: $logo-mobile-margin;
-    }
+.logo {
+  width: 450px;
+  height: auto;
+  @media screen and (max-width: $logo-breakpoint) {
+    width: $logo-mobile-width;
+    margin-left: $logo-mobile-margin;
   }
+}
 
-  .site-title {
-    font-family: $top-title-font;
-    letter-spacing: $top-title-letter-spacing;
-    font-size: 130px;
-    text-align: center;
-    color: $top-title;
-    margin-right: -20px;  // contre balance letter-sp de la dernière lettre.
+.site-title {
+  font-family: $top-title-font;
+  letter-spacing: $top-title-letter-spacing;
+  font-size: 130px;
+  text-align: center;
+  color: $top-title;
+  margin-right: -20px; // contre balance letter-sp de la dernière lettre.
 
-    @media screen and (max-width: 560px) {
-      /* trigger point for mobile */
-    }
+  @media screen and (max-width: 560px) {
+    /* trigger point for mobile */
   }
-
+}
 </style>

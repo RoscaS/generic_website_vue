@@ -1,19 +1,19 @@
-import {Gallery} from './GalleryObject';
-import Vue from 'vue';
+import { Gallery } from "./GalleryObject";
+import Vue from "vue";
 import settings from "../../../site-settings";
 
-const GalleriesStore =  new Vue ({
+const GalleriesStore = new Vue({
   data: () => ({
-    name: 'GalleriesStore',
+    name: "GalleriesStore",
     state: {
       stores: [
-        new Gallery('Carousel'),
-        new Gallery('Promo'),
-        new Gallery('Presentation'),
-        new Gallery('Parallax'),
-        new Gallery('Events'),
-        new Gallery('Stock'),
-        new Gallery('Articles'),
+        new Gallery("Carousel"),
+        new Gallery("Promo"),
+        new Gallery("Presentation"),
+        new Gallery("Parallax"),
+        new Gallery("Events"),
+        new Gallery("Stock"),
+        new Gallery("Articles")
       ],
       activeTab: 0,
       loading: false,
@@ -22,54 +22,97 @@ const GalleriesStore =  new Vue ({
       secondaryStore: null,
       editItem: null,
 
-      carouselAutoScroll: false,
+      carouselAutoScroll: false
     }
   }),
   computed: {
-  	logo: {
-  		get() { return settings.logo ? settings.logo : false; }
-	  },
+    logo: {
+      get() {
+        return settings.logo ? settings.logo : false;
+      }
+    },
     stores: {
-      get() {return this.state.stores;}
+      get() {
+        return this.state.stores;
+      }
     },
     active: {
-      get() {return this.state.active;},
-      set(value) {this.state.active = value}
+      get() {
+        return this.state.active;
+      },
+      set(value) {
+        this.state.active = value;
+      }
     },
     loading: {
-      get(){return this.state.loading;},
-      set(value) {this.state.loading = value;}
+      get() {
+        return this.state.loading;
+      },
+      set(value) {
+        this.state.loading = value;
+      }
     },
     activeTab: {
-      get(){ return this.state.activeTab; },
-      set(value) { this.state.activeTab = value;}
+      get() {
+        return this.state.activeTab;
+      },
+      set(value) {
+        this.state.activeTab = value;
+      }
     },
     primaryStore: {
-      get(){ return this.state.primaryStore;},
-      set(value) { this.state.primaryStore = value;}
+      get() {
+        return this.state.primaryStore;
+      },
+      set(value) {
+        this.state.primaryStore = value;
+      }
     },
     secondaryStore: {
-      get(){ return this.state.secondaryStore;},
-      set(value) { this.state.secondaryStore = value;}
+      get() {
+        return this.state.secondaryStore;
+      },
+      set(value) {
+        this.state.secondaryStore = value;
+      }
     },
     carouselAutoScroll: {
-      get(){return this.state.carouselAutoScroll;},
-      set(value) {this.state.carouselAutoScroll = value;}
+      get() {
+        return this.state.carouselAutoScroll;
+      },
+      set(value) {
+        this.state.carouselAutoScroll = value;
+      }
     },
     editItem: {
-      get(){ return this.state.editItem;},
-      set(value) { this.state.editItem = value;}
-    },
+      get() {
+        return this.state.editItem;
+      },
+      set(value) {
+        this.state.editItem = value;
+      }
+    }
   },
   methods: {
-    setLoading() {this.loading = true;},
-    unsetLoading() {this.loading = false;},
-    clearEditItem() {this.editItem = null;},
-    getStore(name) {return this.stores.filter(i => i.name == name)[0];},
+    setLoading() {
+      this.loading = true;
+    },
+    unsetLoading() {
+      this.loading = false;
+    },
+    clearEditItem() {
+      this.editItem = null;
+    },
+    getStore(name) {
+      return this.stores.filter(i => i.name == name)[0];
+    },
     getImage(gallery, id) {
       let store = this.getStore(gallery);
       if (store.hasLoaded) return store.images.find(i => i.id == id);
-      else return setTimeout(() => {this.getImage(gallery, id);}, 100);
+      else
+        return setTimeout(() => {
+          this.getImage(gallery, id);
+        }, 100);
     },
 
     update() {
@@ -85,7 +128,7 @@ const GalleriesStore =  new Vue ({
       this.activeTab = 0;
       this.state.active = null;
     }
-  },
+  }
 });
 
-export default GalleriesStore
+export default GalleriesStore;

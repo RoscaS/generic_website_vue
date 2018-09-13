@@ -19,15 +19,12 @@ $twitter: #4099ff;
 $twitter-invert: findColorInvert($twitter);
 $green: #41b883;
 
-
 @import "../src/scss/customBuefy";
 
 // Import Bulma and Buefy styles
 
 //$light: $twitter;
 
-
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
-
 </style>

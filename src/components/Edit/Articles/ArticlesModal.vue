@@ -8,35 +8,39 @@
 </template>
 
 <script>
-  import ArticlesEditMenu from './ArticlesEditMenu';
-  import CategoriesStore from './CategoriesStore';
+import ArticlesEditMenu from "./ArticlesEditMenu";
+import CategoriesStore from "./CategoriesStore";
 
-	export default {
-		name: "ArticlesModal",
-    components: {ArticlesEditMenu},
-    data: () => ({
-    }),
-    computed: {
-      edit() {return CategoriesStore},
+export default {
+  name: "ArticlesModal",
+  components: { ArticlesEditMenu },
+  data: () => ({}),
+  computed: {
+    edit() {
+      return CategoriesStore;
+    },
 
-      modalSync: {
-        get() {return this.edit.state.active},
-        set(value) {if (!value) this.edit.end();}
+    modalSync: {
+      get() {
+        return this.edit.state.active;
       },
-      cancelModalOptions() {
-        let a = this.edit.state.newItem || this.edit.state.editItem;
-        if (a || this.edit.loading) return [];
-        else return ['outside', 'x', 'escape'];
+      set(value) {
+        if (!value) this.edit.end();
       }
     },
-    watch: {
-			modalSync(value) {
-        !value ? this.edit.end() : null
-      }
+    cancelModalOptions() {
+      let a = this.edit.state.newItem || this.edit.state.editItem;
+      if (a || this.edit.loading) return [];
+      else return ["outside", "x", "escape"];
     }
-	};
+  },
+  watch: {
+    modalSync(value) {
+      !value ? this.edit.end() : null;
+    }
+  }
+};
 </script>
 
 <style scoped>
-
 </style>

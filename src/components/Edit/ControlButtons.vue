@@ -6,16 +6,16 @@
 </template>
 
 <script>
-	export default {
-		name: "ControleButtons",
-    props: {
-      dark: {type: Boolean, default: false},
-    },
-	};
+export default {
+  name: "ControleButtons",
+  props: {
+    dark: { type: Boolean, default: false }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
 .buttons-wrapper {
   opacity: 1 !important;
@@ -24,20 +24,20 @@
   i {
     padding: 3px;
     font-size: 17px;
-    transition: color .3s ease;
+    transition: color 0.3s ease;
     cursor: pointer;
   }
   .edit {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
     &:hover {
-      transition: color .3s ease;
+      transition: color 0.3s ease;
       color: $is-warning;
     }
   }
   .remove {
     &:hover {
-      transition: color .3s ease;
-      color: $is-danger
+      transition: color 0.3s ease;
+      color: $is-danger;
     }
   }
 }

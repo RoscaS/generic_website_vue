@@ -12,28 +12,27 @@
 </template>
 
 <script>
-  import CategoryBox from './CategoryBox';
-  import DragSortCategories from './DragSortCategories';
+import CategoryBox from "./CategoryBox";
+import DragSortCategories from "./DragSortCategories";
 
-  export default {
-    name: "CategoriesEdit",
-    components: {CategoryBox, DragSortCategories},
-    props: {
-      edit: {type: Object},
-      categories: {type: Array},
-    },
-  };
+export default {
+  name: "CategoriesEdit",
+  components: { CategoryBox, DragSortCategories },
+  props: {
+    edit: { type: Object },
+    categories: { type: Array }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  section {
-    min-height: 400px;
-  }
+section {
+  min-height: 400px;
+}
 
-  h3 {
-    color: white;
-  }
-
+h3 {
+  color: white;
+}
 </style>

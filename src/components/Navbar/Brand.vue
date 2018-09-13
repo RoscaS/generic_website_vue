@@ -22,45 +22,51 @@
 </template>
 
 <script>
-	import GalleriesStore from '../Edit/Galleries/GalleriesStore';
-	import TextsStore from "../../components/Edit/Texts/TextsStore";
+import GalleriesStore from "../Edit/Galleries/GalleriesStore";
+import TextsStore from "../../components/Edit/Texts/TextsStore";
 
-	export default {
-		props: {stiky: {type: Boolean}},
-		name: "Brand",
-		computed: {
-			logo() { return GalleriesStore.logo; },
-			siteInfo() { return TextsStore.getStore("SiteInfo").state; },
-			siteName() { return this.siteInfo.name.data; },
-		},
-		methods: {
-			splitTitle() {
-				let split = this.siteName.split(' ');
-				return split.length > 1 ? split : false;
-			}
-		},
-	};
+export default {
+  props: { stiky: { type: Boolean } },
+  name: "Brand",
+  computed: {
+    logo() {
+      return GalleriesStore.logo;
+    },
+    siteInfo() {
+      return TextsStore.getStore("SiteInfo").state;
+    },
+    siteName() {
+      return this.siteInfo.name.data;
+    }
+  },
+  methods: {
+    splitTitle() {
+      let split = this.siteName.split(" ");
+      return split.length > 1 ? split : false;
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  #Logo {
-    width: $navbar-logo-width;
-    padding-top: 5px;
-  }
+#Logo {
+  width: $navbar-logo-width;
+  padding-top: 5px;
+}
 
-  #Brand {
-    .title {
-      color: $ribbon;
-      & :first-child {
-        background-color: $ribbon;
-        color: white;
-      }
-    }
-    h1 {
-      cursor: pointer;
-      font-size: 27px;
+#Brand {
+  .title {
+    color: $ribbon;
+    & :first-child {
+      background-color: $ribbon;
+      color: white;
     }
   }
+  h1 {
+    cursor: pointer;
+    font-size: 27px;
+  }
+}
 </style>

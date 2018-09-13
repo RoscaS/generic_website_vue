@@ -33,84 +33,90 @@
 </template>
 
 <script>
-	import TextsStore from "../../components/Edit/Texts/TextsStore";
+import TextsStore from "../../components/Edit/Texts/TextsStore";
 
-	export default {
-		name: "RightWidget",
-		props: {
-			state: {type: Object}
-		},
-		computed: {
-      siteContact() { return TextsStore.getStore("SiteContact").state; },
-			phoneHref() {return `tel:${this.state.phone.data}`;},
-      mailHref() {return `mailto:${this.state.mail.data}`},
-      adressHref() {
-        let adress = this.state.adress.data;
-        let post = this.state.post_code.data;
-        let city = this.state.city.data;
-        let name = this.state.name.data;
-        let google = 'https://www.google.ch/maps/search/';
-      	return `${google}${name}+${adress}+${post}+${city}`;
-      }
-		},
-		methods: {
-			highlighted(value) { return this.$parent.highlighted(value); },
-			upper(data) { return data.toUpperCase(); },
-		},
-	};
+export default {
+  name: "RightWidget",
+  props: {
+    state: { type: Object }
+  },
+  computed: {
+    siteContact() {
+      return TextsStore.getStore("SiteContact").state;
+    },
+    phoneHref() {
+      return `tel:${this.state.phone.data}`;
+    },
+    mailHref() {
+      return `mailto:${this.state.mail.data}`;
+    },
+    adressHref() {
+      let adress = this.state.adress.data;
+      let post = this.state.post_code.data;
+      let city = this.state.city.data;
+      let name = this.state.name.data;
+      let google = "https://www.google.ch/maps/search/";
+      return `${google}${name}+${adress}+${post}+${city}`;
+    }
+  },
+  methods: {
+    highlighted(value) {
+      return this.$parent.highlighted(value);
+    },
+    upper(data) {
+      return data.toUpperCase();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .widget-wrapper {
-    color: $top-text;
-    font-size: 13px;
-    padding: 10px 0 10px 0;
-    border-top: 1px solid $accent;
-    border-bottom: 1px solid $accent;
-    height: 60px;
+.widget-wrapper {
+  color: $top-text;
+  font-size: 13px;
+  padding: 10px 0 10px 0;
+  border-top: 1px solid $accent;
+  border-bottom: 1px solid $accent;
+  height: 60px;
 
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 230px;
+  position: relative;
+  z-index: 6;
+
+  @media screen and (max-width: 1087px) {
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .first-line {
+    text-align: left;
+    height: 20px;
+  }
+
+  .second-line {
+    text-align: left;
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: 230px;
-    position: relative;
-    z-index: 6;
+    align-items: center;
 
-    @media screen and (max-width: 1087px) {
-      border-top: none;
-      border-bottom: none;
-    }
-
-    .first-line {
-      text-align: left;
-      height: 20px;
-
-    }
-
-    .second-line {
-      text-align: left;
+    .contact-icons {
       display: flex;
+      flex-direction: row;
       align-items: center;
+      padding-left: 5px;
 
-
-      .contact-icons {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding-left: 5px;
-
-
-        a {
-          margin-top: -2px;
-          padding-right: 4px;
-          position: relative;
-          z-index: 15;
-          font-size: 14px;
-        }
+      a {
+        margin-top: -2px;
+        padding-right: 4px;
+        position: relative;
+        z-index: 15;
+        font-size: 14px;
       }
     }
   }
-
+}
 </style>

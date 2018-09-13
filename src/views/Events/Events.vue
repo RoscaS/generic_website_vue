@@ -9,28 +9,31 @@
 </template>
 
 <script>
-  import ViewsMixin from '../../mixins/ViewsMixin';
-  import EventsGallery from './EventsGallery';
-  import EditIcon from '../../components/Edit/EditIcon';
+import ViewsMixin from "../../mixins/ViewsMixin";
+import EventsGallery from "./EventsGallery";
+import EditIcon from "../../components/Edit/EditIcon";
 
-
-  export default {
-    name: "Events",
-    mixins: [ViewsMixin],
-    components: {EventsGallery, EditIcon},
-    data() {
-      return {
-        component: 'Events',
-        type: 'text',
-      };
+export default {
+  name: "Events",
+  mixins: [ViewsMixin],
+  components: { EventsGallery, EditIcon },
+  data() {
+    return {
+      component: "Events",
+      type: "text"
+    };
+  },
+  computed: {
+    imagesEdit() {
+      return this.galleriesEdit;
     },
-    computed: {
-      imagesEdit() { return this.galleriesEdit },
-      imagesStore() { return this.galleriesEdit.getStore('Events')},
-    },
-  };
+    imagesStore() {
+      return this.galleriesEdit.getStore("Events");
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 </style>

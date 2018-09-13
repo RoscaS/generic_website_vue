@@ -1,11 +1,11 @@
-import tools from '../utils/tools';
-import BaseLayout from '../views/Layouts/BaseLayout';
-import TextsStore from '../components/Edit/Texts/TextsStore';
-import GalleriesStore from '../components/Edit/Galleries/GalleriesStore';
-import CategoriesStore from '../components/Edit/Articles/CategoriesStore';
+import tools from "../utils/tools";
+import BaseLayout from "../views/Layouts/BaseLayout";
+import TextsStore from "../components/Edit/Texts/TextsStore";
+import GalleriesStore from "../components/Edit/Galleries/GalleriesStore";
+import CategoriesStore from "../components/Edit/Articles/CategoriesStore";
 
 export default {
-  components: {BaseLayout},
+  components: { BaseLayout },
   data: () => ({
     tools: tools,
     textsEdit: TextsStore,
@@ -14,19 +14,27 @@ export default {
     editTypes: {
       text: TextsStore,
       image: GalleriesStore,
-      article: CategoriesStore,
-    },
+      article: CategoriesStore
+    }
   }),
   computed: {
-    edit() {return this.editTypes[this.type];},
-    store() {return this.edit.getStore(this.component);},
-    state() {return this.store.state;},
+    edit() {
+      return this.editTypes[this.type];
+    },
+    store() {
+      return this.edit.getStore(this.component);
+    },
+    state() {
+      return this.store.state;
+    }
   },
   methods: {
-    getImage(idx, store = this.store) {return store.imageAtIndex(idx)},
+    getImage(idx, store = this.store) {
+      return store.imageAtIndex(idx);
+    },
 
     highlighted(idx) {
-      return (this.edit.state.activeTab == idx) && this.checkComponent();
+      return this.edit.state.activeTab == idx && this.checkComponent();
     },
     checkComponent() {
       if (this.edit.state.active) {
@@ -36,8 +44,11 @@ export default {
     },
     sReveal(side, delay, distance = 100, duration = 1500) {
       return new this.tools.ScrollRevealOptions(
-        side, delay, distance, duration
+        side,
+        delay,
+        distance,
+        duration
       );
-    },
-  },
+    }
+  }
 };

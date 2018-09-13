@@ -23,89 +23,87 @@
 </template>
 
 <script>
-	import Tools from "../../../utils/tools";
+import Tools from "../../../utils/tools";
 
-	export default {
-		name: "GalleryOptions",
-		props: {store: {type: Object}},
-		data: () => ({}),
-		computed: {
-			carouselAutoScroll: {
-				get() { return this.$siteOptions.state.carousel_auto_scroll.data; },
-				set(value) {
-					this.$siteOptions.state.carousel_auto_scroll.data = value;
-					this.$siteOptions.update(false);
-				}
-			},
-			carouselAutoScrollSpeed: {
-				get() { return this.$siteOptions.state.carousel_auto_scroll_speed.data; },
-				set(value) {
-					this.$siteOptions.state.carousel_auto_scroll_speed.data = value;
-					this.$siteOptions.update();
-				}
-			}
-		},
-		methods: {
-			message(value) {
-				Tools.message(value ? 'autoScrollOn' : 'autoScrollOff');
-			},
-			increment() {
-				this.carouselAutoScrollSpeed += 1000;
-			},
-			decrement() {
-				if (this.carouselAutoScrollSpeed > 2000) {
-					this.carouselAutoScrollSpeed -= 1000;
-				}
-				else {
-					Tools.message('autoScrollMin');
-				}
-			}
-		}
-	};
+export default {
+  name: "GalleryOptions",
+  props: { store: { type: Object } },
+  data: () => ({}),
+  computed: {
+    carouselAutoScroll: {
+      get() {
+        return this.$siteOptions.state.carousel_auto_scroll.data;
+      },
+      set(value) {
+        this.$siteOptions.state.carousel_auto_scroll.data = value;
+        this.$siteOptions.update(false);
+      }
+    },
+    carouselAutoScrollSpeed: {
+      get() {
+        return this.$siteOptions.state.carousel_auto_scroll_speed.data;
+      },
+      set(value) {
+        this.$siteOptions.state.carousel_auto_scroll_speed.data = value;
+        this.$siteOptions.update();
+      }
+    }
+  },
+  methods: {
+    message(value) {
+      Tools.message(value ? "autoScrollOn" : "autoScrollOff");
+    },
+    increment() {
+      this.carouselAutoScrollSpeed += 1000;
+    },
+    decrement() {
+      if (this.carouselAutoScrollSpeed > 2000) {
+        this.carouselAutoScrollSpeed -= 1000;
+      } else {
+        Tools.message("autoScrollMin");
+      }
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  .auto-scroll {
-    z-index: 6;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
+.auto-scroll {
+  z-index: 6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 
-    .auto-scroll-switch {
-      width: 50px;
-    }
-    .auto-scroll-text {
-      margin-top: -2px;
-      margin-left: -5px;
-    }
-    .auto-scroll-speed-wrapper {
-      margin-top: -2px;
-      .auto-scroll-column {
-
-      }
-      .decrement {
-        color: $is-info;
-        margin-left: 10px;
-        margin-right: 10px;
-        cursor: pointer;
-      }
-      .speed-text {
-
-      }
-      .increment {
-        color: $is-info;
-        margin-left: 10px;
-        margin-right: 10px;
-        cursor: pointer;
-      }
-      .auto-scroll-seconds {
-
-      }
-    }
-
+  .auto-scroll-switch {
+    width: 50px;
   }
-
+  .auto-scroll-text {
+    margin-top: -2px;
+    margin-left: -5px;
+  }
+  .auto-scroll-speed-wrapper {
+    margin-top: -2px;
+    .auto-scroll-column {
+    }
+    .decrement {
+      color: $is-info;
+      margin-left: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .speed-text {
+    }
+    .increment {
+      color: $is-info;
+      margin-left: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .auto-scroll-seconds {
+    }
+  }
+}
 </style>

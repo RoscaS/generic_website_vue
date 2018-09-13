@@ -17,26 +17,26 @@
 </template>
 
 <script>
-	import TextsStore from '../../components/Edit/Texts/TextsStore';
+import TextsStore from "../../components/Edit/Texts/TextsStore";
 
-
-	export default {
-		name: "FieldsLayout",
-		props: {
-			store: {type: Object},
-		},
-		computed: {
-			edit() { return TextsStore; },
-			fieldList() {
-				if (this.store.name == 'Review') {
-					return {
-						title: this.store.state.title,
-						sub_title: this.store.state.sub_title,
-					};
-				}
-				return this.store.state;
-			},
-		},
-	};
+export default {
+  name: "FieldsLayout",
+  props: {
+    store: { type: Object }
+  },
+  computed: {
+    edit() {
+      return TextsStore;
+    },
+    fieldList() {
+      if (this.store.name == "Review") {
+        return {
+          title: this.store.state.title,
+          sub_title: this.store.state.sub_title
+        };
+      }
+      return this.store.state;
+    }
+  }
+};
 </script>
-

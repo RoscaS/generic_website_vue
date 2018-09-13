@@ -36,54 +36,56 @@
 </template>
 
 <script>
-	import CategoriesStore from "./CategoriesStore";
-	import CategoriesSide from './CategoriesSide';
-	import ArticlesSide from './ArticlesSide';
-	import ArticlesCard from "./ArticlesCard";
-	import BaseLayout from "../../../views/Layouts/BaseLayout";
+import CategoriesStore from "./CategoriesStore";
+import CategoriesSide from "./CategoriesSide";
+import ArticlesSide from "./ArticlesSide";
+import ArticlesCard from "./ArticlesCard";
+import BaseLayout from "../../../views/Layouts/BaseLayout";
 
-	export default {
-		name: "ArticlesEditMenu",
-		components: {BaseLayout, ArticlesCard, CategoriesSide, ArticlesSide},
-		computed: {
-			edit() {return CategoriesStore;},
-		},
-		methods: {
-			createCategory() {
-				this.edit.state.newItem = 'category';
-			},
-			createArticle() {
-				this.edit.state.newItem = 'article';
-			}
-		}
-	};
+export default {
+  name: "ArticlesEditMenu",
+  components: { BaseLayout, ArticlesCard, CategoriesSide, ArticlesSide },
+  computed: {
+    edit() {
+      return CategoriesStore;
+    }
+  },
+  methods: {
+    createCategory() {
+      this.edit.state.newItem = "category";
+    },
+    createArticle() {
+      this.edit.state.newItem = "article";
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  h3 {
-    color: white;
-  }
+h3 {
+  color: white;
+}
 
-  .main-box {
-    border: 1px solid black;
-    width: 100%;
-    background-color: rgba(48, 93, 120, 0.66);
+.main-box {
+  border: 1px solid black;
+  width: 100%;
+  background-color: rgba(48, 93, 120, 0.66);
 
-    .add-buttons {
-      display: flex;
-      justify-content: flex-end;
+  .add-buttons {
+    display: flex;
+    justify-content: flex-end;
 
-      .buttons-wrapper {
-        margin-left: auto;
+    .buttons-wrapper {
+      margin-left: auto;
 
-        button {
-          &:first-child {
-            margin-right: 1rem;
-          }
+      button {
+        &:first-child {
+          margin-right: 1rem;
         }
       }
     }
   }
+}
 </style>

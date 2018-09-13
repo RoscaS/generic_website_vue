@@ -25,95 +25,99 @@
 </template>
 
 <script>
-	import EditIcon from '../../components/Edit/EditIcon';
-	import ArticlesTable from './ArticlesTable';
-	import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
+import EditIcon from "../../components/Edit/EditIcon";
+import ArticlesTable from "./ArticlesTable";
+import CategoriesStore from "../../components/Edit/Articles/CategoriesStore";
 
-	export default {
-		name: "ArticlesData",
-		components: {ArticlesTable, EditIcon},
-		data: () => ({
-			type: 'article',
-			activeTab: 0,
+export default {
+  name: "ArticlesData",
+  components: { ArticlesTable, EditIcon },
+  data: () => ({
+    type: "article",
+    activeTab: 0,
 
-      heightDelta: 40,
-      step: 10,
-      speed: 10,
+    heightDelta: 40,
+    step: 10,
+    speed: 10,
 
-			element: null,
-			previousHeight: null,
-			target: null,
+    element: null,
+    previousHeight: null,
+    target: null,
 
-      mobileDescription: false,
-		}),
-		computed: {
-			edit() {return CategoriesStore;},
-			stores() {return CategoriesStore.state.stores;},
-		},
-		watch: {
-			activeTab(value) {
-				const id = this.stores[value].id;
-				const count = this.stores[value].count();
+    mobileDescription: false
+  }),
+  computed: {
+    edit() {
+      return CategoriesStore;
+    },
+    stores() {
+      return CategoriesStore.state.stores;
+    }
+  },
+  watch: {
+    activeTab(value) {
+      const id = this.stores[value].id;
+      const count = this.stores[value].count();
 
-				this.element = document.getElementById(`Category${id}`);
-				this.element.style.height = this.previousHeight + 'px';
+      this.element = document.getElementById(`Category${id}`);
+      this.element.style.height = this.previousHeight + "px";
 
-				this.target = count * this.heightDelta;
-        this.target > this.previousHeight ? this.grow() : this.shrink();
-			},
-		},
-		methods: {
-			grow() {
-				if (this.target >= this.previousHeight) {
-          this.element.style.height = this.previousHeight + 'px';
-					setTimeout(() => {
-            this.previousHeight += this.step;
-						this.grow();
-					}, this.speed);
-				} else {
-          this.previousHeight = this.target;
-				}
-			},
-			shrink() {
-				if (this.target <= this.previousHeight) {
-          this.element.style.height = this.previousHeight + 'px';
-					setTimeout(() => {
-						this.previousHeight -= this.step;
-						this.shrink();
-					}, this.speed);
-				} else {
-          this.previousHeight = this.target
-				}
-			},
-      setMobileDescription(data) {
-				this.mobileDescription = false;
-				setTimeout(() => {this.mobileDescription = data;}, 350);
+      this.target = count * this.heightDelta;
+      this.target > this.previousHeight ? this.grow() : this.shrink();
+    }
+  },
+  methods: {
+    grow() {
+      if (this.target >= this.previousHeight) {
+        this.element.style.height = this.previousHeight + "px";
+        setTimeout(() => {
+          this.previousHeight += this.step;
+          this.grow();
+        }, this.speed);
+      } else {
+        this.previousHeight = this.target;
       }
-		},
-		mounted() {
-			setTimeout(() => {
-				this.previousHeight = this.stores[0].count() * this.heightDelta;
-			}, 1500);
-		}
-	};
+    },
+    shrink() {
+      if (this.target <= this.previousHeight) {
+        this.element.style.height = this.previousHeight + "px";
+        setTimeout(() => {
+          this.previousHeight -= this.step;
+          this.shrink();
+        }, this.speed);
+      } else {
+        this.previousHeight = this.target;
+      }
+    },
+    setMobileDescription(data) {
+      this.mobileDescription = false;
+      setTimeout(() => {
+        this.mobileDescription = data;
+      }, 350);
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.previousHeight = this.stores[0].count() * this.heightDelta;
+    }, 1500);
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .content {
-    transition: height .5s ease;
-    height: 260px;
-    margin-top: 40px;
-  }
+.content {
+  transition: height 0.5s ease;
+  height: 260px;
+  margin-top: 40px;
+}
 
-  .mobile-description{
-    color: #777;
-    text-align: center;
-    margin-top: -30px;
-    padding: 0 10px 10px 10px;
-    height: 58px;
-  }
+.mobile-description {
+  color: #777;
+  text-align: center;
+  margin-top: -30px;
+  padding: 0 10px 10px 10px;
+  height: 58px;
+}
 </style>
-
-

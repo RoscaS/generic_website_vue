@@ -41,104 +41,102 @@
 </template>
 
 <script>
-  import icons from './icons';
-  import brands from './brands';
-  import {Scrolly, ScrollyViewport, ScrollyBar} from 'vue-scrolly';
+import icons from "./icons";
+import brands from "./brands";
+import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 
-  export default {
-    name: 'fontAwesomePicker',
-    components: {Scrolly, ScrollyViewport, ScrollyBar},
-    props: {
-      position: { type: String },
-    },
-    data() {
-      return {
-        selected: '',
-        search: '',
-        weight: 'fal',
-        icons,
+export default {
+  name: "fontAwesomePicker",
+  components: { Scrolly, ScrollyViewport, ScrollyBar },
+  props: {
+    position: { type: String }
+  },
+  data() {
+    return {
+      selected: "",
+      search: "",
+      weight: "fal",
+      icons
+    };
+  },
+  computed: {
+    smallRadio() {
+      return window.innerWidth < 600 ? "is-small" : "";
+    }
+  },
+  watch: {
+    search(value) {
+      this.filterIcons(value.trim());
+    }
+  },
+  methods: {
+    getIcon(icon, key) {
+      this.selected = key;
+      const result = {
+        weight: this.weight,
+        className: this.selected,
+        position: this.position
       };
+      this.$emit("selectIcon", result);
     },
-    computed: {
-      smallRadio() {
-        return window.innerWidth < 600? 'is-small': '';
+
+    filterIcons(search) {
+      let filter = [];
+      if (search.length > 1) {
+        filter = icons.filter(item => {
+          const regex = new RegExp(search, "gi");
+          return item.name.match(regex);
+        });
+      } else if (search.length === 0) {
+        this.icons = icons;
       }
-    },
-    watch: {
-      search(value) { this.filterIcons(value.trim()); }
-    },
-    methods: {
-      getIcon(icon, key) {
-        this.selected = key;
-        const result = {
-          weight: this.weight,
-          className: this.selected,
-          position: this.position,
-        };
-        this.$emit('selectIcon', result);
-      },
 
-      filterIcons(search) {
-        let filter = [];
-        if (search.length > 1) {
-          filter = icons.filter((item) => {
-            const regex = new RegExp(search, 'gi');
-            return item.name.match(regex);
-          });
-        }
-        else if (search.length === 0) {
-          this.icons = icons;
-        }
-
-        if (filter.length > 0) {
-          this.icons = filter;
-        }
-      },
-    },
-  };
+      if (filter.length > 0) {
+        this.icons = filter;
+      }
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  #iconPicker {
-    border-radius: 2px;
-  }
+#iconPicker {
+  border-radius: 2px;
+}
 
-  .searchField {
+.searchField {
+}
 
-  }
+.body {
+  position: relative;
+  max-height: 120px;
+  /*padding: 0 0 20px 5px;*/
+  overflow: auto;
+  margin-top: 20px;
 
+  a {
+    display: table;
+    font-size: 30px;
+    float: left;
+    padding: 4px;
+    margin: 0 12px 12px 0;
+    text-align: center;
+    color: inherit;
 
-  .body {
-    position: relative;
-    max-height: 120px;
-    /*padding: 0 0 20px 5px;*/
-    overflow: auto;
-    margin-top: 20px;
-
-    a {
-      display: table;
-      font-size: 30px;
-      float: left;
-      padding: 4px;
-      margin: 0 12px 12px 0;
-      text-align: center;
-      color: inherit;
-
-      &:hover {
-        color: $link-hover;
-      }
+    &:hover {
+      color: $link-hover;
     }
   }
+}
 
-  .block {
+.block {
+  margin-top: 10px;
+
+  @media screen and (max-width: 600px) {
     margin-top: 10px;
-
-    @media screen and (max-width: 600px) {
-      margin-top: 10px;
-      margin-left: -15px;
-    }
+    margin-left: -15px;
   }
-
+}
 </style>

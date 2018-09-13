@@ -20,33 +20,33 @@
 </template>
 
 <script>
-	import CategoriesStore from "./CategoriesStore";
-	import ArticlesBox from "./ArticlesBox";
-	import DragSortArticles from './DragSortArticles';
+import CategoriesStore from "./CategoriesStore";
+import ArticlesBox from "./ArticlesBox";
+import DragSortArticles from "./DragSortArticles";
 
-	export default {
-		name: "CategoryDetail",
-		components: {ArticlesBox, DragSortArticles},
-		props: {
-			category: {type: Object},
-			color: {type: String},
-		},
-		data: () => ({
-			empty: "Cette catégorie est vide. Il est nécéssaire de créér un premier article avant de pouvoir y glisser des articles d'autres catégories."
-		}),
-		computed: {
-			edit() {
-				return CategoriesStore;
-			},
-		},
-	};
+export default {
+  name: "CategoryDetail",
+  components: { ArticlesBox, DragSortArticles },
+  props: {
+    category: { type: Object },
+    color: { type: String }
+  },
+  data: () => ({
+    empty:
+      "Cette catégorie est vide. Il est nécéssaire de créér un premier article avant de pouvoir y glisser des articles d'autres catégories."
+  }),
+  computed: {
+    edit() {
+      return CategoriesStore;
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  h4 {
-    text-align: left;
-  }
-
+h4 {
+  text-align: left;
+}
 </style>

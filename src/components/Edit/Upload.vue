@@ -19,34 +19,33 @@
 </template>
 
 <script>
-  export default {
-    name: "Upload",
-    props: {
-      padding: {type: String, default: '10px'}
-    },
-    data: () => ({
-      dropFiles: [],
-      accept: "image/*",
-    }),
-    computed: {
-      setStyle() {return {padding: this.padding}}
-    },
-    watch: {
-      dropFiles(value) {
-        this.$emit('file', value[0]);
-      }
+export default {
+  name: "Upload",
+  props: {
+    padding: { type: String, default: "10px" }
+  },
+  data: () => ({
+    dropFiles: [],
+    accept: "image/*"
+  }),
+  computed: {
+    setStyle() {
+      return { padding: this.padding };
     }
-  };
+  },
+  watch: {
+    dropFiles(value) {
+      this.$emit("file", value[0]);
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .drop-zone {
-    .content {
-
-    }
+.drop-zone {
+  .content {
   }
-
-
+}
 </style>

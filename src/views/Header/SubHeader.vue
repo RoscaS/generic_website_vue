@@ -16,32 +16,35 @@
 </template>
 
 <script>
-	export default {
-		name: "SubHeader",
-    props: {
-  			state: {type: Object}
-  		},
-    methods: {
-  			highlighted(value) { return this.$parent.highlighted(value); },
-  			upper(data) { return data.toUpperCase(); },
-  		}
-	};
+export default {
+  name: "SubHeader",
+  props: {
+    state: { type: Object }
+  },
+  methods: {
+    highlighted(value) {
+      return this.$parent.highlighted(value);
+    },
+    upper(data) {
+      return data.toUpperCase();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .sub-header {
-    font-size: 20px;
-    line-height: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    color: $top-title;
-    display: block;
+.sub-header {
+  font-size: 20px;
+  line-height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: $top-title;
+  display: block;
 
-    /*@media screen and (max-width: 690px) {*/
-      /*font-size: 16px;*/
-    /*}*/
-  }
-
+  /*@media screen and (max-width: 690px) {*/
+  /*font-size: 16px;*/
+  /*}*/
+}
 </style>

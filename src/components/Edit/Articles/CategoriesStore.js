@@ -1,14 +1,14 @@
 import axios from "../../../http";
-import Vue from 'vue';
-import tools from '../../../utils/tools';
-import {Category} from "./CategoryObject";
+import Vue from "vue";
+import tools from "../../../utils/tools";
+import { Category } from "./CategoryObject";
 import GalleriesStore from "../Galleries/GalleriesStore";
 
-const url = 'categories/';
+const url = "categories/";
 
 const CategoriesStore = new Vue({
   data: () => ({
-    name: 'CategoriesStore',
+    name: "CategoriesStore",
     state: {
       stores: [],
       activeTab: 0,
@@ -24,33 +24,57 @@ const CategoriesStore = new Vue({
       primaryStore: null,
       secondaryStore: null,
 
-      draggingType: null,
+      draggingType: null
     }
   }),
   computed: {
-    gallery() {return GalleriesStore.getStore('Articles');},
+    gallery() {
+      return GalleriesStore.getStore("Articles");
+    },
 
     loading: {
-      get() {return this.state.loading;},
-      set(value) {this.state.loading = value;}
+      get() {
+        return this.state.loading;
+      },
+      set(value) {
+        this.state.loading = value;
+      }
     },
     editItem: {
-      get() {return this.state.editItem;},
-      set(value) {this.state.editItem = value;}
+      get() {
+        return this.state.editItem;
+      },
+      set(value) {
+        this.state.editItem = value;
+      }
     },
     newItem: {
-      get() {return this.state.newItem;},
-      set(value) {this.state.newItem = value;}
+      get() {
+        return this.state.newItem;
+      },
+      set(value) {
+        this.state.newItem = value;
+      }
     },
     tempImage: {
-      get() {return this.state.tempImage;},
-      set(value) {this.state.tempImage = value;}
-    },
+      get() {
+        return this.state.tempImage;
+      },
+      set(value) {
+        this.state.tempImage = value;
+      }
+    }
   },
   methods: {
-    getStore(name) {return this.state.stores.filter(i => i.name == name)[0];},
-    setLoading() {this.state.loading = true;},
-    unsetLoading() {this.state.loading = false;},
+    getStore(name) {
+      return this.state.stores.filter(i => i.name == name)[0];
+    },
+    setLoading() {
+      this.state.loading = true;
+    },
+    unsetLoading() {
+      this.state.loading = false;
+    },
     fetchData() {
       axios.get(url).then(response => {
         response.data.forEach(i => {
@@ -60,7 +84,7 @@ const CategoriesStore = new Vue({
         this.state.hasLoaded = true;
       });
     },
-    sortImages(patch=true) {
+    sortImages(patch = true) {
       let count = this.gallery.images.length;
       this.state.stores.forEach(store => {
         store.articles.forEach(article => {
@@ -74,7 +98,7 @@ const CategoriesStore = new Vue({
       axios.post(`categories/`, data).then(response => {
         this.state.stores.push(new Category(response.data));
         setTimeout(() => {
-          tools.message('categoryNew');
+          tools.message("categoryNew");
           this.unsetLoading();
           this.clearNewItem();
         }, 1500);
@@ -87,7 +111,6 @@ const CategoriesStore = new Vue({
           i.put(false);
         }
       });
-
     },
     sortByPosition() {
       this.state.stores.sort((a, b) => {
@@ -96,11 +119,17 @@ const CategoriesStore = new Vue({
     },
     clearEditItem() {
       if (!this.state.loading) this.state.editItem = null;
-      else setTimeout(() => {this.clearEditItem();}, 500);
+      else
+        setTimeout(() => {
+          this.clearEditItem();
+        }, 500);
     },
     clearNewItem() {
       if (!this.loading) this.state.newItem = null;
-      else setTimeout(() => {this.clearNewItem();}, 500);
+      else
+        setTimeout(() => {
+          this.clearNewItem();
+        }, 500);
     },
     removeCategory(category) {
       let idx = this.state.stores.indexOf(category);
@@ -108,14 +137,14 @@ const CategoriesStore = new Vue({
     },
     uploadImage(form) {
       if (this.state.tempImage) {
-        this.state.tempImage.delete(false)
+        this.state.tempImage.delete(false);
       }
 
-      let gallery = GalleriesStore.getStore('Articles');
+      let gallery = GalleriesStore.getStore("Articles");
       gallery.postImage(form, false);
       setTimeout(() => {
         let image = gallery.images[gallery.images.length - 1];
-        if (image.name == 'tempArticleImage') this.state.tempImage = image;
+        if (image.name == "tempArticleImage") this.state.tempImage = image;
       }, 500);
     },
     start() {
@@ -133,6 +162,3 @@ const CategoriesStore = new Vue({
 });
 
 export default CategoriesStore;
-
-
-

@@ -43,61 +43,68 @@
 </template>
 
 <script>
-  import ViewsMixin from '../mixins/ViewsMixin';
-  import ContactForm from '../components/Forms/ContactForm';
-  import GoogleMap from '../components/Maps';
-  import TextsStore from "../components/Edit/Texts/TextsStore";
+import ViewsMixin from "../mixins/ViewsMixin";
+import ContactForm from "../components/Forms/ContactForm";
+import GoogleMap from "../components/Maps";
+import TextsStore from "../components/Edit/Texts/TextsStore";
 
-  export default {
-    name: "Contact",
-    mixins: [ViewsMixin],
-    components: {ContactForm, GoogleMap},
-    data() {
-      return {
-        component: "Contact",
-        type: 'text',
-      };
+export default {
+  name: "Contact",
+  mixins: [ViewsMixin],
+  components: { ContactForm, GoogleMap },
+  data() {
+    return {
+      component: "Contact",
+      type: "text"
+    };
+  },
+  computed: {
+    siteInfo() {
+      return TextsStore.getStore("SiteInfo").state;
     },
-    computed: {
-      siteInfo() { return TextsStore.getStore("SiteInfo").state; },
-      siteContact() { return TextsStore.getStore("SiteContact").state; },
+    siteContact() {
+      return TextsStore.getStore("SiteContact").state;
+    },
 
-      phoneHref() { return `tel:${this.siteInfo.phone.data}`; },
-      mailHref() { return `mailto:${this.siteInfo.mail.data}`; },
-      adressHref() {
-        let adress = this.siteInfo.adress.data;
-        let post = this.siteInfo.post_code.data;
-        let city = this.siteInfo.city.data;
-        let name = this.siteInfo.name.data;
-        let google = 'https://www.google.ch/maps/search/';
-      	return `${google}${name}+${adress}+${post}+${city}`;
-      }
+    phoneHref() {
+      return `tel:${this.siteInfo.phone.data}`;
     },
-  };
+    mailHref() {
+      return `mailto:${this.siteInfo.mail.data}`;
+    },
+    adressHref() {
+      let adress = this.siteInfo.adress.data;
+      let post = this.siteInfo.post_code.data;
+      let city = this.siteInfo.city.data;
+      let name = this.siteInfo.name.data;
+      let google = "https://www.google.ch/maps/search/";
+      return `${google}${name}+${adress}+${post}+${city}`;
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../scss/global';
+@import "../scss/global";
 
-  i {
-    color: $contact-icons;
-    margin-right: 10px;
-  }
+i {
+  color: $contact-icons;
+  margin-right: 10px;
+}
 
-  .line {
-    margin-bottom: 10px;
-  }
+.line {
+  margin-bottom: 10px;
+}
 
-  .subtitle {
-    margin-top: 30px;
-    margin-bottom: 10px;
+.subtitle {
+  margin-top: 30px;
+  margin-bottom: 10px;
 
-    font-family: 'Open Sans', sans-serif;
-    font-size: 18px;
-    line-height: 25px;
-    text-decoration: none solid rgb(255, 255, 255);
-    word-spacing: 0;
-    font-style: italic;
-  }
-
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  line-height: 25px;
+  text-decoration: none solid rgb(255, 255, 255);
+  word-spacing: 0;
+  font-style: italic;
+}
 </style>

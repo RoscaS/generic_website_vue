@@ -15,34 +15,33 @@
 </template>
 
 <script>
-	export default {
-		name: "TimeSlot",
-		props: {interval: {type: Object}},
-		methods: {
-			remove() {
-				this.interval.remove();
-			}
-		}
-	};
+export default {
+  name: "TimeSlot",
+  props: { interval: { type: Object } },
+  methods: {
+    remove() {
+      this.interval.remove();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  .time-tag {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    width: 100%;
-  }
+.time-tag {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+}
 
-  .arrow-icon {
-    color: black;
-    position: absolute;
-    z-index: 10;
-    left: 60px;
-    top: 4px;
-  }
-
+.arrow-icon {
+  color: black;
+  position: absolute;
+  z-index: 10;
+  left: 60px;
+  top: 4px;
+}
 </style>

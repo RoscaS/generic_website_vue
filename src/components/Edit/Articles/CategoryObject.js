@@ -100,7 +100,7 @@ class Category {
     return formData;
   }
 
-  put(message=true) {
+  put(message = true) {
     this.edit.setLoading();
     this.edit.sortImages();
     axios
@@ -114,7 +114,7 @@ class Category {
         this.slug = this.name;
         this.url = urls.categories + this.slug + "/";
         setTimeout(() => {
-        	if (message) tools.message("updated");
+          if (message) tools.message("updated");
           this.edit.unsetLoading();
         }, 500);
       })

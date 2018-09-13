@@ -54,135 +54,135 @@
 </template>
 
 <script>
-  import SpinLine from '../../LoadingSpinner';
-	import DragSortImages from './DragSortImages';
-	import Upload from "../Upload";
-	import GalleriesStore from './GalleriesStore';
-	import GalleriesDropDown from './GalleriesDropDown';
-	import GalleryOptions from './GalleryOptions';
-	import ImagesCard from './ImagesCard';
-	import ImagesCounter from './ImagesCounter';
+import SpinLine from "../../LoadingSpinner";
+import DragSortImages from "./DragSortImages";
+import Upload from "../Upload";
+import GalleriesStore from "./GalleriesStore";
+import GalleriesDropDown from "./GalleriesDropDown";
+import GalleryOptions from "./GalleryOptions";
+import ImagesCard from "./ImagesCard";
+import ImagesCounter from "./ImagesCounter";
 
-	const parallaxHelp =
-		`
+const parallaxHelp = `
     Cette gallerie contient les images entre les sections du site. Il est important
     qu'elle soit remplie.
     `;
-	const galleriesHelp =
-		`
+const galleriesHelp = `
     Affin d'assurer la cohérence et la qualité d'affichage il est recommandé
     d'utiliser des images dont la hauteur est au maximum aussi grande que la largeur.
     De plus la résolution doit être maximisée sans aller dans l'extrème (idéalement, un poids
     entre 0.5mo et 1mo).
     `;
 
-	export default {
-		name: "ImagesEditMenu",
-		components: {
-			Upload,
-			DragSortImages,
-			GalleriesDropDown,
-			SpinLine,
-			GalleryOptions,
-			ImagesCard,
-			ImagesCounter,
-		},
-		props: {
-			store: {type: Object},
-		},
-		data: () => ({}),
-		computed: {
-			edit() {return GalleriesStore;},
-			conditions() {
-				let storeConditions = this.store.isFull() && !this.store.isEmpty;
-				return this.edit.loading || storeConditions;
-			}
-		},
-		methods: {
-			uploadImage(file) {
-				let formData = new FormData();
-				formData.append('image', file);
-				formData.append('name', `${this.store.name}_${this.store.count()}`);
-				formData.append('gallery', this.store.name);
-				this.store.postImage(formData);
-			},
-		},
-		created() {
-			this.edit.primaryStore = this.store;
-			this.edit.secondaryStore = this.edit.getStore('Stock');
-			setTimeout(() => {
-				this.$snackbar.open({
-					message: galleriesHelp,
-					type: 'is-success',
-					position: 'is-top',
-					actionText: 'Ok',
-					queu: 'true',
-					indefinite: true,
-					onAction: () => {
-						if (this.store.name === 'Parallax') {
-							setTimeout(() => {
-								this.$snackbar.open({
-									message: parallaxHelp,
-									type: 'is-success',
-									position: 'is-top',
-									actionText: 'Ok',
-									indefinite: true,
-								});
-							}, 500);
-						}
-					}
-				});
-			}, 500);
-		}
-	};
+export default {
+  name: "ImagesEditMenu",
+  components: {
+    Upload,
+    DragSortImages,
+    GalleriesDropDown,
+    SpinLine,
+    GalleryOptions,
+    ImagesCard,
+    ImagesCounter
+  },
+  props: {
+    store: { type: Object }
+  },
+  data: () => ({}),
+  computed: {
+    edit() {
+      return GalleriesStore;
+    },
+    conditions() {
+      let storeConditions = this.store.isFull() && !this.store.isEmpty;
+      return this.edit.loading || storeConditions;
+    }
+  },
+  methods: {
+    uploadImage(file) {
+      let formData = new FormData();
+      formData.append("image", file);
+      formData.append("name", `${this.store.name}_${this.store.count()}`);
+      formData.append("gallery", this.store.name);
+      this.store.postImage(formData);
+    }
+  },
+  created() {
+    this.edit.primaryStore = this.store;
+    this.edit.secondaryStore = this.edit.getStore("Stock");
+    setTimeout(() => {
+      this.$snackbar.open({
+        message: galleriesHelp,
+        type: "is-success",
+        position: "is-top",
+        actionText: "Ok",
+        queu: "true",
+        indefinite: true,
+        onAction: () => {
+          if (this.store.name === "Parallax") {
+            setTimeout(() => {
+              this.$snackbar.open({
+                message: parallaxHelp,
+                type: "is-success",
+                position: "is-top",
+                actionText: "Ok",
+                indefinite: true
+              });
+            }, 500);
+          }
+        }
+      });
+    }, 500);
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  .content {
-    .menu-title {
-      position: relative;
-      color: white;
-    }
-    .card {
-      border-radius: 8px;
-      margin-bottom: 60px;
-      width: 960px;
-      border: 1px solid black;
-      &.primary {
-        header {
-          user-select: none;
-          padding: 10px;
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: row;
-          width: 100%;
-          .store-name {
-            margin: 0;
-          }
-          .img-counter {
-            margin: 0 15px -8px 15px;
-          }
-          .img-options {
-            margin: 3px 0 0 0;
-          }
+.content {
+  .menu-title {
+    position: relative;
+    color: white;
+  }
+  .card {
+    border-radius: 8px;
+    margin-bottom: 60px;
+    width: 960px;
+    border: 1px solid black;
+    &.primary {
+      header {
+        user-select: none;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        .store-name {
+          margin: 0;
+        }
+        .img-counter {
+          margin: 0 15px -8px 15px;
+        }
+        .img-options {
+          margin: 3px 0 0 0;
         }
       }
-      &.secondary {
-        header {
-          padding: 10px;
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: row;
-          width: 100%;
-          .gallery-dropdown {
-          }
-          .img-counter {
-            margin-left: 15px;
-          }
+    }
+    &.secondary {
+      header {
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        .gallery-dropdown {
+        }
+        .img-counter {
+          margin-left: 15px;
         }
       }
     }
   }
+}
 </style>

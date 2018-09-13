@@ -38,114 +38,123 @@
 </template>
 
 <script>
-	import TimeStore from '../components/Edit/Time/TimeStore';
-	import EditIcon from "../components/Edit/EditIcon";
+import TimeStore from "../components/Edit/Time/TimeStore";
+import EditIcon from "../components/Edit/EditIcon";
 
-	export default {
-		name: "OpeningHours",
-		components: {EditIcon},
-		data: () => ({}),
-		computed: {
-			edit() { return TimeStore; },
-			days() { return this.edit.state.days;},
-			modalSync: {
-				get() { return this.edit.state.active; },
-				set(value) {this.edit.state.active = value; }
-			}
-		},
-		methods: {
-			dynamicCenter() {
-				let max = 1;
-				const width = window.innerWidth;
-				this.days.forEach(i => {i.count > max ? max = i.count : null;});
-				if (width > 768) {
-					if (max === 1) {
-						return {marginLeft: 37 + '%'};
-					} else if (max === 2) {
-						return {marginLeft: 29 + '%'};
-					} else if (max === 3) {
-						return {marginLeft: 24 + '%'};
-					}
-
-				} else if (width <= 768 && width >= 400) {
-					return {marginLeft: 15 + '%'}
-        } else {
-          return {marginLeft: 10 + '%'}
+export default {
+  name: "OpeningHours",
+  components: { EditIcon },
+  data: () => ({}),
+  computed: {
+    edit() {
+      return TimeStore;
+    },
+    days() {
+      return this.edit.state.days;
+    },
+    modalSync: {
+      get() {
+        return this.edit.state.active;
+      },
+      set(value) {
+        this.edit.state.active = value;
+      }
+    }
+  },
+  methods: {
+    dynamicCenter() {
+      let max = 1;
+      const width = window.innerWidth;
+      this.days.forEach(i => {
+        i.count > max ? (max = i.count) : null;
+      });
+      if (width > 768) {
+        if (max === 1) {
+          return { marginLeft: 37 + "%" };
+        } else if (max === 2) {
+          return { marginLeft: 29 + "%" };
+        } else if (max === 3) {
+          return { marginLeft: 24 + "%" };
         }
-			}
-		}
-	};
+      } else if (width <= 768 && width >= 400) {
+        return { marginLeft: 15 + "%" };
+      } else {
+        return { marginLeft: 10 + "%" };
+      }
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../scss/global';
+@import "../scss/global";
 
-  section {
-    margin-top: -100px !important;
-    @media screen and (max-width: 960px) {
+section {
+  margin-top: -100px !important;
+  @media screen and (max-width: 960px) {
+  }
+}
+
+.weekday {
+  user-select: none;
+  max-width: 545px;
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 0;
+  @media screen and (max-width: 768px) {
+    margin-top: 15px;
+    margin-right: auto;
+    margin-bottom: 10px;
+    max-width: 245px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(119, 119, 119, 0.21);
+  }
+  &:hover {
+    .name {
+      transition: color 0.6s ease;
+      color: $link-normal;
+    }
+    .box {
+      transition: background-color 0.6s ease;
+      background-color: $highlight;
     }
   }
 
-  .weekday {
-    user-select: none;
-    max-width: 545px;
-    margin-top: 0;
-    margin-right: auto;
-    margin-bottom: 0;
+  .name {
+    transition: color 0.6s ease;
+    color: #4c4c4c;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 auto 0 auto;
+    max-width: 130px;
+  }
+
+  .slots {
+    max-width: 400px;
+    margin-top: -8px;
     @media screen and (max-width: 768px) {
-      margin-top: 15px;
-      margin-right: auto;
-      margin-bottom: 10px;
-      max-width: 245px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid rgba(119, 119, 119, 0.21);
+      max-width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2px;
     }
-    &:hover {
-      .name {
-        transition: color .6s ease;
-        color: $link-normal
+
+    .interval {
+      @media screen and (max-width: 768px) {
+        padding-top: 2px;
+        padding-bottom: 2px;
       }
       .box {
-        transition: background-color .6s ease;
-        background-color: $highlight
-      }
-    }
-
-    .name {
-      transition: color .6s ease;
-      color: #4C4C4C;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 0 auto 0 auto;
-      max-width: 130px;
-    }
-
-    .slots {
-      max-width: 400px;
-      margin-top: -8px;
-      @media screen and (max-width: 768px) {
-        max-width: 120px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 2px;
-      }
-
-      .interval {
-        @media screen and (max-width: 768px) {
-          padding-top: 2px;
-          padding-bottom: 2px;
-        }
-        .box {
+        text-align: center;
+        transition: background-color 0.6s ease;
+        padding: 2px;
+        width: 125px;
+        &.closed {
           text-align: center;
-          transition: background-color .6s ease;
-          padding: 2px;
-          width: 125px;
-          &.closed {
-            text-align: center;
-          }
         }
       }
     }
   }
+}
 </style>

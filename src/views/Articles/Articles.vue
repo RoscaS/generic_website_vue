@@ -17,47 +17,48 @@
 </template>
 
 <script>
-	import EditIcon from '../../components/Edit/EditIcon';
-	import ViewsMixin from '../../mixins/ViewsMixin';
-	import ArticlesData from './ArticlessData';
-	import ArticlesCarousel from './ArticlesCarousel';
-	import CategoriesStore from '../../components/Edit/Articles/CategoriesStore';
+import EditIcon from "../../components/Edit/EditIcon";
+import ViewsMixin from "../../mixins/ViewsMixin";
+import ArticlesData from "./ArticlessData";
+import ArticlesCarousel from "./ArticlesCarousel";
+import CategoriesStore from "../../components/Edit/Articles/CategoriesStore";
 
-	export default {
-		name: "Articles",
-		mixins: [ViewsMixin],
-		components: {EditIcon, ArticlesData, ArticlesCarousel},
-		data: () => ({
-			component: 'Article',
-			type: 'text',
-			categoriesStore: CategoriesStore,
-      flash: false,
-		}),
-		computed: {
-			categories() {
-				return this.getCategories();
-			},
-		},
-		methods: {
-			getCategories() {
-				let categories = this.editTypes['article'];
-				if (categories.state.hasLoaded) {
-					return categories.state.stores;
-				}
-				else setTimeout(() => {return this.getCategories();}, 100);
-			},
-		},
-	};
+export default {
+  name: "Articles",
+  mixins: [ViewsMixin],
+  components: { EditIcon, ArticlesData, ArticlesCarousel },
+  data: () => ({
+    component: "Article",
+    type: "text",
+    categoriesStore: CategoriesStore,
+    flash: false
+  }),
+  computed: {
+    categories() {
+      return this.getCategories();
+    }
+  },
+  methods: {
+    getCategories() {
+      let categories = this.editTypes["article"];
+      if (categories.state.hasLoaded) {
+        return categories.state.stores;
+      } else
+        setTimeout(() => {
+          return this.getCategories();
+        }, 100);
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .articles {
-    /*min-height: 1000px;*/
-  }
+.articles {
+  /*min-height: 1000px;*/
+}
 
-  .carousel {
-  }
-
+.carousel {
+}
 </style>

@@ -56,73 +56,77 @@
 </template>
 
 <script>
-  import GalleriesStore from './GalleriesStore';
-  import ImagesCounter from './ImagesCounter';
+import GalleriesStore from "./GalleriesStore";
+import ImagesCounter from "./ImagesCounter";
 
-  export default {
-    name: "GalleriesDropDown",
-    components: {ImagesCounter},
-    props: {
-      store: {type: Object},
+export default {
+  name: "GalleriesDropDown",
+  components: { ImagesCounter },
+  props: {
+    store: { type: Object }
+  },
+  data() {
+    return {
+      edit: GalleriesStore
+    };
+  },
+  computed: {
+    secondaryStore: {
+      get() {
+        return this.edit.secondaryStore;
+      },
+      set(store) {
+        this.edit.secondaryStore = store;
+      }
     },
-    data() {
-      return {
-        edit: GalleriesStore,
-      };
+    mainGalleries() {
+      let galleries = ["Stock", "Carousel", "Events", "Parallax"];
+      return this.edit.stores.filter(i => {
+        return i != this.store && galleries.includes(i.name);
+      });
     },
-    computed: {
-      secondaryStore: {
-        get() { return this.edit.secondaryStore; },
-        set(store) { this.edit.secondaryStore = store;},
-      },
-      mainGalleries() {
-        let galleries = ['Stock', 'Carousel', 'Events', 'Parallax'];
-        return this.edit.stores.filter(i => {
-          return i != this.store && galleries.includes(i.name)
-        });
-      },
-      miscGalleries() {
-        let galleries = ['Presentation', 'Promo'];
-        return this.edit.stores.filter(i => {
-          return i != this.store && galleries.includes(i.name)
-        });
-      },
-      articlesGalleries() {
-        let galleries = ['Articles'];
-        return this.edit.stores.filter(i => {
-          return i != this.store && galleries.includes(i.name)
-        });
-      },
+    miscGalleries() {
+      let galleries = ["Presentation", "Promo"];
+      return this.edit.stores.filter(i => {
+        return i != this.store && galleries.includes(i.name);
+      });
     },
-    methods: {
-      disabled(gallery) {
-        return this.secondaryStore == gallery;
-      },
-    },
-  };
+    articlesGalleries() {
+      let galleries = ["Articles"];
+      return this.edit.stores.filter(i => {
+        return i != this.store && galleries.includes(i.name);
+      });
+    }
+  },
+  methods: {
+    disabled(gallery) {
+      return this.secondaryStore == gallery;
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  .level-left {
+.level-left {
+  font-size: 16px;
+}
+
+.image-counter {
+  margin-right: -28px;
+}
+
+button {
+  p {
+    font-weight: bold;
+    color: white;
     font-size: 16px;
+    margin-top: -3px;
   }
-
-  .image-counter {
-    margin-right: -28px;
+  i {
+    margin-top: -22px;
+    margin-left: 5px;
   }
-
-  button {
-    p {
-      font-weight: bold;
-      color: white;
-      font-size: 16px;
-      margin-top: -3px;
-    }
-    i {
-      margin-top: -22px;
-      margin-left: 5px;
-    }
-  }
+}
 </style>

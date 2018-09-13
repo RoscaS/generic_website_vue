@@ -23,104 +23,105 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable';
-  import GalleriesStore from './GalleriesStore';
-  import ImageOverlay from './ImageOverlay';
+import draggable from "vuedraggable";
+import GalleriesStore from "./GalleriesStore";
+import ImageOverlay from "./ImageOverlay";
 
-  export default {
-    name: "DragSortImages",
-    components: {draggable, ImageOverlay},
-    props: {
-      store: {type: Object},
+export default {
+  name: "DragSortImages",
+  components: { draggable, ImageOverlay },
+  props: {
+    store: { type: Object }
+  },
+  data: () => ({
+    isDragging: false,
+    delayedDragging: false,
+    reOrder: false
+  }),
+  computed: {
+    edit() {
+      return GalleriesStore;
     },
-    data: () => ({
-      isDragging: false,
-      delayedDragging: false,
-      reOrder: false,
-    }),
-    computed: {
-      edit() {return GalleriesStore},
-      editable() {
-        return !this.store.isLocked;
-      },
-      dragOptions() {
-        return {
-          animation: 250,
-          group: 'description',
-          disabled: !this.editable,
-          ghostClass: 'none'
-        };
-      },
-      primaryIsEvents() {
-        let a = this.edit.primaryStore.name == 'Events';
-        let b = this.store.name == 'Events';
-        return a && b
-      },
+    editable() {
+      return !this.store.isLocked;
     },
-    watch: {
-      isDragging(newValue) {
-        if (newValue) {
-          this.delayedDragging = true;
-          return;
-        }
-        this.$nextTick(() => {
-          this.edit.update();
-          this.unlockGalleries();
-        });
+    dragOptions() {
+      return {
+        animation: 250,
+        group: "description",
+        disabled: !this.editable,
+        ghostClass: "none"
+      };
+    },
+    primaryIsEvents() {
+      let a = this.edit.primaryStore.name == "Events";
+      let b = this.store.name == "Events";
+      return a && b;
+    }
+  },
+  watch: {
+    isDragging(newValue) {
+      if (newValue) {
+        this.delayedDragging = true;
+        return;
+      }
+      this.$nextTick(() => {
+        this.edit.update();
+        this.unlockGalleries();
+      });
+    }
+  },
+  methods: {
+    isPlaceholder(image) {
+      return image.name.includes("placeholder");
+    },
+
+    onMove({ relatedContext, draggedContext }) {},
+
+    conditions(galleryName) {
+      let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
+      let clickedGallery = this.edit.getStore(galleryName);
+      let otherGallery = galleries.filter(i => i != clickedGallery)[0];
+      let gallery = this.edit.getStore(galleryName);
+      this.checkEmpty(gallery, otherGallery);
+      this.checkFull(otherGallery);
+    },
+
+    checkEmpty(gallery, otherGallery) {
+      if (gallery.placeholder) otherGallery.lock();
+    },
+
+    checkFull(otherGallery) {
+      if (!otherGallery.isEmpty && otherGallery.count() >= otherGallery.limit) {
+        otherGallery.lock();
       }
     },
-    methods: {
-
-      isPlaceholder(image) {return image.name.includes('placeholder');},
-
-      onMove({relatedContext, draggedContext}) {},
-
-      conditions(galleryName) {
-        let galleries = [this.edit.primaryStore, this.edit.secondaryStore];
-        let clickedGallery = this.edit.getStore(galleryName);
-        let otherGallery = galleries.filter(i => i != clickedGallery)[0];
-        let gallery = this.edit.getStore(galleryName);
-        this.checkEmpty(gallery, otherGallery);
-        this.checkFull(otherGallery);
-      },
-
-      checkEmpty(gallery, otherGallery) {
-        if (gallery.placeholder) otherGallery.lock();
-      },
-
-      checkFull(otherGallery) {
-        if (!otherGallery.isEmpty && otherGallery.count() >= otherGallery.limit) {
-          otherGallery.lock();
-        }
-
-      },
-      unlockGalleries() {
-        this.edit.primaryStore.unlock();
-        this.edit.secondaryStore.unlock();
-      },
-    },
-  };
+    unlockGalleries() {
+      this.edit.primaryStore.unlock();
+      this.edit.secondaryStore.unlock();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../../scss/global';
+@import "../../../scss/global";
 
-  .cols-margins {
-    margin: 0 5% 0 5%;
-  }
+.cols-margins {
+  margin: 0 5% 0 5%;
+}
 
-  .columns {
-    overflow-x: auto;
-    overflow-y: auto;
-    max-height: 550px;
-  }
+.columns {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 550px;
+}
 
-  .column {
-    cursor: grab;
-    margin: 2px 2px 2px 2px;
-    padding: 0!important;
-    width: $edit-width !important;
-    height: $edit-height !important;
-  }
-
+.column {
+  cursor: grab;
+  margin: 2px 2px 2px 2px;
+  padding: 0 !important;
+  width: $edit-width !important;
+  height: $edit-height !important;
+}
 </style>

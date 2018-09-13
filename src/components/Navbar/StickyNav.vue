@@ -9,44 +9,44 @@
 </template>
 
 <script>
-	import Navbar from "./Navbar";
-	import NavbarMobile from "./BurgerIcon";
-	export default {
-		name: "StickyNav",
-		components: {NavbarMobile, Navbar},
-		data: () => ({
-			stiky: false
-		}),
-		methods: {
-			affixx() {
-				this.stiky = true;
-				// console.log('affixx');
-			},
-			affixTop() {
-				this.stiky = false;
-				// console.log('top');
-			},
-			affixxBottom() {
-				// console.log('bottom');
-			},
-		},
-		computed: {
-			dynamicTop: {
-				get() {return {position: 'sticky'};},
-				set(value) {}
-			}
-
-		},
-	};
+import Navbar from "./Navbar";
+import NavbarMobile from "./BurgerIcon";
+export default {
+  name: "StickyNav",
+  components: { NavbarMobile, Navbar },
+  data: () => ({
+    stiky: false
+  }),
+  methods: {
+    affixx() {
+      this.stiky = true;
+      // console.log('affixx');
+    },
+    affixTop() {
+      this.stiky = false;
+      // console.log('top');
+    },
+    affixxBottom() {
+      // console.log('bottom');
+    }
+  },
+  computed: {
+    dynamicTop: {
+      get() {
+        return { position: "sticky" };
+      },
+      set(value) {}
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  @import '../../scss/global';
+@import "../../scss/global";
 
-  .nav-bar {
-    width: 100%;
-    height: 0;
-    z-index: 3;
-  }
-
+.nav-bar {
+  width: 100%;
+  height: 0;
+  z-index: 3;
+}
 </style>
