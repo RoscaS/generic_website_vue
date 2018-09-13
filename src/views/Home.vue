@@ -48,6 +48,20 @@
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
         { name: 'description', content: settings.description },
         { name: "keywords", content: settings.keywords },
+
+        // OpenGraph data (Most widely used)
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: settings.title },
+        { property: 'og:site_name', content: settings.title },
+        { property: 'og:url', content: settings.canonical },
+        { property: 'og:description', content: settings.description},
+
+        // Google / Schema.org markup:
+        {itemprop: 'name', content: settings.title},
+        {itemprop: 'description', content: settings.description},
+        {itemprop: 'image', content: settings.canonical},
+
+
       ],
       link: [
         { rel: 'canonical', href: settings.canonical },
