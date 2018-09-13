@@ -41,6 +41,11 @@
 
 	export default {
 		name: "Home",
+    comupted: {
+			rootLogo() { return settings.logo.split('.')[0]; },
+			icon() { return settings.logo !== '' ? this.rootLogo + '.ico' : ''},
+			image() { return settings.logo !== '' ? this.rootLogo + '.jpg' : ''},
+    },
     metaInfo: {
 			title: settings.title,
       meta: [
@@ -59,13 +64,11 @@
         // Google / Schema.org markup:
         {itemprop: 'name', content: settings.title},
         {itemprop: 'description', content: settings.description},
-        {itemprop: 'image', content: settings.logo.split('.')[0] + '.jpg'},
-
-
+        {itemprop: 'image', content: this.image},
       ],
       link: [
         { rel: 'canonical', href: settings.canonical },
-        { rel: 'icon', href: settings.logo.split('.')[0] + 'ico' },
+        { rel: 'icon', href: this.icon },
       ]
     },
 		components: {
