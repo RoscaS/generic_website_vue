@@ -49,7 +49,7 @@
         { name: 'description', content: settings.description },
         { name: "keywords", content: settings.keywords },
 
-        // OpenGraph data (Most widely used)
+        // OpenGraph data
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: settings.title },
         { property: 'og:site_name', content: settings.title },
@@ -59,13 +59,13 @@
         // Google / Schema.org markup:
         {itemprop: 'name', content: settings.title},
         {itemprop: 'description', content: settings.description},
-        {itemprop: 'image', content: settings.canonical},
+        {itemprop: 'image', content: settings.logo.split('.')[0] + '.jpg'},
 
 
       ],
       link: [
         { rel: 'canonical', href: settings.canonical },
-        { rel: 'icon', href: settings.icon },
+        { rel: 'icon', href: settings.logo.split('.')[0] + 'ico' },
       ]
     },
 		components: {
