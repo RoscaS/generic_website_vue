@@ -12,7 +12,6 @@ const description = "Dev local";
 const keywords = "";
 const canonical = "http://localhost:8080/";
 
-
 const settings = {
   admin: admin,
   url: url,
@@ -27,7 +26,11 @@ const settings = {
   title: title,
   description: description,
   keywords: keywords,
-  canonical: canonical
+  canonical: canonical,
+
+  siteAddons: {
+    genericSection: true,
+  }
 };
 
 export default settings;

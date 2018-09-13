@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <slot v-if="store.name =='Events'"></slot>
+      <slot v-if="store.name ==='Events'"></slot>
 
       <div class="container" v-else>
         <div class="content">
@@ -65,6 +65,4 @@ export default {
 
 <style scoped lang="scss">
 @import "../../scss/global";
-
-
 </style>

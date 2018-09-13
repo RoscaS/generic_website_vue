@@ -1,14 +1,14 @@
-import axios from '../../../http';
-import Vue from 'vue';
-import tools from '../../../utils/tools';
-import {Category} from './CategoryObject';
-import GalleriesStore from '../Galleries/GalleriesStore';
+import axios from "../../../http";
+import Vue from "vue";
+import tools from "../../../utils/tools";
+import { Category } from "./CategoryObject";
+import GalleriesStore from "../Galleries/GalleriesStore";
 
-const url = 'categories/';
+const url = "categories/";
 
 const CategoriesStore = new Vue({
   data: () => ({
-    name: 'CategoriesStore',
+    name: "CategoriesStore",
     state: {
       stores: [],
       activeTab: 0,
@@ -24,12 +24,12 @@ const CategoriesStore = new Vue({
       primaryStore: null,
       secondaryStore: null,
 
-      draggingType: null,
-    },
+      draggingType: null
+    }
   }),
   computed: {
     gallery() {
-      return GalleriesStore.getStore('Articles');
+      return GalleriesStore.getStore("Articles");
     },
 
     loading: {
@@ -38,7 +38,7 @@ const CategoriesStore = new Vue({
       },
       set(value) {
         this.state.loading = value;
-      },
+      }
     },
     editItem: {
       get() {
@@ -46,7 +46,7 @@ const CategoriesStore = new Vue({
       },
       set(value) {
         this.state.editItem = value;
-      },
+      }
     },
     newItem: {
       get() {
@@ -54,7 +54,7 @@ const CategoriesStore = new Vue({
       },
       set(value) {
         this.state.newItem = value;
-      },
+      }
     },
     tempImage: {
       get() {
@@ -62,8 +62,8 @@ const CategoriesStore = new Vue({
       },
       set(value) {
         this.state.tempImage = value;
-      },
-    },
+      }
+    }
   },
   methods: {
     getStore(name) {
@@ -98,7 +98,7 @@ const CategoriesStore = new Vue({
       axios.post(`categories/`, data).then(response => {
         this.state.stores.push(new Category(response.data));
         setTimeout(() => {
-          tools.message('categoryNew');
+          tools.message("categoryNew");
           this.unsetLoading();
           this.clearNewItem();
         }, 1500);
@@ -140,11 +140,11 @@ const CategoriesStore = new Vue({
         this.state.tempImage.delete(false);
       }
 
-      let gallery = GalleriesStore.getStore('Articles');
+      let gallery = GalleriesStore.getStore("Articles");
       gallery.postImage(form, false);
       setTimeout(() => {
         let image = gallery.images[gallery.images.length - 1];
-        if (image.name === 'tempArticleImage') this.state.tempImage = image;
+        if (image.name === "tempArticleImage") this.state.tempImage = image;
       }, 500);
     },
     start() {
@@ -154,11 +154,11 @@ const CategoriesStore = new Vue({
       this.state.active = false;
       this.state.primaryStore = null;
       this.state.secondaryStore = null;
-    },
+    }
   },
   created() {
     this.fetchData();
-  },
+  }
 });
 
 export default CategoriesStore;

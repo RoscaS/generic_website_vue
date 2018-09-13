@@ -1,8 +1,9 @@
-import {Dialog} from 'buefy';
-import axios from '../../../http';
-import urls from '../../../urls';
-import Vue from 'vue';
-import GalleriesStore from '../Galleries/GalleriesStore';
+import { Dialog } from "buefy";
+import axios from "../../../http";
+import urls from "../../../urls";
+import settings from "../../../site-settings";
+import Vue from "vue";
+import GalleriesStore from "../Galleries/GalleriesStore";
 
 import {
   Promo,
@@ -14,12 +15,12 @@ import {
   SiteInfo,
   SiteContact,
   SiteOptions,
-  GenericSection,
-} from './SectionsObjects';
+  GenericSection
+} from "./SectionsObjects";
 
 const SectionsStore = new Vue({
   data: () => ({
-    name: 'TextsEditStore',
+    name: "TextsEditStore",
     state: {
       stores: [
         new Promo(),
@@ -30,46 +31,64 @@ const SectionsStore = new Vue({
         new Contact(),
         new SiteInfo(),
         new SiteContact(),
-        new SiteOptions(),
+        new SiteOptions()
       ],
       activeTab: 0,
       loading: false,
       active: false,
-      currentStore: null,
-    },
+      currentStore: null
+    }
   }),
   computed: {
     loading: {
-      get() {return this.state.loading;},
-      set(value) {this.state.loading = value;},
+      get() {
+        return this.state.loading;
+      },
+      set(value) {
+        this.state.loading = value;
+      }
     },
 
     activeTab: {
-      get() {return this.state.activeTab;},
-      set(value) {this.state.activeTab = value;},
+      get() {
+        return this.state.activeTab;
+      },
+      set(value) {
+        this.state.activeTab = value;
+      }
     },
 
     currentStore: {
-      get() {return this.state.currentStore;},
-      set(value) {this.state.currentStore = value;},
+      get() {
+        return this.state.currentStore;
+      },
+      set(value) {
+        this.state.currentStore = value;
+      }
     },
 
-    genericStors() {return this.state.stores.filter(i => i.isGeneric);},
+    genericStors() {
+      return this.state.stores.filter(i => i.isGeneric);
+    }
   },
 
   methods: {
-    setLoading() {this.state.loading = true;},
-    unsetLoading() {this.state.loading = false;},
+    setLoading() {
+      this.state.loading = true;
+    },
+    unsetLoading() {
+      this.state.loading = false;
+    },
     getStore(name) {
       return this.state.stores.filter(i => i.name == name)[0];
     },
 
     cancelNotification() {
       Dialog.confirm({
-        message: 'Cette action annulera les modifications!',
-        confirmText: 'Continuer',
-        cancelText: 'Sauver & quitter',
-        type: 'is-danger',
+        message: "Cette action annulera les modifications!",
+        confirmText: "Continuer",
+        cancelText: "Sauver & quitter",
+        type: "is-danger",
         hasIcon: true,
         onConfirm: () => {
           this.currentStore.recoverData();
@@ -77,8 +96,13 @@ const SectionsStore = new Vue({
         },
         onCancel: () => {
           this.update();
-        },
+        }
       });
+    },
+    checkAddons() {
+      if (settings.siteAddons.genericSection) {
+        this.getStore('Presentation')['isGeneric'] = true;
+      }
     },
 
     initGenericSections() {
@@ -89,6 +113,7 @@ const SectionsStore = new Vue({
           this.setData(genericSection, section);
           this.state.stores.push(genericSection);
         });
+        this.checkAddons()
       });
     },
 
@@ -145,16 +170,13 @@ const SectionsStore = new Vue({
         this.unsetLoading();
         this.state.currentStore = null;
       }, 1000);
-    },
+    }
   },
   created() {
     this.fetchData();
     this.initGenericSections();
-    setTimeout(() => {
-
-    }, 500);
-    Vue.prototype.$siteOptions = this.getStore('SiteOptions');
-  },
+    Vue.prototype.$siteOptions = this.getStore("SiteOptions");
+  }
 });
 
 export default SectionsStore;

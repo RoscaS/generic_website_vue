@@ -1,149 +1,141 @@
-@import './variables';
-@import '../../node_modules/buefy/src/scss/utils/variables';
-@import '../../node_modules/buefy/src/scss/components/tabs';
+@import "./variables";
+@import "../../node_modules/buefy/src/scss/utils/variables";
+@import "../../node_modules/buefy/src/scss/components/tabs";
 
 .custom-tabs-articles {
+  .tab-content {
+    padding-top: 0;
+    margin-top: -15px;
 
-	.tab-content {
-		padding-top: 0;
-		margin-top: -15px;
-
-		.tab-item {
-			margin: -7px auto 0 auto;
-			width: 900px;
-			@media screen and (max-width: 960px) {
-				width: 75%;
-			}
-		}
-	}
-	.b-tabs {
-		.tabs {
-			li {
-				a {
-					transition: background-color .5s ease;
-					&:hover {
-						transition: background-color .5s ease;
-					}
-				}
-			}
-			.is-active {
-				a {
-					border-color: $articles-tabs-bg;
-					background-color: $articles-tabs-bg;
-					color: white;
-				}
-			}
-		}
-	}
+    .tab-item {
+      margin: -7px auto 0 auto;
+      width: 900px;
+      @media screen and (max-width: 960px) {
+        width: 75%;
+      }
+    }
+  }
+  .b-tabs {
+    .tabs {
+      li {
+        a {
+          transition: background-color 0.5s ease;
+          &:hover {
+            transition: background-color 0.5s ease;
+          }
+        }
+      }
+      .is-active {
+        a {
+          border-color: $articles-tabs-bg;
+          background-color: $articles-tabs-bg;
+          color: white;
+        }
+      }
+    }
+  }
 }
 
 .custom-tabs-wrapper.textEdit {
-	input {
-		@media screen and (max-width: 768px) {
-			width: 100%;
-		}
-	}
+  input {
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
 
-	.tab-content {
-		width: 100%;
-		margin: 15px auto 0 auto;
+  .tab-content {
+    width: 100%;
+    margin: 15px auto 0 auto;
 
-		.tab-item {
-			margin: -7px auto 0 auto;
-			width: 900px;
+    .tab-item {
+      margin: -7px auto 0 auto;
+      width: 900px;
 
-			@media screen and (max-width: 925px) {
-				width: 100%;
-			}
+      @media screen and (max-width: 925px) {
+        width: 100%;
+      }
 
-			.field {
-				margin: 0 25px 0 25px;
-			}
-		}
-	}
+      .field {
+        margin: 0 25px 0 25px;
+      }
+    }
+  }
 
-	.b-tabs {
-		margin: 0 auto 0 auto;
-		.tabs {
+  .b-tabs {
+    margin: 0 auto 0 auto;
+    .tabs {
+      margin: -22px auto auto;
 
-			margin: -22px auto auto;
+      ul {
+        width: auto;
+        border-bottom-color: $bg-text-edit;
+        margin-bottom: 15px;
+      }
 
-			ul {
-				width: auto;
-				border-bottom-color: $bg-text-edit;
-				margin-bottom: 15px;
-			}
+      a {
+        padding-top: 0;
 
-			a {
-				padding-top: 0;
+        @media screen and (max-width: 768px) {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+      }
 
-				@media screen and (max-width: 768px) {
-					padding-left: 10px;
-					padding-right: 10px;
-				}
-			}
+      .is-active {
+        a {
+          transition: border-bottom-color 0.5s ease;
+          color: $accent-text-edit;
+          border-bottom-color: $accent-text-edit;
+        }
+      }
 
-			.is-active {
-				a {
-					transition: border-bottom-color .5s ease;
-					color: $accent-text-edit;
-					border-bottom-color: $accent-text-edit;
-				}
-			}
+      li {
+        border-radius: 5px;
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+        background-color: $bg-text-edit;
 
-			li {
-				border-radius: 5px;
-				margin-left: 2.5px;
-				margin-right: 2.5px;
-				background-color: $bg-text-edit;
+        @media screen and (max-width: 387px) {
+          margin-left: 0;
+          margin-right: 0;
+        }
 
-				@media screen and (max-width: 387px) {
-					margin-left: 0;
-					margin-right: 0;
-				}
+        a {
+          transition: border-bottom-color 0.5s ease;
+          color: white;
+          &:hover {
+            transition: border-bottom-color 0.5s ease;
+            border-bottom-color: $accent-text-edit;
+          }
+          border-bottom-color: $bg-text-edit;
+        }
+      }
+    }
+  }
 
-				a {
-					transition: border-bottom-color .5s ease;
-					color: white;
-					&:hover {
-						transition: border-bottom-color .5s ease;
-						border-bottom-color: $accent-text-edit;
-					}
-					border-bottom-color: $bg-text-edit;
-				}
-
-			}
-		}
-	}
-
-	.tab-item {
-		//padding-bottom: 00px;
-	}
+  .tab-item {
+    //padding-bottom: 00px;
+  }
 }
 
 .images-edit-tabs {
-	.b-tabs {
-		margin: 0 auto -10px auto;
-		.tabs {
-			z-index: 5;
-			margin-top: -85px;
-			margin-bottom: 10px;
-			ul {
-				li {
-					margin: 0;
-				}
-				li.is-active {
-					a {
-						background-color: $is-info;
-						border-color: $is-info;
-					}
-				}
-			}
-		}
-	}
+  .b-tabs {
+    margin: 0 auto -10px auto;
+    .tabs {
+      z-index: 5;
+      margin-top: -85px;
+      margin-bottom: 10px;
+      ul {
+        li {
+          margin: 0;
+        }
+        li.is-active {
+          a {
+            background-color: $is-info;
+            border-color: $is-info;
+          }
+        }
+      }
+    }
+  }
 }
-
-
-
-
-

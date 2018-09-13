@@ -6,8 +6,8 @@
     <div id="StickyNav">
     <StickyNav/>
       <Carousel/>
-      <GenericSections/>
-      <Presentation id="Presentation"/>
+      <Presentation v-if="!siteAddons.genericSection" id="Presentation"/>
+      <GenericSections v-if="siteAddons.genericSection" id="Presentation"/>
       <Hero/>
       <Parallax :idx="0" height="600px" text="Articles"/>
       <Articles id="Articles"/>
@@ -46,6 +46,9 @@ const rootLogo = settings.logo ? settings.logo.split(".")[0] : "favicon.ico";
 
 export default {
   name: "Home",
+  data: () => ({
+    siteAddons: settings.siteAddons
+  }),
   metaInfo: {
     title: settings.title,
     meta: [
@@ -71,7 +74,7 @@ export default {
     ]
   },
   components: {
-	  GenericSections,
+    GenericSections,
     OpeningHours,
     Time,
     Modals,

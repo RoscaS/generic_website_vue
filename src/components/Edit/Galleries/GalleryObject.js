@@ -74,18 +74,18 @@ class Gallery {
 
   update(message = true) {
     if (!this.count() && !this.isEmpty) this.setPlaceHolder();
-    if (this.count() == 2 && this.isEmpty) this.unsetPlaceholder();
+    if (this.count() === 2 && this.isEmpty) this.unsetPlaceholder();
     this.checkFields(message);
     if (this.dirty.length) this.updateDirtyImages();
   }
 
   checkFields() {
     for (let i = 0; i < this.count(); i++) {
-      if (this.images[i].position != i + 1) {
+      if (this.images[i].position !== i + 1) {
         this.images[i].position = i + 1;
         this.setDirty(this.images[i]);
       }
-      if (this.images[i].gallery != this.name) {
+      if (this.images[i].gallery !== this.name) {
         this.images[i].gallery = this.name;
         this.images[i].parentGallery = this;
         this.setDirty(this.images[i]);

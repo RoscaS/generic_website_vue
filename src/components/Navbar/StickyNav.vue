@@ -34,8 +34,8 @@ export default {
     dynamicTop: {
       get() {
         return { position: "sticky" };
-      },
-      set(value) {}
+      }
+      // set(value) {}
     }
   }
 };
