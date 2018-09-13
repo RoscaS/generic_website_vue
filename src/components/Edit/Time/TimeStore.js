@@ -56,16 +56,13 @@ const TimeStore = new Vue({
 					} while (slot);
 				}
 				iterator = iterator.next;
-				console.log('ici');
 
 				if (iterator.name === initial && iterator.count) {
-					console.log('iterator.name === initial && iterator.count');
 					return iterator.slots[0];
 				}
 
 			} while (iterator.name !== initial);
 
-			console.log('null');
 			return null;
 		},
 		pretty() {
