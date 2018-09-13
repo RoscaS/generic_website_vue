@@ -1,8 +1,8 @@
-import GalleriesStore from "../Galleries/GalleriesStore";
-import { Title, SubTitle, Text, Icon, Field } from "../FieldsModels";
-import tools from "../../../utils/tools";
-import urls from "../../../urls";
-import axios from "../../../http";
+import GalleriesStore from '../Galleries/GalleriesStore';
+import {Title, SubTitle, Text, Icon, Field} from '../FieldsModels';
+import tools from '../../../utils/tools';
+import urls from '../../../urls';
+import axios from '../../../http';
 
 class Base {
   constructor() {
@@ -27,12 +27,12 @@ class Base {
   update(message = true) {
     let data = {};
     for (let i in this.state) {
-      if (i != "image") data[i] = this.state[i].data;
+      if (i != 'image') data[i] = this.state[i].data;
       else data[i] = this.state[i].data.image;
     }
     axios.put(this.url, data).then(() => {
       setTimeout(() => {
-        message ? tools.message("updated") : null;
+        message ? tools.message('updated') : null;
       }, 1500);
     });
   }
@@ -41,7 +41,7 @@ class Base {
     for (let i in this.state) {
       this.state[i].data = this.backup[i];
     }
-    tools.message("cancel");
+    tools.message('cancel');
   }
 }
 
@@ -62,11 +62,11 @@ class WithImage extends Base {
 class Promo extends WithImage {
   constructor() {
     super();
-    this.name = "Promo";
+    this.name = 'Promo';
     this.url = urls.promo;
     this.state = {
       title: new Title(22),
-      text: new Text()
+      text: new Text(),
     };
   }
 }
@@ -74,42 +74,40 @@ class Promo extends WithImage {
 class Presentation extends WithImage {
   constructor() {
     super();
-    this.name = "Presentation";
+    this.name = 'Presentation';
     this.url = urls.presentation;
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
-      text1: new Text("Texte 1"),
-      text2: new Text("Texte 2")
+      text1: new Text('Texte 1'),
+      text2: new Text('Texte 2'),
     };
   }
 }
 
-
 class GenericSection extends WithImage {
-	constructor(name) {
-		super();
-		this.name = name;
-		this.url = `${urls.sections}${name}/`;
-		this.state = {
-			title: new Title(),
-			sub_title: new SubTitle(),
-			text1: new Text("Texte 1"),
-			text2: new Text("Texte 2")
-		}
-	}
+  constructor(name) {
+    super();
+    this.isGeneric = true;
+    this.name = name;
+    this.url = `${urls.sections}${name}/`;
+    this.state = {
+      title: new Title(),
+      sub_title: new SubTitle(),
+      text1: new Text('Texte 1'),
+      text2: new Text('Texte 2'),
+    };
+  }
 }
-
-
 
 class Events extends Base {
   constructor() {
     super();
-    this.name = "Events";
+    this.name = 'Events';
     this.url = urls.events;
     this.state = {
       title: new Title(),
-      sub_title: new SubTitle()
+      sub_title: new SubTitle(),
     };
   }
 }
@@ -117,11 +115,11 @@ class Events extends Base {
 class Article extends Base {
   constructor() {
     super();
-    this.name = "Article";
+    this.name = 'Article';
     this.url = urls.article;
     this.state = {
       title: new Title(),
-      sub_title: new SubTitle()
+      sub_title: new SubTitle(),
     };
   }
 }
@@ -129,7 +127,7 @@ class Article extends Base {
 class Hero extends Base {
   constructor() {
     super();
-    this.name = "Hero";
+    this.name = 'Hero';
     this.url = urls.hero;
     this.state = {
       icon1: new Icon(),
@@ -140,21 +138,21 @@ class Hero extends Base {
       title3: new Title(),
       text1: new Text(),
       text2: new Text(),
-      text3: new Text()
+      text3: new Text(),
     };
     this.subs = [
       {
-        label: "Gauche",
-        data: [this.state.title1, this.state.text1, this.state.icon1]
+        label: 'Gauche',
+        data: [this.state.title1, this.state.text1, this.state.icon1],
       },
       {
-        label: "Centre",
-        data: [this.state.title2, this.state.text2, this.state.icon2]
+        label: 'Centre',
+        data: [this.state.title2, this.state.text2, this.state.icon2],
       },
       {
-        label: "Droite",
-        data: [this.state.title3, this.state.text3, this.state.icon3]
-      }
+        label: 'Droite',
+        data: [this.state.title3, this.state.text3, this.state.icon3],
+      },
     ];
   }
 }
@@ -162,13 +160,13 @@ class Hero extends Base {
 class Contact extends Base {
   constructor() {
     super();
-    this.name = "Contact";
+    this.name = 'Contact';
     this.url = urls.contact;
     this.state = {
       title: new Title(),
-      sub_title: new SubTitle("Sous titre 1"),
-      sub_title2: new SubTitle("Sous titre 2"),
-      sub_title3: new SubTitle("Sous titre 3")
+      sub_title: new SubTitle('Sous titre 1'),
+      sub_title2: new SubTitle('Sous titre 2'),
+      sub_title3: new SubTitle('Sous titre 3'),
     };
   }
 }
@@ -176,16 +174,16 @@ class Contact extends Base {
 class Review extends Base {
   constructor() {
     super();
-    this.name = "Review";
+    this.name = 'Review';
     this.url = urls.review;
     this.state = {
       title: new Title(),
       sub_title: new SubTitle(),
-      g_api: { data: "" },
-      g_place_id: { data: "" },
-      g_review_all_url: { data: "" },
-      g_review_new_url: { data: "" },
-      reviews: { data: "" }
+      g_api: {data: ''},
+      g_place_id: {data: ''},
+      g_review_all_url: {data: ''},
+      g_review_new_url: {data: ''},
+      reviews: {data: ''},
     };
   }
 }
@@ -193,17 +191,17 @@ class Review extends Base {
 class SiteInfo extends Base {
   constructor() {
     super();
-    this.name = "SiteInfo";
+    this.name = 'SiteInfo';
     this.url = urls.siteInfo;
     this.state = {
-      name: new Field("Nom", 25),
-      name_add: new Field("Supplément", 15),
-      oppening: new Field("Date d'ouverture", 4),
-      adress: new Field("Adresse", 30),
-      city: new Field("Ville", 30),
-      post_code: new Field("CodePostal", 8),
-      phone: new Field("Téléphone", 30),
-      mail: new Field("Mail", 30)
+      name: new Field('Nom', 25),
+      name_add: new Field('Supplément', 15),
+      oppening: new Field('Date d\'ouverture', 4),
+      adress: new Field('Adresse', 30),
+      city: new Field('Ville', 30),
+      post_code: new Field('CodePostal', 8),
+      phone: new Field('Téléphone', 30),
+      mail: new Field('Mail', 30),
     };
   }
 }
@@ -211,16 +209,16 @@ class SiteInfo extends Base {
 class SiteContact extends Base {
   constructor() {
     super();
-    this.name = "SiteContact";
+    this.name = 'SiteContact';
     this.url = urls.siteContact;
     this.state = {
-      facebook: new Field("Facebook", 1000),
-      tripadvisor: new Field("Tripadvisor", 1000),
-      google: new Field("Google", 1000),
-      twitter: new Field("Twitter", 1000),
-      instagram: new Field("Instagram", 1000),
-      linkedin: new Field("Linkedin", 1000),
-      snapchat: new Field("Snapchat", 1000)
+      facebook: new Field('Facebook', 1000),
+      tripadvisor: new Field('Tripadvisor', 1000),
+      google: new Field('Google', 1000),
+      twitter: new Field('Twitter', 1000),
+      instagram: new Field('Instagram', 1000),
+      linkedin: new Field('Linkedin', 1000),
+      snapchat: new Field('Snapchat', 1000),
     };
   }
 }
@@ -228,11 +226,11 @@ class SiteContact extends Base {
 class SiteOptions extends Base {
   constructor() {
     super();
-    this.name = "SiteOptions";
+    this.name = 'SiteOptions';
     this.url = urls.siteOptions;
     this.state = {
-      carousel_auto_scroll: { data: false },
-      carousel_auto_scroll_speed: { data: 5000 }
+      carousel_auto_scroll: {data: false},
+      carousel_auto_scroll_speed: {data: 5000},
     };
   }
 }
@@ -248,5 +246,5 @@ export {
   SiteInfo,
   SiteContact,
   SiteOptions,
-	GenericSection,
+  GenericSection,
 };

@@ -1,6 +1,6 @@
 import tools from "../utils/tools";
 import BaseLayout from "../views/Layouts/BaseLayout";
-import TextsStore from "../components/Edit/Texts/TextsStore";
+import SectionsStore from "../components/Edit/Texts/SectionsStore";
 import GalleriesStore from "../components/Edit/Galleries/GalleriesStore";
 import CategoriesStore from "../components/Edit/Articles/CategoriesStore";
 
@@ -8,11 +8,11 @@ export default {
   components: { BaseLayout },
   data: () => ({
     tools: tools,
-    textsEdit: TextsStore,
+    textsEdit: SectionsStore,
     galleriesEdit: GalleriesStore,
     categoriesEdit: CategoriesStore,
     editTypes: {
-      text: TextsStore,
+      text: SectionsStore,
       image: GalleriesStore,
       article: CategoriesStore
     }

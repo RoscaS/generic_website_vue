@@ -1,7 +1,7 @@
-import { Dialog } from "buefy";
-import axios from "../../../http";
+import {Dialog} from 'buefy';
+import axios from '../../../http';
 import urls from '../../../urls';
-import Vue from "vue";
+import Vue from 'vue';
 import GalleriesStore from '../Galleries/GalleriesStore';
 
 import {
@@ -14,12 +14,12 @@ import {
   SiteInfo,
   SiteContact,
   SiteOptions,
-  GenericSection
-} from "./SectionsObjects";
+  GenericSection,
+} from './SectionsObjects';
 
-const TextsStore = new Vue({
+const SectionsStore = new Vue({
   data: () => ({
-    name: "TextsEditStore",
+    name: 'TextsEditStore',
     state: {
       stores: [
         new Promo(),
@@ -30,29 +30,31 @@ const TextsStore = new Vue({
         new Contact(),
         new SiteInfo(),
         new SiteContact(),
-        new SiteOptions()
+        new SiteOptions(),
       ],
       activeTab: 0,
       loading: false,
       active: false,
-      currentStore: null
-    }
+      currentStore: null,
+    },
   }),
   computed: {
     loading: {
       get() {return this.state.loading;},
-      set(value) {this.state.loading = value;}
+      set(value) {this.state.loading = value;},
     },
 
     activeTab: {
       get() {return this.state.activeTab;},
-      set(value) {this.state.activeTab = value;}
+      set(value) {this.state.activeTab = value;},
     },
 
     currentStore: {
       get() {return this.state.currentStore;},
-      set(value) {this.state.currentStore = value;}
-    }
+      set(value) {this.state.currentStore = value;},
+    },
+
+    genericStors() {return this.state.stores.filter(i => i.isGeneric);},
   },
 
   methods: {
@@ -64,10 +66,10 @@ const TextsStore = new Vue({
 
     cancelNotification() {
       Dialog.confirm({
-        message: "Cette action annulera les modifications!",
-        confirmText: "Continuer",
-        cancelText: "Sauver & quitter",
-        type: "is-danger",
+        message: 'Cette action annulera les modifications!',
+        confirmText: 'Continuer',
+        cancelText: 'Sauver & quitter',
+        type: 'is-danger',
         hasIcon: true,
         onConfirm: () => {
           this.currentStore.recoverData();
@@ -75,7 +77,7 @@ const TextsStore = new Vue({
         },
         onCancel: () => {
           this.update();
-        }
+        },
       });
     },
 
@@ -86,8 +88,8 @@ const TextsStore = new Vue({
           let genericSection = new GenericSection(section.name);
           this.setData(genericSection, section);
           this.state.stores.push(genericSection);
-        })
-      })
+        });
+      });
     },
 
     fetchData() {
@@ -143,14 +145,16 @@ const TextsStore = new Vue({
         this.unsetLoading();
         this.state.currentStore = null;
       }, 1000);
-    }
+    },
   },
   created() {
     this.fetchData();
     this.initGenericSections();
-    setTimeout(() => {console.log(this.state.stores)}, 500);
-    Vue.prototype.$siteOptions = this.getStore("SiteOptions");
-  }
+    setTimeout(() => {
+
+    }, 500);
+    Vue.prototype.$siteOptions = this.getStore('SiteOptions');
+  },
 });
 
-export default TextsStore;
+export default SectionsStore;

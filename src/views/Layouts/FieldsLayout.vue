@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import TextsStore from "../../components/Edit/Texts/TextsStore";
+import SectionsStore from "../../components/Edit/Texts/SectionsStore";
 
 export default {
   name: "FieldsLayout",
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     edit() {
-      return TextsStore;
+      return SectionsStore;
     },
     fieldList() {
       if (this.store.name == "Review") {

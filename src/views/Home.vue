@@ -6,6 +6,7 @@
     <div id="StickyNav">
     <StickyNav/>
       <Carousel/>
+      <GenericSections/>
       <Presentation id="Presentation"/>
       <Hero/>
       <Parallax :idx="0" height="600px" text="Articles"/>
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import GenericSections from "./GenericSections/GenericSections";
+
 import Parallax from "../components/Parallax/Parallax";
 import PromoRibbon from "../views/Promo/PromoRibbon";
 import Carousel from "../views/Carousel";
@@ -68,6 +71,7 @@ export default {
     ]
   },
   components: {
+	  GenericSections,
     OpeningHours,
     Time,
     Modals,

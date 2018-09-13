@@ -46,7 +46,7 @@
 import ViewsMixin from "../mixins/ViewsMixin";
 import ContactForm from "../components/Forms/ContactForm";
 import GoogleMap from "../components/Maps";
-import TextsStore from "../components/Edit/Texts/TextsStore";
+import SectionsStore from "../components/Edit/Texts/SectionsStore";
 
 export default {
   name: "Contact",
@@ -60,10 +60,10 @@ export default {
   },
   computed: {
     siteInfo() {
-      return TextsStore.getStore("SiteInfo").state;
+      return SectionsStore.getStore("SiteInfo").state;
     },
     siteContact() {
-      return TextsStore.getStore("SiteContact").state;
+      return SectionsStore.getStore("SiteContact").state;
     },
 
     phoneHref() {

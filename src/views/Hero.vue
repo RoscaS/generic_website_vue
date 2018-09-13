@@ -33,7 +33,7 @@
     </section>
 
     <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
-      <TextsEditMenu v-if="checkComponent()" height="300">
+      <SectionsEditMenu v-if="checkComponent()" height="300">
         <b-tabs v-model="edit.activeTab" position="is-centered">
 
           <b-tab-item v-for="(i, idx) in store.subs" :key="idx"
@@ -64,14 +64,14 @@
           </b-tab-item>
 
         </b-tabs>
-      </TextsEditMenu>
+      </SectionsEditMenu>
     </transition>
   </div>
 </template>
 
 <script>
 import IconPicker from "../components/IconPicker/IconPicker";
-import TextsEditMenu from "../components/Edit/Texts/TextsEditMenu";
+import SectionsEditMenu from "../components/Edit/Texts/SectionsEditMenu";
 import EditIcon from "../components/Edit/EditIcon";
 import FieldsLayout from "./Layouts/FieldsLayout";
 import ViewsMixin from "../mixins/ViewsMixin";
@@ -79,7 +79,7 @@ import ViewsMixin from "../mixins/ViewsMixin";
 export default {
   name: "Hero",
   mixins: [ViewsMixin],
-  components: { TextsEditMenu, EditIcon, FieldsLayout, IconPicker },
+  components: { SectionsEditMenu, EditIcon, FieldsLayout, IconPicker },
 
   data() {
     return {

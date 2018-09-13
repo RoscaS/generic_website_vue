@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import TextsStore from "../../components/Edit/Texts/TextsStore";
+import SectionsStore from "../../components/Edit/Texts/SectionsStore";
 
 export default {
   name: "RightWidget",
@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     siteContact() {
-      return TextsStore.getStore("SiteContact").state;
+      return SectionsStore.getStore("SiteContact").state;
     },
     phoneHref() {
       return `tel:${this.state.phone.data}`;

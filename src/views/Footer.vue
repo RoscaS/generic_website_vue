@@ -58,10 +58,10 @@
     </section>
 
     <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
-      <TextsEditMenu v-if="checkComponent()">
+      <SectionsEditMenu v-if="checkComponent()">
         <FieldsLayout :store="contact">
         </FieldsLayout>
-      </TextsEditMenu>
+      </SectionsEditMenu>
     </transition>
 
 
@@ -70,9 +70,9 @@
 
 <script>
 import moment from "moment";
-import TextsStore from "../components/Edit/Texts/TextsStore";
+import SectionsStore from "../components/Edit/Texts/SectionsStore";
 import EditIcon from "../components/Edit/EditIcon";
-import TextsEditMenu from "../components/Edit/Texts/TextsEditMenu";
+import SectionsEditMenu from "../components/Edit/Texts/SectionsEditMenu";
 import FieldsLayout from "./Layouts/FieldsLayout";
 
 const snackBarmsg = `
@@ -83,7 +83,7 @@ const snackBarmsg = `
 export default {
   name: "Footer",
 
-  components: { FieldsLayout, TextsEditMenu, EditIcon },
+  components: { FieldsLayout, SectionsEditMenu, EditIcon },
   data: () => ({
     type: "text",
     component: "SiteContact",
@@ -91,7 +91,7 @@ export default {
   }),
   computed: {
     edit() {
-      return TextsStore;
+      return SectionsStore;
     },
     contact() {
       return this.edit.getStore("SiteContact");

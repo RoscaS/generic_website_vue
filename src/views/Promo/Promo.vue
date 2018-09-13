@@ -24,16 +24,16 @@
       </div>
     </div>
     <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
-      <TextsEditMenu v-if="checkComponent()" height="225">
+      <SectionsEditMenu v-if="checkComponent()" height="225">
         <FieldsLayout :store="store"/>
-      </TextsEditMenu>
+      </SectionsEditMenu>
     </transition>
   </div>
 </template>
 
 <script>
 import ViewsMixin from "../../mixins/ViewsMixin";
-import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
+import SectionsEditMenu from "../../components/Edit/Texts/SectionsEditMenu";
 import EditIcon from "../../components/Edit/EditIcon";
 import FieldsLayout from "../Layouts/FieldsLayout";
 import SectionImage from "../../components/SectionImage";
@@ -41,7 +41,7 @@ import SectionImage from "../../components/SectionImage";
 export default {
   name: "Promo",
   mixins: [ViewsMixin],
-  components: { SectionImage, TextsEditMenu, EditIcon, FieldsLayout },
+  components: { SectionImage, SectionsEditMenu, EditIcon, FieldsLayout },
   data: () => ({
     component: "Promo",
     type: "text"

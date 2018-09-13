@@ -18,13 +18,13 @@
 
 <script>
 import ValidationBtns from "../ValidationButtons";
-import TextsStore from "./TextsStore";
+import SectionsStore from "./SectionsStore";
 import SpinLine from "../../LoadingSpinner";
 
 import "vue2-animate/dist/vue2-animate.min.css";
 
 export default {
-  name: "TextsEditMenu",
+  name: "SectionsEditMenu",
   components: { ValidationBtns, SpinLine },
   props: {
     height: { type: String }
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       activeTab: 0,
-      edit: TextsStore
+      edit: SectionsStore
     };
   },
   methods: {

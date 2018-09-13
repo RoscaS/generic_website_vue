@@ -26,9 +26,9 @@
 
 
     <transition enter-active-class="fadeInUp" leave-active-class="fadeOutDown">
-      <TextsEditMenu v-if="checkComponent()">
+      <SectionsEditMenu v-if="checkComponent()">
         <FieldsLayout :store="store"/>
-      </TextsEditMenu>
+      </SectionsEditMenu>
     </transition>
   </section>
 
@@ -36,7 +36,7 @@
 
 <script>
 import GalleriesStore from "../../components/Edit/Galleries/GalleriesStore";
-import TextsEditMenu from "../../components/Edit/Texts/TextsEditMenu";
+import SectionsEditMenu from "../../components/Edit/Texts/SectionsEditMenu";
 import EditIcon from "../../components/Edit/EditIcon";
 import FieldsLayout from "../Layouts/FieldsLayout";
 import ViewsMixin from "../../mixins/ViewsMixin";
@@ -56,7 +56,7 @@ export default {
     CenterWidget,
     LeftWidget,
     EditIcon,
-    TextsEditMenu,
+    SectionsEditMenu,
     FieldsLayout
   },
   data: () => ({

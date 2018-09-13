@@ -23,7 +23,7 @@
 
 <script>
 import GalleriesStore from "../Edit/Galleries/GalleriesStore";
-import TextsStore from "../../components/Edit/Texts/TextsStore";
+import SectionsStore from "../Edit/Texts/SectionsStore";
 
 export default {
   props: { stiky: { type: Boolean } },
@@ -33,7 +33,7 @@ export default {
       return GalleriesStore.logo;
     },
     siteInfo() {
-      return TextsStore.getStore("SiteInfo").state;
+      return SectionsStore.getStore("SiteInfo").state;
     },
     siteName() {
       return this.siteInfo.name.data;
