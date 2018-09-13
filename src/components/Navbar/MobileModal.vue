@@ -72,6 +72,8 @@ export default {
 @import "../../scss/global";
 
 .modal-links {
+  position: relative;
+  z-index: 10;
   display: flex;
   justify-content: center;
   #ModalLinks {

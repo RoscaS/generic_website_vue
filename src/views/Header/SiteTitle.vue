@@ -61,7 +61,8 @@ export default {
   color: $top-title;
   margin-right: -20px; // contre balance letter-sp de la dernière lettre.
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: $logo-breakpoint) {
+    font-size: 100px;
     /* trigger point for mobile */
   }
 }

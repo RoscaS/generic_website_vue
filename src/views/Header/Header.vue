@@ -100,7 +100,7 @@ export default {
 .site-title {
   margin-bottom: -45px;
   position: relative;
-  z-index: 5;
+  z-index: 3;
 }
 
 .widgets {

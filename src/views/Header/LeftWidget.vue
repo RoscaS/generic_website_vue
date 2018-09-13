@@ -29,7 +29,7 @@ export default {
   border-bottom: 1px solid $accent;
   text-align: right;
   position: relative;
-  z-index: 6;
+  z-index: 3;
 
   @media screen and (max-width: 1087px) {
     border-top: none;
