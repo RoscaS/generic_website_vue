@@ -39,13 +39,10 @@
 	import settings from '../site-settings';
 	import Tools from "../utils/tools";
 
+	const rootLogo = settings.logo ? settings.logo.split('.')[0] : '';
+
 	export default {
 		name: "Home",
-    comupted: {
-			rootLogo() { return settings.logo.split('.')[0]; },
-			icon() { return settings.logo !== '' ? this.rootLogo + '.ico' : ''},
-			image() { return settings.logo !== '' ? this.rootLogo + '.jpg' : ''},
-    },
     metaInfo: {
 			title: settings.title,
       meta: [
@@ -64,11 +61,11 @@
         // Google / Schema.org markup:
         {itemprop: 'name', content: settings.title},
         {itemprop: 'description', content: settings.description},
-        {itemprop: 'image', content: this.image},
+        {itemprop: 'image', content: rootLogo + '.jpg'},
       ],
       link: [
         { rel: 'canonical', href: settings.canonical },
-        { rel: 'icon', href: this.icon },
+        { rel: 'icon', href: rootLogo + '.ico'},
       ]
     },
 		components: {
