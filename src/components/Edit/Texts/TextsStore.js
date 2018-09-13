@@ -1,6 +1,8 @@
-import axios from "../../../http";
 import { Dialog } from "buefy";
+import axios from "../../../http";
+import urls from '../../../urls';
 import Vue from "vue";
+import GalleriesStore from '../Galleries/GalleriesStore';
 
 import {
   Promo,
@@ -11,7 +13,8 @@ import {
   Contact,
   SiteInfo,
   SiteContact,
-  SiteOptions
+  SiteOptions,
+  GenericSection
 } from "./SectionsObjects";
 
 const TextsStore = new Vue({
@@ -37,41 +40,24 @@ const TextsStore = new Vue({
   }),
   computed: {
     loading: {
-      get() {
-        return this.state.loading;
-      },
-      set(value) {
-        this.state.loading = value;
-      }
+      get() {return this.state.loading;},
+      set(value) {this.state.loading = value;}
     },
 
     activeTab: {
-      get() {
-        return this.state.activeTab;
-      },
-      set(value) {
-        this.state.activeTab = value;
-      }
+      get() {return this.state.activeTab;},
+      set(value) {this.state.activeTab = value;}
     },
 
     currentStore: {
-      get() {
-        return this.state.currentStore;
-      },
-      set(value) {
-        this.state.currentStore = value;
-      }
+      get() {return this.state.currentStore;},
+      set(value) {this.state.currentStore = value;}
     }
   },
+
   methods: {
-    setLoading() {
-      this.state.loading = true;
-    },
-
-    unsetLoading() {
-      this.state.loading = false;
-    },
-
+    setLoading() {this.state.loading = true;},
+    unsetLoading() {this.state.loading = false;},
     getStore(name) {
       return this.state.stores.filter(i => i.name == name)[0];
     },
@@ -93,6 +79,17 @@ const TextsStore = new Vue({
       });
     },
 
+    initGenericSections() {
+      axios.get(urls.sections).then(response => {
+        response.data.forEach(section => {
+          GalleriesStore.initGenericSectionsGallery(section);
+          let genericSection = new GenericSection(section.name);
+          this.setData(genericSection, section);
+          this.state.stores.push(genericSection);
+        })
+      })
+    },
+
     fetchData() {
       this.state.stores.forEach(store => {
         axios.get(store.url).then(response => {
@@ -106,8 +103,7 @@ const TextsStore = new Vue({
         store.state[i].data = response[i];
         store.backup[i] = response[i];
       }
-      this.getStore("Presentation").setGallery();
-      this.getStore("Promo").setGallery();
+      store.hasGallery ? store.setGallery() : null;
     },
 
     update() {
@@ -151,6 +147,8 @@ const TextsStore = new Vue({
   },
   created() {
     this.fetchData();
+    this.initGenericSections();
+    setTimeout(() => {console.log(this.state.stores)}, 500);
     Vue.prototype.$siteOptions = this.getStore("SiteOptions");
   }
 });

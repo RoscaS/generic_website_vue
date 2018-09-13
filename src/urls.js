@@ -18,6 +18,8 @@ const urls = {
   slots: "slots/",
   days: "days/",
 
+  sections: "sections/",
+
   siteInfo: "siteInfo/1/",
   siteContact: "siteContact/1/",
   siteOptions: "siteOptions/1/"

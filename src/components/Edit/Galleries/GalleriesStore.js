@@ -1,6 +1,9 @@
 import { Gallery } from "./GalleryObject";
 import Vue from "vue";
 import settings from "../../../site-settings";
+import urls from '../../../urls';
+import axios from "../../../http";
+
 
 const GalleriesStore = new Vue({
   data: () => ({
@@ -21,88 +24,50 @@ const GalleriesStore = new Vue({
       primaryStore: null,
       secondaryStore: null,
       editItem: null,
-
       carouselAutoScroll: false
     }
   }),
   computed: {
     logo: {
-      get() {
-        return settings.logo ? settings.logo : false;
-      }
+      get() {return settings.logo ? settings.logo : false;}
     },
     stores: {
-      get() {
-        return this.state.stores;
-      }
+      get() {return this.state.stores;}
     },
     active: {
-      get() {
-        return this.state.active;
-      },
-      set(value) {
-        this.state.active = value;
-      }
+      get() {return this.state.active;},
+      set(value) {this.state.active = value;}
     },
     loading: {
-      get() {
-        return this.state.loading;
-      },
-      set(value) {
-        this.state.loading = value;
-      }
+      get() {return this.state.loading;},
+      set(value) {this.state.loading = value;}
     },
     activeTab: {
-      get() {
-        return this.state.activeTab;
-      },
-      set(value) {
-        this.state.activeTab = value;
-      }
+      get() {return this.state.activeTab;},
+      set(value) {this.state.activeTab = value;}
     },
     primaryStore: {
-      get() {
-        return this.state.primaryStore;
-      },
-      set(value) {
-        this.state.primaryStore = value;
-      }
+      get() {return this.state.primaryStore;},
+      set(value) {this.state.primaryStore = value;}
     },
     secondaryStore: {
-      get() {
-        return this.state.secondaryStore;
-      },
-      set(value) {
-        this.state.secondaryStore = value;
-      }
+      get() {return this.state.secondaryStore;},
+      set(value) {this.state.secondaryStore = value;}
     },
     carouselAutoScroll: {
-      get() {
-        return this.state.carouselAutoScroll;
-      },
-      set(value) {
-        this.state.carouselAutoScroll = value;
-      }
+      get() {return this.state.carouselAutoScroll;},
+      set(value) {this.state.carouselAutoScroll = value;}
     },
     editItem: {
-      get() {
-        return this.state.editItem;
-      },
-      set(value) {
-        this.state.editItem = value;
-      }
+      get() {return this.state.editItem;},
+      set(value) {this.state.editItem = value;}
     }
   },
   methods: {
-    setLoading() {
-      this.loading = true;
-    },
-    unsetLoading() {
-      this.loading = false;
-    },
-    clearEditItem() {
-      this.editItem = null;
-    },
+
+    setLoading() {this.loading = true;},
+    unsetLoading() {this.loading = false;},
+    clearEditItem() {this.editItem = null;},
     getStore(name) {
       return this.stores.filter(i => i.name == name)[0];
     },
@@ -114,6 +79,10 @@ const GalleriesStore = new Vue({
           this.getImage(gallery, id);
         }, 100);
     },
+
+	  initGenericSectionsGallery(section) {
+	    this.state.stores.push(new Gallery(section.name))
+	  },
 
     update() {
       this.primaryStore.update();

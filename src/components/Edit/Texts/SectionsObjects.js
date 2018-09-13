@@ -49,6 +49,7 @@ class WithImage extends Base {
   constructor() {
     super();
     this.gallery = null;
+    this.hasGallery = true;
     this.hasLoaded = false;
   }
 
@@ -83,6 +84,23 @@ class Presentation extends WithImage {
     };
   }
 }
+
+
+class GenericSection extends WithImage {
+	constructor(name) {
+		super();
+		this.name = name;
+		this.url = `${urls.sections}${name}/`;
+		this.state = {
+			title: new Title(),
+			sub_title: new SubTitle(),
+			text1: new Text("Texte 1"),
+			text2: new Text("Texte 2")
+		}
+	}
+}
+
+
 
 class Events extends Base {
   constructor() {
@@ -229,5 +247,6 @@ export {
   Review,
   SiteInfo,
   SiteContact,
-  SiteOptions
+  SiteOptions,
+	GenericSection,
 };
