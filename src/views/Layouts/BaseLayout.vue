@@ -64,5 +64,28 @@
 </script>
 
 <style scoped lang="scss">
-  @import "../../../static/sass/global";
+  @import '../../scss/global';
+
+  .section-container {
+    margin: 0 auto 50px auto;
+
+    @media screen and (max-width: 960px) {
+      margin-bottom: 0;
+    }
+  }
+
+  .sub-title {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 18px;
+      line-height: 25px;
+      word-spacing: 0;
+      margin: 15px auto 80px auto !important;
+      text-align: center;
+      font-style: italic;
+      color: $sub-titles;
+
+      @media screen and (max-width: 960px) {
+          margin-bottom: 40px !important;
+      }
+  }
 </style>

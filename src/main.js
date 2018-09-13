@@ -13,6 +13,8 @@ import VueRouter from "vue-router";
 import VueScrollTo from "vue-scrollto";
 import VueScrollReveal from "vue-scroll-reveal";
 import VeeValidate from "vee-validate";
+import Meta from 'vue-meta';
+
 
 
 Vue.use(Buefy, {
@@ -41,6 +43,7 @@ Vue.use(FontAwesome);
 Vue.use(VueAnimate);
 Vue.use(Affix);
 Vue.use(ScrollActive);
+Vue.use(Meta);
 
 Vue.config.productionTip = false;
 

@@ -46,7 +46,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../scss/global';
 
   $animationDuration: 3s;
   @import "~vue2-animate/src/sass/vue2-animate";

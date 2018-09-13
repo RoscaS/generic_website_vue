@@ -54,7 +54,7 @@
 </template>
 
 <script>
-	import {SpinLine} from 'vue-loading-spinner';
+  import SpinLine from '../../LoadingSpinner';
 	import DragSortImages from './DragSortImages';
 	import Upload from "../Upload";
 	import GalleriesStore from './GalleriesStore';
@@ -138,7 +138,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../scss/global';
 
   .content {
     .menu-title {

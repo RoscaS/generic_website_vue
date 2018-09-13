@@ -17,9 +17,9 @@
 </template>
 
 <script>
-  import {SpinLine} from 'vue-loading-spinner';
   import ValidationBtns from '../ValidationButtons';
   import TextsStore from './TextsStore';
+  import SpinLine from '../../LoadingSpinner';
 
   import 'vue2-animate/dist/vue2-animate.min.css';
 
@@ -47,7 +47,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../scss/global';
 
   $animationDuration: 1s;
   @import "~vue2-animate/src/sass/vue2-animate";

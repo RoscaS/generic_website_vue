@@ -30,4 +30,5 @@
 </script>
 
 <style scoped lang="scss">
+  @import '../../../scss/global';
 </style>

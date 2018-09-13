@@ -28,7 +28,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../static/sass/global';
+  @import '../scss/global';
 
   img {
     padding: 10px;

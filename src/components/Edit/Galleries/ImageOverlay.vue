@@ -44,7 +44,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../scss/global';
 
   .overlay-wrapper {
     position: relative;

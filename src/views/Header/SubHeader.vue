@@ -29,7 +29,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "../../../static/sass/global";
+  @import '../../scss/global';
 
   .sub-header {
     font-size: 20px;

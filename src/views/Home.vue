@@ -40,7 +40,21 @@
 	import Tools from "../utils/tools";
 
 	export default {
-		name: "Public",
+		name: "Home",
+    metaInfo: {
+			title: settings.title,
+      meta: [
+        {charset: 'utf-8' },
+        {name: 'author', content: 'Rosca Sol (JrosK)'},
+        {name: 'viewport', content: 'width=device-width, initial-scale=1.0'},
+        {name: 'description', content: settings.description},
+        {name: "keywords", content: settings.keywords},
+      ],
+      link: [
+        {rel: 'canonical', href: settings.canonical},
+        {rel: 'icon', href: settings.icon}
+      ]
+    },
 		components: {
 			OpeningHours,
 			Time,

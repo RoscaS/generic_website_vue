@@ -71,7 +71,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../scss/global';
 
   .card {
     border-radius: 9px;

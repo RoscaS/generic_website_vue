@@ -151,7 +151,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../scss/global';
 
   section {
     margin: 0 0px -150px 0px;

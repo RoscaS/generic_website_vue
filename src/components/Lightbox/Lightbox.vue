@@ -64,7 +64,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../scss/global';
 
   .lightbox {
     z-index: 4;

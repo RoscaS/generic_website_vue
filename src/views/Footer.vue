@@ -78,7 +78,7 @@
 	const snackBarmsg = `
 	Inserez le lien complet (https:// compris) d'un réseau social pour
 	afficher son icon active.
-	`
+	`;
 
 	export default {
 		name: "Footer",
@@ -87,7 +87,7 @@
 		data: () => ({
 			type: 'text',
 			component: "SiteContact",
-      helpText: true,
+			helpText: true,
 		}),
 		computed: {
 			edit() { return TextsStore; },
@@ -105,15 +105,15 @@
 				];
 			},
 
-      getIcons() {
+			getIcons() {
 				let lst = [];
 				for (let i = 0; i < this.icons.length; i++) {
 					if (this.icons[i].url !== '') {
 						lst.push(this.icons[i]);
-          }
-        }
-        return lst;
-      }
+					}
+				}
+				return lst;
+			}
 		},
 
 		methods: {
@@ -131,7 +131,7 @@
 								type: 'is-warning',
 								position: 'is-top',
 								actionText: 'Ok',
-                queu: 'false',
+								queu: 'false',
 								duration: 15000,
 							});
 						}, 500);
@@ -146,7 +146,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../static/sass/global';
+  @import '../scss/global';
 
   .hero {
     display: flex;
@@ -212,5 +212,6 @@
       background: white;
     }
   }
+
 
 </style>

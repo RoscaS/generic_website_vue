@@ -48,7 +48,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "../../../static/sass/global";
+  @import '../../scss/global';
 
   .activeEl {
     transition: color .3s ease;

@@ -19,7 +19,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "../../../static/sass/global";
+  @import '../../scss/global';
 
   .left-side {
     color: $top-text;

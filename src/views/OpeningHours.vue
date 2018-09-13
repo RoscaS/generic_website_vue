@@ -78,7 +78,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../static/sass/global';
+  @import '../scss/global';
 
   section {
     margin-top: -100px !important;

@@ -60,7 +60,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../scss/global';
 
   h3 {
     color: white;

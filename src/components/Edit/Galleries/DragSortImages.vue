@@ -103,7 +103,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../scss/global';
 
   .cols-margins {
     margin: 0 5% 0 5%;

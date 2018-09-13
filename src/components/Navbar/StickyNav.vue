@@ -41,7 +41,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "../../../static/sass/global";
+  @import '../../scss/global';
 
   .nav-bar {
     width: 100%;

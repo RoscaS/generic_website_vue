@@ -1,6 +1,6 @@
-@import '../../static/sass/variables';
-@import '~buefy/src/scss/utils/variables';
-@import '~buefy/src/scss/components/tabs';
+@import './variables';
+@import '../../node_modules/buefy/src/scss/utils/variables';
+@import '../../node_modules/buefy/src/scss/components/tabs';
 
 .custom-tabs-articles {
 

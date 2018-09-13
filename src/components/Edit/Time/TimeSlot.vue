@@ -27,6 +27,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import '../../../scss/global';
 
   .time-tag {
     display: flex;

@@ -76,7 +76,7 @@
 </script>
 
 <style scoped lang="scss">
-
+  @import '../../scss/global';
   .wrapper {
     /*display: table;*/
 

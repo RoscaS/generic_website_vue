@@ -12,7 +12,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../static/sass/global';
+  @import '../scss/global';
 
   .header {
       font-family: 'Montserrat', sans-serif;

@@ -49,7 +49,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../scss/global';
 
   .box {
     padding: 3px 5px 3px 5px;

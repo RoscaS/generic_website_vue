@@ -321,7 +321,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../../static/sass/global';
+  @import '../../../scss/global';
 
   .image-error {
     border: 3px solid $is-danger;

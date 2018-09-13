@@ -31,7 +31,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../static/sass/global';
+  @import '../scss/global';
 
   .mapBox {
     border-radius: 8px;

@@ -35,7 +35,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "../../../static/sass/global";
+  @import '../../scss/global';
 
   .setShadow {
     transition: box-shadow .5s ease;

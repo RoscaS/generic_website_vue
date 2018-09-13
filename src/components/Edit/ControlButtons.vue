@@ -15,7 +15,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../../static/sass/global';
+  @import '../../scss/global';
 
 .buttons-wrapper {
   opacity: 1 !important;
