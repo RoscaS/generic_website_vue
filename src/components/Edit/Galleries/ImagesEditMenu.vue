@@ -110,29 +110,19 @@ export default {
   created() {
     this.edit.primaryStore = this.store;
     this.edit.secondaryStore = this.edit.getStore("Stock");
-    setTimeout(() => {
-      this.$snackbar.open({
-        message: galleriesHelp,
-        type: "is-success",
-        position: "is-top",
-        actionText: "Ok",
-        queu: "true",
-        indefinite: true,
-        onAction: () => {
-          if (this.store.name === "Parallax") {
-            setTimeout(() => {
-              this.$snackbar.open({
-                message: parallaxHelp,
-                type: "is-success",
-                position: "is-top",
-                actionText: "Ok",
-                indefinite: true
-              });
-            }, 500);
-          }
-        }
-      });
-    }, 500);
+    if (this.$siteOptions.localOptions.help_popups) {
+      this.$siteOptions.localOptions.help_popups = false
+      setTimeout(() => {
+        this.$snackbar.open({
+          message: galleriesHelp,
+          type: "is-success",
+          position: "is-top",
+          actionText: "Ok",
+          queu: "true",
+          indefinite: true,
+        });
+      }, 500);
+    }
   }
 };
 </script>

@@ -6,7 +6,7 @@ const message = {
     type: "is-danger",
     position: "is-bottom",
     message:
-      "Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur."
+      "Une erreur est survenue, un mail automatique vient d'être envoyé à l'administrateur. Rafraîchissez la page svp."
   },
   updated: {
     type: "is-success",
@@ -40,6 +40,20 @@ const message = {
     message: "Une erreur est survenue. jpg ou png uniquement."
   },
 
+
+
+
+  articlesDisplayPrices: {
+    type: "is-success",
+    position: "is-top",
+    message: "Prix affichés"
+  },
+  articlesHidePrices: {
+    type: "is-warning",
+    position: "is-top",
+    message: "Prix cachés"
+  },
+
   articleNew: {
     type: "is-success",
     position: "is-bottom",
@@ -71,6 +85,8 @@ const message = {
     position: "is-top",
     message: "Déselectionnez les catégories pour en changer l'ordre!"
   },
+
+
 
   validNoImg: {
     type: "is-danger",
@@ -119,7 +135,7 @@ const message = {
     message: "Défilement automatique activé."
   },
   autoScrollOff: {
-    type: "is-danger",
+    type: "is-warning",
     position: "is-top",
     message: "Défilement automatique désactivé."
   },

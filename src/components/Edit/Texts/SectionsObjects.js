@@ -65,7 +65,8 @@ class Promo extends WithImage {
     this.url = urls.promo;
     this.state = {
       title: new Title(22),
-      text: new Text()
+      text: new Text(),
+      label: new Field('Label', 18)
     };
   }
 }
@@ -170,23 +171,6 @@ class Contact extends Base {
   }
 }
 
-class Review extends Base {
-  constructor() {
-    super();
-    this.name = "Review";
-    this.url = urls.review;
-    this.state = {
-      title: new Title(),
-      sub_title: new SubTitle(),
-      g_api: { data: "" },
-      g_place_id: { data: "" },
-      g_review_all_url: { data: "" },
-      g_review_new_url: { data: "" },
-      reviews: { data: "" }
-    };
-  }
-}
-
 class SiteInfo extends Base {
   constructor() {
     super();
@@ -229,8 +213,12 @@ class SiteOptions extends Base {
     this.url = urls.siteOptions;
     this.state = {
       carousel_auto_scroll: { data: false },
-      carousel_auto_scroll_speed: { data: 5000 }
+      carousel_auto_scroll_speed: { data: 5000 },
+      show_articles_price: {data: '' },
     };
+    this.localOptions = {
+      help_popups: true
+    }
   }
 }
 
@@ -241,7 +229,6 @@ export {
   Article,
   Hero,
   Contact,
-  Review,
   SiteInfo,
   SiteContact,
   SiteOptions,

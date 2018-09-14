@@ -172,7 +172,7 @@ export default {
           return false;
         }
       } else if (this.is.article) {
-        if (!this.tempImage) {
+        if (!this.tempImage && this.is.create) {
           this.error.image = "image-error";
           this.messages.push("validNoImg");
           return false;
@@ -200,14 +200,14 @@ export default {
       }
       for (let i of this.categories) {
         if (this.is.category) {
-          if (i.name === this.data.name) {
+          if (i.name === this.data.name && i.name !== i.backup.name) {
             this.error.name = "is-danger";
             this.messages.push("validUniqCatName");
             return false;
           }
         } else if (this.is.article) {
           for (let j of i.articles) {
-            if (j.name === this.data.name) {
+            if (j.name === this.data.name && j.name !== j.backup.name) {
               this.error.name = "is-danger";
               this.messages.push("validUniqArtName");
               return false;

@@ -43,6 +43,8 @@ export default {
 
 <style scoped lang="scss">
 @import "../../scss/global";
+@import url('https://fonts.googleapis.com/css?family=Delius');
+
 
 .logo {
   width: 450px;
@@ -51,10 +53,15 @@ export default {
     width: $logo-mobile-width;
     margin-left: $logo-mobile-margin;
   }
+  @media screen and (max-width: 400px) {
+    width: 275px;
+    margin-left: $logo-mobile-margin;
+  }
 }
 
 .site-title {
-  font-family: $top-title-font;
+  /*<!--font-family: $top-title-font;-->*/
+  font-family: Delius, cursive;
   letter-spacing: $top-title-letter-spacing;
   font-size: 130px;
   text-align: center;

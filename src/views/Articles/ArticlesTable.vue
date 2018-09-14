@@ -12,7 +12,7 @@
         <span class="description is-hidden-mobile" :title="article.description">
           {{ article.description }}
         </span>
-        <span class="price">{{ article.price }} Chf</span>
+        <span v-if="showPrices" class="price">{{ article.price }} Chf</span>
       </div>
     </div>
 
@@ -32,6 +32,7 @@ export default {
     pulsedArticleId: null
   }),
   computed: {
+    showPrices() { return this.$siteOptions.state.show_articles_price.data; },
     articles() {
       return this.category.articles;
     }
@@ -54,7 +55,8 @@ export default {
 
 .articles {
   display: block;
-  width: 79%;
+  width: fit-content;
+  max-width: 79%;
   margin: 0 auto 0 auto;
   @media screen and (max-width: 980px) {
     width: 100%;
@@ -92,15 +94,15 @@ export default {
     }
 
     .description {
-      width: 440px;
+      max-width: 440px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .price {
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 25px;
+      padding-right: 5px;
       margin-left: auto;
       white-space: nowrap;
     }

@@ -10,7 +10,7 @@
           <div class="corner-ribbon top-right"
                :title="hoverTitle"
                slot="trigger">
-            Action spéciale !
+            {{ ribbonLabel }}
           </div>
         </div>
       </div>
@@ -25,6 +25,7 @@
 <script>
 import VueSlideUpDown from "vue-slide-up-down";
 import Promo from "./Promo";
+import SectionsStores from "../../components/Edit/Texts/SectionsStore";
 
 export default {
   name: "PromoRibbon",
@@ -39,6 +40,9 @@ export default {
     };
   },
   computed: {
+    ribbonLabel() {
+      return SectionsStores.getStore('Promo').state.label.data;
+    },
     isTouch() {
       return window.innerWidth <= 1024;
     }
@@ -127,7 +131,7 @@ export default {
   line-height: 50px;
   letter-spacing: 1px;
   color: white;
-  z-index: 3;
+  z-index: 4;
   top: 55px;
   right: -70px;
   left: auto;

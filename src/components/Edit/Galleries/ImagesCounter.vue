@@ -10,6 +10,7 @@
 
 <script>
 import { Toast } from "buefy";
+import GalleriesStore from "./GalleriesStore";
 
 export default {
   name: "ImagesCounter",
@@ -23,6 +24,9 @@ export default {
     };
   },
   computed: {
+    edit() {
+      return GalleriesStore;
+    },
     current() {
       return this.store.isEmpty ? 0 : this.store.count();
     },
@@ -37,17 +41,40 @@ export default {
   },
   watch: {
     current(value) {
-      if (this.total == value && this.verbose && !this.timeOut) {
+      console.log(value)
+      this.checkIsFull(value);
+      this.checkIsParallax();
+    }
+  },
+  methods: {
+    checkIsFull(value) {
+      if (this.total === value && this.verbose && !this.timeOut) {
         let name = this.store.name;
         Toast.open({
           queue: false,
           duration: 3000,
-          message: `Attention, la gallerie "${name}" est pleine!`,
-          type: "is-warning",
+          message: `Gallerie "${name}" pleine.`,
+          type: "is-dark",
           position: "is-top"
         });
       }
+    },
+    checkIsParallax() {
+      if (this.edit.primaryStore.name === "Parallax" && this.store.name === "Parallax") {
+        if (this.store.count() < 3) {
+          Toast.open({
+            queue: false,
+            duration: 6000,
+            message: `Attention, il est important que la gallerie "Parallax" soit pleine pour un affichage correcte du site!`,
+            type: "is-warning",
+            position: "is-top"
+          });
+        }
+      }
     }
+  },
+  mounted() {
+    this.checkIsParallax();
   }
 };
 </script>

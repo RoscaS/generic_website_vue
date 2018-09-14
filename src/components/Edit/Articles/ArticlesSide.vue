@@ -1,6 +1,11 @@
 <template>
   <section>
-    <h3>Articles:</h3>
+
+    <div class="articles-side-header">
+      <h3>Articles:</h3>
+      <ArticlesOptions class="options"/>
+    </div>
+
     <div class="columns is-mobile is-variable is-2">
 
       <transition name="custom-fade">
@@ -23,10 +28,11 @@
 <script>
 import CategoriesStore from "./CategoriesStore";
 import CategoryDetail from "./CategoryDetail";
+import ArticlesOptions from './ArticlesOptions'
 
 export default {
   name: "ArticlesSide",
-  components: { CategoryDetail },
+  components: {ArticlesOptions, CategoryDetail },
   data: () => ({
     noSelection: "Sélectionnez jusqu'à deux catégories pour les éditer."
   }),
@@ -61,8 +67,16 @@ export default {
   opacity: 0;
 }
 
-h3 {
-  color: white;
+.articles-side-header{
+  display: flex;
+  align-items: baseline;
+
+  h3 {
+    color: white;
+  }
+  .options {
+    margin-left: auto;
+  }
 }
 
 .no-selection {
