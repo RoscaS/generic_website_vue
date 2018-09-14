@@ -29,12 +29,6 @@ export default {
       return SectionsStore;
     },
     fieldList() {
-      if (this.store.name == "Review") {
-        return {
-          title: this.store.state.title,
-          sub_title: this.store.state.sub_title
-        };
-      }
       return this.store.state;
     }
   }

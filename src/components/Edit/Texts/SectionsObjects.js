@@ -27,8 +27,7 @@ class Base {
   update(message = true) {
     let data = {};
     for (let i in this.state) {
-      if (i != "image") data[i] = this.state[i].data;
-      else data[i] = this.state[i].data.image;
+      data[i] = this.state[i].data;
     }
     axios.put(this.url, data).then(() => {
       setTimeout(() => {

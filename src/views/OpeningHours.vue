@@ -6,6 +6,7 @@
       <div class="columns is-mobile is-centered weekday"
            :style="dynamicCenter()"
            v-for="(day, i) in days" :key="i"
+           :class="{'today': isToday(day)}"
            v-scroll-reveal="{
              origin: 'right',
              distance: '100px',
@@ -40,6 +41,7 @@
 <script>
 import TimeStore from "../components/Edit/Time/TimeStore";
 import EditIcon from "../components/Edit/EditIcon";
+import { DateTime } from "luxon";
 
 export default {
   name: "OpeningHours",
@@ -62,6 +64,10 @@ export default {
     }
   },
   methods: {
+    isToday(day) {
+      console.log(day.name === DateTime.local().weekdayLong);
+      return day.name === DateTime.local().weekdayLong;
+    },
     dynamicCenter() {
       let max = 1;
       const width = window.innerWidth;
@@ -95,6 +101,17 @@ section {
   }
 }
 
+.today {
+  .name {
+    transition: color 0.6s ease;
+    color: $highlight-strong !important;
+  }
+  .box {
+    transition: background-color 0.6s ease;
+    background-color: $highlight;
+  }
+}
+
 .weekday {
   user-select: none;
   max-width: 545px;
@@ -108,16 +125,6 @@ section {
     max-width: 245px;
     padding-bottom: 5px;
     border-bottom: 1px solid rgba(119, 119, 119, 0.21);
-  }
-  &:hover {
-    .name {
-      transition: color 0.6s ease;
-      color: $link-normal;
-    }
-    .box {
-      transition: background-color 0.6s ease;
-      background-color: $highlight;
-    }
   }
 
   .name {

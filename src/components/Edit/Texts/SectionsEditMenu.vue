@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar custom-tabs-wrapper textEdit" v-show="edit.state.active">
+  <div class="navbar custom-tabs-wrapper textEdit" v-show="active">
     <div class="custom-tabs" :style="{height: height+'px'}">
       <div class="container">
         <slot></slot>
@@ -35,6 +35,11 @@ export default {
       edit: SectionsStore
     };
   },
+  computed: {
+    active() {
+      return this.edit.state.active;
+    }
+  },
   methods: {
     validate() {
       this.edit.update();
@@ -42,7 +47,7 @@ export default {
     cancel() {
       this.edit.cancel();
     }
-  }
+  },
 };
 </script>
 

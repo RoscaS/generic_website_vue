@@ -2,6 +2,29 @@
 @import "../../node_modules/buefy/src/scss/utils/variables";
 @import "../../node_modules/buefy/src/scss/components/tabs";
 
+
+.custom-tabs-sections {
+  .b-tabs {
+    .tabs {
+      .is-active {
+        a {
+          color: $accent-text-edit;
+          border-bottom-color: $accent-text-edit;
+        }
+      }
+      li {
+        a {
+          transition: border-bottom-color 0.5s ease;
+          &:hover {
+            transition: border-bottom-color 0.5s ease;
+            border-bottom-color: $accent-text-edit;
+          }
+        }
+      }
+    }
+  }
+}
+
 .custom-tabs-articles {
   .tab-content {
     padding-top: 0;

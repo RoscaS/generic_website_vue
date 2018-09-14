@@ -67,7 +67,7 @@ const SectionsStore = new Vue({
       }
     },
 
-    genericStors() {
+    genericStores() {
       return this.state.stores.filter(i => i.isGeneric);
     }
   },
@@ -80,7 +80,7 @@ const SectionsStore = new Vue({
       this.state.loading = false;
     },
     getStore(name) {
-      return this.state.stores.filter(i => i.name == name)[0];
+      return this.state.stores.filter(i => i.name === name)[0];
     },
 
     cancelNotification() {
