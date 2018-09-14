@@ -2,7 +2,6 @@
   <section class="section">
     <EditIcon :edit="edit"></EditIcon>
     <div class="container">
-
       <div class="columns is-mobile is-centered weekday"
            :style="dynamicCenter()"
            v-for="(day, i) in days" :key="i"
@@ -65,7 +64,6 @@ export default {
   },
   methods: {
     isToday(day) {
-      console.log(day.name === DateTime.local().weekdayLong);
       return day.name === DateTime.local().weekdayLong;
     },
     dynamicCenter() {
