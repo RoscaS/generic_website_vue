@@ -41,10 +41,11 @@ export default {
 };
 </script>
 
+
+
 <style scoped lang="scss">
 @import "../../scss/global";
-@import url('https://fonts.googleapis.com/css?family=Delius');
-
+@import url("https://fonts.googleapis.com/css?family=Delius");
 
 .logo {
   width: 450px;
