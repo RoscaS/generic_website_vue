@@ -29,7 +29,7 @@ const settings = {
   canonical: canonical,
 
   siteAddons: {
-    genericSection: true,
+    genericSection: false,
   }
 };
 
