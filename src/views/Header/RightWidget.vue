@@ -86,7 +86,7 @@ export default {
   flex-wrap: nowrap;
   width: 230px;
   position: relative;
-  z-index: 6;
+  z-index: 3;
 
   @media screen and (max-width: 1087px) {
     border-top: none;
