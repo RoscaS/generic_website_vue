@@ -62,6 +62,7 @@ export default {
 
 .site-title {
   /*<!--font-family: $top-title-font;-->*/
+  position: relative;
   z-index: 2;
   font-family: Delius, cursive;
   letter-spacing: $top-title-letter-spacing;
