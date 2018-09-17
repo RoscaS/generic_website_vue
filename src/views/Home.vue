@@ -6,8 +6,9 @@
     <div id="StickyNav">
     <StickyNav/>
       <Carousel/>
-      <Presentation v-if="!siteAddons.genericSection" id="Presentation"/>
-      <GenericSections v-if="siteAddons.genericSection" id="Presentation"/>
+      <Presentation id="Presentation"/>
+      <!--<Presentation v-if="!siteAddons.genericSection" id="Presentation"/>-->
+      <!--<GenericSections v-if="siteAddons.genericSection" id="Presentation"/>-->
       <Hero/>
       <Parallax :idx="0" height="600px" text="Articles"/>
       <Articles id="Articles"/>
@@ -22,7 +23,7 @@
 </template>
 
 <script>
-import GenericSections from "./GenericSections/GenericSections";
+// import GenericSections from "./GenericSections/GenericSections";
 
 import Parallax from "../components/Parallax/Parallax";
 import PromoRibbon from "../views/Promo/PromoRibbon";
@@ -74,7 +75,7 @@ export default {
     ]
   },
   components: {
-    GenericSections,
+    // GenericSections,
     OpeningHours,
     Time,
     Modals,

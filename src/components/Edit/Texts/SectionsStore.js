@@ -99,23 +99,23 @@ const SectionsStore = new Vue({
         }
       });
     },
-    checkAddons() {
-      if (settings.siteAddons.genericSection) {
-        this.getStore('Presentation')['isGeneric'] = true;
-      }
-    },
+    // checkAddons() {
+    //   if (settings.siteAddons.genericSection) {
+    //     this.getStore('Presentation')['isGeneric'] = true;
+    //   }
+    // },
 
-    initGenericSections() {
-      axios.get(urls.sections).then(response => {
-        response.data.forEach(section => {
-          GalleriesStore.initGenericSectionsGallery(section);
-          let genericSection = new GenericSection(section.name);
-          this.setData(genericSection, section);
-          this.state.stores.push(genericSection);
-        });
-        this.checkAddons()
-      });
-    },
+    // initGenericSections() {
+    //   axios.get(urls.sections).then(response => {
+    //     response.data.forEach(section => {
+    //       GalleriesStore.initGenericSectionsGallery(section);
+    //       let genericSection = new GenericSection(section.name);
+    //       this.setData(genericSection, section);
+    //       this.state.stores.push(genericSection);
+    //     });
+    //     this.checkAddons()
+    //   });
+    // },
 
     fetchData() {
       this.state.stores.forEach(store => {
@@ -174,7 +174,7 @@ const SectionsStore = new Vue({
   },
   created() {
     this.fetchData();
-    this.initGenericSections();
+    // this.initGenericSections();
     Vue.prototype.$siteOptions = this.getStore("SiteOptions");
   }
 });
