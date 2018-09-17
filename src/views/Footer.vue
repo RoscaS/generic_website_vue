@@ -52,8 +52,8 @@
         easing: 'ease',
        }">
         Design & code:
-        <a class="jrosk" href="mailto:jrosk.ad@gmail.com"
-           title="With  by JrosK">JrosK</a>
+        <a class="jrosk" href="mailto:jrosk.managment@gmail.com"
+           title="With  by Sol Rosca">JrosK</a>
       </p>
     </section>
 
