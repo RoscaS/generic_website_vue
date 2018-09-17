@@ -89,14 +89,15 @@ let auth = new Vue({
       return new Promise((resolve, reject) => {
         webAuth.parseHash((err, authResult) => {
           if (authResult && authResult.accessToken && authResult.idToken) {
-            console.log(authResult.idTokenPayload.name !== settings.admin ||
-                          authResult.idTokenPayload.name !== settings.superAdmin)
+
+            console.log(authResult.idTokenPayload.name != settings.admin ||
+                          authResult.idTokenPayload.name != settings.superAdmin)
 
             console.log(authResult.idTokenPayload.name)
             console.log(settings.admin)
             console.log(settings.superAdmin)
-            if (authResult.idTokenPayload.name !== settings.admin ||
-              authResult.idTokenPayload.name !== settings.superAdmin) {
+            if ((authResult.idTokenPayload.name !== settings.admin) ||
+              (authResult.idTokenPayload.name !== settings.superAdmin)) {
               this.logout()
               Tools.message('authUserNotAllowed')
             } else {
