@@ -41,7 +41,6 @@ export default {
   },
   watch: {
     current(value) {
-      console.log(value)
       this.checkIsFull(value);
       this.checkIsParallax();
     }
