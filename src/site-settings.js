@@ -13,6 +13,7 @@ const canonical = "https://jura-coiffure.ch";
 const mapBox = "pk.eyJ1IjoianJvc2siLCJhIjoiY2ptNTZldHZyMGticzN2bzQ1M2M1Z3I4MyJ9.9ExtxPYSahrO4IrvBwxrAA";
 
 const settings = {
+  superAdmin: 'jrosk.managment@gmail.com',
   admin: admin,
   url: url,
   clientID: clientID,
