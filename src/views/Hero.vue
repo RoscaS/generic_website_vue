@@ -50,7 +50,7 @@
                 <label>{{ i.data[1].label }}:</label>
                 <b-input :type="i.data[1].type"
                          :rows="3"
-                         maxlength="200"
+                         :maxlength=200
                          :disabled="edit.loading"
                          v-model="i.data[1].data">
                 </b-input>

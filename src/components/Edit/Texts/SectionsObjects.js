@@ -65,7 +65,7 @@ class Promo extends WithImage {
     this.url = urls.promo;
     this.state = {
       title: new Title(22),
-      text: new Text(200),
+      text: new Text('Texte', 3, 200),
       label: new Field('Label', 18)
     };
   }
@@ -136,9 +136,9 @@ class Hero extends Base {
       title1: new Title(),
       title2: new Title(),
       title3: new Title(),
-      text1: new Text(200),
-      text2: new Text(200),
-      text3: new Text(200)
+      text1: new Text(),
+      text2: new Text(),
+      text3: new Text()
     };
     this.subs = [
       {
