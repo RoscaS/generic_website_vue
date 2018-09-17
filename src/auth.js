@@ -90,6 +90,9 @@ let auth = new Vue({
       return new Promise((resolve, reject) => {
         webAuth.parseHash((err, authResult) => {
           if (authResult && authResult.accessToken && authResult.idToken) {
+            console.log(name)
+            console.log(settings.admin)
+            console.log(settings.superAdmin)
             let name = authResult.idTokenPayload.name;
             if (name !== settings.admin || name !== settings.superAdmin) {
               this.logout();
