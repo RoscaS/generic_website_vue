@@ -48,6 +48,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Delius");
 
 .logo {
+  z-index: 2;
   width: 450px;
   height: auto;
   @media screen and (max-width: $logo-breakpoint) {

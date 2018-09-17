@@ -131,7 +131,7 @@ export default {
   line-height: 50px;
   letter-spacing: 1px;
   color: white;
-  z-index: 4;
+  z-index: 3;
   top: 55px;
   right: -70px;
   left: auto;
