@@ -48,7 +48,6 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Delius");
 
 .logo {
-  z-index: 2;
   width: 450px;
   height: auto;
   @media screen and (max-width: $logo-breakpoint) {
@@ -63,6 +62,7 @@ export default {
 
 .site-title {
   /*<!--font-family: $top-title-font;-->*/
+  z-index: 2;
   font-family: Delius, cursive;
   letter-spacing: $top-title-letter-spacing;
   font-size: 130px;
