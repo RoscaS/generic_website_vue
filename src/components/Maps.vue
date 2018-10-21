@@ -15,15 +15,19 @@ export default {
     };
   },
   mounted() {
-    let coords = [siteSettings.long, siteSettings.lat];
-    mapboxgl.accessToken = siteSettings.mapBox;
-    let map = new mapboxgl.Map({
-      container: "map", // container id
-      style: "mapbox://styles/mapbox/streets-v9", // stylesheet location
-      center: coords, // starting position [lng, lat]
-      zoom: 16 // starting zoom
-    });
-    var marker = new mapboxgl.Marker().setLngLat(coords).addTo(map);
+    try {
+      let coords = [siteSettings.long, siteSettings.lat];
+      mapboxgl.accessToken = siteSettings.mapBox;
+      let map = new mapboxgl.Map({
+        container: "map", // container id
+        style: "mapbox://styles/mapbox/streets-v9", // stylesheet location
+        center: coords, // starting position [lng, lat]
+        zoom: 16 // starting zoom
+      });
+      var marker = new mapboxgl.Marker().setLngLat(coords).addTo(map);
+    } catch (e) {
+      console.log("No internet, mapbox disabled");
+    }
   }
 };
 </script>

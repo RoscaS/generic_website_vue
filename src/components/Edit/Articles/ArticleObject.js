@@ -31,7 +31,7 @@ class Article {
     return GalleriesStore.getImage("Articles", this.image.id);
   }
   get edit() {
-    return CategoriesStore;
+    return CategoriesSstore;
   }
 
   setBackup() {

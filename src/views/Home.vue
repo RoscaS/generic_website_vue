@@ -4,11 +4,11 @@
     <PromoRibbon/>
     <Header/>
     <div id="StickyNav">
-    <StickyNav/>
+      <StickyNav/>
       <Carousel/>
-      <Presentation id="Presentation"/>
-      <!--<Presentation v-if="!siteAddons.genericSection" id="Presentation"/>-->
-      <!--<GenericSections v-if="siteAddons.genericSection" id="Presentation"/>-->
+      <!--<Presentation id="Presentation"/>-->
+      <Presentation v-if="!siteAddons.genericSection" :id="idPresentation"/>
+      <GenericSections v-if="siteAddons.genericSection" :id="idPresentation"/>
       <Hero/>
       <Parallax :idx="0" height="600px" text="Articles"/>
       <Articles id="Articles"/>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-// import GenericSections from "./GenericSections/GenericSections";
+import GenericSections from "./GenericSections/GenericSections";
 
 import Parallax from "../components/Parallax/Parallax";
 import PromoRibbon from "../views/Promo/PromoRibbon";
@@ -48,7 +48,8 @@ const rootLogo = settings.logo ? settings.logo.split(".")[0] : "favicon.ico";
 export default {
   name: "Home",
   data: () => ({
-    siteAddons: settings.siteAddons
+    siteAddons: settings.siteAddons,
+    idPresentation: 'Presentation',
   }),
   metaInfo: {
     title: settings.title,
@@ -75,7 +76,7 @@ export default {
     ]
   },
   components: {
-    // GenericSections,
+    GenericSections,
     OpeningHours,
     Time,
     Modals,
